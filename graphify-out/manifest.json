@@ -1,0 +1,32 @@
+{
+  "main.py": {
+    "mtime": 1789787588.871684,
+    "seen": 1789788168.134635,
+    "ast_hash": "d235a14e0cff3595e91b26e245a57175",
+    "semantic_hash": "d235a14e0cff3595e91b26e245a57175"
+  },
+  "pyproject.toml": {
+    "mtime": 1789787588.871733,
+    "seen": 1789788168.134638,
+    "ast_hash": "0a9b5cbb773873b2981842aa5c346c92",
+    "semantic_hash": "0a9b5cbb773873b2981842aa5c346c92"
+  },
+  "README.md": {
+    "mtime": 1789787588.8720438,
+    "seen": 1789788168.134639,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "taxcite-prd.md": {
+    "mtime": 1789706358.6893034,
+    "seen": 1789788168.134639,
+    "ast_hash": "1331a250c98cc26f49cb7bd48beb7130",
+    "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
+  },
+  "taxcite-technical-documentation.md": {
+    "mtime": 1789706354.454265,
+    "seen": 1789788168.134639,
+    "ast_hash": "82c6496e770e471094320a5169cd7af4",
+    "semantic_hash": "82c6496e770e471094320a5169cd7af4"
+  }
+}

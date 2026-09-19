@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# macOS
+.DS_Store
+
+# Local tooling / scratch
+.claude/
+CLAUDE.md
+scratch/
+
+# Downloaded corpora (re-fetchable; 67 MB+)
+data/
+
+# graphify internals: machine-specific paths and regenerable cache
+# (graph.json, graph.html and GRAPH_REPORT.md are kept)
+graphify-out/.graphify_*
+graphify-out/cache/

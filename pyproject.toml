@@ -1,0 +1,20 @@
+[project]
+name = "taxcite"
+version = "0.1.0"
+description = "Citation-grounded RAG for compound federal tax questions"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "qdrant-client",
+    "psycopg[binary]",
+    "redis",
+]
+
+[dependency-groups]
+dev = ["pytest", "httpx"]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
