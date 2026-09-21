@@ -5,7 +5,8 @@ services:
     volumes: [qdrant:/qdrant/storage]
 
   postgres:
-    image: postgres:16
+    # postgres 16 plus the pgvector extension, for the ADR-17 benchmark (T6b)
+    image: pgvector/pgvector:pg16
     environment:
       POSTGRES_USER: taxcite
       POSTGRES_PASSWORD: taxcite

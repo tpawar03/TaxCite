@@ -10,10 +10,19 @@ dependencies = [
     "qdrant-client",
     "psycopg[binary]",
     "redis",
+    "fastembed>=0.8.0",
+    "httpx",
+    "pdfminer-six>=20260107",
+    "anthropic>=1.7.0",
+    "openai>=3.16.2",
+    "python-dotenv>=1.2.3",
 ]
 
+[project.scripts]
+taxcite = "taxcite.cli:main"
+
 [dependency-groups]
-dev = ["pytest", "httpx"]
+dev = ["pytest"]
 
 [build-system]
 requires = ["uv_build"]

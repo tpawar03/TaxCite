@@ -3,7 +3,8 @@
 
 import re
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass
+
+from taxcite.chunk import Chunk, estimate_tokens, renumber
 
 MAX_TOKENS = 500
 MAX_TABLE_CELLS = 100
@@ -14,18 +15,7 @@ EMBEDDED_L2 = re.compile(r"^[^(]{0,5}\((\d+)\)")
 RESERVED = re.compile(r"\[Reserved\]", re.I)
 
 
-@dataclass
-class Chunk:
-    citation: str
-    section: str
-    heading: str
-    text: str
-    tokens: int
-    cita: str | None
-    as_of: str
-    excluded: str | None = None
-    part: int = 1  # 1-based index when one citation needs more than one chunk
-    source: str = "ecfr"  # which corpus this came from; IRS publications use "irs_pub" (T5)
+from dataclasses import dataclass
 
 
 @dataclass
@@ -37,10 +27,6 @@ class Block:
 
 def clean(el) -> str:
     return re.sub(r"\s+", " ", " ".join(el.itertext())).strip()
-
-
-def estimate_tokens(text: str) -> int:
-    return round(len(text.split()) * 1.3)
 
 
 def level_of(token: str, prev_l1: str | None) -> int | None:
@@ -93,21 +79,28 @@ def table_block(table) -> Block | None:
     return Block(text="\n".join(r for r in rows if r.strip()))
 
 
-def blocks(section) -> tuple[list[Block], int]:
-    """Ordered text blocks of a section, plus the count of oversized tables."""
+def blocks(section) -> tuple[list[Block], list[int]]:
+    """Ordered text blocks of a section, plus the cell count of each oversized table."""
     out: list[Block] = []
-    oversized = 0
+    oversized: list[int] = []
     prev_l1: str | None = None
 
     def walk(el):
-        nonlocal oversized, prev_l1
+        nonlocal prev_l1
         if el.tag in META_TAGS:
             return
         if el.tag == "TABLE":
             if (block := table_block(el)) is None:
-                oversized += 1
+                oversized.append(sum(1 for c in el.iter() if c.tag in ("TD", "TH")))
             elif block.text:
                 out.append(block)
+            return
+        if el.tag == "EXTRACT":
+            # quoted matter and in-section outlines: keep the text, but never read
+            # designations from it — §1.61-21's outline repeats every (a)(1) heading
+            # and would otherwise restart the numbering mid-section
+            if (text := clean(el)) and not RESERVED.search(text):
+                out.append(Block(text=text))
             return
         if el.tag in TEXT_TAGS:
             text = clean(el)
@@ -187,9 +180,9 @@ def chunk_section(section, as_of: str, source: str = "ecfr") -> list[Chunk]:
 
     body, oversized = blocks(section)
     chunks = [
-        make(cite(number, None), f"[{oversized} table(s) omitted: over {MAX_TABLE_CELLS} cells]", excluded="large_table")
-        for _ in range(1)
-        if oversized
+        make(cite(number, None), f"[table omitted: {cells} cells, over the {MAX_TABLE_CELLS}-cell limit]",
+             excluded="large_table", part=i)
+        for i, cells in enumerate(oversized, 1)
     ]
 
     packed: list[Block] = []
@@ -214,7 +207,16 @@ def chunk_section(section, as_of: str, source: str = "ecfr") -> list[Chunk]:
             flush()
         packed += unit
     flush()
-    return chunks
+    return renumber(chunks)
+
+
+def in_scope(section: str, prefixes: tuple[str, ...] | list[str]) -> bool:
+    """True when a section is one of these prefixes, or a numbered child of one.
+
+    Boundary-aware on purpose: "1.61" (gross income) must match 1.61-1 and
+    1.61(a)-1 but not 1.611-1, which is depletion and a different topic.
+    """
+    return any(section == p or section.startswith(p + "-") or section.startswith(p + "(") for p in prefixes)
 
 
 def parse(xml, as_of: str, source: str = "ecfr") -> list[Chunk]:

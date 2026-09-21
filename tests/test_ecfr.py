@@ -9,7 +9,7 @@ from collections import Counter
 
 import pytest
 
-from taxcite.ingest.ecfr import MAX_TOKENS, Chunk, designations, parse
+from taxcite.ingest.ecfr import MAX_TOKENS, Chunk, designations, in_scope, parse
 
 FIXTURE = "tests/fixtures/ecfr_sample.xml"
 AS_OF = "2026-09-17"
@@ -54,6 +54,17 @@ def test_i_elsewhere_is_a_roman_numeral():
 
 def test_plain_paragraph_has_no_designation():
     assert designations(p("<P>An estate is allowed...</P>"), None) == (None, None)
+
+
+# --- scoping ---
+
+
+def test_in_scope_matches_children_but_not_longer_numbers():
+    assert in_scope("1.61-1", ["1.61"])
+    assert in_scope("1.61(a)-1", ["1.61"])
+    assert in_scope("1.61", ["1.61"])
+    assert not in_scope("1.611-1", ["1.61"])  # depletion, a different topic
+    assert not in_scope("1.6011-1", ["1.61"])
 
 
 # --- section-level behaviour ---
@@ -144,6 +155,37 @@ def test_small_tables_are_flattened_into_rows(chunks):
 def test_large_table_is_recorded_with_a_reason(chunks):
     excluded = [c for c in of(chunks, "1.280F-7") if c.excluded]
     assert [c.excluded for c in excluded] == ["large_table"]
+    assert "617 cells" in excluded[0].text  # one record per table, with its size
+
+
+def test_outline_in_an_extract_does_not_restart_numbering():
+    """A section can embed its own outline (§1.61-21 does); it must not create new (a)(1) chunks."""
+    xml = """<ECFR><DIV8 N="1.test-3" TYPE="SECTION">
+      <HEAD>§ 1.test-3 Fringe benefits.</HEAD>
+      <P>(a) <I>Fringe benefits</I>—(1) <I>In general.</I> A fringe benefit is included in gross income.</P>
+      <P>(2) <I>Outline of this section.</I> The following is an outline:</P>
+      <EXTRACT><P>(a) Fringe benefits.</P><P>(1) In general.</P><P>(2) Outline of this section.</P></EXTRACT>
+      <P>(b) <I>Valuation.</I> An employee must include the fair market value.</P>
+    </DIV8></ECFR>"""
+    cs = parse(ET.fromstring(xml), AS_OF)
+    assert [c.citation for c in cs] == ["26 CFR 1.test-3(a)-(b)"]
+    assert "The following is an outline" in cs[0].text  # kept, just not treated as structure
+
+
+def test_parts_are_numbered_per_citation():
+    """Two chunks reaching the same citation get distinct parts, so keys cannot collide."""
+    xml = """<ECFR><DIV8 N="1.test-4" TYPE="SECTION">
+      <HEAD>§ 1.test-4 Scope.</HEAD>
+      <P>(a) """ + "word " * 400 + """</P>
+      <P>(a) """ + "other " * 400 + """</P>
+    </DIV8></ECFR>"""
+    cs = parse(ET.fromstring(xml), AS_OF)
+    assert [c.part for c in cs] == list(range(1, len(cs) + 1))
+    assert len({c.key for c in cs}) == len(cs)
+
+
+def test_keys_are_unique(chunks):
+    assert len({c.key for c in chunks}) == len(chunks)
 
 
 def test_no_chunk_exceeds_the_token_budget(chunks):

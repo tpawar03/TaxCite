@@ -43,35 +43,35 @@ Full task details are in `tasks/todo.md`.
 
 ### Slice 1 — Retrieval works end to end (regulations)
 - [x] T1: Local stack and package skeleton
-- [ ] T2: Ingest eCFR Title 26 into Postgres + Qdrant
-- [ ] T3: Hybrid search CLI with citations
+- [x] T2: Ingest eCFR Title 26 into Postgres + Qdrant
+- [x] T3: Hybrid search CLI with citations
 
 ### Checkpoint 1
 - [ ] `taxcite search "…"` returns relevant 26 CFR sections for 3 hand-picked questions
 
 ### Slice 2 — Measure retrieval, add publications, pick the embedding model
-- [ ] T4: Pilot set (20 questions) and retrieval eval script
-- [ ] T5: Ingest IRS Publications
-- [ ] T6: Embedding-model benchmark (≥2 candidates) and the decision recorded
-- [ ] T6b: ADR-17 revisit trigger — Qdrant vs. pgvector (hybrid recall, filtered-recall loss, latency, size)
+- [x] T4: Pilot set (20 questions) and retrieval eval script
+- [x] T5: Ingest IRS Publications
+- [x] T6: Embedding-model benchmark (≥2 candidates) and the decision recorded
+- [x] T6b: ADR-17 revisit trigger — Qdrant vs. pgvector (hybrid recall, filtered-recall loss, latency, size)
 
 ### Checkpoint 2 (human review: embedding decision)
-- [ ] Recall@10/nDCG@10 recorded for dense-only vs. hybrid across each candidate; model locked
-- [ ] ADR-17 confirmed or reopened from the T6b Qdrant-vs-pgvector numbers
+- [x] Recall@10/nDCG@10 recorded for dense-only vs. hybrid across each candidate; model locked
+- [x] ADR-17 confirmed or reopened from the T6b Qdrant-vs-pgvector numbers
 
 ### Slice 3 — Answers, baseline, pick the LLM
-- [ ] T7: Cited answer generation and closed-book baseline
-- [ ] T8: ADR-11 LLM benchmark (quality per dollar) and the decision recorded
+- [x] T7: Cited answer generation and closed-book baseline
+- [x] T8: ADR-11 LLM benchmark (quality per dollar) and the decision recorded
 
 ### Checkpoint 3 (human review: ADR-11 decision)
 - [ ] Pilot scores for closed-book vs. RAG per candidate model; projected monthly cost under $50
 
 ### Slice 4 — Delivery
-- [ ] T9: ADR-9 job record + SSE transport
-- [ ] T10: Phase A exit report
+- [x] T9: ADR-9 job record + SSE transport
+- [x] T10: Phase A exit report
 
 ### Checkpoint: Phase A complete
-- [ ] All Phase A acceptance items met; ready to plan Phase B
+- [x] All Phase A acceptance items met; ready to plan Phase B
 
 ## Risks and Mitigations
 

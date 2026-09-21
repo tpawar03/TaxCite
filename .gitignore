@@ -8,6 +8,12 @@ wheels/
 
 # Virtual environments
 .venv
+venv/   # only appears from a stale shell that still sets UV_PROJECT_ENVIRONMENT
+
+# Secrets — never commit a real key (.env.example is the committed template)
+.env
+.env.*
+!.env.example
 
 # macOS
 .DS_Store

@@ -6,7 +6,9 @@
 
 ## Implementation Status
 
-This document describes the target design. It is not, by itself, evidence of a working system — the mechanisms below (decomposition, graph expansion, temporal filtering, authority-aware reranking, claim verification) need to be built as a deliberately scoped vertical slice and measured against a held-out golden set before this reads as more than a design exercise. §7 (Build Phases) and §9 (Eval Harness) exist to produce that evidence, not just to organize the architecture.
+This document describes the target design. **Phase A is built and measured** (report: `eval/results/phase_a.md`, 2026-09-21): 7,652 chunks of 26 CFR and IRS publications indexed, single-hop hybrid retrieval at Recall@10 **0.722**, cited answers served over the ADR-9 job/SSE transport, 95 tests. Retrieval's contribution is measured rather than asserted — answer correctness rises 0.44 → 0.61 and outright-wrong answers fall to zero — and three deferred decisions are now settled by measurement: ADR-11 (LLM), ADR-17 (vector store), ADR-18 (embedding model).
+
+The remaining mechanisms below (decomposition, graph expansion, temporal filtering, authority-aware reranking, claim verification) are **not yet built**. §7 (Build Phases) and §9 (Eval Harness) exist to produce that evidence, not just to organize the architecture. Phase A also produced a baseline each later phase must beat: adding IRS publications cost 12.4 points of regulation recall (the case for Phase E), approximate search loses ~22% of exact results under a strict filter (a risk for Phase D), and the pilot set cannot resolve differences below ~5.6 points (the case for §9.1's 100-question golden set).
 
 Each phase in §7 now carries an explicit, numeric acceptance threshold (e.g., a minimum Recall@20 delta, a minimum extraction precision — consolidated in §9.3) rather than only a qualitative direction to "measure the delta." These are first-pass engineering targets to be recalibrated once real data exists, not final commitments.
 
@@ -361,11 +363,24 @@ No calendar estimates — this is a dependency order.
 *Decision:* Replace this with one structured-output (JSON-schema-constrained) call per sub-query, presenting all of that sub-query's top-k reranked candidates together and requiring the model to return both a per-candidate support judgment (preserving per-candidate granularity in the output schema) and a sub-query-level sufficiency verdict, in a single round trip.
 *Trade-off:* A single call judging many candidates together risks anchoring/averaging across them versus fully independent per-candidate calls — mitigated by requiring the per-candidate field in the structured output rather than only an aggregate verdict, and monitored via the same entailment/completeness eval in §9. In exchange: call count per query drops from as many as `top_k × 3` to 3 (one per sub-query), directly addressing both the cost model (§4.1) and the step-8 latency identified as a critical path item.
 
-**ADR-11: LLM provider and model tiering — decision pending.**
-*Status:* Proposed — `[DECISION NEEDED: specific provider/model]`, constrained by a confirmed <$50/mo ceiling (§4.1).
-*Context:* §3.3's decomposition, sufficiency-gate, and synthesis calls each have different latency/cost/quality requirements (decomposition likely needs only a small, cheap model; synthesis needs longer context and higher quality). No provider or model has been chosen for any of these three call sites. The cost ceiling is no longer open — it's fixed at <$50/mo — which narrows this search rather than leaving it an open-ended benchmark.
-*Options to evaluate in Phase A, filtered by the ceiling:* a self-hosted open-weights model (no marginal per-call cost, but adds GPU/hosting burden) or a budget-tier hosted API used selectively (cheap model for decomposition/sufficiency, anything pricier reserved for synthesis only if it fits the ceiling at expected volume). A frontier-tier hosted API across all three call sites is very unlikely to fit <$50/mo at any real query volume and is deprioritized rather than benchmarked equally.
-*Decision:* Not yet made. Resolve empirically in Phase A alongside the embedding-model benchmark (§3.2), scoring each candidate on quality (RAGAS-style) per dollar against the fixed $50/mo ceiling, not an open-ended cost/quality trade-off.
+**ADR-11: LLM provider and model tiering — gpt-4o-mini, with a measured revisit trigger.**
+*Status:* Decided (2026-09-21), from the T8 benchmark on the pilot set.
+*Context:* §3.3's decomposition, sufficiency-gate and synthesis calls have different cost/latency/quality needs, and §4.1 fixes a <$50/mo ceiling. The ceiling turned out **not** to be the binding constraint: at the persona's volume (dozens of questions per week, ~200/mo) the whole pipeline costs ~$0.10/mo on gpt-4o-mini and ~$0.86/mo on claude-haiku-4-5. §4.1's "a few dozen daily queries" premise only bites above ~500 queries/mo. The decision therefore rests on answer quality and citation behaviour, not price.
+*Measured (20 pilot questions x 2 models x {closed_book, rag}, §9.2 rubric, judge from the other provider, $0.18 total):*
+
+| model | mode | correct | wrong | gold cited | exact cites | fabricated | refused when it should | p50 | $/query |
+|---|---|---|---|---|---|---|---|---|---|
+| gpt-4o-mini | closed_book | 0.44 | 0.06 | 0.00 | 0 | 0 | 0/2 | 1.5s | $0.0001 |
+| **gpt-4o-mini** | **rag** | **0.61** | **0.00** | 0.33 | 18 | 1 | 1/2 | **1.1s** | $0.0005 |
+| claude-haiku-4-5 | closed_book | 0.28 | 0.06 | 0.00 | 0 | 0 | 0/2 | 3.6s | $0.0013 |
+| claude-haiku-4-5 | rag | 0.33 | 0.06 | **0.50** | 32 | **0** | **2/2** | 3.0s | $0.0043 |
+
+*Judge reliability:* Cohen's kappa **0.81** across 72 graded answers (§9.2 requires >=0.70), two judges applying the same rubric in different wording. See log #31 for why the first attempt produced a false 0.65.
+*Decision:* `gpt-4o-mini` at all three call sites for now. It is materially more correct (0.61 vs 0.33), never outright wrong under RAG, ~3x faster and ~8x cheaper.
+*The trade-off this accepts, stated plainly:* the two models fail in opposite directions. Haiku grades worse but cites better — it found the gold citation on 50% of questions against gpt's 33%, fabricated nothing where gpt fabricated one, and refused both unanswerable questions where gpt refused one. For a product whose thesis is verifiable citation, that is the uncomfortable half of the result.
+*Why the trade is acceptable now:* Phase F's NLI verifier (ADR-4) checks claims mechanically and suppresses unverified ones (ADR-15), which is a stronger guarantee than a model's citing habits. Sparse citing costs recall against that gate; fabrication would cost trust.
+*Revisit trigger:* if Phase F's suppression rate is high **because synthesis cited too little or too loosely**, move synthesis to `claude-haiku-4-5` and keep gpt-4o-mini for decomposition and the sufficiency gate — the tiering this ADR was always meant to allow. Re-run `eval/llm_bench.py` to re-test.
+*Also settled here:* the §9.2 judge must come from the other provider, so claude-haiku-4-5 grades gpt-4o-mini's answers. Reasoning/thinking is off everywhere for now: it is affordable (~$1-4/mo at persona volume) but unproven here, and synthesis is the only call site where it plausibly helps.
 
 **ADR-12: Backup and disaster recovery for stateful non-vector stores.**
 *Status:* Decided, pending storage-provider choice.
@@ -409,7 +424,42 @@ No calendar estimates — this is a dependency order.
 - (F) **Elasticsearch / OpenSearch.** True BM25 plus vector search, but memory-hungry, and explicitly a non-goal (PRD §4) unless literal BM25 scoring is later shown to be needed.
 - (G) **Chroma / LanceDB.** Light and embedded, but hybrid fusion and filtered search are less mature for this workload.
 *Decision:* Qdrant, self-hosted. It is the only option that meets all four requirements without extra code (B), extra services (E, F) or recurring cost (D).
-*Trade-off:* One more stateful store to operate and back up (ADR-12), and chunk metadata is split across Postgres (source of truth) and the Qdrant payload (a filter copy). The copy can drift, so ingestion writes both from one code path and re-running ingest is idempotent. **Revisit trigger:** if Phase A–D measurements show the corpus fits comfortably in managed Postgres and pgvector's filtered recall is within 2 points of Qdrant's on the pilot and temporal sets, reopen this ADR in favour of (B) to remove a store.
+*Trade-off:* One more stateful store to operate and back up (ADR-12), and chunk metadata is split across Postgres (source of truth) and the Qdrant payload (a filter copy). The copy can drift, so ingestion writes both from one code path and re-running ingest is idempotent.
+
+*Revisit trigger, as first written:* reopen if the corpus fits managed Postgres and pgvector's filtered recall is within 2 points of Qdrant's. **That trigger was mis-specified** — it omitted overall retrieval quality, and both of its conditions passed. The condition that decided the outcome had to be added after measuring: hybrid recall within 2 points.
+
+*Measured 2026-09-20 (T6b, `eval/store_bench.py`), same bge-base vectors in both stores, 18 pilot questions, k=10:*
+
+| store | hybrid Recall@10 | dense only | lexical only | filtered recall (approx vs exact) | p50 | p95 | storage |
+|---|---|---|---|---|---|---|---|
+| **Qdrant** | **0.667** | 0.583 | 0.444 (BM25) | 0.779 | 14 ms | 61 ms | 24 MB vectors |
+| pgvector | 0.500 | 0.528 | 0.111 (`ts_rank_cd`) | 0.779 | 52 ms | 130 ms | 77 MB table + indexes |
+
+*Outcome: CONFIRMED — Qdrant stays.* Storage passes (77 MB now, ~386 MB projected with case law, inside a 500 MB free tier) and filtered recall is **identical**, disproving the assumption that pgvector's post-filtering would lose recall at this corpus size. The decisive gap is lexical: Postgres full-text ranking is not BM25 and has no comparable inverse-document-frequency weighting, scoring 0.111 against Qdrant's 0.444 on the same queries. Since ADR-6 chose hybrid retrieval precisely because legal text needs literal matching (`§280A`, `Form 8829`), a store that cannot rank lexically defeats the design.
+
+*What would change this:* a Postgres BM25 extension (ParadeDB `pg_search`) closing the lexical gap, or a future where the lexical half stops mattering. Neither is available on a managed free tier today. Re-run `eval/store_bench.py` to re-test.
+
+*Noted for Phase D:* approximate search returned only **77.9% of the exact top-10 under a strict single-section filter, in both stores**. Phase D filters by tax year, which is the same shape, so as-of filtering will need exact search or a raised `ef_search` rather than default ANN parameters.
+
+**ADR-18: Dense embedding model — BAAI/bge-base-en-v1.5.**
+*Status:* Decided (2026-09-20), from measurement on the Phase A pilot set.
+*Context:* §3.2 left the dense model open and required benchmarking at least two candidates on the pilot set before locking one in. Candidates had to be self-hostable at zero marginal cost (§4.1) and fast enough that three sub-query embeddings fit inside the 35s end-to-end budget (ADR-9).
+*Viability screen, before any quality measurement:* `nomic-embed-text-v1.5` embeds at 0.2 chunks/s on this CPU (8.6 hours for the 7,652-chunk corpus) and takes **491 ms per query embed**; its quantised variant is no faster. At three sub-queries per question that is ~1.5s of embedding before retrieval starts, for an 8192-token context the corpus never uses (chunks cap at ~500 tokens). Excluded on latency, not quality. `thenlper/gte-base` errors inside fastembed 0.8 and was not pursued.
+*Measured on 18 pilot questions, full 7,652-chunk corpus (both sources), k=10:*
+
+| model | mode | Recall@10 | nDCG@10 | MRR | Section recall | regulation | publication | query ms |
+|---|---|---|---|---|---|---|---|---|
+| bge-small-en-v1.5 (384d) | dense | 0.500 | 0.278 | 0.185 | 0.667 | 0.562 | 0.000 | 24 |
+| bge-small-en-v1.5 | hybrid | 0.611 | 0.259 | 0.131 | 0.722 | 0.625 | 0.500 | 18 |
+| **bge-base-en-v1.5 (768d)** | dense | 0.583 | 0.401 | 0.315 | 0.667 | 0.656 | 0.000 | 54 |
+| **bge-base-en-v1.5** | **hybrid** | **0.667** | **0.350** | 0.181 | **0.778** | **0.688** | 0.500 | 31 |
+
+*Decision:* `BAAI/bge-base-en-v1.5`, 768 dimensions.
+*Rationale:* the ranking gains exceed the recall gains — nDCG +9 points and dense MRR +13 — which matters because synthesis only sees the top few chunks. It also recovers about half of the 12.4-point regulation-recall loss that adding IRS publications caused (log #24): 0.625 → 0.688.
+*Trade-off:* the index build goes from 9.3 to 31.6 minutes (3.4x) and dense vectors from 12 MB to 24 MB; query embedding goes from 18 ms to 31 ms, negligible against a 35s budget. The real cost is slower iteration: any change that forces a re-index now costs half an hour.
+*Measurement caveat (found after this decision, see log #28):* with 18 pilot questions one question is worth 5.6 points, and a tie at the k boundary made hybrid numbers vary by exactly that much between runs until ties were broken deterministically. The hybrid recall gap between these two models (+5.6) is therefore at the resolution limit of this set; **the decision rests on the deterministic dense metrics** (recall +8.3, nDCG +12.3, MRR +13.0), which were stable across runs. The 100-question golden set in §9.1 is what raises this resolution.
+*Noted for later:* dense retrieval scores **0.000** on publication questions for both models, while hybrid scores 0.500. Publications are matched lexically, not semantically — further support for ADR-6's hybrid design, and a caution against treating dense-only numbers as representative.
+*Revisit trigger:* if a re-index ever blocks iteration, or if Phase E reranking closes the regulation gap on its own, re-run `eval/embed_bench.py` — bge-small remains a 3.4x cheaper fallback at a measured cost of ~5.6 points of hybrid recall.
 
 ---
 
