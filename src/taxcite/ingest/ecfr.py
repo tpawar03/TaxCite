@@ -130,8 +130,9 @@ def units(blocks_: list[Block], key: str) -> list[list[Block]]:
     return grouped
 
 
-def cite(section: str, first: str | None, last: str | None = None, l2: str | None = None) -> str:
-    ref = f"26 CFR {section}"
+def cite(section: str, first: str | None, last: str | None = None, l2: str | None = None,
+         prefix: str = "26 CFR") -> str:
+    ref = f"{prefix} {section}"
     if first:
         ref += f"({first})"
         if last and last != first:
@@ -155,11 +156,11 @@ def split_blocks(blocks_: list[Block], label: str) -> list[tuple[str, str, int]]
     return [(label, text, i) for i, text in enumerate(parts, 1)]
 
 
-def split_unit(unit: list[Block], section: str) -> list[tuple[str, str, int]]:
+def split_unit(unit: list[Block], section: str, prefix: str = "26 CFR") -> list[tuple[str, str, int]]:
     """An oversized level-1 unit, split at level 2 and then at block boundaries."""
     out = []
     for sub in units(unit, "l2"):
-        label = cite(section, sub[0].l1 or unit[0].l1, l2=sub[0].l2)
+        label = cite(section, sub[0].l1 or unit[0].l1, l2=sub[0].l2, prefix=prefix)
         out += split_blocks(sub, label)
     return out
 
@@ -184,30 +185,38 @@ def chunk_section(section, as_of: str, source: str = "ecfr") -> list[Chunk]:
              excluded="large_table", part=i)
         for i, cells in enumerate(oversized, 1)
     ]
+    chunks.extend(make(lbl, text, part=i) for lbl, text, i in pack(body, number))
+    return renumber(chunks)
 
+
+def pack(body: list[Block], section: str, prefix: str = "26 CFR") -> list[tuple[str, str, int]]:
+    """Level-1 units packed up to MAX_TOKENS; an oversized one is split at level 2.
+    Shared with the US Code parser, which only differs in the citation prefix."""
+    out: list[tuple[str, str, int]] = []
     packed: list[Block] = []
+    last: str | None = None  # the last packed *unit's* designation; its trailing blocks carry none
 
     def flush() -> None:
         nonlocal packed
         if packed:
-            label = cite(number, packed[0].l1, packed[-1].l1)
-            chunks.extend(make(lbl, text, part=i) for lbl, text, i in split_blocks(packed, label))
+            out.extend(split_blocks(packed, cite(section, packed[0].l1, last, prefix=prefix)))
             packed = []
 
     for unit in units(body, "l1"):
         if unit[0].l1 is None:  # preamble: never packs with a designated unit
             flush()
-            chunks.extend(make(lbl, text, part=i) for lbl, text, i in split_blocks(unit, cite(number, None)))
+            out.extend(split_blocks(unit, cite(section, None, prefix=prefix)))
             continue
         if estimate_tokens("\n".join(b.text for b in unit)) > MAX_TOKENS:
             flush()
-            chunks.extend(make(lbl, text, part=i) for lbl, text, i in split_unit(unit, number))
+            out.extend(split_unit(unit, section, prefix))
             continue
         if packed and estimate_tokens("\n".join(b.text for b in packed + unit)) > MAX_TOKENS:
             flush()
         packed += unit
+        last = unit[0].l1
     flush()
-    return renumber(chunks)
+    return out
 
 
 def in_scope(section: str, prefixes: tuple[str, ...] | list[str]) -> bool:

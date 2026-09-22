@@ -71,6 +71,11 @@ def test_section_of_ignores_paragraph_depth():
     assert generate.section_of("26 CFR 1.263(a)-3(k)(1)") == "1.263(a)-3"
     assert generate.section_of("26 CFR 1.212-1(c)-(d)") == "1.212-1"
     assert generate.section_of("IRS Pub 587 (2025), p. 12") == "Pub 587"
+    assert generate.section_of("26 U.S.C. § 183(d)") == "183"
+    assert generate.section_of("26 U.S.C. § 1400Z-2(a)(1)") == "1400Z-2"  # the dash is part of the section
+    assert generate.section_of("26 U.S.C. §280A") == "280A"
+    assert generate.section_of("T.C. Memo. 2026-76, at *12-13") == "T.C. Memo. 2026-76"
+    assert generate.section_of("Read v. Commissioner, 114 T.C. No. 2, at *5") == "114 T.C. No. 2"
 
 
 def test_invented_citations_are_flagged(stub, monkeypatch):

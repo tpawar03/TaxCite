@@ -18,6 +18,9 @@ venv/   # only appears from a stale shell that still sets UV_PROJECT_ENVIRONMENT
 # macOS
 .DS_Store
 
+# Personal interview-prep notes — not part of the published project
+docs/phase-a-interview-prep.md
+
 # Local tooling / scratch
 .claude/
 CLAUDE.md

@@ -4,12 +4,23 @@ A gold citation that does not exist, or that points at an excluded chunk, makes
 every downstream number meaningless. Run this after editing pilot.jsonl.
 
     uv run python eval/validate_pilot.py eval/pilot.jsonl
+    uv run python eval/validate_pilot.py eval/golden.jsonl
+
+Gold may be groups of interchangeable citations (log #36): every member must exist,
+and a group is reachable when any member is.
+
+Compound and temporal rows carry `gold_subqueries`, one per gold group: the sub-query an
+ideal decomposer would issue, and the source it would search. A group the whole question
+misses but its sub-query reaches is reported as needing decomposition (B7's job), not
+as a problem. The sub-queries are measurement only; tuning never uses them.
 """
 
 import json
 import re
 import sys
+from collections import Counter
 
+from retrieval import groups
 from taxcite import store
 from taxcite.retrieve import search
 
@@ -25,39 +36,65 @@ def content_words(text: str) -> set[str]:
 def main(path: str) -> int:
     rows = [json.loads(line) for line in open(path) if line.strip()]
     print(f"{len(rows)} questions\n")
-    problems, expected = [], []
+    problems, expected, diluted, needs_decomposition = [], [], [], []
 
     with store.connect() as conn:
         for r in rows:
             issues = []
-            if not r["gold"] and r["category"] != "insufficiency":
-                issues.append("empty gold but not an insufficiency question")
+            # insufficiency rows must have no answer in the corpus; adversarial rows are scored
+            # on behaviour (Phase G), not retrieval
+            if not r["gold"] and r["category"] not in ("insufficiency", "adversarial") and not r.get("expect_insufficient"):
+                issues.append("empty gold but not an insufficiency or adversarial question")
+            if r["category"] == "adversarial" and not (r.get("client_doc") and r.get("expected_behavior")):
+                issues.append("adversarial row needs client_doc and expected_behavior")
 
-            for cit in r["gold"]:
-                # gold may cite a regulation ("26 CFR 1.183-2(b)(3)") or a publication
-                # ("IRS Pub 587 (2025), p. 12"); both live in the chunks table
-                count, text, excluded = conn.execute(
-                    "SELECT count(*), max(text), max(excluded::text) FROM chunks WHERE citation=%s", (cit,)
-                ).fetchone()
-                if not count:
-                    issues.append(f"gold citation not in corpus: {cit}")
-                    continue
-                if excluded:
-                    issues.append(f"gold citation is an excluded chunk ({excluded}): {cit}")
+            top50 = {h.citation for h in search(r["question"], k=50, mode="hybrid")} if r["gold"] else set()
+            texts = []
+            subqueries = r.get("gold_subqueries") or []
+            if subqueries and len(subqueries) != len(r["gold"]):
+                issues.append(f"{len(subqueries)} gold_subqueries for {len(r['gold'])} gold groups")
+            for gi, group in enumerate(groups(r["gold"])):
+                sources = set()
+                for cit in sorted(group):
+                    # every source lives in the chunks table: regulation, publication, statute, opinion
+                    count, text, excluded, source = conn.execute(
+                        "SELECT count(*), max(text), max(excluded::text), max(source) FROM chunks WHERE citation=%s", (cit,)
+                    ).fetchone()
+                    if not count:
+                        issues.append(f"gold citation not in corpus: {cit}")
+                    elif excluded:
+                        issues.append(f"gold citation is an excluded chunk ({excluded}): {cit}")
+                    else:
+                        texts.append(text)
+                        sources.add(source)
 
-                # the answer should be a paraphrase of the cited rule, not of memory
-                if not r.get("verified"):
-                    ratio = len(content_words(r["answer"]) & content_words(text)) / max(len(content_words(r["answer"])), 1)
-                    if ratio < 0.30:
-                        issues.append(f"answer shares only {ratio:.0%} of its content words with {cit} — read the rule and set verified:true")
-
-                # can retrieval reach it at all?
-                if cit not in [h.citation for h in search(r["question"], k=50, mode="hybrid")]:
-                    msg = f"gold not in hybrid top-50: {cit}"
+                # can retrieval reach the group at all? If not, search within the gold's own
+                # source: found there, the gold is right and other corpora are crowding it out
+                # (B3's dilution, which routing is meant to fix); not found even there, suspect it.
+                if not group & top50:
+                    if gi < len(subqueries):
+                        sq = subqueries[gi]
+                        if group & {h.citation for h in search(sq["query"], k=50, mode="hybrid", source=sq["source"])}:
+                            needs_decomposition.append(f"{r['id']}: {' | '.join(sorted(group))}")
+                            continue
+                        issues.append(f"gold not reached even by its sub-query ({sq['source']}: {sq['query']!r}): {' | '.join(sorted(group))}")
+                        continue
+                    own = {h.citation for src in sources for h in search(r["question"], k=50, mode="hybrid", source=src)}
+                    if group & own:
+                        diluted.append(f"{r['id']}: {' | '.join(sorted(group))}")
+                        continue
+                    msg = f"gold not in hybrid top-50, even within its own source: {' | '.join(sorted(group))}"
                     if r.get("expect_hard"):
                         expected.append(f"{r['id']}: {msg}")
                     else:
                         issues.append(msg + " — wrong gold, or a question worth keeping as a known-hard case")
+
+            # the answer should be a paraphrase of the cited sources, not of memory
+            if texts and not r.get("verified"):
+                words = content_words(r["answer"])
+                ratio = len(words & set().union(*map(content_words, texts))) / max(len(words), 1)
+                if ratio < 0.30:
+                    issues.append(f"answer shares only {ratio:.0%} of its content words with its gold — read the sources and set verified:true")
 
             print(f"{r['id']} {'OK' if not issues else 'ISSUES'}")
             for i in issues:
@@ -65,10 +102,17 @@ def main(path: str) -> int:
             if issues:
                 problems.append(r["id"])
 
+    print("\ncategories: " + ", ".join(f"{c} {n}" for c, n in sorted(Counter(r["category"] for r in rows).items())))
+    for n in needs_decomposition:
+        print(f"  needs decomposition (reached only by its gold sub-query): {n}")
+    for d in diluted:
+        print(f"  diluted (found only within its own source): {d}")
     for e in expected:
         print(f"\n  expected-hard: {e}")
     print(f"\n{len(problems)} of {len(rows)} questions need attention; "
-          f"{len(expected)} known-hard gold citations unreachable today")
+          f"{len(expected)} known-hard gold citations unreachable today; "
+          f"{len(diluted)} gold groups reachable only within their own source; "
+          f"{len(needs_decomposition)} reachable only by their gold sub-query")
     return 1 if problems else 0
 
 

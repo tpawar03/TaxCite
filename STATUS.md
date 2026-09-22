@@ -1,6 +1,6 @@
 # TaxCite — Status
 
-_Last updated: 2026-09-19_
+_Last updated: 2026-09-21_
 
 ## Now
 **Phase A is complete (2026-09-21).** Report: `eval/results/phase_a.md`. 95 tests green.
@@ -9,9 +9,23 @@ A reviewer can `POST /queries` a tax question and watch `retrieving → synthesi
 
 Settled by measurement: ADR-11 (`gpt-4o-mini`), ADR-17 (Qdrant over pgvector), ADR-18 (`bge-base-en-v1.5`), §11.1 (statute source).
 
-**Next: plan Phase B** — case-law corpus, query decomposition, the 100-question golden set, and RAGAS as a standing CI gate (faithfulness ≥ 0.85). Phase A left three baselines for later phases to beat: the 12.4-point publication dilution (Phase E), the 22% filtered-recall loss under strict filters (Phase D), and a pilot set too small to resolve differences under 5.6 points (§9.1).
+**Phase B plan approved (2026-09-21).** Plan: `tasks/plan.md` (Phase B section); tasks: `tasks/todo.md` (B1–B10). **B2 done (2026-09-22).** All of Title 26 is indexed: 10,768 statute chunks, 110 tests green. Pilot hybrid Recall@10 0.722 → 0.667 with the statute, one question (P02), whose statute answer now outranks its gold regulation (log #36). Fixed on the way: a Phase A range-citation bug (84 eCFR chunks, log #33) and an embedding batch size that thrashed swap (log #35). **B3 done (2026-09-22).** 307 Tax Court opinions indexed (9,973 chunks); corpus 28,393 vectors; 120 tests green. Case law cut pilot hybrid Recall@10 0.667 → 0.500: P01's top 10 is all case law. Routing case law out recovers ~0.611 (approx.), which is B7's job (log #38). **B4 done (2026-09-22).** `eval/golden.jsonl` (53 rows: 27 statutory, 26 case law) and `eval/dev.jsonl` (12 rows) reviewed and frozen; baseline hybrid Recall@10 0.491, statutory only 0.333 (`eval/results/golden-b4-baseline-k10.json`). **B5 done (2026-09-22). Golden set complete and frozen:** `eval/golden.jsonl`, 111 reviewed rows. Baseline hybrid Recall@10 0.435 over the 84 rows scored in B (statutory 0.333, case law 0.654, compound 0.350; `eval/results/golden-b5-baseline-k10.json`). **Next: B6 (cross-encoder rerank).** Scope from §7 — case-law corpus, query decomposition, the 100-question golden set, and RAGAS as a standing CI gate (faithfulness ≥ 0.85). Phase A left three baselines for later phases to beat: the 12.4-point publication dilution (Phase E), the 22% filtered-recall loss under strict filters (Phase D), and a pilot set too small to resolve differences under 5.6 points (§9.1).
 
 Working mode: Claude writes the code and may edit existing files; new files are handed over as code blocks for the user to create.
+
+## Phase B progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`, Phase B sections)
+| Task | Status |
+|---|---|
+| B1 Topic scope and source spike | ✅ Done (DAWSON; whole Title 26) |
+| B2 Ingest 26 U.S.C. | ✅ Done (10,768 chunks; pilot 0.722 → 0.667) |
+| B3 Ingest Tax Court opinions | ✅ Done (9,973 chunks; pilot 0.667 → 0.500) |
+| B4 Golden set part 1 | ✅ Done (53 rows; baseline 0.491) |
+| B5 Golden set part 2 | ✅ Done (111 rows total; baseline 0.435) |
+| B6 Cross-encoder rerank | ⬜ Next |
+| B7 Query decomposition | ⬜ |
+| B8 RAGAS harness | ⬜ |
+| B9 CI + RAGAS gate | ⬜ |
+| B10 Phase B exit report | ⬜ |
 
 ## Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)
 | Task | Status |
@@ -31,6 +45,15 @@ Working mode: Claude writes the code and may edit existing files; new files are 
 ## Decisions log
 | Date | Decision | Where recorded |
 |---|---|---|
+| 2026-09-22 | B5 audit: compound rows may not reuse an opinion a case-law-only row tests (except deliberate pairs); reversed opinions become explicit Phase E tests with notes | `tasks/todo.md` B5, log #42 |
+| 2026-09-22 | B5: compound/temporal rows carry gold sub-queries (measurement only); insufficiency verified by real search, not text match | `tasks/plan.md`, `tasks/todo.md` B5, log #41 |
+| 2026-09-22 | You kept the extra golden rows: §9.1's per-category counts are minimums; golden set frozen after review | `tasks/plan.md`, `tasks/todo.md` B4 |
+| 2026-09-22 | B4 audit: §9.1 counts treated as minimums (golden part 1 is 27 + 26); rows carry `notes` for facts outside the corpus (appeals, later law); no gold citation or opinion may appear in both golden and dev/pilot | `tasks/plan.md`, `tasks/todo.md` B4, log #40 |
+| 2026-09-22 | B4: dev rows in a new `eval/dev.jsonl` (pilot left untouched); validator distinguishes diluted from wrong gold; nDCG counts each gold group once; ADR-18 nDCG gap marked unreliable | `tasks/todo.md` B4, log #39, tech doc ADR-18 |
+| 2026-09-22 | Plan revised from B1–B3 findings (you allowed plan edits when findings require them): case law is the 50 newest per topic with page pin-cites; no empty holding/dicta column; golden-set gold becomes groups of interchangeable citations (log #36); DAWSON API change and orphaned gold labels added as risks | `tasks/plan.md`, `tasks/todo.md` B3–B4 |
+| 2026-09-21 | B2: statute chapeaus fold into their first provision; repealed provision stubs dropped; eCFR packing shared via `ecfr.pack`; Phase A range-citation bug fixed, P03 gold relabelled `1.162-4(a)-(c)` | `tasks/todo.md` B2, logs #33-34 |
+| 2026-09-21 | B1: case law from DAWSON, not CourtListener (§11.5 revised; 5× coverage, memos included, but no documented API); whole live Title 26 loaded (~60 min once); 8 case-law topics | `tasks/todo.md` B1, log #32, tech doc §11.5 |
+| 2026-09-21 | Phase B plan approved with Claude's defaults: cross-encoder rerank in B (B6); RAGAS library, pinned; holding/dicta field added empty, tagged in Phase E; CI corpus from a Qdrant snapshot + Postgres dump release asset; golden set is held out, tuning on the dev set only | `tasks/plan.md` Phase B |
 | 2026-09-18 | Project intent: interview piece; architecture kept as specified; live demo + eval dashboard; 3–4 months; <$50/mo | `docs/intent/taxcite.md` |
 | 2026-09-18 | Phase A plan approved | `tasks/plan.md` |
 | 2026-09-18 | Embedding: `bge-small-en-v1.5` primary, `nomic-embed-text-v1.5` challenger | `tasks/plan.md` |
@@ -54,6 +77,8 @@ Working mode: Claude writes the code and may edit existing files; new files are 
 
 ## Findings worth remembering
 _Interview-ready versions of these, with trade-offs, are in `docs/engineering-log.md`._
+- CourtListener has only ~20–60 Tax Court opinions a year since 2000 (reported T.C. only); DAWSON has 5× more on `"section 183"` (560 vs 108). Its bulk opinions dump is 54.6 GB with no court id on the row (log #32).
+- Title 26 release point 119-110: 1,900 live sections, ~2.3M tokens, 56 MB XML parsed in 0.7 s. The whole statute is ~60 min to embed.
 - The eCFR API requires compressed responses (406 without them). Part 1 is ~12 MB compressed and takes ~30 s to download; it's cached in `data/raw/`.
 - No §1.280A in eCFR (the home-office regulations were never finalized), so home-office questions rely on Pub 587 and the statute.
 - `CITA` holds the amendment history, and some sections were renumbered ("Redesignated"). Both matter for Phase D.
@@ -63,13 +88,14 @@ _Interview-ready versions of these, with trade-offs, are in `docs/engineering-lo
 - 178 table-of-contents sections (~4% of Part 1) are heading lists that would compete with real rule text in search results.
 - Part 1 parses to 44,250 chunks (43,919 indexable), averaging 270 tokens; parsing takes ~5 s.
 - Sections can embed their own outline in an `<EXTRACT>`; treating it as structure restarted paragraph numbering and silently lost 154 chunks (fixed; log #18).
+- Embedding batch size must stay small on CPU: 256 thrashed at 8.6 GB; 16 is as fast at 1.5 GB. bge-base runs ~3 chunks/s (log #35).
 - Embedding runs at 7.0 chunks/s (~105 min for Part 1). Parallel workers are *slower* (3.4/s at 4 workers); CoreML is a wash.
 
 ## Environment
 - Stack: `docker compose up -d --wait` starts Qdrant (6333), Postgres (**5433**) and Redis (**6380**); 5432 and 6379 are taken locally.
 - Tests: `uv run pytest -q` (needs the stack running).
-- Knowledge graph: `graphify-out/`; it's stale since the ADR-17 and §11.1 edits.
+- Knowledge graph: `graphify-out/`; refreshed 2026-09-21 but not committed yet.
 
 ## Pending housekeeping
-- No git commits yet. Commit the docs, plan and T1? (`.DS_Store` and `scratch/` to `.gitignore` first.)
+- Phase A is committed (`df0703e`). Not committed yet: the `.gitignore` entry for `docs/phase-a-interview-prep.md` and the refreshed `graphify-out/`.
 - If a `venv/` folder reappears, delete it and use a fresh terminal tab.

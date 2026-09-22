@@ -15,7 +15,8 @@ class Chunk:
     as_of: str
     excluded: str | None = None
     part: int = 1  # 1-based index when one citation needs more than one chunk
-    source: str = "ecfr"  # which corpus this came from; IRS publications use "irs_pub"
+    source: str = "ecfr"  # which corpus this came from: "ecfr", "irs_pub", "usc", "case"
+    source_revision: str | None = None  # upstream version, e.g. the US Code release point "Pub. L. 119-110"
 
     @property
     def key(self) -> str:

@@ -17,7 +17,10 @@ COLLECTION = os.environ.get("QDRANT_COLLECTION", "chunks")
 DENSE_MODEL = os.environ.get("EMBED_MODEL", "BAAI/bge-base-en-v1.5")  # ADR-18
 SPARSE_MODEL = "Qdrant/bm25"
 DENSE_DIM = 768  # bge-base; bge-small was 384
-BATCH = 256
+# Every text in a batch is padded to the longest, and ONNX keeps the memory it grabs.
+# Measured on the 128 longest chunks: 16 -> 2.91/s at 1.5 GB, 128 -> 2.86/s at 4.5 GB.
+# 256 grew the ingest to 8.6 GB and 20 GB of swap, at 0.45/s (log #35).
+BATCH = 16
 NAMESPACE = uuid.UUID("6f1d4f9a-6a5e-5f1e-9a8b-2c3d4e5f6a7b")  # fixed: point ids must be reproducible
 
 ROWS_SQL = """
@@ -77,6 +80,9 @@ def sync(conn, qc: QdrantClient, source: str, name: str = COLLECTION, dense=None
         cur.execute(ROWS_SQL, (source,))
         cols = [d.name for d in cur.description]
         rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+    # end the read transaction now: embedding takes up to ~90 min, and an open
+    # transaction holds a lock that blocks any schema change (e.g. store.create_table)
+    conn.commit()
 
     written = 0
     started = time.time()

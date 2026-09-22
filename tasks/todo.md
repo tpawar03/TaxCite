@@ -266,3 +266,323 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 - [ ] A reviewer can POST a question and receive a cited answer over SSE
 - [ ] ADR-9 built; ADR-11 and the embedding model decided
 - [ ] Ready to plan Phase B
+
+---
+---
+
+# TaxCite Phase B — Task List
+
+Plan: `tasks/plan.md` (Phase B section). Test command: `uv run pytest -q`. Every task leaves the repo runnable. Tuning happens on the dev set (`eval/pilot.jsonl` plus the new dev rows), never on `eval/golden.jsonl`.
+
+---
+
+## B1: Topic scope and source spike
+
+**Description:** Pick the Phase B topic families by extending Phase A's 21 regulation section families with ones where case law decides the answer (candidates: hobby loss §183, home office §280A, substantiation §274(d), worker classification, constructive receipt §451). Download one Title 26 USLM release point from uscode.house.gov and record its size, section count and release-point Public Law id. Measure the CourtListener bulk opinion files (download size, format, time to extract Tax Court rows) against the alternatives: the API limited to the chosen topics (125 req/day), and GovInfo USCOURTS. Choose the case-law source.
+
+**Acceptance criteria:**
+- [x] Topic list written down, with the statute sections and the approximate number of Tax Court opinions per topic
+- [x] Case-law source chosen, with the measurements that decided it
+- [x] Decision logged in STATUS.md and in an engineering-log entry (#32)
+
+**Verification:**
+- [x] Manual: the numbers come from actual downloads or API calls, not documentation
+
+**Measured 2026-09-21:**
+- **Statute (uscode.house.gov):** release point `119-110` (Public Law 119-110, 09/16/2026). Zip 8.3 MB, XML 56 MB, 111 s to download, 0.7 s to parse. 2,162 sections: 1,900 live, 241 repealed, 17 renumbered, 2 reserved, 2 omitted. The whole title is ~2.3M tokens without notes (about 7,500 chunks, ~60 min to embed at bge-base's ~2 chunks/s). The topic sections alone are ~101k tokens (~350 chunks).
+- **CourtListener bulk:** opinions 54.6 GB bz2 (all courts), clusters 2.5 GB, dockets 5.0 GB. Opinion rows carry no court id, so a Tax Court slice means joining dockets → clusters → a full stream of the 54.6 GB file.
+- **CourtListener coverage of the Tax Court is thin:** 13,876 opinions in total, but only 1,050 filed since 2000, about 20–60 a year (2015: 32; 2024: 20). That matches the reported T.C. opinions alone. The memorandum opinions, where hobby-loss and substantiation cases are decided, are mostly missing. `"section 183"` returns 108 hits; `"section 280A"` 29; `274(d)` with substantiation 27.
+- **DAWSON (ustaxcourt.gov, the court's own system):** the same `"section 183"` search returns **560** opinions, including memorandum, summary and bench opinions, covering cases filed from May 1986. It has no documented API; its public web app calls an undocumented `public-api` host. Opinions are PDFs.
+- **GovInfo USCOURTS:** not measured. It covers Article III courts, and the Tax Court (Article I) is not among them, so it doesn't help here.
+
+**Decided 2026-09-21 (you confirmed both recommendations):**
+- **Statute:** ingest all live sections of Title 26, not just the topics. It's a one-time ~60-minute load, and compound questions can then reach any section.
+- **Case law:** use DAWSON, not CourtListener, as the Tax Court source: 5× the coverage, and it is the source of record. Scope it to T.C. and memorandum opinions filed 2000 or later, the top ~50 per topic by relevance (~400 opinions, estimated ~16k chunks, ~2 h to embed; B3 measures the real numbers). Summary and bench opinions are nonprecedential and left out for now.
+- **Topics for case law:** §183 hobby loss · §162 trade or business / ordinary and necessary · §274(d) substantiation · §280A home office · §469 material participation · §451 constructive receipt · §3121(d)/§7436 worker classification · §6662 accuracy penalty. The regulation topics stay Phase A's 21.
+
+**Dependencies:** None
+**Files:** `tasks/todo.md` (this entry), `docs/engineering-log.md`, `STATUS.md`
+**Scope:** S
+
+---
+
+## B2: Ingest 26 U.S.C. (statute)
+
+**Description:** Parse the Title 26 USLM XML (release point 119-110) into chunks for **all live sections** (B1 decision). Split by section, and by subsection `(a)` when a section is long, into 200–500-token chunks using the eCFR packing rules. Citations look like `26 U.S.C. § 183(d)`. Set `source = "usc"`, and store the release point's Public Law id as `source_revision`. Teach `generate.py`'s citation parsing the new format, so exact / derived / fabricated counting still works. Re-running is idempotent (keyed on `chunk.key`, like eCFR).
+
+**Acceptance criteria:**
+- [x] `uv run taxcite ingest usc` loads all 1,900 live sections; Postgres indexable 10,768 = Qdrant `usc` 10,768 (33 min to embed)
+- [x] Re-running creates no duplicates (re-run stored the same 11,030 rows), and sections the XML no longer produces are swept
+- [x] Repealed / `[Reserved]` sections are skipped and recorded with a reason (262 sections, `excluded = status`)
+- [x] Pilot-set Recall@10 re-run and recorded before and after; any dilution noted (below)
+
+**Verification:**
+- [x] `uv run pytest -q`: 110 tests, 14 of them over an 8-section USLM fixture (`tests/fixtures/usc_sample.xml`: 183, 212, 64, 4, 6040, 1311, 3241, 1400Z–1)
+- [x] Manual: 3 chunks spot-checked against uscode.house.gov (§183(a)-(d) 6/6, §280A(c)(1) 4/4, §1402(a)(11) 1/1 sentences verbatim)
+
+**Done 2026-09-22.** Pilot hybrid Recall@10 (k=10):
+| | Recall | nDCG | MRR | Section recall |
+|---|---|---|---|---|
+| Phase A | 0.722 | 0.385 | 0.214 | 0.778 |
+| after the range-citation fix (`retrieval-2026-09-21-k10-before-usc.json`) | 0.722 | 0.385 | 0.214 | 0.778 |
+| + statute (`retrieval-2026-09-22-k10.json`) | 0.667 | 0.362 | 0.204 | 0.778 |
+
+The fix changed labels, not results. The statute costs one question (5.6 points, exactly the pilot's resolution): **P02**'s gold regulation `1.183-1(b)(1)` fell from rank 10 to 11 behind `26 U.S.C. § 183(a)-(d)` at rank 2, whose (b) "Deductions allowable" answers P02 directly. The pilot was labelled before the statute existed, so this is the instrument missing an answer, not retrieval getting worse; Phase A's pilot is left unchanged, and B4's golden set labels statute answers. Sparse lost P01 as well (0.444 → 0.389).
+
+**Progress 2026-09-21:**
+- Parser drafted and tested: 11,030 chunks (10,768 indexable) in 2.8 s; median 169 tokens; 4 over 500 (single paragraphs that can't be split, as in eCFR). Every table is flattened: the largest in the text has 86 cells, under eCFR's 100-cell limit.
+- Chunking decisions: level 1 is a section's top provisions (subsections, or paragraphs as in §212), level 2 their children; **lead-ins fold into the first provision they introduce** (log #34); bracketed "[(n) Repealed …]" provisions are dropped; repealed/renumbered/reserved/omitted sections are recorded with `excluded = status`; `sourceCredit` is stored as `cita`; notes are skipped; en-dash section numbers (`1400Z–2`) become hyphens.
+- `ecfr.pack` extracted and shared with a citation prefix. **It had a Phase A bug:** range citations lost their end when the last unit had several blocks, affecting 84 of 5,609 eCFR chunks (log #33). Fixed with a regression test, P03 gold relabelled `1.162-4(a)-(c)`, and the eCFR subset re-ingested from the same 2026-09-17 file.
+- `source_revision` column added (ALTER, so Phase A's table picks it up); `section_of` handles statute citations, including dashed sections; the synthesis prompt shows a statute citation example; the IRS scraper's User-Agent now points to the right repo.
+- Found while testing: `index.sync` held its read transaction open for the whole embedding run, so the `source_revision` ALTER queued behind a running ingest and hung the test suite. `index.sync` now commits after reading, and `create_table` only ALTERs when the column is missing.
+- The first eCFR re-ingest ran at 0.45 chunks/s (8.6 GB, 20 GB swap) and was stopped at 56%. Embedding batch 256 → 16: same speed (2.91 vs 2.86/s), 1.5 GB vs 4.5 GB peak (log #35). Re-run at ~3/s.
+- Known limit: long enumerations split at level 2 still yield short chapeau-less items (1,243 chunks under 50 tokens); revisit if the golden set shows it costs recall.
+
+**Dependencies:** B1
+**Files:** `src/taxcite/ingest/usc.py`, `src/taxcite/ingest/ecfr.py`, `src/taxcite/chunk.py`, `src/taxcite/store.py`, `src/taxcite/cli.py`, `src/taxcite/generate.py`, `eval/pilot.jsonl`, `tests/fixtures/usc_sample.xml`, `tests/test_usc.py`, `tests/test_ecfr.py`, `tests/test_generate.py`
+**Scope:** M
+
+---
+
+## B3: Ingest Tax Court opinions (case law)
+
+**Description:** Load Tax Court opinions from **DAWSON** (B1 decision): T.C. and memorandum opinions filed 2000 or later, the 50 newest per B1 topic (the search has no relevance ranking). DAWSON has no documented API, so first work out its public search endpoint from the web app, then rate-limit requests and send an identifying User-Agent. Opinions are PDFs: extract text with pdfminer.six (as in T5), and record opinions that come out empty with a reason rather than indexing them. Split into paragraph chunks of 150–400 tokens, each overlapping the previous by one paragraph (§3.2). Citations are page pin-cites, `T.C. Memo. 2021-115, at *4-5` (opinions don't number paragraphs). Docket number, opinion type, judge and filing date stay in the cached selection for Phase C's graph. Set `source = "case"`, and teach `generate.py` the case citation format. *(Revised 2026-09-22 from what B3 found; the original assumed relevance ranking, ¶ citations and an empty `holding_dicta` column.)*
+
+**Acceptance criteria:**
+- [x] `uv run taxcite ingest case` loads the topic opinions; Postgres indexable 9,973 = Qdrant `case` 9,973 (32 min to embed)
+- [x] Every chunk has a page pin-cite, and consecutive chunks of one opinion overlap by exactly one paragraph (tested)
+- [x] Opinions with no usable text are recorded with a reason, never indexed empty (none found: all 307 have a text layer)
+- [x] Pilot-set Recall@10 re-run and recorded; dilution noted (below)
+- [x] Opinion count, chunk count and embedding time recorded against B1's estimate: 307 opinions (est. ~400), 9,973 chunks (est. ~16k), 32 min (est. ~2 h)
+
+**Verification:**
+- [x] `uv run pytest -q`: 120 tests, 10 over two real opinions (T.C. Memo. 2021-115, current layout; 125 T.C. No. 13, 2005 layout) and a canned DAWSON response
+- [x] Manual: parsed text checked against the source PDFs for the 2026, 2021, 2005 and 2000 layouts during development
+
+**Done 2026-09-22.** Pilot hybrid Recall@10 (k=10), corpus now 28,393 vectors:
+| | Recall | nDCG | MRR | Section recall |
+|---|---|---|---|---|
+| regulations + publications (Phase A) | 0.722 | 0.385 | 0.214 | 0.778 |
+| + statute (B2) | 0.667 | 0.362 | 0.204 | 0.778 |
+| + case law (`retrieval-2026-09-22-k10.json`) | **0.500** | 0.304 | 0.170 | 0.667 |
+| + case law, case chunks dropped from the top 60 (approximates B7's routing) | ~0.611 | | | |
+
+Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hobby-loss opinions apply §1.183-2(b)'s factors to real horse breeders, which matches a fact-pattern question better than the regulation. Across the pilot, case law takes 53 of 180 top-10 slots (29%). This is the dilution B7's source routing exists to remove (log #38).
+
+**Progress 2026-09-22:**
+- DAWSON's interface, from its web app's bundle: `GET public-api-green.dawson.ustaxcourt.gov/public-api/opinion-search?keyword=…&dateRange=customDates&startDate=MM/DD/YYYY&opinionTypes=MOP,TCOP` (an end date in the future is a 400), then `/public-api/{docket}/{docketEntryId}/public-document-download-url` → a signed S3 link to the PDF. Requests spaced 1 s, identifying User-Agent.
+- **The search has no relevance ranking**, so "top ~50 by relevance" became **the 50 newest per topic** since 2000. 307 distinct opinions (279 memos, 28 T.C.), 269 MB of PDFs, cached with the selection in `data/caselaw/opinions.json` so the corpus stays fixed.
+- Opinions are deduped **by the citation in the title**: consolidated cases appear once per docket, and some memos are coded as T.C. opinions.
+- **Citations are page pin-cites, not ¶ numbers:** opinions don't number paragraphs; they're cited "at *12", and each page opens with a "[*12]" marker. Chunk citation `T.C. Memo. 2021-115, at *4-5`; `section` is the opinion citation.
+- Parsing: body text is the modal font size; larger is the masthead; smaller is footnotes (kept, one block per page, below the last paragraph) or table cells (dropped); page numbers and the "Served" stamp are dropped by pattern (the stamp is larger than body text in 2026, smaller in 2021); number-only pieces (list numbers, body-size table cells, ~3,800) fold into the next paragraph.
+- Profile: 9,973 chunks, median 374 tokens, 28 single paragraphs over 400, no opinion without text (all have a text layer back to 2000). ~33 min to embed.
+- Known limit: pre-2010 layouts put each line in its own text box, so their one-paragraph overlap is one line.
+- **Deviation from the plan:** no empty `holding_dicta` column. Nothing reads it until Phase E, and Phase E can add it the way B2 added `source_revision`, with values.
+
+**Dependencies:** B1
+**Files:** `src/taxcite/ingest/caselaw.py`, `src/taxcite/chunk.py`, `src/taxcite/cli.py`, `src/taxcite/generate.py`, `tests/fixtures/caselaw_sample.*`, `tests/test_caselaw.py`
+**Scope:** M
+
+---
+
+## ✅ Checkpoint 1
+- [ ] `taxcite search "…" --source usc` and `--source case` return relevant hits for 3 hand-picked questions each
+
+---
+
+## B4: Golden set, part 1 — statutory-only and case-law-only (45 rows)
+
+**Description:** Create `eval/golden.jsonl`. The schema extends the pilot set's (question, gold citations, reference answer) with `category`, `scored_from` (the phase a row starts being scored in), `as_of` and `expect_insufficient`. Claude drafts 25 statutory-only and 20 case-law-only rows from ingested text; you review every row. **Gold is a list of groups of interchangeable citations** (e.g. `[["26 U.S.C. § 183(a)-(d)", "26 CFR 1.183-1(b)(1)"]]`); a group counts when any member is retrieved (log #36). Update `eval/retrieval.py` to score groups, treating a flat list as one citation per group so the pilot's numbers don't move. Case-law rows can only use the 307 ingested opinions. Extend `eval/validate_pilot.py` to take any set file and check that every gold citation exists in the corpus. Also add ~12 dev rows (case-law and compound) for tuning, in `eval/dev.jsonl`.
+
+**Acceptance criteria:**
+- [x] 53 rows in `eval/golden.jsonl` (27 statutory, 26 case law; §9.1's 25/20 kept as minimums at your call); the validator passes
+- [x] `eval/retrieval.py` scores gold groups; pilot recall and MRR unchanged (nDCG and section recall corrected, log #39)
+- [x] Every row reviewed by you (`reviewed: true`); corrections logged (log #40)
+- [x] 12 dev rows in `eval/dev.jsonl`, validated, no gold or opinion shared with the golden set or pilot
+
+**Verification:**
+- [x] `uv run python eval/validate_pilot.py eval/golden.jsonl`: 0 of 53 need attention; 4 known-hard; 12 diluted groups
+
+**Done 2026-09-22.** Baseline `eval/results/golden-b4-baseline-k10.json`, hybrid k=10: Recall 0.491 (statutory 0.333, case law 0.654), nDCG 0.324, MRR 0.271. **Frozen:** any change to `eval/golden.jsonl` from here is a logged commit.
+
+**Progress 2026-09-22 (drafted, awaiting your review):**
+- 45 golden rows (25 statutory, 20 case-law; 37 natural-language, 8 keyword) and 12 dev rows (6 case-law, 6 compound) in a **new `eval/dev.jsonl`**, not appended to the pilot, so Phase A's pilot numbers stay comparable. Dev rows use opinions the golden set doesn't.
+- Written from the gold chunks' text: statute answers from the provision (e.g. §67(h) now suspends miscellaneous itemized deductions permanently, not through 2025); case-law answers from the court's own "Held:" or "we hold" sentences. Gold located by phrase, so every chunk containing a holding (overlap can duplicate it) is in its group.
+- Gold groups used where authorities are interchangeable: 5 statute rows carry a regulation alternative; G-C16 accepts two opinions with the same holding; G-C14 and G-C20 accept the syllabus and the discussion page.
+- `eval/retrieval.py` scores groups; `section_of` now comes from `generate.py`. **Two Phase A metric bugs found** (log #39): nDCG counted a gold citation once per retrieved chunk (P15 scored 1.232), and section recall never matched publications. Pilot recall and MRR unchanged; ADR-18 carries a caveat.
+- `eval/validate_pilot.py` handles groups, prints category counts, and **separates diluted gold from wrong gold**: a group missing from the overall top 50 is re-searched within its own source. 12 statute groups are diluted (found within `usc` only); 2 rows are marked `expect_hard` for vocabulary mismatch (G-S03, G-S21).
+- Baseline, hybrid k=10: Recall 0.467 (statutory **0.320**, case law 0.650), nDCG 0.317, MRR 0.268.
+
+**Audit 2026-09-22 (two full passes over every row and its sources, at your request; log #40):**
+- **Wrong or incomplete answers fixed (11 statute rows):** §280A(c)(5)'s carryforward; §179's $4,000,000 phase-down and post-2025 indexing; §469(c)(7)'s employee-services rule; §6662(d)'s 5% threshold for §199A claimants; §6662's 40% tiers; §6664(c)'s charitable-valuation limit; §67(b) exclusions; §274(d)'s nonpersonal-use-vehicle exemption; "modified" AGI in §469(i); G-S11 gold widened to §469(i)(2), which actually states the $25,000.
+- **Ambiguity removed:** G-S02 and G-S07 now say "self-employed" (for an employee, §67(h) would make both answers "no" for a different reason). G-C01 now asks what Gregory decided, not the post-2017 consequence, which needs §67(h) too and moves to B5 as a compound question. G-C09 now asks about Caan's real issue (same property, not cash), not timing. G-C22 drops "competitive", which the opinion doesn't establish.
+- **Law that changed after the source:** G-S25 asked about a state-licensed marijuana dispensary; on 2026-04-28 state-licensed *medical* marijuana moved to Schedule III, outside §280E. Reworded to what the statute says; the dispensary question moves to B5.
+- **Appeals:** Morehouse (G-C03) was reversed by the Eighth Circuit (769 F.3d 616, 2014), which isn't in the corpus; reworded to ask what the Tax Court held, with a note. Patel (G-C11) is on appeal to the Fifth Circuit; Gregory, Grey and Rogerson were affirmed. Rows carry a `notes` field for facts outside the corpus.
+- **Gold too narrow:** G-C06 now accepts six 2003 memo opinions with the same holding; G-C11 accepts T.C. Memo. 2026-26; G-C12 accepts Kings Road's first page; G-S26 accepts §1.446-1(c)(1).
+- **Duplicate removed:** G-C13 (T.C. Memo. 2026-26) restated G-C11's rule; replaced.
+- **Coverage added (8 rows):** statute §451(a) timing and §6651(a)(1) late filing; case law on vehicles under §274(d) (Hoakison; Tibin), hobby loss (Phillips), home office (Longino; Kraske), an independent-contractor win (Mayfield) and constructive receipt (Gale). The golden set had no case-law row on hobby loss, home office, substantiation or constructive receipt, the topics practitioners ask about most.
+- **Dev leakage removed:** five dev compound rows shared statute gold with golden rows (§183(d), §469(i)(3), §3121(d), §274(d), §262); switched to §1.183-2(b), §469(i)(6), §7436, §1.274-5T(b)(2), §1.262-1(a). Now no citation or opinion appears in both sets, or in both golden and pilot.
+- **Known-hard, kept (5):** G-S03, G-S21, G-S26, G-S27 (vocabulary or short-provision mismatch), G-C21 (rank 56 within case law). Dev D09 and D10 are compound rows only decomposition can reach.
+- **Now 53 golden rows** (27 statutory, 26 case law; 46 natural-language, 7 keyword), up from §9.1's 25 + 20. Baseline, hybrid k=10: Recall **0.491** (statutory 0.333, case law 0.654), nDCG 0.324, MRR 0.271.
+
+**Dependencies:** B2, B3
+**Files:** `eval/golden.jsonl`, `eval/dev.jsonl`, `eval/retrieval.py`, `eval/validate_pilot.py`, `tests/test_metrics.py`
+**Scope:** M
+
+---
+
+## B5: Golden set, part 2 — compound, temporal, insufficiency, adversarial (55 rows)
+
+**Progress 2026-09-22 (drafted, awaiting your review):**
+- 55 rows: 30 compound, 10 temporal, 10 insufficiency, 5 adversarial. All validate; no gold or opinion shared with dev or pilot; every calculation re-computed by script.
+- **Compound rows carry `gold_subqueries`**, one per gold group: what an ideal decomposer would issue, and the source it would search. The full compound question reaches almost none of its gold (it describes client facts, not legal terms), but every gold group is reached by its sub-query (45 groups). The validator now checks that, reporting "needs decomposition" instead of an error. The sub-queries are measurement only, and they give B7 a held-out yardstick for decomposition quality.
+- **Insufficiency rows are verified by running the real search**, not by text match: the first draft's "2026 mileage rate" and "2026 wage base" were both answerable (Pub 334's "What's New for 2026" gives 72.5 cents *a* mile and $184,500), and a `cents per mile` probe had missed them. Several rows are traps where search returns authoritative-looking but irrelevant chunks (New York *Liberty Zone* depreciation; outdated §1.179-2(b) amounts).
+- **Temporal rows expose a Phase D gap:** effective dates live in the statutory notes, which the B2 parser drops, so the corpus can't say that the qualified-tips deduction (§224) starts in 2025 or which §179 limit applied in 2023 (log #41). Those rows are `expect_insufficient`.
+- The queued edge cases are in: medical marijuana 2026 (G-T03), hobby expenses after 2017 (G-X01) and in 2016 (G-T04), Morehouse in the Eighth Circuit (G-X02, Phase E).
+- Adversarial rows carry `client_doc` and `expected_behavior`: prompt injection, script injection, a fabricated §183(z), a system-prompt exfiltration request, and a forged authority badge with a `javascript:` link.
+- Baseline on the 30 compound rows, hybrid k=10: Recall **0.317**, the number decomposition has to beat.
+
+**Audit 2026-09-22 (two passes over every row and its full sources, at your request; log #42):**
+- **Compound rows were measuring the case-law category twice.** 22 of 30 reused an opinion already tested by a case-law-only row, usually the same chunk with client facts added. 18 were rebuilt on opinions the golden set doesn't otherwise use (Miller, Sinopoli, Martin, Day, Schwab, Menard, Veriha, Kadau, Big Apple, Rehman, Henry, Goodwill-Oikerhe, Swanton, Velasco, Carter, Maguire, Akers, Charlotte's Office Boutique). The 4 remaining overlaps are deliberate (Gregory + §67(h); Morehouse; different holdings of Anderson and Patel).
+- **Two more reversed opinions found:** Carter's §6751(b) holding was reversed by the Eleventh Circuit (the gold chunk is the post-remand opinion accepting approval as timely, and the draft had the answer backwards), and Menard's reasonable-compensation holding was reversed by the Seventh Circuit (560 F.3d 620, 2009). Both are now explicit tests with notes, like Morehouse. Appellate history was checked for every published opinion in both parts; no other reversals.
+- **Answers that depended on facts the question omitted:** G-X10 (Dirico) is passive only because the lessee used the towers in a *rental* activity; that fact is now in the question. G-X05's 2-of-7 horse presumption needs the activity to be mainly breeding, training, showing or racing.
+- **Answers missing a rule the source states:** §1.274-5T(c)(5) reconstruction after a casualty (G-X13); §280F(d)(5)(B)(ii) for for-hire vans (G-X15); §162(f) for forfeitures (G-X16); §280A(f)(1)(B) hotel-portion exception (G-X24); §6664(c)(3) no reasonable-cause defence for charitable gross overvaluations (G-X30); §7503 weekend rule (G-T05, April 18, 2026 is a Saturday); §6501(e) disclosure carve-out (G-T06); §6651(a)(2) in the late-filing arithmetic (G-T07); the more-than-half test for a full-time nurse (G-X03).
+- **Coverage added:** G-T11, a retroactive rule (100% bonus depreciation enacted July 2025 for property acquired after January 19, 2025); G-I11, a partial-insufficiency row (federal half answerable, California half not) for the per-sub-query sufficiency gate; G-A06, a PII canary for §3.4's redaction invariant.
+- **Now 58 rows** (30 compound, 11 temporal, 11 insufficiency, 6 adversarial), 13 with notes. Compound baseline, hybrid k=10: Recall 0.339.
+
+**Queued by the B4 audit:** (1) a temporal/insufficiency row: "can a state-licensed medical marijuana dispensary deduct its expenses for 2026?" (Schedule III since 2026-04-28; the corpus can't show a schedule); (2) a compound row: hobby expenses after 2017 (Gregory + §67(h)); (3) Morehouse (G-C03) as the first negative-treatment case for Phase E.
+
+**Description:** Add 30 compound rows (statute + case law + client facts; client facts are written into the question text, since client documents arrive in Phase G), 10 temporal rows (retroactive rule, amended return, ambiguous as-of year; `scored_from: D` for accuracy), 10 expected-insufficiency rows (`expect_insufficient: true`) and 5 adversarial rows (a malicious client-document payload; `scored_from: G`). Claude drafts, you review every row. Once reviewed, the set is frozen, and any later change is a logged commit.
+
+**Acceptance criteria:**
+- [x] At least §9.1's counts per category: 27 statutory / 26 case law / 30 compound / 11 temporal / 11 insufficiency / 6 adversarial = 111
+- [x] The validator passes: 0 of 111 need attention (4 known-hard, 12 diluted, 49 reachable only by their gold sub-query); category counts printed
+- [x] Every row reviewed by you; the set is frozen (commit pending)
+
+**Verification:**
+- [x] `uv run python eval/validate_pilot.py eval/golden.jsonl`
+
+**Done 2026-09-22.** Full baseline `eval/results/golden-b5-baseline-k10.json`, hybrid k=10 over the 84 rows scored in B: Recall 0.435, nDCG 0.307, MRR 0.310; by category statutory 0.333, case law 0.654, compound 0.350. Temporal (scored from D) and adversarial (from G) rows are excluded; 10 insufficiency rows count as abstention.
+
+**Dependencies:** B4
+**Files:** `eval/golden.jsonl`, `eval/validate_pilot.py`
+**Scope:** M
+
+---
+
+## ✅ Checkpoint 2 (human review: golden set)
+- [ ] All 100 rows reviewed by you; the validator passes; category counts match §9.1; the set is frozen
+
+---
+
+## B6: Cross-encoder rerank
+
+**Description:** Add a rerank step using fastembed's `TextCrossEncoder` (already a dependency): take the top 50 fused hybrid candidates and rerank them down to k. Expose it as a search mode (`hybrid+rerank`) so it is its own ablation rung. Compare cross-encoder candidates on the dev set, and choose one on quality and CPU latency.
+
+**Acceptance criteria:**
+- [ ] `taxcite search "…" --mode hybrid+rerank` works
+- [ ] Recall@10, nDCG@10, MRR and the section-vs-paragraph recall gap recorded for hybrid vs. hybrid+rerank on the dev set and the golden set
+- [ ] Added p50/p95 query latency recorded
+- [ ] Becomes the default only if the measurements support it; the decision is logged either way
+
+**Verification:**
+- [ ] `uv run pytest -q`: rerank reorders a known case (e.g. P05's rule paragraph ranked above its examples)
+- [ ] `uv run python eval/retrieval.py --mode hybrid+rerank`
+
+**Dependencies:** B2, B3 (golden-set numbers need B5)
+**Files:** `src/taxcite/retrieve.py`, `src/taxcite/cli.py`, `eval/retrieval.py`, `tests/test_retrieve.py`
+**Scope:** S
+
+---
+
+## B7: Query decomposition
+
+**Description:** Add `decompose(question)`: one structured-output call to `gpt-4o-mini` (ADR-11) that returns typed sub-queries (`statutory | case_law | client_fact`) and an as-of year. Retrieve for each sub-query with source routing (statutory → `usc + ecfr + irs_pub`, case_law → `case`, client_fact → not searched; its facts go to synthesis). Group the results by sub-query in the synthesis prompt. The job publishes a `decomposing` stage and stores the as-of year (it is not used as a filter until Phase D). A question that decomposes into one sub-query takes exactly Phase A's path.
+
+**Acceptance criteria:**
+- [ ] `POST /queries` with a compound question shows `decomposing → retrieving → synthesizing → answer` over SSE
+- [ ] The answer can cite statute, regulation and case law in one response
+- [ ] Golden-set retrieval with vs. without decomposition, per category
+- [ ] Routing accuracy recorded: whenever a golden row's gold citations include case law, a case-law sub-query appears
+- [ ] **Pilot recall with routing recovers the case-law dilution** (B3: 0.667 before case law, 0.500 after, ~0.611 with case chunks filtered out); report the exact filtered-query number
+- [ ] Decomposition prompt tuned on the dev set only
+
+**Verification:**
+- [ ] `uv run pytest -q`: parsing the structured output, source routing, the single-sub-query fallback, the SSE stage order
+- [ ] Manual: 3 compound questions through the API
+
+**Dependencies:** B6, B5
+**Files:** `src/taxcite/decompose.py`, `src/taxcite/jobs.py`, `src/taxcite/generate.py`, `eval/retrieval.py`, `tests/test_decompose.py`, `tests/test_jobs.py`
+**Scope:** M
+
+---
+
+## ✅ Checkpoint 3 (human review: does decomposition earn its place?)
+- [ ] Ladder on the golden set: closed-book → dense → hybrid → +rerank → +decomposition
+- [ ] Decomposition helps compound questions, or the report says it doesn't
+
+---
+
+## B8: RAGAS faithfulness harness
+
+**Description:** Add `eval/ragas_eval.py`: run the full pipeline over the golden rows scored in B, then score RAGAS faithfulness with `claude-haiku-4-5` as the judge (the other provider, ADR-11/§9.2). Refusals are excluded from the faithfulness mean and reported as a separate refusal rate. Pipeline outputs are cached per run, so re-judging doesn't regenerate them. Print the running cost and stop at a configurable cap. Pin the `ragas` version; if its dependencies cause trouble, implement the faithfulness metric directly instead (extract claims, check each against the retrieved context, take the ratio).
+
+**Acceptance criteria:**
+- [ ] `uv run python eval/ragas_eval.py` writes `eval/results/ragas-<date>.json` with per-row and aggregate faithfulness, refusal rate and cost
+- [ ] Run 3 times: mean and spread recorded, so the gate's noise band is known before it is enforced
+- [ ] If faithfulness is below 0.85, the cause is analysed and fixed against the dev set, or the threshold is recalibrated with the measurement written down (§9.3)
+
+**Verification:**
+- [ ] `uv run pytest -q`: refusals are excluded from the faithfulness mean, and the cost cap stops a run
+- [ ] Manual: 5 low-scoring rows read to confirm the judge is right about them
+
+**Dependencies:** B7
+**Files:** `eval/ragas_eval.py`, `pyproject.toml`, `tests/test_metrics.py`
+**Scope:** M
+
+---
+
+## B9: CI in GitHub Actions + the RAGAS gate
+
+**Description:** There is no CI today. Add two workflows:
+- `pytest` on every push, with Qdrant, Postgres and Redis as service containers.
+- The RAGAS gate on PRs that touch retrieval, prompts, reranking or decomposition (§7's list). It restores the corpus from a Qdrant snapshot and a Postgres `chunks` dump published as a GitHub release asset, runs `eval/ragas_eval.py`, and fails if faithfulness < 0.85.
+
+Add a script that regenerates and publishes the snapshot when the corpus changes. Embedding and cross-encoder models are kept in the CI cache. API keys come from repository secrets.
+
+**Acceptance criteria:**
+- [ ] `pytest` runs green on push
+- [ ] The gate runs only on PRs touching the listed paths, and its cost and runtime per run are recorded
+- [ ] **Proof:** a PR with a deliberately broken synthesis prompt fails the gate; reverting it passes
+
+**Verification:**
+- [ ] Manual: both workflow runs linked in the log entry
+
+**Dependencies:** B8
+**Files:** `.github/workflows/test.yml`, `.github/workflows/ragas.yml`, `eval/snapshot.py`
+**Scope:** M
+
+---
+
+## B10: Phase B exit report
+
+**Description:** Write `eval/results/phase_b.md`, in the same shape as `phase_a.md`: the golden-set ablation ladder with per-category numbers, faithfulness with its spread across runs, refusal and abstention rates, failures with examples, and §9.3 recalibration notes. Record the **decomposition-only case-law Recall@20** — the baseline Phase C's gate is measured against. Update the tech doc's Implementation Status.
+
+**Acceptance criteria:**
+- [ ] Every number traces to a results file or a reproducible command
+- [ ] At least 5 failure examples documented
+- [ ] Phase C's case-law Recall@20 baseline stated explicitly
+
+**Verification:**
+- [ ] Tech doc Implementation Status updated to say what is built and what is not
+
+**Dependencies:** B9
+**Files:** `eval/results/phase_b.md`, `taxcite-technical-documentation.md`
+**Scope:** S
+
+---
+
+## ✅ Checkpoint: Phase B complete
+- [ ] All tests pass in CI
+- [ ] The RAGAS gate is live and green
+- [ ] Ready to plan Phase C

@@ -1,9 +1,9 @@
 # Graph Report - TaxCite.nosync  (2026-09-22)
 
 ## Corpus Check
-- 49 files · ~80,516 words
+- 48 files · ~75,322 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 10 file(s) not represented in the graph (top: (none) 3, .jsonl 3, .xml 2)
+- Unclassified: 8 file(s) not represented in the graph (top: (none) 3, .xml 2, .example 1)
 
 ## Summary
 - 700 nodes · 1312 edges · 38 communities (32 shown, 6 thin omitted)

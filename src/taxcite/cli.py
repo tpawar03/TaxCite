@@ -2,11 +2,16 @@
 
     taxcite ingest ecfr --part 1
     taxcite ingest ecfr --section 1.61-1 --skip-index
+    taxcite ingest usc
+    taxcite ingest case
 """
 
 import argparse
+import io
+import re
 import sys
 import time
+import zipfile
 from pathlib import Path
 
 import httpx
@@ -20,6 +25,7 @@ load_dotenv()
 from taxcite.ingest import ecfr
 
 ECFR_API = "https://www.ecfr.gov/api/versioner/v1"
+USC_SITE = "https://uscode.house.gov/download/"
 
 # Topics the Phase A pilot questions will cover, plus four large unrelated families
 # as distractors so retrieval has something to get wrong. ~5,000 chunks, ~12 min to
@@ -104,6 +110,82 @@ def ingest_ecfr(args: argparse.Namespace) -> int:
     return 0
 
 
+def fetch_usc(release: str | None = None, refresh: bool = False) -> Path:
+    """Title 26 USLM XML for a release point (default: the current one), cached on disk.
+
+    uscode.house.gov publishes one zip per release point, named for the Public Law it
+    is current through. The server is slow: the 8 MB zip took ~110 s on first fetch.
+    """
+    from taxcite.ingest.irs_pubs import USER_AGENT
+
+    headers = {"User-Agent": USER_AGENT}
+    if not release:
+        page = httpx.get(USC_SITE + "download.shtml", headers=headers, timeout=60).raise_for_status().text
+        release = re.search(r"xml_usc26@([\d-]+)\.zip", page).group(1)
+    path = RAW_DIR / f"usc26@{release}.xml"
+    if path.exists() and not refresh:
+        return path
+    congress, law = release.split("-")
+    url = f"{USC_SITE}releasepoints/us/pl/{congress}/{law}/xml_usc26@{release}.zip"
+    zipped = httpx.get(url, headers=headers, timeout=300).raise_for_status().content
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(zipfile.ZipFile(io.BytesIO(zipped)).read("usc26.xml"))
+    return path
+
+
+def ingest_usc(args: argparse.Namespace) -> int:
+    from taxcite.ingest import usc
+
+    t0 = time.time()
+    path = fetch_usc(args.release, args.refresh)
+    print(f"US Code Title 26: {path} ({path.stat().st_size / 1e6:.0f} MB, {time.time() - t0:.0f}s)")
+    chunks = usc.parse(path)
+    indexable = [c for c in chunks if not c.excluded]
+    print(f"  parsed  {len(chunks)} chunks ({len(indexable)} indexable, {len(chunks) - len(indexable)} "
+          f"repealed/renumbered/reserved/omitted sections recorded), {chunks[0].source_revision}")
+
+    with store.connect() as conn:
+        store.create_table(conn)
+        store.save(conn, chunks)
+        print(f"  stored  {store.count(conn, 'usc')} rows in postgres")
+        if args.skip_index:
+            print("  skipped embedding (--skip-index)")
+            return 0
+        print(f"  embedding {len(indexable)} chunks (~{len(indexable) / 2 / 60:.0f} min at bge-base's ~2/s)...")
+        t0 = time.time()
+        result = index.sync(conn, index.client(), "usc", progress=progress)
+        print(f"  indexed {result['written']} points, removed {result['removed']} stale, {time.time() - t0:.0f}s")
+    return 0
+
+
+def ingest_case(args: argparse.Namespace) -> int:
+    from taxcite.ingest import caselaw
+
+    ops = caselaw.load_selection(args.refresh)
+    print(f"Tax Court opinions (DAWSON): {len(ops)} selected, {caselaw.PER_TOPIC} newest per topic since {caselaw.SINCE}")
+    chunks = []
+    with httpx.Client(headers={"User-Agent": caselaw.USER_AGENT}, timeout=60) as client:
+        for i, op in enumerate(ops, 1):
+            chunks += caselaw.parse(caselaw.fetch(op, client), op)
+            if i % 50 == 0:
+                print(f"  {i}/{len(ops)} opinions parsed", flush=True)
+    indexable = [c for c in chunks if not c.excluded]
+    print(f"  parsed  {len(chunks)} chunks ({len(indexable)} indexable, {len(chunks) - len(indexable)} opinions without text)")
+
+    with store.connect() as conn:
+        store.create_table(conn)
+        store.save(conn, chunks)
+        print(f"  stored  {store.count(conn, 'case')} rows in postgres")
+        if args.skip_index:
+            print("  skipped embedding (--skip-index)")
+            return 0
+        print(f"  embedding {len(indexable)} chunks (~{len(indexable) / 5 / 60:.0f} min at ~5/s)...")
+        t0 = time.time()
+        result = index.sync(conn, index.client(), "case", progress=progress)
+        print(f"  indexed {result['written']} points, removed {result['removed']} stale, {time.time() - t0:.0f}s")
+    return 0
+
+
 def ingest_pubs(args: argparse.Namespace) -> int:
     from taxcite.ingest import irs_pubs
 
@@ -183,6 +265,17 @@ def main(argv: list[str] | None = None) -> int:
     cfr.add_argument("--only", nargs="+", metavar="PREFIX",
                      help='limit to section prefixes, e.g. --only 1.162 1.274; "--only pilot" uses the Phase A subset')
     cfr.set_defaults(func=ingest_ecfr)
+
+    code = ingest.add_parser("usc", help="26 U.S.C. statute (USLM XML from uscode.house.gov)")
+    code.add_argument("--release", help="release point, e.g. 119-110; defaults to the current one")
+    code.add_argument("--refresh", action="store_true", help="re-download even if cached")
+    code.add_argument("--skip-index", action="store_true", help="store in postgres without embedding")
+    code.set_defaults(func=ingest_usc)
+
+    case = ingest.add_parser("case", help="Tax Court opinions (PDF, from DAWSON)")
+    case.add_argument("--refresh", action="store_true", help="re-select opinions (the cached selection keeps the corpus fixed)")
+    case.add_argument("--skip-index", action="store_true", help="store in postgres without embedding")
+    case.set_defaults(func=ingest_case)
 
     pubs = ingest.add_parser("irs-pubs", help="IRS publications (PDF)")
     pubs.add_argument("--pub", action="append", help="publication number, repeatable; default is the Phase A set")

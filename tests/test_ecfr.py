@@ -205,6 +205,18 @@ def test_citations_are_unique(chunks):
     assert dupes == []
 
 
+def test_range_citation_ends_at_the_last_unit_even_when_it_has_several_blocks():
+    # regression (B2): the range end was read from the last *block*, and a unit's
+    # trailing blocks carry no designation, so (a)+(b) was cited as just (a)
+    xml = """<ECFR><DIV8 N="1.test-2" TYPE="SECTION">
+      <HEAD>§ 1.test-2 Rules.</HEAD>
+      <P>(a) <I>First.</I> The first rule applies here.</P>
+      <P>(b) <I>Second.</I> The second rule has two paragraphs.</P>
+      <P>This is the second paragraph of (b), with no designation of its own.</P>
+    </DIV8></ECFR>"""
+    assert [c.citation for c in parse(ET.fromstring(xml), AS_OF)] == ["26 CFR 1.test-2(a)-(b)"]
+
+
 def test_preamble_is_not_packed_with_a_designated_unit():
     xml = """<ECFR><DIV8 N="1.test-1" TYPE="SECTION">
       <HEAD>§ 1.test-1 Scope.</HEAD>

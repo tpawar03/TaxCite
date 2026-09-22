@@ -477,7 +477,7 @@
       "file_type": "code",
       "norm_label": "content_words()",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L32"
+      "source_location": "L27"
     },
     {
       "id": "eval_validate_pilot_main",
@@ -489,7 +489,7 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L36"
+      "source_location": "L31"
     },
     {
       "id": "src_taxcite_generate_section_of",
@@ -9229,7 +9229,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L51",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -9241,7 +9241,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L56",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -9253,7 +9253,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L94",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -12985,7 +12985,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L18",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -12997,7 +12997,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L19",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -13009,7 +13009,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L20",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -13021,7 +13021,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L23",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -14209,7 +14209,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L21",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -14221,7 +14221,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L23",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -14233,7 +14233,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L24",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -14245,7 +14245,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L25",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -16269,7 +16269,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L32",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -16280,7 +16280,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eval/validate_pilot.py",
-      "source_location": "L36",
+      "source_location": "L31",
       "weight": 1.0
     },
     {

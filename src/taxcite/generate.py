@@ -32,12 +32,13 @@ PRICES = {
 }
 
 CITATION_RE = re.compile(r"\[([^\[\]]+)\]")
+OPINION_RE = re.compile(r"\d+ T\.C\. No\. \d+|T\.C\. Memo\. \d{4}-\d+")
 
 RAG_SYSTEM = """You answer US federal tax questions for an enrolled agent, using only the sources provided.
 
 Rules:
 1. Use ONLY the numbered sources. Do not add rules, dollar amounts or dates from memory.
-2. Every sentence that states a rule must end with its citation in square brackets, copied exactly as the source header gives it, e.g. [26 CFR 1.183-2(b)(3)].
+2. Every sentence that states a rule must end with its citation in square brackets, copied exactly as the source header gives it, e.g. [26 CFR 1.183-2(b)(3)], [26 U.S.C. § 183(d)] or [T.C. Memo. 2026-76, at *12].
 3. If the sources do not answer the question, say exactly: INSUFFICIENT EVIDENCE, and explain what is missing. Do not guess.
 4. Regulations and statute outrank IRS publications. Where they differ, follow the regulation and say so.
 5. Be brief: a practitioner wants the rule and the citation, not an essay."""
@@ -81,7 +82,13 @@ def section_of(citation: str) -> str:
 
     '26 CFR 1.263(a)-3(k)(1)' -> '1.263(a)-3'   (the dash separates section from paragraphs)
     'IRS Pub 587 (2025), p. 12' -> 'Pub 587'
+    '26 U.S.C. § 1400Z-2(a)(1)' -> '1400Z-2'  (statute sections can contain a dash)
+    'Chapin v. Commissioner, T.C. Memo. 2026-76, at *12' -> 'T.C. Memo. 2026-76'  (an opinion is its "section")
     """
+    if m := OPINION_RE.search(citation):
+        return m.group()
+    if citation.startswith("26 U.S.C."):
+        return citation.removeprefix("26 U.S.C.").strip(" §").split("(")[0]
     body = citation.removeprefix("26 CFR ").strip()
     if body.startswith("IRS Pub"):
         return "Pub " + body.split()[2]

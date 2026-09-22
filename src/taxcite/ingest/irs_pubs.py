@@ -25,7 +25,7 @@ PUBS = ("587", "463", "17", "334", "946", "527")
 URL = "https://www.irs.gov/pub/irs-pdf/p{num}.pdf"
 RAW_DIR = Path("data/pubs")
 # identifies the client, as a courtesy scraper should; /pub is not disallowed by robots.txt
-USER_AGENT = "TaxCite/0.1 (+https://github.com/tanmay/TaxCite; research project)"
+USER_AGENT = "TaxCite/0.1 (+https://github.com/tpawar03/TaxCite; research project)"
 TARGET_TOKENS = 300
 OVERLAP = 0.15
 MIN_PAGE_WORDS = 20  # below this a page is treated as failed extraction, not content
