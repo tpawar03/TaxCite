@@ -78,9 +78,9 @@
     "semantic_hash": "d86f02d13d3c71b8ea8c1e0735133099"
   },
   "eval/validate_pilot.py": {
-    "mtime": 1790058136.998447,
-    "seen": 1790058249.4352052,
-    "ast_hash": "8428bf544b2fdecac31ad130174fe083",
+    "mtime": 1790060057.2836034,
+    "seen": 1790060247.514404,
+    "ast_hash": "8204df94967197bf9bd92ecc13b80729",
     "semantic_hash": ""
   },
   "src/taxcite/__init__.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790059583.278396,
-    "seen": 1790059583.6712441,
-    "ast_hash": "42f418d0f5cbedd93f97f110514a79c7",
+    "mtime": 1790061166.370865,
+    "seen": 1790061172.973381,
+    "ast_hash": "03ae20798a8e66e3dcf50170c7501349",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -222,9 +222,9 @@
     "semantic_hash": "8f36df7751f76f42df9099d8cc10c5ec"
   },
   "docs/engineering-log.md": {
-    "mtime": 1790059261.5469263,
-    "seen": 1790059300.942754,
-    "ast_hash": "ebcc2022787f3740ff1e8f349bd498fb",
+    "mtime": 1790061060.712158,
+    "seen": 1790061061.124251,
+    "ast_hash": "f1378820b666d04de4e24836c8e2560d",
     "semantic_hash": ""
   },
   "docs/intent/taxcite.md": {
@@ -240,15 +240,15 @@
     "semantic_hash": "ead8cb9392f80bc82e974c5588f08213"
   },
   "tasks/plan.md": {
-    "mtime": 1790059583.2778676,
-    "seen": 1790059583.671246,
-    "ast_hash": "15cd9251c47159e3073b2e5350614732",
+    "mtime": 1790061166.3705602,
+    "seen": 1790061172.973383,
+    "ast_hash": "f488462b6e3fce0e8b279376ece87e31",
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790059583.2776601,
-    "seen": 1790059583.671247,
-    "ast_hash": "6a48e945f595ff210b065cbde91a583f",
+    "mtime": 1790061166.370342,
+    "seen": 1790061172.973384,
+    "ast_hash": "02ede13dbab9120a0f5d795781f85cdd",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -309,6 +309,12 @@
     "mtime": 1790059539.2940705,
     "seen": 1790059564.651485,
     "ast_hash": "6264d466cf62eddecc1a117c0813b56f",
+    "semantic_hash": ""
+  },
+  "eval/results/golden-b5-baseline-k10.json": {
+    "mtime": 1790061142.4256012,
+    "seen": 1790061172.973366,
+    "ast_hash": "5ad2c875be0c795b203941b2d5f9954a",
     "semantic_hash": ""
   }
 }
