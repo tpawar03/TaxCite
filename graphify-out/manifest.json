@@ -18,9 +18,9 @@
     "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
   },
   "taxcite-technical-documentation.md": {
-    "mtime": 1790190529.7130628,
-    "seen": 1790190531.025454,
-    "ast_hash": "0d474838f74982d18a2313cd94b51a27",
+    "mtime": 1790193687.5891001,
+    "seen": 1790193740.012375,
+    "ast_hash": "deaf8afa419f654bf9d596fd5d98eeee",
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790190179.5241416,
-    "seen": 1790190181.352233,
-    "ast_hash": "ce4d5efaf646eae7201bb228c76553cb",
+    "mtime": 1790193724.9714541,
+    "seen": 1790193740.012356,
+    "ast_hash": "2099b728eb8eed2a0af8410de0e62cd8",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -222,9 +222,9 @@
     "semantic_hash": "8f36df7751f76f42df9099d8cc10c5ec"
   },
   "docs/engineering-log.md": {
-    "mtime": 1790190529.7114244,
-    "seen": 1790190531.0254369,
-    "ast_hash": "0ba4c261eed5594e338c30764353fc3c",
+    "mtime": 1790193706.1309857,
+    "seen": 1790193740.012358,
+    "ast_hash": "a73ed56c1f4bcaaba6c60460a975f819",
     "semantic_hash": ""
   },
   "docs/intent/taxcite.md": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790190529.712429,
-    "seen": 1790190531.0254521,
-    "ast_hash": "c60fb523436fe78cc9721b85477a907d",
+    "mtime": 1790193706.1318402,
+    "seen": 1790193740.012374,
+    "ast_hash": "b3398ee6aa2bc7f7fff0f7d4319b73ea",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -480,9 +480,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/faithfulness.yml": {
-    "mtime": 1790190529.7104554,
-    "seen": 1790190531.025432,
-    "ast_hash": "4c118a60589a898e331163f459c0a424",
+    "mtime": 1790193035.1035829,
+    "seen": 1790193740.012353,
+    "ast_hash": "cc435d27f834bce55046111d07b48d2e",
     "semantic_hash": ""
   },
   ".github/workflows/retrieval-gate.yml": {
@@ -513,6 +513,18 @@
     "mtime": 1790184844.892591,
     "seen": 1790184861.071588,
     "ast_hash": "1939b4421654aad000911a8a1d5d4653",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-golden-2026-09-23-k20.json": {
+    "mtime": 1790193434.896979,
+    "seen": 1790193740.0123231,
+    "ast_hash": "76f75c22222fbb64c6591a2e0802a815",
+    "semantic_hash": ""
+  },
+  "eval/results/phase_b.md": {
+    "mtime": 1790193647.071355,
+    "seen": 1790193740.012369,
+    "ast_hash": "fed109643926236ea09184561550361d",
     "semantic_hash": ""
   }
 }

@@ -642,12 +642,13 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 **Description:** Write `eval/results/phase_b.md`, in the same shape as `phase_a.md`: the golden-set ablation ladder with per-category numbers, faithfulness with its spread across runs, refusal and abstention rates, failures with examples, and §9.3 recalibration notes. Record the **decomposition-only case-law Recall@20** — the baseline Phase C's gate is measured against. Update the tech doc's Implementation Status.
 
 **Acceptance criteria:**
-- [ ] Every number traces to a results file or a reproducible command
-- [ ] At least 5 failure examples documented
-- [ ] Phase C's case-law Recall@20 baseline stated explicitly
+- [x] Every number traces to a results file or a reproducible command (commands listed at the foot of the report)
+- [x] Seven failure examples documented, led by citation laundering — `G-S10`/`G-S14` score 0.00 faithfulness with legally correct answers that the citation checker passes
+- [x] **Phase C's case-law Recall@20 baseline: 0.692**, decomposition only. Routing adds nothing to case law at k=20, which is exactly the gap graph expansion exists to close
 
 **Verification:**
-- [ ] Tech doc Implementation Status updated to say what is built and what is not
+- [x] Tech doc Implementation Status rewritten: what Phase B built, its three negative results, the remaining unbuilt mechanisms, and a baselines table carrying each open problem to the phase that owns it
+- [x] Corrected log #47's abstention claim: 9 of 10, not 10 of 10 — `G-I06` never refuses, and `G-I11` (the partial) over-refuses
 
 **Dependencies:** B9
 **Files:** `eval/results/phase_b.md`, `taxcite-technical-documentation.md`

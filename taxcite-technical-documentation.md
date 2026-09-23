@@ -8,7 +8,30 @@
 
 This document describes the target design. **Phase A is built and measured** (report: `eval/results/phase_a.md`, 2026-09-21): 7,652 chunks of 26 CFR and IRS publications indexed, single-hop hybrid retrieval at Recall@10 **0.722**, cited answers served over the ADR-9 job/SSE transport, 95 tests. Retrieval's contribution is measured rather than asserted — answer correctness rises 0.44 → 0.61 and outright-wrong answers fall to zero — and three deferred decisions are now settled by measurement: ADR-11 (LLM), ADR-17 (vector store), ADR-18 (embedding model).
 
-The remaining mechanisms below (decomposition, graph expansion, temporal filtering, authority-aware reranking, claim verification) are **not yet built**. §7 (Build Phases) and §9 (Eval Harness) exist to produce that evidence, not just to organize the architecture. Phase A also produced a baseline each later phase must beat: adding IRS publications cost 12.4 points of regulation recall (the case for Phase E), approximate search loses ~22% of exact results under a strict filter (a risk for Phase D), and the pilot set cannot resolve differences below ~5.6 points (the case for §9.1's 100-question golden set).
+**Phase B is built and measured** (report: `eval/results/phase_b.md`, 2026-09-23). The corpus is now 28,747 chunks across four sources -- 26 U.S.C., 307 Tax Court opinions, 26 CFR, IRS publications -- with 28,393 indexed and every exclusion recorded with a reason. Query decomposition ships, the golden set is 115 reviewed rows, faithfulness is measured with a known noise floor, and CI runs in three tiers with all three verified against real runs. 160 tests.
+
+Phase B's headline results are three negatives and one positive, and the negatives are the useful part:
+
+- **Cross-encoder reranking did not earn the default** (ADR-19): +1.7 points of Recall@10 for 28x the latency. It earns its place only inside the routed path.
+- **Decomposition is source routing, not query rewriting** (ADR-20). The model's rewritten sub-queries scored *below* the questioner's own words; what the plan is good for is deciding which corpora to search.
+- **Decomposition helps the wrong category.** It was built for compound questions (0.349 -> 0.366 Recall@10, and lower still with reranking) and what it actually improves is statutory retrieval, 0.321 -> 0.429.
+- **Faithfulness catches a failure nothing else can**: a legally correct answer carrying a real, retrieved citation that does not support it. Phase A's citation checker passes those; two golden rows do it in every run.
+
+The remaining mechanisms below (graph expansion, temporal filtering, authority-aware reranking, claim verification, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+
+Baselines later phases must beat, now including Phase B's:
+
+| baseline | value | whose problem |
+|---|---|---|
+| Case-law Recall@20, decomposition only | **0.692** | Phase C -- graph expansion must beat it |
+| Publication dilution of regulation recall | 12.4 points | Phase E |
+| Approximate search loss under a strict filter | ~22% | Phase D |
+| Statute effective dates absent from the corpus | parser skips USLM notes | Phase D |
+| Per-sub-query sufficiency gate | not built; `G-I11` over-refuses a half-answerable question | Phase C |
+| Negative treatment | 3 golden rows cite opinions later reversed; no appellate corpus | Phase E |
+| Faithfulness, healthy | 0.8715 (sd 0.0127, n=6) | the standing CI gate, at 0.855 |
+
+Two measurement facts that govern how any of these may be compared. The pipeline has a **noise floor**: the same configuration scores sd 0.013 on golden faithfulness even with decompositions pinned and synthesis at temperature 0, because OpenAI's `temperature=0` is best effort. And **three samples are not enough to see it** -- reading a trend from three runs misled Phase B four separate times. Every comparison from here reports a mean and a standard deviation over at least five runs, against a cached plan set.
 
 Each phase in §7 now carries an explicit, numeric acceptance threshold (e.g., a minimum Recall@20 delta, a minimum extraction precision — consolidated in §9.3) rather than only a qualitative direction to "measure the delta." These are first-pass engineering targets to be recalibrated once real data exists, not final commitments.
 

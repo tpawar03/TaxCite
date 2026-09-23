@@ -1,8 +1,12 @@
 # TaxCite — Status
 
-_Last updated: 2026-09-22_
+_Last updated: 2026-09-23_
 
 ## Now
+**Phase B is complete (2026-09-23).** Report: `eval/results/phase_b.md`. 160 tests green, CI running in three verified tiers.
+
+The corpus is 28,747 chunks across statute, case law, regulations and publications (28,393 indexed). Decomposition ships as source routing; the golden set is 115 reviewed rows; faithfulness is measured with a known noise floor and gated weekly at 0.855. Phase B's three most useful results are negative: reranking did not earn the default, the decomposer's query rewriting scored below the questioner's own words, and decomposition helps statutory retrieval rather than the compound questions it was built for. **Phase C's baseline is set: case-law Recall@20 = 0.692, decomposition only.** **Next: Phase C (citation graph) — but see the 8.9% edge-resolution finding before committing to it.**
+
 **Phase A is complete (2026-09-21).** Report: `eval/results/phase_a.md`. 95 tests green.
 
 A reviewer can `POST /queries` a tax question and watch `retrieving → synthesizing → answer` arrive over SSE, ending in a cited answer whose citations are checked against what was actually retrieved. Retrieval's contribution is measured: correctness 0.44 → 0.61, outright-wrong answers to zero, hybrid Recall@10 0.722.
@@ -26,7 +30,7 @@ Working mode: Claude writes the code and may edit existing files; new files are 
 | B7b Dev set + routing precision + golden audit | ✅ Done (pilot criterion met; golden gain not established) |
 | B8 RAGAS harness | ✅ Done (faithfulness 0.865 ± 0.035; gate not enforceable per-run) |
 | B9 CI + RAGAS gate | 🔶 In progress (design calibrated; workflows written; threshold pending) |
-| B10 Phase B exit report | ⬜ |
+| B10 Phase B exit report | ✅ Done (`eval/results/phase_b.md`) |
 
 ## Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)
 | Task | Status |
