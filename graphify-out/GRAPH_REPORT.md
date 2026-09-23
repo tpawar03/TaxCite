@@ -1,17 +1,17 @@
 # Graph Report - TaxCite.nosync  (2026-09-23)
 
 ## Corpus Check
-- 66 files · ~383,799 words
+- 66 files · ~383,864 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 10 file(s) not represented in the graph (top: (none) 3, .jsonl 3, .xml 2)
 
 ## Summary
-- 822 nodes · 1560 edges · 46 communities (41 shown, 5 thin omitted)
+- 822 nodes · 1558 edges · 43 communities (38 shown, 5 thin omitted)
 - Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 100 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `03f529cf`
+- Built from commit: `e1230403`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -31,16 +31,13 @@
 - TaxCite Phase A — Task List
 - Phase A Implementation Plan
 - Task List
-- ADR-17: Vector Store — Qdrant, Not pgvector
+- Phase A Exit Report
 - TaxCite — Phase A exit report
 - ADR-11: LLM Tiering — gpt-4o-mini
 - test_decompose.py
-- T5: Ingest IRS Publications
-- Log #24: Adding a Second Corpus Made Retrieval Worse
 - taxcite
 - Collaborative Working Mode
 - test_index.py
-- ADR-12: Backup and Disaster Recovery
 - Postgres
 - test_usc.py
 - retrieval.py
@@ -54,7 +51,7 @@
 - rerank
 - fetch
 - Path
-- eCFR Chunking Decisions
+- ADR-17: Vector Store — Qdrant, Not pgvector
 - search
 - generate.py
 - fixture
@@ -71,11 +68,13 @@
 5. `Chunk` - 17 edges
 6. `TaxCite Phase A — Task List` - 16 edges
 7. `ingest_ecfr()` - 15 edges
-8. `parse()` - 14 edges
+8. `ingest_case()` - 14 edges
 9. `of()` - 14 edges
-10. `ingest_case()` - 14 edges
+10. `estimate_tokens()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `Three-Way Citation Counting` --conceptually_related_to--> `Post-Generation Claim Verification`  [INFERRED]
+  STATUS.md → taxcite-technical-documentation.md
 - `PII Redaction Ordering as a CI Invariant` --semantically_similar_to--> `Log #18: The Counts-Match Check Caught Silent Data Loss`  [INFERRED] [semantically similar]
   taxcite-technical-documentation.md → docs/engineering-log.md
 - `test_the_cost_cap_stops_a_run()` --uses--> `Budget`  [INFERRED]
@@ -84,8 +83,6 @@
   tests/test_metrics.py → eval/ragas_eval.py
 - `judged()` --uses--> `Judged`  [INFERRED]
   tests/test_metrics.py → eval/ragas_eval.py
-- `stub_pipeline()` --uses--> `Answer`  [INFERRED]
-  tests/test_jobs.py → src/taxcite/generate.py
 
 ## Import Cycles
 - None detected.
@@ -95,7 +92,7 @@
 - **Phase A Decisions Settled by Measurement** — taxcite_technical_documentation_adr_11, taxcite_technical_documentation_adr_17, taxcite_technical_documentation_adr_18, eval_results_phase_a_exit_report, status_phase_a_complete [EXTRACTED 1.00]
 - **Measurements That Overturned a Stated Intuition** — docs_engineering_log_measured_ablation, docs_engineering_log_publication_dilution, docs_engineering_log_mis_specified_revisit_trigger, docs_engineering_log_parallel_embedding_slower, docs_engineering_log_judge_rubric_mismatch [INFERRED 0.85]
 
-## Communities (46 total, 5 thin omitted)
+## Communities (43 total, 5 thin omitted)
 
 ### Community 0 - "test_metrics.py"
 Cohesion: 0.12
@@ -115,7 +112,7 @@ Nodes (14): Log #18: The Counts-Match Check Caught Silent Data Loss, Log #13: Th
 
 ### Community 4 - "cli.py"
 Cohesion: 0.21
-Nodes (22): Connection, io, Namespace, ingest_case(), ingest_ecfr(), ingest_pubs(), ingest_usc(), latest_as_of() (+14 more)
+Nodes (23): Connection, io, Namespace, ingest_case(), ingest_ecfr(), ingest_pubs(), ingest_usc(), latest_as_of() (+15 more)
 
 ### Community 5 - "test_ecfr.py"
 Cohesion: 0.07
@@ -142,52 +139,40 @@ Cohesion: 0.08
 Nodes (11): fixture, Answer generation, tested without spending money: the model call is stubbed., Sampling at the default temperature made the same question answerable two ways,…, Replace the model call; record what it was asked., Chunk citations are sometimes ranges; citing one paragraph inside is precision,…, A citation not among the sources is the failure mode this system exists to…, stub(), test_a_narrower_paragraph_of_a_retrieved_section_counts_as_derived() (+3 more)
 
 ### Community 11 - "TaxCite"
-Cohesion: 0.15
-Nodes (23): Log #5: Corpus Gaps Shape the Evaluation, Confirmed Intent, TaxCite, TaxCite PRD, Functional Requirements FR-1..FR-17, Goals G1-G6 (research time, seat displacement, groundedness, gates, cost, leakage), Non-Functional Requirements (latency, reliability, cost, security), Non-Goals (no full GraphRAG, no BM25 engine, no token streaming, federal only) (+15 more)
+Cohesion: 0.11
+Nodes (30): Log #5: Corpus Gaps Shape the Evaluation, Log #24: Adding a Second Corpus Made Retrieval Worse, Log #14: Table-of-Contents Sections Would Poison Retrieval, Confirmed Intent, Phase A Known Failures, TaxCite, TaxCite PRD, Functional Requirements FR-1..FR-17 (+22 more)
 
 ### Community 12 - "TaxCite Phase A — Task List"
-Cohesion: 0.10
-Nodes (24): Qdrant Service (compose), Log #21: Gold Sets Need Validating Before They Can Validate Anything, Log #19: Hybrid Retrieval Is Not Uniformly Better Than Dense, Log #20: Measurement Overturned What One Query Suggested, The Pilot Set Is Data, Not Code, ✅ Checkpoint 1 — after T1–T3, ✅ Checkpoint 2 — after T4–T6, ✅ Checkpoint 3 — after T7–T8 (+16 more)
+Cohesion: 0.08
+Nodes (27): Log #29: The Closed-Book Baseline Cited a Publication That No Longer Exists, Log #23: A Discontinued Publication Returns HTTP 200 With HTML, Log #21: Gold Sets Need Validating Before They Can Validate Anything, Log #19: Hybrid Retrieval Is Not Uniformly Better Than Dense, Log #20: Measurement Overturned What One Query Suggested, Log #16: Parallel Workers Made Embedding Slower, The Pilot Set Is Data, Not Code, ✅ Checkpoint 1 — after T1–T3 (+19 more)
 
 ### Community 13 - "Phase A Implementation Plan"
-Cohesion: 0.22
-Nodes (11): Log #11: Stay True to the Architecture, Defer Stores Until They Have Work, Log #9: Redis vs Postgres LISTEN/NOTIFY for Live Events, Log #10: Keep Live Delivery Separate From Tracing, Log #12: Vercel Is the Wrong Host for This Backend, Simplify Inside Components, Never By Dropping a Store, Plain-Module Package Layout, Phase A Implementation Plan, Phase A Risks and Mitigations (+3 more)
+Cohesion: 0.13
+Nodes (20): Qdrant Service (compose), Redis Service (compose), Log #11: Stay True to the Architecture, Defer Stores Until They Have Work, Log #9: Redis vs Postgres LISTEN/NOTIFY for Live Events, Log #10: Keep Live Delivery Separate From Tracing, Log #12: Vercel Is the Wrong Host for This Backend, Simplify Inside Components, Never By Dropping a Store, Host Port Offsets (5433 / 6380) (+12 more)
 
 ### Community 14 - "Task List"
 Cohesion: 0.12
 Nodes (15): Architecture Decisions (for this phase), Checkpoint 1, Checkpoint 2 (human review: embedding decision), Checkpoint 3 (human review: ADR-11 decision), Checkpoint: Phase A complete, Dependency Graph, Implementation Plan: TaxCite Phase A — Core Retrieval Baseline, Overview (+7 more)
 
-### Community 15 - "ADR-17: Vector Store — Qdrant, Not pgvector"
+### Community 15 - "Phase A Exit Report"
 Cohesion: 0.17
-Nodes (17): Log #26: The Benchmark Died Because of Unrelated Software, Log #8: Qdrant Over pgvector, With a Measurable Revisit Trigger, Log #28: One Tied Score Made the Eval Unreproducible, Phase A Exit Report, Phase A Recalibration Notes for §9.3, Repository Map, Phase A Complete (Status), Acceptance Thresholds by Phase (§9.3) (+9 more)
+Nodes (14): Log #26: The Benchmark Died Because of Unrelated Software, Log #28: One Tied Score Made the Eval Unreproducible, Phase A Exit Report, Phase A Recalibration Notes for §9.3, What Phase A did not do, Repository Map, Phase A Complete (Status), Acceptance Thresholds by Phase (§9.3) (+6 more)
 
 ### Community 16 - "TaxCite — Phase A exit report"
-Cohesion: 0.25
-Nodes (7): Decisions settled, with the evidence, Known failures, with examples, Recalibration notes for §9.3, TaxCite — Phase A exit report, The ablation ladder so far, What exists, What Phase A did not do
+Cohesion: 0.29
+Nodes (6): Decisions settled, with the evidence, Known failures, with examples, Recalibration notes for §9.3, TaxCite — Phase A exit report, The ablation ladder so far, What exists
 
 ### Community 17 - "ADR-11: LLM Tiering — gpt-4o-mini"
-Cohesion: 0.23
-Nodes (12): Log #31: The Reliability Check Measured Two Standards and Called It Noise, Log #27: The Revisit Trigger I Wrote Was Mis-Specified, Log #30: The Two Models Fail in Different Directions, Three-Way Citation Counting, ADR-11: LLM Tiering — gpt-4o-mini, ADR-15: Zero-Tolerance Claim Suppression, ADR-3: Post-Generation Claim Verification, ADR-4: Self-Hosted NLI Model for Production Verification (+4 more)
+Cohesion: 0.21
+Nodes (12): Log #31: The Reliability Check Measured Two Standards and Called It Noise, Log #27: The Revisit Trigger I Wrote Was Mis-Specified, Log #30: The Two Models Fail in Different Directions, Three-Way Citation Counting, T10: Phase A exit report, T8: ADR-11 LLM Benchmark, ADR-11: LLM Tiering — gpt-4o-mini, ADR-15: Zero-Tolerance Claim Suppression (+4 more)
 
 ### Community 18 - "test_decompose.py"
 Cohesion: 0.16
 Nodes (16): hit(), plan(), parametrize, Decomposition: parsing a plan, routing it, and degrading when the plan is…, Routing gets a corpus into the pool; the floor stops the reranker taking it…, Phase A's path is the floor: a bad plan must not fail a question the corpus can…, The model is trusted for the routing, not the wording: rewritten text measured…, test_an_unusable_plan_falls_back_to_one_unrouted_search() (+8 more)
 
-### Community 19 - "T5: Ingest IRS Publications"
-Cohesion: 0.14
-Nodes (14): Postgres Service (pgvector/pgvector:pg16), Redis Service (compose), Log #17: Chunker Output Is 12x the Section Count, Log #16: Parallel Workers Made Embedding Slower, Log #22: Choosing a PDF Library by Measuring It on the Real Document, Log #25: Screen Candidates for Viability Before Measuring Quality, Host Port Offsets (5433 / 6380), T5: Ingest IRS Publications (+6 more)
-
-### Community 20 - "Log #24: Adding a Second Corpus Made Retrieval Worse"
-Cohesion: 0.25
-Nodes (9): Log #29: The Closed-Book Baseline Cited a Publication That No Longer Exists, Log #23: A Discontinued Publication Returns HTTP 200 With HTML, Log #24: Adding a Second Corpus Made Retrieval Worse, Log #14: Table-of-Contents Sections Would Poison Retrieval, Phase A Known Failures, ADR-8: Authority-Aware Reranking, Authority-Aware Retrieval, Phase E — Authority-Aware Retrieval (+1 more)
-
 ### Community 23 - "test_index.py"
 Cohesion: 0.21
 Nodes (16): fixture, taxcite_ingest_ecfr, chunks(), ctx(), models_(), No corpus" and "no Qdrant" must not look alike: only the 404 is swallowed., CI starts with an empty Qdrant. The suite's "needs an ingested corpus" guard…, sync() (+8 more)
-
-### Community 24 - "ADR-12: Backup and Disaster Recovery"
-Cohesion: 0.50
-Nodes (4): ADR-12: Backup and Disaster Recovery, Single-Engineer Operational Bus Factor, Phase H — Resilience + Load, Production SLOs and Alerting (§3.4)
 
 ### Community 26 - "test_usc.py"
 Cohesion: 0.07
@@ -210,8 +195,8 @@ Cohesion: 0.23
 Nodes (11): load(), main(), pg_filtered(), pg_hybrid(), qd_filtered(), qd_hybrid(), ADR-17 revisit trigger: Qdrant against pgvector on identical data. uv run…, Top-k inside one section: approximate (HNSW) or exact (sequential scan). (+3 more)
 
 ### Community 31 - "snapshot.py"
-Cohesion: 0.33
-Nodes (8): create(), main(), Freeze the corpus so CI can retrieve against it without a 90-minute ingest. The…, restore(), os, Path, client(), subprocess
+Cohesion: 0.36
+Nodes (7): create(), main(), Freeze the corpus so CI can retrieve against it without a 90-minute ingest. The…, restore(), os, Path, subprocess
 
 ### Community 32 - "validate_pilot.py"
 Cohesion: 0.32
@@ -233,9 +218,9 @@ Nodes (7): Loaded once per process and per model, like the embedding models., Re
 Cohesion: 0.40
 Nodes (5): fetch(), fetch_usc(), Path, Title 26 USLM XML for a release point (default: the current one), cached on…, Download one part (or a single section) of Title 26, cached on disk. The API…
 
-### Community 38 - "eCFR Chunking Decisions"
-Cohesion: 0.22
-Nodes (10): Log #1: Spec Chunk Size Didn't Survive the Data, Log #2: Chunk at Paragraph Designations, Two Levels Deep, Log #3: Tables — A Few Huge, Many Small and Meaningful, Log #6: The Source XML Already Carries Temporal Signals, Approximate Search Loses 22% Under a Strict Filter, eCFR Chunking Decisions, ADR-2: Bi-Temporal Fact Validity, Bi-Temporal Fact Validity (+2 more)
+### Community 38 - "ADR-17: Vector Store — Qdrant, Not pgvector"
+Cohesion: 0.12
+Nodes (20): Postgres Service (pgvector/pgvector:pg16), Log #17: Chunker Output Is 12x the Section Count, Log #1: Spec Chunk Size Didn't Survive the Data, Log #2: Chunk at Paragraph Designations, Two Levels Deep, Log #8: Qdrant Over pgvector, With a Measurable Revisit Trigger, Log #3: Tables — A Few Huge, Many Small and Meaningful, Log #6: The Source XML Already Carries Temporal Signals, Approximate Search Loses 22% Under a Strict Filter (+12 more)
 
 ### Community 39 - "search"
 Cohesion: 0.17
@@ -258,8 +243,8 @@ Cohesion: 0.12
 Nodes (23): collections_abc, functools, qdrant_client, QdrantClient, SparseVector, batched(), count(), create_collection() (+15 more)
 
 ### Community 51 - "Decisions Log"
-Cohesion: 0.20
-Nodes (8): Stable primary key. A citation alone is not unique: one citation can need…, Decisions Log, Environment, Findings worth remembering, Now, Pending housekeeping, Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`), TaxCite — Status
+Cohesion: 0.18
+Nodes (10): Log #22: Choosing a PDF Library by Measuring It on the Real Document, Log #25: Screen Candidates for Viability Before Measuring Quality, Stable primary key. A citation alone is not unique: one citation can need…, Decisions Log, Environment, Findings worth remembering, Now, Pending housekeeping (+2 more)
 
 ## Knowledge Gaps
 - **79 isolated node(s):** `✅ Checkpoint 1 — after T1–T3`, `✅ Checkpoint 2 — after T4–T6`, `✅ Checkpoint 3 — after T7–T8`, `✅ Checkpoint: Phase A complete`, `T2: Ingest eCFR Title 26 into Postgres + Qdrant` (+74 more)
@@ -271,9 +256,9 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Chunk` connect `ecfr.py` to `Decisions Log`, `cli.py`, `test_ecfr.py`?**
   _High betweenness centrality (0.367) - this node is a cross-community bridge._
-- **Why does `Decisions Log` connect `Decisions Log` to `eCFR Chunking Decisions`, `TaxCite`, `ADR-17: Vector Store — Qdrant, Not pgvector`, `ADR-11: LLM Tiering — gpt-4o-mini`, `T5: Ingest IRS Publications`?**
+- **Why does `Decisions Log` connect `Decisions Log` to `ADR-11: LLM Tiering — gpt-4o-mini`, `TaxCite`, `ADR-17: Vector Store — Qdrant, Not pgvector`, `Phase A Exit Report`?**
   _High betweenness centrality (0.357) - this node is a cross-community bridge._
-- **Why does `Confirmed Intent` connect `TaxCite` to `Decisions Log`, `Phase A Implementation Plan`, `ADR-17: Vector Store — Qdrant, Not pgvector`?**
+- **Why does `Confirmed Intent` connect `TaxCite` to `Decisions Log`, `Phase A Implementation Plan`, `Phase A Exit Report`?**
   _High betweenness centrality (0.161) - this node is a cross-community bridge._
 - **Are the 14 inferred relationships involving `Hit` (e.g. with `chunks()` and `Decomposition`) actually correct?**
   _`Hit` has 14 INFERRED edges - model-reasoned connections that need verification._

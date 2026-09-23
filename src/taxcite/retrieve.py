@@ -14,7 +14,7 @@ from qdrant_client import models
 
 from taxcite.index import COLLECTION, DENSE_MODEL, SPARSE_MODEL, client
 
-PREFETCH = 50  # candidates per branch before fusion
+PREFETCH = 1  # SEEDED REGRESSION for the B9 tier-2 proof; the real value is 50
 OVERFETCH = 20  # extra results requested so a tie at the k boundary is resolved here, not by the store
 # Chosen on the dev set (B6): jina-turbo beat both ms-marco MiniLMs and BAAI/bge-reranker-base,
 # which was the slowest and the worst. 25 candidates, because hybrid Recall@25 and @50 are the
