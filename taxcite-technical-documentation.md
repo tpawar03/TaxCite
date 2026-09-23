@@ -462,6 +462,119 @@ No calendar estimates — this is a dependency order.
 *Noted for later:* dense retrieval scores **0.000** on publication questions for both models, while hybrid scores 0.500. Publications are matched lexically, not semantically — further support for ADR-6's hybrid design, and a caution against treating dense-only numbers as representative.
 *Revisit trigger:* if a re-index ever blocks iteration, or if Phase E reranking closes the regulation gap on its own, re-run `eval/embed_bench.py` — bge-small remains a 3.4x cheaper fallback at a measured cost of ~5.6 points of hybrid recall.
 
+**ADR-19: Cross-encoder rerank stays an ablation rung; hybrid remains the default.**
+*Status:* Decided (2026-09-22), from measurement on the B5 golden set. Revisit after B7.
+*Context:* §5.2 puts a cross-encoder rerank between retrieval and the evidence-sufficiency gate. B6 built it (`--mode hybrid+rerank`, fastembed `TextCrossEncoder`) and had to decide whether it becomes the default path.
+*Model chosen on the dev set (12 questions), reranking the fused candidates to k=10:*
+
+| cross-encoder | candidates | Recall@10 | nDCG@10 | MRR | p50 ms |
+|---|---|---|---|---|---|
+| (none — hybrid) | — | 0.625 | 0.434 | 0.442 | 33 |
+| **jinaai/jina-reranker-v1-turbo-en** | **25** | **0.667** | **0.635** | **0.727** | **878** |
+| jinaai/jina-reranker-v1-turbo-en | 50 | 0.667 | 0.631 | 0.720 | 1766 |
+| jinaai/jina-reranker-v1-tiny-en | 25 | 0.667 | 0.580 | 0.642 | 628 |
+| Xenova/ms-marco-MiniLM-L-6-v2 | 25 | 0.667 | 0.544 | 0.625 | 725 |
+| BAAI/bge-reranker-base | 25 | 0.542 | 0.446 | 0.467 | 2830 |
+
+The candidate pool is 25, not 50: hybrid Recall@25 and Recall@50 are the same 0.750 on the dev set, so the second 25 costs ~900 ms a query and cannot contain an answer the first 25 missed. The 1 GB `bge-reranker-base` was both the slowest and the worst — size is not the variable that matters here.
+*Measured on the 84 scored golden rows, k=10:*
+
+| mode | Recall@10 | nDCG@10 | MRR | Section recall | statutory | case law | compound | p50 ms | p95 ms |
+|---|---|---|---|---|---|---|---|---|---|
+| hybrid | 0.435 | 0.307 | 0.310 | 0.560 | 0.333 | 0.654 | 0.350 | 30 | 38 |
+| hybrid+rerank | 0.452 | 0.307 | 0.318 | 0.589 | 0.333 | **0.731** | 0.333 | 852 | 906 |
+
+*Decision:* keep `hybrid` as the default; ship `hybrid+rerank` as its own mode and ablation rung.
+*Rationale:* +1.7 points of recall (about 1.4 gold groups out of 84) for 28x the query latency, with nDCG flat. Underneath that near-flat average is churn, not stability: reranking rescued four questions and lost three, and it demoted gold that hybrid had at rank 1 (G-S12 1 → 10, G-S19 1 → out of the top 10). It helps case law (+7.7) and slightly hurts compound questions.
+*What the numbers actually diagnose:* hybrid Recall@25 on the golden set is 0.530, so of the 9.5 points of headroom inside the candidate pool the reranker recovers 1.7 (18%). The other 47% of gold is **not in the top 25 at all**, which no reranker can fix — the bottleneck is first-stage recall, which is B7's job (decomposition + source routing). Reranking a pool that does not contain the answer is the wrong lever.
+*Revisit trigger:* re-run this comparison after B7. If routing puts statute, regulation and case law into the pool separately, the reranker gets a pool worth ranking and may earn the default then; Phase E's authority-aware reranking (ADR-8) builds on the same step either way.
+
+**ADR-20: Decomposition is used for source routing, not for query rewriting.**
+*Status:* Decided (2026-09-22), from measurement on the dev set; golden-set numbers reported, pilot criterion not met.
+*Context:* §5.2 splits a compound question into typed sub-queries and retrieves each one. B7 built that (`decompose` -> typed sub-queries + as-of year), and the implementation has two separable parts: the model's rewritten query text, and the routing of each sub-query to the corpora that hold that kind of authority (statutory -> `usc`/`ecfr`/`irs_pub`, case_law -> `case`, client_fact -> never searched).
+*Measured on the dev set, k = 10 chunks in every row:*
+
+| variant | Recall@10 | nDCG@10 | MRR |
+|---|---|---|---|
+| hybrid (Phase A) | 0.625 | 0.434 | 0.442 |
+| hybrid+rerank (ADR-19) | 0.667 | 0.635 | 0.727 |
+| **routing, searching the original question** | **0.708** | **0.663** | **0.743** |
+| same sub-queries, no source filter | 0.625 | 0.628 | 0.736 |
+| routing, searching the model's rewritten text | 0.625 | 0.574 | 0.625 |
+
+*Decision:* the decomposer supplies the routing, the client facts and the as-of year; each searchable sub-query searches the **original question** filtered to its corpora, and the union is reranked back to k. `retrieve(rewrite=True)` keeps the other arm runnable.
+*Rationale:* the rewriting costs 8.3 points of dev recall against the question itself, and loses hits the questioner's own words had found -- the corpus is court prose and statute text, so a practitioner's question is already close to the vocabulary of what it is looking for. Routing is worth 8.3 points over the same sub-queries unfiltered. This also settles ADR-19's revisit trigger: the reranker earns its place inside this path, because fused scores from differently-filtered searches are not comparable and something has to order the union.
+*Measured on the golden set (held out), k=10, after the B7b audit grew it to 86 scored rows, against a fixed plan set:* Recall@10 0.428 -> 0.446, nDCG 0.302 -> 0.315, MRR 0.305 -> 0.326, section recall 0.550 -> 0.583. Cost $0.00015 a query; p50 latency 29 ms -> 1,821 ms.
+
+***One run cannot resolve this gain.*** `gpt-4o-mini` re-plans between runs even at temperature 0 with a fixed seed, so the harness now scores each arm against several independently planned sets (`--repeats`). Over **six** plan sets routing scores mean **0.4398**, sd 0.0117, range 0.422-0.457, against a deterministic hybrid baseline of 0.428: an effect of **+0.012 Recall@10 (SEM 0.005), about one gold group in 86**, with one of the six runs landing *below* the baseline. Small and probably real, but an order of magnitude less than the dev and pilot gains implied.
+
+*Where the noise comes from, exactly:* of 86 golden questions planned three times, **14 (16%) are routed differently** and 39 (45%) differ only in wording. The wording differences are inert **by construction** -- the search text is the original question (see the decision above), so only the 14 routing flips can move a metric. Dropping the rewriting bought reproducibility as well as recall.
+
+*And a caution about the noise estimate itself:* the range over three samples is unstable. Three uncached runs gave 0.457 / 0.422 / 0.434 (range 0.035) and three cached plan sets gave 0.446 / 0.440 / 0.440 (range 0.006); the first reading overstated the noise and the second understates it. Quote a standard deviation over five or more plan sets, not a range over three.
+
+*Best arm:* `hybrid+rerank+route` (rerank inside each sub-query, then rerank the union) at **0.452** mean over three plan sets, +0.024 on the baseline and the highest section recall (0.609).
+*The pilot criterion, and what it is worth:* B3's case-law ingest cut pilot Recall@10 from 0.667 to 0.500, and B7 had to recover it. The first (recall-oriented) router scored 0.500 -- no recovery -- because it asked for case law on 16 of 18 pilot questions that never needed it. B7b extended the dev set with 13 rows that need no case law, which made routing *precision* measurable for the first time (recall 1.000, precision 0.600), and two prompt revisions took it to recall 0.917 / precision 0.917 on dev. The pilot then reached **0.611**, the target. Two caveats are recorded with it: the pilot shares three gold citations with the dev set that tuned the prompt, and on the 15 pilot rows that share nothing the numbers are 0.533 -> 0.600, so roughly four points of the headline gain come from one contaminated row (P01); and on the golden set the same prompt change is within noise (0.463 recall-oriented vs 0.457 precision-tuned, against a 0.035 spread).
+
+*What the attribution run settled:* separating the prompt change from the reserved per-sub-query floor, with plans held fixed inside each arm, the floor is **exactly neutral** -- identical Recall/nDCG/MRR at floor 0 and floor 1 under both prompts. It ships anyway because it fixes a defect gold recall cannot see: on a question asking in so many words for the Code, the regulation and the case law, the cross-encoder filled all ten slots with court prose and both statutory sub-queries reached synthesis empty. The two prompts differ by half a gold group and trade categories (recall-oriented: case law 0.692, compound 0.382, routing recall 1.000 / precision 0.731; precision-tuned: case law 0.654, compound 0.398, routing recall 0.930 / precision 0.841).
+*Checkpoint 3 ("does decomposition earn its place?"), answered:* on the golden set it earns a small place, and **not the one the design predicted**. Decomposition was motivated by compound questions, and compound recall barely moves (0.349 -> 0.366 with routing, 0.328 with routing plus reranking). What it actually helps is **statutory** questions -- 0.321 -> 0.357, and 0.429 in the best arm -- because routing keeps 10k chunks of case-law prose out of a pool that should hold statute and regulations. Case law is slightly worse off (0.654 -> 0.641). The mechanism works; the category it was built for is not the category it helps.
+*Revisit trigger:* re-run with `--repeats 5` or more after any change to the decomposition prompt, and read the standard deviation, not one number. Routing precision is still the lever worth pulling: 33 spurious case-law sub-queries across 87 no-case rows (precision 0.827) on the golden set.
+
+**ADR-21: Faithfulness is measured in-house, and the 0.85 gate cannot be enforced on a single run.**
+*Status:* Decided (2026-09-22), from the B8 measurement. The gate design itself is B9's to settle.
+*Context:* §7 makes RAGAS faithfulness a standing CI gate: the build fails below 0.85 on the golden set. B8 had to build the harness, pin `ragas`, and measure.
+*Decision 1 -- the metric is implemented here, not imported.* `ragas` 0.4.3 resolves to **326 packages** against this project's 65 (the langchain stack, `datasets`, `scikit-network`, `instructor`) for a metric that is two model calls, and B9 has to install it on every PR touching retrieval or prompts. ADR-11 also puts the judge on the other provider, which ragas would need a custom LLM wrapper for. `eval/ragas_eval.py` implements RAGAS's own definition -- split the answer into atomic claims, check each against the retrieved context, take the ratio -- with `claude-haiku-4-5` judging. No new dependency.
+*Measured over 96 rows (`scored_from == "B"`, including the insufficiency rows), 3 runs:*
+
+| run | faithfulness | scored rows | refusal rate |
+|---|---|---|---|
+| 1 | 0.859 | 79 | 0.177 |
+| 2 | 0.902 | 83 | 0.135 |
+| 3 | **0.833** | 83 | 0.135 |
+| | **mean 0.865, sd 0.035** | | |
+
+Cost $1.56 and 29 minutes for all three runs. Refusals are excluded from the mean and reported separately: averaging them as 0 punishes the behaviour the system is for, and as 1 would let it pass the gate by refusing everything.
+*Decision 2 -- the gate is not enforceable per-run at 0.85.* Run 3 scored below it with nothing changed. A gate that fails about one unchanged build in three trains a team to ignore it. B9 has to choose between gating the mean of several runs (29 minutes and $1.56 per PR is too slow), pinning a plan cache so CI measures the change rather than the planner (the retrieval eval already does this), or gating a smaller subset against a band derived from its own measured spread.
+*What the metric earned its place for:* two rows scored 0.00 in all three runs with **legally correct answers**. The gold chunk was not retrieved, the model answered from what it already knew, and it attached a citation to a chunk that had been retrieved but does not state the claim. Phase A's citation checker (§5.4, exact / derived / fabricated) scores those as *exact* and passes them -- it was built to catch invented citations, and it did drive those to zero, but it cannot see a real citation on an unsupported claim. Faithfulness is the only check in the system that can.
+*Confidence in the judge:* five low-scoring rows were read against the retrieved text before any of this was written down; the judge was right in all five, including one where the claimed authority does exist in the corpus but in a different chunk part than the one retrieved.
+*Revisit trigger:* re-measure after B9 changes the sampling, and after either of the two systemic causes is addressed -- the retrieval misses that produce laundered citations, and the 3-7 false refusals per run.
+
+**ADR-22: The CI gate is tiered, and faithfulness gates nightly on the golden set rather than per-PR.**
+*Status:* Decided (2026-09-23), from the B9 calibration. Threshold pending one golden measurement; the faithfulness job ships report-only until then.
+*Context:* §7 specifies faithfulness as a standing per-PR gate: the build fails below 0.85 on the golden set for any PR touching retrieval, prompts, reranking or decomposition. B8 showed the metric is noisy; B9 had to find out whether a threshold exists that separates a healthy build from a broken one.
+*Calibration, on the 25-row dev set, judge `claude-haiku-4-5`:*
+
+| arm | runs | mean | sd |
+|---|---|---|---|
+| healthy | 0.788 / 0.829 / 0.853 | 0.823 | 0.033 |
+| healthy, synthesis at temperature 0 | 0.797 / 0.826 / 0.801 | 0.808 | **0.016** |
+| broken prompt | 0.767 / 0.757 | 0.762 | -- |
+| broken prompt, temperature 0 | 0.732 / 0.759 / 0.786 | 0.759 | 0.027 |
+
+The broken prompt is a realistic regression, not a strawman: it keeps the citation requirement and drops only the grounding rule, so Phase A's citation check still passes it -- the failure B8 proved only faithfulness sees.
+*The finding:* a broken synthesis prompt costs about **0.05 faithfulness, roughly 2.2 pooled sd** at this sample size. The separating window is 0.011 wide; a threshold inside it yields on the order of **12% false failures and 12% false passes**. A per-PR gate on 25 rows does not work. Noise scales as 1/sqrt(n), so the same gap on the 96-row golden set is about 4.4 sd, which does work.
+*Where the noise comes from (B8 + B9, by pinning one component at a time):* re-judging identical answers moves the score by sd **0.008** -- about 5% of the variance. The other 95% is upstream, in the planner and in synthesis sampling, and both of those are pinnable. The judge, the one component that cannot be pinned (`anthropic` 1.7.0 exposes no temperature), is the part that barely matters.
+*Decision:*
+
+| tier | trigger | check | blocking |
+|---|---|---|---|
+| 1 | every push | `pytest` with Qdrant/Postgres/Redis service containers | yes |
+| 2 | PRs touching retrieval, reranking, decomposition or ingestion | `eval/retrieval.py` against the committed plan cache -- no LLM, seconds, deterministic | yes |
+| 3 | nightly, release, manual | faithfulness on the golden set, 3 runs | report-only, then yes |
+
+*Rationale:* retrieval changes are the bulk of what breaks this system, and tier 2 catches them deterministically, instantly and for nothing -- two cached runs already agree to three decimals. Faithfulness uniquely catches synthesis-prompt regressions, which are rare, cost 29 minutes and $1.56 per run, and need 96 rows to resolve. Nightly also bounds the tuning-signal exposure: a gate that reads the held-out set on every PR slowly fits the system to it, which is what B4 and B7b exist to prevent. The cost is that a prompt regression is caught within a day instead of at PR time, which is acceptable for a system with no users yet and would not be for one with them.
+*Also decided here:* **synthesis runs at `temperature=0, seed=0`.** It halves the eval's noise (sd 0.033 -> 0.016) at no measurable quality cost, and a legal-research tool that answers the same question two ways on two asks is hard to defend. This is a product decision that CI merely made visible.
+*Not adopted:* the 0.85 threshold. It was chosen in §7 before either the healthy band or the broken-prompt score was known, and a single run at 0.85 fails about one clean build in three (B8: 0.859 / 0.902 / 0.833). 0.85 remains the reported quality target in the exit report; the CI threshold is a different object and comes from the measured bands.
+*Tier-3 threshold, measured (2026-09-23):* **0.83**, three standard deviations below the healthy golden mean.
+
+| golden configuration | runs | mean | sd |
+|---|---|---|---|
+| nothing pinned (B8) | 0.859 / 0.902 / 0.833 | 0.865 | 0.035 |
+| synthesis at temperature 0 only | 0.846 / 0.843 / 0.897 | 0.862 | 0.030 |
+| **plans pinned + temperature 0** | 0.866 / 0.885 / 0.861 | **0.871** | **0.013** |
+
+Pinning the planner is what mattered: temperature 0 alone moved nothing on golden, because the planner dominated it (16% of golden questions route differently between runs). The faithfulness harness was calling `decompose` fresh on every row -- a harness bug, found only by measuring the arms separately. The residual 0.013 decomposes against the judge floor of 0.008 as about 0.010 of synthesis variation, which is irreducible: OpenAI's `temperature=0` with a fixed `seed` is best effort, and two runs over identical plans and identical context still produced different answers.
+*What the threshold is calibrated against:* the **healthy** distribution, not a measured broken one -- "do not drop three sigma below the established baseline". Broken-on-golden has not been measured; the dev calibration put a broken prompt 0.05 below healthy, which would be caught at 0.83, but that gap must not simply be assumed to transfer. B9's proof run is that measurement: a PR removing the grounding rule from `RAG_SYSTEM` must turn the nightly job red. If it does not, the threshold comes down and both numbers are recorded here. Enabling before proving is safe because a nightly job going red blocks no one.
+
 ---
 
 ## 9. The Eval Harness as a Standalone Deliverable

@@ -45,8 +45,14 @@ def main(path: str) -> int:
             # on behaviour (Phase G), not retrieval
             if not r["gold"] and r["category"] not in ("insufficiency", "adversarial") and not r.get("expect_insufficient"):
                 issues.append("empty gold but not an insufficiency or adversarial question")
-            if r["category"] == "adversarial" and not (r.get("client_doc") and r.get("expected_behavior")):
-                issues.append("adversarial row needs client_doc and expected_behavior")
+            # An adversarial row must say what the system should do, and must decide explicitly
+            # whether the attack arrives in a document: "client_doc": "" means it is in the
+            # question itself (the trusted channel), which is its own test.
+            if r["category"] == "adversarial":
+                if not r.get("expected_behavior"):
+                    issues.append("adversarial row needs expected_behavior")
+                if r.get("client_doc") is None:
+                    issues.append('adversarial row needs client_doc (use "" if the attack is in the question)')
 
             top50 = {h.citation for h in search(r["question"], k=50, mode="hybrid")} if r["gold"] else set()
             texts = []

@@ -1,0 +1,59 @@
+12 scorable questions, 0 abstention questions, k=10
+
+mode                            Recall    nDCG     MRR   SectR       nl  keyword    chunks  p50 ms  p95 ms
+----------------------------------------------------------------------------------------------------------
+hybrid                           0.625   0.434   0.442   0.625    0.625    0.000      10.0      25      32
+hybrid+rerank                    0.667   0.635   0.727   0.667    0.667    0.000      10.0     875     952
+hybrid+route                     0.708   0.663   0.743   0.708    0.708    0.000      10.0    1782    2163
+hybrid+rerank+route              0.708   0.657   0.739   0.708    0.708    0.000       9.9    3631    4001
+hybrid+route-norerank            0.667   0.326   0.251   0.833    0.667    0.000      10.0    1226    1559
+hybrid+rerank+route-norerank     0.750   0.540   0.503   0.792    0.750    0.000       9.9    3023    3798
+hybrid+noroute                   0.625   0.628   0.736   0.625    0.625    0.000       9.7    1439    1655
+hybrid+rerank+noroute            0.667   0.636   0.729   0.667    0.667    0.000       9.6    2337    3091
+hybrid+rewrite                   0.625   0.574   0.625   0.875    0.625    0.000      10.0    1823    2203
+hybrid+rerank+rewrite            0.667   0.598   0.625   0.792    0.667    0.000       9.9    3370    4187
+
+recall by category: case_law (6)  compound (6)
+hybrid                               0.833       0.417
+hybrid+rerank                        0.833       0.500
+hybrid+route                         0.833       0.583
+hybrid+rerank+route                  0.833       0.583
+hybrid+route-norerank                1.000       0.333
+hybrid+rerank+route-norerank         0.833       0.667
+hybrid+noroute                       0.833       0.417
+hybrid+rerank+noroute                0.833       0.500
+hybrid+rewrite                       0.667       0.583
+hybrid+rerank+rewrite                0.833       0.500
+
+hybrid+route: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.83 sub-queries/question; $0.0017
+
+hybrid+rerank+route: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.83 sub-queries/question; $0.0017
+
+hybrid+route-norerank: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.83 sub-queries/question; $0.0017
+
+hybrid+rerank+route-norerank: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.83 sub-queries/question; $0.0017
+
+hybrid+noroute: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.75 sub-queries/question; $0.0017
+
+hybrid+rerank+noroute: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.83 sub-queries/question; $0.0017
+
+hybrid+rewrite: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.92 sub-queries/question; $0.0017
+
+hybrid+rerank+rewrite: case-law sub-query on 12/12 rows whose gold needs one (1.000); 0 on rows that do not; 0 fallback plans; 1.83 sub-queries/question; $0.0017
+
+per-question recall (strict):
+id                              hybrid                   hybrid+rerank                    hybrid+route             hybrid+rerank+route           hybrid+route-norerank    hybrid+rerank+route-norerank                  hybrid+noroute           hybrid+rerank+noroute                  hybrid+rewrite           hybrid+rerank+rewrite
+D01                               1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00
+D02                               1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00
+D03                               1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00
+D04                               1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            0.00                            1.00
+D05                               1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00                            1.00
+D06                               0.00                            0.00                            0.00                            0.00                            1.00                            0.00                            0.00                            0.00                            0.00                            0.00
+D07                               0.50                            0.50                            0.50                            0.50                            0.00                            0.50                            0.50                            0.50                            0.00                            0.00
+D08                               0.00                            0.50                            1.00                            1.00                            0.50                            1.00                            0.00                            0.50                            1.00                            1.00
+D09                               0.50                            0.50                            0.50                            0.50                            0.00                            0.50                            0.50                            0.50                            0.00                            0.50
+D10                               0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            0.00
+D11                               0.50                            0.50                            0.50                            0.50                            0.50                            1.00                            0.50                            0.50                            1.00                            1.00
+D12                               0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            0.50                            1.00                            0.50
+
+wrote eval/results/retrieval-2026-09-22-k10.json

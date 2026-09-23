@@ -286,7 +286,7 @@ def main(argv: list[str] | None = None) -> int:
     find = sub.add_parser("search", help="search the indexed corpus")
     find.add_argument("query")
     find.add_argument("-k", type=int, default=10, help="number of results (default 10)")
-    find.add_argument("--mode", default="hybrid", choices=("dense", "sparse", "hybrid"),
+    find.add_argument("--mode", default="hybrid", choices=("dense", "sparse", "hybrid", "hybrid+rerank"),
                       help="retrieval mode; the rungs of the eval ablation ladder")
     find.add_argument("--source", help="limit to one corpus, e.g. ecfr")
     find.set_defaults(func=run_search)

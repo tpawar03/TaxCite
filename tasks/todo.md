@@ -480,18 +480,25 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 **Description:** Add a rerank step using fastembed's `TextCrossEncoder` (already a dependency): take the top 50 fused hybrid candidates and rerank them down to k. Expose it as a search mode (`hybrid+rerank`) so it is its own ablation rung. Compare cross-encoder candidates on the dev set, and choose one on quality and CPU latency.
 
 **Acceptance criteria:**
-- [ ] `taxcite search "…" --mode hybrid+rerank` works
-- [ ] Recall@10, nDCG@10, MRR and the section-vs-paragraph recall gap recorded for hybrid vs. hybrid+rerank on the dev set and the golden set
-- [ ] Added p50/p95 query latency recorded
-- [ ] Becomes the default only if the measurements support it; the decision is logged either way
+- [x] `taxcite search "…" --mode hybrid+rerank` works
+- [x] Recall@10, nDCG@10, MRR and the section-vs-paragraph recall gap recorded for hybrid vs. hybrid+rerank on the dev set and the golden set
+- [x] Added p50/p95 query latency recorded
+- [x] Becomes the default only if the measurements support it; the decision is logged either way — **it does not; hybrid stays the default** (ADR-19)
 
 **Verification:**
-- [ ] `uv run pytest -q`: rerank reorders a known case (e.g. P05's rule paragraph ranked above its examples)
-- [ ] `uv run python eval/retrieval.py --mode hybrid+rerank`
+- [x] `uv run pytest -q`: 127 pass; rerank puts the rule paragraph above the example that quotes it, and the reranked list is a subset of the candidate pool
+- [x] `uv run python eval/retrieval.py --pilot eval/golden.jsonl --mode hybrid --mode hybrid+rerank`
 
 **Dependencies:** B2, B3 (golden-set numbers need B5)
 **Files:** `src/taxcite/retrieve.py`, `src/taxcite/cli.py`, `eval/retrieval.py`, `tests/test_retrieve.py`
 **Scope:** S
+
+**Done (2026-09-22).** Results: `eval/results/golden-b6-rerank-k10.json` (+ `.txt`). Decision: ADR-19, log #43.
+- Cross-encoder chosen on the dev set: `jinaai/jina-reranker-v1-turbo-en`, 25 candidates (Recall 0.667, nDCG 0.635, MRR 0.727, p50 878 ms). It beat `jina-v1-tiny`, both ms-marco MiniLMs and `BAAI/bge-reranker-base` — the 1 GB model was the slowest *and* the worst (0.542 at 2830 ms).
+- Pool is 25 because dev hybrid Recall@25 = Recall@50 = 0.750: the second 25 doubles latency and cannot hold a new answer.
+- Golden set (84 scored rows, k=10): hybrid 0.435 / nDCG 0.307 / MRR 0.310 / SectR 0.560 / p50 30 ms · p95 38 ms; hybrid+rerank 0.452 / 0.307 / 0.318 / 0.589 / p50 852 ms · p95 906 ms. By category: statutory 0.333 → 0.333, case law 0.654 → **0.731**, compound 0.350 → 0.333.
+- Net is churn, not lift: 4 questions rescued, 3 lost; gold ranked 1st by hybrid fell to 10 (G-S12) and out of the top 10 (G-S19).
+- **Diagnosis for B7:** golden hybrid Recall@25 is 0.530, so the reranker recovered 1.7 of the 9.5 points available inside the pool (18%); the other 47% of gold is not in the top 25 at all. First-stage recall is the bottleneck, not ranking. Re-run this comparison after B7 puts routed candidates in the pool.
 
 ---
 
@@ -500,26 +507,54 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 **Description:** Add `decompose(question)`: one structured-output call to `gpt-4o-mini` (ADR-11) that returns typed sub-queries (`statutory | case_law | client_fact`) and an as-of year. Retrieve for each sub-query with source routing (statutory → `usc + ecfr + irs_pub`, case_law → `case`, client_fact → not searched; its facts go to synthesis). Group the results by sub-query in the synthesis prompt. The job publishes a `decomposing` stage and stores the as-of year (it is not used as a filter until Phase D). A question that decomposes into one sub-query takes exactly Phase A's path.
 
 **Acceptance criteria:**
-- [ ] `POST /queries` with a compound question shows `decomposing → retrieving → synthesizing → answer` over SSE
-- [ ] The answer can cite statute, regulation and case law in one response
-- [ ] Golden-set retrieval with vs. without decomposition, per category
-- [ ] Routing accuracy recorded: whenever a golden row's gold citations include case law, a case-law sub-query appears
-- [ ] **Pilot recall with routing recovers the case-law dilution** (B3: 0.667 before case law, 0.500 after, ~0.611 with case chunks filtered out); report the exact filtered-query number
-- [ ] Decomposition prompt tuned on the dev set only
+- [x] `POST /queries` with a compound question shows `decomposing → retrieving → synthesizing → answer` over SSE
+- [~] The answer can cite statute, regulation and case law in one response — it cites across corpora (publication + case law in one answer), but on a question that asks for all three the reranker filled all 10 slots with case law and the statutory groups reached synthesis empty. Open; see the reserved-floor note below
+- [x] Golden-set retrieval with vs. without decomposition, per category
+- [x] Routing accuracy recorded: **56/56** golden rows whose gold needs case law get a case-law sub-query (recall 1.000); precision 0.709 (23 of the 28 rows that need none get one)
+- [ ] **Pilot recall with routing recovers the case-law dilution** — **not met.** Routing scores 0.500, the same as plain hybrid. An oracle routing those questions to statute+regulations only scores **0.667** (0.694 with rerank), so the mechanism works and the classifier's precision is the gap
+- [x] Decomposition prompt tuned on the dev set only (two prompts measured; the dev set cannot see routing precision, so no tuning happened on pilot or golden)
 
 **Verification:**
-- [ ] `uv run pytest -q`: parsing the structured output, source routing, the single-sub-query fallback, the SSE stage order
-- [ ] Manual: 3 compound questions through the API
+- [x] `uv run pytest -q`: 144 pass — plan parsing, the unusable-plan fallback, routing, the rewrite arm, shared searches, group filtering, SSE stage order, the recorded as-of year
+- [x] Manual: 3 compound dev questions through the API — correct stage order, no unsupported citations, ~$0.001 a query
 
 **Dependencies:** B6, B5
-**Files:** `src/taxcite/decompose.py`, `src/taxcite/jobs.py`, `src/taxcite/generate.py`, `eval/retrieval.py`, `tests/test_decompose.py`, `tests/test_jobs.py`
+**Files:** `src/taxcite/decompose.py`, `src/taxcite/jobs.py`, `src/taxcite/generate.py`, `src/taxcite/retrieve.py`, `eval/retrieval.py`, `tests/test_decompose.py`, `tests/test_jobs.py`
+**Scope:** M
+
+**Done (2026-09-22), with one criterion unmet.** Results: `eval/results/golden-b7-decompose-k10.json`, `golden-b7-ladder-k10.txt`, `dev-b7-ladder-k10.txt`, `pilot-b7-decompose-k10.txt`. Decision: ADR-20, log #44.
+- **The rewriting lost; the routing won.** Dev at k=10: plain hybrid 0.625, rewritten sub-query text 0.625, the original question routed by kind **0.708** (nDCG 0.663, MRR 0.743). The shipped path searches the original question, filtered to the corpora each sub-query's kind allows, and reranks the union back to k. `retrieve(rewrite=True)` keeps the losing arm runnable.
+- **Golden (held out), k=10:** Recall 0.435 → 0.476, nDCG 0.307 → 0.330, MRR 0.310 → 0.336, SectR 0.560 → 0.613. Statutory 0.333 → 0.370, case law 0.654 → 0.692, compound 0.350 → 0.400. p50 28 ms → 1,915 ms; $0.00015 a query. Run-to-run spread ±0.006 (the seed is best-effort).
+- **This settles ADR-19's revisit trigger:** the cross-encoder earns its place *inside* the routed path, because fused scores from differently-filtered searches are not comparable.
+- **Two things are blocked on the same gap.** All 12 dev rows have case law in their gold, so the dev set can measure routing *recall* and not routing *precision*, and cannot measure a reserved per-sub-query floor either. Tuning either on the pilot or the golden set would break the held-out rule, so both stop here.
+
+---
+
+## B7b: Dev-set extension, routing precision, and the golden-set audit
+
+**Done (2026-09-22).** Results: `eval/results/golden-b7b-cached-k10.{json,txt}`, `b7b-attribution-prompt-vs-floor.txt`, `b7b-planner-variance.txt`, `dev-b7b-k10.txt`, `pilot-b7b-k10.txt`. Log #45 (audit), #46 (measurement noise); ADR-20 revised.
+
+- [x] **Dev set 12 → 25 rows.** 13 rows whose gold needs no case law (8 statute, 2 regulation, 2 publication, 1 keyword pair). This made routing *precision* measurable for the first time: the old dev set had case law in every row's gold, so a router that asked for case law on every question scored perfectly.
+- [x] **Routing precision tuned on dev only:** recall 1.000 / precision 0.600 → two prompt revisions → **0.917 / 0.917**. The single recall miss (D06) is a question phrased as a pure threshold whose gold is an opinion; the router's statutory answer is arguably the better route and it costs no gold hit.
+- [x] **Pilot dilution criterion met: 0.500 → 0.611** (regulation rows 0.562 → 0.688), the number B3 predicted. Recorded with its caveat: the pilot shares 3 gold citations with dev, and on the 15 uncontaminated rows it is 0.533 → 0.600.
+- [x] **Reserved per-sub-query floor: exactly neutral** on gold recall (identical at floor 0 and 1 under both prompts, on dev and on 86 golden rows). Shipped anyway — it fixes a composition defect the metric cannot see (statutory sub-queries reaching synthesis with zero chunks on a question that asks for statute, regulation and case law).
+- [x] **Golden-set audit, two passes.** 4 rows added (111 → 115), 10 note-level edits. Found: 13 gold groups shared across 29 of 84 scored rows (B5 applied that rule to opinions only); only one row spanned three source kinds and none had statute+regulation+case law as three groups; **no scored row had publication gold at all**; G-T06's answer turned on an unstated extension; G-I07 missing its partly-answerable note. Appellate history verified against CourtListener rather than recall — no new reversals, three positive histories, and one note I was about to write from memory (Schwab "reversed") was wrong, it was affirmed.
+- [x] **Validator fixed:** adversarial rows no longer have to carry a document, so an attack arriving in the user's own message can be expressed.
+- [x] **Planner noise measured and the harness fixed.** `gpt-4o-mini`'s seed is best-effort. `eval/retrieval.py` now caches plans to `eval/results/decompositions.json` (two runs from one cached set agree exactly) and `--repeats N` scores every decomposition arm against N independently planned sets, printing each set's score with the mean and range. Over six plan sets routing is **0.440 ± 0.012** vs a deterministic **0.428**.
+- [x] **The noise has an address:** 14 of 86 golden questions (16%) route differently between plan sets; 39 (45%) differ only in wording, which cannot move a metric because ADR-20 searches the original question. Dropping the rewriting bought reproducibility as well as recall.
+- [x] **Lesson recorded:** a range over three samples is an unstable noise estimate — it read 0.035 once and 0.006 the next time, and misled twice. Report a standard deviation over five or more plan sets.
+
+**Corrects B7:** the golden-set gain reported for routing (0.435 → 0.476) was a single-run reading. Measured properly on the grown 86-row set it is **+0.012 ± 0.012** (six plan sets) — small, probably real, and unresolvable by one run. Checkpoint 3 is now answerable and is answered above.
+
+**Files:** `eval/dev.jsonl`, `eval/golden.jsonl`, `eval/validate_pilot.py`, `eval/retrieval.py`
 **Scope:** M
 
 ---
 
 ## ✅ Checkpoint 3 (human review: does decomposition earn its place?)
-- [ ] Ladder on the golden set: closed-book → dense → hybrid → +rerank → +decomposition
-- [ ] Decomposition helps compound questions, or the report says it doesn't
+- [x] Ladder on the golden set (86 scored rows, k=10, mean over 3 plan sets): hybrid **0.428** → +rerank **0.446** → +route **0.442** → +rerank+route **0.452**. Closed-book and dense rungs are unchanged from Phase A.
+- [x] **The report says it doesn't — for compound questions.** Compound recall barely moves (0.349 → 0.366 with routing, 0.328 with routing plus reranking). Decomposition earns its place on **statutory** questions instead: 0.321 → 0.357, and 0.429 in the best arm, because routing keeps case-law prose out of a pool that should hold statute and regulations. Case law is slightly worse (0.654 → 0.641). The mechanism works; the category it was designed for is not the one it helps.
+- [x] Effect size stated honestly: routing is **+0.012 Recall@10 (sd 0.012 over six plan sets, SEM 0.005)** — about one gold group in 86, with one run of six below the deterministic baseline. No single run can resolve it.
 
 ---
 
@@ -528,39 +563,68 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 **Description:** Add `eval/ragas_eval.py`: run the full pipeline over the golden rows scored in B, then score RAGAS faithfulness with `claude-haiku-4-5` as the judge (the other provider, ADR-11/§9.2). Refusals are excluded from the faithfulness mean and reported as a separate refusal rate. Pipeline outputs are cached per run, so re-judging doesn't regenerate them. Print the running cost and stop at a configurable cap. Pin the `ragas` version; if its dependencies cause trouble, implement the faithfulness metric directly instead (extract claims, check each against the retrieved context, take the ratio).
 
 **Acceptance criteria:**
-- [ ] `uv run python eval/ragas_eval.py` writes `eval/results/ragas-<date>.json` with per-row and aggregate faithfulness, refusal rate and cost
-- [ ] Run 3 times: mean and spread recorded, so the gate's noise band is known before it is enforced
-- [ ] If faithfulness is below 0.85, the cause is analysed and fixed against the dev set, or the threshold is recalibrated with the measurement written down (§9.3)
+- [x] `uv run python eval/ragas_eval.py` writes `eval/results/ragas-<date>.json` with per-row and aggregate faithfulness, refusal rate and cost
+- [x] Run 3 times: **0.859 / 0.902 / 0.833 — mean 0.865, sd 0.035**, over 96 rows (`scored_from == "B"`, including the 10 insufficiency rows, which the retrieval eval excludes)
+- [x] Faithfulness is above 0.85 on the mean, so no fix was triggered — **but run 3 is below it**, which is written down here and in ADR-21: the gate as specified would fail about one unchanged build in three
 
 **Verification:**
-- [ ] `uv run pytest -q`: refusals are excluded from the faithfulness mean, and the cost cap stops a run
-- [ ] Manual: 5 low-scoring rows read to confirm the judge is right about them
+- [x] `uv run pytest -q`: 157 pass, including refusals excluded from the mean, a refusal scored neither 0 nor 1, an answer with no claims reported not averaged, the cost cap stopping a run, and a skipped verdict counting as unsupported
+- [x] Manual: 5 low-scoring rows read against the retrieved text (G-S03, G-S05, G-S10, G-S14, G-C13) — **the judge is right in all five**, including one I expected it to have wrong
 
 **Dependencies:** B7
-**Files:** `eval/ragas_eval.py`, `pyproject.toml`, `tests/test_metrics.py`
+**Files:** `eval/ragas_eval.py`, `tests/test_metrics.py`, `src/taxcite/generate.py` (`pyproject.toml` unchanged — see below)
 **Scope:** M
+
+**Done (2026-09-22).** Results: `eval/results/ragas-2026-09-22.json`, `ragas-2026-09-22-3runs.txt`. Log #47, ADR-21.
+- **Not the `ragas` library.** It resolves to 326 packages against this project's 65 — the langchain stack, `datasets`, `scikit-network` — for a metric that is two model calls, and B9 must install it on every PR. The metric is RAGAS's own definition (atomic claims → supported ratio) with the judge on `claude-haiku-4-5` per ADR-11. No new dependency.
+- **The finding that justifies the gate:** G-S10 and G-S14 scored 0.00 in all three runs with *legally correct* answers. The gold chunk was not retrieved; the model answered from parametric knowledge and attached a citation to a chunk that was retrieved but does not state the claim. Phase A's citation checker scores those as **exact** citations and passes them. Faithfulness is the only check that sees it.
+- **Abstention: 10/10 insufficiency rows refused in 3/3 runs.** The 13–18% refusal rate also includes 3–7 false refusals per run (G-C02 every run, G-X25 twice, eight rows once) — a retrieval problem, not an honesty one.
+- Cost for the whole 3-run measurement: judge $1.35 + pipeline $0.22 = **$1.56**, 29 minutes.
+- Two upstream bugs fixed in `call_model`: `anthropic` 1.7.0 has no `temperature` on `messages.create` (previously every claude call passed None, so it was never hit), and it *does* support schema-enforced JSON via `output_config`, which the judge now uses.
+
+**Hands B9 a problem:** the gate cannot be a single run at 0.85. Options to weigh in B9 — gate the mean of N runs (29 min and $1.56 per PR is too slow), pin a plan cache so CI is deterministic and the gate measures the change rather than the planner, or gate a smaller subset with a band derived from its own measured sd.
 
 ---
 
 ## B9: CI in GitHub Actions + the RAGAS gate
 
-**Description:** There is no CI today. Add two workflows:
+**Description:** There is no CI today. Add three tiers (revised 2026-09-22 from the B8 measurement; you approved the change):
 - `pytest` on every push, with Qdrant, Postgres and Redis as service containers.
-- The RAGAS gate on PRs that touch retrieval, prompts, reranking or decomposition (§7's list). It restores the corpus from a Qdrant snapshot and a Postgres `chunks` dump published as a GitHub release asset, runs `eval/ragas_eval.py`, and fails if faithfulness < 0.85.
+- **A deterministic retrieval check** on PRs touching retrieval, reranking or decomposition: `eval/retrieval.py` against the pinned plan cache. No LLM, seconds to run, and two cached runs already agree to three decimals — it catches a retrieval regression unambiguously and for nothing. Not in the original plan; it is the highest value-per-second check available.
+- The faithfulness gate on PRs touching prompts, synthesis or the pipeline (§7's list). It restores the corpus from a Qdrant snapshot and a Postgres `chunks` dump published as a GitHub release asset, and runs `eval/ragas_eval.py`.
+
+**Three changes to the gate as §7 specified it, each with its reason:**
+1. **It runs on the dev set, not the golden set.** A gate that fires on every qualifying PR is a tuning signal; over months it would fit the system to the held-out data, undoing what B4 and B7b exist to protect. Dev is 25 rows, ~8 minutes, ~$0.40 a run. Golden stays for phase reports.
+2. **The threshold is calibrated against a broken prompt, not set at 0.85.** B8 measured 0.859 / 0.902 / 0.833 on an unchanged pipeline, so a single-run gate at 0.85 fails about one clean build in three. The acceptance criterion below defines what the gate must detect — a deliberately broken synthesis prompt — so the threshold goes between that score and the healthy floor. 0.85 stays as the reported quality target in the exit report; a CI threshold and a quality target are different objects.
+3. **What can be pinned is pinned:** the plan cache (already built), and synthesis temperature (see B9a). The judge cannot be pinned — `anthropic` 1.7.0 exposes no temperature — so its variation is the gate's noise floor.
 
 Add a script that regenerates and publishes the snapshot when the corpus changes. Embedding and cross-encoder models are kept in the CI cache. API keys come from repository secrets.
 
 **Acceptance criteria:**
 - [ ] `pytest` runs green on push
+- [ ] The deterministic retrieval check runs on the listed paths and fails on a seeded retrieval regression
 - [ ] The gate runs only on PRs touching the listed paths, and its cost and runtime per run are recorded
 - [ ] **Proof:** a PR with a deliberately broken synthesis prompt fails the gate; reverting it passes
+- [ ] The threshold is derived from the measured healthy band and the measured broken-prompt score, and both are written down
 
 **Verification:**
-- [ ] Manual: both workflow runs linked in the log entry
+- [ ] Manual: workflow runs linked in the log entry
 
 **Dependencies:** B8
-**Files:** `.github/workflows/test.yml`, `.github/workflows/ragas.yml`, `eval/snapshot.py`
+**Files:** `.github/workflows/test.yml`, `.github/workflows/retrieval-gate.yml`, `.github/workflows/faithfulness.yml`, `eval/snapshot.py`, `eval/retrieval.py` (`--fail-under`), `eval/ragas_eval.py` (`--fail-under`), `src/taxcite/generate.py` (synthesis pinned)
 **Scope:** M
+
+**Progress (2026-09-23).** Design settled and calibrated (ADR-22, log #48); files written; threshold pending one measurement.
+- [x] **Calibrated the gate against the failure it exists to catch.** Dev, judge `claude-haiku-4-5`: healthy 0.823 (sd 0.033), healthy at temp 0 **0.808 (sd 0.016)**, broken prompt 0.762, broken at temp 0 0.759 (sd 0.027). A broken synthesis prompt costs ~0.05 — **2.2 pooled sd**, a 0.011-wide window, ~12% false failures and ~12% false passes. A per-PR faithfulness gate on 25 rows does not work.
+- [x] **Noise decomposed by pinning one component at a time:** re-judging identical answers moves sd **0.008** (5% of variance); the planner and synthesis sampling hold the other 95%, and both are pinnable. The unpinnable component is the one that barely matters.
+- [x] **Synthesis pinned to `temperature=0, seed=0`** — halves the noise, no measurable quality cost, and the right default for a legal tool independent of CI. Test added.
+- [x] **Three workflows written** (`test.yml`, `retrieval-gate.yml`, `faithfulness.yml`) plus `eval/snapshot.py` for corpus freeze/restore, and `--fail-under` on both eval entry points (exit codes verified).
+- [x] Tier 2 is the per-PR blocker: `eval/retrieval.py` against the committed plan cache — no LLM, deterministic, `--fail-under 0.66` against the measured dev figure.
+- [x] **Tier 3 threshold: 0.83**, three sigma below the measured healthy golden mean (0.871, sd 0.013, plans pinned + temperature 0). Enabled in `faithfulness.yml`. Calibrated against the healthy distribution, since broken-on-golden is not measured yet — the proof run supplies that.
+- [x] **Found and fixed a harness bug worth more than the threshold:** `ragas_eval` called `decompose` fresh per row and never used the plan cache, so faithfulness was partly measuring the planner. Pinning plans took golden sd 0.035 → 0.013; temperature 0 alone had moved it only to 0.030, because the planner dominated (16% of golden questions re-route between runs). `decompose.answer()` now accepts a supplied plan (log #49).
+- [x] Residual noise characterised: ~0.010 synthesis + 0.008 judge. Irreducible — OpenAI's `temperature=0` with `seed` is best effort, and two runs over identical plans and context still differ.
+- [ ] **Proof run (also the missing measurement):** push, then open a PR removing the grounding rule from `RAG_SYSTEM`. The nightly job must go red and tier 2 must stay green. If broken scores above 0.83, lower the threshold and record both numbers in ADR-22. Link both workflow runs here.
+- [ ] Workflows have never executed; they run for the first time on the push.
 
 ---
 

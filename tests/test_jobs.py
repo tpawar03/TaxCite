@@ -10,6 +10,8 @@ from taxcite.generate import Answer
 
 client = TestClient(api.app)
 
+STAGES = ["decomposing", "retrieving", "synthesizing", "answer"]
+
 
 @pytest.fixture(autouse=True)
 def clean():
@@ -22,11 +24,14 @@ def clean():
 
 @pytest.fixture
 def stub_pipeline(monkeypatch):
-    """No retrieval, no LLM: this test is about the transport."""
-    from taxcite import generate, retrieve
+    """No decomposition, no retrieval, no LLM: this test is about the transport."""
+    from taxcite import decompose as dc
+    from taxcite import generate
 
-    monkeypatch.setattr(retrieve, "search", lambda *a, **k: [])
-    monkeypatch.setattr(generate, "answer_from_hits", lambda q, hits, **k: Answer(
+    monkeypatch.setattr(dc, "decompose", lambda q, **k: dc.Decomposition(
+        q, [dc.SubQuery("statutory", "hobby loss deduction limit")], as_of="2026", model="stub"))
+    monkeypatch.setattr(dc, "search", lambda *a, **k: [])
+    monkeypatch.setattr(generate, "answer_from_groups", lambda q, groups, **k: Answer(
         text="Yes [26 CFR 1.183-2(b)(3)].", mode="rag", model="stub",
         citations=["26 CFR 1.183-2(b)(3)"], input_tokens=10, output_tokens=5))
 
@@ -50,8 +55,17 @@ def test_post_returns_an_id_immediately(stub_pipeline):
 def test_events_arrive_in_pipeline_order_and_end_with_the_answer(stub_pipeline):
     job_id = client.post("/queries", json={"question": "q"}).json()["id"]
     events = sse_events(client.get(f"/queries/{job_id}/events").text)
-    assert [name for name, _ in events] == ["retrieving", "synthesizing", "answer"]
+    assert [name for name, _ in events] == STAGES
     assert events[-1][1]["citations"] == ["26 CFR 1.183-2(b)(3)"]
+
+
+def test_the_retrieving_stage_records_the_plan_and_the_as_of_year(stub_pipeline):
+    """Phase D filters on as_of; B7 only records it, so the record already shows what it would use."""
+    job_id = client.post("/queries", json={"question": "q"}).json()["id"]
+    events = dict(sse_events(client.get(f"/queries/{job_id}/events").text))
+    assert events["retrieving"]["as_of"] == "2026"
+    assert events["retrieving"]["subqueries"] == [
+        {"kind": "statutory", "query": "hobby loss deduction limit"}]
 
 
 def test_a_late_client_still_sees_every_stage(stub_pipeline):
@@ -59,7 +73,7 @@ def test_a_late_client_still_sees_every_stage(stub_pipeline):
     job_id = client.post("/queries", json={"question": "q"}).json()["id"]
     client.get(f"/queries/{job_id}/events")  # run to completion
     again = sse_events(client.get(f"/queries/{job_id}/events").text)
-    assert [name for name, _ in again] == ["retrieving", "synthesizing", "answer"]
+    assert [name for name, _ in again] == STAGES
 
 
 def test_unknown_job_is_404():
@@ -68,12 +82,12 @@ def test_unknown_job_is_404():
 
 
 def test_a_failing_pipeline_is_recorded_not_swallowed(monkeypatch):
-    from taxcite import retrieve
+    from taxcite import decompose as dc
 
     def boom(*a, **k):
         raise RuntimeError("qdrant is down")
 
-    monkeypatch.setattr(retrieve, "search", boom)
+    monkeypatch.setattr(dc, "decompose", boom)
     job_id = client.post("/queries", json={"question": "q"}).json()["id"]
     events = sse_events(client.get(f"/queries/{job_id}/events").text)
     assert events[-1][0] == "error"
@@ -117,7 +131,7 @@ def test_the_stream_survives_redis_being_down(monkeypatch, stub_pipeline):
     monkeypatch.setattr(jobs, "REDIS_URL", "redis://localhost:1/0")
     job_id = client.post("/queries", json={"question": "q"}).json()["id"]
     events = sse_events(client.get(f"/queries/{job_id}/events").text)
-    assert [name for name, _ in events] == ["retrieving", "synthesizing", "answer"]
+    assert [name for name, _ in events] == STAGES
 
 
 def test_a_stage_is_never_delivered_twice(stub_pipeline):

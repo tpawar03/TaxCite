@@ -1,0 +1,66 @@
+name: faithfulness
+
+# Nightly, not per-PR, and the reason is measured (ADR-22): on the 25 rows affordable per PR,
+# a deliberately broken synthesis prompt separates from a healthy one by only 2.2 sigma, which
+# is ~12% false failures. On the 96-row golden set the same gap is ~4.4 sigma. So it runs where
+# the sample is big enough, once a day, instead of where it would flake.
+on:
+  schedule: [{ cron: "0 6 * * *" }]
+  workflow_dispatch:
+  release: { types: [published] }
+
+jobs:
+  faithfulness:
+    runs-on: ubuntu-latest
+    services:
+      qdrant:
+        image: qdrant/qdrant:v1.12.4
+        ports: ["6333:6333"]
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_USER: taxcite, POSTGRES_PASSWORD: taxcite, POSTGRES_DB: taxcite }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U taxcite" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      QDRANT_URL: http://localhost:6333
+      DATABASE_URL: postgresql://taxcite:taxcite@localhost:5432/taxcite
+      OPENAI_API_KEY: "${{ secrets.OPENAI_API_KEY }}"
+      ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { enable-cache: true }
+      - run: uv sync --frozen
+      - run: for i in $(seq 1 30); do curl -sf localhost:6333/readyz && exit 0; sleep 2; done; exit 1
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/fastembed
+          key: fastembed-bge-base-jina-turbo-v1
+      - name: restore the corpus
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh release download --pattern '*' --dir dist "$(gh release list --limit 1 --json tagName --jq '.[0].tagName')"
+          uv run python eval/snapshot.py restore --from dist
+
+      # Threshold 0.83 = three standard deviations below the measured healthy mean, with plans
+      # pinned and synthesis at temperature 0: mean 0.871, sd 0.013 over three runs on the
+      # 96-row golden set (ADR-22). It is calibrated against the HEALTHY distribution -- "do not
+      # drop 3 sigma below the established baseline" -- because broken-on-golden has not been
+      # measured yet. The proof run does that: a PR with the grounding rule removed from
+      # RAG_SYSTEM must turn this job red. If it does not, this number comes down and the ADR
+      # records both. A nightly job going red blocks nobody, which is why it is safe to enable
+      # this before the proof rather than after.
+      - name: faithfulness
+        run: |
+          uv run python eval/ragas_eval.py --repeats 3 --max-cost 5.00 \
+            --fail-under 0.83 | tee faithfulness.log
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: faithfulness
+          path: |
+            faithfulness.log
+            eval/results/ragas-*.json

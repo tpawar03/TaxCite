@@ -1,0 +1,19 @@
+25 dev rows; cap $3.00
+
+  healthy run 1: faithfulness 0.788 over 25 rows, refusals 0, spend $0.14
+  healthy run 2: faithfulness 0.829 over 25 rows, refusals 0, spend $0.28
+  healthy run 3: faithfulness 0.853 over 24 rows, refusals 1, spend $0.41
+  temp0 run 1: faithfulness 0.797 over 25 rows, refusals 0, spend $0.54
+  temp0 run 2: faithfulness 0.826 over 24 rows, refusals 1, spend $0.68
+  temp0 run 3: faithfulness 0.801 over 25 rows, refusals 0, spend $0.81
+  broken run 1: faithfulness 0.767 over 25 rows, refusals 0, spend $0.95
+  broken run 2: faithfulness 0.757 over 25 rows, refusals 0, spend $1.09
+
+temp0   ['0.797', '0.826', '0.801']  mean 0.808  sd 0.016
+
+healthy ['0.788', '0.829', '0.853']  mean 0.823  sd 0.033
+broken  ['0.767', '0.757']  mean 0.762
+
+healthy floor 0.788 | broken ceiling 0.767 | gap +0.020
+a threshold anywhere in (0.767, 0.788) separates them; midpoint 0.78
+judge+pipeline spend $1.0863

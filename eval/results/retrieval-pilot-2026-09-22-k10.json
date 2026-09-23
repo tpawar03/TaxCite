@@ -1,0 +1,764 @@
+{
+  "k": 10,
+  "modes": [
+    "hybrid",
+    "hybrid+route"
+  ],
+  "rows": [
+    {
+      "id": "P01",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 32.71633299300447,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2012-17, at *22-24"
+    },
+    {
+      "id": "P02",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 26.00895898649469,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2009-220, at *17-18"
+    },
+    {
+      "id": "P03",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.31546487678572877,
+      "mrr": 0.125,
+      "section_recall": 1.0,
+      "ms": 20.903750031720847,
+      "first_hit_rank": 8,
+      "top1": "26 CFR 1.263(a)-3(n)(1)"
+    },
+    {
+      "id": "P04",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 32.17066696379334,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.263(a)-3(k)(7)"
+    },
+    {
+      "id": "P05",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 148.431416018866,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.263(a)-1(f)(7)"
+    },
+    {
+      "id": "P06",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 30.617541982792318,
+      "first_hit_rank": 5,
+      "top1": "IRS Pub 334 (2025), p. 16"
+    },
+    {
+      "id": "P07",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 32.12579200044274,
+      "first_hit_rank": 2,
+      "top1": "IRS Pub 587 (2025), p. 17"
+    },
+    {
+      "id": "P08",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 20.777791971340775,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.179-5(b)"
+    },
+    {
+      "id": "P09",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.23554102703929,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 32"
+    },
+    {
+      "id": "P10",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.2890648263178879,
+      "mrr": 0.1,
+      "section_recall": 1.0,
+      "ms": 29.654957994353026,
+      "first_hit_rank": 10,
+      "top1": "T.C. Memo. 2013-71, at *14-16"
+    },
+    {
+      "id": "P11",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 37.1697079972364,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 15"
+    },
+    {
+      "id": "P12",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 27.508749975822866,
+      "first_hit_rank": 6,
+      "top1": "26 CFR 1.461-4(a)-(c)"
+    },
+    {
+      "id": "P13",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3333333333333333,
+      "mrr": 0.14285714285714285,
+      "section_recall": 1.0,
+      "ms": 30.36312502808869,
+      "first_hit_rank": 7,
+      "top1": "T.C. Memo. 2012-358, at *21-22"
+    },
+    {
+      "id": "P14",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 20.65412502270192,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.167(l)-1(e)(2)"
+    },
+    {
+      "id": "P15",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 25.520000024698675,
+      "first_hit_rank": 3,
+      "top1": "IRS Pub 334 (2025), p. 17"
+    },
+    {
+      "id": "P16",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 24.396458000410348,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 47"
+    },
+    {
+      "id": "P17",
+      "style": "nl",
+      "category": "publication",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 24.980083981063217,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 10"
+    },
+    {
+      "id": "P18",
+      "style": "nl",
+      "category": "publication",
+      "mode": "hybrid",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 23.139083990827203,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2022-99, at *14"
+    },
+    {
+      "id": "P01",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.2890648263178879,
+      "mrr": 0.1,
+      "section_recall": 1.0,
+      "ms": 1872.2686669789255,
+      "first_hit_rank": 10,
+      "top1": "T.C. Memo. 2012-17, at *22-24",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "activity not engaged in for profit deduction limitation"
+        },
+        {
+          "kind": "case_law",
+          "query": "factors determining whether horse breeding is a business or hobby including time and effort invested"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017669999999999999,
+      "has_case_subquery": true
+    },
+    {
+      "id": "P02",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 1748.33812500583,
+      "first_hit_rank": 3,
+      "top1": "26 U.S.C. \u00a7 183(a)-(d)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limitations for activities not engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of expenses for activities not engaged in for profit"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001731,
+      "has_case_subquery": true
+    },
+    {
+      "id": "P03",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 9,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1185.0493749952875,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.162-4(a)-(c)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for repairs and maintenance of tangible property under the Internal Revenue Code"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015659999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P04",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1930.1149579696357,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 946 (2025), p. 12",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capitalization vs. repair deduction for improvements to rental property"
+        },
+        {
+          "kind": "case_law",
+          "query": "replacement of roof rental property repair vs. improvement distinction"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client replaced the entire roof on a rental property"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018705000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "P05",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 4,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1504.3619999778457,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 42",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "safe harbor for expensing de minimis tangible property expenditures"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015690000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P06",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 9,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1421.8587079667486,
+      "first_hit_rank": 2,
+      "top1": "IRS Pub 334 (2025), p. 16",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "definition of materials and supplies for small business under Internal Revenue Code"
+        },
+        {
+          "kind": "statutory",
+          "query": "deduction rules for materials and supplies for small businesses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017189999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P07",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1277.0367080229335,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.179-1(d)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Section 179 expense deduction limitations based on business use percentage"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001596,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P08",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1136.976916983258,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.179-5(b)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "revocation of section 179 election consent requirements by the Commissioner"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001557,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P09",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1390.5803749803454,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 32",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "inclusion amount for leased vehicles under section 280F"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client leases a car for business purposes"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017114999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P10",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3010299956639812,
+      "mrr": 0.1111111111111111,
+      "section_recall": 1.0,
+      "ms": 1118.961500003934,
+      "first_hit_rank": 9,
+      "top1": "26 CFR 1.274-5(j)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for travel expenses away from home"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001551,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P11",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1911.3389170379378,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 15",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cash basis taxpayer income recognition timing check received but not deposited"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxable year for cash basis taxpayer check received in December deposited in January"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017565000000000001,
+      "has_case_subquery": true
+    },
+    {
+      "id": "P12",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 9,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 1258.485957980156,
+      "first_hit_rank": 6,
+      "top1": "26 CFR 1.461-4(a)-(c)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "all events test for liability incurred under the accrual method of accounting and economic performance requirement"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.000159,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P13",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 9,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1201.1523330002092,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.469-5T(a)(1)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "material participation hours test for passive activity loss rules"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015659999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P14",
+      "style": "keyword",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 8,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1186.440749967005,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.167(a)-10(b)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "depreciation period for property placed in service and retired"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001551,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P15",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 1680.1722919917665,
+      "first_hit_rank": 4,
+      "top1": "26 CFR 1.446-1(e)(3)",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for changing accounting method IRS permission"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS approval for change in accounting method"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00016755,
+      "has_case_subquery": true
+    },
+    {
+      "id": "P16",
+      "style": "nl",
+      "category": "regulation",
+      "mode": "hybrid+route",
+      "chunks": 9,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1605.7497920119204,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 47",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "self-employment income calculation for multiple businesses"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client runs two separate businesses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00016725,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P17",
+      "style": "nl",
+      "category": "publication",
+      "mode": "hybrid+route",
+      "chunks": 7,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1170.7968330010772,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 10",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "simplified method home office deduction per square foot deduction limit and maximum square footage cap"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00016185,
+      "has_case_subquery": false
+    },
+    {
+      "id": "P18",
+      "style": "nl",
+      "category": "publication",
+      "mode": "hybrid+route",
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1845.4998749657534,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2013-229, at *16-17",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for standard mileage rate deduction"
+        },
+        {
+          "kind": "case_law",
+          "query": "adequacy of records for substantiating standard mileage rate deduction"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001716,
+      "has_case_subquery": true
+    }
+  ],
+  "reranker": "jinaai/jina-reranker-v1-turbo-en",
+  "routing": {
+    "hybrid+route": {
+      "rows_needing_case_law": 0,
+      "case_subquery_present": 0,
+      "spurious_case_subquery": 6,
+      "fallbacks": 0,
+      "subqueries_per_question": 1.5555555555555556,
+      "cost_usd": 0.0029784
+    }
+  },
+  "summary": {
+    "hybrid": {
+      "recall": 0.5,
+      "ndcg": 0.2468212521068016,
+      "mrr": 0.17043650793650794,
+      "section_recall": 0.7777777777777778,
+      "chunks": 10.0,
+      "p50_ms": 27.508749975822866,
+      "p95_ms": 148.431416018866
+    },
+    "hybrid+route": {
+      "recall": 0.6111111111111112,
+      "ndcg": 0.41710601781859674,
+      "mrr": 0.3589506172839506,
+      "section_recall": 0.8888888888888888,
+      "chunks": 9.11111111111111,
+      "p50_ms": 1421.8587079667486,
+      "p95_ms": 1930.1149579696357
+    }
+  }
+}

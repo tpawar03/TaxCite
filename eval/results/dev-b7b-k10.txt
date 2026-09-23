@@ -1,0 +1,48 @@
+25 scorable questions, 0 abstention questions, k=10
+
+mode                   Recall    nDCG     MRR   SectR       nl  keyword    chunks  p50 ms  p95 ms
+-------------------------------------------------------------------------------------------------
+hybrid                  0.640   0.441   0.420   0.700    0.609    1.000      10.0      27      32
+hybrid+rerank           0.660   0.533   0.560   0.740    0.630    1.000      10.0     878    1003
+hybrid+route            0.720   0.588   0.605   0.740    0.696    1.000       9.0    1697    2282
+hybrid+rerank+route     0.720   0.588   0.608   0.760    0.696    1.000       9.1    2428    4015
+
+recall by category: case_law (6)  compound (6)  statutory (13)
+hybrid                      0.833       0.417       0.654
+hybrid+rerank               0.833       0.500       0.654
+hybrid+route                0.833       0.583       0.731
+hybrid+rerank+route         0.833       0.583       0.731
+
+hybrid+route: case-law sub-query on 11/12 rows whose gold needs one (0.917); 2 on rows that do not; 0 fallback plans; 1.80 sub-queries/question; $0.0043
+
+hybrid+rerank+route: case-law sub-query on 11/12 rows whose gold needs one (0.917); 1 on rows that do not; 0 fallback plans; 1.72 sub-queries/question; $0.0043
+
+per-question recall (strict):
+id                     hybrid          hybrid+rerank           hybrid+route    hybrid+rerank+route
+D01                      1.00                   1.00                   1.00                   1.00
+D02                      1.00                   1.00                   1.00                   1.00
+D03                      1.00                   1.00                   1.00                   1.00
+D04                      1.00                   1.00                   1.00                   1.00
+D05                      1.00                   1.00                   1.00                   1.00
+D06                      0.00                   0.00                   0.00                   0.00
+D07                      0.50                   0.50                   0.50                   0.50
+D08                      0.00                   0.50                   1.00                   1.00
+D09                      0.50                   0.50                   0.50                   0.50
+D10                      0.50                   0.50                   0.50                   0.50
+D11                      0.50                   0.50                   0.50                   0.50
+D12                      0.50                   0.50                   0.50                   0.50
+D13                      0.50                   0.50                   0.50                   0.50
+D14                      1.00                   1.00                   1.00                   1.00
+D15                      0.00                   0.00                   0.00                   0.00
+D16                      0.00                   0.00                   0.00                   0.00
+D17                      0.00                   0.00                   0.00                   0.00
+D18                      1.00                   1.00                   1.00                   1.00
+D19                      1.00                   1.00                   1.00                   1.00
+D20                      1.00                   1.00                   1.00                   1.00
+D21                      1.00                   1.00                   1.00                   1.00
+D22                      1.00                   1.00                   1.00                   1.00
+D23                      0.00                   0.00                   1.00                   1.00
+D24                      1.00                   1.00                   1.00                   1.00
+D25                      1.00                   1.00                   1.00                   1.00
+
+wrote eval/results/retrieval-dev_merged-2026-09-22-k10.json

@@ -1,0 +1,6 @@
+Same configuration (v5 prompt, route, floor 1), golden set, 86 scored rows, repeated:
+run 1: Recall 0.457  nDCG 0.324  MRR 0.338
+run 2: Recall 0.422  nDCG 0.306  MRR 0.321
+run 3: Recall 0.434  nDCG 0.315  MRR 0.334
+identical plan shape run1 vs run2: 77/86; run1 vs run3: 75/86
+Spread 0.035 Recall@10. Plain hybrid is deterministic at 0.428.

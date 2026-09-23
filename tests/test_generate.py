@@ -20,8 +20,8 @@ def stub(monkeypatch):
     """Replace the model call; record what it was asked."""
     calls = {}
 
-    def fake(system, prompt, model):
-        calls.update(system=system, prompt=prompt, model=model)
+    def fake(system, prompt, model, **kw):
+        calls.update(system=system, prompt=prompt, model=model, **kw)
         return calls.get("reply", "stub answer"), 100, 20
 
     monkeypatch.setattr(generate, "call_model", fake)
@@ -136,3 +136,11 @@ def test_missing_openai_key_says_what_to_set(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     with pytest.raises(generate.MissingCredentials, match="OPENAI_API_KEY"):
         generate.call_model("sys", "prompt", "gpt-5-mini")
+
+def test_synthesis_is_pinned_not_sampled(stub, monkeypatch):
+    """Sampling at the default temperature made the same question answerable two ways, and was
+    the larger half of the eval's noise (B9 calibration)."""
+    monkeypatch.setattr(generate, "search", lambda *a, **k: HITS)
+    generate.answer("does time and effort matter?")
+    assert stub["temperature"] == 0
+    assert stub["seed"] == 0

@@ -33,3 +33,9 @@ data/
 # (graph.json, graph.html and GRAPH_REPORT.md are kept)
 graphify-out/.graphify_*
 graphify-out/cache/
+
+# Regenerable pipeline caches. Large, and invalid the moment the pipeline changes — the
+# temperature-0 switch stranded a whole set of them. The PLAN cache is committed on purpose:
+# the retrieval gate pins plans with it, so CI measures the change under test (ADR-22).
+eval/results/pipeline-answers*.json
+eval/results/gate-answers-*.json

@@ -1,7 +1,7 @@
 import pytest
 
 from taxcite import index
-from taxcite.retrieve import search
+from taxcite.retrieve import Hit, rerank, search
 
 pytestmark = pytest.mark.skipif(
     index.count(index.client(), "ecfr") == 0, reason="needs an ingested corpus"
@@ -45,6 +45,37 @@ def test_results_are_reproducible():
 def test_unknown_mode_is_rejected():
     with pytest.raises(ValueError, match="mode must be"):
         search("anything", mode="magic")
+
+
+def test_unknown_mode_suffix_is_rejected():
+    with pytest.raises(ValueError, match="only '\\+rerank' exists"):
+        search("anything", mode="hybrid+magic")
+
+
+def hit(citation, heading, text):
+    return Hit(citation=citation, heading=heading, text=text, score=0.0, section=citation, source="ecfr")
+
+
+def test_rerank_promotes_the_rule_over_a_chunk_that_only_mentions_it():
+    """The cross-encoder's job: an example that quotes a rule is not the rule."""
+    example = hit("26 CFR 1.183-2(c)(1)", "Example 1",
+                  "A taxpayer inherited a farm of 65 acres from her husband and moved onto the farm.")
+    rule = hit("26 CFR 1.183-2(b)(3)", "Relevant factors",
+               "The time and effort expended by the taxpayer in carrying on the activity. The fact that "
+               "the taxpayer devotes much of his personal time and effort to carrying on an activity may "
+               "indicate an intention to derive a profit.")
+    ranked = rerank("does the time a taxpayer spends on an activity show a profit motive?", [example, rule], k=2)
+    assert [h.citation for h in ranked] == [rule.citation, example.citation]
+    assert ranked[0].score > ranked[1].score
+
+
+def test_rerank_mode_reorders_the_hybrid_candidates():
+    q = "does time spent on an activity matter for hobby loss rules?"
+    plain = [h.citation for h in search(q, k=10, mode="hybrid")]
+    reranked = [h.citation for h in search(q, k=10, mode="hybrid+rerank")]
+    assert len(reranked) == 10
+    assert plain != reranked
+    assert set(reranked) <= set(h.citation for h in search(q, k=25, mode="hybrid"))  # drawn from the candidate pool
 
 
 def test_source_filter_limits_results():

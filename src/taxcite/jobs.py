@@ -107,18 +107,29 @@ def get(conn, job_id: str) -> dict | None:
 
 def run(conn, job_id: str, question: str, k: int = 8) -> None:
     """The pipeline, reporting each stage. Phases C-F add their steps here."""
-    from taxcite.generate import answer_from_hits
-    from taxcite.retrieve import search
+    from taxcite import decompose as dc
+    from taxcite.generate import answer_from_groups
 
     try:
         rdb = client()
     except redis.RedisError:
         rdb = None  # the pipeline continues without live events
     try:
-        publish(conn, job_id, "retrieving", {"k": k}, rdb)
-        hits = search(question, k=k)
+        publish(conn, job_id, "decomposing", {}, rdb)
+        plan = dc.decompose(question)
+        # The as-of year is recorded, not applied: nothing filters on it until Phase D,
+        # and storing it now means the job record already shows what a later filter would
+        # have used.
+        publish(conn, job_id, "retrieving", {
+            "k": k,
+            "as_of": plan.as_of,
+            "subqueries": [{"kind": s.kind, "query": s.query} for s in plan.subqueries],
+            "fallback": plan.fallback,
+        }, rdb)
+        dc.retrieve(plan, k=k)
+        hits = dc.chunks(plan, k)
         publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
-        result = answer_from_hits(question, hits)
+        result = answer_from_groups(question, plan.groups({h.citation for h in hits}), facts=plan.facts)
         publish(conn, job_id, "answer", {
             "text": result.text,
             "citations": result.citations,
@@ -126,7 +137,7 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "unsupported_citations": result.unsupported_citations,
             "refused": result.refused,
             "model": result.model,
-            "cost_usd": round(result.cost_usd, 6),
+            "cost_usd": round(result.cost_usd + plan.cost_usd, 6),
         }, rdb)
     except Exception as e:  # the job record must show what happened, not just stop
         publish(conn, job_id, "error", {"type": type(e).__name__, "message": str(e)[:300]}, rdb)

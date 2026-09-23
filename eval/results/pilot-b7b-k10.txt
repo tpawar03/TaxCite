@@ -1,0 +1,35 @@
+18 scorable questions, 2 abstention questions, k=10
+
+mode            Recall    nDCG     MRR   SectR       nl  keyword    chunks  p50 ms  p95 ms
+------------------------------------------------------------------------------------------
+hybrid           0.500   0.247   0.170   0.778    0.357    1.000      10.0      28     148
+hybrid+route     0.611   0.417   0.359   0.889    0.500    1.000       9.1    1422    1930
+
+recall by category: publication (2)  regulation (16)
+hybrid               0.000       0.562
+hybrid+route         0.000       0.688
+
+hybrid+route: case-law sub-query on 0/0 rows whose gold needs one (0.000); 6 on rows that do not; 0 fallback plans; 1.56 sub-queries/question; $0.0030
+
+per-question recall (strict):
+id              hybrid    hybrid+route
+P01               0.00            1.00
+P02               0.00            1.00
+P03               1.00            1.00
+P04               0.00            0.00
+P05               0.00            0.00
+P06               1.00            1.00
+P07               1.00            1.00
+P08               1.00            1.00
+P09               0.00            0.00
+P10               1.00            1.00
+P11               0.00            0.00
+P12               1.00            1.00
+P13               1.00            1.00
+P14               1.00            1.00
+P15               1.00            1.00
+P16               0.00            0.00
+P17               0.00            0.00
+P18               0.00            0.00
+
+wrote eval/results/retrieval-pilot-2026-09-22-k10.json

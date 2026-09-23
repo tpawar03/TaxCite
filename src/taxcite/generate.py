@@ -10,6 +10,7 @@ only if measurement shows a need (T8). Override with TAXCITE_MODEL.
 
 import os
 import re
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -49,6 +50,11 @@ No sources are provided. Answer as accurately as you can, and cite the section y
 believe applies. Be brief."""
 
 
+def cost(model: str, input_tokens: int, output_tokens: int) -> float:
+    in_rate, out_rate = PRICES.get(model, (0.0, 0.0))
+    return (input_tokens * in_rate + output_tokens * out_rate) / 1e6
+
+
 @dataclass
 class Answer:
     text: str
@@ -63,8 +69,7 @@ class Answer:
 
     @property
     def cost_usd(self) -> float:
-        in_rate, out_rate = PRICES.get(self.model, (0.0, 0.0))
-        return (self.input_tokens * in_rate + self.output_tokens * out_rate) / 1e6
+        return cost(self.model, self.input_tokens, self.output_tokens)
 
     @property
     def refused(self) -> bool:
@@ -143,14 +148,35 @@ def _require_credentials(model: str) -> None:
         )
 
 
-def call_model(system: str, prompt: str, model: str, temperature: float | None = None) -> tuple[str, int, int]:
-    """One completion. Returns (text, input_tokens, output_tokens)."""
+def call_model(system: str, prompt: str, model: str, temperature: float | None = None,
+               json_output: bool = False, seed: int | None = None,
+               json_schema: dict | None = None) -> tuple[str, int, int]:
+    """One completion. Returns (text, input_tokens, output_tokens).
+
+    The two providers expose different controls, and this function does not pretend
+    otherwise:
+
+    * `temperature` and `seed` are OpenAI only. `anthropic` 1.7.0 dropped `temperature`
+      from `messages.create` entirely, so passing it raises a TypeError -- it is ignored
+      for claude models rather than faked, and a caller that needs determinism from a
+      claude model cannot get it this way.
+    * `json_output` is OpenAI's loose JSON mode: valid JSON, no guaranteed shape.
+    * `json_schema` is Anthropic's `output_config` format, which is stricter -- the
+      response conforms to the schema. Worth using wherever the shape matters, but parse
+      defensively anyway: a refusal or a truncated response still is not your object.
+
+    `seed` is OpenAI's best-effort determinism, and best-effort is the operative word:
+    the same golden configuration still scored 0.457 / 0.422 / 0.434 across three runs
+    (log #46), which is why the evals cache what the model produced.
+    """
     _require_credentials(model)
     if model.startswith("claude"):
         import anthropic
 
         client = anthropic.Anthropic()
-        kwargs = {"temperature": temperature} if temperature is not None else {}
+        kwargs = {}
+        if json_schema is not None:
+            kwargs["output_config"] = {"format": {"type": "json_schema", "schema": json_schema}}
         response = client.messages.create(
             model=model,
             max_tokens=MAX_TOKENS,
@@ -165,6 +191,10 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
 
     client = OpenAI()
     kwargs = {"temperature": temperature} if temperature is not None else {}
+    if json_output:
+        kwargs["response_format"] = {"type": "json_object"}
+    if seed is not None:
+        kwargs["seed"] = seed
     response = client.chat.completions.create(
         model=model,
         max_completion_tokens=MAX_TOKENS,
@@ -184,6 +214,27 @@ def answer_from_hits(question: str, hits: list[Hit], model: str = MODEL) -> Answ
     return _generate(question, hits, mode="rag", model=model)
 
 
+def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
+                       facts: Sequence[str] = (), model: str = MODEL) -> Answer:
+    """Synthesis over sources grouped by the sub-query that retrieved them (B7).
+
+    The grouping is in the prompt deliberately: a compound question needs the model to
+    see which part of the question each source answers, rather than one flat pile it
+    has to re-sort. Client facts are labelled as facts, not sources, because rule 2
+    requires a citation for every rule and a client's own statement is not one.
+
+    Takes plain data rather than a Decomposition, so `decompose` depends on this
+    module and not the other way round.
+    """
+    blocks = [f"## Sources for: {label}\n\n{format_sources(hits)}" for label, hits in groups if hits]
+    if facts:
+        blocks.append("## Client facts, supplied by the questioner (not sources; never cite these)\n"
+                      + "\n".join(f"- {f}" for f in facts))
+    hits = list({h.citation: h for _, group in groups for h in group}.values())
+    prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\nQuestion: {question}"
+    return _generate(question, hits, mode="rag", model=model, prompt=prompt)
+
+
 def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,
            retrieval_mode: str = "hybrid") -> Answer:
     """Answer a question with retrieval (`rag`) or without it (`closed_book`)."""
@@ -193,15 +244,20 @@ def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,
     return _generate(question, hits, mode=mode, model=model)
 
 
-def _generate(question: str, hits: list[Hit], mode: str, model: str) -> Answer:
+def _generate(question: str, hits: list[Hit], mode: str, model: str, prompt: str | None = None) -> Answer:
     if mode == "rag":
-        prompt = f"Sources:\n\n{format_sources(hits)}\n\nQuestion: {question}"
+        prompt = prompt or f"Sources:\n\n{format_sources(hits)}\n\nQuestion: {question}"
         system = RAG_SYSTEM
     else:
         prompt = f"Question: {question}"
         system = CLOSED_BOOK_SYSTEM
 
-    text, input_tokens, output_tokens = call_model(system, prompt, model)
+    # Synthesis is pinned, not sampled. A legal-research tool that answers the same question
+    # two ways on two asks is hard to defend, and the sampling was also the larger half of the
+    # eval's noise: pinning it halved the faithfulness spread (sd 0.033 -> 0.016) with no
+    # measurable quality cost (0.823 -> 0.808, inside the band). Both are ignored for claude
+    # models, which expose neither knob.
+    text, input_tokens, output_tokens = call_model(system, prompt, model, temperature=0, seed=0)
     exact, derived, invented = parse_citations(text, hits)
     return Answer(text=text, mode=mode, model=model, citations=exact,
                   derived_citations=derived, unsupported_citations=invented,

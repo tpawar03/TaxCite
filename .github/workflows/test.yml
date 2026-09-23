@@ -1,0 +1,45 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    services:
+      qdrant:
+        image: qdrant/qdrant:v1.12.4
+        ports: ["6333:6333"]
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: taxcite
+          POSTGRES_PASSWORD: taxcite
+          POSTGRES_DB: taxcite
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U taxcite" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:7
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping" --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      QDRANT_URL: http://localhost:6333
+      DATABASE_URL: postgresql://taxcite:taxcite@localhost:5432/taxcite
+      REDIS_URL: redis://localhost:6379/0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { enable-cache: true }
+      - run: uv sync --frozen
+      # qdrant's image has no shell tools for a healthcheck, so poll it here
+      - run: for i in $(seq 1 30); do curl -sf localhost:6333/readyz && exit 0; sleep 2; done; exit 1
+      - run: uv run pytest -q
+      # Corpus-dependent tests self-skip on an empty stack. That is deliberate — restoring
+      # 28k vectors on every push is not worth it — but it means this job proves the code
+      # imports, the transport works and the pure logic holds, not that retrieval is good.
+      # The retrieval gate below is what proves that.
+      - run: uv run pytest -q -rs | tail -20
+        name: list what skipped
