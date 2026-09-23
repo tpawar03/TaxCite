@@ -137,7 +137,7 @@ reason B7 existed.
 | Per-PR blocking | faithfulness | **deterministic retrieval check** | On 25 rows a broken prompt separates at 2.2σ (~12% false failures). The retrieval check needs no LLM, runs in seconds, and two cached runs agree to three decimals |
 | Gate's eval set | golden | **dev** for tier 2, golden for tier 3 | A gate firing on every PR is a tuning signal; nightly/weekly bounds the exposure |
 | §9.1 category counts | targets | **minimums** | The golden set is 115 rows against a target of 100 |
-| Reported spread | single run | **mean and sd over ≥5 plan sets** | Three-sample estimates misled this phase four times (logs #46, #47, #50, #51) |
+| Reported spread | single run | **mean and sd over ≥5 plan sets** | Three-sample estimates misled this phase four times |
 
 ## What Phase B got wrong
 
@@ -149,11 +149,11 @@ Recorded because the corrections are the phase's real content:
   *below* the questioner's own words (dev 0.542 vs 0.708). What it is good for is routing
   (ADR-20).
 - **The eval harness was the noise source, not the model.** `ragas_eval` never used the plan
-  cache; pinning plans took golden sd from 0.035 to 0.013 (log #49).
+  cache; pinning plans took golden sd from 0.035 to 0.013.
 - **A gate that could not fail.** `| tee` swallowed the exit code under `bash -e`; the
   faithfulness job was green at any threshold against any prompt until `shell: bash` was
-  added (log #51).
-- **Four separate trends read from three samples** (logs #46, #47, #50, #51). The standing
+  added.
+- **Four separate trends read from three samples.** The standing
   rule is now five or more, with a standard deviation rather than a range.
 
 ## Reproducing
