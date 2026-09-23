@@ -60,7 +60,8 @@ def restore(src: Path) -> int:
     with open(src / SNAPSHOT, "rb") as f:
         r = httpx.post(f"{QDRANT_URL}/collections/{COLLECTION}/snapshots/upload?priority=snapshot",
                        files={"snapshot": (SNAPSHOT, f, "application/octet-stream")}, timeout=900)
-    r.raise_for_status()
+    if r.is_error:  # raise_for_status drops the body, and the body is the whole diagnosis
+        raise SystemExit(f"qdrant refused the snapshot ({r.status_code}): {r.text[:500]}")
     subprocess.run(["psql", "--quiet", "--set", "ON_ERROR_STOP=1", "-f", str(src / DUMP), DATABASE_URL],
                    check=True)
 
