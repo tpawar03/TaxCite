@@ -18,9 +18,9 @@
     "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
   },
   "taxcite-technical-documentation.md": {
-    "mtime": 1790190179.5273468,
-    "seen": 1790190181.352252,
-    "ast_hash": "d840d3dfb72982512211df5176ed978d",
+    "mtime": 1790190529.7130628,
+    "seen": 1790190531.025454,
+    "ast_hash": "0d474838f74982d18a2313cd94b51a27",
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
@@ -108,8 +108,8 @@
     "semantic_hash": ""
   },
   "src/taxcite/generate.py": {
-    "mtime": 1790190197.840858,
-    "seen": 1790190199.210989,
+    "mtime": 1790190544.330361,
+    "seen": 1790190545.722271,
     "ast_hash": "3ef58693cdb23803fdf7521dd42707d9",
     "semantic_hash": ""
   },
@@ -222,9 +222,9 @@
     "semantic_hash": "8f36df7751f76f42df9099d8cc10c5ec"
   },
   "docs/engineering-log.md": {
-    "mtime": 1790190179.5251586,
-    "seen": 1790190181.352234,
-    "ast_hash": "2d6b20d30611db9b8c7417e35d7186ba",
+    "mtime": 1790190529.7114244,
+    "seen": 1790190531.0254369,
+    "ast_hash": "0ba4c261eed5594e338c30764353fc3c",
     "semantic_hash": ""
   },
   "docs/intent/taxcite.md": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790190179.526353,
-    "seen": 1790190181.35225,
-    "ast_hash": "3b4c6dc3678c4f09d867580c3b79e456",
+    "mtime": 1790190529.712429,
+    "seen": 1790190531.0254521,
+    "ast_hash": "c60fb523436fe78cc9721b85477a907d",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -480,9 +480,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/faithfulness.yml": {
-    "mtime": 1790190179.523671,
-    "seen": 1790190181.352229,
-    "ast_hash": "e4e6d506241e3e3fd9b700cc8f888076",
+    "mtime": 1790190529.7104554,
+    "seen": 1790190531.025432,
+    "ast_hash": "4c118a60589a898e331163f459c0a424",
     "semantic_hash": ""
   },
   ".github/workflows/retrieval-gate.yml": {
@@ -492,9 +492,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/test.yml": {
-    "mtime": 1790185324.025752,
-    "seen": 1790186165.157156,
-    "ast_hash": "86cc226fc797591c03269c036abb6892",
+    "mtime": 1790190529.7108173,
+    "seen": 1790190531.025434,
+    "ast_hash": "6b0f6711c76cafca69718296a595d6b2",
     "semantic_hash": ""
   },
   "eval/results/b9-gate-calibration-dev.txt": {

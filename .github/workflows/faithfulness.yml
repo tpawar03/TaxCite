@@ -1,11 +1,19 @@
 name: faithfulness
 
-# Nightly, not per-PR, and the reason is measured (ADR-22): on the 25 rows affordable per PR,
-# a deliberately broken synthesis prompt separates from a healthy one by only 2.2 sigma, which
-# is ~12% false failures. On the 96-row golden set the same gap is ~4.4 sigma. So it runs where
-# the sample is big enough, once a day, instead of where it would flake.
+# Weekly, not per-PR and not nightly, and every part of that is measured (ADR-22).
+#
+# Not per-PR: on the 25 rows affordable there, a broken prompt separates from a healthy one by
+# 2.2 sigma -- about 12% false failures. The golden set is where this metric can resolve.
+#
+# Weekly with 5 repeats rather than nightly with 3: frequency and repeats buy different things.
+# Frequency buys detection latency, which is nearly worthless here because synthesis-prompt
+# changes are rare and deliberate -- you dispatch this by hand on the branch where you made one.
+# Repeats buy statistical power directly, since the gate compares a mean and the standard error
+# falls as 1/sqrt(n). Nightly at 3 repeats costs $48.60/month (the project's entire ceiling is
+# $50) for 6.4% false passes; weekly at 5 costs $11.65 for 2.5%. Cheaper and better, because
+# the original spent on the axis that does not matter.
 on:
-  schedule: [{ cron: "0 6 * * *" }]
+  schedule: [{ cron: "0 6 * * 1" }]  # Mondays
   workflow_dispatch:
   release: { types: [published] }
 
@@ -70,7 +78,7 @@ jobs:
       - name: faithfulness
         shell: bash
         run: |
-          uv run python eval/ragas_eval.py --repeats 3 --max-cost 5.00 \
+          uv run python eval/ragas_eval.py --repeats 5 --max-cost 5.00 \
             --fail-under 0.855 | tee faithfulness.log
 
       - uses: actions/upload-artifact@v4

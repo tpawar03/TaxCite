@@ -630,7 +630,9 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 - [x] Note: B9's criterion says "a *PR* with a broken prompt fails the gate". That wording predates the ADR-22 tiering, under which faithfulness deliberately does not trigger on `pull_request`. The dispatch on a branch is the equivalent proof for a nightly gate.
 - [x] PR #1 closed unmerged.
 - [x] **The re-run turned out to be necessary, before it even ran.** Asking whether it was found that the gate step ended in `| tee`, and GitHub runs steps as `bash -e` without `pipefail` — so a non-zero exit from `ragas_eval` was swallowed and **the gate could not fail at any threshold**. Fixed with `shell: bash`. Log #51.
-- [ ] **Re-run both arms against 0.855 with the pipefail fix in place.** Now it does discover something: whether the gate actually goes red. Expect broken 0.844 < 0.855 → FAIL, healthy 0.881 → PASS. ~$2.80, 50 min.
+- [x] **Re-ran both arms with the pipefail fix: the gate produced its first red build.** Broken 0.815/0.840/0.862 → mean 0.839 → `0.8388 < 0.8550` **FAIL** (run 35907376281). Healthy 0.862/0.868/0.856 → mean 0.862 → **PASS** (run 35907379679). Exit code propagated; the mechanism is verified end to end.
+- [x] **Pooling six samples per arm corrected the error rates I had claimed.** healthy 0.8715 sd 0.0127, broken 0.8415 sd 0.0154, separation 2.1 sigma (not 4.9), bands overlap. At 5 repeats the gate is 0.2% false-fail / 2.5% false-pass — it misses about one broken build in forty. Standing rule added: re-measure both bands with ≥5 samples after any pipeline change (three-sample estimates misled this phase four times: logs #46, #47, #50, #51).
+- [x] **Cadence corrected from nightly/3 to weekly/5** (log #52). Nightly at 3 repeats is $48.60/month against the project's $50 ceiling — the per-run cost was recorded and never multiplied by 30. Weekly at 5 is $11.65/month *and* stricter, because frequency buys latency (worth little here) while repeats buy statistical power. `workflow_dispatch` stays the primary path for a deliberate prompt change.
 - [ ] Delete `proof/retrieval-regression` and `proof/broken-synthesis-prompt`.
 
 ---

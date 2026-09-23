@@ -559,7 +559,7 @@ The broken prompt is a realistic regression, not a strawman: it keeps the citati
 |---|---|---|---|
 | 1 | every push | `pytest` with Qdrant/Postgres/Redis service containers | yes |
 | 2 | PRs touching retrieval, reranking, decomposition or ingestion | `eval/retrieval.py` against the committed plan cache -- no LLM, seconds, deterministic | yes |
-| 3 | nightly, release, manual | faithfulness on the golden set, 3 runs | report-only, then yes |
+| 3 | **weekly** (Mondays), release, manual dispatch | faithfulness on the golden set, **5 repeats**, threshold 0.855 | yes |
 
 *Verified against real CI (2026-09-23):* tier 1 green on `03f529c`. Tier 2 proved both ways on the runner -- healthy `main` scores Recall@10 **0.6800**, identical to the local figure, and PR #1 with a seeded regression (`PREFETCH` 50 -> 1) scores **0.3400** and fails the gate, while `pytest` stays **green** on the same commit. A change that nearly halves retrieval recall breaks no unit test, which is the whole argument for tier 2 being its own blocking check. The corpus restored correctly in CI both times (28,393 vectors / 28,747 chunk rows, matching local exactly).
 *Determinism, with its limit:* healthy runs agree to four decimals between a laptop and a GitHub runner, which is what the 0.66 threshold (0.02 under the healthy figure) relies on. The seeded run did **not** agree (0.340 in CI against 0.380 locally) because at `PREFETCH = 1` a single approximate-search candidate per branch decides everything and tie ordering dominates. Determinism holds in the regime the gate operates in, not in a degenerate one.
@@ -583,7 +583,17 @@ Pinning the planner is what mattered: temperature 0 alone moved nothing on golde
 | grounding rule removed | 0.849 / 0.841 / 0.842 | **0.844** | 0.004 |
 
 **The proof failed, and correctly so: the broken build passed a gate set at 0.83.** The first threshold was three sigma below a *locally* measured healthy mean, which placed it below where a broken build actually lands. Calibrating against the healthy distribution alone is not sufficient -- a threshold has to sit between two measured bands, and the golden gap (0.037) is smaller than the dev gap (0.05) it was extrapolated from. The extrapolation this ADR warned against was the one it then made.
-*The metric itself is sound.* The bands do not overlap: healthy's worst run (0.870) beats broken's best (0.849) by 0.021, a separation of about 4.9 pooled sigma. **The threshold is now 0.855**, inside that window with roughly 2.5 sigma of margin on each side (healthy false-failure ~0.5%, broken false-pass ~0.3%). Caveat: a standard deviation from three samples is a weak estimate, especially the broken arm's 0.004; the robust fact is the non-overlapping window, not the sigmas.
+*The threshold is 0.855, and the honest error rates are worse than the first estimate.* A second pair of runs (after the pipefail fix, below) doubled the sample to six per arm and the picture changed:
+
+| | from 3 samples | pooled, 6 samples |
+|---|---|---|
+| healthy | 0.881 sd 0.010 | **0.8715 sd 0.0127** |
+| broken | 0.844 sd 0.004 | **0.8415 sd 0.0154** |
+| separation | 4.9 sigma | **2.1 sigma** |
+| bands | no overlap | **overlap** (broken best 0.862 > healthy worst 0.856) |
+
+The gate compares a mean of several repeats, so the standard error is what governs it, not the per-run spread. At 5 repeats and a 0.855 threshold that is **0.2% false failures and 2.5% false passes** -- a gate that misses roughly one broken build in forty. Not the 0.3% claimed from three samples. **Standing rule: re-measure both bands with at least five samples after any pipeline change.** Three-sample estimates misled this phase four separate times (logs #46, #47, #50, #51).
+*Cadence, costed:* the run costs $1.62 at 3 repeats, $2.69 at 5. Nightly at 3 is **$48.60/month against a $50 project ceiling** -- the entire budget, for detection latency that buys almost nothing when synthesis-prompt changes are rare and deliberate. Weekly at 5 repeats is **$11.65/month with better error rates** (0.2%/2.5% against 1.2%/6.4%). Frequency and repeats buy different things; the original design spent on the axis that does not matter. Manual `workflow_dispatch` remains the primary path for a deliberate prompt change.
 *Also corrected:* the contingency written into the workflow said that if the proof did not go red the threshold "comes down". That is backwards -- a broken build passing means the gate is too permissive and the number must go **up**.
 *And the fault underneath both of those (log #51):* the gate step ended in `| tee faithfulness.log`. GitHub Actions runs `run:` steps as `bash -e {0}` with no `pipefail`, so the pipeline's exit status came from `tee`, not from the eval. **The faithfulness gate could not fail at any threshold.** The misplaced number was real, but fixing it alone would have left a gate that stays green through anything. Fixed with `shell: bash` (`-eo pipefail`); every gating step is now pipe-free or explicitly pipefail. Tier 2 failed honestly on its seeded regression precisely because it has no pipe -- the contrast between the two was the clue, and it took being asked whether a re-run was necessary to notice it.
 
