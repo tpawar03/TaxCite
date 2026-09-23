@@ -623,8 +623,11 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 - [x] **Tier 3 threshold: 0.83**, three sigma below the measured healthy golden mean (0.871, sd 0.013, plans pinned + temperature 0). Enabled in `faithfulness.yml`. Calibrated against the healthy distribution, since broken-on-golden is not measured yet — the proof run supplies that.
 - [x] **Found and fixed a harness bug worth more than the threshold:** `ragas_eval` called `decompose` fresh per row and never used the plan cache, so faithfulness was partly measuring the planner. Pinning plans took golden sd 0.035 → 0.013; temperature 0 alone had moved it only to 0.030, because the planner dominated (16% of golden questions re-route between runs). `decompose.answer()` now accepts a supplied plan (log #49).
 - [x] Residual noise characterised: ~0.010 synthesis + 0.008 judge. Irreducible — OpenAI's `temperature=0` with `seed` is best effort, and two runs over identical plans and context still differ.
-- [ ] **Proof run (also the missing measurement):** push, then open a PR removing the grounding rule from `RAG_SYSTEM`. The nightly job must go red and tier 2 must stay green. If broken scores above 0.83, lower the threshold and record both numbers in ADR-22. Link both workflow runs here.
-- [ ] Workflows have never executed; they run for the first time on the push.
+- [x] **Tier 1 verified:** `tests` green on `03f529c` (run 35899005211). The first run failed and the CI log confirmed the diagnosis exactly — `index.count` 404'd on an empty Qdrant during collection.
+- [x] **Tier 2 verified both ways:** healthy `main` 0.6800 PASS (run 35900723401); PR #1 with `PREFETCH` 50→1 scores 0.3400 FAIL (run 35900409247), while `pytest` stays green on that same commit. Corpus restored in CI both times, 28,393 / 28,747 matching local.
+- [x] **Three CI-only bugs found and fixed:** the empty-Qdrant 404; a Qdrant version mismatch (workflows pinned v1.12.4, the snapshot is v1.19.1 — the restore 500'd); and `on: release` firing the faithfulness gate when the *corpus* snapshot was published (run 35898818357), now skipped for `corpus-*` tags. `snapshot.py` also now prints Qdrant's response body, which `raise_for_status` was discarding.
+- [ ] **Tier 3 proof — blocked on repo secrets.** `gh secret list` is empty, so `faithfulness.yml` cannot authenticate. Needs `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` set on the repo. Then dispatch it on a branch with the grounding rule removed from `RAG_SYSTEM`: it must go red, and that run is also the missing broken-on-golden measurement validating the 0.83 threshold.
+- [ ] **Close PR #1 unmerged** and delete `proof/retrieval-regression` (the token lacks Pull requests: write).
 
 ---
 

@@ -144,8 +144,8 @@
     "semantic_hash": ""
   },
   "src/taxcite/retrieve.py": {
-    "mtime": 1790116404.883882,
-    "seen": 1790120725.486061,
+    "mtime": 1790186407.3313043,
+    "seen": 1790186409.8181279,
     "ast_hash": "ca222634025cccf5075b0005f31118f1",
     "semantic_hash": ""
   },
@@ -468,21 +468,21 @@
     "semantic_hash": ""
   },
   "eval/results/retrieval-dev-2026-09-23-k10.json": {
-    "mtime": 1790177648.999888,
-    "seen": 1790184861.0715399,
+    "mtime": 1790186407.3235488,
+    "seen": 1790186409.818107,
     "ast_hash": "a260beec97c0dd09098c3c9f870884c6",
     "semantic_hash": ""
   },
   "eval/snapshot.py": {
-    "mtime": 1790185324.025547,
-    "seen": 1790186165.157126,
-    "ast_hash": "48275a5150ed339a1ddecffd20a9188b",
+    "mtime": 1790186253.3761294,
+    "seen": 1790186409.818112,
+    "ast_hash": "0a82b55337d9d1d09faf35572bb99fd3",
     "semantic_hash": ""
   },
   ".github/workflows/faithfulness.yml": {
-    "mtime": 1790185324.0265076,
-    "seen": 1790186165.157154,
-    "ast_hash": "f7d6d2436046e6a64eb9d6af3d72ce05",
+    "mtime": 1790186312.5398495,
+    "seen": 1790186409.8181388,
+    "ast_hash": "5bc544118a60a2cbd2379efa8ce47cae",
     "semantic_hash": ""
   },
   ".github/workflows/retrieval-gate.yml": {
