@@ -39,3 +39,7 @@ graphify-out/cache/
 # the retrieval gate pins plans with it, so CI measures the change under test (ADR-22).
 eval/results/pipeline-answers*.json
 eval/results/gate-answers-*.json
+
+# Working notes kept out of the repo: engineering log, intent, interview prep.
+# They stay on disk, they are just not published.
+docs/

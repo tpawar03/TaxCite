@@ -23,11 +23,10 @@ The eval harness is a deliverable in its own right: an ablation ladder measuring
 | Path | What's in it |
 |---|---|
 | [`taxcite-prd.md`](taxcite-prd.md) | Product requirements: users, goals, non-goals, requirements |
-| [`taxcite-technical-documentation.md`](taxcite-technical-documentation.md) | Architecture, tech stack, build phases, ADR-1..18, eval methodology, data sourcing |
+| [`taxcite-technical-documentation.md`](taxcite-technical-documentation.md) | Architecture, tech stack, build phases, ADR-1..22, eval methodology, data sourcing |
 | [`STATUS.md`](STATUS.md) | Current state, decisions log, findings |
-| [`docs/engineering-log.md`](docs/engineering-log.md) | Observations and trade-offs, with the measurements behind them |
-| [`docs/intent/taxcite.md`](docs/intent/taxcite.md) | Confirmed intent: what "done" means |
-| [`tasks/`](tasks/) | Phase A plan and task list |
+| [`eval/results/`](eval/results/) | Exit reports and every measurement behind them |
+| [`tasks/`](tasks/) | Plan and task list, Phases A and B |
 | [`src/taxcite/`](src/taxcite/) | Implementation |
 | [`tests/`](tests/) | Tests, with fixtures cut from real 26 CFR sections |
 | [`graphify-out/`](graphify-out/) | Knowledge graph of the docs (`graph.html` is interactive) |

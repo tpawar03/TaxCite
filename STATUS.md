@@ -81,7 +81,7 @@ Working mode: Claude writes the code and may edit existing files; new files are 
 | 2026-09-19 | Skip `[Reserved]` paragraphs; skip table-of-contents sections (`excluded = "toc"`); designation parser reads all leading designations (`(b)(1)`) | `tasks/todo.md` T2, log #14 |
 
 ## Findings worth remembering
-_Interview-ready versions of these, with trade-offs, are in `docs/engineering-log.md`._
+_Interview-ready versions of these, with the trade-offs behind them, are kept in a working log outside the repo. The measurements they cite are all in `eval/results/`._
 - CourtListener has only ~20–60 Tax Court opinions a year since 2000 (reported T.C. only); DAWSON has 5× more on `"section 183"` (560 vs 108). Its bulk opinions dump is 54.6 GB with no court id on the row (log #32).
 - Title 26 release point 119-110: 1,900 live sections, ~2.3M tokens, 56 MB XML parsed in 0.7 s. The whole statute is ~60 min to embed.
 - The eCFR API requires compressed responses (406 without them). Part 1 is ~12 MB compressed and takes ~30 s to download; it's cached in `data/raw/`.
