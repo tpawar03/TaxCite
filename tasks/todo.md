@@ -68,7 +68,7 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 
 **Verification:**
 - [x] `uv run pytest -q` — 47 tests, including dense finding §1.183-2(b)(3) and sparse finding §1.280F
-- [x] Manual: 3 questions checked. One excellent (profit-motive factors), two mediocre — see log #19 and the subset gap below
+- [x] Manual: 3 questions checked. One excellent (profit-motive factors), two mediocre — see the subset gap below
 
 **Done 2026-09-20.** Added a `sparse` mode for the §9 ablation ladder. Fixed a real bug: the sparse vectors lacked Qdrant's IDF modifier, so BM25 could not down-weight common words. **Follow-up for T4:** the manual checks showed §1.263(a) (capitalization) missing from the pilot subset, and question-style queries retrieving worse than keyword-style ones.
 
@@ -98,7 +98,7 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 - [x] `uv run pytest -q` — 54 tests
 - [x] `uv run python eval/validate_pilot.py` — 0 problems, 4 known-hard gold citations
 
-**Done 2026-09-20.** First numbers (k=10): hybrid Recall 0.812 / nDCG 0.468, dense 0.719 / 0.445, sparse 0.500 / 0.387. Section recall 1.000 vs strict 0.812 = the reranking headroom. Gold verified against regulation text, **not** reviewed by a tax professional (see log #21); validation caught a wrong citation and two incomplete answers.
+**Done 2026-09-20.** First numbers (k=10): hybrid Recall 0.812 / nDCG 0.468, dense 0.719 / 0.445, sparse 0.500 / 0.387. Section recall 1.000 vs strict 0.812 = the reranking headroom. Gold verified against regulation text, **not** reviewed by a tax professional; validation caught a wrong citation and two incomplete answers.
 
 **Dependencies:** T3 (T5 is needed before the publication questions can be scored)
 **Files:** `eval/pilot.jsonl`, `eval/retrieval.py`, `tests/test_metrics.py`
@@ -119,7 +119,7 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 - [x] `uv run pytest -q` — 71 tests, including window overlap, boilerplate removal and the non-PDF download
 - [x] Manual: gold chunks for P17/P18 read against the source text
 
-**Done 2026-09-20.** Text comes from pdfminer.six, not pypdf (log #22). Pub 535 is discontinued and its URL returns HTTP 200 with HTML, so downloads are validated by content (log #23); 946 and 527 replace it. **Key result:** adding publications cut hybrid recall on the *same 16 regulation questions* from 0.812 to 0.688, because plain-English guidance outranks binding law — the measured case for Phase E authority-aware reranking (log #24).
+**Done 2026-09-20.** Text comes from pdfminer.six, not pypdf. Pub 535 is discontinued and its URL returns HTTP 200 with HTML, so downloads are validated by content; 946 and 527 replace it. **Key result:** adding publications cut hybrid recall on the *same 16 regulation questions* from 0.812 to 0.688, because plain-English guidance outranks binding law — the measured case for Phase E authority-aware reranking.
 
 **Dependencies:** T2 (reuses the store); can run in parallel with T3/T4
 **Files:** `src/taxcite/ingest/irs_pubs.py`, `tests/test_irs_pubs.py`, `tests/fixtures/pub_sample.pdf`
@@ -138,7 +138,7 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 **Verification:**
 - [x] User approved bge-base (2026-09-20)
 
-**Done 2026-09-20.** bge-base beat bge-small on every quality metric (hybrid recall 0.667 vs 0.611, nDCG 0.350 vs 0.259, dense MRR 0.315 vs 0.185) at 3.4x index time (31.6 vs 9.3 min) and 2x storage (24 vs 12 MB). nomic was excluded on latency before any quality measurement (491 ms/query; log #25). Dense scores 0.000 on publication questions for both models — publications match lexically, not semantically.
+**Done 2026-09-20.** bge-base beat bge-small on every quality metric (hybrid recall 0.667 vs 0.611, nDCG 0.350 vs 0.259, dense MRR 0.315 vs 0.185) at 3.4x index time (31.6 vs 9.3 min) and 2x storage (24 vs 12 MB). nomic was excluded on latency before any quality measurement (491 ms/query). Dense scores 0.000 on publication questions for both models — publications match lexically, not semantically.
 
 **Dependencies:** T4, T5
 **Files:** `eval/embed_bench.py`, `taxcite-technical-documentation.md`, `eval/results/embed_bench.md`
@@ -159,7 +159,7 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 - [x] `uv run pytest -q` — 72 tests, including a reproducibility regression test
 - [x] User ran the benchmark and saw the same verdict
 
-**Done 2026-09-20.** Qdrant 0.667 hybrid recall vs pgvector 0.500; the gap is lexical (BM25 0.444 vs `ts_rank_cd` 0.111), not dense (0.583 vs 0.528) and not filtering (0.779 both). Storage would have fitted a free tier (77 MB, ~386 MB projected). Two findings: the revisit trigger omitted the deciding metric (log #27), and a tie at the k boundary made the eval unreproducible until ties were broken deterministically (log #28).
+**Done 2026-09-20.** Qdrant 0.667 hybrid recall vs pgvector 0.500; the gap is lexical (BM25 0.444 vs `ts_rank_cd` 0.111), not dense (0.583 vs 0.528) and not filtering (0.779 both). Storage would have fitted a free tier (77 MB, ~386 MB projected). Two findings: the revisit trigger omitted the deciding metric, and a tie at the k boundary made the eval unreproducible until ties were broken deterministically.
 
 **Dependencies:** T6
 **Files:** `docker-compose.yml`, `eval/store_bench.py`, `eval/results/store_bench.md`, `taxcite-technical-documentation.md`
@@ -186,7 +186,7 @@ Plan: `tasks/plan.md`. Test command: `uv run pytest -q`. Every task leaves the r
 
 **Verification:**
 - [x] `uv run pytest -q` — 84 tests, model call stubbed so no spend
-- [x] Manual: P01 in both modes — RAG cited `26 CFR 1.183-2(b)(3)` exactly; closed-book cited the **discontinued** IRS Pub 535 (log #29)
+- [x] Manual: P01 in both modes — RAG cited `26 CFR 1.183-2(b)(3)` exactly; closed-book cited the **discontinued** IRS Pub 535
 
 **Done 2026-09-20.** Default model `gpt-4o-mini` ($0.15/$0.60 per MTok, ~$0.49/mo at persona volume); `TAXCITE_MODEL` overrides. `.env` is loaded at the CLI entry point via python-dotenv and is gitignored. Invented citations are detected now, before Phase F's NLI verification.
 
@@ -331,11 +331,11 @@ The fix changed labels, not results. The statute costs one question (5.6 points,
 
 **Progress 2026-09-21:**
 - Parser drafted and tested: 11,030 chunks (10,768 indexable) in 2.8 s; median 169 tokens; 4 over 500 (single paragraphs that can't be split, as in eCFR). Every table is flattened: the largest in the text has 86 cells, under eCFR's 100-cell limit.
-- Chunking decisions: level 1 is a section's top provisions (subsections, or paragraphs as in §212), level 2 their children; **lead-ins fold into the first provision they introduce** (log #34); bracketed "[(n) Repealed …]" provisions are dropped; repealed/renumbered/reserved/omitted sections are recorded with `excluded = status`; `sourceCredit` is stored as `cita`; notes are skipped; en-dash section numbers (`1400Z–2`) become hyphens.
-- `ecfr.pack` extracted and shared with a citation prefix. **It had a Phase A bug:** range citations lost their end when the last unit had several blocks, affecting 84 of 5,609 eCFR chunks (log #33). Fixed with a regression test, P03 gold relabelled `1.162-4(a)-(c)`, and the eCFR subset re-ingested from the same 2026-09-17 file.
+- Chunking decisions: level 1 is a section's top provisions (subsections, or paragraphs as in §212), level 2 their children; **lead-ins fold into the first provision they introduce**; bracketed "[(n) Repealed …]" provisions are dropped; repealed/renumbered/reserved/omitted sections are recorded with `excluded = status`; `sourceCredit` is stored as `cita`; notes are skipped; en-dash section numbers (`1400Z–2`) become hyphens.
+- `ecfr.pack` extracted and shared with a citation prefix. **It had a Phase A bug:** range citations lost their end when the last unit had several blocks, affecting 84 of 5,609 eCFR chunks. Fixed with a regression test, P03 gold relabelled `1.162-4(a)-(c)`, and the eCFR subset re-ingested from the same 2026-09-17 file.
 - `source_revision` column added (ALTER, so Phase A's table picks it up); `section_of` handles statute citations, including dashed sections; the synthesis prompt shows a statute citation example; the IRS scraper's User-Agent now points to the right repo.
 - Found while testing: `index.sync` held its read transaction open for the whole embedding run, so the `source_revision` ALTER queued behind a running ingest and hung the test suite. `index.sync` now commits after reading, and `create_table` only ALTERs when the column is missing.
-- The first eCFR re-ingest ran at 0.45 chunks/s (8.6 GB, 20 GB swap) and was stopped at 56%. Embedding batch 256 → 16: same speed (2.91 vs 2.86/s), 1.5 GB vs 4.5 GB peak (log #35). Re-run at ~3/s.
+- The first eCFR re-ingest ran at 0.45 chunks/s (8.6 GB, 20 GB swap) and was stopped at 56%. Embedding batch 256 → 16: same speed (2.91 vs 2.86/s), 1.5 GB vs 4.5 GB peak. Re-run at ~3/s.
 - Known limit: long enumerations split at level 2 still yield short chapeau-less items (1,243 chunks under 50 tokens); revisit if the golden set shows it costs recall.
 
 **Dependencies:** B1
@@ -367,7 +367,7 @@ The fix changed labels, not results. The statute costs one question (5.6 points,
 | + case law (`retrieval-2026-09-22-k10.json`) | **0.500** | 0.304 | 0.170 | 0.667 |
 | + case law, case chunks dropped from the top 60 (approximates B7's routing) | ~0.611 | | | |
 
-Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hobby-loss opinions apply §1.183-2(b)'s factors to real horse breeders, which matches a fact-pattern question better than the regulation. Across the pilot, case law takes 53 of 180 top-10 slots (29%). This is the dilution B7's source routing exists to remove (log #38).
+Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hobby-loss opinions apply §1.183-2(b)'s factors to real horse breeders, which matches a fact-pattern question better than the regulation. Across the pilot, case law takes 53 of 180 top-10 slots (29%). This is the dilution B7's source routing exists to remove.
 
 **Progress 2026-09-22:**
 - DAWSON's interface, from its web app's bundle: `GET public-api-green.dawson.ustaxcourt.gov/public-api/opinion-search?keyword=…&dateRange=customDates&startDate=MM/DD/YYYY&opinionTypes=MOP,TCOP` (an end date in the future is a 400), then `/public-api/{docket}/{docketEntryId}/public-document-download-url` → a signed S3 link to the PDF. Requests spaced 1 s, identifying User-Agent.
@@ -392,12 +392,12 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 
 ## B4: Golden set, part 1 — statutory-only and case-law-only (45 rows)
 
-**Description:** Create `eval/golden.jsonl`. The schema extends the pilot set's (question, gold citations, reference answer) with `category`, `scored_from` (the phase a row starts being scored in), `as_of` and `expect_insufficient`. Claude drafts 25 statutory-only and 20 case-law-only rows from ingested text; you review every row. **Gold is a list of groups of interchangeable citations** (e.g. `[["26 U.S.C. § 183(a)-(d)", "26 CFR 1.183-1(b)(1)"]]`); a group counts when any member is retrieved (log #36). Update `eval/retrieval.py` to score groups, treating a flat list as one citation per group so the pilot's numbers don't move. Case-law rows can only use the 307 ingested opinions. Extend `eval/validate_pilot.py` to take any set file and check that every gold citation exists in the corpus. Also add ~12 dev rows (case-law and compound) for tuning, in `eval/dev.jsonl`.
+**Description:** Create `eval/golden.jsonl`. The schema extends the pilot set's (question, gold citations, reference answer) with `category`, `scored_from` (the phase a row starts being scored in), `as_of` and `expect_insufficient`. Claude drafts 25 statutory-only and 20 case-law-only rows from ingested text; you review every row. **Gold is a list of groups of interchangeable citations** (e.g. `[["26 U.S.C. § 183(a)-(d)", "26 CFR 1.183-1(b)(1)"]]`); a group counts when any member is retrieved. Update `eval/retrieval.py` to score groups, treating a flat list as one citation per group so the pilot's numbers don't move. Case-law rows can only use the 307 ingested opinions. Extend `eval/validate_pilot.py` to take any set file and check that every gold citation exists in the corpus. Also add ~12 dev rows (case-law and compound) for tuning, in `eval/dev.jsonl`.
 
 **Acceptance criteria:**
 - [x] 53 rows in `eval/golden.jsonl` (27 statutory, 26 case law; §9.1's 25/20 kept as minimums at your call); the validator passes
-- [x] `eval/retrieval.py` scores gold groups; pilot recall and MRR unchanged (nDCG and section recall corrected, log #39)
-- [x] Every row reviewed by you (`reviewed: true`); corrections logged (log #40)
+- [x] `eval/retrieval.py` scores gold groups; pilot recall and MRR unchanged (nDCG and section recall corrected)
+- [x] Every row reviewed by you (`reviewed: true`); corrections logged
 - [x] 12 dev rows in `eval/dev.jsonl`, validated, no gold or opinion shared with the golden set or pilot
 
 **Verification:**
@@ -409,11 +409,11 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 - 45 golden rows (25 statutory, 20 case-law; 37 natural-language, 8 keyword) and 12 dev rows (6 case-law, 6 compound) in a **new `eval/dev.jsonl`**, not appended to the pilot, so Phase A's pilot numbers stay comparable. Dev rows use opinions the golden set doesn't.
 - Written from the gold chunks' text: statute answers from the provision (e.g. §67(h) now suspends miscellaneous itemized deductions permanently, not through 2025); case-law answers from the court's own "Held:" or "we hold" sentences. Gold located by phrase, so every chunk containing a holding (overlap can duplicate it) is in its group.
 - Gold groups used where authorities are interchangeable: 5 statute rows carry a regulation alternative; G-C16 accepts two opinions with the same holding; G-C14 and G-C20 accept the syllabus and the discussion page.
-- `eval/retrieval.py` scores groups; `section_of` now comes from `generate.py`. **Two Phase A metric bugs found** (log #39): nDCG counted a gold citation once per retrieved chunk (P15 scored 1.232), and section recall never matched publications. Pilot recall and MRR unchanged; ADR-18 carries a caveat.
+- `eval/retrieval.py` scores groups; `section_of` now comes from `generate.py`. **Two Phase A metric bugs found**: nDCG counted a gold citation once per retrieved chunk (P15 scored 1.232), and section recall never matched publications. Pilot recall and MRR unchanged; ADR-18 carries a caveat.
 - `eval/validate_pilot.py` handles groups, prints category counts, and **separates diluted gold from wrong gold**: a group missing from the overall top 50 is re-searched within its own source. 12 statute groups are diluted (found within `usc` only); 2 rows are marked `expect_hard` for vocabulary mismatch (G-S03, G-S21).
 - Baseline, hybrid k=10: Recall 0.467 (statutory **0.320**, case law 0.650), nDCG 0.317, MRR 0.268.
 
-**Audit 2026-09-22 (two full passes over every row and its sources, at your request; log #40):**
+**Audit 2026-09-22 (two full passes over every row and its sources, at your request):**
 - **Wrong or incomplete answers fixed (11 statute rows):** §280A(c)(5)'s carryforward; §179's $4,000,000 phase-down and post-2025 indexing; §469(c)(7)'s employee-services rule; §6662(d)'s 5% threshold for §199A claimants; §6662's 40% tiers; §6664(c)'s charitable-valuation limit; §67(b) exclusions; §274(d)'s nonpersonal-use-vehicle exemption; "modified" AGI in §469(i); G-S11 gold widened to §469(i)(2), which actually states the $25,000.
 - **Ambiguity removed:** G-S02 and G-S07 now say "self-employed" (for an employee, §67(h) would make both answers "no" for a different reason). G-C01 now asks what Gregory decided, not the post-2017 consequence, which needs §67(h) too and moves to B5 as a compound question. G-C09 now asks about Caan's real issue (same property, not cash), not timing. G-C22 drops "competitive", which the opinion doesn't establish.
 - **Law that changed after the source:** G-S25 asked about a state-licensed marijuana dispensary; on 2026-04-28 state-licensed *medical* marijuana moved to Schedule III, outside §280E. Reworded to what the statute says; the dispensary question moves to B5.
@@ -437,12 +437,12 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 - 55 rows: 30 compound, 10 temporal, 10 insufficiency, 5 adversarial. All validate; no gold or opinion shared with dev or pilot; every calculation re-computed by script.
 - **Compound rows carry `gold_subqueries`**, one per gold group: what an ideal decomposer would issue, and the source it would search. The full compound question reaches almost none of its gold (it describes client facts, not legal terms), but every gold group is reached by its sub-query (45 groups). The validator now checks that, reporting "needs decomposition" instead of an error. The sub-queries are measurement only, and they give B7 a held-out yardstick for decomposition quality.
 - **Insufficiency rows are verified by running the real search**, not by text match: the first draft's "2026 mileage rate" and "2026 wage base" were both answerable (Pub 334's "What's New for 2026" gives 72.5 cents *a* mile and $184,500), and a `cents per mile` probe had missed them. Several rows are traps where search returns authoritative-looking but irrelevant chunks (New York *Liberty Zone* depreciation; outdated §1.179-2(b) amounts).
-- **Temporal rows expose a Phase D gap:** effective dates live in the statutory notes, which the B2 parser drops, so the corpus can't say that the qualified-tips deduction (§224) starts in 2025 or which §179 limit applied in 2023 (log #41). Those rows are `expect_insufficient`.
+- **Temporal rows expose a Phase D gap:** effective dates live in the statutory notes, which the B2 parser drops, so the corpus can't say that the qualified-tips deduction (§224) starts in 2025 or which §179 limit applied in 2023. Those rows are `expect_insufficient`.
 - The queued edge cases are in: medical marijuana 2026 (G-T03), hobby expenses after 2017 (G-X01) and in 2016 (G-T04), Morehouse in the Eighth Circuit (G-X02, Phase E).
 - Adversarial rows carry `client_doc` and `expected_behavior`: prompt injection, script injection, a fabricated §183(z), a system-prompt exfiltration request, and a forged authority badge with a `javascript:` link.
 - Baseline on the 30 compound rows, hybrid k=10: Recall **0.317**, the number decomposition has to beat.
 
-**Audit 2026-09-22 (two passes over every row and its full sources, at your request; log #42):**
+**Audit 2026-09-22 (two passes over every row and its full sources, at your request):**
 - **Compound rows were measuring the case-law category twice.** 22 of 30 reused an opinion already tested by a case-law-only row, usually the same chunk with client facts added. 18 were rebuilt on opinions the golden set doesn't otherwise use (Miller, Sinopoli, Martin, Day, Schwab, Menard, Veriha, Kadau, Big Apple, Rehman, Henry, Goodwill-Oikerhe, Swanton, Velasco, Carter, Maguire, Akers, Charlotte's Office Boutique). The 4 remaining overlaps are deliberate (Gregory + §67(h); Morehouse; different holdings of Anderson and Patel).
 - **Two more reversed opinions found:** Carter's §6751(b) holding was reversed by the Eleventh Circuit (the gold chunk is the post-remand opinion accepting approval as timely, and the draft had the answer backwards), and Menard's reasonable-compensation holding was reversed by the Seventh Circuit (560 F.3d 620, 2009). Both are now explicit tests with notes, like Morehouse. Appellate history was checked for every published opinion in both parts; no other reversals.
 - **Answers that depended on facts the question omitted:** G-X10 (Dirico) is passive only because the lessee used the towers in a *rental* activity; that fact is now in the question. G-X05's 2-of-7 horse presumption needs the activity to be mainly breeding, training, showing or racing.
@@ -493,7 +493,7 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 **Files:** `src/taxcite/retrieve.py`, `src/taxcite/cli.py`, `eval/retrieval.py`, `tests/test_retrieve.py`
 **Scope:** S
 
-**Done (2026-09-22).** Results: `eval/results/golden-b6-rerank-k10.json` (+ `.txt`). Decision: ADR-19, log #43.
+**Done (2026-09-22).** Results: `eval/results/golden-b6-rerank-k10.json` (+ `.txt`). Decision: ADR-19.
 - Cross-encoder chosen on the dev set: `jinaai/jina-reranker-v1-turbo-en`, 25 candidates (Recall 0.667, nDCG 0.635, MRR 0.727, p50 878 ms). It beat `jina-v1-tiny`, both ms-marco MiniLMs and `BAAI/bge-reranker-base` — the 1 GB model was the slowest *and* the worst (0.542 at 2830 ms).
 - Pool is 25 because dev hybrid Recall@25 = Recall@50 = 0.750: the second 25 doubles latency and cannot hold a new answer.
 - Golden set (84 scored rows, k=10): hybrid 0.435 / nDCG 0.307 / MRR 0.310 / SectR 0.560 / p50 30 ms · p95 38 ms; hybrid+rerank 0.452 / 0.307 / 0.318 / 0.589 / p50 852 ms · p95 906 ms. By category: statutory 0.333 → 0.333, case law 0.654 → **0.731**, compound 0.350 → 0.333.
@@ -522,7 +522,7 @@ Three more questions lost (P01, P11, P17). **P01's top 10 is all case law**: hob
 **Files:** `src/taxcite/decompose.py`, `src/taxcite/jobs.py`, `src/taxcite/generate.py`, `src/taxcite/retrieve.py`, `eval/retrieval.py`, `tests/test_decompose.py`, `tests/test_jobs.py`
 **Scope:** M
 
-**Done (2026-09-22), with one criterion unmet.** Results: `eval/results/golden-b7-decompose-k10.json`, `golden-b7-ladder-k10.txt`, `dev-b7-ladder-k10.txt`, `pilot-b7-decompose-k10.txt`. Decision: ADR-20, log #44.
+**Done (2026-09-22), with one criterion unmet.** Results: `eval/results/golden-b7-decompose-k10.json`, `golden-b7-ladder-k10.txt`, `dev-b7-ladder-k10.txt`, `pilot-b7-decompose-k10.txt`. Decision: ADR-20.
 - **The rewriting lost; the routing won.** Dev at k=10: plain hybrid 0.625, rewritten sub-query text 0.625, the original question routed by kind **0.708** (nDCG 0.663, MRR 0.743). The shipped path searches the original question, filtered to the corpora each sub-query's kind allows, and reranks the union back to k. `retrieve(rewrite=True)` keeps the losing arm runnable.
 - **Golden (held out), k=10:** Recall 0.435 → 0.476, nDCG 0.307 → 0.330, MRR 0.310 → 0.336, SectR 0.560 → 0.613. Statutory 0.333 → 0.370, case law 0.654 → 0.692, compound 0.350 → 0.400. p50 28 ms → 1,915 ms; $0.00015 a query. Run-to-run spread ±0.006 (the seed is best-effort).
 - **This settles ADR-19's revisit trigger:** the cross-encoder earns its place *inside* the routed path, because fused scores from differently-filtered searches are not comparable.
@@ -614,14 +614,14 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 **Files:** `.github/workflows/test.yml`, `.github/workflows/retrieval-gate.yml`, `.github/workflows/faithfulness.yml`, `eval/snapshot.py`, `eval/retrieval.py` (`--fail-under`), `eval/ragas_eval.py` (`--fail-under`), `src/taxcite/generate.py` (synthesis pinned)
 **Scope:** M
 
-**Progress (2026-09-23).** Design settled and calibrated (ADR-22, log #48); files written; threshold pending one measurement.
+**Progress (2026-09-23).** Design settled and calibrated (ADR-22); files written; threshold pending one measurement.
 - [x] **Calibrated the gate against the failure it exists to catch.** Dev, judge `claude-haiku-4-5`: healthy 0.823 (sd 0.033), healthy at temp 0 **0.808 (sd 0.016)**, broken prompt 0.762, broken at temp 0 0.759 (sd 0.027). A broken synthesis prompt costs ~0.05 — **2.2 pooled sd**, a 0.011-wide window, ~12% false failures and ~12% false passes. A per-PR faithfulness gate on 25 rows does not work.
 - [x] **Noise decomposed by pinning one component at a time:** re-judging identical answers moves sd **0.008** (5% of variance); the planner and synthesis sampling hold the other 95%, and both are pinnable. The unpinnable component is the one that barely matters.
 - [x] **Synthesis pinned to `temperature=0, seed=0`** — halves the noise, no measurable quality cost, and the right default for a legal tool independent of CI. Test added.
 - [x] **Three workflows written** (`test.yml`, `retrieval-gate.yml`, `faithfulness.yml`) plus `eval/snapshot.py` for corpus freeze/restore, and `--fail-under` on both eval entry points (exit codes verified).
 - [x] Tier 2 is the per-PR blocker: `eval/retrieval.py` against the committed plan cache — no LLM, deterministic, `--fail-under 0.66` against the measured dev figure.
 - [x] **Tier 3 threshold: 0.83**, three sigma below the measured healthy golden mean (0.871, sd 0.013, plans pinned + temperature 0). Enabled in `faithfulness.yml`. Calibrated against the healthy distribution, since broken-on-golden is not measured yet — the proof run supplies that.
-- [x] **Found and fixed a harness bug worth more than the threshold:** `ragas_eval` called `decompose` fresh per row and never used the plan cache, so faithfulness was partly measuring the planner. Pinning plans took golden sd 0.035 → 0.013; temperature 0 alone had moved it only to 0.030, because the planner dominated (16% of golden questions re-route between runs). `decompose.answer()` now accepts a supplied plan (log #49).
+- [x] **Found and fixed a harness bug worth more than the threshold:** `ragas_eval` called `decompose` fresh per row and never used the plan cache, so faithfulness was partly measuring the planner. Pinning plans took golden sd 0.035 → 0.013; temperature 0 alone had moved it only to 0.030, because the planner dominated (16% of golden questions re-route between runs). `decompose.answer` now accepts a supplied plan.
 - [x] Residual noise characterised: ~0.010 synthesis + 0.008 judge. Irreducible — OpenAI's `temperature=0` with `seed` is best effort, and two runs over identical plans and context still differ.
 - [x] **Tier 1 verified:** `tests` green on `03f529c` (run 35899005211). The first run failed and the CI log confirmed the diagnosis exactly — `index.count` 404'd on an empty Qdrant during collection.
 - [x] **Tier 2 verified both ways:** healthy `main` 0.6800 PASS (run 35900723401); PR #1 with `PREFETCH` 50→1 scores 0.3400 FAIL (run 35900409247), while `pytest` stays green on that same commit. Corpus restored in CI both times, 28,393 / 28,747 matching local.
@@ -631,8 +631,8 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 - [x] PR #1 closed unmerged.
 - [x] **The re-run turned out to be necessary, before it even ran.** Asking whether it was found that the gate step ended in `| tee`, and GitHub runs steps as `bash -e` without `pipefail` — so a non-zero exit from `ragas_eval` was swallowed and **the gate could not fail at any threshold**. Fixed with `shell: bash`. Log #51.
 - [x] **Re-ran both arms with the pipefail fix: the gate produced its first red build.** Broken 0.815/0.840/0.862 → mean 0.839 → `0.8388 < 0.8550` **FAIL** (run 35907376281). Healthy 0.862/0.868/0.856 → mean 0.862 → **PASS** (run 35907379679). Exit code propagated; the mechanism is verified end to end.
-- [x] **Pooling six samples per arm corrected the error rates I had claimed.** healthy 0.8715 sd 0.0127, broken 0.8415 sd 0.0154, separation 2.1 sigma (not 4.9), bands overlap. At 5 repeats the gate is 0.2% false-fail / 2.5% false-pass — it misses about one broken build in forty. Standing rule added: re-measure both bands with ≥5 samples after any pipeline change (three-sample estimates misled this phase four times: logs #46, #47, #50, #51).
-- [x] **Cadence corrected from nightly/3 to weekly/5** (log #52). Nightly at 3 repeats is $48.60/month against the project's $50 ceiling — the per-run cost was recorded and never multiplied by 30. Weekly at 5 is $11.65/month *and* stricter, because frequency buys latency (worth little here) while repeats buy statistical power. `workflow_dispatch` stays the primary path for a deliberate prompt change.
+- [x] **Pooling six samples per arm corrected the error rates I had claimed.** healthy 0.8715 sd 0.0127, broken 0.8415 sd 0.0154, separation 2.1 sigma (not 4.9), bands overlap. At 5 repeats the gate is 0.2% false-fail / 2.5% false-pass — it misses about one broken build in forty. Standing rule added: re-measure both bands with ≥5 samples after any pipeline change (three-sample estimates misled this phase four times).
+- [x] **Cadence corrected from nightly/3 to weekly/5**. Nightly at 3 repeats is $48.60/month against the project's $50 ceiling — the per-run cost was recorded and never multiplied by 30. Weekly at 5 is $11.65/month *and* stricter, because frequency buys latency (worth little here) while repeats buy statistical power. `workflow_dispatch` stays the primary path for a deliberate prompt change.
 - [ ] Delete `proof/retrieval-regression` and `proof/broken-synthesis-prompt`.
 
 ---
@@ -648,7 +648,7 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 
 **Verification:**
 - [x] Tech doc Implementation Status rewritten: what Phase B built, its three negative results, the remaining unbuilt mechanisms, and a baselines table carrying each open problem to the phase that owns it
-- [x] Corrected log #47's abstention claim: 9 of 10, not 10 of 10 — `G-I06` never refuses, and `G-I11` (the partial) over-refuses
+- [x] Corrected the B8 abstention claim: 9 of 10, not 10 of 10 — `G-I06` never refuses, and `G-I11` (the partial) over-refuses
 
 **Dependencies:** B9
 **Files:** `eval/results/phase_b.md`, `taxcite-technical-documentation.md`

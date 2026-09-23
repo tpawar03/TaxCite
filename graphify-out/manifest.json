@@ -6,10 +6,10 @@
     "semantic_hash": "9cdef2f8eab8ed081640dc2d34202b95"
   },
   "README.md": {
-    "mtime": 1789856481.6065736,
-    "seen": 1789965912.511286,
-    "ast_hash": "6d5f33ad517f90517fc187534a303ae5",
-    "semantic_hash": "6d5f33ad517f90517fc187534a303ae5"
+    "mtime": 1790196366.645735,
+    "seen": 1790196703.842939,
+    "ast_hash": "74710fa7fd10d1bad1f80f2285f7037d",
+    "semantic_hash": ""
   },
   "taxcite-prd.md": {
     "mtime": 1789706358.6893034,
@@ -18,9 +18,9 @@
     "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
   },
   "taxcite-technical-documentation.md": {
-    "mtime": 1790193687.5891001,
-    "seen": 1790193740.012375,
-    "ast_hash": "deaf8afa419f654bf9d596fd5d98eeee",
+    "mtime": 1790196556.3471005,
+    "seen": 1790196703.842957,
+    "ast_hash": "aff911089b3722e8d089982b600e03a3",
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790193724.9714541,
-    "seen": 1790193740.012356,
-    "ast_hash": "2099b728eb8eed2a0af8410de0e62cd8",
+    "mtime": 1790196394.8489673,
+    "seen": 1790196703.8429399,
+    "ast_hash": "7bbd34f0fadb48258dbedbee8732a3ba",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -220,18 +220,6 @@
     "seen": 1789965912.511287,
     "ast_hash": "8f36df7751f76f42df9099d8cc10c5ec",
     "semantic_hash": "8f36df7751f76f42df9099d8cc10c5ec"
-  },
-  "docs/engineering-log.md": {
-    "mtime": 1790193706.1309857,
-    "seen": 1790193740.012358,
-    "ast_hash": "a73ed56c1f4bcaaba6c60460a975f819",
-    "semantic_hash": ""
-  },
-  "docs/intent/taxcite.md": {
-    "mtime": 1789789574.6029456,
-    "seen": 1789965912.5112882,
-    "ast_hash": "9d039baabca51a7eb47e62fc41e4d196",
-    "semantic_hash": "9d039baabca51a7eb47e62fc41e4d196"
   },
   "eval/results/phase_a.md": {
     "mtime": 1789964911.9984438,
@@ -522,9 +510,9 @@
     "semantic_hash": ""
   },
   "eval/results/phase_b.md": {
-    "mtime": 1790193647.071355,
-    "seen": 1790193740.012369,
-    "ast_hash": "fed109643926236ea09184561550361d",
+    "mtime": 1790196702.9421186,
+    "seen": 1790196703.8429508,
+    "ast_hash": "7045b770968d0c51a74ca327f4a54b16",
     "semantic_hash": ""
   }
 }
