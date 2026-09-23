@@ -18,9 +18,9 @@
     "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
   },
   "taxcite-technical-documentation.md": {
-    "mtime": 1790184815.9665813,
-    "seen": 1790184861.071595,
-    "ast_hash": "518a691b2f5f54243bc96d032bdcab0e",
+    "mtime": 1790187228.8419354,
+    "seen": 1790187558.526381,
+    "ast_hash": "f22116299fcdf05ac8db75e2d3f5702b",
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
@@ -108,8 +108,8 @@
     "semantic_hash": ""
   },
   "src/taxcite/generate.py": {
-    "mtime": 1790177558.0933244,
-    "seen": 1790184861.071553,
+    "mtime": 1790187556.8987088,
+    "seen": 1790187558.526338,
     "ast_hash": "3ef58693cdb23803fdf7521dd42707d9",
     "semantic_hash": ""
   },
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790184844.9671056,
-    "seen": 1790184861.071576,
-    "ast_hash": "5c389a995ddedfedd8628968a3f90751",
+    "mtime": 1790187245.831139,
+    "seen": 1790187558.52636,
+    "ast_hash": "d21376b6f1b9e4f54cdc7c4e297b54bf",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790184844.9666402,
-    "seen": 1790184861.071594,
-    "ast_hash": "90785be17adb1ff3ff87a9a2aec0d71e",
+    "mtime": 1790187228.9067316,
+    "seen": 1790187558.526379,
+    "ast_hash": "ff3daad7370eaea8541b4276440266be",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -486,9 +486,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/retrieval-gate.yml": {
-    "mtime": 1790185324.0261588,
-    "seen": 1790186165.157156,
-    "ast_hash": "bf873f5106238edbc40da050e0a03edf",
+    "mtime": 1790187073.5937037,
+    "seen": 1790187558.526357,
+    "ast_hash": "fc421e765731f6cf1d0f8334873416d3",
     "semantic_hash": ""
   },
   ".github/workflows/test.yml": {

@@ -50,18 +50,22 @@ jobs:
           gh release download --pattern '*' --dir dist "$(gh release list --limit 1 --json tagName --jq '.[0].tagName')"
           uv run python eval/snapshot.py restore --from dist
 
-      # Threshold 0.83 = three standard deviations below the measured healthy mean, with plans
-      # pinned and synthesis at temperature 0: mean 0.871, sd 0.013 over three runs on the
-      # 96-row golden set (ADR-22). It is calibrated against the HEALTHY distribution -- "do not
-      # drop 3 sigma below the established baseline" -- because broken-on-golden has not been
-      # measured yet. The proof run does that: a PR with the grounding rule removed from
-      # RAG_SYSTEM must turn this job red. If it does not, this number comes down and the ADR
-      # records both. A nightly job going red blocks nobody, which is why it is safe to enable
-      # this before the proof rather than after.
+      # Threshold 0.855, set from BOTH measured bands on the runner (ADR-22):
+      #   healthy main                    0.870 / 0.884 / 0.889  mean 0.881 sd 0.010
+      #   grounding rule removed          0.849 / 0.841 / 0.842  mean 0.844 sd 0.004
+      # The bands do not overlap -- healthy's worst run beats broken's best by 0.021 -- and
+      # 0.855 sits inside that window with ~2.5 sd of margin on each side.
+      #
+      # The first attempt used 0.83, three sigma below a healthy mean measured locally. That
+      # was below where a broken build actually lands, so the proof run passed when it should
+      # have gone red (runs 35901633914 and 35901637011). Calibrating against the healthy
+      # distribution alone is not enough: the threshold has to sit between two measured bands,
+      # and the golden gap (0.037) is smaller than the dev gap (0.05) that it was extrapolated
+      # from. Re-measure both bands after any pipeline change, not just the healthy one.
       - name: faithfulness
         run: |
           uv run python eval/ragas_eval.py --repeats 3 --max-cost 5.00 \
-            --fail-under 0.83 | tee faithfulness.log
+            --fail-under 0.855 | tee faithfulness.log
 
       - uses: actions/upload-artifact@v4
         if: always()

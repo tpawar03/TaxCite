@@ -626,8 +626,11 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 - [x] **Tier 1 verified:** `tests` green on `03f529c` (run 35899005211). The first run failed and the CI log confirmed the diagnosis exactly — `index.count` 404'd on an empty Qdrant during collection.
 - [x] **Tier 2 verified both ways:** healthy `main` 0.6800 PASS (run 35900723401); PR #1 with `PREFETCH` 50→1 scores 0.3400 FAIL (run 35900409247), while `pytest` stays green on that same commit. Corpus restored in CI both times, 28,393 / 28,747 matching local.
 - [x] **Three CI-only bugs found and fixed:** the empty-Qdrant 404; a Qdrant version mismatch (workflows pinned v1.12.4, the snapshot is v1.19.1 — the restore 500'd); and `on: release` firing the faithfulness gate when the *corpus* snapshot was published (run 35898818357), now skipped for `corpus-*` tags. `snapshot.py` also now prints Qdrant's response body, which `raise_for_status` was discarding.
-- [ ] **Tier 3 proof — blocked on repo secrets.** `gh secret list` is empty, so `faithfulness.yml` cannot authenticate. Needs `OPENAI_API_KEY` and `ANTHROPIC_API_KEY` set on the repo. Then dispatch it on a branch with the grounding rule removed from `RAG_SYSTEM`: it must go red, and that run is also the missing broken-on-golden measurement validating the 0.83 threshold.
-- [ ] **Close PR #1 unmerged** and delete `proof/retrieval-regression` (the token lacks Pull requests: write).
+- [x] **Tier 3 proof run — and it failed, correctly.** Both arms dispatched on the runner (35901633914 broken, 35901637011 healthy). Healthy `main` 0.870/0.884/0.889 → mean **0.881** sd 0.010. Grounding rule removed → 0.849/0.841/0.842 → mean **0.844** sd 0.004. **The broken build passed a gate set at 0.83**: the threshold was three sigma below a locally measured *healthy* mean and sat below where a broken build actually lands. Threshold corrected to **0.855**, between the two measured bands (~2.5 sigma margin each side); the bands do not overlap, healthy's worst run beats broken's best by 0.021. The contingency comment in the workflow was also backwards ("comes down" → must go up). Log #50, ADR-22.
+- [x] Note: B9's criterion says "a *PR* with a broken prompt fails the gate". That wording predates the ADR-22 tiering, under which faithfulness deliberately does not trigger on `pull_request`. The dispatch on a branch is the equivalent proof for a nightly gate.
+- [x] PR #1 closed unmerged.
+- [ ] **Re-run the proof against 0.855** to see the gate actually go red (~$2.80, 50 min). The arithmetic is already settled by the measured means — 0.844 < 0.855 < 0.881 — so this demonstrates the mechanism rather than discovering anything.
+- [ ] Delete `proof/retrieval-regression` and `proof/broken-synthesis-prompt`.
 
 ---
 

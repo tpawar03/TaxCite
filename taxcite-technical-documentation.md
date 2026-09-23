@@ -575,7 +575,16 @@ The broken prompt is a realistic regression, not a strawman: it keeps the citati
 | **plans pinned + temperature 0** | 0.866 / 0.885 / 0.861 | **0.871** | **0.013** |
 
 Pinning the planner is what mattered: temperature 0 alone moved nothing on golden, because the planner dominated it (16% of golden questions route differently between runs). The faithfulness harness was calling `decompose` fresh on every row -- a harness bug, found only by measuring the arms separately. The residual 0.013 decomposes against the judge floor of 0.008 as about 0.010 of synthesis variation, which is irreducible: OpenAI's `temperature=0` with a fixed `seed` is best effort, and two runs over identical plans and identical context still produced different answers.
-*What the threshold is calibrated against:* the **healthy** distribution, not a measured broken one -- "do not drop three sigma below the established baseline". Broken-on-golden has not been measured; the dev calibration put a broken prompt 0.05 below healthy, which would be caught at 0.83, but that gap must not simply be assumed to transfer. B9's proof run is that measurement: a PR removing the grounding rule from `RAG_SYSTEM` must turn the nightly job red. If it does not, the threshold comes down and both numbers are recorded here. Enabling before proving is safe because a nightly job going red blocks no one.
+*Proof run, and the threshold it corrected (2026-09-23).* Both arms were dispatched on the runner, same corpus, same secrets, one variable changed:
+
+| arm | runs | mean | sd |
+|---|---|---|---|
+| healthy `main` | 0.870 / 0.884 / 0.889 | **0.881** | 0.010 |
+| grounding rule removed | 0.849 / 0.841 / 0.842 | **0.844** | 0.004 |
+
+**The proof failed, and correctly so: the broken build passed a gate set at 0.83.** The first threshold was three sigma below a *locally* measured healthy mean, which placed it below where a broken build actually lands. Calibrating against the healthy distribution alone is not sufficient -- a threshold has to sit between two measured bands, and the golden gap (0.037) is smaller than the dev gap (0.05) it was extrapolated from. The extrapolation this ADR warned against was the one it then made.
+*The metric itself is sound.* The bands do not overlap: healthy's worst run (0.870) beats broken's best (0.849) by 0.021, a separation of about 4.9 pooled sigma. **The threshold is now 0.855**, inside that window with roughly 2.5 sigma of margin on each side (healthy false-failure ~0.5%, broken false-pass ~0.3%). Caveat: a standard deviation from three samples is a weak estimate, especially the broken arm's 0.004; the robust fact is the non-overlapping window, not the sigmas.
+*Also corrected:* the contingency written into the workflow said that if the proof did not go red the threshold "comes down". That is backwards -- a broken build passing means the gate is too permissive and the number must go **up**.
 
 ---
 
