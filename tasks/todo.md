@@ -629,7 +629,8 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 - [x] **Tier 3 proof run — and it failed, correctly.** Both arms dispatched on the runner (35901633914 broken, 35901637011 healthy). Healthy `main` 0.870/0.884/0.889 → mean **0.881** sd 0.010. Grounding rule removed → 0.849/0.841/0.842 → mean **0.844** sd 0.004. **The broken build passed a gate set at 0.83**: the threshold was three sigma below a locally measured *healthy* mean and sat below where a broken build actually lands. Threshold corrected to **0.855**, between the two measured bands (~2.5 sigma margin each side); the bands do not overlap, healthy's worst run beats broken's best by 0.021. The contingency comment in the workflow was also backwards ("comes down" → must go up). Log #50, ADR-22.
 - [x] Note: B9's criterion says "a *PR* with a broken prompt fails the gate". That wording predates the ADR-22 tiering, under which faithfulness deliberately does not trigger on `pull_request`. The dispatch on a branch is the equivalent proof for a nightly gate.
 - [x] PR #1 closed unmerged.
-- [ ] **Re-run the proof against 0.855** to see the gate actually go red (~$2.80, 50 min). The arithmetic is already settled by the measured means — 0.844 < 0.855 < 0.881 — so this demonstrates the mechanism rather than discovering anything.
+- [x] **The re-run turned out to be necessary, before it even ran.** Asking whether it was found that the gate step ended in `| tee`, and GitHub runs steps as `bash -e` without `pipefail` — so a non-zero exit from `ragas_eval` was swallowed and **the gate could not fail at any threshold**. Fixed with `shell: bash`. Log #51.
+- [ ] **Re-run both arms against 0.855 with the pipefail fix in place.** Now it does discover something: whether the gate actually goes red. Expect broken 0.844 < 0.855 → FAIL, healthy 0.881 → PASS. ~$2.80, 50 min.
 - [ ] Delete `proof/retrieval-regression` and `proof/broken-synthesis-prompt`.
 
 ---

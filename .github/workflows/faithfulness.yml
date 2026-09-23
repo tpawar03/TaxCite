@@ -62,7 +62,13 @@ jobs:
       # distribution alone is not enough: the threshold has to sit between two measured bands,
       # and the golden gap (0.037) is smaller than the dev gap (0.05) that it was extrapolated
       # from. Re-measure both bands after any pipeline change, not just the healthy one.
+      # `shell: bash` is load-bearing: it runs with `-eo pipefail`, whereas the default
+      # `bash -e` takes a pipeline's exit status from its LAST command. Without it the `| tee`
+      # swallows a non-zero exit and this gate can never go red -- which is what it did through
+      # the entire first proof run. The retrieval gate has no pipe, which is why that one
+      # failed honestly.
       - name: faithfulness
+        shell: bash
         run: |
           uv run python eval/ragas_eval.py --repeats 3 --max-cost 5.00 \
             --fail-under 0.855 | tee faithfulness.log

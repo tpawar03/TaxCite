@@ -42,10 +42,8 @@ jobs:
           key: fastembed-bge-base-jina-turbo-v1
       # qdrant's image has no shell tools for a healthcheck, so poll it here
       - run: for i in $(seq 1 30); do curl -sf localhost:6333/readyz && exit 0; sleep 2; done; exit 1
-      - run: uv run pytest -q
-      # Corpus-dependent tests self-skip on an empty stack. That is deliberate — restoring
-      # 28k vectors on every push is not worth it — but it means this job proves the code
-      # imports, the transport works and the pure logic holds, not that retrieval is good.
-      # The retrieval gate below is what proves that.
-      - run: uv run pytest -q -rs | tail -20
-        name: list what skipped
+      # -rs reports why tests skipped, in the same run rather than a second one. Corpus-
+      # dependent tests self-skip on an empty stack: deliberate, since restoring 28k vectors on
+      # every push is not worth it, but it means this job proves the code imports, the transport
+      # works and the pure logic holds — not that retrieval is good. The retrieval gate does that.
+      - run: uv run pytest -q -rs

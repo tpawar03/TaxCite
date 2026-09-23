@@ -18,9 +18,9 @@
     "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
   },
   "taxcite-technical-documentation.md": {
-    "mtime": 1790187228.8419354,
-    "seen": 1790187558.526381,
-    "ast_hash": "f22116299fcdf05ac8db75e2d3f5702b",
+    "mtime": 1790190179.5273468,
+    "seen": 1790190181.352252,
+    "ast_hash": "d840d3dfb72982512211df5176ed978d",
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
@@ -108,8 +108,8 @@
     "semantic_hash": ""
   },
   "src/taxcite/generate.py": {
-    "mtime": 1790187556.8987088,
-    "seen": 1790187558.526338,
+    "mtime": 1790190197.840858,
+    "seen": 1790190199.210989,
     "ast_hash": "3ef58693cdb23803fdf7521dd42707d9",
     "semantic_hash": ""
   },
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790187245.831139,
-    "seen": 1790187558.52636,
-    "ast_hash": "d21376b6f1b9e4f54cdc7c4e297b54bf",
+    "mtime": 1790190179.5241416,
+    "seen": 1790190181.352233,
+    "ast_hash": "ce4d5efaf646eae7201bb228c76553cb",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -222,9 +222,9 @@
     "semantic_hash": "8f36df7751f76f42df9099d8cc10c5ec"
   },
   "docs/engineering-log.md": {
-    "mtime": 1790184815.9795027,
-    "seen": 1790184861.071578,
-    "ast_hash": "faebeaa8a64d25d7de7ef62a490d8288",
+    "mtime": 1790190179.5251586,
+    "seen": 1790190181.352234,
+    "ast_hash": "2d6b20d30611db9b8c7417e35d7186ba",
     "semantic_hash": ""
   },
   "docs/intent/taxcite.md": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790187228.9067316,
-    "seen": 1790187558.526379,
-    "ast_hash": "ff3daad7370eaea8541b4276440266be",
+    "mtime": 1790190179.526353,
+    "seen": 1790190181.35225,
+    "ast_hash": "3b4c6dc3678c4f09d867580c3b79e456",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -480,9 +480,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/faithfulness.yml": {
-    "mtime": 1790186312.5398495,
-    "seen": 1790186409.8181388,
-    "ast_hash": "5bc544118a60a2cbd2379efa8ce47cae",
+    "mtime": 1790190179.523671,
+    "seen": 1790190181.352229,
+    "ast_hash": "e4e6d506241e3e3fd9b700cc8f888076",
     "semantic_hash": ""
   },
   ".github/workflows/retrieval-gate.yml": {
