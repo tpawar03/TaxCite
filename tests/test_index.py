@@ -94,3 +94,17 @@ def test_both_vectors_are_stored(ctx, models_):
     (point,), _ = qc.scroll(COLLECTION, limit=1, with_vectors=True)
     assert len(point.vector["dense"]) == index.DENSE_DIM
     assert len(point.vector["sparse"].indices) > 0
+
+def test_count_is_zero_when_the_collection_does_not_exist():
+    """CI starts with an empty Qdrant. The suite's "needs an ingested corpus" guard calls this
+    at import time, so a 404 here failed the whole run instead of skipping a few tests."""
+    assert index.count(index.client(), name="collection-that-does-not-exist") == 0
+    assert index.count(index.client(), "ecfr", name="collection-that-does-not-exist") == 0
+
+
+def test_a_broken_qdrant_still_raises():
+    """"No corpus" and "no Qdrant" must not look alike: only the 404 is swallowed."""
+    from qdrant_client import QdrantClient
+
+    with pytest.raises(Exception):
+        index.count(QdrantClient(url="http://localhost:1", timeout=2), name="anything")

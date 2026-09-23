@@ -18,9 +18,9 @@
     "semantic_hash": "1331a250c98cc26f49cb7bd48beb7130"
   },
   "taxcite-technical-documentation.md": {
-    "mtime": 1790134982.6313193,
-    "seen": 1790134991.604172,
-    "ast_hash": "4a02dc4f464a90f0197d31effa0f37f5",
+    "mtime": 1790184815.9665813,
+    "seen": 1790184861.071595,
+    "ast_hash": "518a691b2f5f54243bc96d032bdcab0e",
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
@@ -66,9 +66,9 @@
     "semantic_hash": "84e22314505ccce8789a425888a654b5"
   },
   "eval/retrieval.py": {
-    "mtime": 1790128312.9710155,
-    "seen": 1790129502.0458088,
-    "ast_hash": "b2e2b2b27ab6167095d2c63c0e13977b",
+    "mtime": 1790177631.7534716,
+    "seen": 1790184861.0715442,
+    "ast_hash": "912d5ebe822936ac2fe3391e6a51e899",
     "semantic_hash": ""
   },
   "eval/store_bench.py": {
@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "src/taxcite/generate.py": {
-    "mtime": 1790132684.179944,
-    "seen": 1790134991.6036181,
-    "ast_hash": "37f399dd0eb9b1131c1ea2f1eea7c541",
+    "mtime": 1790177558.0933244,
+    "seen": 1790184861.071553,
+    "ast_hash": "3ef58693cdb23803fdf7521dd42707d9",
     "semantic_hash": ""
   },
   "src/taxcite/index.py": {
@@ -162,9 +162,9 @@
     "semantic_hash": ""
   },
   "tests/test_generate.py": {
-    "mtime": 1790053280.988427,
-    "seen": 1790056684.1029708,
-    "ast_hash": "90295bd9221c7b090583fc590d996a7b",
+    "mtime": 1790177558.0938208,
+    "seen": 1790184861.0715652,
+    "ast_hash": "2e4ea38a39f3726611fc4f6256d06c2a",
     "semantic_hash": ""
   },
   "tests/test_health.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790134982.6608365,
-    "seen": 1790134991.603938,
-    "ast_hash": "a0c1a5c3028d8f2e4f163bf0ef5cba6c",
+    "mtime": 1790184844.9671056,
+    "seen": 1790184861.071576,
+    "ast_hash": "5c389a995ddedfedd8628968a3f90751",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -222,9 +222,9 @@
     "semantic_hash": "8f36df7751f76f42df9099d8cc10c5ec"
   },
   "docs/engineering-log.md": {
-    "mtime": 1790134916.2025225,
-    "seen": 1790134991.6039512,
-    "ast_hash": "744ce8b4b98a56b0f6069208d84e6929",
+    "mtime": 1790184815.9795027,
+    "seen": 1790184861.071578,
+    "ast_hash": "faebeaa8a64d25d7de7ef62a490d8288",
     "semantic_hash": ""
   },
   "docs/intent/taxcite.md": {
@@ -246,9 +246,9 @@
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790134943.8190122,
-    "seen": 1790134991.604154,
-    "ast_hash": "361e4fb6aefb36f1d5c3e2e88d7eaaf4",
+    "mtime": 1790184844.9666402,
+    "seen": 1790184861.071594,
+    "ast_hash": "90785be17adb1ff3ff87a9a2aec0d71e",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "src/taxcite/decompose.py": {
-    "mtime": 1790121775.4360821,
-    "seen": 1790126181.046782,
-    "ast_hash": "b1dac9734c0598273c9209505bec18a0",
+    "mtime": 1790182299.952391,
+    "seen": 1790184861.071553,
+    "ast_hash": "c1ded44c109e3f6aaece0df532d1c9d1",
     "semantic_hash": ""
   },
   "tests/test_decompose.py": {
@@ -372,21 +372,15 @@
     "semantic_hash": ""
   },
   "eval/results/decompositions.json": {
-    "mtime": 1790128846.8324742,
-    "seen": 1790129502.0457978,
-    "ast_hash": "a634bce24716148bbab71ab35c14a403",
+    "mtime": 1790183100.8936226,
+    "seen": 1790184861.0715241,
+    "ast_hash": "8f80242415e89b3b60e352af40695c8a",
     "semantic_hash": ""
   },
   "eval/results/golden-b7b-cached-k10.json": {
     "mtime": 1790126132.7805786,
     "seen": 1790126181.046773,
     "ast_hash": "7d65bc6ee10b3a67ad93fca6c56fc8cf",
-    "semantic_hash": ""
-  },
-  "eval/results/retrieval-dev_merged-2026-09-22-k10.json": {
-    "mtime": 1790121984.8815408,
-    "seen": 1790126181.046776,
-    "ast_hash": "b31e8dc6f300c294c25cc5fec6031bfe",
     "semantic_hash": ""
   },
   "eval/results/retrieval-pilot-2026-09-22-k10.json": {
@@ -444,9 +438,9 @@
     "semantic_hash": ""
   },
   "eval/ragas_eval.py": {
-    "mtime": 1790132732.338097,
-    "seen": 1790134991.603172,
-    "ast_hash": "85548824b64dedbd43a29619c3268be0",
+    "mtime": 1790182299.9528918,
+    "seen": 1790184861.071521,
+    "ast_hash": "22f49de90e9f5345d1a318cd0ad5541b",
     "semantic_hash": ""
   },
   "eval/results/ragas-2026-09-22.json": {
@@ -459,6 +453,66 @@
     "mtime": 1790134916.1998217,
     "seen": 1790134991.604139,
     "ast_hash": "94b0a3f6e5e5ff3700c7f6e3445b8543",
+    "semantic_hash": ""
+  },
+  "eval/results/ragas-2026-09-23.json": {
+    "mtime": 1790184440.0148354,
+    "seen": 1790184861.071533,
+    "ast_hash": "53d47a77b09b2c27a8ef151f9999d053",
+    "semantic_hash": ""
+  },
+  "eval/results/ragas-judge-noise-pinned-answers.json": {
+    "mtime": 1790136248.50259,
+    "seen": 1790184861.0715342,
+    "ast_hash": "5033f6c75a6958aa4ae1f38b2f38a390",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-dev-2026-09-23-k10.json": {
+    "mtime": 1790177648.999888,
+    "seen": 1790184861.0715399,
+    "ast_hash": "a260beec97c0dd09098c3c9f870884c6",
+    "semantic_hash": ""
+  },
+  "eval/snapshot.py": {
+    "mtime": 1790178166.814975,
+    "seen": 1790184861.0715451,
+    "ast_hash": "1d938749ecd1757a9b8dd169f46b3b0a",
+    "semantic_hash": ""
+  },
+  ".github/workflows/faithfulness.yml": {
+    "mtime": 1790184763.9611034,
+    "seen": 1790184861.071573,
+    "ast_hash": "3dcd5410f4ca44db139094e46f6d1f82",
+    "semantic_hash": ""
+  },
+  ".github/workflows/retrieval-gate.yml": {
+    "mtime": 1790178264.438027,
+    "seen": 1790184861.071574,
+    "ast_hash": "92ed2d531fc3739f244693fbc7892b97",
+    "semantic_hash": ""
+  },
+  ".github/workflows/test.yml": {
+    "mtime": 1790178231.8521183,
+    "seen": 1790184861.071575,
+    "ast_hash": "014f637873a6682498e86d68d1688bfb",
+    "semantic_hash": ""
+  },
+  "eval/results/b9-gate-calibration-dev.txt": {
+    "mtime": 1790184844.8875566,
+    "seen": 1790184861.071581,
+    "ast_hash": "2c2015de96e0264fc45b335ef3cc0986",
+    "semantic_hash": ""
+  },
+  "eval/results/golden-b9-pinned-3runs.txt": {
+    "mtime": 1790184844.882391,
+    "seen": 1790184861.071587,
+    "ast_hash": "b6eb9f99ada670a1d2edf9308421dc1d",
+    "semantic_hash": ""
+  },
+  "eval/results/golden-b9-temp0-unpinned-3runs.txt": {
+    "mtime": 1790184844.892591,
+    "seen": 1790184861.071588,
+    "ast_hash": "1939b4421654aad000911a8a1d5d4653",
     "semantic_hash": ""
   }
 }

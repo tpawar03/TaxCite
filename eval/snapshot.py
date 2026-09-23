@@ -43,9 +43,13 @@ def create(out: Path) -> int:
                 f.write(chunk)
     qc.delete_snapshot(collection_name=COLLECTION, snapshot_name=described.name)
 
-    # only the chunks table: jobs are per-run state, not corpus
-    subprocess.run(["pg_dump", "--no-owner", "--table=chunks", "--file", str(out / DUMP), DATABASE_URL],
-                   check=True)
+    # Only the chunks table: jobs are per-run state, not corpus. Run pg_dump inside the
+    # container -- the host client here is 14 against a 16 server, which pg_dump refuses, and
+    # CI has no host client at all.
+    dump = subprocess.run(["docker", "compose", "exec", "-T", "postgres",
+                           "pg_dump", "--no-owner", "--table=chunks", "-U", "taxcite", "taxcite"],
+                          check=True, capture_output=True)
+    (out / DUMP).write_bytes(dump.stdout)
     for name in (SNAPSHOT, DUMP):
         print(f"  {out / name}  {(out / name).stat().st_size / 1e6:.1f} MB")
     return 0

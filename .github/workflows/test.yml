@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       qdrant:
-        image: qdrant/qdrant:v1.12.4
+        image: qdrant/qdrant:v1.19.1
         ports: ["6333:6333"]
       postgres:
         image: postgres:16
@@ -34,6 +34,12 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with: { enable-cache: true }
       - run: uv sync --frozen
+      # The suite downloads bge-base and the jina cross-encoder on first use; without this the
+      # models are refetched on every run.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/fastembed
+          key: fastembed-bge-base-jina-turbo-v1
       # qdrant's image has no shell tools for a healthcheck, so poll it here
       - run: for i in $(seq 1 30); do curl -sf localhost:6333/readyz && exit 0; sleep 2; done; exit 1
       - run: uv run pytest -q

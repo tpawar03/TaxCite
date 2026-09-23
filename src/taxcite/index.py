@@ -145,7 +145,22 @@ def sweep(qc: QdrantClient, source: str, live_keys: set[str], name: str = COLLEC
 
 
 def count(qc: QdrantClient, source: str | None = None, name: str = COLLECTION) -> int:
+    """Points in the collection, or 0 when the collection does not exist yet.
+
+    A collection that was never created holds no points, and saying so keeps the test suite's
+    "needs an ingested corpus" guard from exploding on a fresh stack -- which is what CI is.
+    The first CI run failed here: the guard calls this at import time, Qdrant answered 404, and
+    pytest errored during collection instead of skipping. A connection failure still raises:
+    "no corpus" and "no Qdrant" are different problems and must not look alike.
+    """
+    from qdrant_client.http.exceptions import UnexpectedResponse
+
     flt = None
     if source:
         flt = models.Filter(must=[models.FieldCondition(key="source", match=models.MatchValue(value=source))])
-    return qc.count(name, count_filter=flt, exact=True).count
+    try:
+        return qc.count(name, count_filter=flt, exact=True).count
+    except UnexpectedResponse as e:
+        if e.status_code == 404:
+            return 0
+        raise
