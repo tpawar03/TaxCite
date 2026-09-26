@@ -5,7 +5,7 @@ _Last updated: 2026-09-23_
 ## Now
 **Phase B is complete (2026-09-23).** Report: `eval/results/phase_b.md`. 160 tests green, CI running in three verified tiers.
 
-The corpus is 28,747 chunks across statute, case law, regulations and publications (28,393 indexed). Decomposition ships as source routing; the golden set is 115 reviewed rows; faithfulness is measured with a known noise floor and gated weekly at 0.855. Phase B's three most useful results are negative: reranking did not earn the default, the decomposer's query rewriting scored below the questioner's own words, and decomposition helps statutory retrieval rather than the compound questions it was built for. **Phase C's baseline is set: case-law Recall@20 = 0.692, decomposition only.** **Next: Phase C (citation graph) — but see the 8.9% edge-resolution finding before committing to it.**
+The corpus is 28,747 chunks across statute, case law, regulations and publications (28,393 indexed). Decomposition ships as source routing; the golden set is 115 reviewed rows; faithfulness is measured with a known noise floor and gated weekly at 0.855. Phase B's three most useful results are negative: reranking did not earn the default, the decomposer's query rewriting scored below the questioner's own words, and decomposition helps statutory retrieval rather than the compound questions it was built for. **Phase C's baseline is set: case-law Recall@20 = 0.692, decomposition only.** **C0 spike done (2026-09-26): graph expansion's ceiling on Phase C's gate is 0 points (needs +5).** None of the missed case-law gold is within 2 hops of a retrieved opinion. 23.1 of the 30.8 missed points are *page selection*: the gold opinion is already in the top 20, but the wrong pages (usually the syllabus, `at *1-2`, is missed). Edge resolution is 4.7%, not 8.9%. **Phase C re-planned (2026-09-26):** the citation graph is kept as two Postgres tables, **not Neo4j** (ADR-23: the lookup is by key, not a traversal), and its job is now *negative treatment*: flag answers that rely on a reversed or appealed opinion (golden rows G-C03, G-X02, G-X09). Expansion becomes a measured ablation rung, and recall work moves to page selection. Plan: `tasks/plan.md` (Phase C); tasks C1–C7 in `tasks/todo.md`; ADR-1 revised. **C1 done (2026-09-26):** with the CourtListener key, all three golden appeals read correctly (*Morehouse* and *Menard* reversed, *Nu-Look* affirmed). 17 of 263 searched opinions have a confirmed appeal; outcomes are 13 right, 2 partial, 1 wrong, 1 unknown on a full hand check, with fixes noted for C3. The keyed limit is 10 requests/minute. Pending appeals (*Patel*) aren't visible to any source, so they show as `unknown`. **C2 drafted (2026-09-26):** all 6 wrong-page rows have another page stating the holding. Accepting the widenings moves case-law Recall@20 0.692 → 0.833 ± 0.018; 4 rows were too-narrow gold, and only 2 (G-C10, G-C26) are real page-selection misses. **You approved all six (2026-09-26); applied, validator passes. Audited baseline: 0.833 ± 0.018 over 3 cached plan sets** (first reported as 0.846 from one set). Follow-up (approved): the same rule applied to the other 18 summary-only gold groups, and G-C15's holding-less `*2` removed; no recall number moves, but keys are now consistent before C6. Found: gold is matched by page label and 2,072 labels are shared, so G-C24 scores an unearned hit (honest case-law figure ~0.795); the fix is C6's first step. Next: C3 (citation and treatment tables).
 
 **Phase A is complete (2026-09-21).** Report: `eval/results/phase_a.md`. 95 tests green.
 
@@ -29,7 +29,7 @@ Working mode: Claude writes the code and may edit existing files; new files are 
 | B7 Query decomposition | ✅ Done (source routing, not rewriting) |
 | B7b Dev set + routing precision + golden audit | ✅ Done (pilot criterion met; golden gain not established) |
 | B8 RAGAS harness | ✅ Done (faithfulness 0.865 ± 0.035; gate not enforceable per-run) |
-| B9 CI + RAGAS gate | 🔶 In progress (design calibrated; workflows written; threshold pending) |
+| B9 CI + RAGAS gate | ✅ Done (three tiers verified in real CI; faithfulness gate 0.855, weekly × 5) |
 | B10 Phase B exit report | ✅ Done (`eval/results/phase_b.md`) |
 
 ## Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)
@@ -50,6 +50,14 @@ Working mode: Claude writes the code and may edit existing files; new files are 
 ## Decisions log
 | Date | Decision | Where recorded |
 |---|---|---|
+| 2026-09-26 | C2 follow-up: you approved widening 18 more gold groups (10 case-law, 8 compound) by the same rule and removing G-C15's `*2`; the shared-label eval fix goes to C6 | `eval/golden.jsonl`, `tasks/todo.md` C2/C6 |
+| 2026-09-26 | C2: you approved widening 6 golden case-law rows with pages stating the court's own holding (dissents, arguments and background excluded). Case-law Recall@20 baseline 0.692 → 0.833 ± 0.018; the real page-selection gap is 2 rows (G-C10, G-C26) | `eval/golden.jsonl`, `tasks/todo.md` C2, tech doc baselines |
+| 2026-09-26 | C1 source: CourtListener (keyed) primary, our corpus's subsequent history as cross-check; disagreement → `unknown`. Appeal matched by family name + first name + "Tax Court" + ≤5 years, earliest appeal wins | `tasks/todo.md` C1 |
+| 2026-09-26 | C1: treatment data comes from both our corpus's subsequent history (free, outcomes, low coverage of recent cases) and CourtListener with an API key (finds appeals, outcome from text). Anonymous CourtListener can't read outcomes and is throttled. Weekly refresh limited to opinions filed in the last ~3 years | `tasks/todo.md` C1 |
+| 2026-09-26 | Treatments go stale (e.g. *Patel* is on appeal now), so each treatment row keeps `checked_at` and every flag shows its check date; checks older than 7 days show as stale. The scheduled refresh stays in Phase H; C1 measures its cost | `tasks/todo.md` C1/C3/C4, ADR-23 |
+| 2026-09-26 | **Neo4j dropped** (you confirmed): the treatment check is one lookup per cited opinion, so citation and treatment edges are Postgres tables. Stores go from five to four. The intent doc now allows dropping a store when a measurement shows it has no job | tech doc ADR-23, §4; PRD; `docs/intent/taxcite.md`; `tasks/plan.md` C3 |
+| 2026-09-26 | Phase C re-planned from C0 (you approved; plan edits allowed): the citation graph's job is negative treatment, not retrieval expansion (ceiling 0). Gate is edges ≥90/85 plus 3/3 reversed rows flagged with 0 false flags; the +5 recall gate becomes a reported rung. Page selection added (C2 audit, C6 fix). Negative treatment moved E → C; per-sub-query sufficiency moved C → F. G-X19 is a no-flag control (its gold is the post-remand opinion) | `tasks/plan.md` Phase C, tech doc ADR-1, §7, §9.3, PRD FR-3 |
+| 2026-09-23 | Phase B checkpoint closed. Phase C opens with a spike (C0), not Neo4j: 8.9% of citation edges resolve, so first measure how much case-law gold a graph could reach, then decide whether to ingest cited opinions, build on the held set, or record a negative result | `tasks/todo.md` C0 |
 | 2026-09-22 | B5 audit: compound rows may not reuse an opinion a case-law-only row tests (except deliberate pairs); reversed opinions become explicit Phase E tests with notes | `tasks/todo.md` B5 |
 | 2026-09-22 | B5: compound/temporal rows carry gold sub-queries (measurement only); insufficiency verified by real search, not text match | `tasks/plan.md`, `tasks/todo.md` B5 |
 | 2026-09-22 | You kept the extra golden rows: §9.1's per-category counts are minimums; golden set frozen after review | `tasks/plan.md`, `tasks/todo.md` B4 |
@@ -107,7 +115,8 @@ _Interview-ready versions of these, with the trade-offs behind them, are kept in
 - A broken synthesis prompt (grounding rule removed, citations still demanded) costs only ~0.05 faithfulness. The metric is structurally weak here: the retrieved sources are still the right sources, so most claims stay supported even when the model is not reading them.
 - An answer cache is invalid the moment the pipeline changes — the temp-1.0 answers were deleted when synthesis was pinned. Same rule as the plan cache.
 - CourtListener's search API works unauthenticated (opinion *text* needs a key; the public page does not). Its coverage of unpublished appellate dispositions is incomplete, so "no appellate opinion found" is not "not appealed".
-- 91% of the opinions our case corpus cites are not in it (2,540 cited, 227 held), so a citation-graph hop would mostly dangle — Phase C needs the cited opinions ingested first.
+- Measured properly (C0, eyecite): 4,911 Tax Court citation edges to 2,496 opinions, 4.7% resolving to one we hold. Reported T.C. opinions are cited by volume/page but keyed by slip number, so they need aliases. The earlier "227 held / 8.9%" was an overestimate.
+- **Graph expansion can't move the golden case-law gate:** 0 of the missed gold is within 2 hops of a retrieved opinion. 23.1 of the 30.8 missed points have the gold opinion already retrieved at the wrong pages. The syllabus chunk (masthead + "P/R" shorthand) is never ranked, even at k=100.
 - Embedding runs at 7.0 chunks/s (~105 min for Part 1). Parallel workers are *slower* (3.4/s at 4 workers); CoreML is a wash.
 
 ## Environment
@@ -116,5 +125,5 @@ _Interview-ready versions of these, with the trade-offs behind them, are kept in
 - Knowledge graph: `graphify-out/`; refreshed 2026-09-21 but not committed yet.
 
 ## Pending housekeeping
-- B1–B5 committed and pushed (2026-09-22). B6, B7, B7b, B8 and B9-so-far are done but uncommitted (54+ files). The remote is `github.com/tpawar03/TaxCite`; the new workflows cannot run until this is pushed.
+- All of Phase B is committed and pushed to `github.com/tpawar03/TaxCite` (2026-09-23); `docs/` is kept out of the repo.
 - If a `venv/` folder reappears, delete it and use a fresh terminal tab.

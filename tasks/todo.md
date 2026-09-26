@@ -657,6 +657,281 @@ Add a script that regenerates and publishes the snapshot when the corpus changes
 ---
 
 ## ✅ Checkpoint: Phase B complete
-- [ ] All tests pass in CI
-- [ ] The RAGAS gate is live and green
-- [ ] Ready to plan Phase C
+- [x] All tests pass in CI
+- [x] The RAGAS gate is live and green (weekly × 5 at 0.855; its first red build was the seeded broken prompt)
+- [x] Ready to plan Phase C — after C0, below
+
+---
+
+# TaxCite Phase C — Task List
+
+Plan: written after C0. Phase C's gate (tech doc §7): case-law Recall@20 improves by **≥5 points over 0.692** (decomposition only, 26 case-law golden rows), and edge extraction reaches precision ≥90% / recall ≥85% on a 200-edge hand-labeled sample.
+
+---
+
+## C0: Citation-graph reachability spike
+
+**Description:** Find out whether graph expansion *can* move case-law Recall@20 before building any of it. The case corpus cites 2,540 distinct opinions and holds 227 (8.9%), so most edges lead nowhere. But the gate is scored on the golden set, and every golden gold opinion is already in the corpus. So adding the cited opinions can't create new gold. They only help if a missed gold opinion is reachable through one of them. Measure three things, then choose a direction.
+
+1. **Can extraction be trusted enough to measure with?** Run eyecite over the 307 opinions' text (it's not a dependency yet; try it in a throwaway script) and compare against whatever produced the 2,540 figure. Hand-check ~30 citations from 3 opinions for misses and false hits, especially `T.C. Memo.` forms and pin-cites.
+2. **The ceiling (the number that decides Phase C).** For each of the 26 case-law golden rows, take the gold opinions that hybrid+routing misses at k=20 (the 30.8%). Is each one 1 hop or 2 hops from an opinion that *is* in the top 20, counting edges in both directions (cites and cited-by)? Count 2-hop paths two ways: only through held opinions, and also through opinions we don't hold (what ingesting them would unlock). This is an upper bound: expansion can't do better than perfect traversal plus perfect reranking.
+3. **Ingestion cost curve.** Rank the 2,313 cited-but-not-held opinions by in-degree. How much of the dangling edge mass do the top 50 / 200 / 500 cover, and how many of those are Tax Court opinions DAWSON can serve? Convert the chosen N to chunks and embed time (~7 chunks/s; B3 averaged ~32 chunks per opinion).
+
+**Acceptance criteria:**
+- [x] Extraction precision/recall estimate on the hand-checked sample, and whether eyecite is good enough for C1 or needs a Tax Court–specific pass
+- [x] Ceiling table: of the missed case-law gold, how many are reachable at 1 hop, at 2 hops through held opinions only, and at 2 hops through any opinion. Stated in Recall@20 points so it compares directly with the +5 gate
+- [x] Coverage curve for top-N ingestion, with the cost of the recommended N
+- [x] A decision you confirm, one of: **(a)** ingest top-N cited opinions and then build the graph, **(b)** build on the held set only, **(c)** record Phase C as a measured negative result and move to Phase D/E. Logged in STATUS.md and the engineering log
+
+**Verification:**
+- [ ] Manual: every number comes from running against the real corpus and golden set, not from estimates
+- [ ] Decision rule, written down *before* the numbers come in: if the ceiling is under +5 points, a graph over the current golden set can't pass its gate however well it's built. Say so plainly instead of building it
+
+**Measured 2026-09-26** (hybrid + routing + rerank, k=20, cached plan set 0, 26 case-law golden rows; reproduces the 0.692 baseline exactly):
+- **Extraction:** eyecite is good enough. It found every memo citation a regex did, and missed 23 of 2,456 (0.9%), all PDF line breaks (`T.C. Memo. 1997- 553`) fixed by one substitution. 15/15 sampled volume/page citations were real. Reported T.C. opinions are cited by volume/page (`119 T.C. 121`) but keyed by slip number (`119 T.C. No. 5`), so held T.C. opinions need an alias; 10 of 28 were recovered by surname match.
+- **Edges:** 271 of 307 opinions cite 2,496 distinct Tax Court opinions (4,911 edges). **4.7% of edges resolve to a held opinion** (the earlier 8.9% was an overestimate). Only 107 held opinions are cited by another.
+- **Ceiling (the deciding number):**
+
+  | Missed case-law gold at k=20 | Recall@20 points |
+  |---|---|
+  | Gold opinion already in top 20, wrong pages | **23.1** (6 rows) |
+  | 1 hop from a retrieved opinion | 0.0 |
+  | 2 hops through held opinions | 0.0 |
+  | 2 hops through any opinion (co-citation; adds ~131 opinions/question) | 0.0 |
+  | Unreachable | 7.7 (2 rows) |
+
+  **Graph expansion's ceiling on the gate is 0 points, against a +5 requirement.** Under the decision rule above, Phase C as specified can't pass its gate.
+- **Where the gap actually is:** in 5 of the 6 wrong-page rows the gold is the syllabus (`at *1-2`), masthead plus the court's "P/R" summary. It is not in the top 100, and when every chunk of that opinion is reranked it ranks 6th–16th. Spot check: G-C18's top sibling page states the rule (gold too narrow?); G-C10's top sibling is the petitioner's argument (a real retrieval miss). Needs an audit before it counts as 23.1 points of system gap.
+- **Ingestion curve:** long tail. 1,632 of 2,389 missing opinions are cited once. The top 50 / 200 / 500 cover 20% / 37% / 54% of dangling edges (~1.6k / 6.4k / 16k chunks, ~4 / 15 / 38 min to embed); nearly all were filed in 1987 or later, so DAWSON can serve them. Moot for the gate: golden gold is in the corpus by construction.
+- Spike scripts live in the session scratchpad, not the repo; ask for them if they should be kept.
+
+**Decided 2026-09-26 (you approved the revised phase):** neither (a), (b) nor (c) as written. The graph is kept and repurposed for **negative treatment**. Expansion becomes an ablation rung. Case-law recall work moves to **page selection**. See `tasks/plan.md` (Phase C) and ADR-1 (revised).
+
+**Dependencies:** None (Phase B complete)
+**Files:** `tasks/todo.md` (this entry), `STATUS.md`, `docs/engineering-log.md` (#53)
+**Scope:** S
+
+---
+
+## C1: Treatment-source spike
+
+**Description:** Find out where "reversed / affirmed / on appeal" data can come from, and how much of it there is, before anything depends on it. Two candidate sources:
+1. **Our own corpus.** Later Tax Court opinions cite earlier ones with subsequent history ("140 T.C. 350 (2013), *rev'd*, 769 F.3d 616 (8th Cir. 2014)"), and eyecite already parses it. Count how many held opinions pick up an `aff'd` / `rev'd` / `vacated` this way.
+2. **CourtListener**, whose search works without a key. Look up each held opinion's appellate history, and record hit rate, request cost and what the response looks like.
+
+Score both against the six golden treatment rows: G-C03, G-X02, G-X09 (reversed), G-C11 (on appeal), G-C06 (appealed, stands), G-X19 (post-remand, not reversed).
+
+**Acceptance criteria:**
+- [ ] For each source: how many of the 307 held opinions it gives any treatment for, and whether it gets the six golden rows right
+- [ ] A hand check of 20 treatment records against the appellate opinion itself
+- [ ] A source chosen (or both, merged), with what "no record" means for each, written down
+- [ ] The cost of re-checking all held opinions (requests, minutes), for Phase H's weekly refresh
+
+**Verification:**
+- [ ] Manual: every number comes from real lookups, not documentation
+
+**Measured 2026-09-26:**
+
+| | Own corpus (subsequent history, eyecite) | CourtListener, no API key |
+|---|---|---|
+| What it gives | The outcome ("*X*, rev'd, *Y*" / "*Y*, aff'g *X*") | That an appeal was *decided*: appellate "*name* v. Commissioner" filed after our opinion |
+| Coverage of our 307 held opinions | **11** (the corpus is the 50 newest per topic, so few later opinions cite them). Covers 613 *cited* opinions | 36 of the 263 searched had a tax-appeal match, before verification; some are same-name collisions |
+| Golden rows | *Menard* reversed ✓, *Nu-Look* affirmed ✓; *Morehouse* missed (nothing in the corpus cites it) | *Morehouse* → 8th Cir. 2014 `769 F.3d 616` ✓, *Menard* → 7th Cir. 2009 `560 F.3d 620` ✓, *Nu-Look* → 3rd Cir. 2004 ✓; G-X19 nothing ✓; *Patel* nothing (pending) |
+| Precision | Hand check of 20 records: 17 right, 1 wrong (a B.T.A. cite read as an appeal), 2 not checkable. Also: T.C. Memo. 2011-48 "affirmed" by a 2003 case | Not measured: throttled |
+| Limits | Only sees an appeal a later held opinion mentions | **The outcome isn't readable**: snippets stem ("vacated" matched "vacation"), opinion pages return a bot challenge (HTTP 202, empty), and the text API returns 401 without a key. **Throttled (429)** after ~260 searches |
+
+- Neither source detects a **pending** appeal (*Patel*, G-C11). That needs docket data; until then the flag reads "unknown", never "no appeal".
+- Parser fixes found: accept only appellate reporters (F., F.2d–F.4th, F. App'x, U.S., WL, USTC, AFTR); require the appeal to be dated after the opinion; add an `overruled` pattern (*Morehouse*'s own text says *Wuebker* "is overruled", which was read as "rev'd").
+- **Refresh cost:** outcomes only change for recent opinions. A decided appeal stays decided. So the weekly refresh only needs opinions filed in the last ~3 years (~150 of 307), at ~1 search each plus a text fetch per hit.
+
+**Recommendation:** both sources, merged. The corpus is free and gives outcomes with their citation. CourtListener *with a free API key* finds the appeals the corpus misses and supplies the outcome from the appellate text. The tech doc (§11.7) records the key's free tier as 125 requests/day. The first full pass (~350 requests) takes about 3 days of quota; the weekly refresh of ~150 recent opinions fits comfortably. **Without a key the Phase C gate can't pass**: *Morehouse*'s reversal is found, but its outcome can't be read.
+
+**With the API key (same day):** for each appeal match, the appellate opinion's text was fetched (~65 requests) and its ruling read from the last disposition sentence ("we reverse and remand", "is AFFIRMED").
+- **Golden rows: all correct.** *Morehouse* reversed (8th Cir. 2014, `769 F.3d 616`), *Menard* reversed (7th Cir. 2009, `560 F.3d 620`), *Nu-Look* affirmed (3rd Cir. 2004). G-X19 has no appeal. *Patel* (G-C11): no docket found, even in docket search, so pending appeals stay `unknown`.
+- **Matching an appeal to our case:** a same-surname search finds ~59 candidates for 36 opinions, most of them collisions ("Michael Kelly" for *Willock*, "Isobel Berry Culp" for *Berry*). The rule that works: the family name in the appeal's case name, a petitioner's first name in its text, the text says "Tax Court", decided within 5 years, and **the earliest such appeal** (a later same-name case picked *Thompson*'s 2016 affirmance over the 2013 reversal that decided it). That leaves **17 of the 263 searched with a confirmed appeal**.
+- **Hand check of all 17 outcomes:** 13 fully right, 2 partial ("AFFIRMED IN PART; REVERSED IN PART" read as reversed), 1 wrong (*Visco*: a footnote where the *Tax Court* is the subject of "reversed"), 1 unknown (*Gregory* ends in a dissent). Fixes for C3: an `in part` outcome, and ignore sentences whose subject is the Tax Court.
+- **Limits measured:** the keyed API allows **10 requests/minute** (a rolling window, with a `retry-after` header). No daily wall was hit at ~65 requests. 44 held opinions are still unsearched and will be finished in C3.
+
+- [x] Numbers per source, golden rows scored
+- [x] Hand check: 20 corpus records (17 right) and all 17 CourtListener outcomes (13 right, 2 partial, 1 wrong, 1 unknown)
+- [x] **Source chosen: both, merged.** CourtListener with the key is primary (finds the appeal, reads its outcome). Corpus subsequent history is a free cross-check and covers opinions that are only cited. Disagreements show as `unknown`, never as either outcome
+
+**Dependencies:** C0
+**Files:** `tasks/todo.md`, `STATUS.md`, `docs/engineering-log.md`; spike scripts outside `src/`
+**Scope:** S
+
+---
+
+## C2: Wrong-page audit (6 golden rows)
+
+**Description:** In G-C10, G-C11, G-C15, G-C18, G-C19 and G-C26 the gold opinion is retrieved but not the gold pages, which costs 23.1 of the 30.8 missed points. For each row, read the opinion and decide whether other pages state the same holding as the gold (the gold group is too narrow) or whether the retriever is picking argument or background over the holding (a real miss). Claude drafts a verdict per row with the quoted sentence; you decide.
+
+**Acceptance criteria:**
+- [x] Per row: widen the gold group (list the added pages and the sentence that states the holding), or leave it (and name what the retriever picked instead)
+- [ ] Changes applied as one logged commit, with the validator passing. Gold groups only widen (applied and validated; commit pending)
+- [x] Case-law Recall@20 re-measured on the audited set: **0.833 ± 0.018** over the 3 cached plan sets (0.846 / 0.846 / 0.808; was 0.692). The audited rows behave identically in all three; the spread comes from other rows. The real page-selection gap C6 has to close: **2 rows, 7.7 points** (G-C10, G-C26)
+
+**Verification:**
+- [x] You review every changed row (the B4/B5 audit rule)
+- [x] `uv run python eval/validate_pilot.py eval/golden.jsonl` passes
+
+**Verdicts (2026-09-26): you approved all six; applied to `eval/golden.jsonl`, validator passes (0 of 115 need attention).** Rule: a page qualifies only if it states *the court's own conclusion* on the question (not argument, background, a dissent, or the court describing other cases). Each opinion was read in full for holding sentences, not just the retrieved pages.
+
+| Row | Verdict | Pages to add | The sentence |
+|---|---|---|---|
+| G-C10 *Dirico* | widen | `139 T.C. No. 16, at *21-23` | "we do not address the issue of whether petitioner materially participated…, and we hold that section 1.469-2(f)(6)… is inapplicable" |
+| G-C11 *Patel* | widen | `165 T.C. No. 10, at *16-17`, `at *17` | "we easily conclude that the statute requires a relevancy determination" |
+| G-C15 *Rogerson* | widen | `T.C. Memo. 2022-49, at *19`, `at *21` | "the five of ten test has been met for each of 2014, 2015, and 2016, and Mr. Rogerson is treated as materially participating"; "(we conclude he did)" at *4 excluded: no five-of-ten rule |
+| G-C18 *Hampton* | widen | `T.C. Memo. 2025-32, at *12`, `at *14` | "Mr. Hampton is barred by the public policy doctrine from reporting his… share of HCM's resulting loss"; "the public policy doctrine disallows Mr. Hampton's claimed deduction" |
+| G-C19 *Mission Organic* | widen | `165 T.C. No. 13, at *2-3`, `at *10-11`, `at *11`, `at *11-12` | "We resolve the issue in favor of the Commissioner"; "it is not an abuse of discretion to disallow such expenses for reasonable collection potential purposes". Pages *45+ are a dissent and excluded |
+| G-C26 *Gale* | widen | `T.C. Memo. 2002-54, at *26-27` | "Any restriction placed on the use of the settlement proceeds after payment… does not delay petitioner's receipt of the income" |
+
+**Effect (cached plan set 0, same basis as the 0.692 baseline):** case-law Recall@20 **0.692 → 0.846** on plan set 0; **0.833 ± 0.018** over all 3 cached plan sets. G-C11 (rank 1), G-C18 (5), G-C19 (9) and G-C15 (20) become hits: **their gold was too narrow**. G-C10 and G-C26 stay missed: the retriever ranks argument and background over the holding. **The real page-selection gap for C6 is those 2 rows (7.7 points), not 23.1.** Two of the six added pages were never retrieved, some evidence the choice wasn't steered by the retriever's output.
+
+**Validation, two scans (2026-09-26).**
+*Scan 1, per page:* every chunk carrying an added label contains a holding sentence, including the duplicate-label chunks (*Hampton* *12 ×2, *14 ×2; *Mission Organic* *11 ×2, whose second copy states "it is not an abuse of discretion in the light of congressional action"). No chunk containing a holding sentence is missing from its group. Every added page is majority text, before "Decision(s) will be entered"; *Mission Organic*'s concurrences begin at *13-14. The "Roberts, J., concurring" inside *Patel* at *13-14 is a quoted D.C. Circuit citation, and *Patel* is a unanimous reviewed opinion. Two pages are weaker: *Dirico* *21-23 never says "passive" (the self-rental rule is "inapplicable", so rental income stays passive), and *Rogerson* *19 gives the five-of-ten result without the related-business link that *21 states. Neither produces a hit.
+*Scan 2, around the change:* no dev/pilot leakage. G-X20 shares *Patel* as a documented deliberate pair at a different pin-cite (*36), so there's no double credit. Only `eval/retrieval.py` metrics read gold; the faithfulness judge and `generate.py` don't. All 12 new labels are indexed in Qdrant. The CI retrieval gate scores `eval/dev.jsonl`, so it's unaffected. Hits come from the strong pages in all 3 cached plan sets (G-C11 *16-17 rank 1, G-C18 *14 rank 5, G-C19 *2-3 rank 9, G-C15 *21 rank 20: **fragile**, at the cutoff). The Phase B report now notes its golden numbers predate C2.
+
+**Follow-up audit of the other 18 summary-only groups (2026-09-26): you approved all 18; applied together with removing G-C15's `*2` (approved). 24 rows changed in total since the last commit, only `gold` fields, validator passes.** Same rule, majority text only. Each proposed label was checked for duplicate copies and for overlap chunks the proposal missed.
+
+| Row | Add | Holding sentence |
+|---|---|---|
+| G-C02 *Moss* | *8-9 | "Mr. Moss' time 'on call'… does not satisfy any part of the 750-hour service performance requirement" (*9-11 excluded: REP status, broader than the question) |
+| G-C03, G-X02 *Morehouse* | *42-43, *43-44 | "We hold that the CRP payments at issue do not constitute 'rentals from real estate'"; "we overrule our holding in Wuebker"; SE-tax inclusion sustained (findings at *23-24 excluded) |
+| G-C04 *Medical Emergency Care* | *12-13, *15-17 | "late filing of the information returns does not prevent it from satisfying the filing requirement of section 530(a)(1)(B)"; "We hold that petitioner is entitled to relief" |
+| G-C05 *Ewens & Miller* | *2-3, *9-10 | "we hold that we do have jurisdiction over additions to tax and penalties found in chapter 68" (the summary's holding runs into *2-3) |
+| G-C07 *Ancira* | *6-8, *8-9 | "petitioner acted as a conduit for Pershing"; "did not result in a distribution" |
+| G-C08 *McNulty* | *2-4, *12-13 | "we hold she did"; "had taxable distributions from her IRA when she received physical custody of the AE coins" |
+| G-C09 *Caan* | *24-25, *28 | "were not contributed in a manner that would qualify as a nontaxable rollover"; conclusion and waiver holding at *28 (both copies). *23 excluded: quoting Lemishow |
+| G-C12 *Kings Road* | *18-19 | "Section 6234(a) is subject to equitable tolling" (*7-8 is the general presumption, not a conclusion) |
+| G-C17 *Lofstrom* | *2-3, *11-12 | "used the B&B for personal purposes for an indeterminate period… we hold that they may not deduct"; "personal use of the B&B, petitioners are not entitled to deduct" |
+| G-C22 *Phillips* | *20-22 | "Mr. Phillips did not engage in his bowling activities for profit" |
+| G-X10 *Veriha* | *9-10, *12-13 | "we conclude that each individual tractor or trailer is an 'item of property'"; "only TRI's net income is recharacterized as nonpassive" (*8-9 excluded: the IRS's contention; *11-12: side issue) |
+| G-X12 *Big Apple* | *28 | "Congress did not clearly state that the 90-day filing deadline is jurisdictional… will deny respondent's Motion" |
+| G-X15 *Henry* | *22 | "the cancellation of indebtedness issue is new matter and… the Commissioner therefore bears the burden of proof" (*23-24 excluded: adopted quote from Tabrezi) |
+| G-X24 *Akers* | *11-12 | "the cabin is considered a residence for purposes of section 280A" |
+| G-X25 *Charlotte's* | *3-5, *25-26, *26-27, *28-29, *29-30 | "[wages?] We hold they were"; "[section 530?] We hold it is not"; "lacked a reasonable basis… not entitled to relief under section 530" |
+| G-X26 *Mazotti* | *11, *15-16 | "her writer-researcher activities were not engaged in for profit"; "we sustain the IRS's disallowance" |
+| G-X27 *Specks* | *10-11 | "we sustain respondent's determination that Mr. Specks is liable for self-employment tax" |
+
+**Impact:** none today. Case-law 0.833 ± 0.018 and compound 0.457 ± 0.008 are unchanged over 3 plan sets, and no row moves. These rows already hit through their summary or are unreachable. The point is consistency before C6 edits summary chunks.
+
+**A bug found and fixed along the way:** my audit helper ordered chunks by `part`, which restarts per label, so its "majority ends here" cut-off dropped majority text. Re-run in page order, it surfaced new holding sentences in five opinions (*Morehouse* *42-43, *Mazotti* *11 and *15-16, and others) and changed nothing in the rest. The six-row validation didn't use that cut-off, so it's unaffected.
+
+**Found, not yet acted on (your call):**
+1. **The rule was applied only to rows that missed.** 18 other gold groups (10 case-law, 8 compound) still accept only the summary page. That can't inflate today's recall, but C6 edits summary chunks, so rows that hit only via their summary could flip to misses and make C6 look worse than it is. Recommendation: run the same audit over all 18 before C6.
+2. **G-C15's pre-existing `*2` has no holding** (facts and contentions; "Held:" is in *2-3). Removing it narrows a key, which needs your approval. No current hit depends on it.
+3. **(Checked 2026-09-26) G-C24 earns an unearned hit.** `T.C. Memo. 2023-128, at *15` is carried by 3 chunks, and only one states the holding. In all 3 plan sets the retrieved *15 (rank 10) is a non-holding copy, so today's case-law recall overstates by one row (3.8 points: honest figure ~0.795). G-C14's two *18 copies both carry answer content, so it's fine. Across all sources 2,072 labels are shared, and 5 non-case gold rows use one (G-S26, G-X10's regulation group, G-S10/G-X03, G-T11, G-S28). Fix belongs in the eval, not the gold: score gold against the chunk that was retrieved, not just its label.
+4. *(original note)* **Two pre-existing gold labels are shared by two chunks** (`T.C. Memo. 2023-128, at *15`, `T.C. Memo. 2024-95, at *18`); unverified that both copies carry the gold content. Across the case corpus 579 labels are shared by 1,249 chunks, so gold matched by label can give unearned credit. Recommendation: check these two in the follow-up audit, and in C6 consider matching gold by chunk key rather than label.
+
+**Dependencies:** C0
+**Files:** `eval/golden.jsonl`, `tasks/todo.md`, `STATUS.md`
+**Scope:** S
+
+---
+
+## ✅ Checkpoint 1 (human review)
+- [x] C2's gold changes approved; the page-selection gap is known (2 rows, 7.7 points)
+- [x] Treatment source chosen from C1's numbers (CourtListener keyed + corpus cross-check)
+
+---
+
+## C3: Citation and treatment edge tables
+
+**Description:** Add two Postgres tables (ADR-23): `citations (citing, cited)` and `treatments (citation, kind, by_citation, source, recorded_at, checked_at)`. `checked_at` is when we last looked the case up, separate from when the court decided, because treatments go stale (a pending appeal can be decided next month). Opinions with no treatment found still get a row (`kind = none`) so their check date is kept. Extract `CITES` edges with eyecite from the case text: normalize the PDF line break (`1997- 553` → `1997-553`), add the volume/page → slip-number alias table for reported T.C. opinions, and skip self-citations. Add treatment rows (`affirmed`, `reversed`, `overruled`, `on appeal`) from C1's source. Opinions we don't hold are keys without chunks. Loading is idempotent: re-running replaces the rows.
+
+**Acceptance criteria:**
+- [ ] The tables are created with the existing schema in `store.py`, and load from one CLI command
+- [ ] A hand-labeled sample of 200 edges, stratified by type (`CITES` vs. treatment), is scored: **precision ≥90%, recall ≥85% per type** (the §9.3 gate)
+- [ ] Row counts match C0's edge list (≈2,500 cited opinions, ≈4,900 `citations` rows) within the documented differences
+
+**Verification:**
+- [ ] Tests: line-break normalization, the alias table, self-cite skipping and subsequent-history parsing, on fixture text
+- [ ] The CI corpus snapshot includes the new tables (`eval/snapshot.py`)
+
+**Dependencies:** C1
+**Files:** `src/taxcite/store.py`, `src/taxcite/ingest/citations.py`, `src/taxcite/cli.py`, `tests/test_citations.py`, `pyproject.toml` (eyecite), `eval/snapshot.py`
+**Scope:** M
+
+---
+
+## C4: Treatment flags in answers
+
+**Description:** After synthesis, look up each cited opinion's treatment edges and attach a flag to that citation: `reversed`, `overruled`, `on appeal`, `affirmed`, or `unknown` when the treatment table can't be read. The flag names its source and its check date. The answer text doesn't change. The flags travel in the job record and the SSE `answer` event. "No flag" is shown as "no negative treatment found in <sources>, as of <checked_at>", never as "good law". A check older than 7 days (the weekly refresh the intent doc allows) is marked stale. The scheduled refresh itself is Phase H's.
+
+**Acceptance criteria:**
+- [ ] **Gate:** G-C03, G-X02 and G-X09 carry a `reversed` flag on their reversed opinion; G-C06 and G-X19 carry none; G-C11 carries `on appeal` if C1's source has it
+- [ ] Flag precision on every held opinion with a treatment edge, checked against C1's hand-verified records (the golden rows cover only 2 opinions, so this is the broader check)
+- [ ] With the treatment lookup failing, the answer is unchanged and every flag reads `unknown`
+
+**Verification:**
+- [ ] Tests: flag attachment from fixture rows; fail-open when the lookup raises
+- [ ] Manual: `POST /queries` with G-X02's question shows *Morehouse* flagged in the SSE `answer` event
+
+**Dependencies:** C3
+**Files:** `src/taxcite/generate.py`, `src/taxcite/store.py`, `src/taxcite/api.py`, `tests/`
+**Scope:** M
+
+---
+
+## C5: Graph expansion as an ablation rung
+
+**Description:** Add bounded 1–2 hop expansion (a join on `citations`, twice for two hops) to the case-law sub-query as an `eval/retrieval.py` variant, off by default. Measure it on the golden set with ≥5 repeats and report the delta next to C0's ceiling of 0. The point is the honest rung on the ladder, not a gain.
+
+**Acceptance criteria:**
+- [ ] Case-law Recall@20 with expansion, mean ± sd over ≥5 plan sets, against 0.692; latency added
+- [ ] Off by default in the live pipeline
+
+**Verification:**
+- [ ] Test: expansion adds only held neighbors within the hop limit, on fixture rows
+
+**Dependencies:** C3
+**Files:** `src/taxcite/decompose.py` or `src/taxcite/retrieve.py`, `eval/retrieval.py`, `tests/`
+**Scope:** S
+
+---
+
+## C6: Page selection
+
+**First, fix the eval's shared-label credit (C2 finding, your call):** gold is matched by page label, but 2,072 labels are shared by several chunks, and G-C24 currently scores a hit from a copy that doesn't state the holding. Credit a gold citation only when the retrieved chunk itself is one the gold means: carry the chunk key on `Hit` and store keys alongside labels for the shared-label gold (G-C18, G-C19, G-C24, G-C14, G-S26, G-X10, G-S10, G-X03, G-T11, G-S28). Re-baseline before measuring anything else; the honest case-law figure is expected near 0.795.
+
+**Description:** Close the real page-selection gap C2 leaves: **G-C10** (*Dirico*: the retriever ranks the petitioner's argument at *20-21 over the holding at *21-23) and **G-C26** (*Gale*: background facts over the reasoning at *26-27), 7.7 points against the audited baseline of 0.833 ± 0.018. Two rows can't justify a big mechanism: if the cheapest candidate doesn't move them on dev, record that and stop. Candidates, cheapest first, chosen and tuned on the dev set only:
+1. Clean the syllabus chunk: drop the masthead (caption, docket, "Filed …") and expand "P" / "R" to "petitioner" / "respondent".
+2. Pull all chunks of an opinion that's already retrieved and rerank them together.
+
+Re-embedding the case corpus costs ~24 min (9,973 chunks at 7/s), and the CI snapshot must be regenerated.
+
+**Acceptance criteria:**
+- [ ] The mechanism chosen on dev, with the losing candidate's number recorded
+- [ ] Golden case-law Recall@20 scored once, against the post-audit baseline from C2; no regression over 2 points on the other categories
+- [ ] CI's corpus snapshot regenerated; tier 2's retrieval check re-baselined, if the corpus changed
+
+**Verification:**
+- [ ] Tests: syllabus cleaning on the two real-opinion fixtures in `tests/test_caselaw.py`
+- [ ] `uv run pytest -q` passes
+
+**Dependencies:** C2
+**Files:** `src/taxcite/ingest/caselaw.py` and/or `src/taxcite/retrieve.py`, `tests/test_caselaw.py`, `eval/snapshot.py`
+**Scope:** M
+
+---
+
+## C7: Phase C exit report
+
+**Description:** Write `eval/results/phase_c.md` in the shape of `phase_b.md`: C0's ceiling, the edge-extraction scores, treatment flags per golden row, the expansion and page-selection rungs with mean ± sd, failures with examples, and §9.3 recalibration notes. Update the tech doc's Implementation Status.
+
+**Acceptance criteria:**
+- [ ] Every number traces to a results file or a command listed at the foot of the report
+- [ ] The §9.3 Phase C gate is stated as met or not met, with no reinterpretation
+
+**Dependencies:** C4, C5, C6
+**Files:** `eval/results/phase_c.md`, `taxcite-technical-documentation.md`
+**Scope:** S
+
+---
+
+## ✅ Checkpoint: Phase C complete
+- [ ] Edges ≥90% / ≥85%; 3/3 reversed rows flagged, 0 false flags
+- [ ] Tests pass in CI; the faithfulness gate is still green
+- [ ] Ready to plan Phase D
+

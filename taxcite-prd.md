@@ -69,13 +69,13 @@ TaxCite is a citation-grounded Retrieval-Augmented Generation (RAG) system that 
 ## 6. System Architecture
 
 **Ingestion (batch + event-driven):**
-eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specific parsers (statute XML parser, OCR for scanned memos, table extraction for rate schedules). Parsed content fans out into four parallel processing paths — chunking + embedding, citation-graph edge extraction, bi-temporal tagging, and authority tagging — which converge into three stores: **Qdrant** (hybrid dense+sparse vector index, shared corpus + per-tenant namespace), **Neo4j** (citation graph), and **Postgres** (metadata, temporal validity, authority profiles, citations).
+eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specific parsers (statute XML parser, OCR for scanned memos, table extraction for rate schedules). Parsed content fans out into four parallel processing paths — chunking + embedding, citation-graph edge extraction, bi-temporal tagging, and authority tagging — which converge into two stores: **Qdrant** (hybrid dense+sparse vector index, shared corpus + per-tenant namespace) and **Postgres** (metadata, temporal validity, authority profiles, citations, and the citation/treatment edges; no separate graph database, ADR-23).
 
 **Query path (compute is synchronous; delivery is streamed):**
 1. Auth/tenant resolution
 2. Query decomposition (LLM) into statutory / case-law / client-fact sub-queries, plus an extracted "as-of" tax year
 3. Parallel hybrid retrieval per sub-query, filtered by the as-of date against each chunk's valid-time window
-4. Citation-graph expansion for the case-law sub-query only (bounded 1–2 hops)
+4. Citation-graph expansion for the case-law sub-query only (bounded 1–2 hops): an ablation rung, off by default, since its measured ceiling is 0 (C0, ADR-1 revised)
 5. Authority-weighted cross-encoder reranking of the combined candidate set
 6. Evidence-sufficiency gate — one batched, structured-output call per sub-query, run before synthesis
 7. Synthesis — one cited answer over sub-answers that passed the gate; buffered, not token-streamed
@@ -89,7 +89,7 @@ eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specif
 | Component | Choice |
 |---|---|
 | Vector + lexical retrieval | Qdrant (self-hosted, native dense+sparse hybrid) |
-| Graph store | Neo4j Community (self-hosted) |
+| Graph store | None: citation and treatment edges are Postgres tables (ADR-23) |
 | Metadata/relational | Postgres (Supabase free tier) |
 | API | FastAPI |
 | Cache/queue | Redis (self-hosted) |
@@ -115,7 +115,7 @@ eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specif
 |---|---|---|
 | FR-1 | The system must decompose a compound tax question into statutory, case-law, and client-fact sub-queries, plus an as-of tax year. | Query path step 2 |
 | FR-2 | The system must retrieve each sub-query via hybrid (dense + sparse) search, filtered by the as-of date against each chunk's valid-time window. | Query path step 3 |
-| FR-3 | For case-law sub-queries, the system must expand seed results via bounded 1–2 hop citation-graph traversal (CITES / DISTINGUISHES / OVERRULES / AMENDS). | Query path step 4; ADR-1 |
+| FR-3 | For every opinion an answer cites, the system must look up its negative treatment in the citation graph (reversed / overruled / on appeal) and flag it on the citation, naming the source; when the graph is unavailable the flag reads "unknown", never "good law". Bounded 1–2 hop expansion of case-law results is kept as a measured ablation rung, off by default. *Revised 2026-09-26 from C0: expansion's ceiling on the golden set is 0 points.* | Query path step 4; ADR-1 (revised) |
 | FR-4 | The system must rerank the combined candidate set using a cross-encoder with authority metadata as an explicit boost/demote signal, not semantic score alone. | Query path step 5; ADR-8 |
 | FR-5 | The system must run an evidence-sufficiency check per sub-query before synthesis, excluding sub-queries below threshold, implemented as one batched structured-output call per sub-query. | Query path step 6; ADR-7, ADR-10 |
 | FR-6 | The system must generate one synthesized answer, with a citation attached to every claim, generated only over sub-answers that passed the sufficiency gate. | Query path step 7 |
@@ -125,7 +125,7 @@ eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specif
 | FR-10 | Every response must include a trace ID. | §3.4 |
 | FR-11 | The system must enforce per-tenant isolation of client documents, verified by an automated test asserting the cross-tenant filter fires on every query, including graph-traversal queries. | ADR-5 |
 | FR-12 | The system must stream per-stage progress via SSE and buffer the final answer until claim verification completes; the answer must never be token-streamed before verification. | ADR-9 |
-| FR-13 | The system must fail open to vector-only case-law retrieval if Neo4j is unavailable, and fail closed to a statute-only answer with an explicit caveat if case-law retrieval fails outright. | §6 (Resilience) |
+| FR-13 | The system must fail open to "treatment unknown" flags if the treatment lookup can't be read, and fail closed to a statute-only answer with an explicit caveat if case-law retrieval fails outright. | §6 (Resilience) |
 | FR-14 | All source-derived and model-generated text must be sanitized at render time; citation chips and authority badges must be populated only from structured ingestion fields, never from arbitrary source text. | ADR-13 |
 | FR-15 | PII in client-document fields must be redacted before any trace span is emitted, not after. | §3.4 |
 | FR-16 | Citation-extraction and authority-metadata gaps encountered during ingestion must be logged and surfaced, never silently defaulted. | §3.2 |
@@ -141,9 +141,9 @@ eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specif
 | Latency | p95 end-to-end, refusal path | ≤2s |
 | Reliability | Error rate | <1% over a rolling 5-minute window |
 | Reliability | Cross-tenant data leakage | 0 tolerated failures (hard gate) |
-| Reliability | Neo4j / Qdrant / Redis health-check failures | Alerted, not silently absorbed, even when the system degrades gracefully |
+| Reliability | Qdrant / Redis health-check failures | Alerted, not silently absorbed, even when the system degrades gracefully |
 | Data freshness | Public corpus reindex | Weekly incremental |
-| Data durability | Backup | Nightly Postgres/Neo4j dumps + Qdrant snapshots, 14-day retention, quarterly restore drill |
+| Data durability | Backup | Nightly Postgres dumps + Qdrant snapshots, 14-day retention, quarterly restore drill |
 | Cost | Per-query LLM call count | ~5 calls worst case (1 decompose + 3 sufficiency + 1 synthesis), down from as many as `2 + top_k × 3` pre-optimization |
 | Cost | Per-query budget | Confirmed ceiling: <$50/mo total; narrows the LLM provider decision to self-hosted or budget-tier options (ADR-11) |
 | Security | Prompt-injection defense | Must pass 100% on the injection test corpus (prompt path) before deploy |
@@ -175,8 +175,9 @@ Quality is tracked via an **ablation ladder** — closed-book → dense-only →
 | Phase | Metric | Threshold |
 |---|---|---|
 | B | RAGAS faithfulness (CI gate) | ≥0.85 |
-| C | Case-law Recall@20 delta over decomposition-only | ≥5 points |
 | C | Citation-edge extraction precision / recall (N=200) | ≥90% / ≥85% |
+| C | Golden negative-treatment rows flagged correctly | 3/3 reversed flagged; 0 false flags |
+| C | Case-law Recall@20 delta from graph expansion | reported, not gated (C0 ceiling: 0; was ≥5) |
 | D | Temporal-filtering accuracy | ≥90% |
 | E | Authority-metadata accuracy (N=150) | ≥95% |
 | E | Recall@20 regression from authority rerank | ≤2 points |
@@ -202,19 +203,19 @@ All thresholds are first-pass engineering targets, to be recalibrated against re
 - Per-tenant isolation enforced at the query-filter layer, with a compensating automated leakage test (ADR-5).
 - Prompt-injection defenses cover both the prompt boundary (ADR-14) and the render boundary (ADR-13) — untrusted client-document content cannot manipulate the model or forge UI elements.
 - PII redaction is enforced as a tested invariant (runs before span emission, not after), not an assumption.
-- Fail-open/fail-closed behavior is explicit and tested: vector-only fallback if the graph store is down, statute-only-with-caveat if case-law retrieval fails outright.
+- Fail-open/fail-closed behavior is explicit and tested: "treatment unknown" if the treatment lookup fails, statute-only-with-caveat if case-law retrieval fails outright.
 
 **Known risks and limitations:**
 
 | Risk | Mitigation |
 |---|---|
 | This is a design document, not yet evidence of a working system | Numeric acceptance gates (§9) exist specifically to produce that evidence |
-| Citation-graph extraction errors could pollute retrieval | Validated against a 200-edge hand-labeled sample, gated at ≥90%/≥85% precision/recall before trusted (Phase C) |
+| Citation-graph extraction errors could produce false or missed treatment flags | Validated against a 200-edge hand-labeled sample, gated at ≥90%/≥85% precision/recall before trusted (Phase C) |
 | Authority-metadata errors could misweight ranking | Validated against a 150-chunk hand-labeled sample, gated at ≥95% accuracy (Phase E); gaps are logged, never silently defaulted |
 | As-of (tax year) resolution can be ambiguous | Assumed year is always surfaced to the user, never silently picked |
 | A general-purpose NLI model may not transfer cleanly to legal language | Periodic audit against LLM-as-judge, gated at F1 ≥0.90 |
 | Entailment does not imply correctness — a claim can be supported yet legally wrong | Tracked as a separate metric (§9), now graded by an LLM judge rather than a human expert — weaker evidence of correctness than human review, disclosed explicitly rather than presented as equivalent |
-| Neo4j is a second stateful dependency | Fail-open behavior, tested, plus an alert so degraded-but-working states are visible |
+| ~~Neo4j is a second stateful dependency~~ | Removed: no graph database (ADR-23) |
 | Sufficiency and verification gates could disagree in edge cases | Resolved: a sub-answer failing verification after passing sufficiency is suppressed entirely (ADR-15). Residual risk is coverage (more "insufficient evidence" outcomes), not safety |
 | LLM provider/model is still unresolved | Cost ceiling itself is now fixed at <$50/mo (§8); provider choice remains open and resolved empirically in Phase A (see §12) |
 | Client-document uploads had no defined threat model | Addressed: file-type allowlist and OCR/parsing-failure policy now specified (FR-17); exact size limit remains open (see §12) |
@@ -229,7 +230,7 @@ All thresholds are first-pass engineering targets, to be recalibrated against re
 |---|---|---|
 | A — Core retrieval baseline | Federal statute + IRS pubs, single-hop hybrid retrieval, single-tenant. Delivery transport (SSE) and LLM provider/embedding model decided here. | Closed-book baseline established; provider/embedding choices locked |
 | B — Decomposition + eval infra | Case-law corpus, query decomposition, 100-question golden set, RAGAS in CI | Faithfulness ≥0.85 |
-| C — Citation graph | Neo4j, citation extraction, bounded graph expansion | Recall@20 delta ≥5 pts AND edge precision/recall ≥90%/85% |
+| C — Citation graph | Citation and treatment edges in Postgres, citation extraction, negative-treatment flags, page selection; graph expansion as an ablation rung | Edge precision/recall ≥90%/85% AND 3/3 reversed golden rows flagged with 0 false flags |
 | D — Temporal validity | Bi-temporal metadata, as-of filtering, amendment versioning | Temporal accuracy ≥90% |
 | E — Authority-aware retrieval | Authority metadata, authority-weighted reranking | Authority accuracy ≥95%; Recall@20 regression ≤2 pts |
 | F — Sufficiency + verification | Batched sufficiency gate, self-hosted NLI verification with zero-tolerance suppression (ADR-15), LLM-judge correctness grading begins | Entailment F1 ≥0.90, completeness ≥0.85 |

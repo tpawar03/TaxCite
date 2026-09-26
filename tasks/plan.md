@@ -201,3 +201,77 @@ Full task details are in `tasks/todo.md` (Phase B section).
 - **RAGAS: the library, version pinned**, so "RAGAS faithfulness" means what reviewers expect. Fall back to our own implementation of the metric if the dependencies cause trouble.
 - ~~Holding/dicta tags: the field is added in B3 and left empty.~~ **Changed in B3:** no empty column. Nothing reads it until Phase E, which adds the column with values, the way B2 added `source_revision`.
 - **CI corpus: a Qdrant snapshot plus a Postgres `chunks` dump, published as a GitHub release asset.** A self-hosted runner on the Mac was rejected as fragile.
+
+---
+
+# Phase C Implementation Plan: Citation graph
+
+_Drafted 2026-09-26 from the C0 spike. Claude revised the phase under your standing permission to change the plan when findings require it. The reasons are in ADR-1 (revised) and engineering log #53._
+
+## Overview
+
+The tech doc's Phase C (§7) built a citation graph to widen case-law search. C0 measured that before building it, and the ceiling is **0 points**: none of the case-law gold that decomposition misses is within two citation hops of anything retrieved. So the phase keeps the graph but gives it a job that pays off, and moves the recall work to where the gap actually is.
+
+**What Phase C delivers:**
+1. **Negative treatment.** When an answer relies on a Tax Court opinion that was later reversed, overruled or is on appeal, the answer says so. This is the question every practitioner asks of a case ("is it still good law?"). Three golden rows already test it (G-C03, G-X02, G-X09), and two check it doesn't over-flag (G-C06, G-X19).
+2. **Page selection.** 23.1 of the 30.8 missed case-law points were the right opinion at the wrong pages. C2 found 15.4 of them were answer keys that were too narrow (fixed, approved); the real gap is **2 rows, 7.7 points**, against an audited baseline of **0.833 ± 0.018** (3 cached plan sets).
+3. **Graph expansion as a measured rung**, not a gate. It goes on the ablation ladder with its honest number.
+
+**Exit condition:** a reviewer asks about CRP payments (G-X02) and the answer cites *Morehouse* with a visible "reversed by the Eighth Circuit" flag. The ladder shows what expansion and page selection each add, including zero.
+
+Source docs: tech doc §3.2, §5.2, §7, §9.3, ADR-1 (revised) · `eval/results/phase_b.md` · `tasks/todo.md` C0.
+
+## Architecture Decisions (for this phase)
+
+- **No graph database: the edges are two Postgres tables (ADR-23).** `citations (citing, cited)` and `treatments (citation, kind, by_citation, source, recorded_at, checked_at)`, keyed by the corpus citation (`T.C. Memo. 2021-115`, `119 T.C. No. 5`). Opinions we cite but don't hold appear as keys with no chunks. Appellate opinions appear only as `by_citation`; there is still no appellate corpus. *Changed 2026-09-26, you confirmed:* the first draft of this plan kept Neo4j, but the treatment check is a lookup by key, not a traversal.
+- **Edges follow what reads them.**
+  - `CITES`: from eyecite, over the opinion text C0 already extracts.
+  - `AFFIRMED_BY`, `REVERSED_BY`, `OVERRULED_BY`: from subsequent history. Our own corpus supplies some ("140 T.C. 350 (2013), *rev'd*, 769 F.3d 616"), and C1 measures how much, plus what CourtListener adds.
+  - `DISTINGUISHES` is dropped: it needs an LLM pass and nothing reads it. `AMENDS` is statute versioning, which is Phase D.
+- **Reported T.C. opinions get an alias.** They are cited by volume and page (`119 T.C. 121`) but keyed by slip number (`119 T.C. No. 5`). C0 recovered 10 of 28 by surname match. C3 makes that a table, checked by hand.
+- **Treatment is looked up at synthesis, not in retrieval.** For each opinion the answer cites, read its treatment edges and attach a flag to the citation: `reversed`, `overruled`, `on appeal` or `affirmed`. The flag travels in the answer payload and the SSE `answer` event. The answer text doesn't change; Phase E decides whether treatment should also change ranking.
+- **The lookup fails open.** If the treatment table can't be read, the answer is unchanged and marked "treatment unknown", never "good law".
+- **The golden set stays frozen except through its audit rule.** C2 may widen gold groups (adding pages that state the same holding) only as a logged commit that you review, the same process as the B4/B5 audits. It never narrows them. Whether a page "states the holding" is judged from the opinion text, not from what the retriever returned.
+
+## Dependency Graph
+
+```
+C0 reachability spike ✅
+   ├── C1 treatment-source spike ──► C3 edge tables ───► C4 treatment flags ──┐
+   │                                      └──► C5 expansion rung (ablation) ───┤
+   └── C2 wrong-page audit ──► C6 page selection ─────────────────────────────┤
+                                                                              ▼
+                                                                  C7 Phase C exit report
+```
+
+## Task List
+
+Full task details are in `tasks/todo.md` (Phase C section).
+
+### Slice 1 — Find out what's there
+- [x] C0: Citation-graph reachability spike
+- [x] C1: Treatment-source spike: where "reversed / on appeal" data comes from, and how much
+- [x] C2: Wrong-page audit of the 6 golden rows (all 6 widened; Recall@20 0.692 → 0.833 ± 0.018 on the audited set)
+
+### Checkpoint 1 (human review)
+- [x] You approve C2's gold changes, if any. The treatment source is chosen from C1's numbers
+
+### Slice 2 — The graph
+- [ ] C3: Citation and treatment edge tables in Postgres (with the 200-edge hand-labeled sample)
+- [ ] C4: Treatment flags in answers
+- [ ] C5: Graph expansion as an ablation rung
+
+### Slice 3 — The real recall gap
+- [ ] C6: Page selection (scope set by C2)
+
+### Checkpoint: Phase C complete
+- [ ] C7: Phase C exit report. Gate met: edges ≥90% precision / ≥85% recall; 3/3 reversed rows flagged; G-C06 and G-X19 not flagged. Ladder shows expansion and page selection with their measured deltas
+
+## Risks and Mitigations
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| No reliable source for appellate outcomes: DAWSON doesn't track appeals, and CourtListener's coverage of unpublished dispositions is incomplete | High | C1 measures coverage before anything depends on it. A missing record shows as "treatment unknown", never as "good law". The flag says which source it came from. |
+| Treatment flags give false comfort: "no flag" read as "good law" | High | The absence of a flag is displayed as "no negative treatment found in <sources>", not as a clean bill. |
+| The wrong-page audit is contaminated: Claude has already seen the retriever's output for these rows | Med | You judge each change from the opinion text. Gold groups may only widen, never narrow, and every change is a logged commit. |
+| Page-selection tuning overfits the 6 rows | Med | Tune on the dev set only. The golden set scores once, at the end, as in Phase B. |

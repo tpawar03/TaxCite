@@ -49,6 +49,8 @@ regulations. The mechanism works; the category it was designed for is not the on
 
 ## Phase C's baseline
 
+*Note (2026-09-26): the golden-set numbers in this report were computed on `eval/golden.jsonl` as of commit `7a0b3e8`, before C2 widened six case-law gold groups. Re-running the commands below on the current file gives the audited numbers (case-law Recall@20 0.833 ± 0.018), not these.*
+
 Graph expansion (§5.3) has to beat this. Decomposition-only, k=20, 26 case-law rows:
 
 | | Recall@20 |
@@ -56,9 +58,14 @@ Graph expansion (§5.3) has to beat this. Decomposition-only, k=20, 26 case-law 
 | hybrid | 0.692 |
 | **hybrid + routing (decomposition only)** | **0.692** |
 
-Routing adds nothing to case law at k=20 — it is already finding what it can, and the
-remaining 30.8% is not in the candidate pool at any depth routing can reach. That is the
-gap graph expansion exists to close, and the number it will be measured against.
+Routing adds nothing to case law at k=20. It is already finding what it can.
+
+*Corrected 2026-09-26 (C0):* this report first said the remaining 30.8% "is not in the
+candidate pool" and that graph expansion exists to close it. Both were wrong. For 23.1 of the
+30.8 points the gold *opinion* is in the top 20, but at the wrong pages (usually the gold is
+the syllabus, `at *1-2`, which never ranks). The other 7.7 points are more than two citation
+hops from anything retrieved. Graph expansion's ceiling on this baseline is 0 points, and
+Phase C's recall work moved to page selection (ADR-1, revised).
 
 Overall at k=20: hybrid 0.469 → routing 0.539; statutory 0.357 → 0.500; compound 0.398 → 0.462.
 
@@ -117,7 +124,7 @@ fully-unanswerable rows abstain reliably; this one does not.
 **5. Over-refusal on a partial.** `G-I11` asks a federal question and a California question
 in one breath. The federal half is answerable (§280A(c)(1) is gold); the system refuses
 **both** in all 3 runs. The per-sub-query sufficiency gate (§3.3 step 6) that would drop only
-the unsupported half is not built — a Phase C item, now with a test waiting for it.
+the unsupported half is not built — a Phase F item (moved from C on 2026-09-26, since F builds the sufficiency gate), now with a test waiting for it.
 
 **6. Retrieval that varies between runs.** `G-C13` retrieved its gold opinion in 1 of 3 runs.
 The planner routes 16% of golden questions differently between runs, and different routing
