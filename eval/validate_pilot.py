@@ -54,7 +54,9 @@ def main(path: str) -> int:
                 if r.get("client_doc") is None:
                     issues.append('adversarial row needs client_doc (use "" if the attack is in the question)')
 
-            top50 = {h.citation for h in search(r["question"], k=50, mode="hybrid")} if r["gold"] else set()
+            # a gold entry is a citation label or, where a label is shared by several chunks, one chunk's key
+            ids = lambda hits: {x for h in hits for x in (h.citation, h.key)}
+            top50 = ids(search(r["question"], k=50, mode="hybrid")) if r["gold"] else set()
             texts = []
             subqueries = r.get("gold_subqueries") or []
             if subqueries and len(subqueries) != len(r["gold"]):
@@ -64,7 +66,8 @@ def main(path: str) -> int:
                 for cit in sorted(group):
                     # every source lives in the chunks table: regulation, publication, statute, opinion
                     count, text, excluded, source = conn.execute(
-                        "SELECT count(*), max(text), max(excluded::text), max(source) FROM chunks WHERE citation=%s", (cit,)
+                        "SELECT count(*), max(text), max(excluded::text), max(source) FROM chunks WHERE "
+                        + ("key" if "#" in cit else "citation") + "=%s", (cit,)
                     ).fetchone()
                     if not count:
                         issues.append(f"gold citation not in corpus: {cit}")
@@ -80,12 +83,12 @@ def main(path: str) -> int:
                 if not group & top50:
                     if gi < len(subqueries):
                         sq = subqueries[gi]
-                        if group & {h.citation for h in search(sq["query"], k=50, mode="hybrid", source=sq["source"])}:
+                        if group & ids(search(sq["query"], k=50, mode="hybrid", source=sq["source"])):
                             needs_decomposition.append(f"{r['id']}: {' | '.join(sorted(group))}")
                             continue
                         issues.append(f"gold not reached even by its sub-query ({sq['source']}: {sq['query']!r}): {' | '.join(sorted(group))}")
                         continue
-                    own = {h.citation for src in sources for h in search(r["question"], k=50, mode="hybrid", source=src)}
+                    own = {x for src in sources for x in ids(search(r["question"], k=50, mode="hybrid", source=src))}
                     if group & own:
                         diluted.append(f"{r['id']}: {' | '.join(sorted(group))}")
                         continue

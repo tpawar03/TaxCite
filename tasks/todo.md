@@ -841,13 +841,25 @@ Score both against the six golden treatment rows: G-C03, G-X02, G-X09 (reversed)
 **Description:** Add two Postgres tables (ADR-23): `citations (citing, cited)` and `treatments (citation, kind, by_citation, source, recorded_at, checked_at)`. `checked_at` is when we last looked the case up, separate from when the court decided, because treatments go stale (a pending appeal can be decided next month). Opinions with no treatment found still get a row (`kind = none`) so their check date is kept. Extract `CITES` edges with eyecite from the case text: normalize the PDF line break (`1997- 553` → `1997-553`), add the volume/page → slip-number alias table for reported T.C. opinions, and skip self-citations. Add treatment rows (`affirmed`, `reversed`, `overruled`, `on appeal`) from C1's source. Opinions we don't hold are keys without chunks. Loading is idempotent: re-running replaces the rows.
 
 **Acceptance criteria:**
-- [ ] The tables are created with the existing schema in `store.py`, and load from one CLI command
-- [ ] A hand-labeled sample of 200 edges, stratified by type (`CITES` vs. treatment), is scored: **precision ≥90%, recall ≥85% per type** (the §9.3 gate)
-- [ ] Row counts match C0's edge list (≈2,500 cited opinions, ≈4,900 `citations` rows) within the documented differences
+- [x] The tables are created with the existing schema in `store.py`, and load from one CLI command (`taxcite citations`; ~2 min from cache)
+- [x] A hand-labeled sample of 200 edges, stratified by type (`CITES` vs. treatment), is scored: **precision ≥90%, recall ≥85% per type** (the §9.3 gate). Results below
+- [x] Row counts match C0's edge list (≈2,500 cited opinions, ≈4,900 `citations` rows) within the documented differences: with C0's normalization the load reproduced C0 exactly (4,911 / 2,496); the final 5,278 / 2,649 adds cites from scanned opinions C0 couldn't read
 
 **Verification:**
-- [ ] Tests: line-break normalization, the alias table, self-cite skipping and subsequent-history parsing, on fixture text
-- [ ] The CI corpus snapshot includes the new tables (`eval/snapshot.py`)
+- [x] Tests: line-break normalization, the alias table, self-cite skipping and subsequent-history parsing, on fixture text (17 tests, `tests/test_citations.py`, each built from a sentence in the corpus)
+- [x] The CI corpus snapshot includes the new tables (`eval/snapshot.py`); restore tolerates an older snapshot without them. **A new snapshot still has to be published** before CI sees the tables
+
+**Measured 2026-09-26 (hand check of 200 edges; the scripts stay in the session scratchpad):**
+
+| Type | Precision | Recall |
+|---|---|---|
+| CITES (100 sampled + 40 from the spacing repair) | 100/100 on the random sample; the repair's 3 OCR false edges (a garbled masthead self-cite, a split page) are now blocked | **99.9%** (5,115 of 5,121 against a looser independent pattern), up from 95.9% before repairing scanned-text spacing ("116 T .C . 438") |
+| Treatment, corpus history (81 sampled) | **75/76** verifiable claims right (1 wrong kind: *Whitehouse*'s vacatur lost across a "supplementing" chain; 4 are `unknown`, a non-claim) | **88%** against the loose yardstick (636/722); of 30 misses classified, 16 aren't history of that case (nested cites, garbled or absent appeal), so ~95% of real history is captured |
+| Treatment, CourtListener (19) | **19/19** | 19 held opinions found; 7 appeals known from the corpus are absent from CourtListener (unpublished Westlaw-only dispositions, a name change); covered by the corpus source |
+
+Found and fixed during the check, each now a test: split decisions after the cite ("aff'd in part, rev'd in part" read as affirmed); vacatur mixes; history crossing a sentence break; history belonging to an outer cite ("(citing Tokarski…)), aff'd"); a garbled cite borrowed as the appeal (gap rule); a blank appeal cite borrowing the next one (*Cave*); parallel WL/T.C.M. cites and explanatory parentheticals hiding history; a case-insensitive sentence guard ("slip op. at"); eyecite taking a year from a later parenthetical (*Lavery*); joint captions with two surnames (*Schwab*); firms named after their owner (*Grey*, *Cave*). Idempotency: two consecutive loads leave byte-identical tables (md5 of both, including `recorded_at` and `checked_at`). *Corrected after your first CLI run printed 716, not 718:* that held only within one hash seed. eyecite misreads some short forms ("72 T.C. at 669") as full cites depending on `PYTHONHASHSEED`, and a phantom cite between an opinion and its appeal dropped the history (*Kahla*, T.C. Memo. 2000-127). `full_cites` now drops reporters ending in " at"; both tables fingerprint identically under six seeds, and the *Kahla* sentence is a test.
+
+Known limits, documented not fixed: OCR-damaged cites ("288.F.2d"), "supplemented by…" chains and list forms ("aff'g A, B, and C") attach history to one member only; pending appeals are invisible to both sources.
 
 **Dependencies:** C1
 **Files:** `src/taxcite/store.py`, `src/taxcite/ingest/citations.py`, `src/taxcite/cli.py`, `tests/test_citations.py`, `pyproject.toml` (eyecite), `eval/snapshot.py`
@@ -860,13 +872,15 @@ Score both against the six golden treatment rows: G-C03, G-X02, G-X09 (reversed)
 **Description:** After synthesis, look up each cited opinion's treatment edges and attach a flag to that citation: `reversed`, `overruled`, `on appeal`, `affirmed`, or `unknown` when the treatment table can't be read. The flag names its source and its check date. The answer text doesn't change. The flags travel in the job record and the SSE `answer` event. "No flag" is shown as "no negative treatment found in <sources>, as of <checked_at>", never as "good law". A check older than 7 days (the weekly refresh the intent doc allows) is marked stale. The scheduled refresh itself is Phase H's.
 
 **Acceptance criteria:**
-- [ ] **Gate:** G-C03, G-X02 and G-X09 carry a `reversed` flag on their reversed opinion; G-C06 and G-X19 carry none; G-C11 carries `on appeal` if C1's source has it
-- [ ] Flag precision on every held opinion with a treatment edge, checked against C1's hand-verified records (the golden rows cover only 2 opinions, so this is the broader check)
-- [ ] With the treatment lookup failing, the answer is unchanged and every flag reads `unknown`
+- [x] **Gate:** G-C03, G-X02 and G-X09 carry a `reversed` flag on their reversed opinion; G-C06 and G-X19 carry none; G-C11 carries `on appeal` if C1's source has it. *Measured 2026-09-27 through the real pipeline (6 runs, $0.005):* *Morehouse* reversed (8th Cir. 2014) on G-C03 and G-X02, *Menard* reversed (7th Cir. 2009) on G-X09; G-C06's cited *Grey* affirmed; G-X19's cited opinions clean (though its answer didn't cite the gold opinion, a retrieval miss); *Patel* reads none with "pending appeals are not tracked", as no source sees it
+- [x] Flag precision on every held opinion with a treatment edge, checked against C1's hand-verified records (the golden rows cover only 2 opinions, so this is the broader check): **26/26** non-clean flags match (19 CourtListener, 7 corpus-only); 281 read none
+- [x] With the treatment lookup failing, the answer is unchanged and every flag reads `unknown` (and the connection is rolled back, since the answer is published on it next)
 
 **Verification:**
-- [ ] Tests: flag attachment from fixture rows; fail-open when the lookup raises
-- [ ] Manual: `POST /queries` with G-X02's question shows *Morehouse* flagged in the SSE `answer` event
+- [x] Tests: flag attachment from fixture rows; fail-open when the lookup raises (6 flag-rule tests in `tests/test_citations.py`, 1 attachment test in `tests/test_jobs.py`; fixture rows, not the live table, because CI restores the pre-C3 snapshot until a new one is published)
+- [x] Manual: `POST /queries` with G-X02's question shows *Morehouse* flagged in the SSE `answer` event: `reversed`, by 769 F.3d 616 (ca8 2014), checked 2026-09-26. The answer *text* still says the payments are subject to SE tax, which is wrong for an Iowa client: the flag is the only warning, and acting on treatment is Phase E's
+
+**Built:** `flags()` / `flag()` in `src/taxcite/ingest/citations.py` (merge rules beside the code that writes the table); `jobs.run` attaches `treatments` to the `answer` event. Rules: an overruling stands alone; sources disagreeing about an appeal give `unknown`; else the most serious negative outcome, then `appealed`, then an affirmance; no rows is `unknown`, never "good law"; a check older than 7 days is `stale`. Corpus-only flags are dated by the corpus download (2026-09-22), so they turn stale on 2026-09-29 until Phase H's weekly refresh exists.
 
 **Dependencies:** C3
 **Files:** `src/taxcite/generate.py`, `src/taxcite/store.py`, `src/taxcite/api.py`, `tests/`
@@ -879,11 +893,21 @@ Score both against the six golden treatment rows: G-C03, G-X02, G-X09 (reversed)
 **Description:** Add bounded 1–2 hop expansion (a join on `citations`, twice for two hops) to the case-law sub-query as an `eval/retrieval.py` variant, off by default. Measure it on the golden set with ≥5 repeats and report the delta next to C0's ceiling of 0. The point is the honest rung on the ladder, not a gain.
 
 **Acceptance criteria:**
-- [ ] Case-law Recall@20 with expansion, mean ± sd over ≥5 plan sets, against 0.692; latency added
-- [ ] Off by default in the live pipeline
+- [x] Case-law Recall@20 with expansion, mean ± sd over ≥5 plan sets, against 0.692; latency added. *Measured 2026-09-27, golden, k=20, 5 plan sets; re-run after C6's key-aware scoring (`eval/results/retrieval-golden-2026-09-27-k20-c5-graph.json`). Under label scoring the arms read 0.815 / 0.777 / 0.777 with the same deltas:*
+
+  | Arm | Case-law Recall@20 | All scored rows | p50 |
+  |---|---|---|---|
+  | shipped (route + rerank) | **0.777 ± 0.029** | 0.563 ± 0.010 | 1.25 s |
+  | + 1 hop | 0.738 ± 0.029 (−3.9) | 0.540 (−2.3) | 1.95 s |
+  | + 2 hops | 0.738 ± 0.029 (−3.9) | 0.522 (−4.1) | 1.98 s |
+
+  **Zero gains in any row or plan set; only losses** (1 hop: G-C15 and G-S01 in all 5 sets; 2 hops adds G-X04, G-X06, G-X17). Expansion only displaces: G-C15's gold sat at rank 20, and a statutory row loses its statute to court prose because its plan also held a case-law sub-query. C0's ceiling of 0 holds, and the real effect is negative. The 0.692 in this criterion is pre-C2; the audited baseline is 0.815 ± 0.029 over 5 plan sets (0.833 had come from 3; the two new sets scored 0.808 and 0.769)
+- [x] Off by default in the live pipeline (`jobs.run` and `decompose.answer` call `retrieve` with the default `hops=0`)
 
 **Verification:**
-- [ ] Test: expansion adds only held neighbors within the hop limit, on fixture rows
+- [x] Test: expansion adds only held neighbors within the hop limit, on fixture rows (`tests/test_decompose.py`: held only, 1 vs 2 hops, cited-by direction, co-citation through an unheld opinion, seeds excluded)
+
+**Built:** `neighbors()` and a cached `citation_graph()` in `decompose.py`; `retrieve(..., hops=0)`; a `sections` filter on `search()`; rungs `route+graph1` / `route+graph2` in `eval/retrieval.py`. Planning 2 more plan sets for the 86 golden questions (~$0.05) extended the committed plan cache; the dev entries the CI gate reads are unchanged.
 
 **Dependencies:** C3
 **Files:** `src/taxcite/decompose.py` or `src/taxcite/retrieve.py`, `eval/retrieval.py`, `tests/`
@@ -895,20 +919,24 @@ Score both against the six golden treatment rows: G-C03, G-X02, G-X09 (reversed)
 
 **First, fix the eval's shared-label credit (C2 finding, your call):** gold is matched by page label, but 2,072 labels are shared by several chunks, and G-C24 currently scores a hit from a copy that doesn't state the holding. Credit a gold citation only when the retrieved chunk itself is one the gold means: carry the chunk key on `Hit` and store keys alongside labels for the shared-label gold (G-C18, G-C19, G-C24, G-C14, G-S26, G-X10, G-S10, G-X03, G-T11, G-S28). Re-baseline before measuring anything else; the honest case-law figure is expected near 0.795.
 
-**Description:** Close the real page-selection gap C2 leaves: **G-C10** (*Dirico*: the retriever ranks the petitioner's argument at *20-21 over the holding at *21-23) and **G-C26** (*Gale*: background facts over the reasoning at *26-27), 7.7 points against the audited baseline of 0.833 ± 0.018. Two rows can't justify a big mechanism: if the cheapest candidate doesn't move them on dev, record that and stop. Candidates, cheapest first, chosen and tuned on the dev set only:
+**Description:** Close the real page-selection gap C2 leaves: **G-C10** (*Dirico*: the retriever ranks the petitioner's argument at *20-21 over the holding at *21-23) and **G-C26** (*Gale*: background facts over the reasoning at *26-27), 7.7 points against the audited baseline of 0.815 ± 0.029 (5 plan sets, C5). Two rows can't justify a big mechanism: if the cheapest candidate doesn't move them on dev, record that and stop. Candidates, cheapest first, chosen and tuned on the dev set only:
 1. Clean the syllabus chunk: drop the masthead (caption, docket, "Filed …") and expand "P" / "R" to "petitioner" / "respondent".
 2. Pull all chunks of an opinion that's already retrieved and rerank them together.
 
 Re-embedding the case corpus costs ~24 min (9,973 chunks at 7/s), and the CI snapshot must be regenerated.
 
 **Acceptance criteria:**
-- [ ] The mechanism chosen on dev, with the losing candidate's number recorded
-- [ ] Golden case-law Recall@20 scored once, against the post-audit baseline from C2; no regression over 2 points on the other categories
-- [ ] CI's corpus snapshot regenerated; tier 2's retrieval check re-baselined, if the corpus changed
+**Done 2026-09-27, part 1 (the eval fix):** `Hit` carries the chunk key; gold can be a label (credits any copy) or a key (credits that chunk only); `eval/retrieval.py` and `eval/validate_pilot.py` accept both. You approved narrowing six rows to the chunk that carries the answer: G-C24 (*15 #3), G-S26 (1.446-1(c)(1) #1), G-X03 and G-X10 (#1), G-T11 (Pub 463 p. 1 #1–#2), G-S28 (Pub 946 p. 59 #3). G-S10, G-C14, G-C18 and G-C19 keep labels: every copy carries the answer. G-C24 and G-S28 are now honest misses (their answer chunk isn't in the top 50 even within its own source), marked `expect_hard` with notes. **Re-baseline, 5 plan sets, k=20 (`eval/results/retrieval-golden-2026-09-27-k20-c6-keyed.json`): case-law 0.777 ± 0.029 (was 0.815; exactly one row, G-C24, in every set), statutory 0.500, compound 0.459 ± 0.012, all 0.563 ± 0.010.** The CI gate's dev check is unchanged at 0.6800 (dev gold has no shared labels).
+
+**Part 2 (page selection) not built, by the brief's own stop rule.** The dev set can't measure it: all 12 dev case-law rows have body-page gold in memorandum opinions, none a summary page or an argument-versus-holding confusion, so neither candidate can be chosen on dev, and tuning on golden is ruled out. The evidence already in hand agrees: within-opinion reranking ranks the holding pages 6th–16th of their own opinion (C0), and summary cleaning targets gold that C2 has since widened with body pages, for a 24-min re-embed and a new snapshot. G-C10 and G-C26 stay as documented misses. **To reopen:** add dev rows whose gold is a holding page competing with argument or background in the same opinion, then measure the two candidates there.
+
+- [x] The mechanism chosen on dev, with the losing candidate's number recorded: neither; dev has no rows that exercise it (above)
+- [x] Golden case-law Recall@20 scored once, against the post-audit baseline from C2; no regression over 2 points on the other categories: re-baselined only (0.777 ± 0.029); no mechanism, so no regression
+- [x] CI's corpus snapshot regenerated; tier 2's retrieval check re-baselined, if the corpus changed: corpus unchanged; tier 2 re-run, 0.6800 PASS
 
 **Verification:**
-- [ ] Tests: syllabus cleaning on the two real-opinion fixtures in `tests/test_caselaw.py`
-- [ ] `uv run pytest -q` passes
+- [x] Tests: key-versus-label gold matching (`tests/test_metrics.py`); syllabus cleaning not built, so no fixture tests
+- [x] `uv run pytest -q` passes
 
 **Dependencies:** C2
 **Files:** `src/taxcite/ingest/caselaw.py` and/or `src/taxcite/retrieve.py`, `tests/test_caselaw.py`, `eval/snapshot.py`
@@ -921,8 +949,8 @@ Re-embedding the case corpus costs ~24 min (9,973 chunks at 7/s), and the CI sna
 **Description:** Write `eval/results/phase_c.md` in the shape of `phase_b.md`: C0's ceiling, the edge-extraction scores, treatment flags per golden row, the expansion and page-selection rungs with mean ± sd, failures with examples, and §9.3 recalibration notes. Update the tech doc's Implementation Status.
 
 **Acceptance criteria:**
-- [ ] Every number traces to a results file or a command listed at the foot of the report
-- [ ] The §9.3 Phase C gate is stated as met or not met, with no reinterpretation
+- [x] Every number traces to a results file or a command listed at the foot of the report. Evidence saved to `eval/results/`: `retrieval-golden-2026-09-27-k20-c5-graph.json`, `…-c6-keyed.json`, `phase-c-treatment-gate-2026-09-27.txt` (re-run, identical to the first), `phase-c-handcheck-citations.txt`, `phase-c-handcheck-treatments.txt`. C0's ceiling reproduces from repo code (command in the report). Three figures carried from C0/C1 were stale and were corrected against the tables (304 citing opinions, 698 opinions with corpus history, 14 held)
+- [x] The §9.3 Phase C gate is stated as met or not met, with no reinterpretation: the original recall gate **not met** (−3.9); the revised gate (edges and treatment flags) met, with the date it was revised
 
 **Dependencies:** C4, C5, C6
 **Files:** `eval/results/phase_c.md`, `taxcite-technical-documentation.md`
@@ -931,7 +959,7 @@ Re-embedding the case corpus costs ~24 min (9,973 chunks at 7/s), and the CI sna
 ---
 
 ## ✅ Checkpoint: Phase C complete
-- [ ] Edges ≥90% / ≥85%; 3/3 reversed rows flagged, 0 false flags
-- [ ] Tests pass in CI; the faithfulness gate is still green
+- [x] Edges ≥90% / ≥85%; 3/3 reversed rows flagged, 0 false flags
+- [ ] Tests pass in CI; the faithfulness gate is still green (after you commit and publish the new corpus snapshot)
 - [ ] Ready to plan Phase D
 

@@ -19,8 +19,9 @@ for the routing. `retrieve(rewrite=True)` keeps the other arm of that measuremen
 """
 
 import json
-from collections.abc import Sequence
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
+from functools import cache
 
 from taxcite.generate import MODEL, call_model, cost
 from taxcite.retrieve import RERANK_MODEL, Hit, rerank, search
@@ -183,8 +184,33 @@ def decompose(question: str, model: str = MODEL) -> Decomposition:
                          input_tokens=tin, output_tokens=tout, fallback=fallback)
 
 
+def neighbors(edges: Iterable[tuple[str, str]], seeds: set[str], hops: int, held: set[str]) -> set[str]:
+    """Held opinions within `hops` citation steps of the seeds, in either direction; the seeds themselves
+    excluded. A hop may pass through an opinion we don't hold (co-citation), as C0 measured."""
+    near: dict[str, set[str]] = {}
+    for a, b in edges:
+        near.setdefault(a, set()).add(b)
+        near.setdefault(b, set()).add(a)
+    reached, frontier = set(seeds), set(seeds)
+    for _ in range(hops):
+        frontier = {n for o in frontier for n in near.get(o, ())} - reached
+        reached |= frontier
+    return (reached - seeds) & held
+
+
+@cache
+def citation_graph() -> tuple[frozenset, frozenset]:
+    """(edges, held opinions), loaded once: 5,278 edges is small enough to walk in memory (ADR-23)."""
+    from taxcite import store
+    with store.connect() as conn:
+        edges = frozenset(conn.execute("SELECT citing, cited FROM citations").fetchall())
+        held = frozenset(r[0] for r in conn.execute(
+            "SELECT DISTINCT section FROM chunks WHERE source = 'case' AND excluded IS NULL"))
+    return edges, held
+
+
 def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = True,
-             rewrite: bool = False) -> Decomposition:
+             rewrite: bool = False, hops: int = 0) -> Decomposition:
     """Search once per sub-query, filtered to the sources its kind allows. Fills `hits` in place.
 
     The search text is the **original question**, not the model's rewritten sub-query,
@@ -193,6 +219,11 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
     rewrite lost hits the questioner's own words had found (log #44). What the model is
     trusted for is the routing -- which corpora this question needs -- not the wording.
     `rewrite` and `route` exist so the eval can take either half away.
+
+    `hops` > 0 expands each case-law sub-query along the citation graph: one more search, limited to
+    the held opinions within that many citation steps of the ones already found, joins its pool, and
+    the reranker decides. Off by default: C0 measured its ceiling on the golden set at zero (ADR-1),
+    and it stays as an ablation rung so the ladder shows that with a number, not a claim (C5).
     """
     seen: dict[tuple, list[Hit]] = {}  # two sub-queries of one kind would repeat a search
     for s in d.searched:
@@ -200,6 +231,14 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
         if key not in seen:
             seen[key] = search(key[0], k=k, mode=mode, source=key[1])
         s.hits = seen[key]
+    if hops:
+        edges, held = citation_graph()
+        for s in (s for s in d.searched if s.kind == "case_law"):
+            near = neighbors(edges, {h.section for h in s.hits if h.source == "case"}, hops, held)
+            own = {h.citation for h in s.hits}
+            if near:
+                s.hits = s.hits + [h for h in search(d.question, k=k, mode=mode, source="case", sections=near)
+                                   if h.citation not in own]
     return d
 
 

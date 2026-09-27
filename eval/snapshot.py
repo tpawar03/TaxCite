@@ -43,11 +43,13 @@ def create(out: Path) -> int:
                 f.write(chunk)
     qc.delete_snapshot(collection_name=COLLECTION, snapshot_name=described.name)
 
-    # Only the chunks table: jobs are per-run state, not corpus. Run pg_dump inside the
+    # The corpus tables only: jobs are per-run state. citations and treatments are derived from
+    # chunks plus CourtListener (C3), which CI can't call without a key, so they ship frozen too. Run pg_dump inside the
     # container -- the host client here is 14 against a 16 server, which pg_dump refuses, and
     # CI has no host client at all.
     dump = subprocess.run(["docker", "compose", "exec", "-T", "postgres",
-                           "pg_dump", "--no-owner", "--table=chunks", "-U", "taxcite", "taxcite"],
+                           "pg_dump", "--no-owner", "--table=chunks", "--table=citations", "--table=treatments",
+                           "-U", "taxcite", "taxcite"],
                           check=True, capture_output=True)
     (out / DUMP).write_bytes(dump.stdout)
     for name in (SNAPSHOT, DUMP):
@@ -68,8 +70,10 @@ def restore(src: Path) -> int:
     from taxcite import store
     points = client().count(COLLECTION).count
     with store.connect() as conn:
+        store.create_table(conn)  # a snapshot published before C3 has no citation tables; don't fail CI on it
         rows = conn.execute("SELECT count(*) FROM chunks").fetchone()[0]
-    print(f"restored {points} vectors, {rows} chunk rows")
+        edges, treated = (conn.execute(f"SELECT count(*) FROM {t}").fetchone()[0] for t in ("citations", "treatments"))
+    print(f"restored {points} vectors, {rows} chunk rows, {edges} citations, {treated} treatments")
     return 0 if points and rows else 1
 
 

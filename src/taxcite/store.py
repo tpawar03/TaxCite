@@ -32,6 +32,28 @@ SCHEMA = (
     """,
     "CREATE INDEX IF NOT EXISTS chunks_section_idx ON chunks (section)",
     "CREATE INDEX IF NOT EXISTS chunks_source_idx ON chunks (source)",
+    # The citation graph is two tables, not a graph store (ADR-23): nothing traverses it, it is looked up.
+    """
+    CREATE TABLE IF NOT EXISTS citations (
+        citing text NOT NULL,
+        cited  text NOT NULL,
+        PRIMARY KEY (citing, cited)
+    )
+    """,
+    "CREATE INDEX IF NOT EXISTS citations_cited_idx ON citations (cited)",
+    # One row per opinion, source and appeal. recorded_at is when we first learned it; checked_at is the
+    # last look, kept separately because treatments go stale (a pending appeal is decided next month).
+    """
+    CREATE TABLE IF NOT EXISTS treatments (
+        citation    text NOT NULL,
+        kind        text NOT NULL,
+        by_citation text NOT NULL DEFAULT '',
+        source      text NOT NULL,
+        recorded_at timestamptz NOT NULL DEFAULT now(),
+        checked_at  timestamptz NOT NULL,
+        PRIMARY KEY (citation, source, by_citation)
+    )
+    """,
 )
 
 UPSERT = """

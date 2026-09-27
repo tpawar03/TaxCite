@@ -158,3 +158,12 @@ def test_a_judge_that_returns_junk_does_not_crash_the_run(text):
 def test_json_is_found_inside_chatter():
     """Instruction is not a guarantee; the model sometimes wraps its JSON in prose."""
     assert parse_json('Sure! {"claims": ["a", "b"]} Hope that helps.', "claims", []) == ["a", "b"]
+
+
+def test_gold_can_name_one_chunk_of_a_shared_label():
+    """C6: three chunks share "T.C. Memo. 2023-128, at *15" and only #3 states the holding."""
+    label, holding, other = "T.C. Memo. 2023-128, at *15", "T.C. Memo. 2023-128, at *15#body#3", "T.C. Memo. 2023-128, at *15#body#1"
+    assert recall_at_k([other], [[holding]]) == 0.0     # the wrong copy no longer earns the hit
+    assert recall_at_k([other, holding], [[holding]]) == 1.0
+    assert recall_at_k([other], [[label]]) == 1.0       # a label still credits any copy
+    assert mrr(["X#a#1", holding], [[holding]]) == 0.5

@@ -1,9 +1,9 @@
 {
   "pyproject.toml": {
-    "mtime": 1789962957.9116185,
-    "seen": 1789965912.511277,
-    "ast_hash": "9cdef2f8eab8ed081640dc2d34202b95",
-    "semantic_hash": "9cdef2f8eab8ed081640dc2d34202b95"
+    "mtime": 1790463062.0636263,
+    "seen": 1790468213.482475,
+    "ast_hash": "83cf7e402178609c85204359b39eda61",
+    "semantic_hash": ""
   },
   "README.md": {
     "mtime": 1790196366.645735,
@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "src/taxcite/cli.py": {
-    "mtime": 1790115415.2203982,
-    "seen": 1790116166.223257,
-    "ast_hash": "5f46f5990417eac739315780c7b573a2",
+    "mtime": 1790463258.5432916,
+    "seen": 1790468213.4824781,
+    "ast_hash": "7cef0eb1128b569d2ab15fbf7233529f",
     "semantic_hash": ""
   },
   "src/taxcite/generate.py": {
@@ -150,9 +150,9 @@
     "semantic_hash": ""
   },
   "src/taxcite/store.py": {
-    "mtime": 1790041748.2946496,
-    "seen": 1790051409.29922,
-    "ast_hash": "2cd564bfcb4f0de4d1f40a2fdfdf0595",
+    "mtime": 1790463244.5809536,
+    "seen": 1790468213.482489,
+    "ast_hash": "7a16204ff28eb1c0534234972d6d1ca9",
     "semantic_hash": ""
   },
   "tests/test_ecfr.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": "a90df7bf9666599b89d1eab00be2fe3e"
   },
   "STATUS.md": {
-    "mtime": 1790462508.4304075,
-    "seen": 1790462910.558183,
-    "ast_hash": "c6e59a4a9eb771cbd82c1e40fcd0ca0e",
+    "mtime": 1790465501.1037784,
+    "seen": 1790468213.482503,
+    "ast_hash": "4e8b219d981a88d34b333f55488df1fa",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -228,15 +228,15 @@
     "semantic_hash": "ead8cb9392f80bc82e974c5588f08213"
   },
   "tasks/plan.md": {
-    "mtime": 1790459652.2929912,
-    "seen": 1790462910.558198,
-    "ast_hash": "8e15180314ebe4b9ee8e49d05d8f80ac",
+    "mtime": 1790465501.1026328,
+    "seen": 1790468213.482518,
+    "ast_hash": "b8bf4b3082b13525080362184ce03e84",
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790462508.4294105,
-    "seen": 1790462910.558198,
-    "ast_hash": "e0d79bf4f8eff3e8197266ffe8420854",
+    "mtime": 1790465501.1020315,
+    "seen": 1790468213.482518,
+    "ast_hash": "891f0a18b0f625ccef3c1794e9156fee",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -462,9 +462,9 @@
     "semantic_hash": ""
   },
   "eval/snapshot.py": {
-    "mtime": 1790186253.3761294,
-    "seen": 1790186409.818112,
-    "ast_hash": "0a82b55337d9d1d09faf35572bb99fd3",
+    "mtime": 1790463272.8508008,
+    "seen": 1790468213.482472,
+    "ast_hash": "9fa1964808e6c1b2513c0a1195991dcb",
     "semantic_hash": ""
   },
   ".github/workflows/faithfulness.yml": {
@@ -513,6 +513,18 @@
     "mtime": 1790459647.0879471,
     "seen": 1790462910.558194,
     "ast_hash": "50501204745ce63cf4d814cc1d006fcf",
+    "semantic_hash": ""
+  },
+  "src/taxcite/ingest/citations.py": {
+    "mtime": 1790467381.7713804,
+    "seen": 1790468213.482483,
+    "ast_hash": "efe8cdfdad94f2a4e44d516dd44d40e7",
+    "semantic_hash": ""
+  },
+  "tests/test_citations.py": {
+    "mtime": 1790467991.6237082,
+    "seen": 1790468213.48249,
+    "ast_hash": "7d464fcbb93476ddcfa072ede3b6bf6a",
     "semantic_hash": ""
   }
 }

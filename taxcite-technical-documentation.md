@@ -17,18 +17,26 @@ Phase B's headline results are three negatives and one positive, and the negativ
 - **Decomposition helps the wrong category.** It was built for compound questions (0.349 -> 0.366 Recall@10, and lower still with reranking) and what it actually improves is statutory retrieval, 0.321 -> 0.429.
 - **Faithfulness catches a failure nothing else can**: a legally correct answer carrying a real, retrieved citation that does not support it. Phase A's citation checker passes those; two golden rows do it in every run.
 
-The remaining mechanisms below (graph expansion, temporal filtering, authority-aware reranking, claim verification, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+**Phase C is built and measured** (report: `eval/results/phase_c.md`, 2026-09-27). The citation graph is two Postgres tables, not a graph database (ADR-23): 5,278 citations among 2,649 Tax Court opinions, and appeal outcomes for the 307 held opinions from two sources, CourtListener and the corpus's own subsequent history. Every opinion an answer cites now carries a treatment flag (reversed, affirmed, appealed, none) with its source and check date. 186 tests. Its results:
 
-Baselines later phases must beat, now including Phase B's:
+- **Graph expansion was measured before it was built, and then built anyway to put a number on the ladder.** The ceiling was zero (no missed gold is within two citation hops of anything retrieved); the rung costs 3.9 points of case-law Recall@20 and 0.7 s and improves no row. It stays off (ADR-1, revised).
+- **The graph's real job is negative treatment.** *Morehouse* and *Menard*, both reversed on appeal, are flagged in every golden row that cites them, with no false flags; the end-to-end answer for an Iowa client is wrong in its text and right in its flag.
+- **Most of the case-law "gap" was the answer key.** An audit of 24 gold groups (all approved) and chunk-level gold took the honest case-law baseline from 0.692 through 0.815 to **0.777 ± 0.029**; the remaining misses are two wrong-page rows, two unreachable rows, and one row (G-C24) that had scored a hit through a copy of its page that doesn't state the holding.
+
+The remaining mechanisms below (temporal filtering, authority-aware reranking, claim verification, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+
+Baselines later phases must beat, now including Phase C's:
 
 | baseline | value | whose problem |
 |---|---|---|
-| Case-law Recall@20, decomposition only | **0.833 ± 0.018** on the C2-audited golden set, 3 cached plan sets (0.692 before); overstates by one row (G-C24 credited through a shared page label, ~0.795 honest) until C6 fixes label matching | Phase C -- page selection. Graph expansion's ceiling was measured at 0 points (C0). Of the 23.1 wrong-page points, C2 found 15.4 were answer keys that were too narrow; the real gap is 2 rows (7.7 points) |
+| Case-law Recall@20, decomposition only | **0.777 ± 0.029**, key-aware scoring on the C2-audited golden set, 5 plan sets (0.815 when a shared page label could earn credit; 0.692 before C2) | Open: page selection for G-C10 and G-C26 (7.7 points) waits on dev rows that exercise it (C6); G-C24's holding copy is unreachable |
+| Graph expansion (ablation rung) | −3.9 case-law, −2.3 / −4.1 all rows (1 / 2 hops), +0.7 s | Off; revisit only with gold reachable through citations (ADR-1) |
+| Publication tables | a table of numbers (G-S28, Pub 946's depreciation caps) isn't in the top 50 even within publications | Phase E (publication handling) |
 | Publication dilution of regulation recall | 12.4 points | Phase E |
 | Approximate search loss under a strict filter | ~22% | Phase D |
 | Statute effective dates absent from the corpus | parser skips USLM notes | Phase D |
 | Per-sub-query sufficiency gate | not built; `G-I11` over-refuses a half-answerable question | Phase F (the sufficiency gate is built there) |
-| Negative treatment | 3 golden rows cite opinions later reversed (G-C03 and G-X02: *Morehouse*; G-X09: *Menard*), 1 is on appeal (G-C11); no appellate corpus | Phase C -- the citation graph's job (ADR-1, revised) |
+| Negative treatment | Built in Phase C: 3/3 reversed golden rows flagged, 0 false flags; 26/26 held-opinion flags match hand-verified records. Pending appeals (G-C11, *Patel*) are invisible to every source; corpus-only flags go stale on 2026-09-29 | Phase H: the weekly refresh; Phase E: acting on treatment in ranking |
 | Faithfulness, healthy | 0.8715 (sd 0.0127, n=6) | the standing CI gate, at 0.855 |
 
 Two measurement facts that govern how any of these may be compared. The pipeline has a **noise floor**: the same configuration scores sd 0.013 on golden faithfulness even with decompositions pinned and synthesis at temperature 0, because OpenAI's `temperature=0` is best effort. And **three samples are not enough to see it** -- reading a trend from three runs misled Phase B four separate times. Every comparison from here reports a mean and a standard deviation over at least five runs, against a cached plan set.
@@ -631,6 +639,7 @@ The gate compares a mean of several repeats, so the standard error is what gover
 *Context:* ADR-1 put the citation graph in Neo4j so case-law retrieval could traverse it 1–2 hops. C0 measured that traversal before it was built: its ceiling on the golden set is 0 points (ADR-1, revised). What remains is negative treatment, which asks one question per cited opinion: what happened to it later? That is a lookup by key, not a traversal.
 *Decision:* Two Postgres tables, in the database the system already runs: `citations (citing, cited)` and `treatments (citation, kind, by_citation, source, recorded_at, checked_at)`. The treatment flag is one indexed read per cited opinion, and it shows its check date. Treatments change more often than anything else in the corpus (a pending appeal can be decided next month), so a check older than the weekly refresh is shown as stale rather than trusted. The expansion ablation rung (Phase C, off by default) is a join on `citations`; a second hop is a second join.
 *Trade-off:* We lose a graph query language and native traversal. Nothing that is built or planned needs either. We gain one fewer stateful service to deploy, back up (ADR-12), health-check (§3.4) and pay for under the $50/month ceiling, and the fail-open path shrinks to "the flag reads unknown".
+*Measured (C5, 2026-09-27):* expansion as an ablation rung costs case-law Recall@20 3.9 points (0.777 → 0.738, key-aware scoring) and all-row recall 2.3 (1 hop) or 4.1 (2 hops), adds ~0.7 s, and gains nothing in any row or plan set; it only displaces gold. It stays off.
 *Revisit trigger:* the same one as ADR-1. If a question set appears whose gold is reachable only through citation chains, and a re-run of C0's ceiling shows expansion earning its gate, measure multi-hop joins in Postgres first. Bring in a graph database only if those joins are too slow at the corpus size of the day.
 
 ---

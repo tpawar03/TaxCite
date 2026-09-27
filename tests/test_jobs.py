@@ -140,3 +140,18 @@ def test_a_stage_is_never_delivered_twice(stub_pipeline):
     names = [name for name, _ in sse_events(client.get(f"/queries/{job_id}/events").text)]
     assert names == sorted(set(names), key=names.index)  # no repeats
     assert len(names) == len(set(names))
+
+def test_the_answer_carries_treatment_flags_for_cited_opinions(monkeypatch, stub_pipeline):
+    """C4: flags sit beside the answer; its text is untouched."""
+    from taxcite import generate
+    from taxcite.ingest import citations
+
+    text = "No [140 T.C. No. 16, at *43-44]; see also [26 U.S.C. § 1402(a)(1)]."
+    monkeypatch.setattr(generate, "answer_from_groups", lambda q, groups, **k: Answer(
+        text=text, mode="rag", model="stub", citations=["140 T.C. No. 16, at *43-44", "26 U.S.C. § 1402(a)(1)"]))
+    seen = []
+    monkeypatch.setattr(citations, "flags", lambda conn, ops: seen.append(ops) or {o: {"status": "reversed"} for o in ops})
+    job_id = client.post("/queries", json={"question": "CRP payments?"}).json()["id"]
+    (_, answer), = [e for e in sse_events(client.get(f"/queries/{job_id}/events").text) if e[0] == "answer"]
+    assert seen == [["140 T.C. No. 16"]]  # only opinions are looked up, once each
+    assert answer["treatments"] == {"140 T.C. No. 16": {"status": "reversed"}} and answer["text"] == text

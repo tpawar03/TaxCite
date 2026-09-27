@@ -1,0 +1,27 @@
+
+G-C03 (expect reversed) gold opinions ['140 T.C. No. 16']
+  cited opinions: ['140 T.C. No. 16']  refused=False
+  140 T.C. No. 16: reversed | Reversed by 769 F.3d 616 (ca8 2014).
+
+G-X02 (expect reversed) gold opinions ['140 T.C. No. 16']
+  cited opinions: ['140 T.C. No. 16']  refused=False
+  140 T.C. No. 16: reversed | Reversed by 769 F.3d 616 (ca8 2014).
+
+G-X09 (expect reversed) gold opinions ['T.C. Memo. 2004-207']
+  cited opinions: ['T.C. Memo. 2004-207']  refused=False
+  T.C. Memo. 2004-207: reversed | Reversed by 560 F.3d 620 (ca7 2009).
+
+G-C06 (expect no negative) gold opinions ['119 T.C. No. 5', 'T.C. Memo. 2003-48', 'T.C. Memo. 2003-49', 'T.C. Memo. 2003-50', 'T.C. Memo. 2003-51', 'T.C. Memo. 2003-52', 'T.C. Memo. 2003-53']
+  cited opinions: ['119 T.C. No. 5']  refused=False
+  119 T.C. No. 5: affirmed | Affirmed by 93 F. App'x 473 (2004).
+
+G-X19 (expect no negative) gold opinions ['T.C. Memo. 2023-133']
+  cited opinions: ['T.C. Memo. 2022-117', 'T.C. Memo. 2025-50']  refused=False
+  T.C. Memo. 2022-117: none | No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked.
+  T.C. Memo. 2025-50: none | No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked.
+
+G-C11 (expect on appeal, if visible) gold opinions ['165 T.C. No. 10', 'T.C. Memo. 2026-26']
+  cited opinions: ['165 T.C. No. 10']  refused=False
+  165 T.C. No. 10: none | No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked.
+
+cost $0.0052

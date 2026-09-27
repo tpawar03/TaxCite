@@ -257,15 +257,15 @@ Full task details are in `tasks/todo.md` (Phase C section).
 - [x] You approve C2's gold changes, if any. The treatment source is chosen from C1's numbers
 
 ### Slice 2 — The graph
-- [ ] C3: Citation and treatment edge tables in Postgres (with the 200-edge hand-labeled sample)
-- [ ] C4: Treatment flags in answers
-- [ ] C5: Graph expansion as an ablation rung
+- [x] C3: Citation and treatment edge tables in Postgres (with the 200-edge hand-labeled sample): CITES 100% / 99.9%, treatment 98.7% / ~95%
+- [x] C4: Treatment flags in answers (gate met: 3/3 reversed flagged, 0 false flags; 26/26 held-opinion flags match hand-verified records)
+- [x] C5: Graph expansion as an ablation rung (−3.8 points case-law, −2.3/−4.1 overall, +0.55 s; zero gains)
 
 ### Slice 3 — The real recall gap
-- [ ] C6: Page selection (scope set by C2)
+- [x] C6: Page selection (scope set by C2): key-aware eval shipped, baseline 0.777 ± 0.029; page selection stopped, dev can't measure it
 
 ### Checkpoint: Phase C complete
-- [ ] C7: Phase C exit report. Gate met: edges ≥90% precision / ≥85% recall; 3/3 reversed rows flagged; G-C06 and G-X19 not flagged. Ladder shows expansion and page selection with their measured deltas
+- [x] C7: Phase C exit report (`eval/results/phase_c.md`). Gate met: edges ≥90% precision / ≥85% recall; 3/3 reversed rows flagged; G-C06 and G-X19 not flagged. Ladder shows expansion and page selection with their measured deltas
 
 ## Risks and Mitigations
 

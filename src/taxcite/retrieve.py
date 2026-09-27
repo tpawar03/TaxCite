@@ -31,6 +31,7 @@ class Hit:
     score: float
     section: str
     source: str
+    key: str = ""  # the chunk itself: several chunks can share one citation label (C2, C6)
 
 
 @cache
@@ -81,19 +82,23 @@ def source_filter(source: str | Sequence[str] | None) -> models.Filter | None:
 
 def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence[str] | None = None,
            collection: str = COLLECTION, qc=None, dense_name: str = DENSE_MODEL,
-           rerank_name: str = RERANK_MODEL) -> list[Hit]:
+           rerank_name: str = RERANK_MODEL, sections: Sequence[str] | None = None) -> list[Hit]:
     """Top-k chunks for a query.
 
     Modes are the rungs of the eval ablation ladder (§9): "sparse" is BM25 only,
     "dense" is embeddings only, "hybrid" fuses both with reciprocal rank fusion.
     Which one wins is query-dependent, so T4 measures it rather than assuming.
     A "+rerank" suffix ("hybrid+rerank") reranks those candidates with a cross-encoder.
+    `sections` limits the search to those sections, e.g. the opinions a citation hop reached (C5).
     """
     qc = qc or client()
     mode, _, suffix = mode.partition("+")
     if suffix not in ("", "rerank"):
         raise ValueError(f"unknown mode suffix {suffix!r}; only '+rerank' exists")
     flt = source_filter(source)
+    if sections:
+        within = models.FieldCondition(key="section", match=models.MatchAny(any=list(sections)))
+        flt = models.Filter(must=[*(flt.must if flt else []), within])
     dense, sparse = embed(query, dense_name)
     limit = RERANK_CANDIDATES if suffix else k + OVERFETCH
     if mode == "dense":
@@ -116,7 +121,7 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
 
     hits = [
         Hit(citation=p.payload["citation"], heading=p.payload["heading"], text=p.payload["text"],
-            score=p.score, section=p.payload["section"], source=p.payload["source"])
+            score=p.score, section=p.payload["section"], source=p.payload["source"], key=p.payload.get("key", ""))
         for p in result.points
     ]
     # Reciprocal rank fusion produces exact ties (1/61 + 1/63 is a common total). When

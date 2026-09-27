@@ -108,7 +108,8 @@ def get(conn, job_id: str) -> dict | None:
 def run(conn, job_id: str, question: str, k: int = 8) -> None:
     """The pipeline, reporting each stage. Phases C-F add their steps here."""
     from taxcite import decompose as dc
-    from taxcite.generate import answer_from_groups
+    from taxcite.generate import OPINION_RE, answer_from_groups
+    from taxcite.ingest.citations import flags
 
     try:
         rdb = client()
@@ -130,7 +131,12 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
         hits = dc.chunks(plan, k)
         publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
         result = answer_from_groups(question, plan.groups({h.citation for h in hits}), facts=plan.facts)
+        # Is each cited opinion still good law (C4)? Looked up after synthesis and attached beside the
+        # answer, never folded into its text; a failed lookup reads "unknown" and the answer still ships.
+        opinions = list(dict.fromkeys(m.group() for c in result.citations + result.derived_citations
+                                      if (m := OPINION_RE.search(c))))
         publish(conn, job_id, "answer", {
+            "treatments": flags(conn, opinions) if opinions else {},
             "text": result.text,
             "citations": result.citations,
             "derived_citations": result.derived_citations,

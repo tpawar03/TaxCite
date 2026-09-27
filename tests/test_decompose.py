@@ -132,3 +132,14 @@ def test_decompose_makes_one_call_and_asks_for_json(monkeypatch):
     assert calls[0][1] == {"temperature": 0, "json_output": True, "seed": dc.SEED}
     assert [s.query for s in d.searched] == ["rewritten"]
     assert d.cost_usd > 0 and d.fallback == ""
+
+def test_graph_expansion_reaches_only_held_neighbors_within_the_hop_limit():
+    """C5: A cites B and C; C cites D; E cites D; Z is unheld. Hops go either direction."""
+    from taxcite.decompose import neighbors
+    edges = {("A", "B"), ("A", "C"), ("C", "D"), ("E", "D"), ("A", "Z"), ("F", "Z")}
+    held = {"A", "B", "C", "D", "E", "F"}
+    assert neighbors(edges, {"A"}, 1, held) == {"B", "C"}            # Z is one hop away but not held
+    assert neighbors(edges, {"A"}, 2, held) == {"B", "C", "D", "F"}  # F through unheld Z (co-citation)
+    assert neighbors(edges, {"D"}, 1, held) == {"C", "E"}            # cited-by counts as a hop
+    assert neighbors(edges, {"A"}, 0, held) == set()                 # off
+    assert "A" not in neighbors(edges, {"A", "B"}, 2, held | {"A"})  # seeds are never returned

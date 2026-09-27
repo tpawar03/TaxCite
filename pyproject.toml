@@ -16,6 +16,7 @@ dependencies = [
     "anthropic>=1.7.0",
     "openai>=3.16.2",
     "python-dotenv>=1.2.3",
+    "eyecite>=2.7.8",
 ]
 
 [project.scripts]

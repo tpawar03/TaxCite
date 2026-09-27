@@ -4,10 +4,12 @@
     taxcite ingest ecfr --section 1.61-1 --skip-index
     taxcite ingest usc
     taxcite ingest case
+    taxcite citations
 """
 
 import argparse
 import io
+import os
 import re
 import sys
 import time
@@ -251,6 +253,21 @@ def run_ask(args: argparse.Namespace) -> int:
     return 0
 
 
+def load_citations(args: argparse.Namespace) -> int:
+    from taxcite.ingest import citations
+
+    token = os.environ.get("COURTLISTENER_TOKEN")
+    if not token:
+        print("  COURTLISTENER_TOKEN not set: appeals are skipped, treatments come from the corpus only")
+    with store.connect() as conn:
+        store.create_table(conn)
+        t0 = time.time()
+        r = citations.load(conn, token, args.recheck)
+    print(f"  {r['citations']} citations to {r['cited']} Tax Court opinions; "
+          f"{r['corpus']} treatments from subsequent history; {r['appeals']} held opinions appealed; {time.time() - t0:.0f}s")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="taxcite")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -282,6 +299,11 @@ def main(argv: list[str] | None = None) -> int:
     pubs.add_argument("--refresh", action="store_true", help="re-download even if cached")
     pubs.add_argument("--skip-index", action="store_true", help="store in postgres without embedding")
     pubs.set_defaults(func=ingest_pubs)
+
+    cite = sub.add_parser("citations", help="rebuild the citation and treatment tables from the case corpus")
+    cite.add_argument("--recheck", action="store_true",
+                      help="re-query CourtListener for opinions filed in the last 3 years (others come from cache)")
+    cite.set_defaults(func=load_citations)
 
     find = sub.add_parser("search", help="search the indexed corpus")
     find.add_argument("query")

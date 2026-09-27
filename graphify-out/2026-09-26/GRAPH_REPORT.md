@@ -1,7 +1,7 @@
-# Graph Report - TaxCite.nosync  (2026-09-23)
+# Graph Report - TaxCite.nosync  (2026-09-26)
 
 ## Corpus Check
-- 68 files · ~398,015 words
+- 66 files · ~390,668 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 10 file(s) not represented in the graph (top: (none) 3, .jsonl 3, .xml 2)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `78bcf82e`
+- Built from commit: `7f04164b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -67,21 +67,21 @@
 5. `Chunk` - 17 edges
 6. `TaxCite Phase A — Task List` - 16 edges
 7. `ingest_ecfr()` - 15 edges
-8. `estimate_tokens()` - 14 edges
+8. `parse()` - 14 edges
 9. `ingest_case()` - 14 edges
-10. `parse()` - 14 edges
+10. `of()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Three-Way Citation Counting` --conceptually_related_to--> `Post-Generation Claim Verification`  [INFERRED]
   STATUS.md → taxcite-technical-documentation.md
 - `PII Redaction Ordering as a CI Invariant` --semantically_similar_to--> `Log #18: The Counts-Match Check Caught Silent Data Loss`  [INFERRED] [semantically similar]
   taxcite-technical-documentation.md → docs/engineering-log.md
-- `main()` --indirect_call--> `conn()`  [INFERRED]
-  eval/embed_bench.py → tests/test_store.py
-- `main()` --calls--> `answer()`  [INFERRED]
-  eval/llm_bench.py → src/taxcite/decompose.py
 - `judged()` --uses--> `Judged`  [INFERRED]
   tests/test_metrics.py → eval/ragas_eval.py
+- `stub_pipeline()` --uses--> `Answer`  [INFERRED]
+  tests/test_jobs.py → src/taxcite/generate.py
+- `hit()` --uses--> `Hit`  [INFERRED]
+  tests/test_decompose.py → src/taxcite/retrieve.py
 
 ## Import Cycles
 - None detected.
@@ -238,7 +238,7 @@ Cohesion: 0.12
 Nodes (16): Log #26: The Benchmark Died Because of Unrelated Software, Log #22: Choosing a PDF Library by Measuring It on the Real Document, Log #28: One Tied Score Made the Eval Unreproducible, Log #25: Screen Candidates for Viability Before Measuring Quality, Stable primary key. A citation alone is not unique: one citation can need…, Decisions Log, Environment, Findings worth remembering (+8 more)
 
 ## Knowledge Gaps
-- **88 isolated node(s):** `taxcite`, `What exists`, `The ablation ladder`, `Phase C's baseline`, `Faithfulness` (+83 more)
+- **88 isolated node(s):** `What exists`, `The ablation ladder`, `Phase C's baseline`, `Faithfulness`, `Abstention` (+83 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 339 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -257,5 +257,5 @@ _Questions this graph is uniquely positioned to answer:_
   _`conn()` has 16 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `Chunk` (e.g. with `parse()` and `parse()`) actually correct?**
   _`Chunk` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `taxcite`, `What exists`, `The ablation ladder` to the rest of the system?**
+- **What connects `What exists`, `The ablation ladder`, `Phase C's baseline` to the rest of the system?**
   _88 weakly-connected nodes found - possible documentation gaps or missing edges._

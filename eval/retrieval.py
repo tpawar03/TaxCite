@@ -74,10 +74,15 @@ def groups(gold: list) -> Gold:
 
 
 def first_hits(retrieved: list[str], gold: Gold) -> list[int]:
-    """0-based rank at which each group is first satisfied, for the groups that are."""
+    """0-based rank at which each group is first satisfied, for the groups that are.
+
+    A retrieved item is a chunk key ("<citation>#<reason>#<part>") or a bare citation. Gold can be
+    either: a citation credits any chunk carrying that label, a key only that chunk. 2,072 labels
+    are shared by several chunks, and one gold row scored a hit from a copy that doesn't state its
+    answer (C2: G-C24), so gold names the chunk where the label alone would over-credit (C6)."""
     ranks = []
     for group in gold:
-        rank = next((i for i, c in enumerate(retrieved) if c in group), None)
+        rank = next((i for i, c in enumerate(retrieved) if c in group or c.split("#")[0] in group), None)
         if rank is not None:
             ranks.append(rank)
     return ranks
@@ -107,6 +112,9 @@ VARIANTS = {
     "route-norerank": dict(route=True,  rewrite=False, rerank=False),
     "noroute":        dict(route=False, rewrite=False, rerank=True),
     "rewrite":        dict(route=True,  rewrite=True,  rerank=True),
+    # C5: the shipped path plus citation-graph expansion of the case-law sub-query (off in the live pipeline)
+    "route+graph1":   dict(route=True,  rewrite=False, rerank=True, hops=1),
+    "route+graph2":   dict(route=True,  rewrite=False, rerank=True, hops=2),
 }
 
 
@@ -119,13 +127,13 @@ def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
         how = VARIANTS[variant]
         plan = dc.retrieve(cached_decompose(question["question"], cache if cache is not None else {},
                                             cache_path, plan_set),
-                           k=k, mode=mode, route=how["route"], rewrite=how["rewrite"])
+                           k=k, mode=mode, route=how["route"], rewrite=how["rewrite"], hops=how.get("hops", 0))
         hits = (dc.chunks(plan, k, reranker) if how["rerank"]
                 else dc.merge(plan.searched, k))
     else:
         hits = search(question["question"], k=k, mode=mode, rerank_name=reranker)
     elapsed_ms = (time.perf_counter() - started) * 1000
-    retrieved = [h.citation for h in hits]
+    retrieved = [h.key or h.citation for h in hits]
     gold = groups(question["gold"])
     ranks = first_hits(retrieved, gold)
     row = {
@@ -138,7 +146,7 @@ def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
         "recall": recall_at_k(retrieved, gold),
         "ndcg": ndcg_at_k(retrieved, gold),
         "mrr": mrr(retrieved, gold),
-        "section_recall": recall_at_k([h.section for h in hits], [{section_of(c) for c in g} for g in gold]),
+        "section_recall": recall_at_k([h.section for h in hits], [{section_of(c.split("#")[0]) for c in g} for g in gold]),
         "ms": elapsed_ms,
         "first_hit_rank": min(ranks) + 1 if ranks else None,
         "top1": retrieved[0] if retrieved else None,
