@@ -1833,6 +1833,35 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 - **Consequences:** validation scan 2's "E3 cost the gate 0.02" is withdrawn. The E4 baseline was taken on a drifting index. A/B comparisons between arms need a fixed search.
 - **Proposed (awaiting your decision):** exact dense search always (D3 already uses it under a filter). Then re-run the baseline and measure the candidates.
 
+**Exact dense search, then the measurements (2026-09-28, your decision).**
+- `retrieve.search` is exact (`55c2b20`); the drift test passes again; the reranker memo is bounded at 1,024 pools.
+- CI gate under exact search: **0.7200** (`retrieval-dev-2026-09-28-k10-ci-exact.json`).
+- The golden baseline was re-taken under exact search (`…-e4-baseline-exact.json`).
+
+**Dev: every arm, 5 plan sets** (`retrieval-dev-2026-09-28-k{8,20}-e4-arms-exact.json`). Rules 1–3 were applied by a script written before the results were read. Conflict rows at target are out of 10, at k=8:
+
+| arm | guards (of 8) + keep | worst category Recall@20 | at target |
+|---|---|---|---|
+| shipped | 8, ok | — | 0 |
+| **prior 0.5, scoped** | **8, ok** | **+0.000** | **3** |
+| prior 0.5, flat | **7** (breaks D05) | +0.000 | 3 |
+| prior 1.0, flat / scoped | 5 / 7 | −0.167 / 0 | 3 |
+| prior 0.25, flat / scoped | 8 | 0 | 2 |
+| prior 0.1; tie 0.25 (either scope) | 8 | 0 | 1 |
+| tie 0.1; slot; deep search | 8 | 0 | 0 |
+
+- **Chosen: prior 0.5, scoped.**
+  - Moves to top-1: D08, D18, D19, identical in all 5 plan sets.
+  - Lifts but doesn't reach top-1: D14 5→2, D23 5→3, D27 7→3, D21 4→3, D16 5→4.
+  - Out of reach: D26, D40.
+- **Flat breaks exactly what E1's guards predicted:** D05's gold opinion loses first place to §420(f)(7), an off-topic statute.
+- **Variants on the choice** (`…-e4-variants.json`), none better:
+  - statute above regulation: 3, but D23's controlling regulation falls 3→5
+  - "A" regulations demoted: 3, identical (dev has no "A" sections)
+  - plus deeper search: 2
+
+  Ties go to the simpler arm, so the choice stands.
+
 **Candidates (built behind a `chunks()` argument, off by default; each an `eval/retrieval.py` arm):**
 - **(a) Additive prior.** Score + w × (level − 1), with w ∈ {0.1, 0.25, 0.5, 1.0}, bracketing the gap scale above.
 - **(b) Margin tie-break.** Within δ ∈ {0.1, 0.25} of each other, the higher level first; otherwise the score decides.
@@ -1866,7 +1895,7 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 
 **Acceptance criteria:**
 - [x] Plans generated (counts and cost stated); baseline on dev and golden recorded with the authority metrics
-- [ ] Every candidate measured on dev (5 plan sets), rules 1–3 applied as written, the choice recorded with the table
+- [x] Every candidate measured on dev (5 plan sets), rules 1–3 applied as written, the choice recorded with the table
 - [ ] Golden gate thresholds confirmed with you before the golden run; golden scored once
 - [ ] CI retrieval gate ≥ 0.70 on the shipped arm (or E4 ships nothing)
 

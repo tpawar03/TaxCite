@@ -154,6 +154,11 @@ for _d in (0.1, 0.25):
         VARIANTS[f"route+statute1+tie{_d}-{_scope}"] = _SHIPPED | {"authority": {"rule": "tie", "delta": _d, "scoped": _scope == "scoped"}}
 VARIANTS["route+statute1+slot"] = _SHIPPED | {"authority": {"slot": True}}
 VARIANTS["route+statute1+deep20"] = _SHIPPED | {"search_k": 20}
+# variants on dev's choice (prior 0.5, scoped): statute above regulation, "…A" regulations demoted, deeper search
+_BEST = {"rule": "prior", "w": 0.5, "scoped": True}
+VARIANTS["route+statute1+prior0.5-scoped+statfirst"] = _SHIPPED | {"authority": _BEST | {"statute_first": True}}
+VARIANTS["route+statute1+prior0.5-scoped+demoteA"] = _SHIPPED | {"authority": _BEST | {"demote_prior": True}}
+VARIANTS["route+statute1+prior0.5-scoped+deep20"] = _SHIPPED | {"authority": _BEST, "search_k": 20}
 
 
 def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
