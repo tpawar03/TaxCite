@@ -1737,6 +1737,39 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 - **Gate: met on the fresh sample, with one caveat.** Every adverse or pending opinion (6) was in the first sample, so no fresh draw can re-test them. The *Banaitis* and *Gregory* fixes are verified by their tests and records, not by the re-check. The first sample's 86.7% stands as that field's measured accuracy before the fix.
 - Why only 146: the treatment stratum ran out of fresh opinions (11 affirmed ones were left).
 
+**Validation in two scans (2026-09-28, at your request).**
+
+*Scan 1, row by row, against evidence independent of what produced each label; a census wherever the population is small:*
+- **Treatment, census of all 26 opinions with a record** (every row both samples graded, plus the rest), each checked against the appellate opinion's own text in the Phase C cache, or the later Tax Court opinion that says "aff'd":
+  - All consistent, including *Visco* (the text ends "We will affirm"; its "reversed" is a footnote about the IRS).
+  - Three gaps. *Western Management* is "AFFIRMED in part; REMANDED in part", but the vocabulary has no remand: "affirmed in part" is true, not whole. 119 T.C. No. 5's label drops its circuit (the source reads "93 Fed. Appx. 473 (3d Cir. 2004)"). T.C. Memo. 2007-166's two sources disagree on the page (86 vs 869; the flag shows the right one).
+  - *Gregory*'s cached appellate text never states its own disposition. "Affirmed" rests on golden G-C01's notes, written from memory; "decided, outcome not read" is what the evidence supports.
+- **Opinion filing dates, census of all 307:** 217 agree with the opinion's own Filed line and 87 have none.
+  - **3 disagreed: a miss in fix (d).** DAWSON also writes "CORRECTED Opinion" and "(CORRECTED)", and the parser matched only "(Corrected)". So did my count of corrected reissues, which was case-sensitive.
+  - T.C. Memo. 2024-3, 2025-97 and 2026-29 were dated by their correction, 3–4 months late. None was in either sample.
+  - Fixed (case-insensitive match, test extended) and re-saved (407 chunks). No UTC/Eastern date shift exists among the 307.
+- **Opinion type, census of all 307** (DAWSON document type vs citation form): 1 disagreement, DAWSON's own miscode (T.C. Memo. 2012-59).
+- **Temporary regulations, census of all 23 sections** by issue date: the 7 excluded and 16 in force are all right under §7805(e)(2).
+- **One of my labels was wrong:** first-sample row 54 (§1.704-1T, 2016) was graded "ok" as a harmless stub, inconsistent with the rule applied to rows 45–53. Now WRONG: first-sample status 140/150, regulations 30/40 (75.0%).
+
+*Scan 2, the procedure and what no stratum could see:*
+- **The fixes changed retrieval.** Removing 151 chunks shifts every query's fused dense/sparse ranks. **The CI retrieval gate fell 0.7200 → 0.7000, exactly at its threshold** (`retrieval-dev-2026-09-28-k10.json`): D11's regulation gold is now 13th. The golden validator's "reachable only by the gold sub-query" count moved 52 → 50. E4's baseline must be re-measured on this corpus, not taken from Phase D.
+- **No gold or tag points at an excluded chunk** (golden, dev, pilot: validator 0 issues). Postgres and Qdrant agree (28,238), and the history table holds exactly the 155 expired versions.
+- **Superseded *final* regulations ("A" suffix) carry the §1.469-4T risk without a sunset:** §1.274-5A (29 chunks, travel substantiation, a core topic), §1.482-1A/-2A/-7A (92) and §1.1402(e)-1A–5A (15). Their scope isn't stated anywhere in the corpus. "Final" is the right label; the ranking risk is open (a decision for you, below).
+- **Temporary sections amended after 1988** (§1.274-5T, §1.62-1T, §1.469-1T/-2T/-5T, §1.162-25T, §1.280F-*T): an amendment issued as a temporary rule may have sunset paragraph by paragraph. The corpus can't say which amendments were temporary. **Unresolved,** labelled in force at section level.
+- **What the samples can't measure:**
+  - "none" treatments (281 opinions) could hide missed appeals; CourtListener's coverage gap is known from Phase C.
+  - 87 opinions (28%) carry no Filed line, so their date rests on DAWSON. A corrected reissue whose title doesn't say so would be invisible.
+- **Effective sample sizes:** opinion-level fields repeat across chunks. Reported status is really 28 opinions, re-drawn as fresh chunks; the censuses above are the stronger evidence.
+- **Cosmetic:** the 23 excluded §1.446-3T/§1.482-1T rows still store `temporary_partly_expired` (unindexed, never read).
+- **Standing risks:**
+  - The hand-checked *Banaitis* row never goes stale (the Supreme Court's word is final).
+  - The grader who designed the fixes also graded the re-check. The censuses reduce that dependence; your spot-check is still owed.
+
+**Decisions for you from the validation:**
+1. The "A"-suffix prior-version final regulations: label them (e.g. `final_prior_version`) for E4 to weigh, exclude them, or leave them.
+2. The CI gate at exactly 0.70: keep the threshold. E4 re-baselines on this corpus and a new snapshot, and should not lower it.
+
 **Dependencies:** E2
 **Files:** `eval/results/`
 **Scope:** S

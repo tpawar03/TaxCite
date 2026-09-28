@@ -8,6 +8,10 @@
 #   treatment        11/11 = 100%  (affirmances only: every adverse or pending opinion was in the first sample, so the fixes for
 #                    Banaitis and Gregory are verified by their tests and the corrected records, not by this draw)
 #   GATE (>=95% overall and per varying field): MET on the fresh sample, with the treatment caveat above.
+#   VALIDATION (two scans, 2026-09-28): the censuses behind this sample found what it couldn't. All 307 opinions' own
+#   Filed lines vs stored dates: 217 agree, 87 have none, 3 disagreed: corrected reissues DAWSON titles "CORRECTED"
+#   (fix (d) matched only "(Corrected)"); fixed, none of them in either sample. All 26 non-"none" treatments checked
+#   against the appellate text or a later Tax Court "aff'd": consistent (see tasks/todo.md E3, validation).
 
 
 ## 1. [statute] 26 U.S.C. § 505(b)(7)#body#1

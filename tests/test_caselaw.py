@@ -102,4 +102,6 @@ def test_a_corrected_reissue_keeps_the_opinions_own_filing_date(monkeypatch):
     op = {**MEMO, "documentTitle": "T.C. Opinion Judge Copeland (Corrected)161 T.C. No. 6", "filingDate": "2023-11-14T19:26:22Z"}
     chunks = caselaw.parse(Path("unused.pdf"), op)
     assert {(c.as_of, c.source_revision) for c in chunks} == {("2023-10-18", "filed 2023-10-18; corrected 2023-11-14")}
+    upper = {**op, "documentTitle": "Memorandum Opinion Judge Lauber CORRECTED Opinion - T.C. Memo. 2025-97"}
+    assert {c.as_of for c in caselaw.parse(Path("unused.pdf"), upper)} == {"2023-10-18"}  # DAWSON's other spelling
     assert {c.as_of for c in caselaw.parse(Path("unused.pdf"), MEMO)} == {MEMO["filingDate"][:10]}  # not corrected: DAWSON's date

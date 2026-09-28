@@ -169,8 +169,9 @@ def parse(path: Path, op: dict) -> list[Chunk]:
     caption = re.sub(r",? Petitioners?$", "", op["caseCaption"]) + " v. Commissioner"
     filed, revision = op["filingDate"][:10], None
     paras = paragraphs(path)
-    # A corrected reissue is listed by the correction's date; the opinion's own line has the filing date (E3: Caan)
-    if "(Corrected)" in op.get("documentTitle", "") and (m := FILED.search(" ".join(t for _, t in paras[:20]))):
+    # A corrected reissue is listed by the correction's date; the opinion's own line has the filing date (E3: Caan).
+    # DAWSON writes it "(Corrected)", "(CORRECTED)" and "CORRECTED Opinion": 4 of 307 opinions
+    if re.search(r"(?i)\bcorrected\b", op.get("documentTitle", "")) and (m := FILED.search(" ".join(t for _, t in paras[:20]))):
         filed = datetime.strptime(f"{m[1][:3]} {m[2]} {m[3]}", "%b %d %Y").date().isoformat()
         revision = f"filed {filed}; corrected {op['filingDate'][:10]}"
 

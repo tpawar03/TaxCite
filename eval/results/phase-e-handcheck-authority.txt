@@ -1,12 +1,13 @@
 # E3 hand check: 150 chunks, seed 20260928. Label each field against the evidence line:
 # 'ok', or 'WRONG: <true value>'. Fields: type, status, source_revision; treatment for opinions.
-# ---- Labelled by Claude 2026-09-28. Tally (field: correct / labelled): ----
+# ---- Labelled by Claude 2026-09-28; corrected in the two-scan validation the same day. Tally (field: correct / labelled): ----
 #   type             150/150 = 100.0%
-#   status           141/150 = 94.0%
+#   status           140/150 = 93.3%
 #   source_revision  149/150 = 99.3%
 #   treatment        13/15 = 86.7%
-#   all fields       453/465 = 97.4%
-#   per varying field: regulation status 31/40 = 77.5% (temporary stratum 11/20 = 55%); opinion status 60/60 (+15 in the treatment stratum, all right);
+#   all fields       452/465 = 97.2%
+#   per varying field: regulation status 30/40 = 75.0% (temporary stratum 10/20 = 50%: row 54 corrected to WRONG in validation);
+#   opinion status 60/60 (+15 in the treatment stratum, all right);
 #   treatment 13/15 = 86.7%; opinion filing date 54/55 = 98.2% where the text has its own Filed line (20 more checkable only against DAWSON: circular).
 #   GATE (>=95% overall AND per varying field): NOT MET: regulation status and treatment fail.
 
@@ -279,7 +280,7 @@ label: type=ok  status=WRONG: expired (whole). Issued May 12, 1989 (T.D. 8253), 
 ## 54. [temporary regulation] 26 CFR 1.704-1T(a)-(c)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: "§ 1.704-1T Partner's distributive share (temporary)." | expiry clause in this chunk: none
-label: type=ok  status=ok  source_revision=ok  | note: status ok: a pure cross-reference stub to final §1.704-1 (issued 2016, so §7805(e)(2) applies, but it carries no rule)
+label: type=ok  status=WRONG: expired (whole). Issued Feb. 4, 2016 (T.D. 9748), so §7805(e)(2) ended it in 2019. A cross-reference stub, but the same rule as rows 45-53 applies (corrected in validation scan 1; first graded 'ok')  source_revision=ok
 
 ## 55. [temporary regulation] 26 CFR 1.62-1T(c)(8)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
@@ -345,7 +346,7 @@ label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a d
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2021-09-29
 treatment: {'status': 'appealed', 'by': '69 F.4th 762 (ca11 2023)', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2021-115' in its own text: at *1-2 | 'Filed September 29, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-09-29T18:32:53.750Z
-label: type=ok  status=ok  source_revision=ok  treatment=WRONG: decided, not pending. 69 F.4th 762 (11th Cir. 2023) affirmed (golden G-C01's notes); flags() reads 'appealed' because the outcome text couldn't be parsed
+label: type=ok  status=ok  source_revision=ok  treatment=WRONG: decided, not pending (69 F.4th 762 (11th Cir. 2023) exists). Outcome 'affirmed' per golden G-C01's notes, written from memory: the cached appellate text never states its disposition (validation scan 1)
 
 ## 67. [treatment] T.C. Memo. 2013-85, at *3-5#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2013-03-27
