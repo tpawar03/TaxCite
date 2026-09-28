@@ -1,0 +1,100 @@
+# E0 reads: plan set 0, k=8. For each, does the LOWER source state the answer in plain
+# English that the gold doesn't? BETTER / equal / partly / no. Read by Claude 2026-09-28 (E1): BETTER 1, equal 1, partly 2, no 5.
+
+## D08
+Q: Does a client who fully owns rental houses and manages them count as actively participating for the rental loss allowance, and how has the Tax Court treated such owners?
+Reference: Active participation is unavailable if the owner's interest is below 10 percent; full owners who are personally active in management qualify, and in Anyika the Tax Court allowed such owners part of their losses, subject to the income phase-out.
+Gold: [['26 U.S.C. § 469(i)(6)'], ['T.C. Memo. 2011-69, at *9-11']]
+Lower (pub): IRS Pub 527 (2025), p. 20#body#3
+The special allowance isn’t available if you were married, lived with your spouse at any time during the year, and are filing a separate return. Active participation. You actively participated in a rental real estate activity if you (and your spouse) owned at least 10% of the rental property and you made management decisions or arranged for others to provide services (such as repairs) in a significant and bona fide sense. Management decisions that may count as active participation include approving new tenants, deciding on rental terms, approving expenditures, and other similar decisions. Example. You are single and had the following income and losses during the tax year. . . Salary . . Dividends . Interest . . . Rental loss . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . $42,300 300 1,400 (4,000 ) The rental loss was from
+
+Verdict: BETTER (keep). Pub 527 p. 20 states the 10% ownership rule *and* what management counts as active participation; §469(i)(6) states only the 10% bar.
+
+## D14
+Q: What is the most a client can deduct for student loan interest, and does their income affect it?
+Reference: ,500 of interest paid on a qualified education loan. Income matters twice: § 221(b)(2) reduces the deduction once modified adjusted gross income passes the threshold, to zero above the top of the range, and § 221(c) denies it entirely to an individual for whom another taxpayer is allowed a § 151 deduction.
+Gold: [['26 U.S.C. § 221(a)-(c)']]
+Lower (pub): IRS Pub 17 (2025), p. 71#body#1
+Exception. In most cases, the cancellation of a student loan made by an educational organization because of services you performed for that organization or another organization that provided the funds for the loan must be included in gross income on your tax return. Refinanced loan. If you refinanced a student loan with another loan from an eligible educational organization or a tax-exempt organization, that loan may also be considered as made by a qualified lender. The refinanced loan is considered made by a qualified lender if it’s made under a program of the refinancing organization that is designed to encourage students to serve in occupations with unmet needs or in areas with unmet needs where the services required of the students are for or under the direction of a governmental unit or a tax-exempt section 501(c)(3) organization. Student loan repayment assistance. Student loan repayments made to you are tax free if you received them for any of the following. • The National Health Service Corps (NHSC) Loan Repayment Program. • A state education loan repayment program eligible for funds under the Public Health Service Act. • Any other state loan repayment or loan forgiveness pr
+
+Verdict: no. Pub 17 p. 71 is student-loan cancellation, not the $2,500 cap. (Row's reference answer is corrupted: starts ",500"; fix proposed.)
+
+## D16
+Q: My client spent $8,000 investigating a business before it opened. Can they deduct that in the first year?
+Reference: Not by default: § 195(a) requires start-up expenditures to be capitalized. If the client elects under § 195(b), they deduct $5,000 in the year the active trade or business begins, reduced dollar for dollar by start-up expenditures over $50,000, and amortize the remaining $3,000 ratably over the 180-month period beginning with the month the business begins.
+Gold: [['26 U.S.C. § 195(a)-(b)']]
+Lower (memo): T.C. Memo. 2021-9, at *15-16#body#1
+species of trees to plant and had not harvested any of the existing trees on the
+property. Id. Indeed, as of the eighth year during which he owned the property,
+he had not harvested any trees, had not planted any new trees, and had not yet
+decided which species of trees to plant. Id. We agreed with the Commissioner
+that what all that meant was that the taxpayer during the two years in issue did not
+have a functioning business. Id. at *3. His expenses were therefore startup
+expenses for which on account of section 195(a) we allowed no current deduction.
+Id. at *3-*4.
+Reems v. Commissioner, T.C. Memo. 1994-253, 1994 Tax Ct. Memo
+LEXIS 256, is similar. The taxpayer there also purchased property on which to
+raise and harvest timber and had taken the first steps in a program to start a
+commercial timbering business, paying some $30,000 in expenses. Reems v.
+Commissioner, 1994 Tax Ct. Memo LEXIS 256, at *7-*8. Notwithstanding some
+incidental sales of firewood and walnut trees from the property, we found that,
+during the year in issue, he had not commenced an active business on the property.
+Id. at *12. We allowed no deduction for what we described as "'start-up
+expenditures'[,] * * * cle
+
+Verdict: partly. T.C. Memo. 2021-9 applies §195(a) capitalization; nothing on the §195(b) election, $5,000 or 180 months.
+
+## D18
+Q: My client is 45 and took $20,000 out of a 401(k). What extra tax applies?
+Reference: An additional tax of 10 percent of the portion includible in gross income — $2,000 if the whole distribution is taxable — on top of ordinary income tax, unless one of the exceptions in § 72(t)(2) applies (among them death, disability, substantially equal periodic payments, separation from service after age 55, and certain medical expenses).
+Gold: [['26 U.S.C. § 72(t)(1)']]
+Lower (pub): IRS Pub 17 (2025), p. 3#body#7
+its instructions for additional information regarding QOFs. limit Deferred compensation contribution increased. If you participate in a 401(k) plan, 403(b) plan, or the federal government’s Thrift Savings Plan, the total annual amount you can contribute for 2025 is increased to: • $23,500; • $31,000 if age 50 or older; or • $37,750 if age 60, 61, 62, or 63 at the end of 2025. This also applies to most section 457 plans. New Schedule 1-A. A new schedule to Form 1040, Schedule 1-A, has been created for taxpayers to claim a deduction for the recently enacted deductions for no tax on tips, no tax on overtime, no tax on car loan interest, and the enhanced senior deduction. For more information, see the instructions for Schedule 1-A in the Instructions for Form 1040. State and local tax deduction limit increased. The overall limit on the deduction for state and local income, sales, and property taxes has increased to $40,000 ($20,000 if married filing separately). The overall limit is reduced if your modified adjusted gross income is more than $500,000 ($250,000 if married filing separately) but will not be reduced below $10,000 ($5,000 if married filing separately). For more information
+
+Verdict: no. Pub 17 p. 3 is 401(k) contribution limits, not the 10% additional tax.
+
+## D19
+Q: An employer paid $7,000 of an employee's tuition under an educational assistance program. How much is taxable to the employee?
+Reference: $1,750. Section 127(a)(1) excludes educational assistance furnished under a program described in § 127(b), and § 127(a)(2) caps the exclusion at $5,250 per calendar year; the excess is taxable wages.
+Gold: [['26 U.S.C. § 127(a)']]
+Lower (pub): IRS Pub 17 (2025), p. 134#body#1
+Educational assistance: Employer-provided 49 Scholarships (See Scholarships and fellowships) Tuition (See Qualified tuition programs) EIC (See Earned income credit) Elderly or disabled, credit for: Married filing separately 23 Elderly persons: Credit for (See Elderly or disabled, credit for) Exemption from withholding 39 Home for the aged 35 Long-term care (See Long-term care insurance contracts) Nutrition Program for the Elderly 74 Standard deduction for age 65 or older 92 Tax Counseling for the Elderly 10 Election precinct officials: Fees, reporting of 75 Elective deferrals: Limits 51 Electronic filing (See E-file) Electronic payment options 3 Electronic reporting: Returns (See E-file) Embezzlement: Reporting embezzled funds 76 Emergency medical service personnel: Life insurance proceeds when death in line of duty 70 Emotional distress damages 74 Employee benefits 48, 49 (See also Fringe benefits) Employee business expenses: Reimbursements 39, 47 Returning excess 39 Employee expenses: Home computer 102 Miscellaneous 101 Employees 39, 48, 49 (See also Fringe benefits) Awards for service 47 Business expenses (See Employee business expenses) Form W-4 to be filled out when starting n
+
+Verdict: no. Pub 17 p. 134 is the index page.
+
+## D21
+Q: Can my client still do a like-kind exchange on business equipment?
+Reference: No. Section 1031(a)(1) applies only to real property held for productive use in a trade or business or for investment, so equipment no longer qualifies. Even for real property, the replacement must be identified within 45 days and received within 180 days of the transfer (§ 1031(a)(3)), and real property held primarily for sale is excluded.
+Gold: [['26 U.S.C. § 1031(a)-(b)']]
+Lower (pub): IRS Pub 334 (2025), p. 18#body#2
+give property away. For details about damaged, destroyed, or stolen property, see Pub. 547, Casualties, Disasters, and Thefts. For details about other dispositions, see chapter 1 of Pub. 544. Nontaxable exchanges. Certain exchanges of property are not taxable. This means any gain from the exchange is not recognized and you cannot deduct any loss. Your gain or loss will not be recognized until you sell or otherwise dispose of the property you receive. Like-kind exchanges. A like-kind exchange is the exchange of property for other like-kind property. It is the most common type of nontaxable exchange. Section 1031 like-kind exchange treatment applies only to exchanges of real property held for use in a trade or business or for investment, other than real property held primarily for sale. Report the exchange of like-kind property on Form 8824, Like-Kind Exchanges. For more information about like-kind exchanges, see chapter 1 of Pub. 544. Installment sales. An installment sale is a sale of property where you receive at least one payment after the tax year of the sale. If you finance the buyer’s purchase of your property, instead of having the buyer get a loan or mortgage from a third pa
+
+Verdict: equal. Pub 334 p. 18 states §1031's real-property-only rule plainly.
+
+## D23
+Q: What makes an expense reimbursement arrangement an accountable plan?
+Reference: It must meet all three requirements of § 1.62-2: business connection (paragraph (d)), substantiation (paragraph (e)), and return of amounts paid in excess of substantiated expenses (paragraph (f)). If an employee fails to return the excess within a reasonable period of time, only that excess is treated as paid under a nonaccountable plan.
+Gold: [['26 CFR 1.62-2(c)(1)', '26 CFR 1.62-2(c)(2)']]
+Lower (pub): IRS Pub 463 (2025), p. 42#body#4
+who don’t fit into one of the listed categories may not use Form 2106. Reimbursement, allowance, or advance. A reimbursement or other expense allowance arrangement is a system or plan that an employer uses to pay, substantiate, and recover the expenses, advances, reimbursements, and amounts charged to the employer for employee business expenses. Arrangements include per diem and car allowances. A per diem allowance is a fixed amount of daily reimbursement your employer gives you for your lodging and M&IE when you are away from home on business. (The term “incidental expenses” is defined in chapter 1 under Standard Meal Allowance.) A car allowance is an amount your employer gives you for the business use of your car. Your employer should tell you what method of reimbursement is used and what records you must provide. Employers. If you are an employer and you reimburse employee business expenses, how you treat this reimbursement on your employee’s Form W-2 depends in part on whether you have an accountable plan. Reimbursements treated as paid under an accountable plan, as explained next, aren’t reported as pay. Reimbursements treated as paid under nonaccountable plans, as explained l
+
+Verdict: partly. Pub 463 p. 42 defines a reimbursement arrangement generally; not the three requirements of §1.62-2(c).
+
+## D26
+Q: My married clients bought their home in 2012 with a $900,000 mortgage. On their 2016 joint return, could they deduct all of the mortgage interest?
+Reference: Yes, if they itemize and the home is a qualified residence. For 2016, interest on up to $1,000,000 of acquisition indebtedness ($500,000 married filing separately) is qualified residence interest (section 163(h)(3)(B)(ii)). The $750,000 limit applies only to taxable years beginning after December 31, 2017 (section 163(h)(3)(F)(i)(II)), and even then it does not apply to debt incurred on or before December 15, 2017 (section 163(h)(3)(F)(i)(IV)).
+Gold: [['26 U.S.C. § 163(h)(3)#body#1'], ['26 U.S.C. § 163(h)(3)#body#3']]
+Lower (pub): IRS Pub 587 (2025), p. 18#body#4
+home mortgage interest allowed as a deduction this year will be included in the business use of the home deduction you report on Schedule C (Form 1040), line 30, or Schedule F (Form 1040), line 32. If you cannot deduct the business portion of your home mortgage interest in full this year, you will carry over the remaining home mortgage interest to a subsequent year in which you use actual expenses to figure your business portion of the home deduction. If you itemize your deductions on Schedule A (Form 1040), only include the personal part of your deductible mortgage interest on Schedule A (Form 1040), line 8a or 8b. The personal portion of your home mortgage interest will generally be the amount of deductible home mortgage interest you figured when treating all home mortgage interest as a personal expense and applying the Schedule A (Form 1040) limits on deducting home mortgage interest, reduced by the business or rental portions deducted or carried over as a business or rental expense on Schedule C, E, or F, or any form other than Schedule A. Home mortgage interest that exceeds the amount you figured after applying the Schedule A (Form 1040) limits on deducting home mortgage inter
+
+Verdict: no. Pub 587 p. 18 is the home-office share of mortgage interest; nothing on the $1,000,000 limit or 2016.
+
+## D27
+Q: My client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away. Can she claim the clean vehicle credit for each?
+Reference: Only possibly for the August car, and only if it meets section 30D's other requirements (the per-vehicle limit of up to $7,500 under section 30D(b), the component, price and income limits). No credit is allowed for any vehicle acquired after September 30, 2025 (section 30D(h)), so the October car gets none.
+Gold: [['26 U.S.C. § 30D(h)'], ['26 U.S.C. § 30D(a)-(c)']]
+Lower (pub): IRS Pub 946 (2025), p. 60#body#3
+amount by multiplying the maximum amount by a fraction. The numerator of the fraction is the number of months and partial months in the short tax year, and the denominator is 12. Example. On April 15, 2025, you bought and placed in service a new car for $14,500. You used the car only in your business. You file your tax return based on the calendar year. You do not elect a section 179 deduction and elected not to claim any special depreciation allowance for the 5-year property. Under MACRS, a car is 5-year property. Because you placed your car in service on April 15 and used it only for business, you use the percentages in Table A-1 to figure your MACRS depreciation on the car. You multiply the $14,500 unadjusted basis of your car by 0.20 to get your MACRS depreciation of $2,900 for 2025. This $2,900 is below the maximum depreciation deduction of $12,200 for passenger automobiles placed in service in 2025. You can deduct the full $2,900. Electric Vehicles The maximum depreciation deductions for passenger automobiles that are produced to run primarily on electricity are higher than those for other automobiles. The maximum deduction amounts for electric vehicles placed in service afte
+
+Verdict: no. Pub 946 p. 60 is MACRS for a car; §30D(h) isn't in the pool at k=8.
+

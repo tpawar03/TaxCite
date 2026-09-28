@@ -1381,4 +1381,278 @@ No temporal row needs an earlier version of the text (D0: bucket 4 had 0 rows). 
 ## ✅ Checkpoint: Phase D complete
 - [ ] Temporal accuracy ≥90% (10/11) on the golden temporal rows; ≤2-point regression elsewhere: **not met** (0.394 scored once; 0.152 re-scored after the refusal fix, identical retrieval); no regression elsewhere (0.602 → 0.606)
 - [x] Tests and both CI gates green on the new snapshot: tests green on every `phase-d` commit; faithfulness 0.882 at refusals 0.135; retrieval gate re-baselined to route+statute1 at 0.70 (0.720 measured locally; runs in CI on the next PR touching retrieval)
-- [ ] Ready to plan Phase E (after you review and merge `phase-d`)
+- [x] Ready to plan Phase E: `phase-d` merged (PR #2, `aa9dd82`); retrieval gate 0.7200 in CI
+
+---
+
+# TaxCite Phase E — Task List
+
+Plan: `tasks/plan.md` (Phase E). Test command: `uv run pytest -q`. Every task leaves the repo runnable. Approved 2026-09-28.
+
+---
+
+## E0: Authority spike
+
+**Goal:** decide, before building, whether an authority prior can help (E4 go/no-go), which authority fields E2 stores, and what E3 samples. A diagnosis on golden, as D0 was; nothing is tuned here. No product code changes.
+
+**What's already known (2026-09-28, from the database):**
+
+| | count |
+|---|---|
+| Indexed chunks | statute 10,768 · regulations 5,609 · opinions 9,973 · publications 2,043 |
+| Opinions | 279 memorandum (9,015 chunks) · 28 reported T.C. (958 chunks); all Tax Court, filed 2000+ |
+| Temporary regulations (`section` ends in `T`) | 23 sections, 440 chunks |
+| `treatments` rows | corpus: affirmed 609, reversed 52, reversed in part 37, vacated 6, overruled 1, unknown 5, … · CourtListener: none 288, affirmed 13, reversed 3, appealed 1, … (rows cover cited opinions, not only the 307 held) |
+
+**Setup, fixed for every part:** golden, the shipped arm `route+statute1`, plans from `eval/results/decompositions-d7.json` (the live D7 planner; 5 plan sets for the 86 scored golden rows), hits from `dc.chunks(d, k)` at **k=8** (what synthesis reads) and k=20 (what the ladder scores). Authority of a hit, for this spike only, by a throwaway classifier on `Hit.source` and the citation: statute · regulation (final / temporary) · T.C. · T.C. Memo. · publication. Levels: statute = regulation > T.C. > Memo. > publication. (Whether statute outranks regulation for ranking is E4's question, not E0's.)
+
+**Part 1: who holds the top, by authority.** Per category, mean ± sd over 5 plan sets: the authority of top-1, and the authority mix of the top 8. For each row, the gold's highest authority level and the rank of its best gold hit.
+- **Definitions (per gold group, as `eval/e0_authority.py` computes them):** *inverted at top-1*: top-1 isn't gold and ranks below the row's highest-authority gold, which the pool holds. *Displaced*: the group isn't in the top k, the pool holds it, and the top k holds a non-gold hit of lower authority, the case a prior could fix (E4's ceiling, C0's reachability question). *Outranked*: in the top k, below such a hit. *Not in pool*: no prior can reach it. The pool is every sub-query's search hits before `chunks()` picks k.
+- **D32's risk.** For ≥10 inversions (all of them if fewer), read the lower-authority hit that outranks gold: does it state the answer in plain English that the gold doesn't? Tally yes / no / partly, with one line each.
+
+**Part 2: the field inventory.** For each §3.2 field (`authority_type`, `authority_level`, `court`, `jurisdiction`, `precedential_status`, `binding_on`, `publication_status`, `negative_treatment`, `source_revision`): its values in this corpus with counts, where each value comes from (a column, the citation's form, `treatments`, nothing), and whether it's constant. Two things to settle:
+- **Which treatment governs an opinion** when corpus and CourtListener rows disagree, or when an opinion has several (Phase C's `generate` merge rule is the starting point; say whether it's enough for ranking).
+- **Temporary regulations:** is a `T` section still in force, or superseded by a final one also in the corpus? Check the 23 by hand from eCFR's section text (a `T` regulation usually says when it expires).
+
+**Part 3: conflict rows.** A written definition, then candidates from existing golden and dev rows (Part 1's inversions are the first place to look; Phase C's *Morehouse*/*Menard* rows and the Eleventh Circuit post-remand row are known ones). For each candidate: the controlling source, the competing lower-authority source, and why the higher one controls. Candidates on golden are *not* tuned on; they seed E1's writing.
+
+**Decision rules, written before measuring:**
+- **E4 is built** if rows inverted at top-1 or displaced at k=8 are ≥5 golden rows (mean over plan sets) *and* fewer than half of the read inversions are D32-type (the lower source is the better evidence). Otherwise E4 is dropped or narrowed to what the numbers support (e.g. a reversed-opinion demotion alone), and the gate's rerank half is reported as not applicable, with the evidence, as C0 did for graph expansion.
+- **E2 stores** a field per chunk only if it has ≥2 values in the corpus; constants are documented in the tech doc.
+- **E3's strata** give each varying field ≥30 of the 150 labels.
+
+**Acceptance criteria:**
+- [x] Part 1's tables (k=8 and k=20, mean ± sd over 5 plan sets) and the per-row inversion list, saved
+- [x] The ceiling (inversions with gold in the pool) and the D32 tally with one line per read row
+- [x] Part 2's inventory with counts and sources; the treatment-merge rule and the 23 temporary regulations settled
+- [x] Part 3's definition and candidates, each with its controlling source
+- [x] The decision, applied as written above: E4 go / narrowed / dropped; E2's fields; E3's strata
+
+**Verification:**
+- [x] Every number reproducible from one command (`eval/e0_authority.py`) and its output in `eval/results/phase-e-e0-authority.json`; the hand reads in `phase-e-e0-reads.txt`
+- [ ] You read the D32 tally and ≥3 candidate conflict rows (Checkpoint 1)
+
+**Done 2026-09-28** (`eval/results/phase-e-e0-authority.json`, `phase-e-e0-reads.txt`; 86 rows × 5 plan sets, 27 min, no API calls. The 11 temporal rows have one cached plan set, so they're out of the 5-set run; a 1-set run had 1 inverted and 1 displaced of 11.)
+
+Part 1, k=8, mean ± sd over 5 plan sets:
+
+| category (rows) | top-1: statute / reg / T.C. / Memo. / pub | inverted at top-1 | displaced | outranked | gold groups not in pool |
+|---|---|---|---|---|---|
+| statutory (28) | 7.0 / 4.0 / 1.0 / 5.0 / 11.0 | **11.0 ± 0** | 6.0 ± 0 | 9.0 ± 0 | 7 / 29 |
+| compound (31) | 2.4 / 2.0 / 5.0 / 18.6 / 3.0 | **7.6 ± 0.55** | 8.6 ± 0.55 | 6.4 ± 0.55 | 30.4 / 63 |
+| case law (26) | 1.2 / 0 / 8.8 / 16.0 / 0 | 1.0 ± 0 | 0 | 2.0 ± 0 | 7.2 / 26 |
+| **all (86)** | 10.6 / 6.0 / 14.8 / 39.6 / 15.0 | **19.6 ± 0.55** | **14.6 ± 0.55** | 17.4 ± 0.55 | **45.6 / 119** |
+
+At k=20: inverted 21.6, displaced 12.6, not in pool 38.6 / 119. The same 24 rows are inverted or displaced in all 5 plan sets (G-X04 in 3): this is structural, not planner noise.
+
+- **The ceiling clears the bar by 4×:** ~20 rows inverted at top-1, ~15 displaced, against 5 required. Statutory and compound only; case law has nothing for a prior to do (1 row).
+- **The bigger limit is reach, not order:** 45.6 of 119 gold groups aren't in the pool at k=8 (38.6 at k=20). No prior reaches them. Searching deeper than synthesis reads (search at 20, pick 8) is the lever for those, and it's G-T08's problem too.
+- **D32's risk is small here:** of 15 inversions read, the lower source was **better** evidence once (G-S09: Pub 463 works the exact 40%-use case), **equal** 5 times (a memo or publication restating the statute), **partly** 2, **no** 7. One of the "no" is harmful: *Morehouse*, reversed, outranking §1402(a)(1) for an Iowa client (G-X02).
+
+Part 2, the field inventory:
+
+| field | values here | source | per chunk? |
+|---|---|---|---|
+| `authority_type` | statute 10,768 · regulation 5,609 (440 temporary) · opinion 9,973 · publication 2,043 | `source` + the citation's form | yes |
+| `precedential_status` | opinions: 28 reported T.C. (958 chunks) / 279 Memo. (9,015); publications: not binding; regulations: final / temporary / **temporary, expired** | citation form; the regulation's own text | yes |
+| `negative_treatment` | held opinions: none 281 · affirmed 20 · affirmed in part 1 · reversed 3 · reversed in part 1 · appealed 1 | `treatments`, merged by Phase C's `flags()` (reused as is: it already records disagreement as "unknown") | yes |
+| `source_revision` | statute: release point; **regulations, opinions, publications: empty** (an FR-16 gap) | eCFR date, filing date, edition: all in `as_of` already | yes, filled by E2 |
+| `authority_level` | a function of the three above | derived | stored with the profile |
+| `court`, `jurisdiction` | U.S. Tax Court; federal | constant | no: documented |
+| `binding_on` | depends on the taxpayer's circuit (Golsen) | a client fact | no: Phase G |
+| `publication_status` | folded into `precedential_status` | — | no |
+
+- **Temporary regulations:** §7805(e)(2) (in the corpus) sunsets a temporary regulation after 3 years, but only those issued after November 1988; the older ones (§1.274-5T, §1.280F-*T, §1.469-*T) stay in force. **Four state their own expiry, all past:** §1.988-1T and §1.988-2T whole (Dec 6, 2019); parts of §1.446-3T (May 7, 2018) and §1.482-1T (Sept 14, 2018). Expired text is indexed as if current. "A final with the same number exists" (16 of 23) is not evidence of supersession: §1.274-5 and §1.274-5T are different provisions.
+
+Part 3, conflict rows. **Definition:** a question where a retrieved, relevant source of lower authority competes with a higher one that controls the answer: statute or regulation over a publication or opinion restating it; a reported T.C. over a memorandum; a reviewing court's rule over a reversed opinion, for a taxpayer in that circuit. Candidates (golden, not tuned on; they seed E1's dev rows):
+- statute vs. publication or opinion: G-S02, G-S07, G-S11, G-S19 (lower is irrelevant); G-S06, G-S08, G-S16, G-S25 (lower restates it); **G-S09 (lower is the better evidence: the row that says "reorder, don't remove")**
+- reported T.C. vs. memorandum: G-C04 (120 T.C. No. 15 vs. T.C. Memo. 2010-205)
+- reversed opinion vs. the reviewing court: G-X02 (*Morehouse*, Eighth Circuit), G-X09 (*Menard*, Seventh), G-X19
+- **A counter-row:** G-C03 asks how the Tax Court decided *Morehouse*; there the reversed opinion *is* the answer. The same opinion must be demoted for G-X02 and kept for G-C03. What decides is the taxpayer's circuit, a client fact.
+
+**Decision (rules as written):**
+- **E4 is built.** Inverted or displaced at k=8: ~20 and ~15 rows (≥5 required); D32-type 1 of 15 (< half).
+- **E4's candidates change:** a blanket reversed-opinion demotion is **dropped** (G-C03 vs. G-X02: it needs `binding_on`, Phase G); **added:** search deeper than synthesis reads (pool at 20, pick 8), for the 45.6 gold groups out of reach. Expired temporary-regulation text is demoted (or dropped from the index: E2 decides, 4 sections).
+- **E2 stores:** `authority_type`, `precedential_status`, `negative_treatment`, `source_revision` (filled for every source), and the derived `authority_level`. `court` and `jurisdiction` documented as constants; `binding_on` deferred.
+- **E3's strata (150):** statute 20 · final regulation 20 · temporary regulation 20 (all 4 expired sections in) · reported T.C. 30 · Memo. 30 · publication 15 · opinions with a non-"none" treatment 15 (reversed, reversed in part, appealed, affirmed). Each varying field gets ≥30 labels.
+
+**Dependencies:** none
+**Files:** `eval/e0_authority.py` (new, given in chat; a 1-plan-set run verified 2026-09-28: 5.4 min), `eval/results/phase-e-e0-*` (no product code)
+**Scope:** S
+
+---
+
+## E1: Authority-conflict rows
+
+**Goal:** the rows E4 is tuned and gated on. Each one names the source that should be top-1 (`controls`) and the lower source competing with it. Dev for tuning, a golden subset held out and scored once, in E4.
+
+**What exists already (E0, and a 1-plan-set dev run: `phase-e-e0-authority-dev.json`, old planner cache):**
+- **Golden:** 24 rows inverted or displaced at k=8 in all 5 plan sets. 15 read in E0 (`phase-e-e0-reads.txt`); 9 unread: G-X04, X05, X07, X13, X15, X17, X22, X27, X29.
+- **Dev:** 9 inverted rows, all statute or regulation vs. a publication or memo: D08, D14, D16, D18, D19, D21, D23, D26, D27 (`phase-e-e0-reads-dev.txt`, unread). 7 rows already have the controlling source at top-1: D13, D20, D30, D31, D34, D36, D37.
+- **Thin kinds:** reported T.C. vs. memo has one golden row (G-C04) and none on dev. Reversed opinions: golden has *Morehouse* (G-C03, G-X02) and *Menard* (G-X09); dev has none. The held opinions with a negative treatment not used by golden: **137 T.C. No. 17** (reversed, 8th Cir. 2013) and **T.C. Memo. 2002-5** (reversed in part, 9th Cir. 2003). 18 of the 28 reported T.C. opinions are unused by golden.
+
+**Changed from the plan's default (for you to confirm):** the golden subset is mostly **existing rows, tagged**, plus new rows only where a kind is thin. The default ("new golden rows") assumed 3–5 existing candidates; E0 found 24. Tagging them is legitimate because E0 only diagnosed them and nothing was tuned on them. **The caveat, stated in E4's report:** they were selected *because* they fail today, so the subset measures gain. The guard rows measure harm.
+
+**The row tag** (added to existing rows, no other field changed; new rows are full rows with `scored_from: "E"`, so the CI gate and every earlier ladder stay unchanged):
+
+```json
+"authority": {"kind": "statute_over_lower", "controls": ["26 U.S.C. § 280A(c)(1)"],
+              "competes": ["IRS Pub 587 (2025), p. 5#body#4"], "keep": []}
+```
+
+- `kind`:
+  - `statute_over_lower`: statute or regulation over a publication or opinion
+  - `reported_over_memo`: a reported T.C. over a T.C. Memo.
+  - `reviewing_court`: a reversed opinion vs. the reviewing court's rule, where the question states the taxpayer's circuit
+  - `guard`: the controlling source is already top-1, and E4 must not break it
+- `controls`: citations or chunk keys, drawn from the row's gold. Any one at top-1 passes. Where the reviewing court's opinion isn't in the corpus (G-X02's Eighth Circuit), `controls` is the statute, and the circuit's rule reaches the answer only through Phase C's flag.
+- `competes`: the lower source or sources seen competing (from E0's runs, or expected for new rows).
+- `keep`: sources that must stay in the top 8 because they are better or unique evidence (G-S09's Pub 463). Empty for most rows.
+
+**Target composition:**
+
+| kind | golden (held out) | dev (tuning) |
+|---|---|---|
+| `statute_over_lower` | the E0 rows that hold up on reading (≈12–15) | the 9 inverted dev rows that hold up, and new rows if fewer than 6 survive |
+| `reported_over_memo` | G-C04 + **2 new** | **3 new** (unused T.C. opinions with a memo on the same issue) |
+| `reviewing_court` | G-X02, G-X09 (and G-X19 if its reading holds) | **2 new**: 137 T.C. No. 17 for an Eighth Circuit client, T.C. Memo. 2002-5 for a Ninth |
+| `guard` | ≥4, incl. **G-C03** (the reversed opinion *is* the answer) and ≥1 with a `keep` source | ≥4 from D13, D20, D30, D31, D34, D36, D37, **plus a counter-pair row**: how the Tax Court decided 137 T.C. No. 17 |
+| rows with a `keep` source | G-S09 and any found by reading | ≥2 (found in the dev reads, or new) |
+
+**Method (D1's two scans):**
+1. **Read before tagging.** Read the 9 unread golden inversions and the 9 dev inversions, the same way as E0: is the lower source better, equal, partial, or no? `controls` must be the source a practitioner would cite for the answer, not just the higher-level gold. A row whose "conflict" doesn't hold up (the top-1 is also gold, or the question really is about the publication) isn't tagged.
+2. **Write the new rows from the ingested text.** For `reported_over_memo`, find a memo that restates or applies the reported opinion's rule, and ask the question in the memo's words. For `reviewing_court`, state the taxpayer's circuit in the question. The reference answer gives the circuit's rule and names the reversed holding.
+3. **Scan 1, per row:** every `controls` and `competes` chunk read in full. The answer checked against the text, not memory. `controls` ⊆ gold.
+4. **Scan 2, across sets:** no citation shared between golden and dev (checked against pilot too). Every kind is present on dev. Gold widened where a publication states the same rule, because a publication can be gold without being the controlling source.
+
+**Acceptance criteria:**
+- [ ] Composition as the table above (or the shortfall stated per kind, with the reason)
+- [ ] `validate_pilot.py` passes both sets, and it now also checks `authority`: every `controls` entry is in the row's gold, and every `controls`, `competes` and `keep` entry exists in the corpus
+- [ ] Each tagged row records whether a `controls` source is in the pool at k=20 on a live-planner plan. Out-of-reach rows are kept, and counted separately in E4 (they're what deeper search is for)
+- [ ] No citation shared between sets; golden edits in logged commits you review
+
+**Verification:**
+- [ ] Manual: you approve every row (Checkpoint 1), including the tags on existing golden rows
+
+**Progress 2026-09-28: the 18 unread cases are read; 23 golden + 9 dev tags approved and applied, and D14's answer fixed (approved).** Only the `authority` field changed on tagged rows (and `answer` on D14), checked against HEAD; validator 0/115 and 0/39; 219 tests pass.
+- **Verdicts** (in `phase-e-e0-reads.txt` and `phase-e-e0-reads-dev.txt`):
+  - golden, 9 new: equal 3, partly 2, no 3, not a conflict 1 (G-X04: top-1 is never below the statute's level)
+  - dev, 9: better 1 (D08), equal 1, partly 2, no 5
+  - both sets, all 33 read so far: the lower source was the better evidence twice (G-S09, D08), and both become `keep` sources
+- **`at: 8` added to the tag.** Three golden compound rows (G-X07, G-X17, G-X27) have an on-point gold opinion at top-1 in 5 of 5 plan sets, and G-S08's top-1 is a regulation at the statute's level. Pushing the statute above an on-point opinion isn't the goal; getting it into the top 8 is. G-X02 stays `at: 1`: its top-1 is the reversed *Morehouse*.
+- **Proposed tags, 23 golden + 9 dev** (all `statute_over_lower` unless noted):
+  - golden, `at: 1`: G-S02, S04, S06, S07, S09 (keep Pub 463 p. 31), S10, S11, S15, S16, S19, S25, G-X03, X05, X13, X15, X22, X29, G-C04 (`reported_over_memo`), G-X02 (`reviewing_court`)
+  - golden, `at: 8`: G-S08, G-X07, X17, X27
+  - dev: D08 (keep Pub 527 p. 20), D14, D16, D18, D19, D21, D23, D26, D27
+  - Tested on copies: the validator passes both (0 of 115, 0 of 39) and flags every class of bad tag.
+- **A data bug:** D14's reference answer starts ",500 of interest" where "$2,500" was lost (shell interpolation of `$2` at authoring, most likely). No other row in golden, dev or pilot has the pattern. Fixed: "$2,500" restored. No code reads reference answers for retrieval, so no score moves.
+- **Still to do:** guards (golden: G-C03 + ≥3; dev: ≥4 from D13, D20, D30, D31, D34, D36, D37); read G-X09 and G-X19 for `reviewing_court`; write the new rows (golden: 2 `reported_over_memo`; dev: 3 `reported_over_memo`, 2 `reviewing_court`, 1 counter-pair guard).
+
+**Out of scope:** the expired temporary regulations (§1.988-1T/-2T are foreign currency, outside the Phase B topics; E2 handles them as metadata, not rows); E4's baseline top-1 on these rows (E4's first step, with 5 live-planner plan sets for every tagged row, dev included: dev's B rows have no D7 plans yet, ~$0.05).
+
+**Dependencies:** E0
+**Files:** `eval/dev.jsonl`, `eval/golden.jsonl`, `eval/validate_pilot.py`
+**Scope:** M
+
+---
+
+## ✅ Checkpoint 1 (human review)
+- [x] E0's field list, the conflict-row definition and the go/no-go on E4 confirmed (2026-09-28)
+- [ ] E1's rows approved
+
+---
+
+## E2: Authority profile at ingestion
+
+**Description:** One function, `authority(chunk)`, from structured fields only: `source`, the citation's form, and `treatments`. Stored in an `authority` jsonb column on `chunks` (migrated the way `effective` was), written by every ingester and backfilled for the existing rows without re-embedding. Only the fields E0 found to vary are per-chunk; constants are documented. A value with no source is `"unknown"` and counted in the ingest log, never defaulted (FR-16). Carried onto `Hit`.
+
+**Acceptance criteria:**
+- [ ] Every indexed chunk has a profile; the count of `"unknown"` per field is printed by the backfill and is 0 or explained
+- [ ] Re-running the backfill changes nothing (idempotent), and D6's trigger doesn't record a text version for it (the text didn't change)
+- [ ] Snapshot restore still works (D6's trigger lesson: test on a throwaway DB)
+
+**Verification:**
+- [ ] Tests: `authority()` on fixture chunks, one per value (statute, final and temporary regulation, T.C., T.C. Memo., reversed opinion, publication, and an unknown)
+- [ ] `uv run pytest -q` passes
+
+**Dependencies:** E0
+**Files:** `src/taxcite/authority.py` (or inside `store.py` if it's short), `src/taxcite/store.py`, `src/taxcite/retrieve.py` (`Hit`), `tests/`
+**Scope:** S
+
+---
+
+## E3: Stratified 150-chunk hand check
+
+**Description:** §3.2's validation, made meaningful. Draw 150 chunks stratified by E0's strata, weighted to the fields that vary (opinions by T.C./Memo. and treatment, regulations by final/temporary), not uniformly. Label each field by hand against the source of truth (the opinion's caption, eCFR's section status, the treatment record). Report accuracy per field and overall. D4's rule: if it fails and gets fixed, re-check on a **fresh** sample, never the one it was fixed against.
+
+**Acceptance criteria:**
+- [ ] ≥95% field-level accuracy overall **and** per varying field, or stated as not met
+- [ ] The sample, labels and disagreements saved (`eval/results/phase-e-handcheck-authority.txt`)
+
+**Verification:**
+- [ ] Manual: you spot-check ≥10 labels
+
+**Dependencies:** E2
+**Files:** `eval/results/`
+**Scope:** S
+
+---
+
+## E4: Authority-weighted rerank
+
+**Description:** In `decompose.chunks()`, add an authority prior to the cross-encoder score before the rest of the slots are filled. Candidates, compared on dev (E1's conflict rows and all other dev rows): (a) an additive prior per level; (b) a tie-break inside a score margin; (c) a reserved controlling slot, D3b's statute slot generalised to regulations; each with and without (d) searching deeper than synthesis reads (pool at k=20, pick 8: E0 found 45.6 of 119 gold groups out of the k=8 pool). Expired temporary-regulation text demoted. **No blanket reversed-opinion demotion** (E0: G-C03 needs *Morehouse*, G-X02 needs it demoted; that's `binding_on`, Phase G). Nothing is removed from the pool. Chosen on dev; golden scored once.
+
+**Acceptance criteria:**
+- [ ] Conflict subset: controlling source at top-1, before and after, dev and golden; the gate reads "changes top-1 to the controlling source"
+- [ ] Recall@20 per golden category, ≥5 plan sets: ≤2-point regression each (§9.3)
+- [ ] Reported, not gated: the lower-authority source still in k=8 on conflict rows; regulation recall (Phase A's 12.4 points); G-T08's statute rank at k=8; latency (a prior should cost ~0 ms)
+- [ ] An `eval/retrieval.py` arm for the rung, so the ladder shows it
+
+**Verification:**
+- [ ] Tests: the prior reorders but never drops a hit; ties broken deterministically
+- [ ] CI retrieval gate re-baselined if the shipped arm changes (as D3b did)
+
+**Dependencies:** E1, E2 (E3 before it ships live)
+**Files:** `src/taxcite/decompose.py`, `eval/retrieval.py`, `.github/workflows/`, `tests/`
+**Scope:** M
+
+---
+
+## E5: Authority in answers
+
+**Description:** Each source handed to synthesis carries its authority label ("Statute", "Tax Court memorandum", "IRS publication: not binding"…), with a prompt rule: when sources conflict, the higher authority governs and the answer says so. The API response carries each citation's authority from the stored profile, never from source text (ADR-13, FR-8, FR-14). Build `--samples N` on the answer-level scorers first (Phase D's handoff), then measure dev conflict-row answers with §9.2's rubric (defect tag "authority misweighted").
+
+**Acceptance criteria:**
+- [ ] Every citation in the response has an authority label from the structured field; a test proves a label-like string inside source text doesn't become one (G-A row's `✔ BINDING` spoof)
+- [ ] `--samples N` exists and its ± covers generator variance, not only the judge's
+- [ ] Faithfulness gate green, refusal rate ≤0.25
+- [ ] Dev conflict-row answers, `--samples 3`: "authority misweighted" count before and after (reported, not gated)
+
+**Verification:**
+- [ ] Tests: label rendering; the spoof case; the prompt rule only when sources of different levels are present (Phase D's rule-6 lesson: a rule given to every question changed undated answers)
+- [ ] `uv run pytest -q` passes
+
+**Dependencies:** E2, E4
+**Files:** `src/taxcite/generate.py`, `src/taxcite/jobs.py`, `eval/temporal.py` / `eval/ragas_eval.py`, `tests/`
+**Scope:** M
+
+---
+
+## E6: Phase E exit report
+
+**Description:** `eval/results/phase_e.md` in the shape of `phase_d.md`: E0's findings and decision, the metadata accuracy per field, the ladder with the authority rung, the conflict subset row by row, answers with their sample spread, failures with examples, §9.3 recalibration notes. Update the tech doc's Implementation Status, baselines, §7 and §9.3.
+
+**Acceptance criteria:**
+- [ ] Every number traces to a results file or a command at the foot of the report
+- [ ] Both §9.3 Phase E gates stated as met or not met, with no reinterpretation
+
+**Dependencies:** E4, E5
+**Files:** `eval/results/phase_e.md`, `taxcite-technical-documentation.md`
+**Scope:** S
+
+---
+
+## ✅ Checkpoint: Phase E complete
+- [ ] Authority metadata ≥95% field-level on the 150-chunk stratified sample
+- [ ] Controlling source moves to top-1 on the golden conflict subset; ≤2-point Recall@20 regression per category
+- [ ] Tests and both CI gates green on a new snapshot

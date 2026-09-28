@@ -54,6 +54,23 @@ def main(path: str) -> int:
                 if r.get("client_doc") is None:
                     issues.append('adversarial row needs client_doc (use "" if the attack is in the question)')
 
+            # E1's authority tag: what should rank first must be gold, and every source it names must exist
+            if tag := r.get("authority"):
+                gold_ids = {c for g in groups(r["gold"]) for c in g}
+                if tag.get("kind") not in ("statute_over_lower", "reported_over_memo", "reviewing_court", "guard"):
+                    issues.append(f"authority kind unknown: {tag.get('kind')!r}")
+                if tag.get("at", 1) not in (1, 8):
+                    issues.append(f"authority at must be 1 or 8: {tag.get('at')!r}")
+                if not tag.get("controls"):
+                    issues.append("authority tag needs controls")
+                for cit in tag.get("controls", []):
+                    if cit not in gold_ids:
+                        issues.append(f"authority controls is not in gold: {cit}")
+                for cit in tag.get("controls", []) + tag.get("competes", []) + tag.get("keep", []):
+                    if not conn.execute("SELECT 1 FROM chunks WHERE " + ("key" if "#" in cit else "citation")
+                                        + "=%s AND excluded IS NULL", (cit,)).fetchone():
+                        issues.append(f"authority source not in corpus: {cit}")
+
             # a gold entry is a citation label or, where a label is shared by several chunks, one chunk's key
             ids = lambda hits: {x for h in hits for x in (h.citation, h.key)}
             top50 = ids(search(r["question"], k=50, mode="hybrid")) if r["gold"] else set()

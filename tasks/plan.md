@@ -383,3 +383,93 @@ Full task details are in `tasks/todo.md` (Phase D section).
 - **Transaction time: build the minimum (D6), with no retrieval mode.** ADR-2 decided both time dimensions, and retiring instead of deleting is one column plus a changed sweep. A transaction-time *query* path ("answer as TaxCite would have on date Y") has no row that tests it and nothing that reads it, so it isn't built. Alternative: defer D6 to Phase H's incremental reindexing, where re-ingest becomes routine.
 - **Questions with an ambiguous year (G-T09) are answered for current law, with the change stated,** not sent back with a clarifying question. The API has no conversation turn to ask one in.
 - **Sources outside the corpus stay out.** G-T03 turns on a DEA scheduling rule. Adding Federal Register rules is its own ingestion source. D0 reports what it would unlock, and adding it is your call. G-T03's correct answer is an honest limit ("the statute says X; scheduling is outside the sources"). D0 checks that its reference answer says that.
+
+---
+
+# Phase E Implementation Plan: Authority-aware retrieval
+
+_Drafted 2026-09-28; approved the same day with Claude's four defaults below. E0 is a go/no-go on E4. Phase D's plan above is kept as history._
+
+## Overview
+
+The tech doc's Phase E (§7, §5.5, ADR-8) tags every chunk with an authority profile at ingestion, uses it as an explicit reranking signal, and shows each citation's authority in the answer. **Gate (§9.3):** authority metadata ≥95% field-level accuracy on a 150-chunk hand-labeled sample; reranking changes the top-1 result on a curated authority-conflict subset, with ≤2 points of Recall@20 regression elsewhere.
+
+**What is known before building (one plan set, golden, shipped `route+statute1`, `retrieval-golden-2026-09-27-k20-d3b.json`):** on the 28 statutory rows, top-1 is an IRS publication on 14, a Tax Court opinion on 6, a regulation on 4 and the statute on 6. The gold chunk is top-1 on 3. Phase A measured the same thing another way: publications cost regulation recall 12.4 points. So lower-authority sources outranking the controlling one is common, not an edge case. **But Phase D's filter taught the counter-lesson:** the publication that outranks the statute is often the only plain-English evidence for the answer (D32). Authority must reorder, never remove.
+
+**What doesn't exist yet:**
+- **No authority-conflict subset.** No golden or dev row is tagged as one, and the gate needs it. Two golden rows come close: the Eleventh Circuit reversal read through the post-remand opinion, and the reversed *Morehouse*/*Menard* rows (Phase C).
+- **Most spec fields have one value across this corpus.** Every opinion is the Tax Court's; every source is federal; there are no circuit opinions, Revenue Rulings or proposed regulations. The fields that vary are few: source type, T.C. vs. Memo., temporary vs. final regulation, and negative treatment (Phase C). A uniform 150-chunk sample would pass 95% on the constant fields alone, so the sample is stratified (E3).
+
+So the phase opens with a spike (E0), as C and D did, and writes its conflict rows (E1) before anything is tuned.
+
+**Exit condition:** a reviewer asks a statutory question whose plain words match Pub 17. The statute (or regulation) is top-1 and Pub 17 is still in the eight sources synthesis reads. Each citation in the answer carries a label from structured fields ("Statute", "Treasury regulation", "Tax Court (reported)", "Tax Court memorandum", "IRS publication: not binding"; reversed opinions flagged, as in Phase C). The ladder shows what the authority rung adds on the conflict subset and what it costs everywhere else (≤2 points).
+
+Source docs: tech doc §3.2, §5.5, §7, §9, §9.3, ADR-8, ADR-13 · `eval/results/phase_a.md` (the 12.4 points) · `eval/results/phase_c.md` (treatment) · `eval/results/phase_d.md` (the filter that removed evidence).
+
+## Architecture Decisions (for this phase)
+
+- **The authority profile is computed by one function from structured fields, and stored.** `authority(chunk)` reads `source`, the citation's form (T.C. No. vs. T.C. Memo.; a `T` suffix on a regulation section) and Phase C's `treatments` table. It is stored as one `authority` jsonb column on `chunks`, like D4's `effective`, so the hand check, the reranker and the answer labels all read the same stored value (ADR-13: badges come only from ingestion fields). Backfilled, no re-embed. A field with no source for its value is stored as `"unknown"` and logged (FR-16), never defaulted.
+- **Spec fields that are constant in this corpus are recorded once, not tagged per chunk.** `court`, `jurisdiction` and `binding_on` are stored where they vary (the reversing circuit in a treatment) and documented as constants otherwise. E0 confirms which. If a later source (circuit opinions, Revenue Rulings) makes one vary, it gets a value then.
+- **Not in the Qdrant payload.** The reranker runs after search, on `Hit`s, so nothing filters on authority. Add it to the payload only if a filter needs it.
+- **Authority reorders; it never filters.** The candidate is a prior added to the cross-encoder score by authority level, inside `decompose.chunks()`, where the statute slot already lives. Alternatives E4 compares on dev: a per-level additive prior; a tie-break only within a score margin; a reserved "controlling" slot (the statute slot generalised). Nothing is removed from the pool, so a publication can still reach synthesis on relevance. **Added after E0:** searching deeper than synthesis reads, because 45.6 of 119 golden gold groups aren't in the k=8 pool at all, and no prior reaches them.
+- **No blanket demotion for negative treatment (changed after E0).** The same reversed opinion is the answer to G-C03 (how did the Tax Court decide *Morehouse*?) and the thing to demote for G-X02 (an Iowa client, Eighth Circuit). Which one applies is the taxpayer's circuit, `binding_on`, so it waits for Phase G. Phase C's flag stays on every answer.
+- **The gate's "changes top-1" is scored as "the controlling source becomes top-1".** Changing top-1 to the wrong chunk shouldn't count. Each conflict row names its controlling source; the score is the share of rows where it's top-1, before and after. Also reported: whether the lower-authority source is still in synthesis depth (k=8), which is D32's lesson made a metric.
+- **Tuning happens on dev; the golden conflict subset is scored once, at the end.** E1 writes both before E4 starts. The golden audit rule applies: logged commits you review, no citation shared between sets.
+- **Answers are reported, not gated, and sampled properly.** Phase D's handoff: an answer-level metric on few rows needs several generated answers per row. `eval/temporal.py --samples N` (or the same flag on the faithfulness harness) is built in E5 before any answer number is quoted. The faithfulness gate and its refusal-rate check run as usual.
+
+## Dependency Graph
+
+```
+E0 authority spike (where authority costs, which fields vary, which rows conflict)
+   ├── E1 authority-conflict rows (dev + golden subset) ──────────┐
+   └── E2 authority profile at ingestion (+ backfill) ─┬──────────┤
+            └── E3 150-chunk stratified hand check ────┤          │
+                                                       ▼          ▼
+                                      E4 authority-weighted rerank (tuned on dev)
+                                                       ▼
+                                      E5 authority in answers (labels, prompt, --samples)
+                                                       ▼
+                                                E6 Phase E exit report
+```
+
+## Task List
+
+Full task details are in `tasks/todo.md` (Phase E section).
+
+### Slice 1 — Find out where authority costs
+- [x] E0: Authority spike (~20 rows inverted at top-1, ~15 displaced, stable over 5 plan sets; 1 of 15 lower sources was better evidence: **E4 go**)
+- [ ] E1: Authority-conflict rows (dev + golden subset)
+
+### Checkpoint 1 (human review)
+- [x] You confirm E0's field list and the conflict-row definition (2026-09-28)
+- [ ] E1's rows are approved
+
+### Slice 2 — Metadata
+- [ ] E2: Authority profile at ingestion
+- [ ] E3: Stratified 150-chunk hand check (≥95% field-level)
+
+### Slice 3 — Ranking and answers
+- [ ] E4: Authority-weighted rerank
+- [ ] E5: Authority in answers
+
+### Checkpoint: Phase E complete
+- [ ] E6: Phase E exit report (`eval/results/phase_e.md`): both gates stated as met or not; ≤2-point regression per category; CI green with a new snapshot
+
+## Risks and Mitigations
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Boosting the statute pushes the plain-English publication out of synthesis depth, and answers get worse (D3's filter did exactly this) | High | Reorder only, never filter; E4 reports "lower-authority source still in k=8" and dev answers with `--samples`, not recall alone |
+| The 95% metadata gate passes vacuously on constant fields | High | Stratified sample (E3): most labels go to the fields that vary; accuracy reported per field, and the gate is read per field |
+| "Changes top-1" passes by changing it to the wrong chunk | Med | Scored as "controlling source becomes top-1" (E1 names it per row) |
+| The conflict subset is small, so one row is many points (Phase D: 9.1 points a row) | Med | E1 aims for ≥10 golden and ≥10 dev rows; the report lists every row |
+| The statute is the right authority but the wrong section (G-T08: the slot went to §225) | Med | Out of E's gate; E4 reports G-T08's rank as a side effect, not a target |
+| Tuning on the golden subset | Med | E1 before E4; golden conflict rows scored once, at the end |
+| Answer-level numbers on few rows are one sample of a brittle generator (Phase D: 0.394 → 0.152) | Med | `--samples` in E5 before any answer number is quoted |
+
+## Resolved Inputs (2026-09-28, Claude's defaults confirmed)
+
+- **Publication tables (G-S28, Pub 946's depreciation caps) are not in Phase E.** The tech doc lists them under "Phase E (publication handling)", but it's a chunking and extraction problem, not authority. Default: record it as open with no phase; you can move it into E as E7.
+- **The 12.4-point publication dilution is reported, not gated.** Phase A named restoring it as E's baseline to beat, measured on regulations-only before routing existed. E4 reports regulation recall with and without the rung; the gate stays §9.3's.
+- **Conflict subset: new golden rows, written before E4, reviewed by you.** Alternative: tag existing rows only (probably 3–5 rows, too few to read).
+- **`binding_on` / Golsen is documented, not modelled.** Which circuit's law binds the Tax Court depends on the taxpayer's residence, a client fact. Without client documents (Phase G) there is nothing to key it on. Default: store the reversing circuit where a treatment has one; revisit in Phase G.
