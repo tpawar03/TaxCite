@@ -42,8 +42,13 @@ Rules:
 2. Every sentence that states a rule must end with its citation in square brackets, copied exactly as the source header gives it, e.g. [26 CFR 1.183-2(b)(3)], [26 U.S.C. § 183(d)] or [T.C. Memo. 2026-76, at *12].
 3. If the sources do not answer the question, say exactly: INSUFFICIENT EVIDENCE, and explain what is missing. Do not guess.
 4. Regulations and statute outrank IRS publications. Where they differ, follow the regulation and say so.
-5. Be brief: a practitioner wants the rule and the citation, not an essay.
-6. Tax year: the question header names the tax year it is about, or says none was named. Start the answer by stating the year you answer for. A source marked "Effective:" had its current text take effect later than that year, or retroactively. Where that text itself states the rule for particular years (a schedule, "before January 1, 2022, 26 percent", "taxable years beginning after 2017"), those statements govern the years they name. Otherwise do not apply it to an earlier year: use the earlier text if the note quotes it, or say the rule for that year is not in the sources. When no year was named and a source shows the rule changed, answer for current law and say what changed and when."""
+5. Be brief: a practitioner wants the rule and the citation, not an essay."""
+
+# Only for a question with a tax year (D7). Given to every question it made the model refuse 40 of 96
+# golden rows that name no year, faithfulness's refusal rate going 0.13 -> 0.55; the gate itself still
+# passed, because refusals are outside its mean.
+YEAR_RULE = """
+6. Tax year: the question header names the tax year it is about. Start the answer by stating the year you answer for. A source marked "Effective:" had its current text take effect later than that year, or retroactively. Where that text itself states the rule for particular years (a schedule, "before January 1, 2022, 26 percent", "taxable years beginning after 2017"), those statements govern the years they name. Otherwise do not apply it to an earlier year: use the earlier text if the note quotes it, or say the rule for that year is not in the sources."""
 
 CLOSED_BOOK_SYSTEM = """You answer US federal tax questions for an enrolled agent, from your own knowledge.
 
@@ -246,9 +251,10 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
         blocks.append("## Client facts, supplied by the questioner (not sources; never cite these)\n"
                       + "\n".join(f"- {f}" for f in facts))
     hits = list({h.citation: h for _, group in groups for h in group}.values())
-    header = f"Tax year(s) the question is about: {' and '.join(years)}" if years else "Tax year: none named"
-    prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\n{header}\nQuestion: {question}"
-    return _generate(question, hits, mode="rag", model=model, prompt=prompt)
+    header = f"Tax year(s) the question is about: {' and '.join(years)}\n" if years else ""
+    prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\n{header}Question: {question}"
+    return _generate(question, hits, mode="rag", model=model, prompt=prompt,
+                     system=RAG_SYSTEM + YEAR_RULE if years else RAG_SYSTEM)
 
 
 def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,
@@ -260,10 +266,11 @@ def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,
     return _generate(question, hits, mode=mode, model=model)
 
 
-def _generate(question: str, hits: list[Hit], mode: str, model: str, prompt: str | None = None) -> Answer:
+def _generate(question: str, hits: list[Hit], mode: str, model: str, prompt: str | None = None,
+              system: str | None = None) -> Answer:
     if mode == "rag":
         prompt = prompt or f"Sources:\n\n{format_sources(hits)}\n\nQuestion: {question}"
-        system = RAG_SYSTEM
+        system = system or RAG_SYSTEM
     else:
         prompt = f"Question: {question}"
         system = CLOSED_BOOK_SYSTEM
