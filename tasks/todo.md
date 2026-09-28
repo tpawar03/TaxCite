@@ -1665,7 +1665,7 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 - [x] The sample, labels and disagreements saved (`eval/results/phase-e-handcheck-authority.txt`)
 
 **Verification:**
-- [ ] Manual: you spot-check ≥10 labels
+- [x] Manual: you spot-check ≥10 labels (done 2026-09-28)
 
 **Sample drawn 2026-09-28** (`eval/e3_sample.py`, seed 20260928; `phase-e-e3-sample.json`, and `phase-e-handcheck-authority.txt` to label):
 - **Strata:**
@@ -1778,20 +1778,75 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 
 ## E4: Authority-weighted rerank
 
-**Description:** In `decompose.chunks()`, add an authority prior to the cross-encoder score before the rest of the slots are filled. Candidates, compared on dev (E1's conflict rows and all other dev rows): (a) an additive prior per level; (b) a tie-break inside a score margin; (c) a reserved controlling slot, D3b's statute slot generalised to regulations; each scoped to a statutory sub-query's own candidates, and unscoped (E1's guards: a flat prior promotes irrelevant statutes above gold opinions); each with and without (d) searching deeper than synthesis reads (pool at k=20, pick 8: E0 found 45.6 of 119 gold groups out of the k=8 pool). Expired temporary-regulation text demoted. **No blanket reversed-opinion demotion** (E0: G-C03 needs *Morehouse*, G-X02 needs it demoted; that's `binding_on`, Phase G). Nothing is removed from the pool. Chosen on dev; golden scored once.
+**Goal:** make the controlling source win where a lower one outranks it (E1's conflict rows) without breaking the rows that are right today (E1's guards) or costing more than 2 points of Recall@20 in any category (§9.3). Chosen on dev, golden scored once.
+
+**What the code and the corpus fix before any design (2026-09-28):**
+- **Routing makes sources disjoint by sub-query kind.** A statutory sub-query searches `usc`/`ecfr`/`irs_pub`; a case-law sub-query searches `case` only. So the statute-over-opinion harm E1's guards show is purely *across* sub-query kinds. "Scoped" can be defined exactly: reorder within one kind's candidates, and leave the cross-kind ordering to the cross-encoder.
+- **The cross-encoder's scale:** top-1 score median 0.80 (range −0.46…2.47), adjacent-rank gap in the top 8 median 0.13, 90th percentile 0.53 (golden, 40 rows, plan set 0). A prior's weight is sized against those gaps.
+- **Where the order is decided:** `decompose.chunks()`. It takes one floor slot per sub-query, then D3b's statute slot, then fills by cross-encoder score, and **sorts the chosen 8 by score**. Top-1 is the highest score among the chosen, so a candidate changes top-1 only through the score it sorts by.
+- **E0's numbers describe the pre-E3 corpus.** E3 removed 155 chunks, and the CI gate moved 0.7200 → 0.7000. The baseline is re-measured here.
+
+**Step 0: plans and the baseline (no code change to ranking).**
+- **Plan sets from the live (D7) planner, into `decompositions-d7.json`:**
+  - 5 sets for every dev row (dev's B rows only have old-planner plans)
+  - 4 more for the 11 temporal golden rows
+  - 5 for the rows E1 added (G-C27, D40–D42)
+  - About 260 gpt-4o-mini calls, under $0.15. Appended, so the existing plan sets don't change.
+- **Authority metrics in `eval/retrieval.py`,** read from each row's `authority` tag:
+  - conflict rows: `controls` at target (top-1 for `at: 1`, top 8 for `at: 8`), and whether `controls` is in the pool at all
+  - guards: still at top-1
+  - `keep` sources: still in the top 8
+  - Reported per kind, mean ± sd over 5 plan sets. Plus Recall@20 and Recall@8 per category over all scored rows, regulation recall (Phase A's 12.4 points), G-T08's statute rank, and latency.
+- **Baseline on dev and golden,** shipped arm (`route+statute1`), k=8 and k=20. Golden is measured here only as the "before" of a pre-registered comparison; nothing is tuned on it.
+
+**Candidates (built behind a `chunks()` argument, off by default; each an `eval/retrieval.py` arm):**
+- **(a) Additive prior.** Score + w × (level − 1), with w ∈ {0.1, 0.25, 0.5, 1.0}, bracketing the gap scale above.
+- **(b) Margin tie-break.** Within δ ∈ {0.1, 0.25} of each other, the higher level first; otherwise the score decides.
+- **(c) Controlling slot.** D3b's statute slot widened to "statute or final regulation", 1 slot.
+- **Each of (a) and (b) in two scopes:**
+  - *flat*, across the merged list;
+  - *scoped*, where the boosted order is computed within each kind's candidates and that kind's original scores are then re-assigned in the new order. That leaves the cross-kind score profile, and so the statute-vs-opinion order, as the cross-encoder had it.
+  - Scoped within case law still ranks reported over memo, and D03's guard (a reversed reported opinion over the gold memo) tests exactly that.
+- **(d) Deeper search:** search each sub-query at 20 and choose 8, with and without the best of (a)–(c). This is for E0's 45.6 of 119 golden gold groups out of the k=8 pool: no reordering reaches those.
+- **Variants on the best candidate:**
+  - statute above regulation (the levels are equal today);
+  - `final_prior_version` a quarter-level below `final` (E3's 136 "A" chunks);
+  - no blanket demotion of reversed opinions (dropped in E0).
+
+**Choosing on dev (rules fixed before measuring):**
+1. Break no dev guard (0 of 8 lose top-1) and keep every `keep` source in the top 8.
+2. Recall@20 regression ≤ 2 points in every dev category, mean over 5 plan sets.
+3. Among those, the most dev conflict rows at target. Ties go to the simpler candidate: slot, then tie-break, then prior; scoped before flat; no deeper search before deeper search.
+
+If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (as C5 did).
+
+**The golden gate (pre-registered, to confirm with you before any golden run):**
+- **Conflict rows:** at least half of the golden conflict rows whose controlling source is in the pool reach their target, up from the baseline. §9.3 says "changes the top-1 result on a curated authority-conflict subset" without a number; this puts one on it.
+- **Guards:** at most 1 of the 9 golden guards loses top-1; every `keep` source stays in the top 8 (G-S09).
+- **Recall@20:** ≤ 2 points regression in every golden category, 5 plan sets.
+- **Reported, not gated:** conflict rows out of the pool (reach); Recall@8; regulation recall; G-T08; latency; which rows changed top-1 and to what.
+
+**Shipping:**
+- If the chosen candidate ships live, `decompose` gets it as a constant (like `STATUTE`), and the CI gate's arm follows.
+- **The CI gate stays at 0.70** (your decision). It is re-run on a new snapshot that carries E2–E3's metadata and exclusions; publishing that snapshot is your call.
 
 **Acceptance criteria:**
-- [ ] Conflict subset: controlling source at top-1, before and after, dev and golden; the gate reads "changes top-1 to the controlling source"
-- [ ] Recall@20 per golden category, ≥5 plan sets: ≤2-point regression each (§9.3)
-- [ ] Reported, not gated: the lower-authority source still in k=8 on conflict rows; regulation recall (Phase A's 12.4 points); G-T08's statute rank at k=8; latency (a prior should cost ~0 ms)
-- [ ] An `eval/retrieval.py` arm for the rung, so the ladder shows it
+- [ ] Plans generated (counts and cost stated); baseline on dev and golden recorded with the authority metrics
+- [ ] Every candidate measured on dev (5 plan sets), rules 1–3 applied as written, the choice recorded with the table
+- [ ] Golden gate thresholds confirmed with you before the golden run; golden scored once
+- [ ] CI retrieval gate ≥ 0.70 on the shipped arm (or E4 ships nothing)
 
 **Verification:**
-- [ ] Tests: the prior reorders but never drops a hit; ties broken deterministically
-- [ ] CI retrieval gate re-baselined if the shipped arm changes (as D3b did)
+- [ ] Tests: each candidate on fixture hits:
+  - the prior reorders but never drops a hit;
+  - scoped keeps the cross-kind order;
+  - the tie-break respects δ;
+  - the slot fills only from statute or final regulation;
+  - ties are broken deterministically
+- [ ] `uv run pytest -q` passes
 
-**Dependencies:** E1, E2 (E3 before it ships live)
-**Files:** `src/taxcite/decompose.py`, `eval/retrieval.py`, `.github/workflows/`, `tests/`
+**Dependencies:** E1, E2, E3
+**Files:** `src/taxcite/decompose.py` (`chunks()`), `eval/retrieval.py` (arms, authority metrics), `eval/results/decompositions-d7.json` (plans), `.github/workflows/` (if the arm changes), `tests/test_decompose.py`
 **Scope:** M
 
 ---
