@@ -206,6 +206,12 @@ def aggregate(judged: list[Judged]) -> dict:
     }
 
 
+def refusals_ok(rates: list[float], limit: float | None) -> bool:
+    """Refusals sit outside the faithfulness mean (see `aggregate`), so a build that refuses more can pass
+    it: D7's first build passed at 0.866 while refusing 55% of golden rows (log #72). This bounds them."""
+    return limit is None or (statistics.mean(rates) if rates else 0.0) <= limit
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--questions", default="eval/golden.jsonl")
@@ -218,6 +224,8 @@ def main() -> int:
     ap.add_argument("--fail-under", type=float, metavar="MEAN",
                     help="exit non-zero if the mean faithfulness is below this. Set it from a measured "
                          "band, not from the quality target: the two are different objects (ADR-22)")
+    ap.add_argument("--max-refusal-rate", type=float, metavar="RATE",
+                    help="exit non-zero if the mean refusal rate is above this; the faithfulness mean excludes refusals")
     ap.add_argument("--answers-cache", default=str(ANSWERS), help="'' regenerates every run")
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json",
                     help="pin decompositions from this cache; '' re-plans every run (noisy)")
@@ -295,13 +303,19 @@ def main() -> int:
                   "claims": j.claims, "verdicts": j.verdicts} for judged, _ in runs for j in judged],
     }, indent=2))
     print(f"\nwrote {out}")
+    ok = True
     if args.fail_under is not None:
         mean = statistics.mean(values) if values else 0.0
         ok = mean >= args.fail_under
         print(f"gate: mean faithfulness {mean:.4f} {'>=' if ok else '<'} {args.fail_under:.4f} "
               f"-> {'PASS' if ok else 'FAIL'}")
-        return 0 if ok else 1
-    return 0
+    if args.max_refusal_rate is not None:
+        rates = [s["refusal_rate"] for _, s in runs]
+        refusing = refusals_ok(rates, args.max_refusal_rate)
+        print(f"gate: mean refusal rate {statistics.mean(rates):.4f} {'<=' if refusing else '>'} "
+              f"{args.max_refusal_rate:.4f} -> {'PASS' if refusing else 'FAIL'}")
+        ok = ok and refusing
+    return 0 if ok else 1
 
 
 if __name__ == "__main__":
