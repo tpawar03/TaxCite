@@ -1862,6 +1862,30 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 
   Ties go to the simpler arm, so the choice stands.
 
+**Golden, scored once (2026-09-28)** (`retrieval-golden-2026-09-28-k{8,20}-e4-golden-gate.json`; shipped vs chosen, same process, 5 plan sets):
+
+| pre-registered criterion | threshold | shipped | prior 0.5 scoped | |
+|---|---|---|---|---|
+| conflict rows at target, of the 23 in the pool | ≥ 12 | 0 | **2.2** (2, 2, 2, 2, 3) | **not met** |
+| guards still top-1 | ≥ 7 of 8 | 8 | **8** (every set) | met |
+| `keep` source in the top 8 (G-S09) | kept | kept | kept | met |
+| Recall@20, worst category change | ≥ −2 pts | — | **+0.000** (case law); statutory **+12.5**, temporal +9.1, compound +2.6 | met |
+
+- **Not met, and not reinterpreted.** Reached target: G-S06 (top-1 in every set) and G-S08 (at 8, 7th), plus one more in one plan set.
+- **Moved up without reaching target:** G-S09 8→2, G-C04 4→2, G-S02 out→4, G-S19 8→4, G-S10 8→5, G-X03 out→7.
+- **Why golden falls short of dev (3/10), row by row:**
+  - (1) **Reach:** 12 of the 23 have the controlling source outside the top 8 under both arms. A reordering of the statutory kind lifts a statute within its kind, but the compound rows' top 8 is shared with opinions.
+  - (2) **The scope does what it was built to do:** in compound and reviewing-court rows the lower source that leads is an *opinion* (G-X02's *Morehouse*, G-X07's *Day*), and scoped never reorders across kinds.
+  - (3) G-C04's reported opinion rose 4→2, not to 1.
+- **What it does do:**
+  - golden Recall@20 statutory 0.607 → 0.732: Phase A's 12.4-point publication dilution, restored inside the statutory kind
+  - Recall@8 overall 0.493 → 0.529
+  - dev CI gate arm 0.720 → **0.740** (nDCG 0.547 → 0.610, MRR 0.553 → 0.635; `…-k10-ci-e4-choice.json`)
+  - zero guards broken
+- **Latency:** not measurable from these runs. The chosen arm reused the first arm's cached reranker scores, so its p50 is flattering. The prior itself is a sort over the pool (~50 hits).
+
+**Awaiting your decision: ship it or not.** The gate's rerank half failed as pre-registered, but the change improves retrieval and breaks nothing. If shipped: a `decompose` constant (like `STATUTE`), `answer()` passes it, and the CI arm switches. **CI would need a new snapshot:** `corpus-2026-09-28` predates E2, and without the profile on the points the prior does nothing.
+
 **Candidates (built behind a `chunks()` argument, off by default; each an `eval/retrieval.py` arm):**
 - **(a) Additive prior.** Score + w × (level − 1), with w ∈ {0.1, 0.25, 0.5, 1.0}, bracketing the gap scale above.
 - **(b) Margin tie-break.** Within δ ∈ {0.1, 0.25} of each other, the higher level first; otherwise the score decides.
@@ -1896,7 +1920,7 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 **Acceptance criteria:**
 - [x] Plans generated (counts and cost stated); baseline on dev and golden recorded with the authority metrics
 - [x] Every candidate measured on dev (5 plan sets), rules 1–3 applied as written, the choice recorded with the table
-- [ ] Golden gate thresholds confirmed with you before the golden run; golden scored once
+- [x] Golden gate thresholds confirmed with you before the golden run; golden scored once: **not met on the conflict criterion** (2.2 of 23 vs ≥ 12)
 - [ ] CI retrieval gate ≥ 0.70 on the shipped arm (or E4 ships nothing)
 
 **Verification:**
