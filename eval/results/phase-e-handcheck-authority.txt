@@ -1,828 +1,838 @@
 # E3 hand check: 150 chunks, seed 20260928. Label each field against the evidence line:
 # 'ok', or 'WRONG: <true value>'. Fields: type, status, source_revision; treatment for opinions.
+# ---- Labelled by Claude 2026-09-28. Tally (field: correct / labelled): ----
+#   type             150/150 = 100.0%
+#   status           141/150 = 94.0%
+#   source_revision  149/150 = 99.3%
+#   treatment        13/15 = 86.7%
+#   all fields       453/465 = 97.4%
+#   per varying field: regulation status 31/40 = 77.5% (temporary stratum 11/20 = 55%); opinion status 60/60 (+15 in the treatment stratum, all right);
+#   treatment 13/15 = 86.7%; opinion filing date 54/55 = 98.2% where the text has its own Filed line (20 more checkable only against DAWSON: circular).
+#   GATE (>=95% overall AND per varying field): NOT MET: regulation status and treatment fail.
+
 
 ## 1. [statute] 26 U.S.C. § 7482(a)(1)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Courts of review'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 2. [statute] 26 U.S.C. § 422(d)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Incentive stock options'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 3. [statute] 26 U.S.C. § 1260(c)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Gains from constructive ownership transactions'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 4. [statute] 26 U.S.C. § 36(d)-(e)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'First-time homebuyer credit'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 5. [statute] 26 U.S.C. § 168(i)(12)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Accelerated cost recovery system'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 6. [statute] 26 U.S.C. § 6049(b)(4)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Returns regarding payments of interest'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 7. [statute] 26 U.S.C. § 4940(c)(1)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Excise tax based on investment income'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 8. [statute] 26 U.S.C. § 905(c)(3)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Applicable rules'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 9. [statute] 26 U.S.C. § 331(a)-(c)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Gain or loss to shareholder in corporate liquidations'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 10. [statute] 26 U.S.C. § 465(d)-(e)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Deductions limited to amount at risk'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 11. [statute] 26 U.S.C. § 6656(d)-(e)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Failure to make deposit of taxes'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 12. [statute] 26 U.S.C. § 1260(b)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Gains from constructive ownership transactions'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 13. [statute] 26 U.S.C. § 6110(f)(1)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Public inspection of written determinations'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 14. [statute] 26 U.S.C. § 1254(a)(4)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Gain from disposition of interest in oil, gas, geothermal, or other mineral properties'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 15. [statute] 26 U.S.C. § 414(e)(3)#body#2
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Definitions and special rules'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 16. [statute] 26 U.S.C. § 529(e)(4)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Qualified tuition programs'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 17. [statute] 26 U.S.C. § 9826(e)(10)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Oversight of entities that provide pharmacy benefit management services'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 18. [statute] 26 U.S.C. § 7871(c)(3)#body#2
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Indian tribal governments treated as States for certain purposes'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 19. [statute] 26 U.S.C. § 7121(a)-(b)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Closing agreements'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 20. [statute] 26 U.S.C. § 168(n)(4)#body#1
 stored: type=statute status=enacted level=4 | source_revision=Pub. L. 119-110
 evidence: heading: 'Accelerated cost recovery system'
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 21. [final regulation] 26 CFR 1.162-33(c)(1)#body#15
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.162-33 Certain employee remuneration in excess of $1,000,000 not deductible for taxable years beginning after December 31, 2017.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 22. [final regulation] 26 CFR 1.263A-1(b)(4)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.263A-1 Uniform capitalization of costs.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 23. [final regulation] 26 CFR 1.274-12(b)(6)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.274-12 Limitation on deductions for certain food or beverage expenses paid or incurred after December 31, 2017.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 24. [final regulation] 26 CFR 1.61-5(b)(2)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.61-5 Allocations by cooperative associations; per-unit retain certificates—tax treatment as to cooperatives and patrons.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 25. [final regulation] 26 CFR 1.162-20(c)(2)#body#5
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.162-20 Expenditures attributable to lobbying, political campaigns, attempts to influence legislation, etc., and certain advertising.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 26. [final regulation] 26 CFR 1.263(a)-4(d)(4)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.263(a)-4 Amounts paid to acquire or create intangibles.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 27. [final regulation] 26 CFR 1.482-5(d)(4)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.482-5 Comparable profits method.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 28. [final regulation] 26 CFR 1.988-6(c)#body#9
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.988-6 Nonfunctional currency contingent payment debt instruments.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 29. [final regulation] 26 CFR 1.704-2(j)(1)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.704-2 Allocations attributable to nonrecourse liabilities.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 30. [final regulation] 26 CFR 1.274-5A(c)(6)#body#3
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.274-5A Substantiation requirements.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 31. [final regulation] 26 CFR 1.401(a)(4)-13(d)(4)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.401(a)(4)-13 Effective dates and fresh-start rules.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 32. [final regulation] 26 CFR 1.179-5(c)(4)#body#2
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.179-5 Time and manner of making election.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 33. [final regulation] 26 CFR 1.988-5(b)#body#19
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.988-5 Section 988(d) hedging transactions.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 34. [final regulation] 26 CFR 1.263(a)-2(f)(2)#body#3
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.263(a)-2 Amounts paid to acquire or produce tangible property.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 35. [final regulation] 26 CFR 1.262-1(b)(5)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.262-1 Personal, living, and family expenses.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 36. [final regulation] 26 CFR 1.263(a)-3(i)(2)#body#2
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.263(a)-3 Amounts paid to improve tangible property.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 37. [final regulation] 26 CFR 1.167(c)-1(a)(6)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.167(c)-1 Limitations on methods of computing depreciation under section 167(b) (2), (3), and (4).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 38. [final regulation] 26 CFR 1.263A-4(e)(4)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.263A-4 Rules for property produced in a farming business.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 39. [final regulation] 26 CFR 1.179-1(e)(5)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.179-1 Election to expense certain depreciable assets.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 40. [final regulation] 26 CFR 1.401(a)(4)-6(b)(6)#body#1
 stored: type=regulation status=final level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.401(a)(4)-6 Contributory defined benefit plans.' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 41. [temporary regulation] 26 CFR 1.988-1T#expired#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17 | excluded=expired
 evidence: heading: '§ 1.988-1T Certain definitions and special rules (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok  | note: status ok: temporary, and the expiry is carried by excluded=expired
 
 ## 42. [temporary regulation] 26 CFR 1.988-1T(j)-(k)#expired#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17 | excluded=expired
 evidence: heading: '§ 1.988-1T Certain definitions and special rules (temporary).' | expiry clause in this chunk: applicability of this section expires on December 6, 2019
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok  | note: status ok (expiry via excluded=expired)
 
 ## 43. [temporary regulation] 26 CFR 1.988-2T#expired#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17 | excluded=expired
 evidence: heading: '§ 1.988-2T Recognition and computation of exchange gain or loss (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok  | note: status ok (expiry via excluded=expired)
 
 ## 44. [temporary regulation] 26 CFR 1.988-2T(j)-(k)#expired#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17 | excluded=expired
 evidence: heading: '§ 1.988-2T Recognition and computation of exchange gain or loss (temporary).' | expiry clause in this chunk: applicability of this section expires on December 6, 2019
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok  | note: status ok (expiry via excluded=expired)
 
 ## 45. [temporary regulation] 26 CFR 1.446-3T(k)#body#1
 stored: type=regulation status=temporary_partly_expired level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.446-3T Notional principal contracts (temporary).' | expiry clause in this chunk: applicability of paragraph (g)(4) of this section and paragraph (g)(6) Examples 2, 3 and 4 of this section expires May 7, 2018
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 8, 2015 (T.D. 9719), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later  source_revision=ok
 
 ## 46. [temporary regulation] 26 CFR 1.482-1T#body#13
 stored: type=regulation status=temporary_partly_expired level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.482-1T Allocation of income and deductions among taxpayers (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued Sept. 16, 2015 (T.D. 9738), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later  source_revision=ok
 
 ## 47. [temporary regulation] 26 CFR 1.446-3T#body#1
 stored: type=regulation status=temporary_partly_expired level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.446-3T Notional principal contracts (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 8, 2015 (T.D. 9719), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later (this chunk is paragraph (g)(4), which its own clause also expired)  source_revision=ok
 
 ## 48. [temporary regulation] 26 CFR 1.482-1T#body#8
 stored: type=regulation status=temporary_partly_expired level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.482-1T Allocation of income and deductions among taxpayers (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued Sept. 16, 2015 (T.D. 9738), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later  source_revision=ok
 
 ## 49. [temporary regulation] 26 CFR 1.469-4T(k)(3)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 12, 1989 (T.D. 8253), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later; superseded by final §1.469-4, also in the corpus; its text governs taxable years around 1989  source_revision=ok
 
 ## 50. [temporary regulation] 26 CFR 1.469-1T(g)(8)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.469-1T General rules (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 51. [temporary regulation] 26 CFR 1.469-4T(c)(4)#body#12
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 12, 1989 (T.D. 8253), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later; superseded by final §1.469-4, also in the corpus; its text governs taxable years around 1989  source_revision=ok
 
 ## 52. [temporary regulation] 26 CFR 1.469-4T(f)(5)#body#15
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 12, 1989 (T.D. 8253), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later; superseded by final §1.469-4, also in the corpus; its text governs taxable years around 1989  source_revision=ok
 
 ## 53. [temporary regulation] 26 CFR 1.469-4T(k)(7)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 12, 1989 (T.D. 8253), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later; superseded by final §1.469-4, also in the corpus; its text governs taxable years around 1989  source_revision=ok
 
 ## 54. [temporary regulation] 26 CFR 1.704-1T(a)-(c)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: "§ 1.704-1T Partner's distributive share (temporary)." | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok  | note: status ok: a pure cross-reference stub to final §1.704-1 (issued 2016, so §7805(e)(2) applies, but it carries no rule)
 
 ## 55. [temporary regulation] 26 CFR 1.62-1T(c)(8)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.62-1T Adjusted gross income (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 56. [temporary regulation] 26 CFR 1.168(j)-1T#body#27
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.168(j)-1T Questions and answers concerning tax-exempt entity leasing rules (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 57. [temporary regulation] 26 CFR 1.280F-5T(e)(3)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.280F-5T Leased property (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 58. [temporary regulation] 26 CFR 1.469-4T(e)(3)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=WRONG: expired (whole). Issued May 12, 1989 (T.D. 8253), after Nov. 20, 1988, so §7805(e)(2) ended it 3 years later; superseded by final §1.469-4, also in the corpus; its text governs taxable years around 1989  source_revision=ok
 
 ## 59. [temporary regulation] 26 CFR 1.62-1T(c)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.62-1T Adjusted gross income (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 60. [temporary regulation] 26 CFR 1.62-1T(a)-(b)#body#1
 stored: type=regulation status=temporary level=4 | source_revision=eCFR 2026-09-17
 evidence: heading: '§ 1.62-1T Adjusted gross income (temporary).' | expiry clause in this chunk: none
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 61. [treatment] 137 T.C. No. 17, at *14-15#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2011-12-27
 treatment: {'status': 'reversed', 'by': '729 F.3d 869 (ca8 2013)', 'sources': ['CourtListener']}
 evidence: citation form '137 T.C. No. 17' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2011-12-27T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 62. [treatment] 140 T.C. No. 16, at *8-10#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2013-06-18
 treatment: {'status': 'reversed', 'by': '769 F.3d 616 (ca8 2014)', 'sources': ['CourtListener']}
 evidence: citation form '140 T.C. No. 16' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2013-06-18T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 63. [treatment] T.C. Memo. 2002-5, at *8-10#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2002-01-08
 treatment: {'status': 'reversed in part', 'by': '340 F.3d 1074 (ca9 2003)', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2002-5' in its own text: at *1-3 | 'Filed January 8, 2002' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2002-01-08T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=WRONG: the Ninth Circuit's partial reversal (340 F.3d 1074) was itself reversed by the Supreme Court (Commissioner v. Banks, 543 U.S. 426 (2005), decided with Banaitis); the Tax Court's fee holding stands (T.C. Memo. 2025-80 at *11 states the rule from Banks)
 
 ## 64. [treatment] T.C. Memo. 2003-162, at *5-7#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2003-06-03
 treatment: {'status': 'affirmed in part', 'by': "176 F. App'x 778 (ca9 2006)", 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2003-162' in its own text: at *1-2 | 'Filed June 3, 2003' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2003-06-03T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 65. [treatment] T.C. Memo. 2004-207, at *94-95#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2004-09-16
 treatment: {'status': 'reversed', 'by': '560 F.3d 620 (ca7 2009)', 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form 'T.C. Memo. 2004-207' in its own text: at *1-2 | 'Filed September 16, 2004' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2004-09-16T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 66. [treatment] T.C. Memo. 2021-115, at *1-2#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2021-09-29
 treatment: {'status': 'appealed', 'by': '69 F.4th 762 (ca11 2023)', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2021-115' in its own text: at *1-2 | 'Filed September 29, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-09-29T18:32:53.750Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=WRONG: decided, not pending. 69 F.4th 762 (11th Cir. 2023) affirmed (golden G-C01's notes); flags() reads 'appealed' because the outcome text couldn't be parsed
 
 ## 67. [treatment] T.C. Memo. 2013-85, at *3-5#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2013-03-27
 treatment: {'status': 'affirmed', 'by': '766 F.3d 917 (ca8 2014)', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2013-85' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-03-27T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 68. [treatment] T.C. Memo. 2021-41, at *7-8#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2021-04-06
 treatment: {'status': 'affirmed', 'by': '52 F.4th 889 (ca10 2022)', 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form 'T.C. Memo. 2021-41' in its own text: at *1-2 | 'Filed April 6, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-04-06T18:37:43.644Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 69. [treatment] T.C. Memo. 2013-211, at *3-5#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2013-09-09
 treatment: {'status': 'affirmed', 'by': "580 F. App'x 474 (ca7 2014)", 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2013-211' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-09-09T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 70. [treatment] T.C. Memo. 2010-144, at *13-14#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2010-06-30
 treatment: {'status': 'affirmed', 'by': "475 F. App'x 259 (ca9 2012)", 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form 'T.C. Memo. 2010-144' in its own text: at *1-2 | 'Filed June 30, 2010' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2010-06-30T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 71. [treatment] T.C. Memo. 2023-87, at *20-21#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2023-07-17
 treatment: {'status': 'affirmed', 'by': '2025 WL 511651 (ca1 2025)', 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form 'T.C. Memo. 2023-87' in its own text: at *1-2 | 'Filed July 17, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-07-17T18:35:01.446Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 72. [treatment] T.C. Memo. 2003-48, at *13-14#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2003-02-26
 treatment: {'status': 'affirmed', 'by': "90 F. App'x 669 (ca3 2004)", 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2003-48' in its own text: at *1-2 | 'Filed February 26, 2003' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2003-02-26T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 73. [treatment] T.C. Memo. 2007-271, at *1-3#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2007-09-12
 treatment: {'status': 'affirmed', 'by': "325 F. App'x 596 (ca9 2009)", 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2007-271' in its own text: not in the extracted text | 'Filed September 12, 2007' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2007-09-12T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 74. [treatment] T.C. Memo. 2006-239, at *18-19#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2006-11-07
 treatment: {'status': 'affirmed', 'by': "277 F. App'x 122 (ca2 2008)", 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form 'T.C. Memo. 2006-239' in its own text: at *1-3 | 'Filed November 7, 2006' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2006-11-07T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 75. [treatment] T.C. Memo. 2000-77, at *2-4#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2000-03-07
 treatment: {'status': 'affirmed', 'by': '281 F.3d 101 (ca3 2002)', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2000-77' in its own text: at *1-2 | 'Filed March 7, 2000' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2000-03-07T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=ok (per the record: a decided appellate citation from CourtListener and/or later Tax Court opinions; not independently re-verified)
 
 ## 76. [reported opinion] 114 T.C. No. 2, at *36-37#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2000-02-04
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '114 T.C. No. 2' in its own text: at *1-2 | 'Filed February 4, 2000' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2000-02-04T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 77. [reported opinion] 115 T.C. No. 23, at *11-12#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2000-09-29
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '115 T.C. No. 23' in its own text: at *1-2 | 'Filed September 29, 2000' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2000-09-29T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 78. [reported opinion] 116 T.C. No. 29, at *4-5#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2001-06-14
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '116 T.C. No. 29' in its own text: at *1-2 | 'Filed June 14, 2001' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2001-06-14T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 79. [reported opinion] 117 T.C. No. 22, at *5-6#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2001-12-11
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '117 T.C. No. 22' in its own text: at *1-2 | 'Filed December 11, 2001' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2001-12-11T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 80. [reported opinion] 119 T.C. No. 5, at *7-8#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2002-09-16
 treatment: {'status': 'affirmed', 'by': "93 F. App'x 473 (2004)", 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form '119 T.C. No. 5' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2002-09-16T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 81. [reported opinion] 119 T.C. No. 6, at *5-6#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2002-09-24
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '119 T.C. No. 6' in its own text: at *1-2 | 'Filed September 24, 2002' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2002-09-24T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 82. [reported opinion] 120 T.C. No. 15, at *10-12#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2003-05-19
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '120 T.C. No. 15' in its own text: at *1-2 | 'Filed May 19, 2003' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2003-05-19T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 83. [reported opinion] 121 T.C. No. 6, at *9-10#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2003-08-04
 treatment: {'status': 'affirmed', 'by': '425 F.3d 1203 (ca9 2005)', 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form '121 T.C. No. 6' in its own text: at *1-2 | 'Filed August 4, 2003' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2003-08-04T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 84. [reported opinion] 123 T.C. No. 4, at *16-17#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2004-07-15
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '123 T.C. No. 4' in its own text: at *1 | 'Filed July 15, 2004' (at *1) | DAWSON: 'T.C. Opinion' (TCOP), filed 2004-07-15T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 85. [reported opinion] 125 T.C. No. 13, at *15-16#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2005-11-22
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '125 T.C. No. 13' in its own text: at *1-2 | 'Filed November 22, 2005' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2005-11-22T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 86. [reported opinion] 131 T.C. No. 11, at *5-6#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2008-11-12
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '131 T.C. No. 11' in its own text: at *1-2 | 'Filed November 12, 2008' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2008-11-12T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 87. [reported opinion] 132 T.C. No. 19, at *1-3#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2009-06-30
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '132 T.C. No. 19' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2009-06-30T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 88. [reported opinion] 135 T.C. No. 18, at *9-11#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2010-09-20
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '135 T.C. No. 18' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2010-09-20T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 89. [reported opinion] 136 T.C. No. 6, at *14-15#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2011-02-07
 treatment: {'status': 'affirmed', 'by': '715 F.3d 1169 (ca9 2013)', 'sources': ['later Tax Court opinions', 'CourtListener']}
 evidence: citation form '136 T.C. No. 6' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2011-02-07T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 90. [reported opinion] 137 T.C. No. 13, at *12-13#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2011-11-30
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '137 T.C. No. 13' in its own text: at *1-2 | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2011-11-30T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 91. [reported opinion] 139 T.C. No. 16, at *34-36#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2012-11-13
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '139 T.C. No. 16' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2012-11-13T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 92. [reported opinion] 139 T.C. No. 3, at *6-8#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2012-08-08
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '139 T.C. No. 3' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2012-08-08T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 93. [reported opinion] 141 T.C. No. 3, at *33-34#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2013-09-03
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '141 T.C. No. 3' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2013-09-03T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 94. [reported opinion] 157 T.C. No. 10, at *21-23#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2021-11-18
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '157 T.C. No. 10' in its own text: at *1-2 | 'Filed November 18, 2021' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2021-11-18T19:33:26.313Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 95. [reported opinion] 158 T.C. No. 6, at *2-4#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2022-04-19
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '158 T.C. No. 6' in its own text: at *1-2 | 'Filed April 19, 2022' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2022-04-19T18:37:26.553Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 96. [reported opinion] 161 T.C. No. 6, at *1-3#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2023-11-14
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '161 T.C. No. 6' in its own text: at *1 | 'Filed October 18, 2023' (at *1) | DAWSON: 'T.C. Opinion' (TCOP), filed 2023-11-14T19:26:22.526Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=WRONG: filed 2023-10-18 (the opinion's own line). 2023-11-14 is the corrected reissue DAWSON lists; recorded as the filing date  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 97. [reported opinion] 165 T.C. No. 10, at *5-6#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2025-11-12
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '165 T.C. No. 10' in its own text: at *1-2 | 'Filed November 12, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-11-12T19:35:15.046Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 98. [reported opinion] 165 T.C. No. 13, at *4-5#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2025-12-16
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '165 T.C. No. 13' in its own text: at *1-2 | 'Filed December 16, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-12-16T19:36:10.951Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 99. [reported opinion] 167 T.C. No. 11, at *14#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2026-09-21
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '167 T.C. No. 11' in its own text: at *1-2 | 'Filed September 21, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-09-21T18:31:02.011Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 100. [reported opinion] 167 T.C. No. 4, at *44-45#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2026-07-15
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '167 T.C. No. 4' in its own text: at *1-2 | 'Filed July 15, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-07-15T18:32:03.981Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 101. [reported opinion] 167 T.C. No. 7, at *11#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2026-08-05
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '167 T.C. No. 7' in its own text: at *1-2 | 'Filed August 5, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-08-05T18:31:54.517Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 102. [reported opinion] 167 T.C. No. 7, at *22#body#3
 stored: type=opinion status=reported level=3 | source_revision=filed 2026-08-05
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '167 T.C. No. 7' in its own text: at *1-2 | 'Filed August 5, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-08-05T18:31:54.517Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 103. [reported opinion] 165 T.C. No. 10, at *22#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2025-11-12
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '165 T.C. No. 10' in its own text: at *1-2 | 'Filed November 12, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-11-12T19:35:15.046Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 104. [reported opinion] 165 T.C. No. 13, at *48#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2025-12-16
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '165 T.C. No. 13' in its own text: at *1-2 | 'Filed December 16, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-12-16T19:36:10.951Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 105. [reported opinion] 114 T.C. No. 2, at *15-16#body#1
 stored: type=opinion status=reported level=3 | source_revision=filed 2000-02-04
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form '114 T.C. No. 2' in its own text: at *1-2 | 'Filed February 4, 2000' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2000-02-04T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 106. [memorandum opinion] T.C. Memo. 2026-35, at *13#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2026-04-23
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2026-35' in its own text: at *1-2 | 'Filed April 23, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-04-23T18:28:37.154Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 107. [memorandum opinion] T.C. Memo. 2009-223, at *24-25#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2009-09-29
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2009-223' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2009-09-29T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 108. [memorandum opinion] T.C. Memo. 2026-14, at *6-7#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2026-02-05
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2026-14' in its own text: at *1-2 | 'Filed February 5, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-02-05T19:32:31.849Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 109. [memorandum opinion] T.C. Memo. 2022-40, at *6#body#2
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2022-04-20
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2022-40' in its own text: at *1-2 | 'Filed April 20, 2022' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2022-04-20T18:37:39.344Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 110. [memorandum opinion] T.C. Memo. 2024-103, at *10#body#3
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2024-11-06
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2024-103' in its own text: at *1-2 | 'Filed November 6, 2024' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2024-11-06T19:31:08.920Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 111. [memorandum opinion] T.C. Memo. 2007-101, at *17-18#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2007-04-25
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2007-101' in its own text: at *1-2 | 'Filed April 25, 2007' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2007-04-25T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 112. [memorandum opinion] T.C. Memo. 2012-59, at *7-8#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2012-03-05
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2012-59' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2012-03-05T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)  | note: status ok: titled T.C. Memo. 2012-59; DAWSON's TCOP code is its own miscoding
 
 ## 113. [memorandum opinion] T.C. Memo. 2010-140, at *6-7#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2010-06-24
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2010-140' in its own text: not in the extracted text | 'Filed June 24, 2010' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2010-06-24T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 114. [memorandum opinion] T.C. Memo. 2025-87, at *6-7#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2025-08-18
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2025-87' in its own text: at *1-2 | 'Filed August 18, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-08-18T18:34:30.833Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 115. [memorandum opinion] T.C. Memo. 2023-128, at *3-4#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2023-10-26
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2023-128' in its own text: at *1-2 | 'Filed October 26, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-10-26T18:35:22.458Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 116. [memorandum opinion] T.C. Memo. 2003-49, at *15-17#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2003-02-26
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2003-49' in its own text: at *1-3 | 'Filed February 26, 2003' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2003-02-26T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 117. [memorandum opinion] T.C. Memo. 2023-133, at *40#body#2
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2023-11-06
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2023-133' in its own text: at *1-2 | 'Filed November 6, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-11-06T19:34:18.638Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 118. [memorandum opinion] T.C. Memo. 2021-118, at *13-15#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2021-10-05
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2021-118' in its own text: at *1-2 | 'Filed October 5, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-10-05T18:38:18.543Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 119. [memorandum opinion] T.C. Memo. 2026-43, at *4#body#3
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2026-05-27
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2026-43' in its own text: at *1-2 | 'Filed May 27, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-05-27T18:33:13.619Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 120. [memorandum opinion] T.C. Memo. 2013-36, at *16-18#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2013-02-04
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2013-36' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-02-04T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 121. [memorandum opinion] T.C. Memo. 2026-78, at *6#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2026-09-02
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2026-78' in its own text: at *1-2 | 'Filed September 2, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-09-02T18:25:48.723Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 122. [memorandum opinion] T.C. Memo. 2024-91, at *6-7#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2024-09-26
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2024-91' in its own text: at *1-2 | 'Filed September 26, 2024' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2024-09-26T18:35:04.132Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 123. [memorandum opinion] T.C. Memo. 2025-127, at *19-20#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2025-12-08
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2025-127' in its own text: at *1-2 | 'Filed December 8, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-12-08T19:39:48.595Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 124. [memorandum opinion] T.C. Memo. 2025-50, at *8#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2025-05-20
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2025-50' in its own text: at *1-2 | 'Filed May 20, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-05-20T18:34:19.883Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 125. [memorandum opinion] T.C. Memo. 2011-42, at *23-24#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2011-02-17
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2011-42' in its own text: at *1-3 | 'Filed February 17, 2011' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2011-02-17T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 126. [memorandum opinion] T.C. Memo. 2013-294, at *12-13#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2013-12-30
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2013-294' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-12-30T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 127. [memorandum opinion] T.C. Memo. 2012-291, at *7#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2012-10-16
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2012-291' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2012-10-16T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 128. [memorandum opinion] T.C. Memo. 2022-112, at *8#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2022-11-29
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2022-112' in its own text: at *1-2 | 'Filed November 29, 2022' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2022-11-29T19:50:35.765Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 129. [memorandum opinion] T.C. Memo. 2025-12, at *4-5#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2025-02-03
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2025-12' in its own text: at *1-2 | 'Filed February 3, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-02-03T19:31:15.525Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 130. [memorandum opinion] T.C. Memo. 2023-41, at *2-3#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2023-03-27
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2023-41' in its own text: at *1-2 | 'Filed March 27, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-03-27T18:36:59.881Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 131. [memorandum opinion] T.C. Memo. 2012-83, at *4-5#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2012-03-22
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2012-83' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2012-03-22T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 132. [memorandum opinion] T.C. Memo. 2010-64, at *15-16#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2010-04-01
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2010-64' in its own text: not in the extracted text | 'Filed April 1, 2010' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2010-04-01T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 133. [memorandum opinion] T.C. Memo. 2012-299, at *8-9#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2012-10-25
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2012-299' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2012-10-25T04:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 134. [memorandum opinion] T.C. Memo. 2022-51, at *4-5#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2022-05-18
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2022-51' in its own text: at *1-2 | 'Filed May 18, 2022' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2022-05-18T18:38:48.723Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 135. [memorandum opinion] T.C. Memo. 2013-22, at *7-8#body#1
 stored: type=opinion status=memorandum level=2 | source_revision=filed 2013-01-17
 treatment: {'status': 'none', 'by': '', 'sources': ['CourtListener']}
 evidence: citation form 'T.C. Memo. 2013-22' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-01-17T05:00:00.000Z
-label: type=  status=  source_revision=  treatment=
+label: type=ok  status=ok  source_revision=ok (DAWSON record only: circular)  treatment=not graded (outside the treatment stratum; 'none' can't be verified as an absence)
 
 ## 136. [publication] IRS Pub 463 (2025), p. 10#body#1
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 463 Travel, Gift, and Car Expenses' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 137. [publication] IRS Pub 17 (2025), p. 64#body#1
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 138. [publication] IRS Pub 17 (2025), p. 15#body#6
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 139. [publication] IRS Pub 946 (2025), p. 42#body#4
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 140. [publication] IRS Pub 946 (2025), p. 29#body#3
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 141. [publication] IRS Pub 527 (2025), p. 37#body#2
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 527 Residential Rental Property (Including Rental of Vacation Homes)' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 142. [publication] IRS Pub 463 (2025), p. 42#body#1
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 463 Travel, Gift, and Car Expenses' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 143. [publication] IRS Pub 17 (2025), p. 108#body#3
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 144. [publication] IRS Pub 17 (2025), p. 37#body#3
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 145. [publication] IRS Pub 463 (2025), p. 20#body#1
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 463 Travel, Gift, and Car Expenses' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 146. [publication] IRS Pub 946 (2025), p. 18#body#1
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 147. [publication] IRS Pub 946 (2025), p. 62#body#6
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 148. [publication] IRS Pub 946 (2025), p. 32#body#1
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 149. [publication] IRS Pub 17 (2025), p. 81#body#5
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 
 ## 150. [publication] IRS Pub 17 (2025), p. 69#body#2
 stored: type=publication status=not_binding level=1 | source_revision=2025 edition
 evidence: heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01
-label: type=  status=  source_revision=
+label: type=ok  status=ok  source_revision=ok
 

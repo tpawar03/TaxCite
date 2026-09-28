@@ -1661,8 +1661,8 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 **Description:** §3.2's validation, made meaningful. Draw 150 chunks stratified by E0's strata, weighted to the fields that vary (opinions by T.C./Memo. and treatment, regulations by final/temporary), not uniformly. Label each field by hand against the source of truth (the opinion's caption, eCFR's section status, the treatment record). Report accuracy per field and overall. D4's rule: if it fails and gets fixed, re-check on a **fresh** sample, never the one it was fixed against.
 
 **Acceptance criteria:**
-- [ ] ≥95% field-level accuracy overall **and** per varying field, or stated as not met
-- [ ] The sample, labels and disagreements saved (`eval/results/phase-e-handcheck-authority.txt`)
+- [x] ≥95% field-level accuracy overall **and** per varying field, or stated as not met: **not met** (overall 97.4%; regulation status 77.5%, treatment 86.7%)
+- [x] The sample, labels and disagreements saved (`eval/results/phase-e-handcheck-authority.txt`)
 
 **Verification:**
 - [ ] Manual: you spot-check ≥10 labels
@@ -1689,6 +1689,34 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
   - **20 of 75 sampled opinions lost their caption in PDF extraction** (the text starts after it). Their filing date can only be checked against DAWSON's record, which is where `as_of` came from, so it's circular. Those rows are marked and reported separately, not counted as independent passes.
   - **DAWSON's `documentType` disagrees with our label once in all 307 opinions:** T.C. Memo. 2012-59 is coded "T.C. Opinion" (TCOP) but titled "T.C. Memo. 2012-59". The citation is right; it's in the sample.
   - **Treatment has two known problems in the sample.** *Banaitis* (T.C. Memo. 2002-5) is "reversed in part", but the Supreme Court reversed that reversal (E1). *Gregory* (T.C. Memo. 2021-115) is "appealed; the outcome could not be read", but golden G-C01's notes record it as affirmed by the Eleventh Circuit in 2023. The field may not reach 95% on 15 rows; if so, it's reported, not re-drawn.
+
+**Labelled 2026-09-28 (all 150; tally at the top of `phase-e-handcheck-authority.txt`). Gate NOT MET.**
+
+| field | correct | where it fails |
+|---|---|---|
+| type | 150/150 | — |
+| status | 141/150 (94.0%); **regulations 31/40 (77.5%)**, temporary stratum 11/20 | 9 temporary-regulation rows |
+| source_revision | 149/150 | 1 opinion (below); 20 opinion dates checkable only against DAWSON (circular), reported separately |
+| treatment | **13/15 (86.7%)** | *Banaitis*, *Gregory* |
+| all fields | 453/465 (97.4%) | |
+
+**What's wrong, and why:**
+1. **§7805(e)(2) sunsets temporary regulations; E2 only read their own expiry clauses.** A temporary regulation issued after Nov. 20, 1988 expires within 3 years whatever its text says. The issuing Treasury Decision's date is in every section's source note (`cita`). Five sections are affected beyond §1.988-1T/-2T:
+   - **§1.469-4T** (May 1989, 126 chunks, superseded by final §1.469-4, which is also in the corpus; passive-activity grouping is a core topic)
+   - §1.446-3T and §1.482-1T (2015, 23 chunks, labelled "partly expired": in fact wholly expired)
+   - §1.167(a)-13T (1994, 1 chunk) and §1.704-1T (2016, 1 cross-reference stub)
+
+   The 16 sections issued before the cutoff (1984–July 1988) stay in force, and were labelled right.
+2. **Treatment:**
+   - *Gregory* reads "appealed" though CourtListener's record names a decided appellate opinion (69 F.4th 762, affirmed); `flags()` treats a decision whose outcome it can't parse as pending.
+   - *Banaitis* reads "reversed in part", but the Supreme Court reversed that reversal (*Banks*, 2005). Treatment is tracked one appeal deep.
+3. **One corrected reissue:** DAWSON lists *Estate of Caan* (161 T.C. No. 6) by its corrected version's date (Nov. 14, 2023); the opinion says "Filed October 18, 2023". It's the only "(Corrected)" title among the 307.
+
+**Proposed fixes (awaiting your decision), then a re-check on a fresh sample (new seed, same strata: D4's rule):**
+- (a) `chunk.expiry` also applies §7805(e)(2): a temporary regulation whose first Treasury Decision in `cita` postdates Nov. 20, 1988 and is more than 3 years before the snapshot is `expired`, excluded like §1.988-1T. That's about 151 more chunks out of the index, including all of §1.469-4T. `temporary_partly_expired` then disappears: both sections it described are wholly expired. The alternative, keeping §1.469-4T with a valid-time window for pre-1992 years, is a Phase D mechanism no row needs.
+- (b) `flags()`: an appeal with a decided appellate citation and an unparsed outcome reads "decided; outcome not read", not "appealed" (pending). That fixes the *Gregory* class in code.
+- (c) *Banaitis*: one hand-entered treatment row (source `manual`, citing *Banks* and T.C. Memo. 2025-80 at *11), or leave it as a documented limitation. It's the only two-level chain known; finding others needs the Phase H refresh.
+- (d) *Caan*: when DAWSON's title says "(Corrected)", take the filing date from the opinion's own "Filed" line. One opinion.
 
 **Dependencies:** E2
 **Files:** `eval/results/`
