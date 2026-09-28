@@ -8,7 +8,7 @@ literal terms like "section 183" or "Form 8829" match as themselves, and a
 
 from collections.abc import Sequence
 from dataclasses import dataclass, replace
-from functools import cache
+from functools import cache, lru_cache
 
 from qdrant_client import models
 
@@ -59,6 +59,13 @@ def _reranker(name: str = RERANK_MODEL):
     return TextCrossEncoder(name)
 
 
+@lru_cache(maxsize=4096)
+def _scores(name: str, query: str, docs: tuple[str, ...]) -> tuple[float, ...]:
+    """The cross-encoder is deterministic, so a pool scored once needn't be scored again. E4 compares a
+    dozen orderings of the same pools; bounded, so a long-running server can't grow it without limit."""
+    return tuple(float(s) for s in _reranker(name).rerank(query, list(docs)))
+
+
 def rerank(query: str, hits: list[Hit], k: int, name: str = RERANK_MODEL) -> list[Hit]:
     """Re-score candidates with a cross-encoder, which reads query and chunk together.
 
@@ -67,8 +74,7 @@ def rerank(query: str, hits: list[Hit], k: int, name: str = RERANK_MODEL) -> lis
     """
     if not hits:
         return []
-    docs = [f"{h.citation} {h.heading}\n{h.text}" for h in hits]
-    scores = _reranker(name).rerank(query, docs)
+    scores = _scores(name, query, tuple(f"{h.citation} {h.heading}\n{h.text}" for h in hits))
     scored = [replace(h, score=float(s)) for h, s in zip(hits, scores)]
     return sorted(scored, key=lambda h: (-h.score, h.citation))[:k]
 

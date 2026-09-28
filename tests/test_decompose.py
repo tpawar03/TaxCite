@@ -187,3 +187,57 @@ def test_statute_floor_searches_the_statute_and_keeps_it_through_reranking(monke
     assert {"26 U.S.C. § 67(e)-(h)", "26 U.S.C. § 67(a)-(b)"} <= set(kept) and len(kept) == 3
     off = dc.retrieve(dc.Decomposition("q", plan(("statutory", "s"))), k=3)
     assert not {h.source for h in dc.chunks(off, 3, floor=0)} & {"usc"}   # off: the pool never had it
+
+
+def scored(citation, score, source, kind, status, lvl):
+    return Hit(citation=citation, heading="h", text="t", score=score, section=citation, source=source,
+               authority={"type": kind, "status": status, "level": lvl})
+
+
+E4_POOL = [scored("IRS Pub 587 (2025), p. 5", 1.00, "irs_pub", "publication", "not_binding", 1),
+           scored("T.C. Memo. 2020-1, at *3", 0.90, "case", "opinion", "memorandum", 2),
+           scored("26 U.S.C. § 280A(c)(1)", 0.80, "usc", "statute", "enacted", 4),
+           scored("26 U.S.C. § 420(f)(7)", 0.20, "usc", "statute", "enacted", 4),
+           scored("140 T.C. No. 16, at *1-2", 0.10, "case", "opinion", "reported", 3)]
+
+
+def test_weigh_reorders_by_authority_and_drops_nothing():
+    """E4 (a): the prior lifts the statute over the publication; every hit survives, scores re-assigned."""
+    out = dc.weigh(E4_POOL, {"rule": "prior", "w": 0.25})   # statute 0.80 + 0.75, memo 0.90 + 0.25, publication 1.00
+    assert [h.citation for h in out][:3] == ["26 U.S.C. § 280A(c)(1)", "T.C. Memo. 2020-1, at *3", "IRS Pub 587 (2025), p. 5"]
+    assert sorted(h.citation for h in out) == sorted(h.citation for h in E4_POOL)
+    assert [h.score for h in out] == sorted((h.score for h in E4_POOL), reverse=True)
+    assert out == dc.weigh(E4_POOL, {"rule": "prior", "w": 0.25})          # deterministic
+
+
+def test_scoped_weighing_leaves_the_statute_against_opinion_order_alone():
+    """E1's guards: reorder within a kind of source, never a statute over an opinion across kinds."""
+    out = dc.weigh(E4_POOL, {"rule": "prior", "w": 1.0, "scoped": True})
+    kinds = ["case" if h.source == "case" else "statutory" for h in out]
+    assert kinds == ["case" if h.source == "case" else "statutory" for h in E4_POOL]   # same kind at each rank
+    assert out[0].citation == "26 U.S.C. § 280A(c)(1)"             # statute over publication, within statutory
+    assert [h.citation for h in out if h.source == "case"] == ["140 T.C. No. 16, at *1-2", "T.C. Memo. 2020-1, at *3"]
+    flat = dc.weigh(E4_POOL, {"rule": "prior", "w": 1.0})
+    assert flat[1].citation == "26 U.S.C. § 420(f)(7)"               # flat: an off-topic statute jumps the opinion
+
+
+def test_tie_rule_moves_a_higher_level_only_within_delta():
+    """A source passes a neighbour only if their scores are within delta: at 0.15 the memo passes the
+    publication (0.10 apart), and the statute, 0.20 below the publication, can't pass it."""
+    out = dc.weigh(E4_POOL, {"rule": "tie", "delta": 0.15})
+    assert [h.citation for h in out][:3] == ["T.C. Memo. 2020-1, at *3", "IRS Pub 587 (2025), p. 5", "26 U.S.C. § 280A(c)(1)"]
+    wide = dc.weigh(E4_POOL, {"rule": "tie", "delta": 0.25})
+    assert [h.citation for h in wide][:3] == ["26 U.S.C. § 280A(c)(1)", "T.C. Memo. 2020-1, at *3", "IRS Pub 587 (2025), p. 5"]
+    assert dc.weigh(E4_POOL, {"rule": "tie", "delta": 0.05}) == [*E4_POOL]    # no neighbour within 0.05
+
+
+def test_the_widened_slot_takes_a_final_regulation_but_not_a_temporary_one(monkeypatch):
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: hits)
+    pubs = [scored(f"IRS Pub 17 (2025), p. {i}", 1 - i / 10, "irs_pub", "publication", "not_binding", 1) for i in range(1, 4)]
+    temp = scored("26 CFR 1.274-5T(c)(1)", 0.05, "ecfr", "regulation", "temporary", 4)
+    final = scored("26 CFR 1.274-2(a)", 0.01, "ecfr", "regulation", "final", 4)
+    s = dc.SubQuery("statutory", "s"); s.hits = pubs + [temp, final]
+    d = dc.Decomposition("q", [s]); d.statute_floor = 1
+    assert final.citation not in {h.citation for h in dc.chunks(d, 3, floor=0)}
+    kept = {h.citation for h in dc.chunks(d, 3, floor=0, authority={"slot": True})}
+    assert final.citation in kept and temp.citation not in kept

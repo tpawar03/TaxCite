@@ -22,7 +22,7 @@ import json
 import re
 from datetime import date
 from collections.abc import Iterable, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import cache
 
 from taxcite.generate import MODEL, call_model, cost
@@ -290,7 +290,47 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
     return d
 
 
-def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: int = 1) -> list[Hit]:
+def level(h: Hit, statute_first: bool = False, demote_prior: bool = False) -> float:
+    """A hit's authority level (E2's profile; 0 when it has none), with E4's two variants: the statute a
+    half-level above regulations, and an earlier regime's "…A" regulation a quarter-level below final."""
+    a = h.authority or {}
+    return (a.get("level", 0) + (0.5 if statute_first and a.get("type") == "statute" else 0)
+            - (0.25 if demote_prior and a.get("status") == "final_prior_version" else 0))
+
+
+def weigh(ranked: list[Hit], how: dict) -> list[Hit]:
+    """E4's reorderings of the cross-encoder's list by authority. Nothing is dropped.
+
+    `how["rule"]`: "prior" adds w × (level − 1) to the score; "tie" lets a higher level pass a lower one
+    whose score is within `delta`. The new order is given the old scores, highest first, so `chunks`'
+    final sort by score keeps it. `scoped` does this within each kind of source (statutory: statute,
+    regulation, publication; case law: opinions) and hands each kind back its own scores, so the
+    cross-kind order the cross-encoder chose, statute against opinion, is untouched (E1's guards).
+    """
+    lvl = lambda h: level(h, how.get("statute_first", False), how.get("demote_prior", False))  # noqa: E731
+
+    def order(hs: list[Hit]) -> list[Hit]:
+        if how["rule"] == "prior":
+            return sorted(hs, key=lambda h: (-(h.score + how["w"] * (lvl(h) - 1)), h.citation))
+        out, moved = list(hs), True
+        while moved:  # terminates: a swap only ever moves a strictly higher level forward
+            moved = False
+            for i in range(len(out) - 1):
+                if out[i].score - out[i + 1].score < how["delta"] and lvl(out[i + 1]) > lvl(out[i]):
+                    out[i], out[i + 1], moved = out[i + 1], out[i], True
+        return out
+
+    def rescore(hs: list[Hit]) -> list[Hit]:
+        return [replace(h, score=s) for h, s in zip(order(hs), sorted((h.score for h in hs), reverse=True))]
+
+    if not how.get("scoped"):
+        return rescore(ranked)
+    out = [h for kind in ("statutory", "case") for h in rescore([x for x in ranked if ("case" if x.source == "case" else "statutory") == kind])]
+    return sorted(out, key=lambda h: (-h.score, h.citation))
+
+
+def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: int = 1,
+           authority: dict | None = None) -> list[Hit]:
     """The k chunks synthesis sees: every sub-query's hits, ordered by the cross-encoder.
 
     B6 shelved reranking because 47% of golden gold never reached the candidate pool, so
@@ -304,14 +344,21 @@ def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: in
     the cross-encoder filled all ten slots with court prose and both statutory sub-queries
     reached synthesis empty. A floor of 1 fixes that and is neutral on every dev metric
     (identical Recall/nDCG/MRR at floors 0-3), so it buys answer composition for nothing.
+
+    `authority` (E4, off unless given): {"rule": "prior"|"tie", ...} reorders by `weigh`; {"slot": True}
+    lets the statute slots also take a final regulation.
     """
     ranked = rerank(d.question, merge(d.searched, None), 10**6, rerank_model)
+    if authority and authority.get("rule"):
+        ranked = weigh(ranked, authority)
+    slot = ((lambda h: h.source == "usc" or (h.authority or {}).get("status") == "final")
+            if authority and authority.get("slot") else (lambda h: h.source == "usc"))
     chosen: dict[str, Hit] = {}
     for s in d.searched:
         own = {h.citation for h in s.hits}
         for h in [x for x in ranked if x.citation in own][:floor]:
             chosen.setdefault(h.citation, h)
-    for h in [x for x in ranked if x.source == "usc"][:d.statute_floor]:  # D3b's statute slots
+    for h in [x for x in ranked if slot(x)][:d.statute_floor]:  # D3b's statute slots (E4: or a final regulation)
         chosen.setdefault(h.citation, h)
     for h in ranked:  # the rest by cross-encoder score
         if len(chosen) >= k:

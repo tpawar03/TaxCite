@@ -1753,7 +1753,7 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 - **One of my labels was wrong:** first-sample row 54 (§1.704-1T, 2016) was graded "ok" as a harmless stub, inconsistent with the rule applied to rows 45–53. Now WRONG: first-sample status 140/150, regulations 30/40 (75.0%).
 
 *Scan 2, the procedure and what no stratum could see:*
-- **The fixes changed retrieval.** Removing 151 chunks shifts every query's fused dense/sparse ranks. **The CI retrieval gate fell 0.7200 → 0.7000, exactly at its threshold** (`retrieval-dev-2026-09-28-k10.json`): D11's regulation gold is now 13th. The golden validator's "reachable only by the gold sub-query" count moved 52 → 50. E4's baseline must be re-measured on this corpus, not taken from Phase D.
+- ~~**The fixes changed retrieval.** The CI retrieval gate fell 0.7200 → 0.7000 (D11).~~ **Corrected in E4 (2026-09-28): the 0.7000 wasn't the exclusions.** The same code and data read 0.7200 an hour later (`retrieval-dev-2026-09-28-k10-approx-now.json`). Dense search was approximate (HNSW), and its results changed as Qdrant re-optimised the collection after E3's deletions and payload writes. Exact search reads 0.7200 too (`…-k10-exact.json`). The D14/D19/D33 rank shifts from the same session carry the same doubt. What held: no gold or tag points at an excluded chunk, and Postgres and Qdrant agree.
 - **No gold or tag points at an excluded chunk** (golden, dev, pilot: validator 0 issues). Postgres and Qdrant agree (28,238), and the history table holds exactly the 155 expired versions.
 - **Superseded *final* regulations ("A" suffix) carry the §1.469-4T risk without a sunset:** §1.274-5A (29 chunks, travel substantiation, a core topic), §1.482-1A/-2A/-7A (92) and §1.1402(e)-1A–5A (15). Their scope isn't stated anywhere in the corpus. "Final" is the right label; the ranking risk is open (a decision for you, below).
 - **Temporary sections amended after 1988** (§1.274-5T, §1.62-1T, §1.469-1T/-2T/-5T, §1.162-25T, §1.280F-*T): an amendment issued as a temporary rule may have sunset paragraph by paragraph. The corpus can't say which amendments were temporary. **Unresolved,** labelled in force at section level.
@@ -1815,8 +1815,23 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 
 - **Every conflict row fails today at k=8,** as E1 selected them. Where the controlling source is in the top 8 it is 2nd–8th: G-S10 and G-S25 at 2, D18 at 2. Most golden statute rows have it outside the top 8 entirely, 14 of 24.
 - **The planner's variance barely reaches retrieval:** sd is 0 in most categories (0.034 dev statutory, 0.017 golden case law). The search text is the question itself, and the plans differ mainly in routing, which rarely changes. So five plan sets cost little and resolve little; they stay for the gate as pre-registered.
-- **E3 didn't move golden** (0.606 on the B rows, as in Phase D). On dev it cost the CI gate 0.02, via D11 (validation scan 2).
+- **E3 didn't move golden** (0.606 on the B rows, as in Phase D). ~~On dev it cost the CI gate 0.02, via D11~~: corrected, see below; the approximate index was drifting.
 - **G-C27 isn't a guard in the full pipeline.** Its top-1 is §469(h), the statute *Garnett* interprets, and *Garnett* is 2nd in all 5 plan sets. E1 tagged it from a case-corpus-only search, a proxy that didn't hold. It's neither a conflict (the higher authority leads) nor a guard. **Proposed: untag it, as D42 was untagged in E1, and read the golden guard gate against the 8 guards that lead at baseline (≤ 1 of 8 lost).** Awaiting your decision (a golden edit).
+
+**G-C27 untagged (your decision, 2026-09-28); the golden guard gate reads against the 8 guards that lead at baseline (≤ 1 of 8 lost).**
+
+**Candidates built (2026-09-28):**
+- `decompose.weigh()` (prior / tie, flat / scoped, statute-first and prior-version variants), the widened slot in `chunks(authority=…)`, and `search_k` for deeper search.
+- 14 arms in `eval/retrieval.py`.
+- The cross-encoder's scores are memoised (`lru_cache`, 4,096 pools): deterministic, so arms stop re-scoring the same pools.
+- 4 tests, 31 in `test_decompose.py`.
+
+**Stopped before measuring: dense search wasn't reproducible.** An old unit test, `test_dense_finds_the_hobby_loss_factor`, began failing with no code or data change.
+- For that query, approximate (HNSW) dense search dropped §1.183-2(b)(3), which exact search ranks 3rd.
+- Across 102 dev and golden questions, approximate shares 98.7% of the exact top 50 on average, **88% at worst**, and 99.6% of the top 10. Raising `hnsw_ef` to 256 gives 99.8%. Exact search costs 6 ms a query instead of 4 (vs ~1 s for reranking).
+- **The CI gate read 0.7000 and then 0.7200 on identical code and data.** Qdrant re-optimised the collection in between (after E3's deletions and payload writes), and approximate results moved. Exact search reads 0.7200.
+- **Consequences:** validation scan 2's "E3 cost the gate 0.02" is withdrawn. The E4 baseline was taken on a drifting index. A/B comparisons between arms need a fixed search.
+- **Proposed (awaiting your decision):** exact dense search always (D3 already uses it under a filter). Then re-run the baseline and measure the candidates.
 
 **Candidates (built behind a `chunks()` argument, off by default; each an `eval/retrieval.py` arm):**
 - **(a) Additive prior.** Score + w × (level − 1), with w ∈ {0.1, 0.25, 0.5, 1.0}, bracketing the gap scale above.

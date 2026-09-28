@@ -142,6 +142,18 @@ VARIANTS = {
     "route+union":    dict(route=True,  rewrite=False, rerank=True, union=True),
     "route+union+statute2": dict(route=True, rewrite=False, rerank=True, union=True, statute=2),
 }
+# E4: authority on the shipped arm. (a) an additive prior, (b) a near-tie rule, each across the merged list
+# ("flat") or within one kind of source ("scoped"); (c) the statute slot widened to final regulations;
+# (d) searching deeper than synthesis reads.
+_SHIPPED = dict(route=True, rewrite=False, rerank=True, statute=1)
+for _w in (0.1, 0.25, 0.5, 1.0):
+    for _scope in ("flat", "scoped"):
+        VARIANTS[f"route+statute1+prior{_w}-{_scope}"] = _SHIPPED | {"authority": {"rule": "prior", "w": _w, "scoped": _scope == "scoped"}}
+for _d in (0.1, 0.25):
+    for _scope in ("flat", "scoped"):
+        VARIANTS[f"route+statute1+tie{_d}-{_scope}"] = _SHIPPED | {"authority": {"rule": "tie", "delta": _d, "scoped": _scope == "scoped"}}
+VARIANTS["route+statute1+slot"] = _SHIPPED | {"authority": {"slot": True}}
+VARIANTS["route+statute1+deep20"] = _SHIPPED | {"search_k": 20}
 
 
 def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
@@ -153,10 +165,10 @@ def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
         how = VARIANTS[variant]
         plan = dc.retrieve(cached_decompose(question["question"], cache if cache is not None else {},
                                             cache_path, plan_set),
-                           k=k, mode=mode, route=how["route"], rewrite=how["rewrite"], hops=how.get("hops", 0),
+                           k=how.get("search_k", k), mode=mode, route=how["route"], rewrite=how["rewrite"], hops=how.get("hops", 0),
                            editions=how.get("editions"), statute=how.get("statute", 0),
                            union=how.get("union", False))
-        hits = (dc.chunks(plan, k, reranker) if how["rerank"]
+        hits = (dc.chunks(plan, k, reranker, authority=how.get("authority")) if how["rerank"]
                 else dc.merge(plan.searched, k))
     else:
         hits = search(question["question"], k=k, mode=mode, rerank_name=reranker)
