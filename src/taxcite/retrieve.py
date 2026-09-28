@@ -59,7 +59,7 @@ def _reranker(name: str = RERANK_MODEL):
     return TextCrossEncoder(name)
 
 
-@lru_cache(maxsize=4096)
+@lru_cache(maxsize=1024)
 def _scores(name: str, query: str, docs: tuple[str, ...]) -> tuple[float, ...]:
     """The cross-encoder is deterministic, so a pool scored once needn't be scored again. E4 compares a
     dozen orderings of the same pools; bounded, so a long-running server can't grow it without limit."""
@@ -120,9 +120,11 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
         flt = models.Filter(must=[*(flt.must if flt else []), within])
     if year is not None:
         flt = models.Filter(must=[*(flt.must if flt else []), edition_filter(year, *editions)])
-    # Filtered dense search is exact: approximate kept 99.2% of the exact top 50 under the edition
-    # filter (min 96%) for 3 ms less (D3); ADR-17 measured 22% lost under a strict filter. Sparse is exact already.
-    exact = models.SearchParams(exact=True) if year is not None else None
+    # Dense search is exact (E4). Approximate (HNSW) kept 98.7% of the exact top 50 on average but 88% at
+    # worst, and its misses moved when Qdrant re-optimised the collection: the CI gate read 0.70, then 0.72,
+    # on identical code and data. Exact costs 6 ms a query against 4 (and ~1 s of reranking), and makes
+    # retrieval a function of code and data again. Sparse search is exact already.
+    exact = models.SearchParams(exact=True)
     dense, sparse = embed(query, dense_name)
     limit = RERANK_CANDIDATES if suffix else k + OVERFETCH
     if mode == "dense":
