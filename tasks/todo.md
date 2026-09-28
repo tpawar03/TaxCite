@@ -1581,20 +1581,57 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 
 ## E2: Authority profile at ingestion
 
-**Description:** One function, `authority(chunk)`, from structured fields only: `source`, the citation's form, and `treatments`. Stored in an `authority` jsonb column on `chunks` (migrated the way `effective` was), written by every ingester and backfilled for the existing rows without re-embedding. Only the fields E0 found to vary are per-chunk; constants are documented. A value with no source is `"unknown"` and counted in the ingest log, never defaulted (FR-16). Carried onto `Hit`.
+**Goal:** every chunk carries an authority profile from structured fields only (ADR-13), stored in Postgres and on the Qdrant point, so E4's ranker, E3's hand check and E5's labels all read one value. No re-embedding.
+
+**Three design changes from the plan, found reading the code (for you to confirm):**
+1. **The profile goes into the Qdrant payload after all.** The plan said "not in the payload, the reranker runs on `Hit`s". But a `Hit` is built from the payload (`retrieve.search`), as D4's `effective` and D3's `edition` are. Reading Postgres per query instead would add a database round-trip to the hot path. So: payload, as `effective` did.
+2. **`negative_treatment` isn't copied onto chunks.** It changes (a pending appeal is decided; Phase H refreshes it), and `ingest.citations.flags()` already reads it live, per opinion, for every answer (Phase C). A copy on 9,973 chunks would go stale and need its own refresh. E4 doesn't rank on it (the blanket demotion was dropped), and E5 labels answers from `flags()` as today. E3 checks treatment labels through `flags()`, the same function answers use.
+3. **Wholly expired temporary regulations are excluded, not demoted.** §1.988-1T and §1.988-2T say "the applicability of this section expires on December 6, 2019". They get the existing `excluded` mechanism with a new reason, `expired`, so the next sync removes them from Qdrant, and D6's trigger keeps their text in `chunk_versions`. That's 4 chunks. The two *partly* expired sections (§1.446-3T, §1.482-1T: named paragraphs expired in 2018) stay indexed, labelled `temporary_partly_expired`. Mapping each expiry to its paragraphs isn't worth it for 2 sections outside the Phase B topics.
+
+**The profile** (jsonb column `authority` on `chunks`; the same dict under `authority` in the payload; `Hit.authority`):
+
+```json
+{"type": "opinion", "status": "memorandum", "level": 2}
+```
+
+| `type` | `status` | `level` | from |
+|---|---|---|---|
+| `statute` | `enacted` | 4 | `source == "usc"` |
+| `regulation` | `final` | 4 | `source == "ecfr"`, section without a `T` suffix |
+| `regulation` | `temporary` | 4 | `T` suffix (pre-1988 temporary regulations stay in force; §7805(e)(2)'s 3-year limit doesn't reach them) |
+| `regulation` | `temporary_partly_expired` | 4 | `T` suffix and the text says some paragraphs' applicability "expires" on a past date |
+| `opinion` | `reported` | 3 | `source == "case"`, citation matches `\d+ T.C. No. \d+` |
+| `opinion` | `memorandum` | 2 | citation matches `T.C. Memo. \d{4}-\d+` |
+| `publication` | `not_binding` | 1 | `source == "irs_pub"` |
+| `unknown` | `unknown` | 0 | anything else: counted and printed, never defaulted (FR-16) |
+
+- Statute and regulation share level 4 on purpose. Which outranks the other for ranking is E4's question, answered on dev, not baked in here.
+- `court` ("U.S. Tax Court") and `jurisdiction` ("federal") are constants in this corpus: documented in the tech doc (§3.2, §5.5), not stored. `binding_on` waits for Phase G.
+
+**`source_revision` for every source (the FR-16 gap E0 found):** each ingester sets it from what it already knows. `ecfr`: `"eCFR 2026-09-17"` (the snapshot date); `irs_pub`: `"2025 edition"`; `case`: `"filed 2019-03-04"`; `usc`: unchanged (`"Pub. L. 119-110"`). The backfill fills the existing rows the same way.
+
+**Where it's computed:** one function, `authority(chunk)`, called in `store.save()`, the one write path every ingester already goes through. It's a pure function of `source`, `citation`, `section` and `text`, so the backfill is the same function over existing rows.
+
+**Backfill** (one CLI command, idempotent, no re-embed):
+- Postgres: `UPDATE chunks SET authority = …, source_revision = …` per key, batched.
+- Qdrant: `set_payload` grouped by distinct profile (about 8 values), so it's a few calls, not 28,000.
+- Expired sections: `excluded = 'expired'`, and those points are deleted from Qdrant.
+- It prints the count per `type`/`status`, the `unknown` count, and the expired keys.
 
 **Acceptance criteria:**
-- [ ] Every indexed chunk has a profile; the count of `"unknown"` per field is printed by the backfill and is 0 or explained
-- [ ] Re-running the backfill changes nothing (idempotent), and D6's trigger doesn't record a text version for it (the text didn't change)
-- [ ] Snapshot restore still works (D6's trigger lesson: test on a throwaway DB)
+- [ ] Every indexed chunk has a profile, and `unknown` is 0 or each case is explained
+- [ ] Counts match E0's inventory: statute 10,768; regulations 5,609 (440 temporary, 4 excluded as expired); opinions 9,973 (958 reported, 9,015 memo); publications 2,043
+- [ ] Re-running the backfill changes nothing, and D6's trigger records no text versions for it (only `authority` and `source_revision` change, not `text`)
+- [ ] `index.sync` writes `authority` into the payload for new points; `Hit.authority` is filled on search
+- [ ] Snapshot round-trip on a throwaway database: dump, restore, and `authority` survives (D6's restore lesson)
 
 **Verification:**
-- [ ] Tests: `authority()` on fixture chunks, one per value (statute, final and temporary regulation, T.C., T.C. Memo., reversed opinion, publication, and an unknown)
-- [ ] `uv run pytest -q` passes
+- [ ] Tests: `authority()` on one fixture chunk per row of the table above, including an unknown; the payload carries `authority` into `Hit` (in-memory Qdrant, as D3's edition test does); the backfill is idempotent
+- [ ] `uv run pytest -q` passes; the CI retrieval gate is unchanged (no ranking change in E2)
 
 **Dependencies:** E0
-**Files:** `src/taxcite/authority.py` (or inside `store.py` if it's short), `src/taxcite/store.py`, `src/taxcite/retrieve.py` (`Hit`), `tests/`
-**Scope:** S
+**Files:** `src/taxcite/store.py` (column, `authority()`, save), `src/taxcite/index.py` (payload), `src/taxcite/retrieve.py` (`Hit.authority`), `src/taxcite/ingest/{ecfr,caselaw,irs_pubs}.py` (`source_revision`), `src/taxcite/cli.py` (the backfill command), `tests/`
+**Scope:** M
 
 ---
 
