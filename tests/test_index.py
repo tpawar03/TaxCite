@@ -29,9 +29,11 @@ def ctx():
     with store.connect() as conn:
         store.create_table(conn)
         conn.execute("DELETE FROM chunks WHERE source = 'test'")
+        conn.execute("DELETE FROM chunk_versions WHERE source = 'test'")
         conn.commit()
         yield conn, qc
         conn.execute("DELETE FROM chunks WHERE source = 'test'")
+        conn.execute("DELETE FROM chunk_versions WHERE source = 'test'")
         conn.commit()
     if qc.collection_exists(COLLECTION):
         qc.delete_collection(COLLECTION)

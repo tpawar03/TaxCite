@@ -7,7 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
 
 import pytest
-from ragas_eval import Budget, CostCap, Judged, aggregate, judge_claims, parse_json
+from ragas_eval import Budget, CostCap, Judged, aggregate, judge_claims, parse_json, refusals_ok
 from retrieval import mrr, ndcg_at_k, recall_at_k, section_of
 
 GOLD = {"A", "B"}
@@ -167,3 +167,10 @@ def test_gold_can_name_one_chunk_of_a_shared_label():
     assert recall_at_k([other, holding], [[holding]]) == 1.0
     assert recall_at_k([other], [[label]]) == 1.0       # a label still credits any copy
     assert mrr(["X#a#1", holding], [[holding]]) == 0.5
+
+
+def test_refusal_rate_gate():
+    """D7's first build: faithfulness passed at 0.866 while refusing more than half the golden set."""
+    assert refusals_ok([0.125, 0.135], 0.25)            # healthy, Phase C to D7 fixed
+    assert not refusals_ok([0.521, 0.552, 0.573], 0.25)  # the build that passed faithfulness
+    assert refusals_ok([0.9], None)                      # no limit set: not gated

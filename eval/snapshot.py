@@ -64,10 +64,15 @@ def restore(src: Path) -> int:
                        files={"snapshot": (SNAPSHOT, f, "application/octet-stream")}, timeout=900)
     if r.is_error:  # raise_for_status drops the body, and the body is the whole diagnosis
         raise SystemExit(f"qdrant refused the snapshot ({r.status_code}): {r.text[:500]}")
+    from taxcite import store
+    # The dump carries chunks' D6 trigger but not the function it calls (pg_dump --table skips functions),
+    # so create the function first or the dump stops at CREATE TRIGGER
+    with store.connect() as conn:
+        conn.execute(store.RETIRE[0])
+        conn.commit()
     subprocess.run(["psql", "--quiet", "--set", "ON_ERROR_STOP=1", "-f", str(src / DUMP), DATABASE_URL],
                    check=True)
 
-    from taxcite import store
     points = client().count(COLLECTION).count
     with store.connect() as conn:
         store.create_table(conn)  # a snapshot published before C3 has no citation tables; don't fail CI on it

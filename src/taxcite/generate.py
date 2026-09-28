@@ -44,6 +44,12 @@ Rules:
 4. Regulations and statute outrank IRS publications. Where they differ, follow the regulation and say so.
 5. Be brief: a practitioner wants the rule and the citation, not an essay."""
 
+# Only for a question with a tax year (D7). Given to every question it made the model refuse 40 of 96
+# golden rows that name no year, faithfulness's refusal rate going 0.13 -> 0.55; the gate itself still
+# passed, because refusals are outside its mean.
+YEAR_RULE = """
+6. Tax year: the question header names the tax year it is about. Start the answer by stating the year you answer for. A source marked "Effective:" had its current text take effect later than that year, or retroactively. Where that text itself states the rule for particular years (a schedule, "before January 1, 2022, 26 percent", "taxable years beginning after 2017"), those statements govern the years they name. Otherwise do not apply it to an earlier year: use the earlier text if the note quotes it, or say the rule for that year is not in the sources."""
+
 CLOSED_BOOK_SYSTEM = """You answer US federal tax questions for an enrolled agent, from your own knowledge.
 
 No sources are provided. Answer as accurately as you can, and cite the section you
@@ -76,9 +82,21 @@ class Answer:
         return "INSUFFICIENT EVIDENCE" in self.text.upper()
 
 
-def format_sources(hits: list[Hit]) -> str:
+def effective_note(h: Hit, year: int | None) -> str:
+    """D7: flag statute text whose latest amendment took effect after the question's year, or
+    retroactively, with the Amendments entry, which often quotes the replaced text."""
+    e = h.effective
+    if not e or year is None:
+        return ""
+    starts = re.search(r"\d{4}", e.get("date") or "")
+    if not e.get("retroactive") and not (starts and int(starts.group()) >= year):
+        return ""
+    return f"\nEffective: the current text was enacted in {e['year']} and {e['rule']}. Amendment: {e['amendment'][:400]}"
+
+
+def format_sources(hits: list[Hit], year: int | None = None) -> str:
     return "\n\n".join(
-        f"[{h.citation}] ({h.heading})\n{h.text}" for h in hits
+        f"[{h.citation}] ({h.heading}){effective_note(h, year)}\n{h.text}" for h in hits
     )
 
 
@@ -215,7 +233,7 @@ def answer_from_hits(question: str, hits: list[Hit], model: str = MODEL) -> Answ
 
 
 def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
-                       facts: Sequence[str] = (), model: str = MODEL) -> Answer:
+                       facts: Sequence[str] = (), model: str = MODEL, as_of: str | None = None) -> Answer:
     """Synthesis over sources grouped by the sub-query that retrieved them (B7).
 
     The grouping is in the prompt deliberately: a compound question needs the model to
@@ -226,13 +244,17 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
     Takes plain data rather than a Decomposition, so `decompose` depends on this
     module and not the other way round.
     """
-    blocks = [f"## Sources for: {label}\n\n{format_sources(hits)}" for label, hits in groups if hits]
+    years = sorted(set(re.findall(r"\b(?:19|20)\d\d\b", as_of or "")))
+    year = int(years[0]) if years else None  # the earliest year named: the one later text can't govern
+    blocks = [f"## Sources for: {label}\n\n{format_sources(hits, year)}" for label, hits in groups if hits]
     if facts:
         blocks.append("## Client facts, supplied by the questioner (not sources; never cite these)\n"
                       + "\n".join(f"- {f}" for f in facts))
     hits = list({h.citation: h for _, group in groups for h in group}.values())
-    prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\nQuestion: {question}"
-    return _generate(question, hits, mode="rag", model=model, prompt=prompt)
+    header = f"Tax year(s) the question is about: {' and '.join(years)}\n" if years else ""
+    prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\n{header}Question: {question}"
+    return _generate(question, hits, mode="rag", model=model, prompt=prompt,
+                     system=RAG_SYSTEM + YEAR_RULE if years else RAG_SYSTEM)
 
 
 def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,
@@ -244,10 +266,11 @@ def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,
     return _generate(question, hits, mode=mode, model=model)
 
 
-def _generate(question: str, hits: list[Hit], mode: str, model: str, prompt: str | None = None) -> Answer:
+def _generate(question: str, hits: list[Hit], mode: str, model: str, prompt: str | None = None,
+              system: str | None = None) -> Answer:
     if mode == "rag":
         prompt = prompt or f"Sources:\n\n{format_sources(hits)}\n\nQuestion: {question}"
-        system = RAG_SYSTEM
+        system = system or RAG_SYSTEM
     else:
         prompt = f"Question: {question}"
         system = CLOSED_BOOK_SYSTEM

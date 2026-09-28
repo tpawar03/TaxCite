@@ -118,19 +118,19 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
     try:
         publish(conn, job_id, "decomposing", {}, rdb)
         plan = dc.decompose(question)
-        # The as-of year is recorded, not applied: nothing filters on it until Phase D,
-        # and storing it now means the job record already shows what a later filter would
-        # have used.
+        # The as-of year is recorded on the job. dc.EDITIONS would limit publications to the
+        # editions near it; D3 built that and left it off live until D7 (see decompose.EDITIONS).
         publish(conn, job_id, "retrieving", {
             "k": k,
             "as_of": plan.as_of,
             "subqueries": [{"kind": s.kind, "query": s.query} for s in plan.subqueries],
             "fallback": plan.fallback,
         }, rdb)
-        dc.retrieve(plan, k=k)
+        dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE)
         hits = dc.chunks(plan, k)
         publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
-        result = answer_from_groups(question, plan.groups({h.citation for h in hits}), facts=plan.facts)
+        result = answer_from_groups(question, plan.groups({h.citation for h in hits}), facts=plan.facts,
+                                    as_of=plan.as_of)
         # Is each cited opinion still good law (C4)? Looked up after synthesis and attached beside the
         # answer, never folded into its text; a failed lookup reads "unknown" and the answer still ships.
         opinions = list(dict.fromkeys(m.group() for c in result.citations + result.derived_citations

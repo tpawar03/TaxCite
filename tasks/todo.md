@@ -960,6 +960,425 @@ Re-embedding the case corpus costs ~24 min (9,973 chunks at 7/s), and the CI sna
 
 ## ✅ Checkpoint: Phase C complete
 - [x] Edges ≥90% / ≥85%; 3/3 reversed rows flagged, 0 false flags
-- [ ] Tests pass in CI; the faithfulness gate is still green (after you commit and publish the new corpus snapshot)
-- [ ] Ready to plan Phase D
+- [x] Tests pass in CI; the faithfulness gate is still green (after you commit and publish the new corpus snapshot). On `corpus-2026-09-27` (2026-09-27): retrieval gate 0.6800 PASS (run 36362575198); faithfulness 0.8715 ± 0.007 over 5 runs PASS (run 36362586552; judge cost $2.27, above the $1.40 recorded in the workflow comment)
+- [x] Ready to plan Phase D
 
+
+---
+
+# TaxCite Phase D — Task List
+
+Plan: `tasks/plan.md` (Phase D, revised after D0). Phase D's gate (§9.3): **≥90% temporal accuracy on the held-out temporal rows** (G-T01–G-T11: 10 of 11), with no more than a 2-point Recall@20 regression on the other categories. **At risk** (D0): G-T03 needs Phase F's sufficiency gate; G-T05 and G-T07 need date arithmetic.
+
+---
+
+## D0: Temporal failure spike
+
+**Description:** Find out what the 11 temporal golden rows actually need before building any of it. The corpus holds one version of each source, so an as-of filter alone can't find text that isn't there. For each row, run today's pipeline and read the answer against the reference answer. Then put the row in the first bucket that fixes it:
+1. **Already right:** today's text states the dates (a sunset or start date in the section itself).
+2. **Needs the as-of year in synthesis:** the text is retrieved, but the answer applies today's rule to an earlier year.
+3. **Needs an effective date from the statutory notes:** the date isn't in the section text (G-T02, G-T10 per their notes).
+4. **Needs an earlier version of the text:** which source, and which release point or edition.
+5. **Outside every source:** name what would supply it (G-T03's rescheduling).
+
+Then measure the cost of bucket 4. Compare the current USLM release point with one from 2016–2017 by section text hash, and do the same for eCFR at two dates. Count how many sections changed, how many chunks they make, and the embed time at ~7 chunks/s.
+
+**Acceptance criteria:**
+- [x] A per-row table: bucket, the evidence (the sentence that decides it, or where it lives), and whether the decomposer's as-of year matches the row's
+- [x] Today's baseline: rows answered correctly for their year, and as-of extraction accuracy on all 11 (the wider golden check is deferred to D2, which defines the match rule)
+- [x] The versioning cost curve: not needed; no row needs an earlier version
+- [x] A decision rule, written down before the numbers: build D4 only if bucket 3 has ≥1 row; build D5 only for a source with a bucket-4 row; if buckets 1–2 alone reach 10/11, say so and shrink the phase
+- [x] A decision you confirm, logged in STATUS.md and the engineering log
+
+**Verification:**
+- [x] Manual: every number comes from real runs against the corpus, not estimates
+
+**Measured 2026-09-27** (shipped pipeline: route + rerank, k=8 for answers, fresh plans, ~$0.01; answers judged by hand against each row's `answer`; scripts in the session scratchpad):
+
+| Row | as-of: gold → plan | Today | Gold at k=20 | Fixed first by | Evidence |
+|---|---|---|---|---|---|
+| G-T01 | 2016 and 2026 → none | ✗ applies Pub 17 (2025)'s post-2017 rules to 2016 | 0/2 | **retrieval**, then 2 | §67(h) "Suspension for taxable years beginning after 2017" is in today's text |
+| G-T02 | 2023 → 2023 | ✗ "$1,000,000" (neither 2023's figure nor today's) | 0/1 (rank 12) | **retrieval**, then 3 | Note: "shall apply to property placed in service in taxable years beginning after December 31, 2024" (§179, 2025 amendment) |
+| G-T03 | 2026 → 2026 | ✗ confident "no deduction" | 0/1 | 5 (+ retrieval) | Scheduling is outside the corpus; the reference answer already says so ✓ |
+| G-T04 | 2016 → 2016 | ✗ "not deductible" | 0/2 | **retrieval**, then 2 | §67(a)-(b) + *Gregory* |
+| G-T05 | 2026-05 → 2022 | ✗ invents a 6-month extension | 0/2 | **retrieval**, then 1 | Not a temporal failure: §6511/§7503 date arithmetic |
+| G-T06 | 2026-09 → 2021 | ✓ (from model memory; nothing cited was retrieved) | 0/2 | **retrieval** | Right but unfaithful |
+| G-T07 | 2025 → 2024 | ◐ $2,500, misses the §6651(c)(1) offset | 0/3 | **retrieval**, then 1 | Not temporal |
+| G-T08 | 2026 → 2026 | ✗ INSUFFICIENT EVIDENCE | 0/1 | **retrieval**, then 1 | §164(b)(7) states 2026's $40,400 outright |
+| G-T09 | none → none | ◐ "50%", no year dependence | 1/2 | retrieval of (n)(2), then 2 | §274(n)(2)(D) "paid or incurred before January 1, 2023" |
+| G-T10 | 2024 → 2024 | ◐ right outcome, start date unsupported, no flag | 2/2 | 3 (*corrected in D1's scan: also Pub 17 (2025), p. 3, "qualified tips paid to you in 2025"*) | Note is a cross-reference: "Effective Date of 2025 Amendment note under section 45B" |
+| G-T11 | 2025 → 2025 | ✗ gives the Jan 10 machine 100% | 1/2 | 2 | Pub 463 p. 1 states the Jan 20 cutoff; synthesis misapplies it |
+
+- **Today: 1 of 11 correct** (G-T06, and unfaithfully), 3 partial, 7 wrong.
+- **As-of extraction: 7/11 exact.** The 4 misses aren't planner errors so much as a definition gap. G-T01 names two years, and the plan holds one. In G-T05–G-T07 the plan gives the *return's tax year* and the gold gives the *event date* (claim, audit, filing). D2 must define which one counts.
+- **The binding constraint is retrieval, not time.** Temporal gold-group Recall@20 is **0.200** (4/20). 8 of 11 rows miss the gold statute entirely. The gold is reachable: each row's gold sub-query ranks it 1st–4th within its own source in 17 of 20 groups. The loss comes from the question's plain words (log #44's measured choice) matching IRS publications and regulations over statute.
+  | Arm (same plans, k=20) | Temporal Recall@20 |
+  |---|---|
+  | shipped | 0.200 |
+  | **as-of filter on publication edition** (drop editions other than the plan's year) | **0.350** (G-T03, G-T07, G-T08 recover) |
+  | statute + regulations only | 0.300 |
+  | planner's rewritten sub-queries | 0.250 |
+- **Buckets:** retrieval blocks 8 rows. Once retrieved: 1 (answerable from current text) ×4, 2 (year-aware synthesis) ×4, 3 (notes) ×2, **4 (earlier version) ×0**, 5 (outside) ×1.
+- **Cost curve: not needed.** No row needs an earlier version. G-T02's reference answer asks for an honest "the 2023 version isn't in the corpus", which the §179 note makes possible.
+
+**Decision rule applied:**
+- **D5 is not built.** Bucket 4 has 0 rows.
+- **D4 is built** (G-T02, G-T10). It must follow cross-referenced notes: §224's date lives under §45B.
+- Buckets 1–2 alone can't reach 10/11, because retrieval blocks 8 rows first. So the phase doesn't shrink. It **gains a retrieval task**.
+
+**Decided 2026-09-27 (you confirmed the plan change):**
+1. D3 gives publications valid time from their edition year (measured +15 points on temporal rows).
+2. New **D3b: statutory recall on dated questions**, tuned on D1's dev rows. Candidates, cheapest first: a per-source floor inside the statutory route; searching the question *and* the planner's sub-query (union).
+3. **The gate stays at 10/11, and D0 says plainly it is at risk.** G-T03 needs the sufficiency gate (Phase F), so it is the one allowed miss. G-T05 and G-T07 need date arithmetic that no temporal mechanism supplies.
+
+**Dependencies:** None (Phase C complete)
+**Files:** `tasks/todo.md` (this entry), `STATUS.md`, `docs/engineering-log.md`; spike scripts outside `src/`
+**Scope:** S
+
+---
+
+## D1: Dev temporal rows
+
+**Description:** The dev set has no temporal rows (only D24 carries an as-of year), so nothing in Phase D can be tuned without them. C6 stopped at this same gap. Write ≥8 dev rows covering the buckets D0 finds: a sunset date in the text, an amendment effective mid-year, a rule changed between two release points, an ambiguous year, and a retroactive rule. Each row gets a gold `as_of`, gold citations (keyed to the version where it matters) and a reference answer. Same authoring process as B4/B5: Claude drafts from the ingested text, you review every row.
+
+**Acceptance criteria:**
+- [x] ≥8 rows, each one tied to a D0 bucket (14 after two validation scans)
+- [x] No citation or opinion shared with the golden set (checked against golden, pilot and dev gold)
+- [x] `uv run python eval/validate_pilot.py eval/dev.jsonl` passes
+
+**Verification:**
+- [x] You review every row
+
+**Validated 2026-09-27 in two scans (below): 14 rows, D26–D39. You approved all 14 (`reviewed: true`), and the G-T10 fix.** All are `scored_from: "D"`, so the CI retrieval gate (which scores only `"B"` rows) is unchanged. The validator passes (0 of 39 need attention). No gold label is shared with the golden or pilot sets.
+
+| Row | D0 bucket / shape | Section | as_of | What it tests |
+|---|---|---|---|---|
+| D26 | 2, and a year with no publication edition | §163(h)(3) (keyed: part 1 $1M, part 3 (F)) | 2016 | $1,000,000 vs $750,000; the pre-Dec-15-2017 grandfather |
+| D27 | 2, mid-year cutoff on two dates (G-T11's shape) | §30D(h), (a)-(c) | 2025 | August vs October 2025 car; acquired after Sept 30, 2025 |
+| D28 | 1, and a year with no publication edition | §25D(f)-(h) | 2021 | 26% for 2020–2021 |
+| D29 | 1, termination | §25C(h)-(i) | 2026 | placed in service after Dec 31, 2025 |
+| D30 | 3, cross-referenced note (G-T10's counterpart) | §225 | 2024 | start date only in a note under §63 |
+| D31 | 2, tax year vs event date | §163(h)(4) (keyed part 1) | 2025 | loan incurred March 2024, before the Dec 31, 2024 start |
+| D32 | 3, retroactive, and a year with no publication edition | §6050W(e)-(g) | 2023 | $20,000/200 restored "as if included in" ARPA (notes only) |
+| D33 | ambiguous year (G-T09's counterpart) | §217(k), (a)-(c) | none | suspension after 2017; the Armed Forces and intelligence-community exceptions |
+| D34 | procedural, tax year vs event date (G-T05–G-T07's shape) | §6502(a)-(b) | 2012 | 10 years from a June 3, 2014 assessment |
+
+**Dev now exercises D3b's failure, unlike C6's dev set.** In 8 of 9 rows the question's own words miss the gold, and the gold sub-query reaches it. D31 and D34 are reached by the question itself. Every answer is written from the corpus text plus the USLM notes quoted in D0; no outside fact is used.
+
+**Scan 1, per row (every gold chunk and its neighbours read in full; each answer checked against the text, not memory):**
+- **D26:** the answer now states its conditions, itemizing and a qualified residence. The $1,000,000 limit (part 1), the post-2017 $750,000 substitution, and the Dec 15, 2017 grandfather (part 3) are confirmed. Keyed gold is right: parts 1 and 3, not part 2 (the pre-1987 debt rules).
+- **D27:** $3,750 + $3,750 per vehicle (§30D(b)), plus the MAGI test on the lesser of this year's and last year's income (§30D(f)(10)), confirm "up to $7,500 … income limits". (h) turns on *acquired*, and the question makes acquisition and placed-in-service the same day, so the gap between them doesn't arise.
+- **D28, D29:** confirmed. §25D(g)(2) is 26% for 2020–2021 under both the pre- and post-2022 text. §25C(i) turns on placed in service, so the unstated payment date can't change the answer.
+- **D30: the answer was wrong on one point, now fixed.** It said the start date was only in the notes, but Pub 17 (2025), p. 3 lists overtime among "the new deductions" for 2025. The answer now accepts either the evidence or an honest "not in my sources", and must not apply the deduction to 2024.
+- **D31:** confirmed. §163(h)(4)(E)(ii)'s refinancing rule only carries forward qualifying debt, so a 2024 loan can't be refinanced into eligibility. Keyed part 1 is right.
+- **D32:** confirmed, and the notes now say the exception covers only third party settlement organizations (§6050W(e), (b)(3)).
+- **D33:** confirmed. The Armed Forces rule is (g); the gold stays (k) + (a)-(c), with the reason in the notes.
+- **D34:** confirmed. No §6503 suspension, because the question excludes one.
+
+**Scan 2, across the set:**
+- **Gold too narrow:** D31 widened to Pub 17 (2025), p. 3 (#5, #6), a same-year edition that states "a vehicle you purchased in 2025". Pub 334, p. 5 ("Beginning in 2025") can't decide the loan date and isn't gold. Every other rule was searched for in the publications and regulations: none states it for the row's year.
+- **Leakage:** no gold label is shared with golden or pilot (re-checked with the new rows). The topic pairing D38 ↔ golden G-I01 (mileage 2026 vs 2027, no shared gold) is documented on D38.
+- **Missing edge cases, now added:**
+  | Row | Edge | Why it matters |
+  |---|---|---|
+  | D35 | Today's text answers a *different* year, and the right year's text is only in the notes (§21 applies 35%; 2023 was 20%) | G-T02's dev twin, and the Phase D exit condition. No dev row had this shape |
+  | D36 | Relative year ("this year's return"), same facts as D35 | The planner's prompt has no current date, so it can't resolve "this year" |
+  | D37 | Two years in one question, one of them after a sunset and after today; today's text *implies the wrong start year* (§151(d)(5) opens "after December 31, 2017", but (C) began in 2025) | G-T01's shape, plus a literal-reading trap |
+  | D38 | A 2025 publication states a 2026 fact (72.5 cents) | An "other editions out" filter drops the only source |
+  | D39 | A year with no source at all, where neighbouring years' figures and a historical depreciation table are retrievable | The filter plus an honest refusal; `expect_insufficient` |
+- **Validator:** 0 of 39 need attention. D30 and D35 are marked `verified` because their answers quote notes, not the gold chunk.
+
+**Findings for later tasks:**
+- **D3, edition filter:** a 2025 edition carries facts about other years: next year's figures (D38), "What's New" statements that are evidence about the year before (D30, and golden G-T10), and historical tables (D39's trap). D0's "drop other editions" simulation is too blunt. D3 must measure D30, D38 and D39 alongside the 0.200 → 0.350 gain.
+- **D4:** the USLM *Amendments* notes quote prior text verbatim ("Prior to amendment, text read as follows: …35 percent…"). That is a cheap way to recover earlier versions, worth weighing for D35 and G-T02.
+- **D2/D7:** the planner needs today's date to resolve relative years (D36).
+- **Golden audit finding (approved and applied 2026-09-27: `answer` and `notes` only, gold unchanged, validator passes 0/115; no eval code reads reference answers, so no score moves):** G-T10's reference answer says the tips deduction's start date "appears only in the statutory notes", but Pub 17 (2025), p. 3 says "qualified tips paid to you in 2025", and D0's run retrieved that page. Suggested fix: accept either the evidence or an honest "not in my sources", the same wording as D30.
+
+**Dependencies:** D0
+**Files:** `eval/dev.jsonl`
+**Scope:** S
+
+---
+
+## D2: Temporal scorer
+
+**Description:** Add a temporal accuracy mode to the eval. First fix what "as-of" means (D0 found two meanings): the **tax year** whose rules apply. A row whose question turns on an event date (G-T05–G-T07) records both, the tax year for the match and the event date for the answer; that is a golden gold change you review. A row naming two years (G-T01) is scored on its answer alone. Per row: (a) the plan's as-of year matches the row's tax year (exact, no judge); (b) an LLM judge from the other provider grades the answer against the reference answer for that year, using §9.2's 3-point rubric and defect tags. A second, differently prompted judge grades the same answers, and Cohen's κ is reported. A row passes only if (a) holds and (b) is *Correct*. Answers are cached, so a re-score only re-judges.
+
+**Acceptance criteria:**
+- [x] One command scores the temporal rows of a set and writes a results file (`eval/temporal.py`)
+- [x] ≥3 judge repeats per row on dev, with spread reported; κ between the two judges ≥0.7, or the metric is marked untrusted (κ 0.81–0.93 over three calibration runs)
+- [x] Cost per golden run measured (expected well under $1): **~$0.08 estimated** from dev's $0.099 for 14 rows × 3 repeats plus the grounding check; golden is not run until D7, to keep it held out
+
+**Verification:**
+- [x] Tests: the as-of match and the pass rule, on fixture plans and fixture verdicts (no API calls): `tests/test_temporal.py`, 10 tests (as-of formats, two-year rows, invented years, pass rule, a hand-computed κ); 196 pass
+- [ ] Manual: the judge's verdicts on dev are read by you for at least 5 rows
+
+**Built 2026-09-27:** `eval/temporal.py` reuses the faithfulness harness's answer cache and plan pinning (`pipeline_answer`, `cached_decompose`), the §9.2 rubric and its alternate phrasing (`llm_bench.judge`, log #31), and the claim checker (`extract_claims`, `judge_claims`). The judge is `claude-haiku-4-5` (other provider). The only new logic is `as_of_match`, `passed` and `kappa`.
+
+**Calibration on dev (14 rows, 3 repeats, `eval/results/temporal-dev-2026-09-27.json`):**
+
+| | Value |
+|---|---|
+| Temporal accuracy | **0.381 ± 0.041** (0.357 / 0.429 / 0.357); judge noise is about half a row |
+| Grounded accuracy (diagnostic) | 0.214–0.286: of the correct answers, only those whose every claim is in the retrieved sources (or the question) |
+| As-of extraction | 9/13 scored rows (0.692) |
+| κ, primary vs alternate judge | 0.888, 0.810, 0.925 over three calibration runs (≥ 0.7) |
+| Judge cost | $0.099 per run |
+
+**What calibration changed:**
+- **A grounding diagnostic was added, and it isn't in the pass rule.** The reference-answer judge never sees the sources, so a correct answer can come from the model's memory: D35's "20%" cites Pub 17 (2025), p. 34, which doesn't state it, and §21 wasn't retrieved (G-T06 in D0 was the same). Each answer is now also checked claim by claim against its sources, and the question counts as a source, because restating its facts isn't memory. That fix took D32 and D34 from false "ungrounded" to grounded. **Decided 2026-09-27: report grounding, don't gate on it.** §9.3's gate is unchanged, faithfulness keeps its own gate, and the Phase D report shows both figures per row.
+- **D28's reference answer was trimmed.** It carried a non-material sentence (§25D(e)(8)), and the judge counted its absence as `missing_condition`. The sentence moved to the row's notes. The same risk may sit in golden reference answers. If D7's per-row table shows `partial` for a non-material omission, audit that row.
+- The judge sometimes emits a tag outside the taxonomy (`wrong_conclusion`). It is kept as given, and it doesn't affect the grade.
+
+**Found for later tasks (the planner, not the scorer):**
+- **No current date:** D36's "this year" is planned as **2023**, and its answer applies the old 20% schedule.
+- **Event date vs tax year:** D31 is planned as 2024 (the loan), not tax year 2025. The planner prompt says "the tax year or date the question is about".
+- **Missed years:** D26 ("on their 2016 joint return") and D34 (the "2012 income tax") are planned with no year at all.
+- These are prompt changes, tuned on dev in D3/D7. They invalidate the plan cache for affected questions.
+
+**Golden change, approved and applied 2026-09-27 (the as-of rule):** G-T05, G-T06 and G-T07 record an event date in `as_of`. Under D2's rule, `as_of` becomes the tax year and the event date moves to the notes:
+
+| Row | `as_of` now | Proposed | Event date (to notes) |
+|---|---|---|---|
+| G-T05 | 2026-05 | **2022** (the return) | refund claim, May 2026 |
+| G-T06 | 2026-09 | **2021** | audit opened, September 2026 |
+| G-T07 | 2025 | **2024** | filed August 30, 2025 |
+
+This changes no gold and no reference answer, only which year the as-of check expects. D0's planner already returned exactly these three years.
+
+**Dependencies:** D0 (D1 to calibrate)
+**Files:** `eval/temporal.py` (or a mode in `eval/ragas_eval.py` if it fits), `tests/`
+**Scope:** M
+
+---
+
+## ✅ Checkpoint 1 (human review)
+- [x] D0's decision confirmed (2026-09-27): D4 built for G-T02 and G-T10; D5 dropped; D3b added; publication valid time in D3
+- [x] D1's rows approved (2026-09-27)
+
+---
+
+## D3: Valid-time columns and the as-of filter
+
+**Description:** Add `effective_date` and `superseded_date` to `chunks` (migrated the way `source_revision` was) and to the Qdrant payload, with a payload index. **Publications are dated by edition:** `Pub 17 (2025)` is valid for tax year 2025 only. Statute dates arrive with D4; regulations and case law stay undated. When the plan has an as-of year, filter every sub-query's search to chunks valid in that year. Undated chunks always pass. D0's simulation (drop other editions) moved temporal gold Recall@20 from 0.200 to 0.350; the built filter should reproduce that. Measure approximate versus exact search under the filter on dev (ADR-17 measured a 22.1% loss for approximate search), and ship the one that loses nothing unless it costs >100 ms.
+
+**Acceptance criteria:**
+- [x] The filter is off when no as-of year is extracted, and undated chunks always pass
+- [x] Temporal gold Recall@20 reproduces D0's 0.350 on the same plans (or the difference is explained): **0.350 exactly** with the exact-year window
+- [x] Filtered approximate vs. exact: recall against the exact top-k, and latency, on dev: approximate keeps **99.2%** of the exact dense top 50 (min 96%), and exact costs +3 ms (13 vs 10 ms p50). **Exact ships**
+- [ ] Every golden row scored with the filter on: ≤2-point Recall@20 regression per non-temporal category (≥5 plan sets)
+
+**Verification:**
+- [x] Tests: the validity window at its edges, on fixture chunks: `test_edition_filter_keeps_undated_chunks_and_nearby_editions` (in-memory Qdrant: undated, same year, older and newer windows, no nearby edition), `test_tax_year_is_one_year_or_none`, `test_the_plans_tax_year_reaches_search_only_when_editions_are_on`
+- [x] `uv run pytest -q` passes (205)
+
+**Built 2026-09-27, smaller than planned.** Every publication in the corpus is a 2025 edition, and its year is already in `as_of`. So D3 needed no new Postgres columns and no re-embedding:
+- an integer `edition` payload on publication points (written by `index.sync`; the 2,043 existing points were backfilled with `set_payload`), with an integer payload index;
+- `retrieve.edition_filter(year, back, forward)`: undated chunks always pass;
+- `decompose.tax_year()`: one year or none, so multi-year plans aren't filtered;
+- the window is passed only when a filter applies, and dense search is exact when filtering;
+- `eval/retrieval.py` arms `route+ed0`, `route+ed-1` and `route+ed±1`, plus `--scored-from D`, which adds the temporal rows.
+
+The statute's valid time arrives with D4, where a column is first needed.
+
+**Measured:**
+
+| Arm | Golden temporal Recall@20 (D0's plans) | Dev temporal Recall@20 (3 plan sets) |
+|---|---|---|
+| shipped (`route`) | 0.200 | 0.423 |
+| ed0 (same-year editions) | **0.350** | 0.500 |
+| **ed-1 (same year and the one before)** | 0.250 | **0.577** |
+| ed±1 | 0.200 | 0.577 |
+
+- **Window chosen on dev: ed-1.** It keeps D38's 2026 fact from a 2025 edition, and gains D35 and D36. Golden would have chosen ed0: G-T03 and G-T08 (2026) only recover when the 2025 editions are dropped. For a 2026 question a 2025 edition is both the only source (D38) and the text crowding out the statute (G-T03, G-T08). That second half is dilution, which is D3b's job. Recorded, not chosen.
+- **Answers disagree with recall.** With ed-1 live, dev temporal accuracy fell from **0.36–0.43 (12 judge repeats) to 0.286** (`temporal-dev-2026-09-27-d3.json`). D30 and D32 went from correct to incorrect, and D31 went from partial to correct. Removing the 2025 editions removed the only plain-English year evidence. D30 then applied today's §225 to 2024. D32 filled with regulations and fell back on a stale memory of the $600 threshold, which the 2025 law retroactively repealed for 2023; Pub 17 (2025) had given the $20,000 / 200 rule. Recall was blind to this because D1's gold doesn't count off-year editions.
+- **Decided 2026-09-27 (you agreed): the filter stays off in the live pipeline until D7.** `decompose.EDITIONS = None`, passed at both live call sites (`decompose.answer`, `jobs.run`). D7 re-decides with D3b and D4 in place, on dev answers, not recall.
+- **Golden regression, non-temporal categories (ed-1 vs shipped, 5 plan sets, k=20): moved to D7** (you decided, 2026-09-27). The first run was stopped unfinished to free the CPU for D3b. With the filter off in the live pipeline, the check only matters when D7 re-decides the filter, and it is more meaningful there, measured together with D3b and D4.
+- Also fixed: `eval/temporal.py` names its results file after a non-default answer cache, because a D3 run had overwritten the calibration file (the log #64 mistake again). The calibration file was regenerated from its cached answers.
+
+**Dependencies:** Checkpoint 1
+**Files:** `src/taxcite/chunk.py`, `src/taxcite/store.py`, `src/taxcite/index.py`, `src/taxcite/retrieve.py`, `src/taxcite/decompose.py`, `tests/`
+**Scope:** M
+
+---
+
+## D3b: Statute recall on dated questions
+
+**Description:** D0 found that 8 of 11 temporal rows never retrieve their statute. The pipeline searches with the question's own words (log #44), which match plain-English publications and regulations. Each row's legal-vocabulary sub-query ranks the statute 1st–4th, so the statute is reachable. The planner's rewritten sub-queries scored 0.250, below D3's filter alone (0.350). Candidates, cheapest first, chosen on D1's dev rows only:
+1. A per-source floor inside the statutory route: reserve slots for `usc` the way `chunks()` reserves one per sub-query.
+2. Search the question *and* the planner's sub-query, and merge the two pools before reranking.
+
+If neither moves dev, record the numbers and stop (C6's rule).
+
+**Acceptance criteria:**
+- [x] Each candidate's dev temporal and dev statutory Recall@20, ≥3 plan sets; the winner chosen on dev: **statute search + 1 reserved slot**
+- [x] Golden scored once with the winner: temporal gold Recall@20 against D3's figure, and ≤2-point regression on every other category (≥5 plan sets): temporal **0.200 → 0.400** (D3's best was 0.350); all B rows 0.563 → 0.602, no category down
+- [x] The CI retrieval gate's dev check still passes, and its threshold is re-baselined if the default changed: gate now scores `route+statute1`, floor 0.66 → **0.70** (measured 0.720; `route` reproduced 0.680)
+
+**Verification:**
+- [x] Tests: the source floor (or the pool merge) on fixture hits: `test_statute_floor_searches_the_statute_and_keeps_it_through_reranking`
+- [ ] `uv run pytest -q` passes
+
+**Built and measured 2026-09-27.** First, a ceiling check. Searching the question's own words within the statute alone reaches **0.679** of dev's statute gold at k=20; the planner's sub-query only lifts that to 0.714. So `retrieve(statute=n)` adds a statute-only search to each statutory sub-query, and `chunks()` reserves n slots for the best-ranked statute chunks. `retrieve(union=True)` pools the sub-query's own text (candidate 2).
+
+| Dev, 38 scored rows, 3 plan sets | All @20 | Statutory | Temporal | Case law | Compound | All @8 |
+|---|---|---|---|---|---|---|
+| shipped (`route`) | 0.605 | 0.654 | 0.423 | 0.833 | 0.667 | 0.539 |
+| **+ statute, floor 1** | **0.724** | **0.808** | **0.615** | 0.833 | 0.667 | **0.605** |
+| floor 2 / 3 | 0.724 | 0.808 | 0.615 | 0.833 | 0.667 | 0.605 |
+| union | 0.684 (range 0.039) | 0.744 | 0.526 | 0.833 | 0.750 | |
+| union + floor 2 | 0.732 ± 0.013 | 0.821 | 0.615 | 0.833 | 0.694 | |
+
+- **Floor size doesn't matter** (1 = 2 = 3 at k=20 and k=8); the gain is getting the statute into the pool. The shipped route pool averaged 17.4 chunks. The union adds plan noise for an unresolved edge. **Chosen: floor 1**, live as `decompose.STATUTE = 1`, for about +250–450 ms at p50.
+- **Answers, dev temporal (the D3 lesson):** 0.381 ± 0.041 against a 0.36–0.43 baseline, so neutral within noise. The three rows that moved were traced to synthesis nondeterminism (D31: identical sources, different text) and judge variance (D30), not to D3b. D26 improved through Pub 587. The statute search pulled the wrong sections for it (§221, §121), which is the vocabulary ceiling.
+- **Golden, scored once (`retrieval-golden-2026-09-27-k20-d3b.json`, 5 plan sets):** all 0.563 → **0.602** (each plan set up by more than the 0.029 spread), statutory 0.500 → **0.607**, compound 0.459 → 0.470, case law 0.777 unchanged. Golden temporal on D0's plans: **0.200 → 0.400**, recovering G-T03, G-T08 and two of G-T07's groups. That resolves D3's conflict: those were the rows only the exact-year filter could recover, and the statute floor gets them without dropping publications. The ed-1 filter on top adds nothing (0.400). Still missed: G-T01, G-T04, G-T05, G-T06, where the question's words don't reach §67, §6511 or §6501 even within the statute.
+- Evidence: `retrieval-dev-d3b-k20.json`, `-k8.json`, `-gate-k10.json`, `temporal-dev-2026-09-27-d3b.json`, `retrieval-golden-2026-09-27-k20-d3b.json`.
+
+**Dependencies:** D1, D3
+**Files:** `src/taxcite/decompose.py`, `eval/retrieval.py`, `tests/test_decompose.py`
+**Scope:** S–M
+
+---
+
+## D4: Effective dates from statutory notes
+
+**Description:** Built for G-T02 and G-T10 (D0). Read "Effective Date of [year] Amendment" notes from the USLM XML the parser already downloads, and set `effective_date` on the chunks of the subsections each note names. Follow cross-references: §224's note reads "Effective Date of 2025 Amendment note under section 45B". §179's is in place: "shall apply to property placed in service in taxable years beginning after December 31, 2024". A note the parser can't read with confidence leaves the date null (always passes the filter), never a guess. A statute chunk whose date is after the as-of year still passes the filter, flagged for synthesis (D7), because it is the best evidence available.
+
+**Acceptance criteria:**
+- [x] A hand-checked sample of 50 parsed dates, stratified by note shape: accuracy ≥90% on dates set, coverage reported (the §3.2 pattern). **Fresh round 3: 48–49/50 (96–98%)**; coverage 1,795 of 2,576 amended chunks (below)
+- [x] G-T02's §179(b) and G-T10's §224 chunks get their date (2025 amendment: taxable years beginning after December 31, 2024)
+
+**Verification:**
+- [x] Tests: each note shape found in the sample, as fixture XML taken from the real notes: `tests/test_usc_notes.py` (9 tests) on `tests/fixtures/usc_notes.xml` (§§ 179, 224, 45P, 246A, 25D, 23, cut from the release point); 215 pass
+
+**Built 2026-09-27:** `src/taxcite/ingest/usc_notes.py`. For each statute chunk it finds the latest amendment since 2012 that changed that chunk's text, joins it to that law's Effective Date of Amendment note (following "note under section X" references), and keeps the entry itself, which often quotes the replaced text ("substituted “$2,500,000” for “$1,000,000”", "Prior to amendment, text read as follows"). A section added since 2012 uses its own Effective Date note. The result is stored as `chunks.effective` (jsonb) and in the Qdrant payload; `usc.parse` attaches it. The 11,030 existing rows and 1,795 points were backfilled (SQL upsert plus `set_payload`), with no re-embed.
+
+**Hand checks, three fresh samples of 50, stratified by note shape** (quoted law, summary/cross-reference, retroactive, section added). Each link was checked for two things: the amendment is really the latest to that chunk's text, and the rule is that law's.
+
+| Round | Correct | Failure classes found, then fixed |
+|---|---|---|
+| 1 | 40/50 (80%) | catchline renames treated as text changes; subsections named only in the entry text; a note's general rule used where a paragraph governs the amendment's own subsection; "not applicable to…" read as the rule |
+| 2 (fresh) | 40/50 (80%) | subsection-level entries that touched only the heading, intro or concluding text, attributed to every child (fixed with **text evidence**: an entry quoting its new text links only to the chunk containing it); "(4) to (6)" ranges; a rule in subsection (a) of the law applied to an amendment made by (e) |
+| 3 (fresh) | **48–49/50 (96–98%)** | one comma-chained exception clause (fixed in the module; unit test); one link not fully verifiable |
+
+The module differs from the spike in two ways. Range chunks hold their subsections whole, and a subparagraph marker may follow a heading ("Inflation adjustment. (A) In general"). Both added links: 20 of the added links were spot-checked, 20/20 right.
+
+**Coverage:** 1,795 of 2,576 statute chunks amended since 2012 (70%) carry a rule. The rest carry nothing, which by design never passes as a guess. Known limit: list rules ("shall apply to— (1) … executed after December 31, 2018", §61 alimony) fall back to the enactment date.
+
+**The rows that motivated it:** §179(b)(1) (G-T02) and §224 (G-T10) get "taxable years beginning after December 31, 2024". §225 (D30) gets the same; §21(a) (D35) gets "after December 31, 2025" plus the 2025 entry; §151(d)(5) (D37) gets "after December 31, 2024". §163(h)(3) part 1 (D26's $1,000,000 rule) correctly gets none, while parts 2 and 3 get 2020 and 2025. §6050W(e) (D32) is marked retroactive.
+
+**Not in D4, and D7's call:** how synthesis uses it (the flag "this text applies from…", and when to quote the replaced text). The CI snapshot must be regenerated to carry the column and payload; that happens once, with D7.
+
+**Dependencies:** D3
+**Files:** `src/taxcite/ingest/usc.py`, `tests/test_usc.py`
+**Scope:** M
+
+---
+
+## ~~D5: Prior versions of changed sections~~ (dropped after D0)
+
+No temporal row needs an earlier version of the text (D0: bucket 4 had 0 rows). G-T02's reference answer asks for an honest "the 2023 version isn't in the corpus", which D4's note makes possible. **To reopen:** a golden or dev row whose correct answer needs earlier statutory text. Price it then with D0's method: section hashes compared across two release points, with `fetch_usc(release=...)`.
+
+---
+
+## D6: Transaction time: retire, don't delete
+
+**Description:** Add `recorded_at` (backfilled from `fetched_at`) and `retired_at` to `chunks`. The re-ingest sweep sets `retired_at` instead of deleting the row. Retrieval reads only unretired rows, and retired points are still removed from Qdrant. One documented SQL query answers "which text did TaxCite hold for this citation on date Y".
+
+**Acceptance criteria:**
+- [x] A re-ingest that drops a paragraph retires it; its text is still in Postgres and absent from search (Postgres: `test_a_dropped_paragraph_is_retired_by_the_sweep`; search: `index.sweep` unchanged, still removes the point)
+- [ ] The audit query is in the report, run against a real retired row: **no real retired row exists yet** (`chunk_versions` is empty until a re-ingest changes or drops text: Phase H's refresh, or a re-ingest in D8). Run against test rows meanwhile
+
+**Verification:**
+- [x] Tests: sweep retires rather than deletes; retired rows never reach `search`: 3 tests in `tests/test_store.py` (a rewrite is retired, not lost; a dropped paragraph is retired by the sweep; an unchanged re-ingest keeps its `recorded_at` and retires nothing). 218 pass
+
+**Built 2026-09-27, by a different route than planned.** A `retired_at` column on `chunks` would have needed `retired_at IS NULL` in every reader. Instead:
+- `chunks` stays "what TaxCite holds now".
+- A Postgres trigger (`chunks_retire`) copies every version TaxCite stops holding into `chunk_versions (key, source, citation, text, recorded_at, retired_at)`. That covers a row the sweep deletes, and also **text an amendment rewrites in place**. The same key (`citation#body#part`) survives an amendment, so the planned version would have lost exactly the history ADR-2 is about.
+- `chunks.recorded_at` is when the current text was first recorded. The upsert keeps it unless the text changes; a rewrite is retired at its replacement's `recorded_at`, and a dropped row when the sweep ran.
+- The audit query is `store.held_at(conn, citation, at)` (`HELD_AT` in `store.py`): the current rows recorded by `at`, plus the retired rows whose window covers `at`.
+- No reader changed, and Qdrant is untouched: `index.sweep` still removes retired points.
+
+**Live migration:** 28,747 rows backfilled with `recorded_at = fetched_at`, the trigger installed, `chunk_versions` empty. **Known imprecision:** the statute rows' `recorded_at` is 2026-09-28, because D4's backfill re-saved them hours before this migration. For pre-D6 rows the last fetch is the best record there is.
+
+**Dependencies:** D3 (the same migration)
+**Files:** `src/taxcite/store.py`, `src/taxcite/index.py`, `tests/`
+**Scope:** S
+
+---
+
+## D7: As-of-aware synthesis
+
+**Description:** Give synthesis the plan's as-of year, and each chunk's valid-time window. The answer states the tax year it answers for. When a statute chunk took effect after that year (D4), the answer says the earlier rule isn't in its sources and doesn't apply today's text or guess (G-T02). D0's four year-reasoning rows are the targets: G-T01, G-T04, G-T09 and G-T11 (Pub 463's January 20 cutoff misapplied). When the question names no year, it answers for current law and says so, naming any change the retrieved text dates. When a retrieved source's validity window doesn't cover the year, the answer says the source may not apply. Prompt changes are tuned on dev only; the faithfulness gate is dispatched on the branch before merging (ADR-22).
+
+**Acceptance criteria:**
+- [x] The golden regression check moved from D3: the edition filter (ed-1), with D3b and D4 in place, against shipped, ≤2-point Recall@20 regression per non-temporal category, 5 plan sets, k=20. **Superseded:** the filter lost on dev answers even with D3b and D4 (0.429 vs 0.452) and stays off, so it has nothing to regress. The check that matters instead is the new *planner* against golden retrieval: **met**, all 0.602 → 0.606 (5 plan sets, range 0.012); statutory 0.607 level, case law 0.777 → 0.800, compound 0.470 → 0.462 (−0.8). Cost: p50 1.75 s → 2.99 s, from more sub-queries (2.34 per question vs 2.05) (`retrieval-golden-k20-d7-planner.json`)
+- [x] Dev temporal accuracy (D2) before and after, ≥3 repeats: **0.381 ± 0.041 → 0.452 ± 0.041** (as-of extraction 0.692 → 0.846)
+- [x] **Gate, scored once:** golden temporal accuracy ≥90% (10/11), per-row table with defect tags: **NOT MET, 0.394 ± 0.052 (4–5 of 11)**; D0's baseline was 1/11 (table below)
+- [x] The faithfulness gate stays green (≥0.855): **fixed build 0.882 ± 0.011, refusals 0.125–0.156 (mean 0.135), run 36381406751.** The first run passed (0.866) **at a refusal rate of 0.52–0.57** (Phase C 0.125), caused by rule 6 going to every question. Fixed in `0f2caf7` (the rule and header only when dated): refusals 13/96 locally, dev temporal 0.500. Re-run dispatched (36381406751), PENDING. **Added (you asked, 2026-09-28):** the faithfulness gate now also fails on a mean refusal rate above 0.25 (`--max-refusal-rate`; healthy band 0.125–0.135, broken 0.52–0.57); `test_refusal_rate_gate`; both paths smoke-tested (forced FAIL exits 1). Golden temporal re-scored once after the fix (your option b): **0.152 ± 0.052**, same retrieval, different answers. The scorer caches one answer per row, so its ± misses the generator's own variation
+
+**Verification:**
+- [x] Manual: `POST /queries` with G-T02's question doesn't apply $2.5M to 2023. It says the current limit applies from taxable years beginning after 2024, and names the year, in the SSE `answer` event. **Half met (2026-09-28):** `as_of` 2023; the answer names 2023 and doesn't apply $2.5M, but gives "$1,000,000 … reduced above $2,500,000", the pre-2025 *base* amounts from the amendment note's replaced text, not 2023's inflation-adjusted $1,160,000, and doesn't say that figure isn't in its sources
+
+**Built 2026-09-27/28.**
+- **Synthesis:** `Hit.effective` from the payload. `generate.effective_note` marks a statute source "Effective: …" when its current text took effect after the question's earliest year, or retroactively, and quotes the amendment entry (often the replaced text). The prompt carries the tax year(s). Rule 6: state the year answered for; text that states rules for particular years governs those years; don't apply later text to an earlier year (use quoted earlier text, or say it's not in the sources); with no year, answer for current law and name the change.
+- **Planner:** today's date in the user message, "as_of" defined as the tax year of the return or transaction, not a later event's date; two years kept; a present-tense question with no year is null.
+- One tuning iteration on dev after reading answers, then stop: rule 6 gained "text stating rules for particular years governs them" (D28 had refused 2021's 26%, which the schedule states), and the planner gained the present-tense rule.
+
+**Dev (14 rows, 3 judge repeats, `temporal-dev-2026-09-27-d7.json`, `-2026-09-28-d7ed.json`):**
+
+| Arm | Temporal accuracy | Grounded | As-of |
+|---|---|---|---|
+| D3b live, old planner and synthesis | 0.381 ± 0.041 | 0.21–0.29 | 0.692 |
+| **D7** | **0.452 ± 0.041** | 0.21–0.29 | 0.846 |
+| D7 + edition filter (ed-1) | 0.429 ± 0.000 | 0.143 | 0.846 |
+
+**The edition filter stays off:** even with D3b's statute slot and D4's dates, it loses D32, whose only source for the retroactively restored $20,000 threshold is the 2025 edition, and it halves grounding. `decompose.EDITIONS = None` is final for Phase D.
+
+**Golden temporal gate, scored once (`temporal-golden-2026-09-28-d7.json`): 0.394 ± 0.052, NOT MET (≥0.90 = 10/11).**
+
+| Row | Grades (3 repeats) | Why |
+|---|---|---|
+| G-T01 | correct | two years; §67(h) retrieved and read by year |
+| G-T02 | incorrect ×2, correct ×1 | gives the pre-2025 base amounts ($1,000,000 / $2,500,000) from the note's replaced text as 2023's figures; 2023's were inflation-adjusted |
+| G-T03 | incorrect | outside every source (DEA rescheduling): the sufficiency gate's job (Phase F) |
+| G-T04 | partial | §67 reached only in part |
+| G-T05 | partial | date arithmetic (§7503 weekend) |
+| G-T06 | correct (ungrounded) | from memory; §6501 not retrieved |
+| G-T07 | partial / incorrect | misses the §6651(c)(1) offset |
+| G-T08 | incorrect | refuses: at k=8 the one statute slot goes to §225/§1, not §164(b)(7). D3b's recovery was at k=20 |
+| G-T09 | incorrect / partial | planner put 2026 on an undated question despite the new rule; answers current law without the pre-2023 exception |
+| G-T10 | correct | "not applicable for 2024", the D4 date used |
+| G-T11 | correct | the January 20 cutoff applied to both machines |
+
+**Findings for the report:**
+- **Two of the misses are retrieval at synthesis depth,** not time: G-T08 at k=8, and G-T06 answering right from memory. The recall metrics at k=20 overstate what synthesis sees.
+- **Recovering an earlier version from the notes has a trap:** replaced text can be a *base* amount that was inflation-adjusted every year (G-T02). The statute never stated the year's figure; Rev. Procs did, and they aren't in the corpus.
+- **The planner's year extraction is unstable at the edges** (gpt-4o-mini): D33, D34 and G-T09 moved between runs even with the rule in the prompt.
+- **Synthesis ignores a note sometimes** (D37 applied the senior deduction to 2022 with the note attached).
+- The faithfulness gate must be dispatched on a branch with these prompt changes (ADR-22), and it needs the CI snapshot regenerated first, so CI has D4's dates. Both are outward actions, awaiting your go-ahead.
+
+**Dependencies:** D2, D3, D3b, D4
+**Files:** `src/taxcite/generate.py`, `src/taxcite/jobs.py`, `tests/`
+**Scope:** M
+
+---
+
+## D8: Phase D exit report
+
+**Description:** Write `eval/results/phase_d.md` in the shape of `phase_c.md`: D0's buckets and decision (versioning measured and dropped), D3b's recall rung, the effective-date accuracy, the filter's rung on the ladder with the approximate-versus-exact numbers, temporal accuracy per row, failures with examples, and §9.3 recalibration notes. Update the tech doc's Implementation Status and baselines table.
+
+**Acceptance criteria:**
+- [x] Every number traces to a results file or a command at the foot of the report (D0's plans and the D4 hand checks now saved in `eval/results/`; the temporal-recall script re-run: all six arms reproduce). All numbers in: faithfulness 0.882 at refusals 0.135 (run 36381406751); golden retrieval with the new planner 0.606
+- [x] The §9.3 Phase D gate is stated as met or not met, with no reinterpretation: **not met, 0.394 ± 0.052 (4–5 of 11)**; tech doc Implementation Status, baselines, §7 and §9.3 updated
+
+**Dependencies:** D7
+**Files:** `eval/results/phase_d.md`, `taxcite-technical-documentation.md`
+**Scope:** S
+
+---
+
+## ✅ Checkpoint: Phase D complete
+- [ ] Temporal accuracy ≥90% (10/11) on the golden temporal rows; ≤2-point regression elsewhere: **not met** (0.394 scored once; 0.152 re-scored after the refusal fix, identical retrieval); no regression elsewhere (0.602 → 0.606)
+- [x] Tests and both CI gates green on the new snapshot: tests green on every `phase-d` commit; faithfulness 0.882 at refusals 0.135; retrieval gate re-baselined to route+statute1 at 0.70 (0.720 measured locally; runs in CI on the next PR touching retrieval)
+- [ ] Ready to plan Phase E (after you review and merge `phase-d`)

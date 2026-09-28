@@ -143,3 +143,47 @@ def test_graph_expansion_reaches_only_held_neighbors_within_the_hop_limit():
     assert neighbors(edges, {"D"}, 1, held) == {"C", "E"}            # cited-by counts as a hop
     assert neighbors(edges, {"A"}, 0, held) == set()                 # off
     assert "A" not in neighbors(edges, {"A", "B"}, 2, held | {"A"})  # seeds are never returned
+
+
+@pytest.mark.parametrize("as_of, year", [
+    ("2023", 2023),
+    ("2026-05", 2026),
+    ("tax year 2016", 2016),
+    (None, None),
+    ("", None),
+    ("2016 and 2026", None),   # two years: a one-year filter would drop half the answer
+    ("2024 through 2024", 2024),
+])
+def test_tax_year_is_one_year_or_none(as_of, year):
+    assert dc.tax_year(as_of) == year
+
+
+def test_the_plans_tax_year_reaches_search_only_when_editions_are_on(monkeypatch):
+    calls = []
+    monkeypatch.setattr(dc, "search", lambda q, k, mode, source, **kw: calls.append(kw) or [])
+    plan = lambda as_of: dc.Decomposition("q", [dc.SubQuery("statutory", "x")], as_of=as_of)  # noqa: E731
+    dc.retrieve(plan("2023"))
+    dc.retrieve(plan("2023"), editions=(1, 0))
+    dc.retrieve(plan("2016 and 2026"), editions=(1, 0))
+    assert calls == [{}, {"year": 2023, "editions": (1, 0)}, {}]
+
+
+def test_statute_floor_searches_the_statute_and_keeps_it_through_reranking(monkeypatch):
+    """D3b: plain-English publications outrank the statute; a statute-only search puts it in the
+    pool and the reserved slots keep it there."""
+    pubs = [hit(f"IRS Pub 17 (2025), p. {i}", source="irs_pub") for i in range(1, 6)]
+    statute = [hit("26 U.S.C. § 67(e)-(h)", source="usc"), hit("26 U.S.C. § 67(a)-(b)", source="usc")]
+    calls = []
+
+    def fake_search(q, k, mode, source, **kw):
+        calls.append(source)
+        return statute if source == "usc" else pubs
+    monkeypatch.setattr(dc, "search", fake_search)
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: hits)  # publications first, as measured
+
+    d = dc.retrieve(dc.Decomposition("q", plan(("statutory", "s"), ("case_law", "c"))), k=3, statute=2)
+    assert calls == [("usc", "ecfr", "irs_pub"), "usc", ("case",)]   # statutory sub-query only
+    kept = [h.citation for h in dc.chunks(d, 3, floor=0)]
+    assert {"26 U.S.C. § 67(e)-(h)", "26 U.S.C. § 67(a)-(b)"} <= set(kept) and len(kept) == 3
+    off = dc.retrieve(dc.Decomposition("q", plan(("statutory", "s"))), k=3)
+    assert not {h.source for h in dc.chunks(off, 3, floor=0)} & {"usc"}   # off: the pool never had it

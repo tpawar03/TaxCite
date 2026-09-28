@@ -17,6 +17,7 @@ class Chunk:
     part: int = 1  # 1-based index when one citation needs more than one chunk
     source: str = "ecfr"  # which corpus this came from: "ecfr", "irs_pub", "usc", "case"
     source_revision: str | None = None  # upstream version, e.g. the US Code release point "Pub. L. 119-110"
+    effective: dict | None = None  # statute only (D4): when this text's latest amendment applies, from the notes
 
     @property
     def key(self) -> str:

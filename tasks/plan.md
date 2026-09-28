@@ -275,3 +275,111 @@ Full task details are in `tasks/todo.md` (Phase C section).
 | Treatment flags give false comfort: "no flag" read as "good law" | High | The absence of a flag is displayed as "no negative treatment found in <sources>", not as a clean bill. |
 | The wrong-page audit is contaminated: Claude has already seen the retriever's output for these rows | Med | You judge each change from the opinion text. Gold groups may only widen, never narrow, and every change is a logged commit. |
 | Page-selection tuning overfits the 6 rows | Med | Tune on the dev set only. The golden set scores once, at the end, as in Phase B. |
+
+---
+
+# Phase D Implementation Plan: Temporal validity
+
+_Approved 2026-09-27 with Claude's defaults below. Revised the same day after D0, and you confirmed the changes: versioning dropped, publication valid time and a statutory-recall task (D3b) added, gate unchanged. The reasons are in D0 (`tasks/todo.md`) and engineering log #65. Phase C's plan above is kept as history._
+
+## Overview
+
+The tech doc's Phase D (§7) adds valid time and transaction time to chunks, filters retrieval by the question's as-of year, and versions amendments at ingestion. Its gate: **≥90% accuracy on a held-out set of retroactive/amended-rule questions** (§9.3). The held-out set is the 11 temporal golden rows (G-T01–G-T11), which have run since Phase B for faithfulness only.
+
+**What D0 measured (2026-09-27):** today 1 of 11 temporal rows is right, and that one unfaithfully.
+- **Retrieval blocks 8 rows before time matters.** Temporal gold Recall@20 is 0.200. The question's plain words match IRS publications and regulations rather than the statute, even though each row's legal-vocabulary sub-query ranks its statute 1st–4th.
+- **No row needs an earlier version of the text,** so the spec's amendment versioning is not built.
+- **Two rows need an effective date** that only the statutory notes carry (G-T02, G-T10).
+- **Four rows need synthesis to reason about the year** (G-T01, G-T04, G-T09, G-T11).
+- **One row is outside every source** (G-T03).
+
+So the phase does three things:
+1. **Time in retrieval.** Publications get valid time from their edition year, which removes the plain-English competitor for a dated question (0.200 → 0.350, measured). Statute recall on dated questions gets its own task (D3b).
+2. **Effective dates** from the statutory notes, so the system knows when today's text began to apply.
+3. **Year-aware answers.**
+
+**Exit condition:** a reviewer asks G-T02 ("the §179 limit for property placed in service in 2023"). The answer doesn't apply today's $2.5M. It says the current limit applies from taxable years beginning after 2024 (the 2025 amendment's note), and that the 2023 figure isn't in its sources. It names the tax year it answered for. The ladder shows what the filter adds to temporal rows and what it costs everywhere else (at most 2 points).
+
+Source docs: tech doc §5.3, §7, §9, §9.3, ADR-2, ADR-17 (the 22% filtered-ANN note) · `eval/results/phase_c.md` · engineering log #40–41, #65.
+
+## Architecture Decisions (for this phase)
+
+- **Valid time is two new columns, not a new table:** `effective_date` and `superseded_date` (null = open) on `chunks` and in the Qdrant payload. The existing `as_of` column is *not* valid time: it records the download date or publication edition. It keeps that meaning, and the report says so.
+- **Where the dates come from:**
+  - **Publications:** the edition year gives the tax year the edition is written for, so Pub 17 (2025) is valid for tax year 2025.
+  - **Statute:** the effective date of the latest amendment note, where D4 can read one; otherwise undated.
+  - **Regulations and case law:** undated in this phase.
+- **No amendment versioning (changed after D0).** No temporal row needs an earlier version of the text, so earlier release points are not ingested. When the as-of year falls before today's text took effect, the answer says the earlier version isn't in its sources. It doesn't apply today's rule, and it doesn't guess. Chunk keys don't change. **To reopen:** a golden or dev row whose correct answer needs earlier statutory text.
+- **The filter applies only when the decomposer finds an as-of year.** It keeps chunks where `effective_date ≤ as_of < superseded_date`. For a publication, that is its own edition year. Undated chunks always pass, so the filter never hides the only copy of a section. A statute chunk whose current text began after the as-of year stays in, flagged to synthesis, because it is still the best available evidence and the answer must say it may not apply. With no as-of year, the answer is about current law and says so.
+- **Filtered search is exact, not approximate.** ADR-17 measured a 22.1% loss for approximate top-10 search under a strict filter, in both stores, and a date filter has the same shape. At 28k points, exact search is a brute-force scan of a few milliseconds. D3 measures both before choosing, and the ladder records the cost.
+- **Statute recall on dated questions is its own task (D3b, added after D0).** The pipeline searches with the question's words (log #44, measured on dev). For temporal rows that finds publications. The planner's rewritten sub-queries reached 0.250, below the filter alone. Candidates are chosen on D1's dev rows, never on golden.
+- **Effective dates come from USLM's statutory notes, read selectively.** Only "Effective Date of [year] Amendment" notes are read, not the whole notes body, and cross-references are followed (§224's date is a note "under section 45B"). Each date gets a hand-checked accuracy figure (§3.2's pattern), like Phase C's edges.
+- **Transaction time is kept, but only in Postgres.** `recorded_at` (from `fetched_at`) and `retired_at`: a re-ingest retires a superseded row instead of the sweep deleting it. Retired text is removed from Qdrant as it is today, because retrieval never reads it. "What did TaxCite believe on date Y" is a SQL query for audit (ADR-2), not a retrieval mode. No golden row tests it; see Resolved Inputs.
+- **Temporal accuracy is scored two ways per row.**
+  - **As-of extraction:** does the decomposer's year match the row's? D0 found "as-of" means two things: the return's tax year (substantive rules) and the date of an event like a claim or an audit (procedure). D2 fixes the rule, and gold rows with an event date also record the tax year. A plan with one year can't express G-T01's two years, and D2 scores that row by its answer alone.
+  - **Answer correctness for that year:** an LLM judge from the other provider checks the answer against the reference answer (§9.2's rubric, including its "wrong tax year" and "superseded rule applied" defect tags). A second judge checks the first, and the score is reported only if Cohen's κ ≥ 0.7.
+  - **Grounding is reported, not gated** (decided after D2): each answer is also checked claim by claim against its sources, because the reference-answer judge can't tell a right answer from memory from one the sources support.
+  - A row passes only if both do. The gate is 10 of 11 rows. **One row is 9.1 points**, so the gate allows exactly one miss, and the report says that.
+- **The gate is at risk, and is kept as written.** G-T03 needs the sufficiency gate (Phase F), so it is probably the one allowed miss. G-T05 and G-T07 turn on date arithmetic (the §7503 weekend rule, the §6651(c)(1) offset) that no temporal mechanism supplies. They pass only if retrieval brings their statute in and synthesis does the arithmetic. Not met is a valid outcome, reported as such.
+- **Tuning happens on dev, which first needs temporal rows.** Dev has none today (only D24 carries an as-of year). C6 stopped at this exact wall, so D1 writes dev temporal rows before anything is tuned. The golden set's audit rule still applies: logged commits you review, and no citation or opinion shared between sets.
+
+## Dependency Graph
+
+```
+D0 temporal failure spike ✅
+   ├── D1 dev temporal rows ──────────────────────────────────────┐
+   ├── D2 temporal scorer (as-of + judged answer) ────────────────┤
+   └── D3 valid-time columns + as-of filter (pubs by edition) ─┬──┤
+            ├── D3b statute recall on dated questions (dev) ───┤  │
+            ├── D4 effective dates from USLM notes ────────────┤  │
+            └── D6 transaction time ───────────────────────────┘  │
+                                                                  ▼
+                                      D7 as-of-aware synthesis (tuned on dev)
+                                                                  ▼
+                                                     D8 Phase D exit report
+```
+
+## Task List
+
+Full task details are in `tasks/todo.md` (Phase D section).
+
+### Slice 1 — Find out what the temporal rows need
+- [x] D0: Temporal failure spike (1/11 right today; retrieval blocks 8; no row needs an earlier version)
+- [x] D1: Dev temporal rows (14, D26–D39, validated in two scans, approved)
+- [ ] D2: Temporal scorer (built and calibrated: dev 0.381 ± 0.041, κ ≥ 0.81; as-of change applied; awaiting your verdict read)
+
+### Checkpoint 1 (human review)
+- [x] You confirm D0's decision: D4 built (G-T02, G-T10), D5 dropped, D3b added
+- [x] D1's rows are approved
+
+### Slice 2 — Time in retrieval
+- [x] D3: The as-of filter (publications dated by edition): built, window ed-1 chosen on dev recall; **off live until D7** (it cost dev answers 0.36–0.43 → 0.29)
+- [x] D3b: Statute recall on dated questions (statute search + 1 slot, live; golden 0.563 → 0.602, temporal 0.200 → 0.400)
+- [x] D4: Effective dates from statutory notes (1,795 statute chunks dated; fresh hand check 48–49/50)
+- ~~D5: Prior versions of changed sections~~ (dropped after D0: no row needs one)
+- [x] D6: Transaction time: retire, don't delete (a trigger into `chunk_versions`, covering in-place rewrites too; `store.held_at` answers "what did TaxCite hold on date Y")
+
+### Slice 3 — Answers
+- [x] D7: As-of-aware synthesis (dev 0.381 → 0.452; **golden gate not met: 0.394, 4–5 of 11**; the edition filter stays off)
+
+### Checkpoint: Phase D complete
+- [x] D8: Phase D exit report (`eval/results/phase_d.md`): gate **not met**. Gate ≥90% (10/11) on the temporal rows, stated as met or not; ≤2-point regression on other categories; CI green with a new snapshot
+
+## Risks and Mitigations
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Retrieval, not time, blocks most temporal rows (D0: 8/11), so temporal mechanisms alone can't reach the gate | High | D3's publication filter (measured +15 points) and D3b target it directly; D8 reports the gate with both, and not met is a valid outcome |
+| The gate is 11 rows, so one row is 9.1 points; a noisy judge can pass or fail it alone | High | Each row is scored on both parts; the judged part runs ≥3 repeats and reports its spread; the report lists every row, not just the total |
+| Some rows can't pass from any source in the corpus (G-T03's rescheduling is a DEA rule, not tax text) | High | The correct answer is an honest "the corpus can't establish this", and G-T03's reference answer says so (checked in D0). Never reword the question to make it pass |
+| D3b's recall fix helps temporal rows and hurts the rest (log #44 chose question wording on dev for a reason) | High | Chosen on dev; every golden category re-scored, ≤2-point regression, ≥5 plan sets |
+| The as-of filter hides the only copy of a section, or the decomposer invents a year | High | Undated chunks always pass the filter; the filter needs an extracted year; statute whose text began later stays in, flagged; D3 measures every non-temporal golden row with the filter on (≤2-point regression) |
+| Dropping a publication edition removes the only source that states a year's figure (G-T11's cutoff is in Pub 463 (2025)) | Med | Only editions whose year differs from the as-of year are dropped; G-T11 asks about 2025 and keeps its 2025 edition. Dev rows cover a year with no matching edition |
+| Effective-date notes are free text, and some are cross-references to another section's note | Med | A hand-checked sample with a stated accuracy target; cross-references followed; an unparsed note leaves the date null (always passes), never a guess |
+| Tuning on the 11 golden rows | Med | D1 first; the golden temporal rows score once, at the end |
+
+## Resolved Inputs (2026-09-27, Claude's defaults confirmed)
+
+- **Transaction time: build the minimum (D6), with no retrieval mode.** ADR-2 decided both time dimensions, and retiring instead of deleting is one column plus a changed sweep. A transaction-time *query* path ("answer as TaxCite would have on date Y") has no row that tests it and nothing that reads it, so it isn't built. Alternative: defer D6 to Phase H's incremental reindexing, where re-ingest becomes routine.
+- **Questions with an ambiguous year (G-T09) are answered for current law, with the change stated,** not sent back with a clarifying question. The API has no conversation turn to ask one in.
+- **Sources outside the corpus stay out.** G-T03 turns on a DEA scheduling rule. Adding Federal Register rules is its own ingestion source. D0 reports what it would unlock, and adding it is your call. G-T03's correct answer is an honest limit ("the statute says X; scheduling is outside the sources"). D0 checks that its reference answer says that.

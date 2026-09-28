@@ -75,11 +75,15 @@ jobs:
       # swallows a non-zero exit and this gate can never go red -- which is what it did through
       # the entire first proof run. The retrieval gate has no pipe, which is why that one
       # failed honestly.
+      # Refusals are outside the faithfulness mean, so a build can pass it by refusing more.
+      # D7's first build did: 0.866 at a refusal rate of 0.52-0.57 (run 36376696743). Healthy
+      # builds refuse 0.125 (Phase C) to 0.135 (D7 fixed), steady across runs because plans are
+      # pinned and synthesis runs at temperature 0; 0.25 sits between the bands (log #72).
       - name: faithfulness
         shell: bash
         run: |
           uv run python eval/ragas_eval.py --repeats 5 --max-cost 5.00 \
-            --fail-under 0.855 | tee faithfulness.log
+            --fail-under 0.855 --max-refusal-rate 0.25 | tee faithfulness.log
 
       - uses: actions/upload-artifact@v4
         if: always()

@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta, timezone
 
 import pytest
 
@@ -17,9 +18,11 @@ def conn():
     with store.connect() as c:
         store.create_table(c)
         c.execute("DELETE FROM chunks WHERE source = 'test'")
+        c.execute("DELETE FROM chunk_versions WHERE source = 'test'")
         c.commit()
         yield c
         c.execute("DELETE FROM chunks WHERE source = 'test'")
+        c.execute("DELETE FROM chunk_versions WHERE source = 'test'")
         c.commit()
 
 
@@ -59,3 +62,36 @@ def test_excluded_rows_are_stored_but_not_counted_as_indexable(conn):
     store.save(conn, chunks(toc))
     assert store.count(conn, "test") == 1
     assert store.count(conn, "test", indexable_only=True) == 0
+
+T1, T2 = datetime(2024, 1, 5, tzinfo=timezone.utc), datetime(2025, 7, 4, tzinfo=timezone.utc)
+CITE = "26 CFR 1.test-1(a)-(b)"
+
+
+def test_rewritten_text_is_retired_not_lost(conn):
+    """Transaction time (D6): an amendment rewrites a chunk in place; the old text stays answerable."""
+    store.save(conn, chunks(), fetched_at=T1)
+    store.save(conn, chunks(SECTION.replace("do the thing", "do the amended thing")), fetched_at=T2)
+    between = store.held_at(conn, CITE, datetime(2025, 1, 1, tzinfo=timezone.utc))
+    after = store.held_at(conn, CITE, datetime(2025, 8, 1, tzinfo=timezone.utc))
+    assert len(between) == len(after) == 1
+    assert "amended" not in between[0][1] and "amended" in after[0][1]
+    assert store.held_at(conn, CITE, datetime(2023, 1, 1, tzinfo=timezone.utc)) == []  # before it was recorded
+
+
+def test_a_dropped_paragraph_is_retired_by_the_sweep(conn):
+    with_c = SECTION.replace("</DIV8>", "<P>(c) <I>Later rule.</I> A third paragraph.</P></DIV8>")
+    store.save(conn, chunks(with_c), fetched_at=T1)   # one chunk, 26 CFR 1.test-1(a)-(c)
+    store.save(conn, chunks(), fetched_at=T2)         # upstream dropped (c): the sweep removes (a)-(c)
+    assert [k for (k,) in conn.execute("SELECT key FROM chunks WHERE source = 'test'")] == [f"{CITE}#body#1"]
+    gone = "26 CFR 1.test-1(a)-(c)"
+    (text,) = store.held_at(conn, gone, datetime(2024, 6, 1, tzinfo=timezone.utc))[0][1:]
+    assert "Later rule" in text                                   # still answerable for when it was held
+    assert store.held_at(conn, gone, datetime.now(timezone.utc) + timedelta(days=1)) == []
+
+
+def test_an_unchanged_reingest_keeps_its_recorded_time_and_retires_nothing(conn):
+    store.save(conn, chunks(), fetched_at=T1)
+    store.save(conn, chunks(), fetched_at=T2)
+    (recorded,) = conn.execute("SELECT recorded_at FROM chunks WHERE source = 'test'").fetchone()
+    assert recorded == T1
+    assert conn.execute("SELECT count(*) FROM chunk_versions WHERE source = 'test'").fetchone()[0] == 0

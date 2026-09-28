@@ -54,12 +54,14 @@ jobs:
       # No LLM: plans come from the committed cache, so this comparison is deterministic and
       # any drop is a real regression, not the planner having a different day (log #46).
       # Threshold is the measured dev figure less a small margin for Qdrant version drift.
+      # D3b: the gate scores what ships, route plus the statute search (0.720 on dev; route alone
+      # was 0.680 with a 0.66 floor), so the floor moves up by the same 0.04.
       - name: retrieval must not regress
         run: |
           uv run python eval/retrieval.py \
             --pilot eval/dev.jsonl --mode hybrid --k 10 \
-            --decompose route --plan-cache eval/results/decompositions.json \
-            --fail-under 0.66
+            --decompose route+statute1 --plan-cache eval/results/decompositions.json \
+            --fail-under 0.70
 
       - uses: actions/upload-artifact@v4
         if: always()

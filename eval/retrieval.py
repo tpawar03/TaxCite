@@ -108,13 +108,24 @@ def mrr(retrieved: list[str], gold) -> float:
 # Each decomposition variant takes one thing away from the shipped path, so the table
 # says what routing earns, what the model's rewriting earns, and what reranking earns.
 VARIANTS = {
-    "route":          dict(route=True,  rewrite=False, rerank=True),   # shipped
+    "route":          dict(route=True,  rewrite=False, rerank=True),   # shipped until D3b
     "route-norerank": dict(route=True,  rewrite=False, rerank=False),
     "noroute":        dict(route=False, rewrite=False, rerank=True),
     "rewrite":        dict(route=True,  rewrite=True,  rerank=True),
     # C5: the shipped path plus citation-graph expansion of the case-law sub-query (off in the live pipeline)
     "route+graph1":   dict(route=True,  rewrite=False, rerank=True, hops=1),
     "route+graph2":   dict(route=True,  rewrite=False, rerank=True, hops=2),
+    # D3: publications limited to editions near the plan's tax year, as (older, newer) years allowed
+    "route+ed0":      dict(route=True,  rewrite=False, rerank=True, editions=(0, 0)),
+    "route+ed-1":     dict(route=True,  rewrite=False, rerank=True, editions=(1, 0)),  # D3's chosen window; off live until D7
+    "route+ed±1":     dict(route=True,  rewrite=False, rerank=True, editions=(1, 1)),
+    # D3b: statute recall. A statute-only search per statutory sub-query with n reserved slots,
+    # and/or the sub-query's own text pooled with the question's
+    "route+statute1": dict(route=True,  rewrite=False, rerank=True, statute=1),  # shipped (D3b)
+    "route+statute2": dict(route=True,  rewrite=False, rerank=True, statute=2),
+    "route+statute3": dict(route=True,  rewrite=False, rerank=True, statute=3),
+    "route+union":    dict(route=True,  rewrite=False, rerank=True, union=True),
+    "route+union+statute2": dict(route=True, rewrite=False, rerank=True, union=True, statute=2),
 }
 
 
@@ -127,7 +138,9 @@ def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
         how = VARIANTS[variant]
         plan = dc.retrieve(cached_decompose(question["question"], cache if cache is not None else {},
                                             cache_path, plan_set),
-                           k=k, mode=mode, route=how["route"], rewrite=how["rewrite"], hops=how.get("hops", 0))
+                           k=k, mode=mode, route=how["route"], rewrite=how["rewrite"], hops=how.get("hops", 0),
+                           editions=how.get("editions"), statute=how.get("statute", 0),
+                           union=how.get("union", False))
         hits = (dc.chunks(plan, k, reranker) if how["rerank"]
                 else dc.merge(plan.searched, k))
     else:
@@ -180,6 +193,8 @@ def main() -> int:
     ap.add_argument("--fail-under", type=float, metavar="RECALL",
                     help="exit non-zero if the last mode's Recall@k is below this. For CI: with the "
                          "plan cache pinned this comparison is deterministic, so any drop is a real one")
+    ap.add_argument("--scored-from", action="append", metavar="PHASE",
+                    help="score rows first scored in this phase (repeatable; default B). D adds the temporal rows")
     ap.add_argument("--repeats", type=int, default=1, metavar="N",
                     help="score the decomposition arms against N independently planned sets and "
                          "report the mean and the spread; the planner is the noise source, so a "
@@ -193,7 +208,8 @@ def main() -> int:
 
     questions = [json.loads(line) for line in open(args.pilot) if line.strip()]
     # the golden set marks the phase a row starts being scored in; the pilot marks `scorable`
-    questions = [q for q in questions if q.get("scorable", q.get("scored_from") == "B")]
+    phases = set(args.scored_from or ["B"])
+    questions = [q for q in questions if q.get("scorable", q.get("scored_from") in phases)]
     scored = [q for q in questions if q["gold"]]
     abstain = [q for q in questions if not q["gold"]]
     print(f"{len(scored)} scorable questions, {len(abstain)} abstention questions, k={args.k}\n")

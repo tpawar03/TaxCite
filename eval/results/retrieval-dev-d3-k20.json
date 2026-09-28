@@ -1,0 +1,4711 @@
+{
+  "k": 20,
+  "modes": [
+    "hybrid",
+    "hybrid+route",
+    "hybrid+route+ed0",
+    "hybrid+route+ed-1",
+    "hybrid+route+ed\u00b11"
+  ],
+  "rows": [
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 33.12729099707212,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4"
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.3065735963827292,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 36.98520800389815,
+      "first_hit_rank": 3,
+      "top1": "IRS Pub 946 (2025), p. 61#body#4"
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 30.06883300258778,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 45Y(d)#body#1"
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 31.55374999914784,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(a)-(b)#body#1"
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.2640681225725909,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 34.74495800037403,
+      "first_hit_rank": 4,
+      "top1": "IRS Pub 17 (2025), p. 78#body#5"
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 0.3333333333333333,
+      "mrr": 0.14285714285714285,
+      "section_recall": 1.0,
+      "ms": 34.116250011720695,
+      "first_hit_rank": 7,
+      "top1": "IRS Pub 334 (2025), p. 38#body#5"
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 36.97941699647345,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 4#body#6"
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 23.46633300476242,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1"
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 35.85749999911059,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1"
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 37.925833006738685,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 34#body#8"
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 35.57645800174214,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 34#body#8"
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 36.76870900380891,
+      "first_hit_rank": 2,
+      "top1": "IRS Pub 17 (2025), p. 94#body#2"
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 0.26264953503719357,
+      "mrr": 0.07692307692307693,
+      "section_recall": 1.0,
+      "ms": 24.402583003393374,
+      "first_hit_rank": 13,
+      "top1": "IRS Pub 334 (2025), p. 35#body#2"
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 564.2292499978794,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 628.0262499931268,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019544999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 702.9350829980103,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001818,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 835.0132909981767,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 787.0645840012003,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 615.705792006338,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 with a loan secured by the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 535.047792000114,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 4#body#6",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018404999999999997,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 461.7695420020027,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015585,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1719.6799579978688,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020864999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 16,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 581.2528339884011,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 34#body#8",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 16,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 571.0372500034282,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 129(d)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 517.3439170030179,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 473.3925000036834,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 2280.892875001882,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 1906.0938750044443,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed them in service immediately"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018105,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1944.1071250039386,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1595.7285830081673,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1553.3851670043077,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1920.561834005639,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and secured a loan with the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1590.9771250007907,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 4#body#6",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1678.3363750000717,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 3168.1511670030886,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for IRS collection of tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020805000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 16,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1855.0658749882132,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 34#body#8",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with an adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001878,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 16,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1926.249625001219,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 129(d)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1657.0588750037132,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to an individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018255,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1484.9247079982888,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1622.011207989999,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 1689.9176249862649,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed both in service immediately"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017985,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1811.649542010855,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1833.5619169956772,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for heat pumps installed in 2026"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1750.9315420029452,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1825.180250001722,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and will pay interest in 2025"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001857,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1535.537583011319,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 4#body#6",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party payment networks under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1640.1110410079127,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 2649.428250006167,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019905,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 16,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1680.9432079899125,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 34#body#8",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 16,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1770.4405419935938,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 129(d)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1594.3279589992017,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1252.603959001135,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 554.8239170020679,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 649.3511660082731,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019544999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 705.8367089921376,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001818,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 19,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 668.6822499905247,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 19,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 679.4065830035834,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 608.0290410027374,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 with a loan secured by the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 388.7881659902632,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018404999999999997,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 480.2988750016084,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015585,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1479.1002920101164,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020864999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 622.2675409953808,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 708.0906670016702,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 500.9937919967342,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 634.2191250005271,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 536.6123330022674,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 609.791957991547,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed them in service immediately"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018105,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 703.8174999906914,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 19,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 671.5550420049112,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 19,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 667.9629580030451,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 612.9923339904053,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and secured a loan with the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 371.46533399936743,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 478.76929100311827,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1396.2862089974806,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for IRS collection of tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020805000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 568.1858750031097,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with an adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001878,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 789.2170830018586,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 522.9279159975704,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to an individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018255,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 595.3287919983268,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 522.6262500073062,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 596.7399170040153,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed both in service immediately"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017985,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 705.646375005017,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 19,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 691.427207988454,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for heat pumps installed in 2026"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 19,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 715.8270840009209,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 653.8521250040503,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and will pay interest in 2025"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001857,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 379.22895900555886,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party payment networks under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 500.3911659878213,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1397.3633749992587,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019905,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 570.326874993043,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 671.556834000512,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 495.35395798739046,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed0",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 603.5268749983516,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 651.3476249965606,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 610.8201669994742,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019544999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 708.3098750008503,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001818,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 702.5900840089889,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 19,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 671.4461670053424,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 613.045250007417,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 with a loan secured by the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 367.64237500028685,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018404999999999997,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 461.4922500040848,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015585,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1377.2046660014894,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020864999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 578.7664579984266,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 673.4490000089863,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 514.9525839951821,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 476.2005410011625,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 543.483000001288,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 601.6574590030359,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed them in service immediately"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018105,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 755.2204160019755,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 748.0431669973768,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 19,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 675.724208005704,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 608.307041999069,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and secured a loan with the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 393.7154580053175,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 473.79695800191257,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1388.040292004007,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for IRS collection of tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020805000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 575.1102920039557,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with an adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001878,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 668.7638750008773,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 533.439749997342,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to an individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018255,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 494.153459003428,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 518.3714580052765,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 604.7407080041012,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed both in service immediately"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017985,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 698.3600410021609,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 724.7486660053255,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for heat pumps installed in 2026"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 19,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 681.7959170002723,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 740.8760830003303,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and will pay interest in 2025"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001857,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 418.46479200467,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party payment networks under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 499.63295899215154,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1398.3277920051478,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019905,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 566.1093330127187,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 676.5003750042524,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 504.44099999731407,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed-1",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 499.4064999918919,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 528.0425000091782,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 594.1460839967476,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019544999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 717.143166999449,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001818,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 706.5310420002788,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 706.9567500002449,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 578.1265840050764,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 with a loan secured by the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 384.4471659976989,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018404999999999997,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 453.28333298675716,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015585,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1552.7747919986723,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020864999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 607.762667001225,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 691.3042499945732,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 517.8001250023954,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 0,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 514.699915991514,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 525.7545409986051,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 599.4838750048075,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed them in service immediately"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018105,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 696.7718329979107,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 717.695791987353,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 733.8333329971647,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 634.6297499985667,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and secured a loan with the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001845,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 366.66858299577143,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 491.0264580103103,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1452.5142919883365,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for IRS collection of tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00020805000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 781.9697500090115,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with an adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001878,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 695.4617079900345,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 509.7012499900302,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to an individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018255,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 1,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 513.5667909926269,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D26",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 529.9468750017695,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 18#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018194999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D27",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 0.5,
+      "ndcg": 0.15693994437792994,
+      "mrr": 0.07142857142857142,
+      "section_recall": 1.0,
+      "ms": 621.7255829978967,
+      "first_hit_rank": 14,
+      "top1": "IRS Pub 946 (2025), p. 60#body#3",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed both in service immediately"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017985,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D28",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 716.6747080045752,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D29",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 703.9657080022153,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for heat pumps installed in 2026"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D30",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 705.3385829931358,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001623,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D31",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 17,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 582.9611669905717,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and will pay interest in 2025"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001857,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D32",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 403.67883299768437,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.451-3(e)(2)#body#4",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party payment networks under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00018104999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D33",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 15,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 462.4592079926515,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015705000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D34",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 20,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1397.459332991275,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019905,
+      "has_case_subquery": true
+    },
+    {
+      "id": "D35",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 16,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 598.6035839887336,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.0001884,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D36",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 19,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 685.2112079941435,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00019125,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D37",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 659.5535420055967,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018314999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "D38",
+      "style": "nl",
+      "category": "temporal",
+      "mode": "hybrid+route+ed\u00b11",
+      "plan_set": 2,
+      "chunks": 14,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 481.0731250036042,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.61-21(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "decompose_cost_usd": 0.00015945,
+      "has_case_subquery": false
+    }
+  ],
+  "reranker": "jinaai/jina-reranker-v1-turbo-en",
+  "repeats": 3,
+  "routing": {
+    "hybrid+route": {
+      "rows_needing_case_law": 0,
+      "case_subquery_present": 0,
+      "spurious_case_subquery": 3,
+      "fallbacks": 0,
+      "subqueries_per_question": 1.794871794871795,
+      "cost_usd": 0.00698775
+    },
+    "hybrid+route+ed0": {
+      "rows_needing_case_law": 0,
+      "case_subquery_present": 0,
+      "spurious_case_subquery": 3,
+      "fallbacks": 0,
+      "subqueries_per_question": 1.794871794871795,
+      "cost_usd": 0.00698775
+    },
+    "hybrid+route+ed-1": {
+      "rows_needing_case_law": 0,
+      "case_subquery_present": 0,
+      "spurious_case_subquery": 3,
+      "fallbacks": 0,
+      "subqueries_per_question": 1.794871794871795,
+      "cost_usd": 0.00698775
+    },
+    "hybrid+route+ed\u00b11": {
+      "rows_needing_case_law": 0,
+      "case_subquery_present": 0,
+      "spurious_case_subquery": 3,
+      "fallbacks": 0,
+      "subqueries_per_question": 1.794871794871795,
+      "cost_usd": 0.00698775
+    }
+  },
+  "recall_per_plan_set": {
+    "hybrid": [
+      0.4230769230769231
+    ],
+    "hybrid+route": [
+      0.4230769230769231,
+      0.4230769230769231,
+      0.4230769230769231
+    ],
+    "hybrid+route+ed0": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "hybrid+route+ed-1": [
+      0.5769230769230769,
+      0.5769230769230769,
+      0.5769230769230769
+    ],
+    "hybrid+route+ed\u00b11": [
+      0.5769230769230769,
+      0.5769230769230769,
+      0.5769230769230769
+    ]
+  },
+  "summary": {
+    "hybrid": {
+      "recall": 0.4230769230769231,
+      "ndcg": 0.26236165643559717,
+      "mrr": 0.25408565793181176,
+      "section_recall": 0.6923076923076923,
+      "chunks": 20.0,
+      "p50_ms": 34.74495800037403,
+      "p95_ms": 37.925833006738685
+    },
+    "hybrid+route": {
+      "recall": 0.4230769230769231,
+      "ndcg": 0.3857049294984849,
+      "mrr": 0.4285714285714286,
+      "section_recall": 0.6923076923076923,
+      "chunks": 16.846153846153847,
+      "p50_ms": 1622.011207989999,
+      "p95_ms": 2649.428250006167
+    },
+    "hybrid+route+ed0": {
+      "recall": 0.5,
+      "ndcg": 0.49101802537760353,
+      "mrr": 0.543956043956044,
+      "section_recall": 0.7692307692307693,
+      "chunks": 16.76923076923077,
+      "p50_ms": 612.9923339904053,
+      "p95_ms": 1397.3633749992587
+    },
+    "hybrid+route+ed-1": {
+      "recall": 0.5769230769230769,
+      "ndcg": 0.5395510833446387,
+      "mrr": 0.5824175824175825,
+      "section_recall": 0.8461538461538461,
+      "chunks": 16.615384615384617,
+      "p50_ms": 608.307041999069,
+      "p95_ms": 1388.040292004007
+    },
+    "hybrid+route+ed\u00b11": {
+      "recall": 0.5769230769230769,
+      "ndcg": 0.5395510833446387,
+      "mrr": 0.5824175824175825,
+      "section_recall": 0.8461538461538461,
+      "chunks": 16.692307692307693,
+      "p50_ms": 607.762667001225,
+      "p95_ms": 1452.5142919883365
+    }
+  }
+}

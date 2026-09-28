@@ -19,6 +19,8 @@ for the routing. `retrieve(rewrite=True)` keeps the other arm of that measuremen
 """
 
 import json
+import re
+from datetime import date
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 from functools import cache
@@ -43,7 +45,11 @@ SYSTEM = """You plan the searches needed to answer a US federal tax question.
 Return JSON only, in this shape:
 {"as_of": "2023" or null, "subqueries": [{"kind": "statutory", "query": "..."}]}
 
-"as_of" is the tax year or date the question is about, if it names or implies one.
+"as_of" is the tax year whose rules the answer depends on: the year of the return or of the
+transaction, not the date of a later event such as filing, a refund claim, an audit or a levy.
+Resolve "this year", "last year's return" and the like from today's date, and use today's date
+for nothing else: a present-tense question that names no year ("are meals deductible?") is null. If the question asks
+about two tax years, give both ("2016 and 2026"). If it names or implies none, null.
 
 "kind" is one of:
   "statutory"   - the rule itself: Internal Revenue Code, Treasury regulations, IRS publications.
@@ -123,6 +129,7 @@ class Decomposition:
     input_tokens: int = 0
     output_tokens: int = 0
     fallback: str = ""  # set when the model's plan was unusable and we searched as Phase A did
+    statute_floor: int = 0  # set by retrieve (D3b): slots `chunks` reserves for the statute
 
     @property
     def searched(self) -> list[SubQuery]:
@@ -177,7 +184,8 @@ def parse(text: str, question: str) -> tuple[list[SubQuery], str | None, str]:
 def decompose(question: str, model: str = MODEL) -> Decomposition:
     """One structured-output call (ADR-11). Temperature 0 and a fixed seed, so a re-run
     of the eval measures the change under test and not a different plan."""
-    text, tin, tout = call_model(SYSTEM, f"Question: {question}", model,
+    # today's date resolves a relative year ("this year's return"); without it the model guessed 2023 (D2)
+    text, tin, tout = call_model(SYSTEM, f"Today's date: {date.today():%B %d, %Y}\nQuestion: {question}", model,
                                  temperature=0, json_output=True, seed=SEED)
     subs, as_of, fallback = parse(text, question)
     return Decomposition(question=question, subqueries=subs, as_of=as_of, model=model,
@@ -209,8 +217,28 @@ def citation_graph() -> tuple[frozenset, frozenset]:
     return edges, held
 
 
+# D3's edition window, chosen on dev recall: (1, 0), a dated question sees its own year's edition and
+# the one before (a 2025 edition states 2026's mileage rate); dev temporal Recall@20 0.423 -> 0.577.
+# Off in the live pipeline: on dev *answers* it cost 0.36-0.43 -> 0.29, because removing the 2025
+# editions removed the only plain-English year evidence (D30's "new for 2025", D32's retroactive
+# $20,000) and synthesis fell back on today's statute and stale memory. D7 re-decides with D3b and D4.
+EDITIONS: tuple[int, int] | None = None
+
+# D3b, chosen on dev: each statutory sub-query also searches the statute alone, and one slot is
+# reserved for it. Dev Recall@20 0.605 -> 0.724 (statutory 0.654 -> 0.808, temporal 0.423 -> 0.615,
+# case law and compound unchanged); floors of 1, 2 and 3 scored the same at k=20 and at k=8.
+STATUTE = 1
+
+
+def tax_year(as_of: str | None) -> int | None:
+    """The plan's one tax year, or None: no year, or several ("2016 and 2026"), filter nothing."""
+    years = re.findall(r"\b(?:19|20)\d\d\b", as_of or "")
+    return int(years[0]) if len(set(years)) == 1 else None
+
+
 def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = True,
-             rewrite: bool = False, hops: int = 0) -> Decomposition:
+             rewrite: bool = False, hops: int = 0, editions: tuple[int, int] | None = None,
+             statute: int = 0, union: bool = False) -> Decomposition:
     """Search once per sub-query, filtered to the sources its kind allows. Fills `hits` in place.
 
     The search text is the **original question**, not the model's rewritten sub-query,
@@ -224,13 +252,33 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
     the held opinions within that many citation steps of the ones already found, joins its pool, and
     the reranker decides. Off by default: C0 measured its ceiling on the golden set at zero (ADR-1),
     and it stays as an ablation rung so the ladder shows that with a number, not a claim (C5).
+
+    `statute` > 0 adds a statute-only search to each statutory sub-query and has `chunks` reserve
+    that many slots for the statute (D3b): the question's plain words find publications first, and
+    searched within the statute alone they reach 0.68 of dev's statute gold at k=20. `union` also
+    searches the sub-query's own text and pools both (D3b's second candidate).
     """
     seen: dict[tuple, list[Hit]] = {}  # two sub-queries of one kind would repeat a search
+    year = tax_year(d.as_of) if editions is not None else None
+    dated = {"year": year, "editions": editions} if year is not None else {}  # D3's edition filter
     for s in d.searched:
         key = (s.query if rewrite else d.question, s.sources if route else None)
         if key not in seen:
-            seen[key] = search(key[0], k=k, mode=mode, source=key[1])
+            seen[key] = search(key[0], k=k, mode=mode, source=key[1], **dated)
         s.hits = seen[key]
+        extra = []
+        if union and not rewrite:
+            extra += search(s.query, k=k, mode=mode, source=key[1], **dated)
+        if statute and s.kind == "statutory" and route:
+            extra += search(key[0], k=k, mode=mode, source="usc")
+        if extra:
+            own = {h.key or h.citation for h in s.hits}
+            s.hits = list(s.hits)  # the search result may be shared with another sub-query (`seen`)
+            for h in extra:
+                if (h.key or h.citation) not in own:
+                    own.add(h.key or h.citation)
+                    s.hits.append(h)
+    d.statute_floor = statute
     if hops:
         edges, held = citation_graph()
         for s in (s for s in d.searched if s.kind == "case_law"):
@@ -263,6 +311,8 @@ def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: in
         own = {h.citation for h in s.hits}
         for h in [x for x in ranked if x.citation in own][:floor]:
             chosen.setdefault(h.citation, h)
+    for h in [x for x in ranked if x.source == "usc"][:d.statute_floor]:  # D3b's statute slots
+        chosen.setdefault(h.citation, h)
     for h in ranked:  # the rest by cross-encoder score
         if len(chosen) >= k:
             break
@@ -301,6 +351,7 @@ def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
     """
     from taxcite.generate import answer_from_groups
 
-    d = retrieve(plan or decompose(question, model=model), k=k, mode=mode, route=route)
+    d = retrieve(plan or decompose(question, model=model), k=k, mode=mode, route=route, editions=EDITIONS,
+                 statute=STATUTE)
     kept = {h.citation for h in chunks(d, k)}
-    return d, answer_from_groups(question, d.groups(kept), facts=d.facts, model=model)
+    return d, answer_from_groups(question, d.groups(kept), facts=d.facts, model=model, as_of=d.as_of)

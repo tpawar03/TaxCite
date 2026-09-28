@@ -1,7 +1,7 @@
 import pytest
 
 from taxcite import index
-from taxcite.retrieve import Hit, rerank, search
+from taxcite.retrieve import Hit, edition_filter, rerank, search
 
 pytestmark = pytest.mark.skipif(
     index.count(index.client(), "ecfr") == 0, reason="needs an ingested corpus"
@@ -87,3 +87,23 @@ def test_publications_answer_what_regulations_cannot():
     """No final 280A regulations exist, so the home-office rules live only in Pub 587."""
     hits = search("simplified method home office deduction per square foot", k=10)
     assert any(h.source == "irs_pub" and "587" in h.citation for h in hits)
+
+def test_edition_filter_keeps_undated_chunks_and_nearby_editions():
+    """D3's filter, against Qdrant's own semantics (in-memory), not a re-implementation of them."""
+    from qdrant_client import QdrantClient, models
+
+    qc = QdrantClient(":memory:")
+    qc.create_collection("t", vectors_config=models.VectorParams(size=1, distance=models.Distance.DOT))
+    points = {1: {"source": "usc"}, 2: {"source": "irs_pub", "edition": 2025},
+              3: {"source": "irs_pub", "edition": 2024}, 4: {"source": "irs_pub"},  # undated publication
+              5: {"source": "irs_pub", "edition": 2026}}
+    qc.upsert("t", [models.PointStruct(id=i, vector=[1.0], payload=p) for i, p in points.items()])
+
+    def kept(year, back, forward):
+        hits, _ = qc.scroll("t", scroll_filter=models.Filter(must=[edition_filter(year, back, forward)]))
+        return {h.id for h in hits}
+
+    assert kept(2025, 0, 0) == {1, 2, 4}
+    assert kept(2026, 1, 0) == {1, 2, 4, 5}      # a 2025 edition may state a 2026 figure (D38)
+    assert kept(2024, 1, 1) == {1, 2, 3, 4}      # and the 2025 edition's "new for 2025" speaks to 2024 (D30)
+    assert kept(2016, 1, 1) == {1, 4}            # no edition near 2016: only undated chunks survive

@@ -24,7 +24,7 @@ BATCH = 16
 NAMESPACE = uuid.UUID("6f1d4f9a-6a5e-5f1e-9a8b-2c3d4e5f6a7b")  # fixed: point ids must be reproducible
 
 ROWS_SQL = """
-    SELECT key, citation, part, section, heading, text, tokens, source, as_of
+    SELECT key, citation, part, section, heading, text, tokens, source, as_of, effective
     FROM chunks WHERE source = %s AND excluded IS NULL ORDER BY key
 """
 
@@ -55,6 +55,13 @@ def create_collection(qc: QdrantClient, name: str = COLLECTION, dim: int = DENSE
     )
     for field in ("source", "section", "citation"):
         qc.create_payload_index(name, field, models.PayloadSchemaType.KEYWORD)
+    qc.create_payload_index(name, "edition", models.PayloadSchemaType.INTEGER)
+
+
+def edition(source: str, as_of) -> int | None:
+    """A publication's edition year is its valid time: Pub 17 (2025) is written for tax year 2025.
+    Other sources carry no year in D3 (the statute's comes from its notes in D4)."""
+    return int(str(as_of)[:4]) if source == "irs_pub" else None
 
 
 def batched(rows: list[dict], size: int = BATCH) -> Iterator[list[dict]]:
@@ -104,7 +111,8 @@ def sync(conn, qc: QdrantClient, source: str, name: str = COLLECTION, dense=None
                         "key": r["key"], "citation": r["citation"], "part": r["part"],
                         "section": r["section"], "heading": r["heading"], "text": r["text"],
                         "tokens": r["tokens"], "source": r["source"], "as_of": str(r["as_of"]),
-                    },
+                    } | ({"edition": e} if (e := edition(r["source"], r["as_of"])) else {})
+                      | ({"effective": r["effective"]} if r.get("effective") else {}),
                 )
                 for r, d, s in zip(batch, dvecs, svecs)
             ],
