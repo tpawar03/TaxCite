@@ -1555,7 +1555,15 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
   - **G-X19 not tagged:** its top-1, T.C. Memo. 2025-50 at *5, applies the Eleventh Circuit's rule under *Golsen* (*Kroner*): same level as the gold, and correct. It's a `binding_on` row (Phase G), not a level conflict.
   - Validator 0/115, 0/39.
 - **What the guards change for E4:** a flat per-level prior is now expected to fail its own guards. The prior has to be scoped: applied among the candidates of a statutory sub-query (routing already types them), or as a margin tie-break, not across the whole merged list. E4's candidates (a)–(c) are measured with that scoping as well as without, and the guard rows are scored alongside the conflict rows.
-- **Still to do:** write the new rows (golden: 2 `reported_over_memo`; dev: 3 `reported_over_memo`, 2 `reviewing_court`, 1 counter-pair guard).
+- **New rows drafted (2026-09-28, `reviewed: false`, `scored_from: "E"`, uncommitted, awaiting your approval):**
+  - **Only 4 reported opinions have a memo in the corpus that restates them** (searched by case name; the citations table misses volume/page cites): *Knudsen* 131 T.C. No. 11 (13 memos), *Smalley* 116 T.C. No. 29 (3), *Garnett* 132 T.C. No. 19 (2), *Treece* 158 T.C. No. 6 (1, its own merits memo). All four were drafted from the opinions' text.
+  - **Measured before tagging** (case-corpus search of the question, reranked, top 8, no planner): the reported opinion already leads for *Garnett* and *Smalley*, and a non-gold page of *Treece* itself leads for *Treece*. Only *Knudsen* is a real conflict: three memos citing it hold the top 3, and it isn't in the top 8.
+  - **Applied:** G-C27 (*Garnett*, `guard`), D40 (*Knudsen*, `reported_over_memo`), D41 (*Smalley*, `guard`), D42 (*Treece*, untagged: same opinion, same level, not an authority conflict; kept as a case-law row). Validator 0/116, 0/42; no gold shared golden/dev; 219 tests.
+  - **Shortfalls, with reasons:**
+    - `reported_over_memo`: golden has 1 (G-C04), dev has 1 (D40), against 3 each planned. **The kind is rare, not under-sampled:** a reported opinion usually states its own holding better than the memos citing it, and the cross-encoder already prefers it (3 of the 4 checked). The conflict appears when the reported opinion is out of reach (D40) or outranked by a memo on the same facts (G-C04).
+    - `reviewing_court` on dev: 0 of 2. The two reversed held opinions golden doesn't use can't be grounded. *Thompson* (137 T.C. No. 17, 8th Cir. 2013): no text in the corpus says what the circuit held. *Banaitis* (T.C. Memo. 2002-5), flagged "reversed in part" (9th Cir. 2003): the Supreme Court reversed the Ninth Circuit in *Commissioner v. Banks*, 543 U.S. 426 (2005), and T.C. Memo. 2025-80 at *11 states the Tax Court's rule from *Banks*. **So Phase C's flag points the wrong way:** the reversal was itself reversed. That's a finding for E3's treatment labels (a treatment chain two levels deep) and Phase H. Golden's G-X02 and G-X09 cover the kind; E4 reports them, and nothing is tuned on it because the blanket demotion was dropped.
+    - Dev counter-pair guard: not written (it depended on *Thompson*). G-C03 covers it on golden; dev D03's threat is a reversed opinion, which covers the dev side of the same risk.
+- **E1 totals:** golden 24 conflict rows (21 `statute_over_lower`, 1 `reported_over_memo`, 2 `reviewing_court`) + 9 guards; dev 10 conflict rows (9 `statute_over_lower`, 1 `reported_over_memo`) + 8 guards.
 
 **Out of scope:** the expired temporary regulations (§1.988-1T/-2T are foreign currency, outside the Phase B topics; E2 handles them as metadata, not rows); E4's baseline top-1 on these rows (E4's first step, with 5 live-planner plan sets for every tagged row, dev included: dev's B rows have no D7 plans yet, ~$0.05).
 
@@ -1567,7 +1575,7 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 
 ## ✅ Checkpoint 1 (human review)
 - [x] E0's field list, the conflict-row definition and the go/no-go on E4 confirmed (2026-09-28)
-- [ ] E1's rows approved
+- [x] E1's rows approved (2026-09-28)
 
 ---
 

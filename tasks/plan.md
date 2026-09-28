@@ -438,11 +438,11 @@ Full task details are in `tasks/todo.md` (Phase E section).
 
 ### Slice 1 — Find out where authority costs
 - [x] E0: Authority spike (~20 rows inverted at top-1, ~15 displaced, stable over 5 plan sets; 1 of 15 lower sources was better evidence: **E4 go**)
-- [ ] E1: Authority-conflict rows (dev + golden subset)
+- [x] E1: Authority-conflict rows (golden 24 conflict + 9 guard, dev 10 + 8; reported-vs-memo conflicts are rare; approved)
 
 ### Checkpoint 1 (human review)
 - [x] You confirm E0's field list and the conflict-row definition (2026-09-28)
-- [ ] E1's rows are approved
+- [x] E1's rows are approved (2026-09-28)
 
 ### Slice 2 — Metadata
 - [ ] E2: Authority profile at ingestion
