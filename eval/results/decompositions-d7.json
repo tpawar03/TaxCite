@@ -16,6 +16,74 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1030,
       "output_tokens": 74
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 75
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest for tax year 2016"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage on their home purchased in 2012"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest for tax year 2016"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage on their home purchased in 2012"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limitation for qualified residence interest for mortgages taken out before December 15, 2017"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 80
     }
   ],
   "My client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away. Can she claim the clean vehicle credit for each?": [
@@ -35,9 +103,145 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1044,
       "output_tokens": 91
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1044,
+      "output_tokens": 90
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1044,
+      "output_tokens": 90
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1044,
+      "output_tokens": 90
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1044,
+      "output_tokens": 90
     }
   ],
   "My client's rooftop solar system was installed and completed in June 2021. What percentage of the cost can he take as the residential clean energy credit?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems placed in service before 2022"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 74
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems placed in service before 2022"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 74
+    },
     {
       "subqueries": [
         {
@@ -73,9 +277,129 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1028,
       "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 69
     }
   ],
   "A nurse worked a lot of overtime in 2024. Can she deduct the overtime premium on her 2024 return under the deduction for qualified overtime compensation?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1027,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1027,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1027,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1027,
+      "output_tokens": 41
+    },
     {
       "subqueries": [
         {
@@ -107,6 +431,74 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1039,
       "output_tokens": 80
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and pays interest on the loan in 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1039,
+      "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and pays interest on the loan in 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1039,
+      "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and pays interest on the loan in 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1039,
+      "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and pays interest on the loan in 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1039,
+      "output_tokens": 79
     }
   ],
   "For 2023, a payment app paid my client $8,000 for 50 sales of used household goods. Was the app required to report the payments to her on Form 1099-K?": [
@@ -126,9 +518,129 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1036,
       "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 74
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 74
     }
   ],
   "Are moving expenses for a new job deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of moving expense deduction for tax years after 2017"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1004,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of moving expense deduction for tax years after 2017"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1004,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of moving expense deduction for tax years after 2017"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1004,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of moving expense deduction for tax years after 2017"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1004,
+      "output_tokens": 42
+    },
     {
       "subqueries": [
         {
@@ -164,6 +676,90 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1048,
       "output_tokens": 99
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": "2012",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 97
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 115
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "statutory",
+          "query": "events that extend the statute of limitations for IRS collection actions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 99
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal tax liabilities"
+        },
+        {
+          "kind": "statutory",
+          "query": "expiration of the 10-year collection period for assessed taxes"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no extension of the collection period"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 104
     }
   ],
   "My single client had adjusted gross income of $60,000 in 2023 and paid $3,000 of day care for her 6-year-old so she could work. What percentage of those expenses did her child and dependent care credit cover for 2023?": [
@@ -183,6 +779,74 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1049,
       "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, had adjusted gross income of $60,000 in 2023, and paid $3,000 for day care for her 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 91
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage based on adjusted gross income for 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 78
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for taxpayers with adjusted gross income of $60,000"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, has adjusted gross income of $60,000, and paid $3,000 for day care for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 88
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for taxpayers with adjusted gross income of $60,000"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, has adjusted gross income of $60,000, and paid $3,000 for day care for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 88
     }
   ],
   "My single client has adjusted gross income of $60,000 and is paying $3,000 of day care this year for her 6-year-old so she can work. What percentage of those expenses will her child and dependent care credit cover on this year's return?": [
@@ -202,6 +866,74 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1048,
       "output_tokens": 86
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 86
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 of day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 86
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and incurred $3,000 in day care expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 80
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paying $3,000 for day care for a 6-year-old"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 85
     }
   ],
   "My client, a single retiree, turned 70 in 2020. Could she take the $6,000 deduction for seniors on her 2022 return, and will she be able to on her 2029 return?": [
@@ -221,9 +953,129 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1042,
       "output_tokens": 78
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for taxpayers age 50 and older"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": "2022 and 2029",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1042,
+      "output_tokens": 78
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers aged 65 or older"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": "2022 and 2029",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1042,
+      "output_tokens": 70
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for traditional individual retirement account contributions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": "2022 and 2029",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1042,
+      "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for traditional IRA contributions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": "2022 and 2029",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1042,
+      "output_tokens": 74
     }
   ],
   "What standard mileage rate applies to business driving in 2026?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 39
+    },
     {
       "subqueries": [
         {
@@ -270,9 +1122,129 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1021,
       "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        },
+        {
+          "kind": "statutory",
+          "query": "deductibility of unreimbursed employee expenses for taxable year 2016"
+        }
+      ],
+      "as_of": "2016 and 2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        },
+        {
+          "kind": "statutory",
+          "query": "deductibility of unreimbursed employee expenses for taxable year 2016"
+        }
+      ],
+      "as_of": "2016 and 2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        },
+        {
+          "kind": "statutory",
+          "query": "deductibility of unreimbursed employee expenses for taxable year 2016"
+        }
+      ],
+      "as_of": "2016 and 2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        },
+        {
+          "kind": "statutory",
+          "query": "deductibility of unreimbursed employee expenses for tax year 2016"
+        }
+      ],
+      "as_of": "2016 and 2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
     }
   ],
   "What was the section 179 expensing limit for property a client placed in service in 2023?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing limit for property placed in service in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing limit for property placed in service in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing limit for property placed in service in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing limit for property placed in service in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 43
+    },
     {
       "subqueries": [
         {
@@ -308,6 +1280,82 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1017,
       "output_tokens": 100
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "limitations on deductions for expenses related to the trafficking of controlled substances under Internal Revenue Code Section 280E"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of ordinary business expenses for state-licensed medical marijuana dispensaries under Section 280E"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 82
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "limitations on deductions for expenses related to the trafficking of controlled substances under Internal Revenue Code Section 280E"
+        },
+        {
+          "kind": "case_law",
+          "query": "tax treatment of medical marijuana dispensaries ordinary business expenses Section 280E"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a state-licensed medical marijuana dispensary"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 100
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "limitations on deductions for expenses related to the trafficking of controlled substances under Internal Revenue Code Section 280E"
+        },
+        {
+          "kind": "case_law",
+          "query": "tax treatment of medical marijuana dispensaries ordinary business expenses Section 280E"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a state-licensed medical marijuana dispensary"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 100
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "disallowance of deductions for expenses related to the trafficking of controlled substances under Internal Revenue Code Section 280E"
+        },
+        {
+          "kind": "case_law",
+          "query": "tax treatment of medical marijuana dispensaries ordinary business expenses Section 280E"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 78
     }
   ],
   "For her 2016 return, could my client deduct expenses of a hobby that produced some income?": [
@@ -331,9 +1379,161 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1015,
       "output_tokens": 91
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and limitations under Internal Revenue Code Section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "factors determining whether an activity is engaged in for profit under hobby loss rules"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a hobby that produced some income in 2016"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 96
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and limitations under Internal Revenue Code Section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "factors determining whether an activity is engaged in for profit under Section 183"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a hobby that produced some income in 2016"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 96
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and limitations under Internal Revenue Code Section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "factors determining whether an activity is engaged in for profit under Section 183"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a hobby that produced some income"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 92
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and limitations under Internal Revenue Code Section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "factors determining whether an activity is engaged in for profit under Section 183"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a hobby that produced some income in 2016"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 96
     }
   ],
   "My client filed and paid her 2022 return on April 18, 2023. In May 2026 she found a deduction she missed. Can she still claim a refund?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "time limit for claiming a refund for overpayment of tax, including missed deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed and paid her 2022 return on April 18, 2023 and found a missed deduction in May 2026"
+        }
+      ],
+      "as_of": "2022",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1033,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "time limit for claiming a refund for overpayment of tax, including missed deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed and paid her 2022 return on April 18, 2023 and found a missed deduction in May 2026"
+        }
+      ],
+      "as_of": "2022",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1033,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "time limit for claiming a refund for overpayment of tax, including missed deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed and paid her 2022 return on April 18, 2023 and found a missed deduction in May 2026"
+        }
+      ],
+      "as_of": "2022",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1033,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "time limit for claiming a refund for overpayment of tax, including missed deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed and paid her 2022 return on April 18, 2023 and found a missed deduction in May 2026"
+        }
+      ],
+      "as_of": "2022",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1033,
+      "output_tokens": 84
+    },
     {
       "subqueries": [
         {
@@ -373,9 +1573,161 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1049,
       "output_tokens": 104
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for assessment of tax under Internal Revenue Code section 6501"
+        },
+        {
+          "kind": "statutory",
+          "query": "exceptions to the three-year statute of limitations for substantial omissions of income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client omitted income equal to 30 percent of the gross income reported on the 2021 return"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 104
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for assessment of tax under Internal Revenue Code section 6501"
+        },
+        {
+          "kind": "statutory",
+          "query": "exceptions to the statute of limitations for substantial omission of income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client left out income equal to 30 percent of the gross income reported on the 2021 return"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 103
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for assessment of tax under Internal Revenue Code section 6501"
+        },
+        {
+          "kind": "statutory",
+          "query": "exceptions to the statute of limitations for substantial omission of income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client left out income equal to 30 percent of the gross income reported on the 2021 return"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 103
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for assessment of tax under Internal Revenue Code section 6501"
+        },
+        {
+          "kind": "statutory",
+          "query": "exceptions to the three-year statute of limitations for substantial omissions of income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client left out income equal to 30 percent of the gross income reported on the 2021 return"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 105
     }
   ],
   "My client's 2024 return was due April 15, 2025. He had no extension and filed on August 30, 2025, with $10,000 of tax unpaid. What is the failure-to-file addition?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "failure-to-file penalty for late filing of tax return"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed his 2024 return late on August 30, 2025, with $10,000 of tax unpaid"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1043,
+      "output_tokens": 77
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "failure-to-file penalty for late filing of tax return"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed his 2024 return late on August 30, 2025, with $10,000 of tax unpaid"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1043,
+      "output_tokens": 77
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "failure-to-file penalty for late filing of tax return"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed his 2024 return late on August 30, 2025, with $10,000 of tax unpaid"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1043,
+      "output_tokens": 77
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "failure-to-file penalty for late filing of tax return"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed his 2024 return late on August 30, 2025, with $10,000 of tax unpaid"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1043,
+      "output_tokens": 77
+    },
     {
       "subqueries": [
         {
@@ -407,9 +1759,113 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1024,
       "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cap on state and local tax deduction for married couples"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cap on state and local tax deduction for married couples with modified AGI"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cap on state and local tax deduction for married couples under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 45
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cap on state and local tax deduction for married couples with modified AGI"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 42
     }
   ],
   "Are restaurant meals with clients 100 percent deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of business meals and entertainment expenses, temporary 100 percent deduction for restaurant meals"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 46
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of business meals and entertainment expenses, temporary 100 percent deduction for restaurant meals"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 46
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of business meals and entertainment expenses, temporary 100 percent deduction for restaurant meals"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 46
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of business meals and entertainment expenses, temporary 100 percent deduction for restaurant meals"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 46
+    },
     {
       "subqueries": [
         {
@@ -441,9 +1897,141 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1015,
       "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified tips under Internal Revenue Code section 162(a)"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a waiter who receives tips"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified tips under Internal Revenue Code section 162(a)"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a waiter who receives tips"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified tips under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 40
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified tips under Internal Revenue Code section 162(a)"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a waiter who receives tips"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 63
     }
   ],
   "My client acquired one machine on January 10, 2025 and another on March 3, 2025, and placed both in service in March 2025. What bonus depreciation applies to each?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "bonus depreciation rules for qualified property placed in service in 2025"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client acquired one machine on January 10, 2025 and another on March 3, 2025, both placed in service in March 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1037,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "bonus depreciation rules for qualified property placed in service in 2025"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client placed two machines in service in March 2025, one acquired on January 10, 2025 and another on March 3, 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1037,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "bonus depreciation rules for qualified property placed in service in 2025"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client placed two machines in service in March 2025, one acquired on January 10, 2025 and another on March 3, 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1037,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "bonus depreciation rules for qualified property placed in service in 2025"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client acquired one machine on January 10, 2025 and another on March 3, 2025, both placed in service in March 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1037,
+      "output_tokens": 88
+    },
     {
       "subqueries": [
         {
@@ -8530,6 +10118,2457 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1024,
       "output_tokens": 63
+    }
+  ],
+  "Has the Tax Court found an Arabian horse breeding and showing operation to be a hobby rather than a business?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on Arabian horse breeding showing operation hobby loss rules"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on Arabian horse breeding showing operation hobby loss rules"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on Arabian horse breeding showing operation hobby versus business determination"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on Arabian horse breeding showing operation hobby versus business determination"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on Arabian horse breeding showing operation hobby loss rules"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 38
+    }
+  ],
+  "Can a social media influencer deduct cable and streaming subscriptions as business expenses?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary business expenses deduction for self-employed individuals"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of cable and streaming subscriptions for social media influencers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a social media influencer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary business expenses deduction for self-employed individuals"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of cable and streaming subscriptions for social media influencers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a social media influencer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary business expenses deduction for self-employed individuals"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of cable and streaming subscriptions for social media influencers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a social media influencer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary business expenses deduction for self-employed individuals"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of cable and streaming subscriptions for social media influencers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a social media influencer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary business expenses deduction for self-employed individuals"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of cable and streaming subscriptions for social media influencers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a social media influencer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 84
+    }
+  ],
+  "How has the Tax Court treated farm workers who were given housing, insurance and pay advances by the farm?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of farm workers housing insurance pay advances"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of farm workers housing insurance pay advances"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of farm workers housing insurance pay advances"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of farm workers housing insurance pay advances"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of farm workers housing insurance pay advances"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 38
+    }
+  ],
+  "Are toll and parking charges on a spreadsheet enough to substantiate travel expenses?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 39
+    }
+  ],
+  "Does a taxpayer have income when a life insurance policy they thought they had transferred is terminated?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of life insurance policy termination and transfer"
+        },
+        {
+          "kind": "case_law",
+          "query": "income recognition upon termination of life insurance policy"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 59
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of life insurance policy termination and transfer of ownership"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer income recognition upon termination of life insurance policy after attempted transfer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 66
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of life insurance policy termination and transfer"
+        },
+        {
+          "kind": "case_law",
+          "query": "income recognition upon termination of life insurance policy after attempted transfer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 62
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of life insurance policy termination and transfer"
+        },
+        {
+          "kind": "case_law",
+          "query": "income recognition upon termination of life insurance policy"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 59
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of life insurance policy termination and transfer of ownership"
+        },
+        {
+          "kind": "case_law",
+          "query": "income recognition upon termination of life insurance policy after attempted transfer"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 64
+    }
+  ],
+  "Do rental owners with income over $100,000 still get part of the $25,000 rental loss allowance?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "phase-out of rental real estate loss allowance for high-income taxpayers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has rental income over $100,000"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "phase-out of rental real estate loss allowance for high-income taxpayers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has rental income over $100,000"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "rental loss allowance phase-out for modified adjusted gross income over $100,000"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has rental income over $100,000"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "phase-out of rental real estate loss allowance for high-income taxpayers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has rental income over $100,000"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "phase-out of rental real estate loss allowance for high-income taxpayers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has rental income over $100,000"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 63
+    }
+  ],
+  "What factors decide whether a client's Arabian horse breeding is a business or a hobby, and how has the Tax Court applied them?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and factors for determining if an activity is engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse breeding as a business versus hobby loss rules"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 71
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and factors for determining if an activity is engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse breeding as a business versus hobby loss rules"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 71
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and factors for determining if an activity is engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse breeding as a business versus hobby loss rules"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 71
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and factors for determining if an activity is engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse breeding as a business versus hobby loss rules"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 71
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss rules and factors for determining if an activity is engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse breeding as a business versus hobby loss rules"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 71
+    }
+  ],
+  "Does a client who fully owns rental houses and manages them count as actively participating for the rental loss allowance, and how has the Tax Court treated such owners?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "active participation in rental real estate activities for purposes of rental loss allowance"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of fully owning and managing rental properties as active participation"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client fully owns and manages rental houses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1026,
+      "output_tokens": 89
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "active participation in rental real estate activities for purposes of rental loss allowance"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of fully owning and managing rental properties as active participation"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client fully owns and manages rental houses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1026,
+      "output_tokens": 89
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "active participation in rental real estate activities for purposes of rental loss allowance"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of fully owning and managing rental properties in relation to active participation"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client fully owns and manages rental houses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1026,
+      "output_tokens": 91
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "active participation in rental real estate activities for purposes of rental loss allowance"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of fully owning and managing rental properties as active participation"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client fully owns and manages rental houses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1026,
+      "output_tokens": 89
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "active participation in rental real estate activities for loss allowance"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of fully owning and managing rental properties for active participation"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client fully owns and manages rental houses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1026,
+      "output_tokens": 86
+    }
+  ],
+  "The IRS reclassified a farm's contract workers as employees. Can the farm challenge that in Tax Court, and how has the court ruled on farm workers given housing and advances?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "classification of workers as employees versus independent contractors under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on classification of farm workers receiving housing and advances"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the farm's contract workers have been reclassified as employees by the IRS"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 93
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "classification of workers as employees versus independent contractors for tax purposes"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on classification of farm workers receiving housing and advances"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the farm's contract workers have been reclassified as employees by the IRS"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 93
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "classification of workers as employees versus independent contractors under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on classification of farm workers receiving housing and advances"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the farm's contract workers have been reclassified as employees by the IRS"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 93
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "classification of workers as employees versus independent contractors under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on classification of farm workers receiving housing and advances"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the farm's contract workers have been reclassified as employees by the IRS"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 93
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "classification of workers as employees versus independent contractors"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on classification of farm workers receiving housing and advances"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 63
+    }
+  ],
+  "What records does a client need for travel expenses, and has the Tax Court accepted a spreadsheet of toll and parking charges?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "substantiation requirements for travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "substantiation requirements for travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 67
+    }
+  ],
+  "When is income constructively received, and has the Tax Court applied it to a terminated life insurance policy?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt of income doctrine"
+        },
+        {
+          "kind": "case_law",
+          "query": "constructive receipt application to terminated life insurance policy"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt of income doctrine"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on constructive receipt and terminated life insurance policies"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 60
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt of income doctrine"
+        },
+        {
+          "kind": "case_law",
+          "query": "constructive receipt application to terminated life insurance policy"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt of income doctrine"
+        },
+        {
+          "kind": "case_law",
+          "query": "constructive receipt application to terminated life insurance policy"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt of income doctrine"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on constructive receipt and terminated life insurance policies"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 61
+    }
+  ],
+  "Can an influencer deduct streaming subscriptions? What does the Code say about personal expenses, and has the Tax Court ruled on this?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of personal expenses under Internal Revenue Code section 262"
+        },
+        {
+          "kind": "case_law",
+          "query": "influencer deducting streaming subscriptions as business expenses Tax Court rulings"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of personal expenses under Internal Revenue Code section 262"
+        },
+        {
+          "kind": "case_law",
+          "query": "influencer deducting streaming subscriptions as business expenses Tax Court rulings"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of personal expenses under Internal Revenue Code"
+        },
+        {
+          "kind": "case_law",
+          "query": "influencer deductibility of streaming subscriptions personal versus business expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 65
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of personal expenses under Internal Revenue Code section 262"
+        },
+        {
+          "kind": "case_law",
+          "query": "influencer deducting streaming subscriptions as business expenses Tax Court rulings"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 69
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of personal expenses under Internal Revenue Code section 262"
+        },
+        {
+          "kind": "case_law",
+          "query": "influencer deductibility of streaming subscriptions personal versus business expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 68
+    }
+  ],
+  "My client is single, owned and lived in her house for 3 of the last 5 years, and sold it at a $200,000 gain. How much of that gain can she exclude?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "exclusion of gain from the sale of a principal residence, ownership and use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single and owned and lived in her house for 3 of the last 5 years, selling it at a $200,000 gain"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "exclusion of gain from the sale of a principal residence for single taxpayers, ownership and use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, owned and lived in her house for 3 of the last 5 years, and sold it at a $200,000 gain"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 91
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "exclusion of gain from the sale of a principal residence, ownership and use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, owned and lived in her house for 3 of the last 5 years, and sold it at a $200,000 gain"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 88
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "exclusion of gain from the sale of a principal residence ownership and use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, owned and lived in her house for 3 of the last 5 years, and sold it at a $200,000 gain"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "exclusion of gain from the sale of a principal residence, ownership and use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single and owned and lived in her house for 3 of the last 5 years, selling it at a $200,000 gain"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 87
+    }
+  ],
+  "What is the most a client can deduct for student loan interest, and does their income affect it?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum deduction for student loan interest"
+        },
+        {
+          "kind": "statutory",
+          "query": "income phase-out limits for student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum deduction for student loan interest"
+        },
+        {
+          "kind": "statutory",
+          "query": "income phase-out limits for student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum deduction for student loan interest"
+        },
+        {
+          "kind": "statutory",
+          "query": "income phase-out limits for student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum deduction for student loan interest"
+        },
+        {
+          "kind": "statutory",
+          "query": "income phase-out limits for student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum deduction for student loan interest"
+        },
+        {
+          "kind": "statutory",
+          "query": "income phase-out limits for student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 57
+    }
+  ],
+  "My client itemizes and paid $9,000 of unreimbursed medical bills on $100,000 of AGI. How much is deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "medical expense deduction limitation based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $100,000 of AGI and paid $9,000 in unreimbursed medical bills"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 72
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "medical expense deduction limitation based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $100,000 of AGI and paid $9,000 in unreimbursed medical bills"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 72
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "medical expense deduction limitation based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $100,000 of AGI and paid $9,000 in unreimbursed medical bills"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 72
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "medical expense deduction limitation based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $100,000 of AGI and paid $9,000 of unreimbursed medical bills"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 72
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "medical expense deduction limitation based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $100,000 of AGI and paid $9,000 in unreimbursed medical bills"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 72
+    }
+  ],
+  "My client spent $8,000 investigating a business before it opened. Can they deduct that in the first year?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction of business investigation expenses under Internal Revenue Code Section 195"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client spent $8,000 investigating a business before it opened"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction of business investigation expenses under Internal Revenue Code Section 195"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client spent $8,000 investigating a business before it opened"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction of business investigation expenses under Internal Revenue Code Section 195"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client spent $8,000 investigating a business before it opened"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction of business investigation expenses under Internal Revenue Code Section 195"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client spent $8,000 investigating a business before it opened"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction of business investigation expenses under Internal Revenue Code Section 195"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client spent $8,000 investigating a business before it opened"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 67
+    }
+  ],
+  "My client has a $10,000 net capital loss for the year and no capital gains. How much can they use now, and what happens to the rest?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capital loss deduction limit against ordinary income and carryover rules for net capital losses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capital loss deduction limit against ordinary income and carryover rules for net capital losses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capital loss deduction limit against ordinary income and carryover rules for net capital losses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capital loss deduction limit against ordinary income and carryover rules for net capital losses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capital loss deduction limit against ordinary income and carryover rules for net capital losses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 43
+    }
+  ],
+  "My client is 45 and took $20,000 out of a 401(k). What extra tax applies?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "additional tax on early distributions from qualified retirement plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is 45 and took $20,000 out of a 401(k)"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 68
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "additional tax on early distributions from qualified retirement plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is 45 and took $20,000 out of a 401(k)"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 68
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "additional tax on early distributions from qualified retirement plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is 45 and took $20,000 out of a 401(k)"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 68
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "additional tax on early distributions from qualified retirement plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is 45 and took $20,000 out of a 401(k)"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 68
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "additional tax on early distributions from qualified retirement plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is 45 and took $20,000 out of a 401(k)"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 68
+    }
+  ],
+  "An employer paid $7,000 of an employee's tuition under an educational assistance program. How much is taxable to the employee?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of educational assistance program benefits under Internal Revenue Code Section 127"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the employer paid $7,000 of the employee's tuition"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of educational assistance under section 127 of the Internal Revenue Code"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of educational assistance program benefits under Internal Revenue Code Section 127"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the employer paid $7,000 of the employee's tuition"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of educational assistance program benefits under Internal Revenue Code Section 127"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the employer paid $7,000 of the employee's tuition"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of educational assistance under section 127 of the Internal Revenue Code"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 42
+    }
+  ],
+  "contemporaneous written acknowledgment $250 charitable contribution substantiation": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 42
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 42
+    }
+  ],
+  "Can my client still do a like-kind exchange on business equipment?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 43
+    }
+  ],
+  "How does an employer value an employee's personal use of a company car under the cents-per-mile rule, and what does that rate cover?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cents-per-mile rule for valuing personal use of a company car"
+        },
+        {
+          "kind": "statutory",
+          "query": "what the cents-per-mile rate covers for personal use of a company vehicle"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 70
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cents-per-mile rule for valuing personal use of a company car"
+        },
+        {
+          "kind": "statutory",
+          "query": "what the cents-per-mile rate covers for personal use of a company vehicle"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 70
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cents-per-mile rule for valuing personal use of a company car"
+        },
+        {
+          "kind": "statutory",
+          "query": "what the cents-per-mile rate covers for personal use of a company vehicle"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 70
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cents-per-mile rule for valuing personal use of a company car"
+        },
+        {
+          "kind": "statutory",
+          "query": "what the cents-per-mile rate covers for personal use of a company vehicle"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 70
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cents-per-mile rule for valuing personal use of a company car"
+        },
+        {
+          "kind": "statutory",
+          "query": "what the cents-per-mile rate covers for personal use of a company vehicle"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 70
+    }
+  ],
+  "What makes an expense reimbursement arrangement an accountable plan?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for an accountable plan under IRS guidelines"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for an accountable plan under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "court interpretations of accountable plan requirements"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 56
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for an accountable plan under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "court interpretations of accountable plan requirements"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 56
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for an accountable plan under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "court interpretations of accountable plan requirements"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 56
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for an accountable plan under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "court interpretations of accountable plan requirements"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 56
+    }
+  ],
+  "2025 standard deduction amount single filer": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard deduction amount for single filers for tax year 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1003,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard deduction amount for single filers for tax year 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1003,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard deduction amount for single filers for tax year 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1003,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard deduction amount for single filers for tax year 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1003,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard deduction amount for single filers for tax year 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1003,
+      "output_tokens": 39
+    }
+  ],
+  "My client turns 74 this year, still works for an employer where she owns no stock, and has a 401(k) with that employer. When must she start taking required minimum distributions from it?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "required minimum distribution rules for 401(k) plans, age 73 and older"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 44
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "required minimum distribution rules for 401(k) plans, age 73 and older"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 44
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "required minimum distribution rules for 401(k) plans, age 73 and older"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client turns 74 in 2026 and still works for an employer where she owns no stock"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 77
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "required minimum distribution rules for 401(k) plans, age 73 and older"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 44
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "required minimum distribution rules for 401(k) plans, age 73 and older"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client turns 74 in 2026 and still works for an employer where she owns no stock"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 77
+    }
+  ],
+  "My client's hobby-loss case is going to trial. If he meets the section 7491(a) requirements, will the burden shifting to the IRS decide the case?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's hobby-loss case is going to trial and he meets the section 7491(a) requirements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 95
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's hobby-loss case is going to trial and he meets the section 7491(a) requirements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 95
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss case burden shifting IRS trial outcome"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's hobby-loss case is going to trial and he meets the section 7491(a) requirements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 94
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's hobby-loss case is going to trial and he meets the section 7491(a) requirements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 95
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's hobby-loss case is going to trial and he meets the section 7491(a) requirements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 95
+    }
+  ],
+  "Can a taxpayer win in Tax Court on an alternative argument raised for the first time in its post-trial brief?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial brief"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    }
+  ],
+  "The IRS reclassified my client's corporate officer as an employee and refused to let the company pay under the Voluntary Classification Settlement Program. Can the Tax Court review that refusal?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "review of IRS refusal to allow participation in Voluntary Classification Settlement Program"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS reclassified the client's corporate officer as an employee"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court review of IRS refusal to allow Voluntary Classification Settlement Program"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS reclassified the client's corporate officer as an employee"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "review of IRS refusal to allow participation in Voluntary Classification Settlement Program"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS reclassified the client's corporate officer as an employee"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 85
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "review of IRS refusal to allow participation in Voluntary Classification Settlement Program"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS reclassified the client's corporate officer as an employee"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 87
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court review of IRS refusal to allow Voluntary Classification Settlement Program"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 61
+    }
+  ],
+  "My client owns an interest in an LLC and works in its business. Is his interest automatically treated as a limited partnership interest, so the passive loss rules presume he doesn't materially participate?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "treatment of LLC interests under passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in LLCs and passive activity loss limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client works in the business of the LLC"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1031,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "treatment of LLC interests under passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in LLCs and limited partnership interests"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client works in the business of the LLC"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1031,
+      "output_tokens": 83
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "treatment of LLC interests under passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in LLCs and limited partnership interests"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client works in the business of the LLC"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1031,
+      "output_tokens": 83
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "treatment of LLC interests under passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in LLCs and limited partnership interests"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client works in the business of the LLC"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1031,
+      "output_tokens": 83
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "treatment of LLC interests under passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in LLCs and passive activity loss limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client works in the business of the LLC"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1031,
+      "output_tokens": 84
     }
   ]
 }

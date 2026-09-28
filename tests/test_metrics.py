@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
 
 import pytest
 from ragas_eval import Budget, CostCap, Judged, aggregate, judge_claims, parse_json, refusals_ok
-from retrieval import mrr, ndcg_at_k, recall_at_k, section_of
+from retrieval import authority_facts, mrr, ndcg_at_k, recall_at_k, section_of
 
 GOLD = {"A", "B"}
 
@@ -174,3 +174,19 @@ def test_refusal_rate_gate():
     assert refusals_ok([0.125, 0.135], 0.25)            # healthy, Phase C to D7 fixed
     assert not refusals_ok([0.521, 0.552, 0.573], 0.25)  # the build that passed faithfulness
     assert refusals_ok([0.9], None)                      # no limit set: not gated
+
+
+def test_authority_facts_read_the_tag_at_its_target():
+    """E4: a conflict row passes when its controlling source reaches its target rank; a guard when it still leads."""
+    top = ["IRS Pub 587 (2025), p. 5#body#4", "26 U.S.C. § 280A(c)(1)#body#1", "x#body#1"]
+    conflict = {"kind": "statute_over_lower", "controls": ["26 U.S.C. § 280A(c)(1)"], "competes": [], "keep": []}
+    f = authority_facts(conflict, top, top)
+    assert (f["auth_rank"], f["auth_at_target"], f["auth_in_pool"], f["auth_keep"]) == (2, False, True, None)
+    assert authority_facts({**conflict, "at": 8}, top, top)["auth_at_target"] is True        # at 8: rank 2 is in
+    missing = authority_facts(conflict, ["x#body#1"], ["x#body#1"])
+    assert (missing["auth_rank"], missing["auth_in_pool"]) == (None, False)                  # out of reach
+    guard = {"kind": "guard", "controls": ["IRS Pub 587 (2025), p. 5"], "competes": [], "keep": []}
+    assert authority_facts(guard, top, top)["auth_at_target"] is True                        # a label credits its chunks
+    keep = {**conflict, "keep": ["x#body#1"]}
+    assert authority_facts(keep, top, top)["auth_keep"] is True
+    assert authority_facts(keep, top[:2], top)["auth_keep"] is False

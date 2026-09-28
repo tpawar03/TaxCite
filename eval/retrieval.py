@@ -88,6 +88,21 @@ def first_hits(retrieved: list[str], gold: Gold) -> list[int]:
     return ranks
 
 
+def authority_facts(tag: dict, retrieved: list[str], pool: list[str]) -> dict:
+    """E1's tag on one row (E4): does the controlling source reach its target rank (1, or the top 8), is it
+    in the searched pool at all (if not, no reordering can reach it), and do `keep` sources stay in the top 8?
+    A guard's target is 1: the source that leads today must still lead."""
+    ctl = [set(tag["controls"])]
+    at = next(iter(first_hits(retrieved, ctl)), None)
+    return {
+        "auth_kind": tag["kind"], "auth_target": tag.get("at", 1),
+        "auth_rank": None if at is None else at + 1,
+        "auth_at_target": at is not None and at < tag.get("at", 1),
+        "auth_in_pool": bool(first_hits(pool, ctl)),
+        "auth_keep": all(first_hits(retrieved[:8], [{k}]) for k in tag["keep"]) if tag["keep"] else None,
+    }
+
+
 def recall_at_k(retrieved: list[str], gold) -> float:
     gold = groups(gold)
     return len(first_hits(retrieved, gold)) / len(gold) if gold else 0.0
@@ -164,6 +179,9 @@ def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
         "first_hit_rank": min(ranks) + 1 if ranks else None,
         "top1": retrieved[0] if retrieved else None,
     }
+    if tag := question.get("authority"):
+        pool = [h.key or h.citation for s in plan.searched for h in s.hits] if plan is not None else retrieved
+        row |= authority_facts(tag, retrieved, pool)
     if plan is not None:
         row |= {
             "subqueries": [{"kind": s.kind, "query": s.query} for s in plan.subqueries],
@@ -195,6 +213,7 @@ def main() -> int:
                          "plan cache pinned this comparison is deterministic, so any drop is a real one")
     ap.add_argument("--scored-from", action="append", metavar="PHASE",
                     help="score rows first scored in this phase (repeatable; default B). D adds the temporal rows")
+    ap.add_argument("--tag", default="", help="added to the results filename, so arms run the same day don't overwrite each other")
     ap.add_argument("--repeats", type=int, default=1, metavar="N",
                     help="score the decomposition arms against N independently planned sets and "
                          "report the mean and the spread; the planner is the noise source, so a "
@@ -232,6 +251,14 @@ def main() -> int:
         vals = [r[key] for r in rows if r["mode"] == mode and (style is None or r["style"] == style)]
         return sum(vals) / len(vals) if vals else 0.0
 
+    def per_plan_set_where(mode: str, field: str, value) -> list[float]:
+        """Recall per plan set over the rows where `field` == `value` (a category)."""
+        out = []
+        for i in sorted({r["plan_set"] for r in rows if r["mode"] == mode}):
+            vals = [r["recall"] for r in rows if r["mode"] == mode and r["plan_set"] == i and r[field] == value]
+            out.append(sum(vals) / len(vals))
+        return out
+
     def per_plan_set(mode: str, key: str = "recall") -> list[float]:
         """That mode's score under each plan set, so the spread is visible next to the mean."""
         out = []
@@ -264,6 +291,45 @@ def main() -> int:
             vals = {c: [r["recall"] for r in rows if r["mode"] == mode and r["category"] == c] for c in categories}
             print(f"{mode:<{width}}" + "".join(f"{sum(v) / len(v):>12.3f}" for v in vals.values()))
 
+    def mean_sd(vals: list[float]) -> str:
+        m = sum(vals) / len(vals)
+        sd = (sum((v - m) ** 2 for v in vals) / (len(vals) - 1)) ** 0.5 if len(vals) > 1 else 0.0
+        return f"{m:.3f} ± {sd:.3f}"
+
+    if len(categories) > 1:  # the ≤2-point rule is read per category, mean ± sd over plan sets
+        print("\nrecall by category, mean ± sd over plan sets:")
+        for mode in labels:
+            print(f"{mode:<{width}}" + "".join(f"{c}: {mean_sd(per_plan_set_where(mode, 'category', c))}   " for c in categories))
+
+    authority = {}
+    for mode in labels:
+        tagged = [r for r in rows if r["mode"] == mode and "auth_kind" in r]
+        if not tagged:
+            continue
+        sets = sorted({r["plan_set"] for r in tagged})
+        conflict = [r for r in tagged if r["auth_kind"] != "guard"]
+        guards = [r for r in tagged if r["auth_kind"] == "guard"]
+        rate = lambda rs, key: [sum(r[key] for r in rs if r["plan_set"] == i) for i in sets]  # noqa: E731  rows per set
+        authority[mode] = {
+            "conflict_rows": len(conflict) // len(sets), "guard_rows": len(guards) // len(sets),
+            "conflict_at_target": rate(conflict, "auth_at_target"),
+            "conflict_in_pool": rate(conflict, "auth_in_pool"),
+            "conflict_at_target_of_in_pool": rate([r for r in conflict if r["auth_in_pool"]], "auth_at_target"),
+            "guards_kept": rate(guards, "auth_at_target"),
+            "keep_sources_kept": rate([r for r in tagged if r["auth_keep"] is not None], "auth_keep"),
+            "keep_rows": len([r for r in tagged if r["auth_keep"] is not None]) // len(sets),
+            "by_kind": {k: rate([r for r in conflict if r["auth_kind"] == k], "auth_at_target")
+                        for k in sorted({r["auth_kind"] for r in conflict})},
+        }
+        a = authority[mode]
+        print(f"\n{mode}: authority (rows per plan set, mean ± sd over {len(sets)} sets)")
+        print(f"   conflict rows at target   {mean_sd(a['conflict_at_target'])} of {a['conflict_rows']}"
+              f"   (in pool {mean_sd(a['conflict_in_pool'])}; at target among those {mean_sd(a['conflict_at_target_of_in_pool'])})")
+        for k, v in a["by_kind"].items():
+            print(f"      {k:<22} {mean_sd(v)}")
+        print(f"   guards still top-1        {mean_sd(a['guards_kept'])} of {a['guard_rows']}")
+        print(f"   keep sources in top 8     {mean_sd(a['keep_sources_kept'])} of {a['keep_rows']}")
+
     routing = {}
     for mode in labels:
         planned = [r for r in rows if r["mode"] == mode and "subqueries" in r]
@@ -295,13 +361,15 @@ def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
     # the question-set name is in the filename: a golden run and a pilot run on the same
     # day used to write the same file, and the second silently replaced the first
-    out = RESULTS / f"retrieval-{Path(args.pilot).stem}-{date.today()}-k{args.k}.json"
+    out = RESULTS / f"retrieval-{Path(args.pilot).stem}-{date.today()}-k{args.k}{'-' + args.tag if args.tag else ''}.json"
     out.write_text(json.dumps({
         "k": args.k, "modes": labels, "rows": rows,
         "reranker": args.reranker,
         "repeats": args.repeats,
         "routing": routing,
         "recall_per_plan_set": {m: per_plan_set(m) for m in labels},
+        "recall_per_plan_set_by_category": {m: {c: per_plan_set_where(m, "category", c) for c in categories} for m in labels},
+        "authority": authority,
         "summary": {m: {key: avg(m, key) for key in ("recall", "ndcg", "mrr", "section_recall", "chunks")}
                     | {"p50_ms": pct(m, 0.5), "p95_ms": pct(m, 0.95)} for m in labels},
     }, indent=2))

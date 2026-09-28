@@ -1799,6 +1799,25 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
   - Reported per kind, mean ± sd over 5 plan sets. Plus Recall@20 and Recall@8 per category over all scored rows, regulation recall (Phase A's 12.4 points), G-T08's statute rank, and latency.
 - **Baseline on dev and golden,** shipped arm (`route+statute1`), k=8 and k=20. Golden is measured here only as the "before" of a pre-registered comparison; nothing is tuned on it.
 
+**Step 0 done (2026-09-28).**
+- **Plans:** 241 new live-planner plans in `decompositions-d7.json` (5 min, $0.047); every scored dev and golden row now has 5 sets, and the existing sets are unchanged (byte-compared).
+- **Code:** `eval/retrieval.py` gets `authority_facts()` (tested in `test_metrics.py`), per-category recall as mean ± sd over plan sets, an authority summary, and `--tag`, so same-day arms stop overwriting each other.
+- **Results:** `retrieval-{dev,golden}-2026-09-28-k{8,20}-e4-baseline.json`, arm `route+statute1`, scored rows B + D + E.
+
+| | dev k=8 | dev k=20 | golden k=8 | golden k=20 |
+|---|---|---|---|---|
+| Recall, all scored rows | 0.590 | 0.700 | 0.493 | 0.580 |
+| Recall, original B rows (comparable to Phase D) | 0.608 | 0.748 | 0.515 | **0.606** (Phase D: 0.606) |
+| conflict rows at target | **0 / 10** | 0 / 10 | **0 / 24** | 1 / 24 |
+| conflict rows in the pool | 9 / 10 (not D40) | 9 / 10 | 23 / 24 (not G-X09) | 23 / 24 |
+| guards still leading | 8 / 8 | 8 / 8 | **8 / 9** (not G-C27) | 8 / 9 |
+| `keep` sources in the top 8 | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 1 |
+
+- **Every conflict row fails today at k=8,** as E1 selected them. Where the controlling source is in the top 8 it is 2nd–8th: G-S10 and G-S25 at 2, D18 at 2. Most golden statute rows have it outside the top 8 entirely, 14 of 24.
+- **The planner's variance barely reaches retrieval:** sd is 0 in most categories (0.034 dev statutory, 0.017 golden case law). The search text is the question itself, and the plans differ mainly in routing, which rarely changes. So five plan sets cost little and resolve little; they stay for the gate as pre-registered.
+- **E3 didn't move golden** (0.606 on the B rows, as in Phase D). On dev it cost the CI gate 0.02, via D11 (validation scan 2).
+- **G-C27 isn't a guard in the full pipeline.** Its top-1 is §469(h), the statute *Garnett* interprets, and *Garnett* is 2nd in all 5 plan sets. E1 tagged it from a case-corpus-only search, a proxy that didn't hold. It's neither a conflict (the higher authority leads) nor a guard. **Proposed: untag it, as D42 was untagged in E1, and read the golden guard gate against the 8 guards that lead at baseline (≤ 1 of 8 lost).** Awaiting your decision (a golden edit).
+
 **Candidates (built behind a `chunks()` argument, off by default; each an `eval/retrieval.py` arm):**
 - **(a) Additive prior.** Score + w × (level − 1), with w ∈ {0.1, 0.25, 0.5, 1.0}, bracketing the gap scale above.
 - **(b) Margin tie-break.** Within δ ∈ {0.1, 0.25} of each other, the higher level first; otherwise the score decides.
@@ -1831,7 +1850,7 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - **The CI gate stays at 0.70** (your decision). It is re-run on a new snapshot that carries E2–E3's metadata and exclusions; publishing that snapshot is your call.
 
 **Acceptance criteria:**
-- [ ] Plans generated (counts and cost stated); baseline on dev and golden recorded with the authority metrics
+- [x] Plans generated (counts and cost stated); baseline on dev and golden recorded with the authority metrics
 - [ ] Every candidate measured on dev (5 plan sets), rules 1–3 applied as written, the choice recorded with the table
 - [ ] Golden gate thresholds confirmed with you before the golden run; golden scored once
 - [ ] CI retrieval gate ≥ 0.70 on the shipped arm (or E4 ships nothing)
