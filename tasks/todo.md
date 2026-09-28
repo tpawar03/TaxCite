@@ -1884,7 +1884,7 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
   - zero guards broken
 - **Latency:** not measurable from these runs. The chosen arm reused the first arm's cached reranker scores, so its p50 is flattering. The prior itself is a sort over the pool (~50 hits).
 
-**Awaiting your decision: ship it or not.** The gate's rerank half failed as pre-registered, but the change improves retrieval and breaks nothing. If shipped: a `decompose` constant (like `STATUTE`), `answer()` passes it, and the CI arm switches. **CI would need a new snapshot:** `corpus-2026-09-28` predates E2, and without the profile on the points the prior does nothing.
+**Shipped (your decision, 2026-09-28):** `decompose.AUTHORITY` is `chunks()`' default, so `answer()` and the API's jobs path use it; eval arms that pass `None` measure the pre-E4 pipeline. The CI gate scores `route+statute1+prior0.5-scoped` (0.7400 locally; floor 0.70). `eval/e4_choose.py` added (reproduces the choice). ADR-8 revised. **Needed for CI to test it: a new snapshot (yours to publish).** Until then CI restores `corpus-2026-09-28`, whose points carry no profile, so the prior is inert there. ~~Awaiting your decision: ship it or not.~~ The gate's rerank half failed as pre-registered, but the change improves retrieval and breaks nothing. If shipped: a `decompose` constant (like `STATUTE`), `answer()` passes it, and the CI arm switches. **CI would need a new snapshot:** `corpus-2026-09-28` predates E2, and without the profile on the points the prior does nothing.
 
 **Candidates (built behind a `chunks()` argument, off by default; each an `eval/retrieval.py` arm):**
 - **(a) Additive prior.** Score + w × (level − 1), with w ∈ {0.1, 0.25, 0.5, 1.0}, bracketing the gap scale above.
@@ -1921,16 +1921,16 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - [x] Plans generated (counts and cost stated); baseline on dev and golden recorded with the authority metrics
 - [x] Every candidate measured on dev (5 plan sets), rules 1–3 applied as written, the choice recorded with the table
 - [x] Golden gate thresholds confirmed with you before the golden run; golden scored once: **not met on the conflict criterion** (2.2 of 23 vs ≥ 12)
-- [ ] CI retrieval gate ≥ 0.70 on the shipped arm (or E4 ships nothing)
+- [x] CI retrieval gate ≥ 0.70 on the shipped arm (or E4 ships nothing): **0.7400** locally on the new arm
 
 **Verification:**
-- [ ] Tests: each candidate on fixture hits:
+- [x] Tests: each candidate on fixture hits:
   - the prior reorders but never drops a hit;
   - scoped keeps the cross-kind order;
   - the tie-break respects δ;
   - the slot fills only from statute or final regulation;
   - ties are broken deterministically
-- [ ] `uv run pytest -q` passes
+- [x] `uv run pytest -q` passes
 
 **Dependencies:** E1, E2, E3
 **Files:** `src/taxcite/decompose.py` (`chunks()`), `eval/retrieval.py` (arms, authority metrics), `eval/results/decompositions-d7.json` (plans), `.github/workflows/` (if the arm changes), `tests/test_decompose.py`

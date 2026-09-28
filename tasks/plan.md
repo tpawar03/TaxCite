@@ -449,7 +449,7 @@ Full task details are in `tasks/todo.md` (Phase E section).
 - [x] E3: Stratified 150-chunk hand check: first sample not met (regulation status 77.5%, treatment 86.7%); four fixes (§7805(e)(2) sunset, decided appeals, a hand-checked Banaitis record, corrected reissue dates); fresh 146-row re-check 100% per field (treatment caveat)
 
 ### Slice 3 — Ranking and answers
-- [ ] E4: Authority-weighted rerank (briefed 2026-09-28: baseline on the post-E3 corpus; candidates a–d, flat and scoped; dev rules fixed; golden thresholds to confirm)
+- [x] E4: Authority-weighted rerank: scoped prior 0.5 shipped; golden conflict criterion **not met** (2.2/23 vs 12), guards 8/8, Recall@20 statutory +12.5; exact dense search adopted (approximate drifted)
 - [ ] E5: Authority in answers
 
 ### Checkpoint: Phase E complete

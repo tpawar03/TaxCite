@@ -136,7 +136,7 @@ VARIANTS = {
     "route+ed±1":     dict(route=True,  rewrite=False, rerank=True, editions=(1, 1)),
     # D3b: statute recall. A statute-only search per statutory sub-query with n reserved slots,
     # and/or the sub-query's own text pooled with the question's
-    "route+statute1": dict(route=True,  rewrite=False, rerank=True, statute=1),  # shipped (D3b)
+    "route+statute1": dict(route=True,  rewrite=False, rerank=True, statute=1, authority=None),  # D3b, before E4
     "route+statute2": dict(route=True,  rewrite=False, rerank=True, statute=2),
     "route+statute3": dict(route=True,  rewrite=False, rerank=True, statute=3),
     "route+union":    dict(route=True,  rewrite=False, rerank=True, union=True),
@@ -149,13 +149,14 @@ _SHIPPED = dict(route=True, rewrite=False, rerank=True, statute=1)
 for _w in (0.1, 0.25, 0.5, 1.0):
     for _scope in ("flat", "scoped"):
         VARIANTS[f"route+statute1+prior{_w}-{_scope}"] = _SHIPPED | {"authority": {"rule": "prior", "w": _w, "scoped": _scope == "scoped"}}
+VARIANTS["route+statute1+prior0.5-scoped"] = _SHIPPED | {"authority": dc.AUTHORITY}  # the shipped setting itself
 for _d in (0.1, 0.25):
     for _scope in ("flat", "scoped"):
         VARIANTS[f"route+statute1+tie{_d}-{_scope}"] = _SHIPPED | {"authority": {"rule": "tie", "delta": _d, "scoped": _scope == "scoped"}}
 VARIANTS["route+statute1+slot"] = _SHIPPED | {"authority": {"slot": True}}
 VARIANTS["route+statute1+deep20"] = _SHIPPED | {"search_k": 20}
 # variants on dev's choice (prior 0.5, scoped): statute above regulation, "…A" regulations demoted, deeper search
-_BEST = {"rule": "prior", "w": 0.5, "scoped": True}
+_BEST = dc.AUTHORITY  # E4's choice, shipped: the CI arm route+statute1+prior0.5-scoped reads the live constant
 VARIANTS["route+statute1+prior0.5-scoped+statfirst"] = _SHIPPED | {"authority": _BEST | {"statute_first": True}}
 VARIANTS["route+statute1+prior0.5-scoped+demoteA"] = _SHIPPED | {"authority": _BEST | {"demote_prior": True}}
 VARIANTS["route+statute1+prior0.5-scoped+deep20"] = _SHIPPED | {"authority": _BEST, "search_k": 20}

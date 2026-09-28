@@ -238,6 +238,17 @@ def test_the_widened_slot_takes_a_final_regulation_but_not_a_temporary_one(monke
     final = scored("26 CFR 1.274-2(a)", 0.01, "ecfr", "regulation", "final", 4)
     s = dc.SubQuery("statutory", "s"); s.hits = pubs + [temp, final]
     d = dc.Decomposition("q", [s]); d.statute_floor = 1
-    assert final.citation not in {h.citation for h in dc.chunks(d, 3, floor=0)}
+    assert final.citation not in {h.citation for h in dc.chunks(d, 3, floor=0, authority=None)}  # neither slot nor prior
     kept = {h.citation for h in dc.chunks(d, 3, floor=0, authority={"slot": True})}
     assert final.citation in kept and temp.citation not in kept
+
+
+def test_chunks_ships_the_scoped_prior_and_none_turns_it_off(monkeypatch):
+    """E4: the live path reorders by authority within a kind of source; None is the pre-E4 order."""
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: sorted(hits, key=lambda h: -h.score))
+    s = dc.SubQuery("statutory", "s"); s.hits = [E4_POOL[0], E4_POOL[2]]         # publication 1.00, statute 0.80
+    c = dc.SubQuery("case_law", "c"); c.hits = [E4_POOL[1]]                       # memo 0.90
+    d = dc.Decomposition("q", [s, c])
+    assert dc.AUTHORITY == {"rule": "prior", "w": 0.5, "scoped": True}
+    assert [h.source for h in dc.chunks(d, 3)] == ["usc", "case", "irs_pub"]      # statute first, opinion kept 2nd
+    assert [h.source for h in dc.chunks(d, 3, authority=None)] == ["irs_pub", "case", "usc"]

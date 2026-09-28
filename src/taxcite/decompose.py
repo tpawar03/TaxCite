@@ -229,6 +229,13 @@ EDITIONS: tuple[int, int] | None = None
 # case law and compound unchanged); floors of 1, 2 and 3 scored the same at k=20 and at k=8.
 STATUTE = 1
 
+# E4, chosen on dev by rules fixed in advance: authority reorders each kind of source's candidates (statute
+# and regulation over publication; reported opinion over memorandum) with a prior of 0.5 per level, and never
+# moves a statute above an opinion (E1's guards: the across-kind version put §420(f)(7) over D05's opinion).
+# Dev: 3/10 conflict rows to top-1, 0/8 guards broken. Golden, scored once: 2.2/23 at target against a
+# pre-registered 12 (not met), guards 8/8, Recall@20 statutory +12.5 points, no category down.
+AUTHORITY = {"rule": "prior", "w": 0.5, "scoped": True}
+
 
 def tax_year(as_of: str | None) -> int | None:
     """The plan's one tax year, or None: no year, or several ("2016 and 2026"), filter nothing."""
@@ -330,7 +337,7 @@ def weigh(ranked: list[Hit], how: dict) -> list[Hit]:
 
 
 def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: int = 1,
-           authority: dict | None = None) -> list[Hit]:
+           authority: dict | None = AUTHORITY) -> list[Hit]:
     """The k chunks synthesis sees: every sub-query's hits, ordered by the cross-encoder.
 
     B6 shelved reranking because 47% of golden gold never reached the candidate pool, so
@@ -345,8 +352,8 @@ def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: in
     reached synthesis empty. A floor of 1 fixes that and is neutral on every dev metric
     (identical Recall/nDCG/MRR at floors 0-3), so it buys answer composition for nothing.
 
-    `authority` (E4, off unless given): {"rule": "prior"|"tie", ...} reorders by `weigh`; {"slot": True}
-    lets the statute slots also take a final regulation.
+    `authority` (E4; `AUTHORITY` ships, None turns it off): {"rule": "prior"|"tie", ...} reorders by
+    `weigh`; {"slot": True} lets the statute slots also take a final regulation.
     """
     ranked = rerank(d.question, merge(d.searched, None), 10**6, rerank_model)
     if authority and authority.get("rule"):
