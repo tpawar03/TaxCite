@@ -1667,6 +1667,29 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 **Verification:**
 - [ ] Manual: you spot-check ≥10 labels
 
+**Sample drawn 2026-09-28** (`eval/e3_sample.py`, seed 20260928; `phase-e-e3-sample.json`, and `phase-e-handcheck-authority.txt` to label):
+- **Strata:**
+
+  | stratum | rows | how drawn |
+  |---|---|---|
+  | statute | 20 | random |
+  | final regulation | 20 | random |
+  | temporary regulation | 20 | all 4 expired + 4 partly expired + 12 random |
+  | reported opinion | 30 | all 28 reported opinions, one chunk each, + 2 |
+  | memorandum opinion | 30 | 30 distinct opinions |
+  | publication | 15 | random |
+  | treatment | 15 | 15 distinct opinions: every held opinion with an adverse or pending record (6), + 9 affirmed |
+
+  Opinion labels belong to the opinion, so those strata take one chunk per opinion.
+- **Evidence per row (the source of truth):**
+  - regulations: the eCFR heading ("(temporary)") and any expiry clause
+  - opinions: the opinion's own text (its citation form and "Filed <date>" line), plus DAWSON's record (`documentType`/`eventCode`, `filingDate`)
+  - treatment: the `flags()` record
+- **What the evidence showed while drawing:**
+  - **20 of 75 sampled opinions lost their caption in PDF extraction** (the text starts after it). Their filing date can only be checked against DAWSON's record, which is where `as_of` came from, so it's circular. Those rows are marked and reported separately, not counted as independent passes.
+  - **DAWSON's `documentType` disagrees with our label once in all 307 opinions:** T.C. Memo. 2012-59 is coded "T.C. Opinion" (TCOP) but titled "T.C. Memo. 2012-59". The citation is right; it's in the sample.
+  - **Treatment has two known problems in the sample.** *Banaitis* (T.C. Memo. 2002-5) is "reversed in part", but the Supreme Court reversed that reversal (E1). *Gregory* (T.C. Memo. 2021-115) is "appealed; the outcome could not be read", but golden G-C01's notes record it as affirmed by the Eleventh Circuit in 2023. The field may not reach 95% on 15 rows; if so, it's reported, not re-drawn.
+
 **Dependencies:** E2
 **Files:** `eval/results/`
 **Scope:** S

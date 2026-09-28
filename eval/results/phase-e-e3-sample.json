@@ -1,0 +1,2488 @@
+{
+ "seed": 20260928,
+ "sample": [
+  {
+   "n": 1,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 7482(a)(1)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Courts of review'"
+  },
+  {
+   "n": 2,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 422(d)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Incentive stock options'"
+  },
+  {
+   "n": 3,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 1260(c)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Gains from constructive ownership transactions'"
+  },
+  {
+   "n": 4,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 36(d)-(e)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'First-time homebuyer credit'"
+  },
+  {
+   "n": 5,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 168(i)(12)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Accelerated cost recovery system'"
+  },
+  {
+   "n": 6,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 6049(b)(4)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Returns regarding payments of interest'"
+  },
+  {
+   "n": 7,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 4940(c)(1)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Excise tax based on investment income'"
+  },
+  {
+   "n": 8,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 905(c)(3)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Applicable rules'"
+  },
+  {
+   "n": 9,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 331(a)-(c)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Gain or loss to shareholder in corporate liquidations'"
+  },
+  {
+   "n": 10,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 465(d)-(e)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Deductions limited to amount at risk'"
+  },
+  {
+   "n": 11,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 6656(d)-(e)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Failure to make deposit of taxes'"
+  },
+  {
+   "n": 12,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 1260(b)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Gains from constructive ownership transactions'"
+  },
+  {
+   "n": 13,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 6110(f)(1)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Public inspection of written determinations'"
+  },
+  {
+   "n": 14,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 1254(a)(4)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Gain from disposition of interest in oil, gas, geothermal, or other mineral properties'"
+  },
+  {
+   "n": 15,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 414(e)(3)#body#2",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Definitions and special rules'"
+  },
+  {
+   "n": 16,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 529(e)(4)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Qualified tuition programs'"
+  },
+  {
+   "n": 17,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 9826(e)(10)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Oversight of entities that provide pharmacy benefit management services'"
+  },
+  {
+   "n": 18,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 7871(c)(3)#body#2",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Indian tribal governments treated as States for certain purposes'"
+  },
+  {
+   "n": 19,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 7121(a)-(b)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Closing agreements'"
+  },
+  {
+   "n": 20,
+   "stratum": "statute",
+   "key": "26 U.S.C. \u00a7 168(n)(4)#body#1",
+   "stored": {
+    "type": "statute",
+    "level": 4,
+    "status": "enacted"
+   },
+   "source_revision": "Pub. L. 119-110",
+   "excluded": null,
+   "evidence": "heading: 'Accelerated cost recovery system'"
+  },
+  {
+   "n": 21,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.162-33(c)(1)#body#15",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.162-33 Certain employee remuneration in excess of $1,000,000 not deductible for taxable years beginning after December 31, 2017.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 22,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.263A-1(b)(4)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.263A-1 Uniform capitalization of costs.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 23,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.274-12(b)(6)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.274-12 Limitation on deductions for certain food or beverage expenses paid or incurred after December 31, 2017.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 24,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.61-5(b)(2)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.61-5 Allocations by cooperative associations; per-unit retain certificates\u2014tax treatment as to cooperatives and patrons.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 25,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.162-20(c)(2)#body#5",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.162-20 Expenditures attributable to lobbying, political campaigns, attempts to influence legislation, etc., and certain advertising.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 26,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.263(a)-4(d)(4)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.263(a)-4 Amounts paid to acquire or create intangibles.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 27,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.482-5(d)(4)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.482-5 Comparable profits method.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 28,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.988-6(c)#body#9",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.988-6 Nonfunctional currency contingent payment debt instruments.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 29,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.704-2(j)(1)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.704-2 Allocations attributable to nonrecourse liabilities.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 30,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.274-5A(c)(6)#body#3",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.274-5A Substantiation requirements.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 31,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.401(a)(4)-13(d)(4)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.401(a)(4)-13 Effective dates and fresh-start rules.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 32,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.179-5(c)(4)#body#2",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.179-5 Time and manner of making election.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 33,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.988-5(b)#body#19",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.988-5 Section 988(d) hedging transactions.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 34,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.263(a)-2(f)(2)#body#3",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.263(a)-2 Amounts paid to acquire or produce tangible property.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 35,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.262-1(b)(5)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.262-1 Personal, living, and family expenses.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 36,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.263(a)-3(i)(2)#body#2",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.263(a)-3 Amounts paid to improve tangible property.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 37,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.167(c)-1(a)(6)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.167(c)-1 Limitations on methods of computing depreciation under section 167(b) (2), (3), and (4).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 38,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.263A-4(e)(4)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.263A-4 Rules for property produced in a farming business.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 39,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.179-1(e)(5)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.179-1 Election to expense certain depreciable assets.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 40,
+   "stratum": "final regulation",
+   "key": "26 CFR 1.401(a)(4)-6(b)(6)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "final"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.401(a)(4)-6 Contributory defined benefit plans.' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 41,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.988-1T#expired#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": "expired",
+   "evidence": "heading: '\u00a7 1.988-1T Certain definitions and special rules (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 42,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.988-1T(j)-(k)#expired#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": "expired",
+   "evidence": "heading: '\u00a7 1.988-1T Certain definitions and special rules (temporary).' | expiry clause in this chunk: applicability of this section expires on December 6, 2019"
+  },
+  {
+   "n": 43,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.988-2T#expired#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": "expired",
+   "evidence": "heading: '\u00a7 1.988-2T Recognition and computation of exchange gain or loss (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 44,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.988-2T(j)-(k)#expired#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": "expired",
+   "evidence": "heading: '\u00a7 1.988-2T Recognition and computation of exchange gain or loss (temporary).' | expiry clause in this chunk: applicability of this section expires on December 6, 2019"
+  },
+  {
+   "n": 45,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.446-3T(k)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary_partly_expired"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.446-3T Notional principal contracts (temporary).' | expiry clause in this chunk: applicability of paragraph (g)(4) of this section and paragraph (g)(6) Examples 2, 3 and 4 of this section expires May 7, 2018"
+  },
+  {
+   "n": 46,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.482-1T#body#13",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary_partly_expired"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.482-1T Allocation of income and deductions among taxpayers (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 47,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.446-3T#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary_partly_expired"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.446-3T Notional principal contracts (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 48,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.482-1T#body#8",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary_partly_expired"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.482-1T Allocation of income and deductions among taxpayers (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 49,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.469-4T(k)(3)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 50,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.469-1T(g)(8)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.469-1T General rules (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 51,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.469-4T(c)(4)#body#12",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 52,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.469-4T(f)(5)#body#15",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 53,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.469-4T(k)(7)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 54,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.704-1T(a)-(c)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: \"\u00a7 1.704-1T Partner's distributive share (temporary).\" | expiry clause in this chunk: none"
+  },
+  {
+   "n": 55,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.62-1T(c)(8)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.62-1T Adjusted gross income (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 56,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.168(j)-1T#body#27",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.168(j)-1T Questions and answers concerning tax-exempt entity leasing rules (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 57,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.280F-5T(e)(3)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.280F-5T Leased property (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 58,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.469-4T(e)(3)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.469-4T Definition of activity (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 59,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.62-1T(c)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.62-1T Adjusted gross income (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 60,
+   "stratum": "temporary regulation",
+   "key": "26 CFR 1.62-1T(a)-(b)#body#1",
+   "stored": {
+    "type": "regulation",
+    "level": 4,
+    "status": "temporary"
+   },
+   "source_revision": "eCFR 2026-09-17",
+   "excluded": null,
+   "evidence": "heading: '\u00a7 1.62-1T Adjusted gross income (temporary).' | expiry clause in this chunk: none"
+  },
+  {
+   "n": 61,
+   "stratum": "treatment",
+   "key": "137 T.C. No. 17, at *14-15#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2011-12-27",
+   "excluded": null,
+   "evidence": "citation form '137 T.C. No. 17' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2011-12-27T05:00:00.000Z",
+   "treatment": {
+    "status": "reversed",
+    "by": "729 F.3d 869 (ca8 2013)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 62,
+   "stratum": "treatment",
+   "key": "140 T.C. No. 16, at *8-10#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2013-06-18",
+   "excluded": null,
+   "evidence": "citation form '140 T.C. No. 16' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2013-06-18T04:00:00.000Z",
+   "treatment": {
+    "status": "reversed",
+    "by": "769 F.3d 616 (ca8 2014)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 63,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2002-5, at *8-10#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2002-01-08",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2002-5' in its own text: at *1-3 | 'Filed January 8, 2002' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2002-01-08T05:00:00.000Z",
+   "treatment": {
+    "status": "reversed in part",
+    "by": "340 F.3d 1074 (ca9 2003)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 64,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2003-162, at *5-7#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2003-06-03",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2003-162' in its own text: at *1-2 | 'Filed June 3, 2003' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2003-06-03T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed in part",
+    "by": "176 F. App'x 778 (ca9 2006)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 65,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2004-207, at *94-95#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2004-09-16",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2004-207' in its own text: at *1-2 | 'Filed September 16, 2004' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2004-09-16T04:00:00.000Z",
+   "treatment": {
+    "status": "reversed",
+    "by": "560 F.3d 620 (ca7 2009)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 66,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2021-115, at *1-2#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2021-09-29",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2021-115' in its own text: at *1-2 | 'Filed September 29, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-09-29T18:32:53.750Z",
+   "treatment": {
+    "status": "appealed",
+    "by": "69 F.4th 762 (ca11 2023)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 67,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2013-85, at *3-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2013-03-27",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2013-85' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-03-27T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "766 F.3d 917 (ca8 2014)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 68,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2021-41, at *7-8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2021-04-06",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2021-41' in its own text: at *1-2 | 'Filed April 6, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-04-06T18:37:43.644Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "52 F.4th 889 (ca10 2022)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 69,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2013-211, at *3-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2013-09-09",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2013-211' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-09-09T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "580 F. App'x 474 (ca7 2014)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 70,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2010-144, at *13-14#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2010-06-30",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2010-144' in its own text: at *1-2 | 'Filed June 30, 2010' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2010-06-30T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "475 F. App'x 259 (ca9 2012)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 71,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2023-87, at *20-21#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2023-07-17",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2023-87' in its own text: at *1-2 | 'Filed July 17, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-07-17T18:35:01.446Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "2025 WL 511651 (ca1 2025)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 72,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2003-48, at *13-14#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2003-02-26",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2003-48' in its own text: at *1-2 | 'Filed February 26, 2003' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2003-02-26T05:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "90 F. App'x 669 (ca3 2004)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 73,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2007-271, at *1-3#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2007-09-12",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2007-271' in its own text: not in the extracted text | 'Filed September 12, 2007' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2007-09-12T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "325 F. App'x 596 (ca9 2009)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 74,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2006-239, at *18-19#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2006-11-07",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2006-239' in its own text: at *1-3 | 'Filed November 7, 2006' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2006-11-07T05:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "277 F. App'x 122 (ca2 2008)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 75,
+   "stratum": "treatment",
+   "key": "T.C. Memo. 2000-77, at *2-4#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2000-03-07",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2000-77' in its own text: at *1-2 | 'Filed March 7, 2000' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2000-03-07T05:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "281 F.3d 101 (ca3 2002)",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 76,
+   "stratum": "reported opinion",
+   "key": "114 T.C. No. 2, at *36-37#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2000-02-04",
+   "excluded": null,
+   "evidence": "citation form '114 T.C. No. 2' in its own text: at *1-2 | 'Filed February 4, 2000' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2000-02-04T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 77,
+   "stratum": "reported opinion",
+   "key": "115 T.C. No. 23, at *11-12#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2000-09-29",
+   "excluded": null,
+   "evidence": "citation form '115 T.C. No. 23' in its own text: at *1-2 | 'Filed September 29, 2000' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2000-09-29T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 78,
+   "stratum": "reported opinion",
+   "key": "116 T.C. No. 29, at *4-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2001-06-14",
+   "excluded": null,
+   "evidence": "citation form '116 T.C. No. 29' in its own text: at *1-2 | 'Filed June 14, 2001' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2001-06-14T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 79,
+   "stratum": "reported opinion",
+   "key": "117 T.C. No. 22, at *5-6#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2001-12-11",
+   "excluded": null,
+   "evidence": "citation form '117 T.C. No. 22' in its own text: at *1-2 | 'Filed December 11, 2001' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2001-12-11T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 80,
+   "stratum": "reported opinion",
+   "key": "119 T.C. No. 5, at *7-8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2002-09-16",
+   "excluded": null,
+   "evidence": "citation form '119 T.C. No. 5' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2002-09-16T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "93 F. App'x 473 (2004)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 81,
+   "stratum": "reported opinion",
+   "key": "119 T.C. No. 6, at *5-6#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2002-09-24",
+   "excluded": null,
+   "evidence": "citation form '119 T.C. No. 6' in its own text: at *1-2 | 'Filed September 24, 2002' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2002-09-24T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 82,
+   "stratum": "reported opinion",
+   "key": "120 T.C. No. 15, at *10-12#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2003-05-19",
+   "excluded": null,
+   "evidence": "citation form '120 T.C. No. 15' in its own text: at *1-2 | 'Filed May 19, 2003' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2003-05-19T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 83,
+   "stratum": "reported opinion",
+   "key": "121 T.C. No. 6, at *9-10#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2003-08-04",
+   "excluded": null,
+   "evidence": "citation form '121 T.C. No. 6' in its own text: at *1-2 | 'Filed August 4, 2003' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2003-08-04T04:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "425 F.3d 1203 (ca9 2005)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 84,
+   "stratum": "reported opinion",
+   "key": "123 T.C. No. 4, at *16-17#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2004-07-15",
+   "excluded": null,
+   "evidence": "citation form '123 T.C. No. 4' in its own text: at *1 | 'Filed July 15, 2004' (at *1) | DAWSON: 'T.C. Opinion' (TCOP), filed 2004-07-15T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 85,
+   "stratum": "reported opinion",
+   "key": "125 T.C. No. 13, at *15-16#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2005-11-22",
+   "excluded": null,
+   "evidence": "citation form '125 T.C. No. 13' in its own text: at *1-2 | 'Filed November 22, 2005' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2005-11-22T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 86,
+   "stratum": "reported opinion",
+   "key": "131 T.C. No. 11, at *5-6#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2008-11-12",
+   "excluded": null,
+   "evidence": "citation form '131 T.C. No. 11' in its own text: at *1-2 | 'Filed November 12, 2008' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2008-11-12T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 87,
+   "stratum": "reported opinion",
+   "key": "132 T.C. No. 19, at *1-3#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2009-06-30",
+   "excluded": null,
+   "evidence": "citation form '132 T.C. No. 19' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2009-06-30T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 88,
+   "stratum": "reported opinion",
+   "key": "135 T.C. No. 18, at *9-11#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2010-09-20",
+   "excluded": null,
+   "evidence": "citation form '135 T.C. No. 18' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2010-09-20T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 89,
+   "stratum": "reported opinion",
+   "key": "136 T.C. No. 6, at *14-15#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2011-02-07",
+   "excluded": null,
+   "evidence": "citation form '136 T.C. No. 6' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2011-02-07T05:00:00.000Z",
+   "treatment": {
+    "status": "affirmed",
+    "by": "715 F.3d 1169 (ca9 2013)",
+    "sources": [
+     "later Tax Court opinions",
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 90,
+   "stratum": "reported opinion",
+   "key": "137 T.C. No. 13, at *12-13#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2011-11-30",
+   "excluded": null,
+   "evidence": "citation form '137 T.C. No. 13' in its own text: at *1-2 | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2011-11-30T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 91,
+   "stratum": "reported opinion",
+   "key": "139 T.C. No. 16, at *34-36#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2012-11-13",
+   "excluded": null,
+   "evidence": "citation form '139 T.C. No. 16' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2012-11-13T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 92,
+   "stratum": "reported opinion",
+   "key": "139 T.C. No. 3, at *6-8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2012-08-08",
+   "excluded": null,
+   "evidence": "citation form '139 T.C. No. 3' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2012-08-08T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 93,
+   "stratum": "reported opinion",
+   "key": "141 T.C. No. 3, at *33-34#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2013-09-03",
+   "excluded": null,
+   "evidence": "citation form '141 T.C. No. 3' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2013-09-03T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 94,
+   "stratum": "reported opinion",
+   "key": "157 T.C. No. 10, at *21-23#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2021-11-18",
+   "excluded": null,
+   "evidence": "citation form '157 T.C. No. 10' in its own text: at *1-2 | 'Filed November 18, 2021' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2021-11-18T19:33:26.313Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 95,
+   "stratum": "reported opinion",
+   "key": "158 T.C. No. 6, at *2-4#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2022-04-19",
+   "excluded": null,
+   "evidence": "citation form '158 T.C. No. 6' in its own text: at *1-2 | 'Filed April 19, 2022' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2022-04-19T18:37:26.553Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 96,
+   "stratum": "reported opinion",
+   "key": "161 T.C. No. 6, at *1-3#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2023-11-14",
+   "excluded": null,
+   "evidence": "citation form '161 T.C. No. 6' in its own text: at *1 | 'Filed October 18, 2023' (at *1) | DAWSON: 'T.C. Opinion' (TCOP), filed 2023-11-14T19:26:22.526Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 97,
+   "stratum": "reported opinion",
+   "key": "165 T.C. No. 10, at *5-6#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2025-11-12",
+   "excluded": null,
+   "evidence": "citation form '165 T.C. No. 10' in its own text: at *1-2 | 'Filed November 12, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-11-12T19:35:15.046Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 98,
+   "stratum": "reported opinion",
+   "key": "165 T.C. No. 13, at *4-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2025-12-16",
+   "excluded": null,
+   "evidence": "citation form '165 T.C. No. 13' in its own text: at *1-2 | 'Filed December 16, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-12-16T19:36:10.951Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 99,
+   "stratum": "reported opinion",
+   "key": "167 T.C. No. 11, at *14#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2026-09-21",
+   "excluded": null,
+   "evidence": "citation form '167 T.C. No. 11' in its own text: at *1-2 | 'Filed September 21, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-09-21T18:31:02.011Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 100,
+   "stratum": "reported opinion",
+   "key": "167 T.C. No. 4, at *44-45#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2026-07-15",
+   "excluded": null,
+   "evidence": "citation form '167 T.C. No. 4' in its own text: at *1-2 | 'Filed July 15, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-07-15T18:32:03.981Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 101,
+   "stratum": "reported opinion",
+   "key": "167 T.C. No. 7, at *11#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2026-08-05",
+   "excluded": null,
+   "evidence": "citation form '167 T.C. No. 7' in its own text: at *1-2 | 'Filed August 5, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-08-05T18:31:54.517Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 102,
+   "stratum": "reported opinion",
+   "key": "167 T.C. No. 7, at *22#body#3",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2026-08-05",
+   "excluded": null,
+   "evidence": "citation form '167 T.C. No. 7' in its own text: at *1-2 | 'Filed August 5, 2026' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2026-08-05T18:31:54.517Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 103,
+   "stratum": "reported opinion",
+   "key": "165 T.C. No. 10, at *22#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2025-11-12",
+   "excluded": null,
+   "evidence": "citation form '165 T.C. No. 10' in its own text: at *1-2 | 'Filed November 12, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-11-12T19:35:15.046Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 104,
+   "stratum": "reported opinion",
+   "key": "165 T.C. No. 13, at *48#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2025-12-16",
+   "excluded": null,
+   "evidence": "citation form '165 T.C. No. 13' in its own text: at *1-2 | 'Filed December 16, 2025' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2025-12-16T19:36:10.951Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 105,
+   "stratum": "reported opinion",
+   "key": "114 T.C. No. 2, at *15-16#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 3,
+    "status": "reported"
+   },
+   "source_revision": "filed 2000-02-04",
+   "excluded": null,
+   "evidence": "citation form '114 T.C. No. 2' in its own text: at *1-2 | 'Filed February 4, 2000' (at *1-2) | DAWSON: 'T.C. Opinion' (TCOP), filed 2000-02-04T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 106,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2026-35, at *13#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2026-04-23",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2026-35' in its own text: at *1-2 | 'Filed April 23, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-04-23T18:28:37.154Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 107,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2009-223, at *24-25#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2009-09-29",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2009-223' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2009-09-29T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 108,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2026-14, at *6-7#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2026-02-05",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2026-14' in its own text: at *1-2 | 'Filed February 5, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-02-05T19:32:31.849Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 109,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2022-40, at *6#body#2",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2022-04-20",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2022-40' in its own text: at *1-2 | 'Filed April 20, 2022' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2022-04-20T18:37:39.344Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 110,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2024-103, at *10#body#3",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2024-11-06",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2024-103' in its own text: at *1-2 | 'Filed November 6, 2024' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2024-11-06T19:31:08.920Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 111,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2007-101, at *17-18#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2007-04-25",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2007-101' in its own text: at *1-2 | 'Filed April 25, 2007' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2007-04-25T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 112,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2012-59, at *7-8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2012-03-05",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2012-59' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'T.C. Opinion' (TCOP), filed 2012-03-05T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 113,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2010-140, at *6-7#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2010-06-24",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2010-140' in its own text: not in the extracted text | 'Filed June 24, 2010' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2010-06-24T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 114,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2025-87, at *6-7#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2025-08-18",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2025-87' in its own text: at *1-2 | 'Filed August 18, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-08-18T18:34:30.833Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 115,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2023-128, at *3-4#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2023-10-26",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2023-128' in its own text: at *1-2 | 'Filed October 26, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-10-26T18:35:22.458Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 116,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2003-49, at *15-17#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2003-02-26",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2003-49' in its own text: at *1-3 | 'Filed February 26, 2003' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2003-02-26T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 117,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2023-133, at *40#body#2",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2023-11-06",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2023-133' in its own text: at *1-2 | 'Filed November 6, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-11-06T19:34:18.638Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 118,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2021-118, at *13-15#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2021-10-05",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2021-118' in its own text: at *1-2 | 'Filed October 5, 2021' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2021-10-05T18:38:18.543Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 119,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2026-43, at *4#body#3",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2026-05-27",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2026-43' in its own text: at *1-2 | 'Filed May 27, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-05-27T18:33:13.619Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 120,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2013-36, at *16-18#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2013-02-04",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2013-36' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-02-04T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 121,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2026-78, at *6#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2026-09-02",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2026-78' in its own text: at *1-2 | 'Filed September 2, 2026' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2026-09-02T18:25:48.723Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 122,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2024-91, at *6-7#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2024-09-26",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2024-91' in its own text: at *1-2 | 'Filed September 26, 2024' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2024-09-26T18:35:04.132Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 123,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2025-127, at *19-20#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2025-12-08",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2025-127' in its own text: at *1-2 | 'Filed December 8, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-12-08T19:39:48.595Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 124,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2025-50, at *8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2025-05-20",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2025-50' in its own text: at *1-2 | 'Filed May 20, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-05-20T18:34:19.883Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 125,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2011-42, at *23-24#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2011-02-17",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2011-42' in its own text: at *1-3 | 'Filed February 17, 2011' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2011-02-17T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 126,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2013-294, at *12-13#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2013-12-30",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2013-294' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-12-30T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 127,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2012-291, at *7#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2012-10-16",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2012-291' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2012-10-16T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 128,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2022-112, at *8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2022-11-29",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2022-112' in its own text: at *1-2 | 'Filed November 29, 2022' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2022-11-29T19:50:35.765Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 129,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2025-12, at *4-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2025-02-03",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2025-12' in its own text: at *1-2 | 'Filed February 3, 2025' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2025-02-03T19:31:15.525Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 130,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2023-41, at *2-3#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2023-03-27",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2023-41' in its own text: at *1-2 | 'Filed March 27, 2023' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2023-03-27T18:36:59.881Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 131,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2012-83, at *4-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2012-03-22",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2012-83' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2012-03-22T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 132,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2010-64, at *15-16#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2010-04-01",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2010-64' in its own text: not in the extracted text | 'Filed April 1, 2010' (at *1-3) | DAWSON: 'Memorandum Opinion' (MOP), filed 2010-04-01T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 133,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2012-299, at *8-9#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2012-10-25",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2012-299' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2012-10-25T04:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 134,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2022-51, at *4-5#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2022-05-18",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2022-51' in its own text: at *1-2 | 'Filed May 18, 2022' (at *1-2) | DAWSON: 'Memorandum Opinion' (MOP), filed 2022-05-18T18:38:48.723Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 135,
+   "stratum": "memorandum opinion",
+   "key": "T.C. Memo. 2013-22, at *7-8#body#1",
+   "stored": {
+    "type": "opinion",
+    "level": 2,
+    "status": "memorandum"
+   },
+   "source_revision": "filed 2013-01-17",
+   "excluded": null,
+   "evidence": "citation form 'T.C. Memo. 2013-22' in its own text: not in the extracted text | no 'Filed <date>' line in the extracted text | DAWSON: 'Memorandum Opinion' (MOP), filed 2013-01-17T05:00:00.000Z",
+   "treatment": {
+    "status": "none",
+    "by": "",
+    "sources": [
+     "CourtListener"
+    ]
+   }
+  },
+  {
+   "n": 136,
+   "stratum": "publication",
+   "key": "IRS Pub 463 (2025), p. 10#body#1",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 463 Travel, Gift, and Car Expenses' | as_of 2025-01-01"
+  },
+  {
+   "n": 137,
+   "stratum": "publication",
+   "key": "IRS Pub 17 (2025), p. 64#body#1",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01"
+  },
+  {
+   "n": 138,
+   "stratum": "publication",
+   "key": "IRS Pub 17 (2025), p. 15#body#6",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01"
+  },
+  {
+   "n": 139,
+   "stratum": "publication",
+   "key": "IRS Pub 946 (2025), p. 42#body#4",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01"
+  },
+  {
+   "n": 140,
+   "stratum": "publication",
+   "key": "IRS Pub 946 (2025), p. 29#body#3",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01"
+  },
+  {
+   "n": 141,
+   "stratum": "publication",
+   "key": "IRS Pub 527 (2025), p. 37#body#2",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 527 Residential Rental Property (Including Rental of Vacation Homes)' | as_of 2025-01-01"
+  },
+  {
+   "n": 142,
+   "stratum": "publication",
+   "key": "IRS Pub 463 (2025), p. 42#body#1",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 463 Travel, Gift, and Car Expenses' | as_of 2025-01-01"
+  },
+  {
+   "n": 143,
+   "stratum": "publication",
+   "key": "IRS Pub 17 (2025), p. 108#body#3",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01"
+  },
+  {
+   "n": 144,
+   "stratum": "publication",
+   "key": "IRS Pub 17 (2025), p. 37#body#3",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01"
+  },
+  {
+   "n": 145,
+   "stratum": "publication",
+   "key": "IRS Pub 463 (2025), p. 20#body#1",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 463 Travel, Gift, and Car Expenses' | as_of 2025-01-01"
+  },
+  {
+   "n": 146,
+   "stratum": "publication",
+   "key": "IRS Pub 946 (2025), p. 18#body#1",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01"
+  },
+  {
+   "n": 147,
+   "stratum": "publication",
+   "key": "IRS Pub 946 (2025), p. 62#body#6",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01"
+  },
+  {
+   "n": 148,
+   "stratum": "publication",
+   "key": "IRS Pub 946 (2025), p. 32#body#1",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 946 How To Depreciate Property' | as_of 2025-01-01"
+  },
+  {
+   "n": 149,
+   "stratum": "publication",
+   "key": "IRS Pub 17 (2025), p. 81#body#5",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01"
+  },
+  {
+   "n": 150,
+   "stratum": "publication",
+   "key": "IRS Pub 17 (2025), p. 69#body#2",
+   "stored": {
+    "type": "publication",
+    "level": 1,
+    "status": "not_binding"
+   },
+   "source_revision": "2025 edition",
+   "excluded": null,
+   "evidence": "heading: 'Publication 17 Your Federal Income Tax For Individuals' | as_of 2025-01-01"
+  }
+ ]
+}
