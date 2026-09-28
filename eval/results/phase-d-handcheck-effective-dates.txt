@@ -1,0 +1,788 @@
+Phase D, D4 — hand check of effective-date links (tasks/todo.md D4)
+
+Each link: the chunk, the amendment attributed as the latest (2012+) change to its text, the effective rule
+read from the notes. Judged correct when (1) that amendment really is the latest change to that chunk's text
+and (2) the rule is that law's rule for it. Three independent samples of 50, stratified by note shape
+(18 quoted law, 16 summary/cross-reference, 8 retroactive, 8 section added); each round excludes every key
+drawn before, so no round re-checks rows the previous fixes were written against.
+
+ROUND 1 — 40/50 (80%). Wrong: #2 45J(e)(2) general rule for subsection (a) used for an amendment by (b);
+#5, #12 25D catchline rename read as a text change; #15 61 list rule ("shall apply to— (1) ... after
+December 31, 2018") missed, enactment date used; #17 30D(g) catchline, general rule instead of (g)'s own;
+#29 48E(e)(4) exception for 70513(a) missed; #32 246A "not applicable to ... before Oct. 1, 1942" read as the
+rule; #35, #37 40 subsections named only in the entry text treated as whole-section; #40 1202(b)(4) rule for
+70431(a) used for (c). Also noted: #36's retroactive flag belongs to a different sub-amendment (date right).
+
+ROUND 2 (fresh) — 40/50 (80%). Wrong: #4 851(b)(2), #6 5041(c)(6), #25 1272(a)(4), #26 457(b)(5),
+#28 3303(a)(3), #31 3303(a)(1): a subsection-level entry that touched only the heading, intro or concluding
+text attributed to every child; #8, #13 163(h)(5) "(4) to (6)" range read as endpoints, 2025 renumbering
+missed; #18 45Z(d)-(e), #21 7803(e)(3): a rule quoted from subsection (a) of the law applied to an
+amendment made by another subsection.
+
+ROUND 3 (fresh) — 48–49/50 (96–98%). Wrong: #19 48E(a)(3), a comma-chained exception clause took (a)'s
+rule for (d)'s amendment (fixed in the module: "on or after June 16, 2025"). Unverified: #10 72(t)(2)
+part 3 may carry later 2022 subparagraphs.
+
+MODULE vs SPIKE — the module (src/taxcite/ingest/usc_notes.py) treats range chunks as holding their
+subsections whole and accepts a subparagraph marker after a heading; 1,795 links vs the spike's 1,700.
+20 of the added links spot-checked (two draws of 10): 20/20 right.
+
+
+======== ROUND 1 SAMPLE ========
+#1 [quoted law] 26 U.S.C. § 168(a)-(b)#body#1  year 2017
+   AMEND: Subsec. (b)(2)(B) to (D). Pub. L. 115–97, § 13203(b), redesignated subpars. (C) and (D) as (B) and (C), respectively, and struck out former subpar. (B) which read as follows: “any property used in a farming business (within the me
+   RULE:  shall apply to property placed in service after December 31, 2017, in taxable years ending after such date | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13203(c), Dec. 22, 2017, 131 Stat. 2109, provided that: “The amendments made by this section [amending this section] shall apply to property placed in service after December 31, 2017, in taxable years ending after such date.”
+
+#2 [quoted law] 26 U.S.C. § 45J(e)(2)#body#1  year 2018
+   AMEND: Subsecs. (e), (f). Pub. L. 115–123, § 40501(b)(1), added subsec. (e) and redesignated former subsec. (e) as (f).
+   RULE:  on or after the date of enactment | date Feb. 9, 2018
+   NOTE:  Pub. L. 115–123, div. D, title I, § 40501(c), Feb. 9, 2018, 132 Stat. 154, provided that: “(1) Treatment of unutilized limitation amounts.—The amendment made by subsection (a) [amending this section] shall take effect on the date of the enactment of this Act [
+
+#3 [quoted law] 26 U.S.C. § 179D(d)(4)#body#1  year 2022
+   AMEND: Subsec. (d). Pub. L. 117–169, § 13303(a)(5)(A), redesignated pars. (2) to (6) as (1) to (5), respectively, and struck out former par. (1) which provided for a partial allowance for a deduction.
+   RULE:  shall apply to taxable years beginning after December 31, 2022 | date December 31, 2022
+   NOTE:  Pub. L. 117–169, title I, § 13303(d), Aug. 16, 2022, 136 Stat. 1952, provided that: “(1) In general.—Except as otherwise provided in this subsection, the amendments made by this section [amending this section and section 312 of this title] shall apply to taxab
+
+#4 [quoted law] 26 U.S.C. § 864(c)(8)#body#1  year 2017
+   AMEND: Subsec. (c)(8). Pub. L. 115–97, § 13501(a)(1), added par. (8).
+   RULE:  shall apply to sales, exchanges, and dispositions on or after November 27, 2017 | date November 27, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13501(c)(1), Dec. 22, 2017, 131 Stat. 2141, provided that: “The amendments made by subsection (a) [amending this section] shall apply to sales, exchanges, and dispositions on or after November 27, 2017.”
+
+#5 [quoted law] 26 U.S.C. § 25D(d)(2)#body#1  year 2022
+   AMEND: Pub. L. 117–169, § 13302(c)(2), substituted “clean energy credit” for “energy efficient property” in section catchline.
+   RULE:  shall apply to expenditures made after December 31, 2021 | date December 31, 2021
+   NOTE:  Pub. L. 117–169, title I, § 13302(d), Aug. 16, 2022, 136 Stat. 1947, provided that: “(1) In general.—Except as provided in paragraph (2), the amendments made by this section [amending this section] shall apply to expenditures made after December 31, 2021. “(2)
+
+#6 [quoted law] 26 U.S.C. § 30D(e)(3)#body#1  year 2022
+   AMEND: Pub. L. 117–169, § 13401(i)(1), substituted “Clean vehicle credit” for “New qualified plug-in electric drive motor vehicles” in section catchline.
+   RULE:  shall apply to vehicles placed in service after December 31, 2022 | date December 31, 2022
+   NOTE:  ; Transition RulePub. L. 117–169, title I, § 13401(k), Aug. 16, 2022, 136 Stat. 1961, provided that: “(1) In general.—Except as provided in paragraphs (2), (3), (4), and (5), the amendments made by this section [amending this section and sections 30B, 38, 6213
+
+#7 [quoted law] 26 U.S.C. § 6103(p)(8)#body#1  year 2019
+   AMEND: Subsec. (p)(8)(B). Pub. L. 116–25, § 2004(b), inserted “or paragraph (9)” after “subparagraph (A)”.
+   RULE:  shall apply to disclosures made after December 31, 2022 | date December 31, 2022
+   NOTE:  Pub. L. 116–25, title II, § 2004(c), July 1, 2019, 133 Stat. 1004, provided that: “The amendments made by this section [amending this section] shall apply to disclosures made after December 31, 2022.”
+
+#8 [quoted law] 26 U.S.C. § 430(m)(2)#body#1  year 2021
+   AMEND: Subsec. (m). Pub. L. 117–2, § 9707(a), amended subsec. (m) generally, revising special rules for community newspaper plans.
+   RULE:  shall apply to plan years ending after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 117–2, title IX, § 9707(c), Mar. 11, 2021, 135 Stat. 206, provided that: “The amendments made by this section [amending this section and section 1083 of Title 29, Labor] shall apply to plan years ending after December 31, 2017.”
+
+#9 [quoted law] 26 U.S.C. § 32(d)-(f)#body#1  year 2021
+   AMEND: Subsec. (d). Pub. L. 117–2, § 9623(a), designated existing provisions as par. (1), inserted heading, and added par. (2).
+   RULE:  shall apply to taxable years beginning after December 31, 2020 | date December 31, 2020
+   NOTE:  Pub. L. 117–2, title IX, § 9623(c), Mar. 11, 2021, 135 Stat. 154, provided that: “The amendments made by this section [amending this section] shall apply to taxable years beginning after December 31, 2020.”
+
+#10 [quoted law] 26 U.S.C. § 170(d)(1)#body#2  year 2025
+   AMEND: Subsec. (d)(1)(C). Pub. L. 119–21, § 70425(a)(2), added subpar. (C).
+   RULE:  shall apply to taxable years beginning after December 31, 2025 | date December 31, 2025
+   NOTE:  Pub. L. 119–21, title VII, § 70425(c), July 4, 2025, 139 Stat. 237, provided that: “The amendments made by this section [amending this section] shall apply to taxable years beginning after December 31, 2025.”
+
+#11 [quoted law] 26 U.S.C. § 451(k)(1)#body#1  year 2017
+   AMEND: Subsecs. (b) to (k). Pub. L. 115–97 first added subsec. (b) and then added subsec. (c) and correspondingly redesignated former subsecs. (b) to (i) first as (c) to (j) and then as (d) to (k), respectively.
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13221(c)–(e), Dec. 22, 2017, 131 Stat. 2116, 2117, provided that: “(c) Effective Date.—The amendments made by this section [amending this section] shall apply to taxable years beginning after December 31, 2017. “(d) Coordination With
+
+#12 [quoted law] 26 U.S.C. § 25D(e)(6)#body#1  year 2022
+   AMEND: Pub. L. 117–169, § 13302(c)(2), substituted “clean energy credit” for “energy efficient property” in section catchline.
+   RULE:  shall apply to expenditures made after December 31, 2021 | date December 31, 2021
+   NOTE:  Pub. L. 117–169, title I, § 13302(d), Aug. 16, 2022, 136 Stat. 1947, provided that: “(1) In general.—Except as provided in paragraph (2), the amendments made by this section [amending this section] shall apply to expenditures made after December 31, 2021. “(2)
+
+#13 [quoted law] 26 U.S.C. § 7804(a)-(d)#body#1  year 2019
+   AMEND: Subsec. (d). Pub. L. 116–25 added subsec. (d).
+   RULE:  on or after the date of enactment | date July 1, 2019
+   NOTE:  Pub. L. 116–25, title III, § 3001(b), July 1, 2019, 133 Stat. 1015, provided that: “The amendment made by subsection (a) [amending this section] shall apply with respect to the hiring of employees after the date of the enactment of this Act [July 1, 2019].”
+
+#14 [quoted law] 26 U.S.C. § 414(s)-(t)#body#1  year 2014
+   AMEND: Subsec. (t)(2). Pub. L. 113–295, § 221(a)(19)(B)(ii), struck out “120,” after “117(d),”.
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this sectio
+
+#15 [quoted law] 26 U.S.C. § 61(a)-(b)#body#1  year 2017
+   AMEND: Subsec. (a)(8) to (15). Pub. L. 115–97 redesignated pars. (9) to (15) as (8) to (14), respectively, and struck out former par. (8) which read as follows: “Alimony and separate maintenance payments;”.
+   RULE:  on or after the date of enactment | date Dec. 22, 2017
+   NOTE:  Pub. L. 115–97, title I, § 11051(c), Dec. 22, 2017, 131 Stat. 2090, provided that: “The amendments made by this section [amending this section and sections 62, 121, 152, 219, 220, 223, 382, 408, 3402, 6724, and 7701 of this title and repealing sections 71, 215
+
+#16 [quoted law] 26 U.S.C. § 25A(c)-(e)#body#1  year 2020
+   AMEND: Subsec. (d). Pub. L. 116–260, § 104(a)(1), added par. (1), redesignated par. (3) as (2), and struck out former pars. (1) and (2) which provided income limitations for the American Opportunity Tax Credit and Lifetime Learning Credi
+   RULE:  shall apply to taxable years beginning after December 31, 2020 | date December 31, 2020
+   NOTE:  Pub. L. 116–260, div. EE, title I, § 104(c), Dec. 27, 2020, 134 Stat. 3041, provided that: “The amendments made by this section [amending this section and sections 62, 74, 86, 135, 137, 219, 221, and 469 of this title and repealing section 222 of this title] s
+
+#17 [quoted law] 26 U.S.C. § 30D(g)(4)#body#1  year 2022
+   AMEND: Pub. L. 117–169, § 13401(i)(1), substituted “Clean vehicle credit” for “New qualified plug-in electric drive motor vehicles” in section catchline.
+   RULE:  shall apply to vehicles placed in service after December 31, 2022 | date December 31, 2022
+   NOTE:  ; Transition RulePub. L. 117–169, title I, § 13401(k), Aug. 16, 2022, 136 Stat. 1961, provided that: “(1) In general.—Except as provided in paragraphs (2), (3), (4), and (5), the amendments made by this section [amending this section and sections 30B, 38, 6213
+
+#18 [quoted law] 26 U.S.C. § 274(o)-(p)#body#1  year 2025
+   AMEND: Subsec. (o). Pub. L. 119–21, § 70305(a), substituted “Except in the case of an expense described in subsection (e)(8) or (n)(2)(C), no deduction” for “No deduction” in introductory provisions.
+   RULE:  shall apply to amounts paid or incurred after December 31, 2025 | date December 31, 2025
+   NOTE:  Pub. L. 119–21, title VII, § 70305(c), July 4, 2025, 139 Stat. 197, provided that: “The amendments made by this section [amending this section] shall apply to amounts paid or incurred after December 31, 2025.”
+
+#19 [summary/cross-ref] 26 U.S.C. § 6050S(c)-(g)#body#1  year 2015
+   AMEND: Subsec. (d)(2). Pub. L. 114–27 amended par. (2) generally. Prior to amendment, par. (2) read as follows: “the amounts described in subparagraph (B) of subsection (b)(2).”
+   RULE:  applicable to taxable years beginning after June 29, 2015, see section 804(d) of Pub | date June 29, 2015
+   NOTE:  Amendment by Pub. L. 114–27 applicable to taxable years beginning after June 29, 2015, see section 804(d) of Pub. L. 114–27, set out as a note under section 25A of this title.
+
+#20 [summary/cross-ref] 26 U.S.C. § 55(d)(3)#body#1  year 2017
+   AMEND: Subsec. (d)(3). Pub. L. 115–97, § 12001(b)(5)(A), redesignated par. (4) as (3). Former par. (3) redesignated (2).
+   RULE:  applicable to taxable years beginning after Dec. 31, 2017, see section 12001(c) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by section 12001(a), (b)(3)(A), (B), (4)–(6) of Pub. L. 115–97 applicable to taxable years beginning after Dec. 31, 2017, see section 12001(c) of Pub. L. 115–97, set out as a note under section 11 of this title.
+
+#21 [summary/cross-ref] 26 U.S.C. § 529A(b)(2)#body#1  year 2025
+   AMEND: Subsec. (b)(2)(B). Pub. L. 119–21, § 70204(a)(2)(A), which directed the insertion of “or received in a qualified ABLE rollover contribution described in section 530A(d)(4)(B)” after “except as provided in the case of contributions
+   RULE:  applicable to taxable years beginning after Dec. 31, 2025, see section 70204(e) of Pub | date Dec. 31, 2025
+   NOTE:  Amendment by section 70204(a)(2)(A), (B) of Pub. L. 119–21 applicable to taxable years beginning after Dec. 31, 2025, see section 70204(e) of Pub. L. 119–21, set out as an Effective Date note under section 128 of this title.
+
+#22 [summary/cross-ref] 26 U.S.C. § 137(a)-(b)#body#1  year 2021
+   AMEND: Subsec. (b)(3)(A). Pub. L. 117–2 inserted “85(c)” before “221”.
+   RULE:  applicable to taxable years beginning after Dec. 31, 2019, see section 9042(c) of Pub | date Dec. 31, 2019
+   NOTE:  Amendment by Pub. L. 117–2 applicable to taxable years beginning after Dec. 31, 2019, see section 9042(c) of Pub. L. 117–2, set out as a note under section 74 of this title.
+
+#23 [summary/cross-ref] 26 U.S.C. § 6056(c)#body#1  year 2024
+   AMEND: Subsec. (c)(3). Pub. L. 118–168 added par. (3) relating to electronic delivery. Pub. L. 118–167 added par. (3) relating to alternative manner of furnishing statements.
+   RULE:  applicable to statements the due date for which is after Dec. 31, 2024, see section 3(c) of Pub | date Dec. 31, 2024
+   NOTE:  Amendment by Pub. L. 118–168 applicable to statements the due date for which is after Dec. 31, 2024, see section 3(c) of Pub. L. 118–168, set out as a note under section 6055 of this title.
+
+#24 [summary/cross-ref] 26 U.S.C. § 50(d)#body#1  year 2022
+   AMEND: Subsec. (d). Pub. L. 117–169, § 13801(c), inserted “In the case of a real estate investment trust making an election under section 6418, paragraphs (1)(B) and (2)(B) of the section 46(e) referred to in paragraph (1) of this subsec
+   RULE:  applicable to taxable years beginning after Dec. 31, 2022, see section 13801(g) of Pub | date Dec. 31, 2022
+   NOTE:  Amendment by section 13801(c) of Pub. L. 117–169 applicable to taxable years beginning after Dec. 31, 2022, see section 13801(g) of Pub. L. 117–169, set out as an Effective Date note under section 6417 of this title.
+
+#25 [summary/cross-ref] 26 U.S.C. § 220(g)-(h)#body#1  year 2017
+   AMEND: Subsec. (g)(2). Pub. L. 115–97, § 11002(d)(1)(T), substituted “for ‘calendar year 2016’ in subparagraph (A)(ii)” for “for ‘calendar year 1992’ in subparagraph (B)”.
+   RULE:  applicable to taxable years beginning after Dec. 31, 2017, see section 11002(e) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by section 11002(d)(1)(T) of Pub. L. 115–97 applicable to taxable years beginning after Dec. 31, 2017, see section 11002(e) of Pub. L. 115–97, set out as a note under section 1 of this title.
+
+#26 [summary/cross-ref] 26 U.S.C. § 457(d)(4)#body#1  year 2022
+   AMEND: Subsec. (d)(4). Pub. L. 117–328, § 312(c), added par. (4).
+   RULE:  applicable to plan years beginning after Dec. 29, 2022, see section 312(d) of Pub | date Dec. 29, 2022
+   NOTE:  Amendment by section 312(c) of Pub. L. 117–328 applicable to plan years beginning after Dec. 29, 2022, see section 312(d) of Pub. L. 117–328, set out as a note under section 401 of this title.
+
+#27 [summary/cross-ref] 26 U.S.C. § 53(e)#body#1  year 2022
+   AMEND: Subsec. (e). Pub. L. 117–169, § 10101(e)(1), amended subsec. (e) generally. Prior to amendment, subsec. (e) related to portion of credit treated as refundable.
+   RULE:  applicable to taxable years beginning after Dec. 31, 2022, see section 10101(f) of Pub | date Dec. 31, 2022
+   NOTE:  Amendment by Pub. L. 117–169 applicable to taxable years beginning after Dec. 31, 2022, see section 10101(f) of Pub. L. 117–169, set out as a note under section 11 of this title.
+
+#28 [summary/cross-ref] 26 U.S.C. § 5173(a)-(d)#body#1  year 2015
+   AMEND: Subsec. (a)(2). Pub. L. 114–113, § 332(b)(2)(A)(ii), substituted “Except as provided under section 5551(d), no distilled spirits” for “No distilled spirits”.
+   RULE:  applicable to any calendar quarters beginning more than 1 year after Dec. 18, 2015, see section 332(c) of Pub | date Dec. 18, 2015
+   NOTE:  Amendment by Pub. L. 114–113 applicable to any calendar quarters beginning more than 1 year after Dec. 18, 2015, see section 332(c) of Pub. L. 114–113, set out as a note under section 5061 of this title.
+
+#29 [summary/cross-ref] 26 U.S.C. § 48E(e)(4)#body#1  year 2025
+   AMEND: Subsec. (e)(4). Pub. L. 119–21, § 70513(a)(2), added par. (4).
+   RULE:  applicable to taxable years beginning after July 4, 2025, except that amendment by section 70513(a) of Pub | date July 4, 2025
+   NOTE:  Amendment by section 70513 of Pub. L. 119–21 applicable to taxable years beginning after July 4, 2025, except that amendment by section 70513(a) of Pub. L. 119–21 applicable to facilities the construction of which begins after the date which is 12 months after
+
+#30 [summary/cross-ref] 26 U.S.C. § 457(b)(6)#body#1  year 2022
+   AMEND: Subsec. (b). Pub. L. 117–328, § 110(f), inserted at end of concluding provisions “A plan which is established and maintained by an employer which is described in subsection (e)(1)(A) shall not be treated as failing to meet the req
+   RULE:  applicable to contributions made for plan years beginning after Dec. 31, 2023, see section 110(h) of Pub | date Dec. 31, 2023
+   NOTE:  Amendment by section 110(f) of Pub. L. 117–328 applicable to contributions made for plan years beginning after Dec. 31, 2023, see section 110(h) of Pub. L. 117–328, set out as a note under section 401 of this title.
+
+#31 [summary/cross-ref] 26 U.S.C. § 48E(b)(6)#body#1  year 2025
+   AMEND: Subsec. (b)(6), (7). Pub. L. 119–21, § 70513(b)(1)(A), added par. (6) and redesignated former par. (6) as (7).
+   RULE:  applicable to taxable years beginning after July 4, 2025, except that amendment by section 70513(a) of Pub | date July 4, 2025
+   NOTE:  Amendment by section 70513 of Pub. L. 119–21 applicable to taxable years beginning after July 4, 2025, except that amendment by section 70513(a) of Pub. L. 119–21 applicable to facilities the construction of which begins after the date which is 12 months after
+
+#32 [summary/cross-ref] 26 U.S.C. § 246A(a)-(b)#body#1  year 2014
+   AMEND: Subsecs. (a), (e). Pub. L. 113–295 struck out “, 244,” after “section 243”.
+   RULE:  applicable to preferred stock issued before Oct. 1, 1942 (determined in the same manner as under section 247 of this title as in effect before its repeal by Pub | date Oct. 1, 1942
+   NOTE:  Amendment by Pub. L. 113–295 not applicable to preferred stock issued before Oct. 1, 1942 (determined in the same manner as under section 247 of this title as in effect before its repeal by Pub. L. 113–295), see section 221(a)(41)(K) of Pub. L. 113–295, set ou
+
+#33 [summary/cross-ref] 26 U.S.C. § 897(k)(4)#body#1  year 2015
+   AMEND: Subsec. (k). Pub. L. 114–113, § 322(a)(1), added subsec. (k).
+   RULE:  applicable to any disposition on and after Dec. 18, 2015, and any distribution by a real estate investment trust on or after such date which is treated as a ded | date Dec. 18, 2015
+   NOTE:  Amendment by section 322(a)(1), (2)(A) of Pub. L. 114–113 effective Dec. 18, 2015, and applicable to any disposition on and after Dec. 18, 2015, and any distribution by a real estate investment trust on or after such date which is treated as a deduction for a 
+
+#34 [summary/cross-ref] 26 U.S.C. § 6050W(a)-(b)#body#1  year 2025
+   AMEND: Subsec. (a)(3). Pub. L. 119–21, § 70201(f)(3)(A), added par. (3).
+   RULE:  applicable to taxable years beginning after Dec. 31, 2024, see section 70201(j) of Pub | date Dec. 31, 2024
+   NOTE:  Amendment by section 70201(f)(3) of Pub. L. 119–21 applicable to taxable years beginning after Dec. 31, 2024, see section 70201(j) of Pub. L. 119–21, set out as a note under section 45B of this title.
+
+#35 [retroactive] 26 U.S.C. § 40(g)(4)#body#1  year 2013
+   AMEND: Pub. L. 112–240, § 404(b)(3)(A)(i), substituted “second generation biofuel” for “cellulosic biofuel” wherever appearing in text in subsecs. (a)(4), (b)(4)(C), (6), and (d)(3)(D), (6).
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 112–240, title IV, § 404(a)(3), Jan. 2, 2013, 126 Stat. 2338, provided that: “The amendments made by this subsection [amending this section] shall take effect as if included in section 15321(b) of the Heartland, Habitat, and Horticulture Act of 2008 [p
+
+#36 [retroactive] 26 U.S.C. § 1202(a)(5)#body#1  year 2025
+   AMEND: Subsec. (a)(5). Pub. L. 119–21, § 70431(a)(2), added par. (5).
+   RULE:  applicable to taxable years beginning after July 4, 2025, with amendment by section 70431(a)(4)(B) to take effect as if included in the enactment of section 201 | date July 4, 2025
+   NOTE:  Amendment by section 70431(a)(1)–(3), (4)(B), (5) of Pub. L. 119–21 generally applicable to taxable years beginning after July 4, 2025, with amendment by section 70431(a)(4)(B) to take effect as if included in the enactment of section 2011 of Pub. L. 111–240, 
+
+#37 [retroactive] 26 U.S.C. § 40(d)(5)#body#1  year 2013
+   AMEND: Pub. L. 112–240, § 404(b)(3)(A)(i), substituted “second generation biofuel” for “cellulosic biofuel” wherever appearing in text in subsecs. (a)(4), (b)(4)(C), (6), and (d)(3)(D), (6).
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 112–240, title IV, § 404(a)(3), Jan. 2, 2013, 126 Stat. 2338, provided that: “The amendments made by this subsection [amending this section] shall take effect as if included in section 15321(b) of the Heartland, Habitat, and Horticulture Act of 2008 [p
+
+#38 [retroactive] 26 U.S.C. § 2010(c)(4)#body#1  year 2013
+   AMEND: Subsec. (c)(4)(B)(i). Pub. L. 112–240 substituted “applicable exclusion amount” for “basic exclusion amount”.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 112–240 effective as if included in the amendments made by section 303 of the Tax Relief, Unemployment Insurance Reauthorization, and Job Creation Act of 2010, Pub. L. 111–312, see section 101(c)(3)(B) of Pub. L. 112–240, set out as a note
+
+#39 [retroactive] 26 U.S.C. § 199A(c)(3)#body#1  year 2018
+   AMEND: Subsec. (c)(3)(B). Pub. L. 115–141, § 101(b)(2)(B)(i)(I), struck out “investment” before “items” in introductory provisions.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 11011 of Pub. L. 115–97, see section 101(d) of Pub. L. 115–141, set out as a note under section 62 of this title.
+
+#40 [retroactive] 26 U.S.C. § 1202(b)(4)#body#2  year 2025
+   AMEND: Subsec. (b)(4). Pub. L. 119–21, § 70431(c)(2), added par. (4) relating to inflation adjustment. Paragraph was added as directed “at the end” of subsec. (b), and therefore after par. (5) of subsec. (b) as added by Pub. L. 119–21, §
+   RULE:  applicable to taxable years beginning after July 4, 2025, with amendment by section 70431(a)(4)(B) to take effect as if included in the enactment of section 201 | date July 4, 2025
+   NOTE:  Amendment by section 70431(a)(1)–(3), (4)(B), (5) of Pub. L. 119–21 generally applicable to taxable years beginning after July 4, 2025, with amendment by section 70431(a)(4)(B) to take effect as if included in the enactment of section 2011 of Pub. L. 111–240, 
+
+#41 [retroactive] 26 U.S.C. § 6231(a)-(d)#body#1  year 2018
+   AMEND: Subsec. (a). Pub. L. 115–141, § 206(h)(2), substituted “Any notice of a final partnership adjustment” for “Any notice of a final partnership adjustment shall not be mailed earlier than 270 days after the date on which the notice o
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 1101 of Pub. L. 114–74, see section 207 of Pub. L. 115–141, set out as a note under section 6031 of this title.
+
+#42 [retroactive] 26 U.S.C. § 57(a)(7)#body#1  year 2025
+   AMEND: Subsec. (a)(7). Pub. L. 119–21 substituted “In the case of stock acquired on or before the date of the enactment of the Creating Small Business Jobs Act of 2010, an amount” for “An amount”.
+   RULE:  on or after the date of enactment | date July 4, 2025
+   NOTE:  Pub. L. 119–21, title VII, § 70431(a)(6), July 4, 2025, 139 Stat. 241, provided that: “(A) In general.—Except as provided in subparagraph (B), the amendments made by this subsection [amending this section and section 1202 of this title] shall apply to taxable 
+
+#43 [section added] 26 U.S.C. § 48D(c)#body#1  year 2022
+   AMEND: section added
+   RULE:  applicable to property placed in service after Dec. 31, 2022, and, for any property the construction of which begins prior to Jan | date Dec. 31, 2022
+   NOTE:  Effective DateSection applicable to property placed in service after Dec. 31, 2022, and, for any property the construction of which begins prior to Jan. 1, 2023, only to the extent of the basis thereof attributable to the construction, reconstruction, or erect
+
+#44 [section added] 26 U.S.C. § 7527A(b)(1)#body#1  year 2021
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after Dec. 31, 2020, see section 9611(c)(1) of Pub | date Dec. 31, 2020
+   NOTE:  Effective DateSection applicable to taxable years beginning after Dec. 31, 2020, see section 9611(c)(1) of Pub. L. 117–2, set out as an Effective Date of 2021 Amendment note under section 24 of this title.
+
+#45 [section added] 26 U.S.C. § 6659(a)-(b)#body#1  year 2025
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after Dec. 31, 2025, see section 70204(e) of Pub | date Dec. 31, 2025
+   NOTE:  Effective DateSection applicable to taxable years beginning after Dec. 31, 2025, see section 70204(e) of Pub. L. 119–21, set out as a note under section 128 of this title.
+
+#46 [section added] 26 U.S.C. § 9817(b)(7)#body#2  year 2020
+   AMEND: section added
+   RULE:  shall apply with respect to plan years beginning on or after January 1, 2022 | date January 1, 2022
+   NOTE:  Effective DatePub. L. 116–260, div. BB, title I, § 105(a)(4), Dec. 27, 2020, 134 Stat. 2851, provided that: “The amendments made by this subsection [enacting this section, section 1185f of Title 29, Labor, and section 300gg–112 of Title 42, The Public Health a
+
+#47 [section added] 26 U.S.C. § 128(a)-(c)#body#1  year 2025
+   AMEND: section added
+   RULE:  shall apply to taxable years beginning after December 31, 2025 | date December 31, 2025
+   NOTE:  Effective DatePub. L. 119–21, title VII, § 70204(e), July 4, 2025, 139 Stat. 188, provided that: “The amendments made by this section [enacting this section and sections 139J, 530A, 6434, and 6659 of this title and amending sections 529A, 4973, 6213, and 6693 
+
+#48 [section added] 26 U.S.C. § 3134(c)(1)#body#1  year 2021
+   AMEND: section added
+   RULE:  shall apply to calendar quarters beginning after June 30, 2021 | date June 30, 2021
+   NOTE:  Effective DatePub. L. 117–2, title IX, § 9651(d), Mar. 11, 2021, 135 Stat. 182, provided that: “The amendments made by this section [enacting this section and amending section 1324 of Title 31, Money and Finance] shall apply to calendar quarters beginning afte
+
+#49 [section added] 26 U.S.C. § 45Z(f)(7)#body#1  year 2022
+   AMEND: section added
+   RULE:  shall apply to transportation fuel produced after December 31, 2024 | date December 31, 2024
+   NOTE:  Effective DatePub. L. 117–169, title I, § 13704(c), Aug. 16, 2022, 136 Stat. 2003, provided that: “The amendments made by this section [enacting this section and amending sections 25C, 30C, 38, and 4101 of this title] shall apply to transportation fuel produce
+
+#50 [section added] 26 U.S.C. § 6433(e)#body#1  year 2022
+   AMEND: section added
+   RULE:  shall apply to taxable years beginning after December 31, 2026 | date December 31, 2026
+   NOTE:  Effective DatePub. L. 117–328, div. T, title I, § 103(f), Dec. 29, 2022, 136 Stat. 5286, provided that: “The amendments made by this section [enacting this section and amending sections 25B and 6211 of this title and section 1324 of Title 31, Money and Finance
+
+{'quoted law': 934, 'summary/cross-ref': 522, 'retroactive': 206, 'section added': 337}
+
+======== ROUND 2 SAMPLE ========
+#1 [quoted law] 26 U.S.C. § 851(b)(3)#body#1  year 2017
+   AMEND: Subsec. (b). Pub. L. 115–97 substituted “section 951(a)(1)(A)” for “section 951(a)(1)(A)(i)” in concluding provisions.
+   RULE:  shall apply to taxable years of foreign corporations beginning after December 31, 2017, and to taxable years of United States shareholders in which or with which such tax | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 14212(c), Dec. 22, 2017, 131 Stat. 2217, provided that: “The amendments made by this section [amending this section and sections 951, 952, 953, 964, and 970 of this title and repealing section 955 of this title] shall apply to taxable years of foreign corporations beginnin
+
+#2 [quoted law] 26 U.S.C. § 4943(g)(4)#body#1  year 2018
+   AMEND: Subsec. (g). Pub. L. 115–123 added subsec. (g).
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–123, div. D, title II, § 41110(b), Feb. 9, 2018, 132 Stat. 160, provided that: “The amendment made by this section [amending this section] shall apply to taxable years beginning after December 31, 2017.”
+
+#3 [quoted law] 26 U.S.C. § 864(c)(8)#body#2  year 2017
+   AMEND: Subsec. (c)(8). Pub. L. 115–97, § 13501(a)(1), added par. (8).
+   RULE:  shall apply to sales, exchanges, and dispositions on or after November 27, 2017 | date November 27, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13501(c)(1), Dec. 22, 2017, 131 Stat. 2141, provided that: “The amendments made by subsection (a) [amending this section] shall apply to sales, exchanges, and dispositions on or after November 27, 2017.”
+
+#4 [quoted law] 26 U.S.C. § 851(b)(2)#body#1  year 2017
+   AMEND: Subsec. (b). Pub. L. 115–97 substituted “section 951(a)(1)(A)” for “section 951(a)(1)(A)(i)” in concluding provisions.
+   RULE:  shall apply to taxable years of foreign corporations beginning after December 31, 2017, and to taxable years of United States shareholders in which or with which such tax | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 14212(c), Dec. 22, 2017, 131 Stat. 2217, provided that: “The amendments made by this section [amending this section and sections 951, 952, 953, 964, and 970 of this title and repealing section 955 of this title] shall apply to taxable years of foreign corporations beginnin
+
+#5 [quoted law] 26 U.S.C. § 1297(f)(1)#body#1  year 2017
+   AMEND: Subsec. (f). Pub. L. 115–97, § 14501(b), added subsec. (f).
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 14501(c), Dec. 22, 2017, 131 Stat. 2235, provided that: “The amendments made by this section [amending this section] shall apply to taxable years beginning after December 31, 2017.”
+
+#6 [quoted law] 26 U.S.C. § 5041(c)(6)#body#1  year 2020
+   AMEND: Subsec. (c). Pub. L. 116–260, § 106(d)(1)(A), struck out “for small domestic producers” after “Credit” in heading.
+   RULE:  shall apply to wine removed after December 31, 2020 | date December 31, 2020
+   NOTE:  Pub. L. 116–260, div. EE, title I, § 106(d)(3), Dec. 27, 2020, 134 Stat. 3044, provided that: “The amendments made by this subsection [amending this section] shall apply to wine removed after December 31, 2020.”
+
+#7 [quoted law] 26 U.S.C. § 163(j)(4)#body#1  year 2017
+   AMEND: Subsec. (j). Pub. L. 115–97, § 13301(a), amended subsec. (j) generally. Prior to amendment, subsec. (j) related to a limitation on deduction for interest on certain indebtedness of a corporation.
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13301(c), Dec. 22, 2017, 131 Stat. 2121, provided that: “The amendments made by this section [amending this section and sections 381 and 382 of this title] shall apply to taxable years beginning after December 31, 2017.”
+
+#8 [quoted law] 26 U.S.C. § 163(h)(5)#body#1  year 2014
+   AMEND: Subsec. (h)(5). Pub. L. 113–295, § 221(a)(25)(A)(ii), struck out par. (5). Text read as follows: “In the case of any taxable year beginning in calendar years 1987 through 1990, the amount of interest 
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#9 [quoted law] 26 U.S.C. § 1314(d)#body#1  year 2014
+   AMEND: Subsecs. (d), (e). Pub. L. 113–295 redesignated subsec. (e) as (d) and struck out former subsec. (d). Prior to amendment, text of subsec. (d) read as follows: “No adjustment shall be made under this p
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#10 [quoted law] 26 U.S.C. § 904(d)(2)#body#4  year 2025
+   AMEND: Subsec. (d)(2)(H)(i). Pub. L. 119–21, § 70311(b)(1), substituted “paragraph (1)(D)” for “paragraph (1)(B)”.
+   RULE:  shall apply to taxable years beginning after December 31, 2025 | date December 31, 2025
+   NOTE:  Pub. L. 119–21, title VII, § 70311(c), July 4, 2025, 139 Stat. 203, provided that: “The amendments made by this section [amending this section and section 951A of this title] shall apply to taxable years beginning after December 31, 2025.”
+
+#11 [quoted law] 26 U.S.C. § 6103(k)(6)#body#1  year 2019
+   AMEND: Subsec. (k)(6). Pub. L. 116–25, § 1405(a)(2)(C), inserted at end “This paragraph shall not apply to any disclosure to an individual providing information relating to any purpose described in paragraph
+   RULE:  on or after the date of enactment | date July 1, 2019
+   NOTE:  Pub. L. 116–25, title I, § 1405(c)(1), July 1, 2019, 133 Stat. 1000, provided that: “The amendments made by subsection (a) [amending this section and section 7213 of this title] shall apply to disclosures made after the date of the enactment of this Act [July 1, 2019].”
+
+#12 [quoted law] 26 U.S.C. § 6045(g)(2)#body#1  year 2015
+   AMEND: Subsec. (g)(2)(B)(iii). Pub. L. 114–113 added cl. (iii).
+   RULE:  shall apply to returns required to be filed, and payee statements required to be furnished, after December 31, 2016 | date December 31, 2016
+   NOTE:  Pub. L. 114–113, div. Q, title II, § 202(e), Dec. 18, 2015, 129 Stat. 3078, as amended by Pub. L. 115–141, div. U, title I, § 101(f)(3), Mar. 23, 2018, 132 Stat. 1161, provided that: “The amendments made by this section [amending this section and sections 6721 and 6722 of this title] shall apply to 
+
+#13 [quoted law] 26 U.S.C. § 163(h)(5)#body#2  year 2014
+   AMEND: Subsec. (h)(5). Pub. L. 113–295, § 221(a)(25)(A)(ii), struck out par. (5). Text read as follows: “In the case of any taxable year beginning in calendar years 1987 through 1990, the amount of interest 
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#14 [quoted law] 26 U.S.C. § 48(a)(15)#body#1  year 2022
+   AMEND: Subsec. (a)(15). Pub. L. 117–169, § 13204(c)(1), added par. (15). Former par. (15) redesignated (16). Pub. L. 117–169, § 13102(p), added par. (15).
+   RULE:  shall apply to property placed in service after December 31, 2022, and, for any property the construction of which begins prior to January 1, 2023, only to the extent of  | date December 31, 2022
+   NOTE:  Pub. L. 117–169, title I, § 13204(c)(3), Aug. 16, 2022, 136 Stat. 1941, provided that: “The amendments made by this subsection [amending this section] shall apply to property placed in service after December 31, 2022, and, for any property the construction of which begins prior to January 1, 2023, o
+
+#15 [quoted law] 26 U.S.C. § 833(c)(5)#body#1  year 2014
+   AMEND: Subsec. (c)(5). Pub. L. 113–235 substituted “paragraphs (2) and (3) of subsection (a)” for “this section” and inserted “and for activities that improve health care quality” after “clinical services”.
+   RULE:  shall apply to taxable years beginning after December 31, 2009 | date December 31, 2009
+   NOTE:  Pub. L. 113–235, div. N, § 102(b), Dec. 16, 2014, 128 Stat. 2773, provided that: “The amendments made by this section [amending this section] shall apply to taxable years beginning after December 31, 2009.”
+
+#16 [quoted law] 26 U.S.C. § 402(c)(3)#body#1  year 2017
+   AMEND: Subsec. (c)(3). Pub. L. 115–97, § 13613(b)(1), substituted “Time limit on transfers” for “Transfer must be made within 60 days of receipt” in heading.
+   RULE:  shall apply to plan loan offset amounts which are treated as distributed in taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13613(c), Dec. 22, 2017, 131 Stat. 2166, provided that: “The amendments made by this section [amending this section] shall apply to plan loan offset amounts which are treated as distributed in taxable years beginning after December 31, 2017.”
+
+#17 [quoted law] 26 U.S.C. § 105(f)-(g)#body#1  year 2014
+   AMEND: Subsec. (f). Pub. L. 113–295 struck out “or (d)” after “subsection (c)”.
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#18 [quoted law] 26 U.S.C. § 45Z(d)-(e)#body#1  year 2025
+   AMEND: Subsec. (d)(5)(A)(iv). Pub. L. 119–21, § 70521(e)(1), added cl. (iv).
+   RULE:  shall apply to transportation fuel produced after December 31, 2025 | date December 31, 2025
+   NOTE:  Pub. L. 119–21, title VII, § 70521(a)(2), July 4, 2025, 139 Stat. 276, provided that: “The amendments made by this subsection [amending this section] shall apply to transportation fuel produced after December 31, 2025.”
+
+#19 [summary/cross-ref] 26 U.S.C. § 908(a)-(b)#body#1  year 2017
+   AMEND: Subsec. (a). Pub. L. 115–97 struck out “902 or” after “or under section” in introductory provisions.
+   RULE:  applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable  | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable years of foreign corporations end, see section 14301(d) of Pub. L. 115–97, set out as a note under sec
+
+#20 [summary/cross-ref] 26 U.S.C. § 6652(p)#body#1  year 2017
+   AMEND: Subsec. (p). Pub. L. 115–97, § 13603(e), added subsec. (p).
+   RULE:  applicable to failures to provide notice after Dec. 31, 2017, see section 13603(f) | date Dec. 31, 2017
+   NOTE:  Amendment by section 13603(e) of Pub. L. 115–97 applicable to failures to provide notice after Dec. 31, 2017, see section 13603(f)
+
+#21 [summary/cross-ref] 26 U.S.C. § 7803(e)(3)#body#1  year 2019
+   AMEND: Subsec. (e). Pub. L. 116–25, § 1001(a), added subsec. (e).
+   RULE:  on or after the date of enactment | date None
+   NOTE:  (7) of the Internal Revenue Code of 1986, as added by subsection (a), shall apply to conferences occurring after the date which is 1 year after the date of the enactment of this Act.”
+
+#22 [summary/cross-ref] 26 U.S.C. § 4973(g)-(h)#body#1  year 2014
+   AMEND: Subsec. (h). Pub. L. 113–295, § 102(b)(2), added subsec. (h).
+   RULE:  applicable to taxable years beginning after Dec. 31, 2014, see section 102(f) | date Dec. 31, 2014
+   NOTE:  Amendment by Pub. L. 113–295 applicable to taxable years beginning after Dec. 31, 2014, see section 102(f)
+
+#23 [summary/cross-ref] 26 U.S.C. § 1445(f)#body#1  year 2015
+   AMEND: Subsec. (f)(3). Pub. L. 114–113, § 323(b), substituted “any person other than—” for “any person other than a United States person.” and added subpars. (A) and (B).
+   RULE:  applicable to dispositions and distributions after Dec. 18, 2015, see section 323(c) of Pub | date Dec. 18, 2015
+   NOTE:  Amendment by section 323(b) of Pub. L. 114–113 applicable to dispositions and distributions after Dec. 18, 2015, see section 323(c) of Pub. L. 114–113, set out as a note under section 897 of this title.
+
+#24 [summary/cross-ref] 26 U.S.C. § 38(b)(35)#body#1  year 2022
+   AMEND: Subsec. (b)(35). Pub. L. 117–169, § 13203(b), added par. (35).
+   RULE:  applicable to fuel sold or used after Dec. 31, 2022, see section 13203(f) of Pub | date Dec. 31, 2022
+   NOTE:  Amendment by section 13203(b) of Pub. L. 117–169 applicable to fuel sold or used after Dec. 31, 2022, see section 13203(f) of Pub. L. 117–169, set out as an Effective Date note under section 40B of this title.
+
+#25 [summary/cross-ref] 26 U.S.C. § 1272(a)(4)#body#1  year 2018
+   AMEND: Subsec. (a). Pub. L. 115–141, § 401(c)(1)(F)(i), struck out “on debt instruments issued after July 1, 1982,” after “discount” in heading.
+   RULE:  applicable to debt instruments issued on or after July 2, 1982, see section 401(c)(1)(H) of Pub | date July 2, 1982
+   NOTE:  Amendment by section 401(c)(1)(B), (F) of Pub. L. 115–141 applicable to debt instruments issued on or after July 2, 1982, see section 401(c)(1)(H) of Pub. L. 115–141, set out as a note under section 163 of this title.
+
+#26 [summary/cross-ref] 26 U.S.C. § 457(b)(5)#body#1  year 2022
+   AMEND: Subsec. (b). Pub. L. 117–328, § 110(f), inserted at end of concluding provisions “A plan which is established and maintained by an employer which is described in subsection (e)(1)(A) shall not be trea
+   RULE:  applicable to contributions made for plan years beginning after Dec. 31, 2023, see section 110(h) of Pub | date Dec. 31, 2023
+   NOTE:  Amendment by section 110(f) of Pub. L. 117–328 applicable to contributions made for plan years beginning after Dec. 31, 2023, see section 110(h) of Pub. L. 117–328, set out as a note under section 401 of this title.
+
+#27 [summary/cross-ref] 26 U.S.C. § 691(c)(4)#body#1  year 2017
+   AMEND: Subsec. (c)(4). Pub. L. 115–97 struck out “1201,” after “1(h),”.
+   RULE:  applicable to taxable years beginning after Dec. 31, 2017, see section 13001(c)(1) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to taxable years beginning after Dec. 31, 2017, see section 13001(c)(1) of Pub. L. 115–97, set out as a note under section 11 of this title.
+
+#28 [summary/cross-ref] 26 U.S.C. § 3303(a)(3)#body#1  year 2014
+   AMEND: Subsec. (a). Pub. L. 113–295, § 206(c)(2)(B), substituted “paragraphs (1), (2), (3), and (4)” for “paragraphs (1), (2), and (3)” and “paragraph (1), (2), (3), or (4)” for “paragraph (1), (2), or (3)” 
+   RULE:  applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 20 | date Dec. 19, 2014
+   NOTE:  Amendment by Pub. L. 113–295 applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 206(g)
+
+#29 [summary/cross-ref] 26 U.S.C. § 6051(a)(16)#body#1  year 2017
+   AMEND: Subsec. (a)(16), (17). Pub. L. 115–97 added pars. (16) and (17).
+   RULE:  applicable to stock attributable to options exercised, or restricted stock units settled, after Dec. 31, 2017, see section 13603(f)(1) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to stock attributable to options exercised, or restricted stock units settled, after Dec. 31, 2017, see section 13603(f)(1) of Pub. L. 115–97, set out as a note under section 83 of this title.
+
+#30 [summary/cross-ref] 26 U.S.C. § 1291(g)#body#1  year 2017
+   AMEND: Subsec. (g)(2)(A). Pub. L. 115–97 substituted “any distribution, any withholding tax imposed with respect to such distribution, but only if” for “any distribution— “(i) any foreign taxes deemed paid u
+   RULE:  applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable  | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable years of foreign corporations end, see section 14301(d) of Pub. L. 115–97, set out as a note under sec
+
+#31 [summary/cross-ref] 26 U.S.C. § 3303(a)(1)#body#1  year 2014
+   AMEND: Subsec. (a). Pub. L. 113–295, § 206(c)(2)(B), substituted “paragraphs (1), (2), (3), and (4)” for “paragraphs (1), (2), and (3)” and “paragraph (1), (2), (3), or (4)” for “paragraph (1), (2), or (3)” 
+   RULE:  applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 20 | date Dec. 19, 2014
+   NOTE:  Amendment by Pub. L. 113–295 applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 206(g)
+
+#32 [summary/cross-ref] 26 U.S.C. § 59(k)(1)#body#2  year 2022
+   AMEND: Subsec. (k). Pub. L. 117–169, § 10101(a)(2), added subsec. (k).
+   RULE:  applicable to taxable years beginning after Dec. 31, 2022, see section 10101(f) of Pub | date Dec. 31, 2022
+   NOTE:  Amendment by section 10101(a)(2), (c) of Pub. L. 117–169 applicable to taxable years beginning after Dec. 31, 2022, see section 10101(f) of Pub. L. 117–169, set out as a note under section 11 of this title.
+
+#33 [summary/cross-ref] 26 U.S.C. § 1381(a)-(c)#body#1  year 2017
+   AMEND: Subsec. (b). Pub. L. 115–97 substituted “tax imposed by section 11” for “taxes imposed by section 11 or 1201”.
+   RULE:  applicable to taxable years beginning after Dec. 31, 2017, see section 13001(c)(1) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to taxable years beginning after Dec. 31, 2017, see section 13001(c)(1) of Pub. L. 115–97, set out as a note under section 11 of this title.
+
+#34 [summary/cross-ref] 26 U.S.C. § 30B(f)-(g)#body#1  year 2013
+   AMEND: Subsec. (g)(2). Pub. L. 112–240 amended par. (2) generally. Prior to amendment, par. (2) related to personal credit with a limitation based on amount of tax.
+   RULE:  applicable to taxable years beginning after Dec. 31, 2011, see section 104(d) of Pub | date Dec. 31, 2011
+   NOTE:  Amendment by Pub. L. 112–240 applicable to taxable years beginning after Dec. 31, 2011, see section 104(d) of Pub. L. 112–240, set out as a note under section 23 of this title.
+
+#35 [retroactive] 26 U.S.C. § 6235(a)-(b)#body#1  year 2018
+   AMEND: Subsec. (a). Pub. L. 115–141, § 206(k)(1), inserted “or section 905(c)” after “Except as otherwise provided in this section” and substituted “subchapter” for “subpart” in introductory provisions.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 1101 of Pub. L. 114–74, see section 207 of Pub. L. 115–141, set out as a note under section 6031 of this title.
+
+#36 [retroactive] 26 U.S.C. § 904(h)(7)#body#1  year 2014
+   AMEND: Subsec. (h)(7). Pub. L. 113–295, § 219(c), struck out “as ordinary income under section 1246 or” after “gain treated”.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 113–295, div. A, title II, § 219(d), Dec. 19, 2014, 128 Stat. 4035, provided that: “The amendments made by this section [amending this section, section 199 of this title, and provisions set out as a note under section 114 of this title] shall take effect as if included in the provision of th
+
+#37 [retroactive] 26 U.S.C. § 40(d)(3)#body#1  year 2013
+   AMEND: Pub. L. 112–240, § 404(b)(3)(A)(i), substituted “second generation biofuel” for “cellulosic biofuel” wherever appearing in text in subsecs. (a)(4), (b)(4)(C), (6), and (d)(3)(D), (6).
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 112–240, title IV, § 404(a)(3), Jan. 2, 2013, 126 Stat. 2338, provided that: “The amendments made by this subsection [amending this section] shall take effect as if included in section 15321(b) of the Heartland, Habitat, and Horticulture Act of 2008 [probably should be Heartland, Habitat, Ha
+
+#38 [retroactive] 26 U.S.C. § 40(b)(6)#body#2  year 2013
+   AMEND: Subsec. (b)(6). Pub. L. 112–240, § 404(b)(3)(A)(ii), substituted “Second generation” for “Cellulosic” in heading.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 112–240, title IV, § 404(a)(3), Jan. 2, 2013, 126 Stat. 2338, provided that: “The amendments made by this subsection [amending this section] shall take effect as if included in section 15321(b) of the Heartland, Habitat, and Horticulture Act of 2008 [probably should be Heartland, Habitat, Ha
+
+#39 [retroactive] 26 U.S.C. § 40(a)#body#1  year 2013
+   AMEND: Pub. L. 112–240, § 404(b)(3)(A)(i), substituted “second generation biofuel” for “cellulosic biofuel” wherever appearing in text in subsecs. (a)(4), (b)(4)(C), (6), and (d)(3)(D), (6).
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 112–240, title IV, § 404(a)(3), Jan. 2, 2013, 126 Stat. 2338, provided that: “The amendments made by this subsection [amending this section] shall take effect as if included in section 15321(b) of the Heartland, Habitat, and Horticulture Act of 2008 [probably should be Heartland, Habitat, Ha
+
+#40 [retroactive] 26 U.S.C. § 168(j)(8)#body#1  year 2018
+   AMEND: Subsec. (j)(8). Pub. L. 115–141, § 101(e)(2), substituted “paragraph (1)” for “this subsection”.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by section 101(d)(1), (2), (e) of Pub. L. 115–141 effective as if included in the provision of the Protecting Americans from Tax Hikes Act of 2015, div. Q of Pub. L. 114–113, to which such amendment relates, see section 101(s) of Pub. L. 115–141, set out as a note under section 24 of this 
+
+#41 [retroactive] 26 U.S.C. § 6428(g)(1)#body#1  year 2020
+   AMEND: Subsec. (g). Pub. L. 116–260, § 273(a)(3), added subsec. (g) and struck out former subsec. (g) which set forth general provisions relating to identification number requirement, defined “valid identifi
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Pub. L. 116–260, div. N, title II, § 273(c), Dec. 27, 2020, 134 Stat. 1978, provided that: “The amendments made by this section [amending this section and provisions set out as a note under this section] shall take effect as if included in section 2201 of the CARES Act [Pub. L. 116–136, enacting thi
+
+#42 [retroactive] 26 U.S.C. § 199A(g)(1)#body#1  year 2018
+   AMEND: Subsec. (g). Pub. L. 115–141, § 101(a)(1), amended subsec. (g) generally. Prior to amendment, subsec. (g) related to deduction allowed to specified agricultural or horticultural cooperatives.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 11011 of Pub. L. 115–97, see section 101(d) of Pub. L. 115–141, set out as a note under section 62 of this title.
+
+#43 [section added] 26 U.S.C. § 6418(g)(4)#body#1  year 2022
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after Dec. 31, 2022, see section 13801(g) of Pub | date Dec. 31, 2022
+   NOTE:  Effective DateSection applicable to taxable years beginning after Dec. 31, 2022, see section 13801(g) of Pub. L. 117–169, set out as a note under section 6417 of this title.
+
+#44 [section added] 26 U.S.C. § 45X(b)(1)#body#1  year 2022
+   AMEND: section added
+   RULE:  shall apply to components produced and sold after December 31, 2022 | date December 31, 2022
+   NOTE:  Effective DatePub. L. 117–169, title I, § 13502(c), Aug. 16, 2022, 136 Stat. 1981, provided that: “The amendments made by this section [enacting this section and amending section 38 of this title] shall apply to components produced and sold after December 31, 2022.”
+
+#45 [section added] 26 U.S.C. § 3511(g)-(h)#body#1  year 2014
+   AMEND: section added
+   RULE:  applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 20 | date Dec. 19, 2014
+   NOTE:  Effective DateSection applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 206(g)(1) of Pub. L. 113–295, set out as an Effective Date of 2014 Amendment note under section 3302 of this t
+
+#46 [section added] 26 U.S.C. § 529A(c)(3)#body#1  year 2014
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after Dec. 31, 2014, see section 102(f)(1) of Pub | date Dec. 31, 2014
+   NOTE:  Effective DateSection applicable to taxable years beginning after Dec. 31, 2014, see section 102(f)(1) of Pub. L. 113–295, set out as an Effective Date of 2014 Amendment note under section 552a of Title 5, Government Organization and Employees.
+
+#47 [section added] 26 U.S.C. § 3132(g)-(j)#body#1  year 2021
+   AMEND: section added
+   RULE:  applicable to amounts paid with respect to calendar quarters beginning after Mar. 31, 2021, see section 9641(d) of Pub | date Mar. 31, 2021
+   NOTE:  Effective DateSection applicable to amounts paid with respect to calendar quarters beginning after Mar. 31, 2021, see section 9641(d) of Pub. L. 117–2, set out as a note under secton 3131 of this title.
+
+#48 [section added] 26 U.S.C. § 6418(a)-(c)#body#1  year 2022
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after Dec. 31, 2022, see section 13801(g) of Pub | date Dec. 31, 2022
+   NOTE:  Effective DateSection applicable to taxable years beginning after Dec. 31, 2022, see section 13801(g) of Pub. L. 117–169, set out as a note under section 6417 of this title.
+
+#49 [section added] 26 U.S.C. § 174A(d)#body#1  year 2025
+   AMEND: section added
+   RULE:  shall apply to amounts paid or incurred in taxable years beginning after December 31, 2024 | date December 31, 2024
+   NOTE:  Effective DatePub. L. 119–21, title VII, § 70302(e), (f), July 4, 2025, 139 Stat. 193, 194, provided that: “(e) Effective Date.—“(1) In general.—Except as otherwise provided in this subsection or subsection (f)(1), the amendments made by this section [enacting this section and amending sections 41, 
+
+#50 [section added] 26 U.S.C. § 6039K(b)(2)#body#1  year 2025
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after July 4, 2025, see section 70421(d)(5) of Pub | date July 4, 2025
+   NOTE:  Effective DateSection applicable to taxable years beginning after July 4, 2025, see section 70421(d)(5) of Pub. L. 119–21, set out as an Effective Date of 2025 Amendment note under section 6011 of this title.
+
+{'quoted law': 734, 'summary/cross-ref': 467, 'retroactive': 122, 'section added': 370} excluded 50
+
+======== ROUND 3 SAMPLE ========
+#1 [quoted law] 26 U.S.C. § 312(a)-(d)#body#1  year 2014
+   AMEND: Subsec. (d)(2), (3). Pub. L. 113–295, § 221(a)(49), redesignated par. (3) as (2) and struck out former par. (2) which read as follows: “In the case of a distribution of stock or securities, or propert
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#2 [quoted law] 26 U.S.C. § 45S(a)-(b)#body#1  year 2025
+   AMEND: Subsec. (a)(3). Pub. L. 119–21, § 70304(a)(1)(B), added par. (3).
+   RULE:  shall apply to taxable years beginning after December 31, 2025 | date December 31, 2025
+   NOTE:  Pub. L. 119–21, title VII, § 70304(c), July 4, 2025, 139 Stat. 197, provided that: “The amendments made by this section [amending this section and section 280C of this title] shall apply to taxable years beginning after December 31, 2025.”
+
+#3 [quoted law] 26 U.S.C. § 23(b)-(c)#body#1  year 2013
+   AMEND: Subsec. (c). Pub. L. 112–240, § 104(c)(2)(A)(ii), (iii), added par. (1), redesignated par. (3) as (2), and struck out former pars. (1) and (2) which related to rule for years in which all personal cre
+   RULE:  shall apply to taxable years beginning after December 31, 2011 | date December 31, 2011
+   NOTE:  Pub. L. 112–240, title I, § 104(d), Jan. 2, 2013, 126 Stat. 2323, provided that: “The amendments made by this section [amending this section and sections 24, 25, 25A, 25B, 25D, 26, 30, 30B, 30D, 55, 904, and 1400C of this title] shall apply to taxable years beginning after December 31, 2011.”
+
+#4 [quoted law] 26 U.S.C. § 5051(a)(4)#body#1  year 2020
+   AMEND: Subsec. (a)(4)(B). Pub. L. 116–260, § 106(b)(3)(B)(ii), substituted “The Secretary, after consultation with the Secretary of the Department of Homeland Security,” for “The Secretary” in introductory p
+   RULE:  shall apply to beer removed after December 31, 2020 | date December 31, 2020
+   NOTE:  Pub. L. 116–260, div. EE, title I, § 106(b)(5), Dec. 27, 2020, 134 Stat. 3042, provided that: “The amendments made by this subsection [amending this section] shall apply to beer removed after December 31, 2020.”
+
+#5 [quoted law] 26 U.S.C. § 401(k)(11)#body#2  year 2022
+   AMEND: Subsec. (k)(11)(E). Pub. L. 117–328, § 117(g)(2), added subpar. (E).
+   RULE:  shall apply to taxable years beginning after December 31, 2023 | date December 31, 2023
+   NOTE:  Pub. L. 117–328, div. T, title I, § 117(h), Dec. 29, 2022, 136 Stat. 5301, provided that: “The amendments made by this section [amending this section and sections 408 and 414 of this title] shall apply to taxable years beginning after December 31, 2023.”
+
+#6 [quoted law] 26 U.S.C. § 453B(e)(3)#body#1  year 2017
+   AMEND: Subsec. (e)(3). Pub. L. 115–97, § 13512(b)(1)(B), added par. (3).
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13512(c), Dec. 22, 2017, 131 Stat. 2143, provided that: “The amendments made by this section [amending this section and sections 465, 801, 804, 805, 842, and 953 of this title and repealing section 806 of this title] shall apply to taxable years beginning after December 31
+
+#7 [quoted law] 26 U.S.C. § 432(e)(9)#body#1  year 2014
+   AMEND: Subsec. (e)(9). Pub. L. 113–235, § 201(b)(5), added par. (9). Pub. L. 113–235, § 109(b)(1), struck out par. (9) which related to adjustments disregarded in withdrawal liability determination.
+   RULE:  on or after the date of enactment | date Dec. 16, 2014
+   NOTE:  Pub. L. 113–235, div. O, title II, § 201(c), Dec. 16, 2014, 128 Stat. 2822, provided that: “The amendments made by this section [amending this section and sections 1021, 1085, 1303 and 1399 of Title 29, Labor] shall take effect on the date of the enactment of this Act [Dec. 16, 2014].”
+
+#8 [quoted law] 26 U.S.C. § 2001(g)#body#1  year 2017
+   AMEND: Subsec. (g). Pub. L. 115–97 amended subsec. (g) generally. Prior to amendment, text read as follows: “For purposes of applying subsection (b)(2) with respect to 1 or more gifts, the rates of tax under
+   RULE:  shall apply to estates of decedents dying and gifts made after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 11061(c), Dec. 22, 2017, 131 Stat. 2091, provided that: “The amendments made by this section [amending this section and section 2010 of this title] shall apply to estates of decedents dying and gifts made after December 31, 2017.”
+
+#9 [quoted law] 26 U.S.C. § 420(e)(7)#body#1  year 2022
+   AMEND: Subsec. (e)(7). Pub. L. 117–328, § 606(a)(2)(A), added par. (7).
+   RULE:  on or after the date of enactment | date Dec. 29, 2022
+   NOTE:  Pub. L. 117–328, div. T, title VI, § 606(c), Dec. 29, 2022, 136 Stat. 5398, provided that: “The amendments made by this section [amending this section and sections 1021, 1103, and 1108 of Title 29, Labor] shall apply to transfers made after the date of the enactment of this Act [Dec. 29, 2022].”
+
+#10 [quoted law] 26 U.S.C. § 72(t)(2)#body#3  year 2019
+   AMEND: Subsec. (t)(2)(H). Pub. L. 116–94, § 113(a), added subpar. (H).
+   RULE:  shall apply to distributions made after December 31, 2019 | date December 31, 2019
+   NOTE:  Pub. L. 116–94, div. O, title I, § 113(b), Dec. 20, 2019, 133 Stat. 3156, provided that: “The amendments made by this section [amending this section] shall apply to distributions made after December 31, 2019.”
+
+#11 [quoted law] 26 U.S.C. § 162(p)-(q)#body#1  year 2017
+   AMEND: Subsec. (q). Pub. L. 115–97, § 13307(a), added subsec. (q). Former subsec. (q) redesignated (r), then (s).
+   RULE:  on or after the date of enactment | date Dec. 22, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13307(b), Dec. 22, 2017, 131 Stat. 2129, provided that: “The amendments made by this section [amending this section] shall apply to amounts paid or incurred after the date of the enactment of this Act [Dec. 22, 2017].”
+
+#12 [quoted law] 26 U.S.C. § 219(g)(3)#body#1  year 2014
+   AMEND: Subsec. (g)(3)(B)(i), (ii). Pub. L. 113–295, § 221(a)(38)(E), added cls. (i) and (ii) and struck out former cls. (i) and (ii) which related to applicable dollar amounts for a taxpayer filing a joint r
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#13 [quoted law] 26 U.S.C. § 543(a)(1)#body#1  year 2014
+   AMEND: Subsec. (a)(1)(C) to (E). Pub. L. 113–295 added subpar. (C) and redesignated former subpars. (C) and (D) as (D) and (E), respectively.
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. B, title II, § 207(b), Dec. 19, 2014, 128 Stat. 4072, provided that: “The amendments made by this Act [probably means this section, section 207 of title II of div. B of Pub. L. 113–295, which amended this section] shall apply to taxable years ending on or after the date of the 
+
+#14 [quoted law] 26 U.S.C. § 21(f)-(g)#body#1  year 2021
+   AMEND: Subsec. (g). Pub. L. 117–2, § 9631(a), added subsec. (g).
+   RULE:  shall apply to taxable years beginning after December 31, 2020 | date December 31, 2020
+   NOTE:  Pub. L. 117–2, title IX, § 9631(d), Mar. 11, 2021, 135 Stat. 160, provided that: “The amendments made by this section [amending this section, section 6211 of this title and section 1324 of Title 31, Money and Finance] shall apply to taxable years beginning after December 31, 2020.”
+
+#15 [quoted law] 26 U.S.C. § 168(i)(7)#body#1  year 2017
+   AMEND: Subsec. (i)(7)(B). Pub. L. 115–97, § 13504(b)(1), struck out concluding provisions which read as follows: “Subparagraph (A) shall not apply in the case of a termination of a partnership under section 
+   RULE:  shall apply to partnership taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13504(c), Dec. 22, 2017, 131 Stat. 2142, provided that: “The amendments made by this section [amending this section and sections 708 and 743 of this title] shall apply to partnership taxable years beginning after December 31, 2017.”
+
+#16 [quoted law] 26 U.S.C. § 6060(a)-(c)#body#1  year 2014
+   AMEND: Subsec. (c). Pub. L. 113–295, which directed substitution of “year.” for “ ‘year’ ” and all that followed, was executed by substituting “year.” for “year, except that the first return period shall be 
+   RULE:  on or after the date of enactment | date Dec. 19, 2014
+   NOTE:  Pub. L. 113–295, div. A, title II, § 221(b), Dec. 19, 2014, 128 Stat. 4055, provided that: “(1) General rule.—Except as otherwise provided in subsection (a) [see Tables for classification] or paragraph (2) of this subsection, the amendments made by this section [see Tables for classification] shall 
+
+#17 [quoted law] 26 U.S.C. § 846(c)#body#1  year 2017
+   AMEND: Subsec. (c)(2). Pub. L. 115–97, § 13523(a), amended par. (2) generally. Prior to amendment, text read as follows: “(A) In general.—The annual rate determined by the Secretary under this paragraph for 
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  Pub. L. 115–97, title I, § 13523(d), Dec. 22, 2017, 131 Stat. 2152, provided that: “The amendments made by this section [amending this section] shall apply to taxable years beginning after December 31, 2017.”
+
+#18 [quoted law] 26 U.S.C. § 24(h)(5)#body#1  year 2025
+   AMEND: Subsec. (h)(5). Pub. L. 119–21, § 70104(d), amended par. (5) generally. Prior to amendment, par. (5) related to maximum amount of refundable credit and its adjustment for inflation.
+   RULE:  shall apply to taxable years beginning after December 31, 2024 | date December 31, 2024
+   NOTE:  Pub. L. 119–21, title VII, § 70104(f), July 4, 2025, 139 Stat. 161, provided that: “The amendments made by this section [amending this section and section 6213 of this title] shall apply to taxable years beginning after December 31, 2024.”
+
+#19 [summary/cross-ref] 26 U.S.C. § 48E(a)(3)#body#1  year 2025
+   AMEND: Subsec. (a)(3)(B). Pub. L. 119–21, § 70513(d), amended subpar. (B) generally. Prior to amendment, text read as follows: “Rules similar to the rules of section 48(a)(12) shall apply.”
+   RULE:  applicable to facilities the construction of which begins after the date which is 12 months after July 4, 2025, amendment by section 70513(d) of Pub | date July 4, 2025
+   NOTE:  , except that amendment by section 70513(a) of Pub. L. 119–21 applicable to facilities the construction of which begins after the date which is 12 months after July 4, 2025, amendment by section 70513(d) of Pub. L. 119–21 applicable on or after June 16, 2025, and amendment by section 70513(f) of Pub
+
+#20 [summary/cross-ref] 26 U.S.C. § 48(a)(9)#body#1  year 2022
+   AMEND: Subsec. (a)(9). Pub. L. 117–169, § 13102(k), added par. (9).
+   RULE:  applicable to property placed in service after Dec. 31, 2021, see section 13102(q) | date Dec. 31, 2021
+   NOTE:  Amendment by section 13102(a)–(e), (k), (p) of Pub. L. 117–169 applicable to property placed in service after Dec. 31, 2021, see section 13102(q)
+
+#21 [summary/cross-ref] 26 U.S.C. § 6512(b)(3)#body#1  year 2015
+   AMEND: Subsec. (b)(3). Pub. L. 114–74 struck out first set of concluding provisions “In the case of a credit or refund relating to an affected item (within the meaning of section 6231(a)(5)), the preceding s
+   RULE:  applicable to returns filed for partnership taxable years beginning after Dec. 31, 2017, with certain exceptions, see section 1101(g) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 114–74 applicable to returns filed for partnership taxable years beginning after Dec. 31, 2017, with certain exceptions, see section 1101(g) of Pub. L. 114–74, set out as an Effective Date note under section 6221 of this title.
+
+#22 [summary/cross-ref] 26 U.S.C. § 907(f)(2)#body#1  year 2017
+   AMEND: Subsec. (f)(2)(B)(i). Pub. L. 115–97, § 14301(c)(27), struck out “902 or” after “under section”.
+   RULE:  applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable  | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable years of foreign corporations end, see section 14301(d) of Pub. L. 115–97, set out as a note under sec
+
+#23 [summary/cross-ref] 26 U.S.C. § 761(a)-(d)#body#1  year 2015
+   AMEND: Subsec. (b). Pub. L. 114–74 inserted at end “In the case of a capital interest in a partnership in which capital is a material income-producing factor, whether a person is a partner with respect to su
+   RULE:  applicable to partnership taxable years beginning after Dec. 31, 2015, see section 1102(c) of Pub | date Dec. 31, 2015
+   NOTE:  Amendment by Pub. L. 114–74 applicable to partnership taxable years beginning after Dec. 31, 2015, see section 1102(c) of Pub. L. 114–74, set out as a note under section 704 of this title.
+
+#24 [summary/cross-ref] 26 U.S.C. § 30D(g)(2)#body#1  year 2022
+   AMEND: Subsec. (g). Pub. L. 117–169, § 13401(g)(1), added subsec. (g) and struck out former subsec. (g) which related to credit allowed for 2- and 3-wheeled plug-in electric vehicles.
+   RULE:  shall apply to vehicles placed in service after December 31, 2023 | date December 31, 2023
+   NOTE:  (4) Transfer of credit.—The amendments made by subsection (g) [amending this section] shall apply to vehicles placed in service after December 31, 2023. 
+
+#25 [summary/cross-ref] 26 U.S.C. § 952(c)(1)#body#1  year 2017
+   AMEND: Subsec. (c)(1)(B)(i). Pub. L. 115–97, § 14212(b)(1)(C), substituted “section 951(a)(1)(A)” for “section 951(a)(1)(A)(i)”.
+   RULE:  applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable  | date Dec. 31, 2017
+   NOTE:  Amendment by section 14212(b)(1)(C) of Pub. L. 115–97 applicable to taxable years of foreign corporations beginning after Dec. 31, 2017, and to taxable years of United States shareholders in which or with which such taxable years of foreign corporations end, see section 14212(c) of Pub. L. 115–97, s
+
+#26 [summary/cross-ref] 26 U.S.C. § 5551(d)#body#1  year 2015
+   AMEND: Subsec. (d). Pub. L. 114–113, § 332(b)(1)(B), added subsec. (d).
+   RULE:  applicable to any calendar quarters beginning more than 1 year after Dec. 18, 2015, see section 332(c) of Pub | date Dec. 18, 2015
+   NOTE:  Amendment by Pub. L. 114–113 applicable to any calendar quarters beginning more than 1 year after Dec. 18, 2015, see section 332(c) of Pub. L. 114–113, set out as a note under section 5061 of this title.
+
+#27 [summary/cross-ref] 26 U.S.C. § 6655(g)(4)#body#1  year 2015
+   AMEND: Subsec. (g)(4)(E), (F). Pub. L. 114–41, § 2006(a)(2)(G), added subpar. (E) and redesignated former subpar. (E) as (F).
+   RULE:  applicable to returns for taxable years beginning after Dec. 31, 2015, with special rule for certain C corporations, see section 2006(a) | date Dec. 31, 2015
+   NOTE:  Amendment by Pub. L. 114–41 applicable to returns for taxable years beginning after Dec. 31, 2015, with special rule for certain C corporations, see section 2006(a)
+
+#28 [summary/cross-ref] 26 U.S.C. § 831(b)(3)#body#1  year 2017
+   AMEND: Subsec. (b)(3). Pub. L. 115–97, § 13511(b)(2)(B), struck out “except as provided in section 844,” after “part,” in introductory provisions.
+   RULE:  applicable to losses arising in taxable years beginning after Dec. 31, 2017, see section 13511(c) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by section 13511(b)(2)(B) of Pub. L. 115–97 applicable to losses arising in taxable years beginning after Dec. 31, 2017, see section 13511(c) of Pub. L. 115–97, set out as a note under section 381 of this title.
+
+#29 [summary/cross-ref] 26 U.S.C. § 448(c)#body#1  year 2017
+   AMEND: Subsec. (c). Pub. L. 115–97, § 13102(a)(1), substituted “Gross receipts test” for “$5,000,000 gross receipts test” in heading and amended introductory provisions and par. (1) generally. Prior to amend
+   RULE:  applicable to taxable years beginning after Dec. 31, 2017, see section 13102(e) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 115–97 applicable to taxable years beginning after Dec. 31, 2017, see section 13102(e) of Pub. L. 115–97, set out as a note under section 263A of this title.
+
+#30 [summary/cross-ref] 26 U.S.C. § 7482(b)(1)#body#1  year 2015
+   AMEND: Subsec. (b)(1). Pub. L. 114–74, § 1101(f)(13)(C), substituted “section 6234” for “section 6226, 6228(a), or 6234(c)” in concluding provisions.
+   RULE:  applicable to returns filed for partnership taxable years beginning after Dec. 31, 2017, with certain exceptions, see section 1101(g) of Pub | date Dec. 31, 2017
+   NOTE:  Amendment by Pub. L. 114–74 applicable to returns filed for partnership taxable years beginning after Dec. 31, 2017, with certain exceptions, see section 1101(g) of Pub. L. 114–74, set out as an Effective Date note under section 6221 of this title.
+
+#31 [summary/cross-ref] 26 U.S.C. § 45P(a)-(e)#body#1  year 2015
+   AMEND: Subsec. (a). Pub. L. 114–113, § 122(b)(1), struck out “, in the case of an eligible small business employer” after “section 38”.
+   RULE:  shall apply to taxable years beginning after December 31, 2015 | date December 31, 2015
+   NOTE:  (2) Modification.—The amendments made by subsection (b) [amending this section] shall apply to taxable years beginning after December 31, 2015.”
+
+#32 [summary/cross-ref] 26 U.S.C. § 168(g)(1)#body#1  year 2017
+   AMEND: Subsec. (g)(1)(F). Pub. L. 115–97, § 13204(a)(3)(A)(i), added subpar. (F).
+   RULE:  shall apply to taxable years beginning after December 31, 2017 | date December 31, 2017
+   NOTE:  (2) Amendments related to electing real property trade or business.—The amendments made by subsection (a)(3)(A) [amending this section] shall apply to taxable years beginning after December 31, 2017. 
+
+#33 [summary/cross-ref] 26 U.S.C. § 7701(a)(51)#body#1  year 2025
+   AMEND: Subsec. (a)(51), (52). Pub. L. 119–21 added pars. (51) and (52).
+   RULE:  applicable to taxable years beginning after July 4, 2025, see section 70512(l)(1) of Pub | date July 4, 2025
+   NOTE:  Amendment by Pub. L. 119–21 applicable to taxable years beginning after July 4, 2025, see section 70512(l)(1) of Pub. L. 119–21, set out in a note under section 45 of this title.
+
+#34 [summary/cross-ref] 26 U.S.C. § 36B(f)#body#1  year 2025
+   AMEND: Subsec. (f)(2). Pub. L. 119–21, § 71305(a), (b)(1), struck out subpar. (A) designation and heading and subpar. (B) which related to limitation on increase of advance payments under section 1412 of the
+   RULE:  applicable to taxable years beginning after Dec. 31, 2025, see section 71305(c) of Pub | date Dec. 31, 2025
+   NOTE:  Amendment by section 71305 of Pub. L. 119–21, applicable to taxable years beginning after Dec. 31, 2025, see section 71305(c) of Pub. L. 119–21 set out as a note under section 35 of this title.
+
+#35 [retroactive] 26 U.S.C. § 6225(c)(5)#body#1  year 2015
+   AMEND: Subsec. (c)(5) to (8). Pub. L. 114–113, § 411(a)(2), added par. (5) and redesignated former pars. (5) to (7) as (6) to (8), respectively.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 114–113 effective as if included in section 1101 of Pub. L. 114–74, see section 411(e) of Pub. L. 114–113, set out as a note under section 6031 of this title.
+
+#36 [retroactive] 26 U.S.C. § 853A(a)-(d)#body#1  year 2014
+   AMEND: Subsec. (a). Pub. L. 113–295, § 209(h)(2), in concluding provisions, substituted “with respect to some or all of the credits” for “with respect to credits” and inserted “(determined without regard to 
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 113–295 effective as if included in the provisions of the American Recovery and Reinvestment Tax Act of 2009, Pub. L. 111–5, div. B, title I, to which such amendment relates, see section 209(k) of Pub. L. 113–295, set out as a note under section 24 of this title.
+
+#37 [retroactive] 26 U.S.C. § 6226(c)-(d)#body#1  year 2018
+   AMEND: Subsec. (c)(2). Pub. L. 115–141, § 204(b)(2), inserted “or which is described in subsection (b)(4)(A)(ii)(I),” after “is elected,” in introductory provisions.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 1101 of Pub. L. 114–74, see section 207 of Pub. L. 115–141, set out as a note under section 6031 of this title.
+
+#38 [retroactive] 26 U.S.C. § 199A(c)(1)#body#1  year 2018
+   AMEND: Subsec. (c)(1). Pub. L. 115–141, § 101(b)(2)(A), struck out “, qualified cooperative dividends,” after “qualified REIT dividends”.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 11011 of Pub. L. 115–97, see section 101(d) of Pub. L. 115–141, set out as a note under section 62 of this title.
+
+#39 [retroactive] 26 U.S.C. § 6225(c)(9)#body#1  year 2018
+   AMEND: Subsec. (c)(9). Pub. L. 115–141, § 202(c)(2), added par. (9).
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 1101 of Pub. L. 114–74, see section 207 of Pub. L. 115–141, set out as a note under section 6031 of this title.
+
+#40 [retroactive] 26 U.S.C. § 199A(g)(5)#body#1  year 2018
+   AMEND: Subsec. (g). Pub. L. 115–141, § 101(a)(1), amended subsec. (g) generally. Prior to amendment, subsec. (g) related to deduction allowed to specified agricultural or horticultural cooperatives.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 11011 of Pub. L. 115–97, see section 101(d) of Pub. L. 115–141, set out as a note under section 62 of this title.
+
+#41 [retroactive] 26 U.S.C. § 6233(a)-(c)#body#1  year 2018
+   AMEND: Subsec. (c). Pub. L. 115–141 added subsec. (c).
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by Pub. L. 115–141 effective as if included in section 1101 of Pub. L. 114–74, see section 207 of Pub. L. 115–141, set out as a note under section 6031 of this title.
+
+#42 [retroactive] 26 U.S.C. § 833(b)(3)#body#1  year 2014
+   AMEND: Subsec. (b)(3)(E). Pub. L. 113–295 struck out “, 244,” after “sections 243” in cl. (ii) and in concluding provisions.
+   RULE:  as if included in an earlier law | date None
+   NOTE:  Amendment by section 211(c)(1)(B) of Pub. L. 113–295 effective as if included in the provisions of the Tax Extenders and Alternative Minimum Tax Relief Act of 2008, Pub. L. 110–343, div. C, to which such amendment relates, see section 211(d) of Pub. L. 113–295, set out as a note under section 143 of
+
+#43 [section added] 26 U.S.C. § 6417(d)(1)#body#1  year 2022
+   AMEND: section added
+   RULE:  shall apply to taxable years beginning after December 31, 2022 | date December 31, 2022
+   NOTE:  Effective DatePub. L. 117–169, title I, § 13801(g), Aug. 16, 2022, 136 Stat. 2013, provided that: “The amendments made by this section [enacting this section and section 6418 of this title and amending sections 39 and 50 of this title] shall apply to taxable years beginning after December 31, 2022.”
+
+#44 [section added] 26 U.S.C. § 530A(f)#body#1  year 2025
+   AMEND: section added
+   RULE:  applicable to taxable years beginning after Dec. 31, 2025, see section 70204(e) of Pub | date Dec. 31, 2025
+   NOTE:  Effective DateSection applicable to taxable years beginning after Dec. 31, 2025, see section 70204(e) of Pub. L. 119–21, set out as a note under section 128 of this title.
+
+#45 [section added] 26 U.S.C. § 6417(d)(3)#body#2  year 2022
+   AMEND: section added
+   RULE:  shall apply to taxable years beginning after December 31, 2022 | date December 31, 2022
+   NOTE:  Effective DatePub. L. 117–169, title I, § 13801(g), Aug. 16, 2022, 136 Stat. 2013, provided that: “The amendments made by this section [enacting this section and section 6418 of this title and amending sections 39 and 50 of this title] shall apply to taxable years beginning after December 31, 2022.”
+
+#46 [section added] 26 U.S.C. § 433(f)(5)#body#1  year 2014
+   AMEND: section added
+   RULE:  applicable to years beginning after Dec. 31, 2013, see section 3 of Pub | date Dec. 31, 2013
+   NOTE:  Effective DateSection applicable to years beginning after Dec. 31, 2013, see section 3 of Pub. L. 113–97, set out as an Effective Date of 2014 Amendment note under section 401 of this title.
+
+#47 [section added] 26 U.S.C. § 7705(c)(3)#body#1  year 2014
+   AMEND: section added
+   RULE:  applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 20 | date Dec. 19, 2014
+   NOTE:  Effective DateSection applicable with respect to wages for services performed on or after January 1 of the first calendar year beginning more than 12 months after Dec. 19, 2014, see section 206(g)(1) of Pub. L. 113–295, set out as an Effective Date of 2014 Amendment note under section 3302 of this t
+
+#48 [section added] 26 U.S.C. § 433(j)(3)#body#1  year 2014
+   AMEND: section added
+   RULE:  applicable to years beginning after Dec. 31, 2013, see section 3 of Pub | date Dec. 31, 2013
+   NOTE:  Effective DateSection applicable to years beginning after Dec. 31, 2013, see section 3 of Pub. L. 113–97, set out as an Effective Date of 2014 Amendment note under section 401 of this title.
+
+#49 [section added] 26 U.S.C. § 6417(d)(3)#body#3  year 2022
+   AMEND: section added
+   RULE:  shall apply to taxable years beginning after December 31, 2022 | date December 31, 2022
+   NOTE:  Effective DatePub. L. 117–169, title I, § 13801(g), Aug. 16, 2022, 136 Stat. 2013, provided that: “The amendments made by this section [enacting this section and section 6418 of this title and amending sections 39 and 50 of this title] shall apply to taxable years beginning after December 31, 2022.”
+
+#50 [section added] 26 U.S.C. § 45Z(f)(1)#body#1  year 2022
+   AMEND: section added
+   RULE:  shall apply to transportation fuel produced after December 31, 2024 | date December 31, 2024
+   NOTE:  Effective DatePub. L. 117–169, title I, § 13704(c), Aug. 16, 2022, 136 Stat. 2003, provided that: “The amendments made by this section [enacting this section and amending sections 25C, 30C, 38, and 4101 of this title] shall apply to transportation fuel produced after December 31, 2024.”
+
+{'quoted law': 725, 'summary/cross-ref': 417, 'retroactive': 111, 'section added': 363} excluded 100

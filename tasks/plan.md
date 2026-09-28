@@ -363,7 +363,7 @@ Full task details are in `tasks/todo.md` (Phase D section).
 - [x] D7: As-of-aware synthesis (dev 0.381 → 0.452; **golden gate not met: 0.394, 4–5 of 11**; the edition filter stays off)
 
 ### Checkpoint: Phase D complete
-- [ ] D8: Phase D exit report. Gate ≥90% (10/11) on the temporal rows, stated as met or not; ≤2-point regression on other categories; CI green with a new snapshot
+- [x] D8: Phase D exit report (`eval/results/phase_d.md`): gate **not met**. Gate ≥90% (10/11) on the temporal rows, stated as met or not; ≤2-point regression on other categories; CI green with a new snapshot
 
 ## Risks and Mitigations
 

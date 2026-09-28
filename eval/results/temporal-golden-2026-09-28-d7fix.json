@@ -1,0 +1,415 @@
+{
+  "questions": "eval/golden.jsonl",
+  "judge": "claude-haiku-4-5",
+  "repeats": 3,
+  "k": 8,
+  "accuracy_per_repeat": [
+    0.09090909090909091,
+    0.18181818181818182,
+    0.18181818181818182
+  ],
+  "grounded_accuracy_per_repeat": [
+    0.0,
+    0.09090909090909091,
+    0.09090909090909091
+  ],
+  "as_of_accuracy": 0.9,
+  "kappa": 0.7981651376146788,
+  "judge_cost_usd": 0.091324,
+  "stopped": null,
+  "rows": [
+    {
+      "id": "G-T01",
+      "as_of_gold": "2016 and 2026",
+      "as_of_plan": "2016 and 2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2016, unreimbursed job expenses were deductible if they were ordinary and necessary and the employee was an Armed Forces reservist, a qualified performing artist, or a fee-basis state or local government official",
+        "For tax year 2026, unreimbursed employee expenses are not deductible"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T02",
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T03",
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T04",
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For the 2016 tax year, expenses related to a hobby that produced some income cannot be deducted",
+        "Hobby expenses are considered miscellaneous itemized deductions"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T05",
+      "as_of_gold": "2022",
+      "as_of_plan": "2022",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T06",
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The general statute of limitations for assessment of tax is three years from the date the return was filed",
+        "A substantial omission of income extends the statute of limitations to six years",
+        "An omission of income equal to 30 percent of gross income reported is a substantial omission",
+        "The IRS can assess tax until six years after the return was filed for substantial omissions"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "G-T07",
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The minimum penalty would be $10,000",
+        "The maximum penalty is capped at 25% of the unpaid tax",
+        "The failure-to-file penalty in this case is $2,500 (25% of $10,000)"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T08",
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": true,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T09",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": false,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2026, restaurant meals with clients are generally subject to a 50% deduction limit"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "G-T10",
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": true,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "G-T11",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Property acquired on March 3, 2025, and placed in service in March 2025 qualifies for a 40% special depreciation allowance for tax year 2025"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    }
+  ]
+}

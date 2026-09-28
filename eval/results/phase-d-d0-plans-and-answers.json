@@ -1,0 +1,303 @@
+{
+ "G-T01": {
+  "as_of_gold": "2016 and 2026",
+  "as_of_plan": null,
+  "subs": [
+   [
+    "statutory",
+    "deduction for unreimbursed employee expenses for taxable year 2016"
+   ],
+   [
+    "statutory",
+    "suspension of miscellaneous itemized deductions for taxable years after 2017"
+   ],
+   [
+    "statutory",
+    "deduction for unreimbursed employee expenses for taxable year 2026"
+   ]
+  ],
+  "answer": "For the 2016 return, an employee could deduct unreimbursed job expenses only if they qualified under specific categories, such as Armed Forces reservists, qualified performing artists, fee-basis state or local government officials, or employees with impairment-related work expenses. They must complete Form 2106 to take the deduction for unreimbursed employee expenses that are ordinary and necessary, paid or incurred during the tax year [IRS Pub 17 (2025), p. 103].\n\nFor the 2026 return, the same rules apply as in 2016. Employees can only deduct unreimbursed job expenses if they fall into the specified categories and must complete Form 2106 [IRS Pub 17 (2025), p. 103]. However, it is important to note that miscellaneous itemized deductions, including unreimbursed employee expenses, are suspended for taxable years after 2017, which would affect the ability to deduct these expenses for 2026 [IRS Pub 17 (2025), p. 103].",
+  "citations": [
+   "IRS Pub 17 (2025), p. 103"
+  ],
+  "ref": "For 2016, yes, as miscellaneous itemized deductions to the extent they exceed 2 percent of adjusted gross income (section 67(a)). For 2026, no: section 67(h) allows no miscellaneous itemized deductions for taxable years beginning after December 31, 2017.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 67(a)-(b)"
+   ],
+   [
+    "26 U.S.C. \u00a7 67(e)-(h)"
+   ]
+  ],
+  "notes": null
+ },
+ "G-T02": {
+  "as_of_gold": "2023",
+  "as_of_plan": "2023",
+  "subs": [
+   [
+    "statutory",
+    "section 179 expensing limit for property placed in service"
+   ]
+  ],
+  "answer": "The section 179 expensing limit for property placed in service in 2023 is $1,000,000, and this limit is reduced if the cost of section 179 property placed in service during the taxable year exceeds $4,000,000 [26 U.S.C. \u00a7 179(b)(2)].",
+  "citations": [
+   "26 U.S.C. \u00a7 179(b)(2)"
+  ],
+  "ref": "The corpus holds only the current text, which sets a $2,500,000 limit as amended in 2025 and indexes it for taxable years beginning after 2025. That figure does not apply to 2023, and the 2023 limit is not in the corpus, so the system should say the version in force for 2023 is unavailable rather than apply $2,500,000.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 179(b)(1)"
+   ]
+  ],
+  "notes": "The effective date of the 2025 amendment appears only in the statutory notes, which the B2 parser does not ingest. Phase D (versioning) is the fix."
+ },
+ "G-T03": {
+  "as_of_gold": "2026",
+  "as_of_plan": "2026",
+  "subs": [
+   [
+    "statutory",
+    "deduction limitations for expenses related to illegal activities under Internal Revenue Code Section 280E"
+   ],
+   [
+    "case_law",
+    "tax treatment of medical marijuana dispensaries ordinary business expenses Section 280E"
+   ]
+  ],
+  "answer": "No, a state-licensed medical marijuana dispensary cannot deduct its ordinary business expenses for its 2026 tax year due to the provisions of Section 280E, which disallows deductions for any amounts paid or incurred in carrying on a trade or business that consists of trafficking in controlled substances, as defined by federal law. This applies even if the business is legal under state law [T.C. Memo. 2024-98, at *2-3].",
+  "citations": [
+   "T.C. Memo. 2024-98, at *2-3"
+  ],
+  "ref": "The corpus cannot answer this. Section 280E disallows deductions only for trafficking in schedule I or II controlled substances, and whether medical marijuana is on those schedules is outside the corpus. (As of 2026-04-28 state-licensed medical marijuana is Schedule III, so section 280E no longer applies to it.) The system should flag that the controlling fact is missing.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 280E"
+   ]
+  ],
+  "notes": "Moved from B4's G-S25 after the April 2026 rescheduling."
+ },
+ "G-T04": {
+  "as_of_gold": "2016",
+  "as_of_plan": "2016",
+  "subs": [
+   [
+    "statutory",
+    "hobby loss deduction limitations under Internal Revenue Code Section 183"
+   ],
+   [
+    "case_law",
+    "hobby versus business determination factors income expenses"
+   ],
+   [
+    "client_fact",
+    "the client had a hobby that produced some income"
+   ]
+  ],
+  "answer": "No, your client cannot deduct expenses related to a hobby that produced some income. Expenses incurred in connection with a hobby or other non-profit activity are not deductible, except to the extent allowable under section 183(b), which limits deductible expenses from activities not engaged in for profit to the amount of gross income derived from that activity [26 U.S.C. \u00a7 183(a)], [T.C. Memo. 2026-47, at *9].",
+  "citations": [
+   "T.C. Memo. 2026-47, at *9"
+  ],
+  "ref": "Yes, up to the hobby income and only as a miscellaneous itemized deduction subject to the 2-percent floor: in Gregory the Tax Court held section 183(b)(2) is a miscellaneous itemized deduction under section 67(a). The same expenses are not deductible after 2017.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 67(a)-(b)"
+   ],
+   [
+    "T.C. Memo. 2021-115, at *13-14"
+   ]
+  ],
+  "notes": null
+ },
+ "G-T05": {
+  "as_of_gold": "2026-05",
+  "as_of_plan": "2022",
+  "subs": [
+   [
+    "statutory",
+    "time limit for claiming a refund for overpayment of tax, including missed deductions"
+   ],
+   [
+    "client_fact",
+    "the client filed and paid her 2022 return on April 18, 2023, and found a missed deduction in May 2026"
+   ]
+  ],
+  "answer": "Your client can claim a refund for a missed deduction if she files her claim within three years of the original return filing date, plus a six-month extension period. Since she filed her 2022 return on April 18, 2023, the deadline for claiming a refund would be April 18, 2026, plus the six-month extension, making it October 18, 2026. As she found the missed deduction in May 2026, she is still within the time limit to file a claim for a refund. Therefore, she can claim the refund for the missed deduction [IRS Pub 17 (2025), p. 21].",
+  "citations": [
+   "IRS Pub 17 (2025), p. 21"
+  ],
+  "ref": "No. A refund claim must be filed within 3 years from filing (April 18, 2026) or 2 years from payment (April 18, 2025), whichever is later. April 18, 2026 is a Saturday, so section 7503 extends the deadline to Monday, April 20, 2026; a claim in May is still late.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 6511(a)"
+   ],
+   [
+    "26 U.S.C. \u00a7 7503"
+   ]
+  ],
+  "notes": null
+ },
+ "G-T06": {
+  "as_of_gold": "2026-09",
+  "as_of_plan": "2021",
+  "subs": [
+   [
+    "statutory",
+    "statute of limitations for assessment of tax when income is omitted from a return"
+   ],
+   [
+    "case_law",
+    "IRS audit statute of limitations income omission"
+   ],
+   [
+    "client_fact",
+    "the client omitted income equal to 30 percent of the gross income reported and filed without an extension"
+   ]
+  ],
+  "answer": "The general statute of limitations for the IRS to assess income tax is three years from the later of the date a tax return is filed or the date that return is due [\u00a7 6501(a)]. However, if a taxpayer omits more than 25% of their gross income from the return, the limitations period extends to six years [\u00a7 6501(e)(1)]. Since your client omitted income equal to 30% of the gross income reported, the six-year statute of limitations applies. \n\nGiven that your client filed the return on October 1, 2022, the IRS can assess the tax until October 1, 2028. Therefore, it is not too late for the IRS to assess the tax as of September 2026.",
+  "citations": [],
+  "ref": "No. The normal 3-year period ended October 1, 2025, but because the omission exceeds 25 percent of reported gross income, section 6501(e)(1) extends the period to 6 years, until October 1, 2028, unless the omitted amount was adequately disclosed on the return.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 6501(a)"
+   ],
+   [
+    "26 U.S.C. \u00a7 6501(e)(1)"
+   ]
+  ],
+  "notes": "The question states 'no extension' because the answer's dates depend on it: with an extension to October 17, 2022, section 6501(b)(1) would run the period from the extended due date instead of the filing date and move every date in the answer."
+ },
+ "G-T07": {
+  "as_of_gold": "2025",
+  "as_of_plan": "2024",
+  "subs": [
+   [
+    "statutory",
+    "failure-to-file penalty calculation for late filing of tax return"
+   ],
+   [
+    "client_fact",
+    "the client filed on August 30, 2025, with $10,000 of tax unpaid"
+   ]
+  ],
+  "answer": "The failure-to-file penalty is usually 5% for each month or part of a month that a return is late, up to a maximum of 25% of the unpaid tax. Since the return was filed more than 60 days late, the minimum penalty is the smaller of $525 or 100% of the unpaid tax. In this case, the unpaid tax is $10,000, so the minimum penalty would be $10,000. However, since the penalty is capped at 25% of the unpaid tax, the maximum failure-to-file penalty would be $2,500. Therefore, the failure-to-file addition is $2,500. [IRS Pub 17 (2025), p. 22]",
+  "citations": [
+   "IRS Pub 17 (2025), p. 22"
+  ],
+  "ref": "5 percent per month or part of a month, capped at 25 percent. The return was about 4.5 months late, so 5 months count: 25 percent of $10,000 is $2,500. Section 6651(c)(1) reduces it by the failure-to-pay addition for the same months (0.5 percent a month under section 6651(a)(2), so $250), leaving $2,250 for failure to file plus $250 for failure to pay, absent reasonable cause.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 6651(a)(1)"
+   ],
+   [
+    "26 U.S.C. \u00a7 6651(a)(2)"
+   ],
+   [
+    "26 U.S.C. \u00a7 6651(b)-(c)"
+   ]
+  ],
+  "notes": null
+ },
+ "G-T08": {
+  "as_of_gold": "2026",
+  "as_of_plan": "2026",
+  "subs": [
+   [
+    "statutory",
+    "cap on state and local tax deduction for married couples"
+   ]
+  ],
+  "answer": "INSUFFICIENT EVIDENCE. The sources provided do not contain information regarding the cap on the state and local tax deduction for married couples or any specific details for the year 2026.",
+  "citations": [],
+  "ref": "$40,400 for taxable years beginning in 2026. The phase-down applies only above the threshold of $505,000 for 2026, so it does not reduce this couple's cap. (It was $40,000 for 2025 and reverts to $10,000 for years after 2029.)",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 164(b)(7)"
+   ]
+  ],
+  "notes": null
+ },
+ "G-T09": {
+  "as_of_gold": null,
+  "as_of_plan": null,
+  "subs": [
+   [
+    "statutory",
+    "deductibility of business meals and entertainment expenses"
+   ],
+   [
+    "case_law",
+    "business meals with clients 100 percent deductibility"
+   ]
+  ],
+  "answer": "No, restaurant meals with clients are not 100 percent deductible. Generally, only 50 percent of meal expenses is allowed as a deduction unless an exception applies. The exceptions do not include meals with clients unless they meet specific criteria outlined in the regulations. Therefore, the standard deduction limit of 50 percent applies to meals with clients. [26 U.S.C. \u00a7 274(n)(1)]",
+  "citations": [
+   "26 U.S.C. \u00a7 274(n)(1)"
+  ],
+  "ref": "It depends on the year. Business meals are generally limited to 50 percent (section 274(n)(1)); the 100 percent exception for food or beverages provided by a restaurant applied only to amounts paid or incurred before January 1, 2023 (section 274(n)(2)(D)). The system should ask or state which year applies.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 274(n)(1)"
+   ],
+   [
+    "26 U.S.C. \u00a7 274(n)(2)"
+   ]
+  ],
+  "notes": "Deliberately ambiguous as-of year."
+ },
+ "G-T10": {
+  "as_of_gold": "2024",
+  "as_of_plan": "2024",
+  "subs": [
+   [
+    "statutory",
+    "deduction for qualified tips under Internal Revenue Code section 162"
+   ]
+  ],
+  "answer": "No, a waiter cannot deduct his tips on his 2024 return under the new deduction for qualified tips because the deduction for qualified tips is applicable only for taxable years beginning in 2025 through 2028. Therefore, no deduction shall be allowed for any taxable year beginning before January 1, 2025 [26 U.S.C. \u00a7 224(h)].",
+  "citations": [],
+  "ref": "The corpus shows the deduction (up to $25,000, phased out above $150,000 of modified AGI) and its termination after 2028, but not its start date, which appears only in the statutory notes. The deduction applies to taxable years beginning after 2024, so the answer for 2024 is no; the system should flag that the effective date is not in its sources.",
+  "gold": [
+   [
+    "26 U.S.C. \u00a7 224(a)-(c)"
+   ],
+   [
+    "26 U.S.C. \u00a7 224(d)-(h)"
+   ]
+  ],
+  "notes": "Effective date only in the statutory notes, which the B2 parser does not ingest."
+ },
+ "G-T11": {
+  "as_of_gold": "2025",
+  "as_of_plan": "2025",
+  "subs": [
+   [
+    "statutory",
+    "bonus depreciation rules for qualified property placed in service after 2022"
+   ],
+   [
+    "statutory",
+    "placed in service date for bonus depreciation eligibility"
+   ],
+   [
+    "client_fact",
+    "the client acquired one machine on January 10, 2025 and another on March 3, 2025, and placed both in service in March 2025"
+   ]
+  ],
+  "answer": "For property acquired and placed in service after January 19, 2025, the first-year special bonus depreciation allowance is 100% for qualified property. However, for qualified property placed in service during 2025 that is acquired after September 27, 2017, and before January 20, 2025, the special depreciation allowance remains 40% [IRS Pub 463 (2025), p. 1].\n\nSince both machines were acquired in January and March 2025, they qualify for the 100% bonus depreciation because they were placed in service after January 19, 2025 [IRS Pub 463 (2025), p. 1].",
+  "citations": [
+   "IRS Pub 463 (2025), p. 1"
+  ],
+  "ref": "A retroactive rule: the July 4, 2025 law made 100 percent bonus depreciation permanent for qualified property acquired and placed in service after January 19, 2025, so the March machine gets 100 percent. The machine acquired on January 10, 2025 falls under the prior phase-down, 40 percent for property placed in service in 2025.",
+  "gold": [
+   [
+    "IRS Pub 463 (2025), p. 1#body#1",
+    "IRS Pub 463 (2025), p. 1#body#2"
+   ],
+   [
+    "26 U.S.C. \u00a7 168(k)(1)"
+   ]
+  ],
+  "notes": "Retroactive rule: enacted 2025-07-04, effective for property acquired after 2025-01-19. The statute text shows only the permanent 100 percent; the transition is in the publication."
+ }
+}

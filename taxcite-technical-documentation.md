@@ -23,9 +23,15 @@ Phase B's headline results are three negatives and one positive, and the negativ
 - **The graph's real job is negative treatment.** *Morehouse* and *Menard*, both reversed on appeal, are flagged in every golden row that cites them, with no false flags; the end-to-end answer for an Iowa client is wrong in its text and right in its flag.
 - **Most of the case-law "gap" was the answer key.** An audit of 24 gold groups (all approved) and chunk-level gold took the honest case-law baseline from 0.692 through 0.815 to **0.777 ± 0.029**; the remaining misses are two wrong-page rows, two unreachable rows, and one row (G-C24) that had scored a hit through a copy of its page that doesn't state the holding.
 
-The remaining mechanisms below (temporal filtering, authority-aware reranking, claim verification, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+**Phase D is built and measured; its gate is not met** (report: `eval/results/phase_d.md`, 2026-09-28). A spike before building found that retrieval, not time, blocked 8 of the 11 temporal golden rows, and that none needed an earlier version of the text, so amendment versioning was not built. What was built: statute effective dates read from the USLM notes (1,795 chunks, 48–49/50 on a fresh hand check), a reserved statute slot in retrieval (golden Recall@20 0.563 → 0.602), year-aware synthesis, and transaction time as a history table fed by a trigger. Its results:
 
-Baselines later phases must beat, now including Phase C's:
+- **Temporal accuracy 0.394 ± 0.052 on the golden rows, against a gate of 0.90** (4–5 of 11; the baseline was 1). Most misses are not about time: retrieval at synthesis depth, arithmetic, a fact outside the corpus, the planner's year.
+- **The as-of filter improved recall and made answers worse**, because the later publication editions it removed were the only evidence about retroactive changes. It is built and off.
+- **Recovering an earlier version from the notes has a trap:** a replaced dollar figure can be an inflation-indexed base, not the year's amount (G-T02).
+
+The remaining mechanisms below (authority-aware reranking, claim verification, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+
+Baselines later phases must beat, now including Phase D's:
 
 | baseline | value | whose problem |
 |---|---|---|
@@ -33,8 +39,10 @@ Baselines later phases must beat, now including Phase C's:
 | Graph expansion (ablation rung) | −3.9 case-law, −2.3 / −4.1 all rows (1 / 2 hops), +0.7 s | Off; revisit only with gold reachable through citations (ADR-1) |
 | Publication tables | a table of numbers (G-S28, Pub 946's depreciation caps) isn't in the top 50 even within publications | Phase E (publication handling) |
 | Publication dilution of regulation recall | 12.4 points | Phase E |
-| Approximate search loss under a strict filter | ~22% | Phase D |
-| Statute effective dates absent from the corpus | parser skips USLM notes | Phase D |
+| Approximate search loss under a strict filter | ~22% under a single-section filter; **0.8%** under the edition filter (exact search used anyway, +3 ms) | Resolved in Phase D for its filter; the filter itself is off |
+| Statute effective dates | Built in Phase D: 1,795 of 2,576 chunks amended since 2012 dated (70%); 48–49/50 on a fresh hand check | Coverage of the remaining 30% open |
+| Temporal accuracy, golden (G-T01–G-T11) | **0.394 ± 0.052** (4–5 of 11); grounded 0.273; as-of extraction 9/10 | Open: retrieval at k=8 (G-T08), inflation-indexed base amounts (G-T02), arithmetic (G-T05, G-T07), planner year (G-T09); Phase F: G-T03 |
+| Recall@20, all golden rows, shipped | **0.602** (statutory 0.607, compound 0.470, case law 0.777), with the statute slot | the ladder's current top |
 | Per-sub-query sufficiency gate | not built; `G-I11` over-refuses a half-answerable question | Phase F (the sufficiency gate is built there) |
 | Negative treatment | Built in Phase C: 3/3 reversed golden rows flagged, 0 false flags; 26/26 held-opinion flags match hand-verified records. Pending appeals (G-C11, *Patel*) are invisible to every source; corpus-only flags go stale on 2026-09-29 | Phase H: the weekly refresh; Phase E: acting on treatment in ranking |
 | Faithfulness, healthy | 0.8715 (sd 0.0127, n=6) | the standing CI gate, at 0.855 |
@@ -334,7 +342,7 @@ No calendar estimates — this is a dependency order.
 
 **Phase C — Citation graph.** Store citation and treatment edges in Postgres (ADR-23), run citation extraction over the case-law corpus, and use the graph to flag negative treatment: an answer that relies on an opinion later reversed, overruled or on appeal says so. Graph expansion into case-law retrieval is built as an ablation rung and reported, not gated. Case-law recall work goes to page selection, where the measured gap is. **Gate (both required):** edge-extraction precision ≥90% / recall ≥85% on a 200-edge hand-labeled sample (§3.2), AND the golden negative-treatment rows are flagged correctly: the 3 reversed (G-C03, G-X02, G-X09) flagged; G-C06 (appealed, cert denied) and G-X19 (gold is the post-remand opinion, itself not reversed) not flagged. *Revised 2026-09-26 from C0:* the original gate was +5 points of case-law Recall@20 from expansion, and C0 measured that ceiling at 0 (ADR-1).
 
-**Phase D — Temporal validity.** Add valid-time and transaction-time metadata to statute and case-law chunks, implement as-of filtering, add amendment-versioning to ingestion. **Gate:** ≥90% accuracy on a held-out set of retroactive/amended-rule questions.
+**Phase D — Temporal validity.** Add valid-time and transaction-time metadata to statute and case-law chunks, implement as-of filtering, add amendment-versioning to ingestion. **Gate:** ≥90% accuracy on a held-out set of retroactive/amended-rule questions. *As built (2026-09-28, `eval/results/phase_d.md`):* versioning not built (no row needed it); effective dates from the statutory notes; as-of filtering built and off; transaction time as a trigger-fed history table. Gate **not met** (0.394).
 
 **Phase E — Authority-aware retrieval.** Add authority metadata at ingestion (`negative_treatment` arrives earlier, from Phase C's graph), incorporate into reranking, add authority annotations to answer presentation. **Gate:** authority metadata ≥95% field-level accuracy on a 150-chunk hand-labeled sample (§3.2); reranking must change the top-1 result on a curated authority-conflict subset without a >2-point Recall@20 regression elsewhere.
 
@@ -705,7 +713,8 @@ Substantive correctness (§5.4, §10) is the hardest metric to produce, and this
 | C | Citation-edge extraction precision / recall (N=200 edges) | ≥90% / ≥85% |
 | C | Golden negative-treatment rows flagged correctly | 3/3 reversed flagged; 0 false flags (G-C06, G-X19) |
 | C | Case-law Recall@20 delta from graph expansion | reported, not gated (C0 ceiling: 0 points; was ≥5) |
-| D | Temporal-filtering accuracy (held-out retroactive/amended set) | ≥90% |
+| D | Temporal-filtering accuracy (held-out retroactive/amended set) | ≥90% (measured 0.394: **not met**) |
+| D | Effective-date extraction accuracy (N=50, hand check) | ≥90% (measured 48–49/50) |
 | E | Authority-metadata accuracy (N=150 chunks) | ≥95% |
 | E | Recall@20 regression from authority-aware rerank | ≤2 points |
 | F | Citation entailment F1 (NLI vs. LLM-judge audit) | ≥0.90 |

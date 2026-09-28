@@ -1,26 +1,26 @@
 # Graph Report - TaxCite.nosync  (2026-09-28)
 
 ## Corpus Check
-- 93 files · ~906,982 words
+- 99 files · ~1,038,154 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 11 file(s) not represented in the graph (top: (none) 3, .jsonl 3, .xml 3)
 
 ## Summary
-- 946 nodes · 1829 edges · 56 communities (46 shown, 10 thin omitted)
-- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 113 edges (avg confidence: 0.89)
+- 966 nodes · 1850 edges · 50 communities (41 shown, 9 thin omitted)
+- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 114 edges (avg confidence: 0.89)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b2dc3dba`
+- Built from commit: `12ffe7da`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- main
+- aggregate
 - test_irs_pubs.py
 - test_jobs.py
 - T2: Ingest eCFR Title 26
-- conn
+- ragas_eval.py
 - test_ecfr.py
 - TaxCite — Phase B exit report
 - retrieve
@@ -39,39 +39,33 @@
 - cli.py
 - taxcite
 - Collaborative Working Mode
-- snapshot.py
+- embed_bench.py
 - decompose.py
 - Postgres
 - test_usc.py
-- ragas_eval.py
-- caselaw.py
+- llm_bench.py
+- rerank
 - jobs.py
-- store_bench.py
+- retrieve.py
 - TaxCite — Phase C exit report
-- index.py
+- taxcite
 - ADR-13: Sanitized Rendering Only, Structured Fields for UI Elements
 - test_metrics.py
 - retrieval.py
 - Plain-Module Package Layout
-- edition_filter
 - ADR-17: Vector Store — Qdrant, Not pgvector
 - search
 - generate.py
-- Chunk
-- as_of_match
-- taxcite_ingest_ecfr
-- taxcite
-- taxcite_ingest
+- usc_notes.py
+- sys
+- TaxCite — Phase D exit report
+- TaxCite — Status
 - taxcite_ingest_caselaw
 - taxcite_ingest_irs_pubs
 - SubQuery
-- store.py
-- irs_pubs.py
-- aggregate
-- strip_boilerplate
-- test_fetch_rejects_a_non_pdf
-- MissingCredentials
-- dehyphenate
+- call_model
+- taxcite_ingest
+- taxcite_ingest_ecfr
 
 ## God Nodes (most connected - your core abstractions)
 1. `search()` - 27 edges
@@ -104,31 +98,31 @@
 - **Answer-Correctness Gate Stack** — taxcite_technical_documentation_evidence_sufficiency_gate, taxcite_technical_documentation_claim_verification, taxcite_technical_documentation_authority_aware_retrieval, taxcite_technical_documentation_adr_7, taxcite_technical_documentation_adr_15, taxcite_technical_documentation_adr_4 [EXTRACTED 1.00]
 - **Phase A Decisions Settled by Measurement** — taxcite_technical_documentation_adr_11, taxcite_technical_documentation_adr_17, taxcite_technical_documentation_adr_18, eval_results_phase_a_exit_report, status_phase_a_complete [EXTRACTED 1.00]
 
-## Communities (56 total, 10 thin omitted)
+## Communities (50 total, 9 thin omitted)
 
-### Community 0 - "main"
-Cohesion: 0.12
-Nodes (23): Budget, CostCap, extract_claims(), judge_claims(), main(), parse_json(), pipeline_answer(), Path (+15 more)
+### Community 0 - "aggregate"
+Cohesion: 0.24
+Nodes (10): aggregate(), Refusals are excluded from the mean and reported separately (§9.2). Averaging a…, judged(), An answer the extractor found nothing in would otherwise score 0/0., A row with one claim per entry in `supported`., Averaging refusals in either direction breaks the gate: 0 punishes the…, test_a_refusal_is_not_scored_as_zero_or_as_one(), test_aggregate_counts_claims_and_unsupported_claims() (+2 more)
 
 ### Community 1 - "test_irs_pubs.py"
-Cohesion: 0.17
-Nodes (15): title_of(), page(), Publication chunking: pure functions tested on text, no PDF needed., A page shaped like a real one: header lines, body, footer., A table row like "Line 6 amount" must survive digit-normalised matching., Pub 17 prints its title before the number, unlike Pub 587., Pub 946 has no edition line; the bullet list ends the title., test_edition_year_and_title() (+7 more)
+Cohesion: 0.07
+Nodes (32): skipif, edition_year(), _normalise(), Sliding windows with overlap; a short page yields a single window., Drop lines that repeat across most pages at the top or bottom of the page.…, strip_boilerplate(), clean(), edge_count() (+24 more)
 
 ### Community 2 - "test_jobs.py"
 Cohesion: 0.08
 Nodes (25): fastapi_testclient, pytest, clean(), fixture, Job record and SSE transport (ADR-9), with the pipeline stubbed., ADR-9: nothing unverified reaches the user, so the answer is buffered., ADR-16: Redis carries progress; the record is the source of truth behind it., A Redis outage must degrade liveness, not correctness (ADR-16). (+17 more)
 
 ### Community 3 - "T2: Ingest eCFR Title 26"
-Cohesion: 0.13
-Nodes (19): The Pilot Set Is Data, Not Code, eCFR Chunking Decisions, Nine-Section eCFR Test Fixture, T10: Phase A exit report, T2: Ingest eCFR Title 26, T3: Hybrid search CLI with citations, T4: Pilot Set and Retrieval Eval Script, T5: Ingest IRS Publications (+11 more)
+Cohesion: 0.16
+Nodes (15): eCFR Chunking Decisions, Nine-Section eCFR Test Fixture, T2: Ingest eCFR Title 26, T5: Ingest IRS Publications, T6: Embedding-Model Benchmark, Harvard Caselaw Access Project, Per-Document-Type Chunker (§3.2), CourtListener (+7 more)
 
-### Community 4 - "conn"
-Cohesion: 0.12
-Nodes (23): asyncio, BackgroundTasks, BaseModel, fastapi, fastapi_responses, get, post, pydantic (+15 more)
+### Community 4 - "ragas_eval.py"
+Cohesion: 0.11
+Nodes (27): Budget, CostCap, extract_claims(), judge_claims(), Judged, main(), parse_json(), pipeline_answer() (+19 more)
 
 ### Community 5 - "test_ecfr.py"
-Cohesion: 0.05
-Nodes (52): Element, designations(), in_scope(), level_of(), parse(), True when a section is one of these prefixes, or a numbered child of one.…, Every chunk in an eCFR XML file or element tree., 1 for a level-1 letter, 2 for a level-2 number, None for anything deeper.… (+44 more)
+Cohesion: 0.06
+Nodes (51): Element, designations(), in_scope(), level_of(), parse(), True when a section is one of these prefixes, or a numbered child of one.…, Every chunk in an eCFR XML file or element tree., 1 for a level-1 letter, 2 for a level-2 number, None for anything deeper.… (+43 more)
 
 ### Community 6 - "TaxCite — Phase B exit report"
 Cohesion: 0.18
@@ -140,27 +134,27 @@ Nodes (15): Reproducing, answer(), chunks(), decompose(), Decomposition, (sub-qu
 
 ### Community 8 - "citations.py"
 Cohesion: 0.07
-Nodes (50): eyecite, eyecite_models, FullCaseCitation, logging, appeal(), appeal_label(), cached(), cites() (+42 more)
+Nodes (52): eyecite, eyecite_models, FullCaseCitation, logging, load_selection(), The selection is cached so the corpus stays fixed while new opinions are filed., appeal(), appeal_label() (+44 more)
 
 ### Community 9 - "ecfr.py"
-Cohesion: 0.11
-Nodes (41): estimate_tokens(), Make `part` a running count per citation, so `key` is unique by construction.…, renumber(), make(), Block, blocks(), walk(), chunk_section() (+33 more)
+Cohesion: 0.06
+Nodes (76): httpx, LTTextBox, pdfminer_high_level, pdfminer_layout, re, Chunk, estimate_tokens(), The unit every ingester produces and every store consumes. (+68 more)
 
 ### Community 10 - "test_generate.py"
 Cohesion: 0.08
 Nodes (11): fixture, Answer generation, tested without spending money: the model call is stubbed., Sampling at the default temperature made the same question answerable two ways,…, Replace the model call; record what it was asked., Chunk citations are sometimes ranges; citing one paragraph inside is precision,…, A citation not among the sources is the failure mode this system exists to…, stub(), test_a_narrower_paragraph_of_a_retrieved_section_counts_as_derived() (+3 more)
 
 ### Community 11 - "TaxCite"
-Cohesion: 0.14
-Nodes (23): TaxCite, TaxCite PRD, Functional Requirements FR-1..FR-17, Goals G1-G6 (research time, seat displacement, groundedness, gates, cost, leakage), Non-Functional Requirements (latency, reliability, cost, security), Non-Goals (no full GraphRAG, no BM25 engine, no token streaming, federal only), Open Questions (embedding, LLM provider, frontend, backup storage, market scope), Renee (Enrolled Agent persona) (+15 more)
+Cohesion: 0.12
+Nodes (27): TaxCite, Three-Way Citation Counting, TaxCite PRD, Functional Requirements FR-1..FR-17, Goals G1-G6 (research time, seat displacement, groundedness, gates, cost, leakage), Non-Functional Requirements (latency, reliability, cost, security), Non-Goals (no full GraphRAG, no BM25 engine, no token streaming, federal only), Open Questions (embedding, LLM provider, frontend, backup storage, market scope) (+19 more)
 
 ### Community 12 - "TaxCite Phase A — Task List"
-Cohesion: 0.17
-Nodes (11): ✅ Checkpoint 1 — after T1–T3, ✅ Checkpoint 2 — after T4–T6, ✅ Checkpoint 3 — after T7–T8, ✅ Checkpoint: Phase A complete, T2: Ingest eCFR Title 26 into Postgres + Qdrant, T4: Pilot set (20 questions) and retrieval eval script, T6: Embedding-model benchmark and decision, T6b: ADR-17 revisit trigger — Qdrant vs. pgvector (+3 more)
+Cohesion: 0.12
+Nodes (16): The Pilot Set Is Data, Not Code, ✅ Checkpoint 1 — after T1–T3, ✅ Checkpoint 2 — after T4–T6, ✅ Checkpoint 3 — after T7–T8, ✅ Checkpoint: Phase A complete, T2: Ingest eCFR Title 26 into Postgres + Qdrant, T3: Hybrid search CLI with citations, T4: Pilot Set and Retrieval Eval Script (+8 more)
 
 ### Community 13 - "Phase A Implementation Plan"
-Cohesion: 0.19
-Nodes (14): Qdrant Service (compose), Redis Service (compose), Host Port Offsets (5433 / 6380), Phase A Implementation Plan, Phase A Risks and Mitigations, T1: Local stack and package skeleton, T9: Job Record and SSE Transport, ADR-16: Live Delivery Decoupled From Tracing (+6 more)
+Cohesion: 0.23
+Nodes (12): Redis Service (compose), Host Port Offsets (5433 / 6380), Phase A Implementation Plan, Phase A Risks and Mitigations, T1: Local stack and package skeleton, T9: Job Record and SSE Transport, ADR-16: Live Delivery Decoupled From Tracing, ADR-9: SSE Progress Stream Over a Durable Job Record (+4 more)
 
 ### Community 14 - "Task List"
 Cohesion: 0.12
@@ -171,12 +165,12 @@ Cohesion: 0.05
 Nodes (8): memo(), fixture, Case-law tests against two real Tax Court opinions (see tasks/todo.md B3): -…, result(), tc(), test_selection_dedupes_by_citation_and_keeps_the_newest(), Citation and treatment extraction (tasks/todo.md C3), on text shaped like the…, test_a_failed_lookup_fails_open_and_rolls_back()
 
 ### Community 16 - "Phase A Exit Report"
-Cohesion: 0.09
-Nodes (24): Decisions settled, with the evidence, Phase A Exit Report, Phase A Known Failures, Known failures, with examples, Phase A Recalibration Notes for §9.3, Recalibration notes for §9.3, TaxCite — Phase A exit report, The ablation ladder so far (+16 more)
+Cohesion: 0.11
+Nodes (20): Decisions settled, with the evidence, Phase A Exit Report, Phase A Known Failures, Known failures, with examples, Phase A Recalibration Notes for §9.3, Recalibration notes for §9.3, TaxCite — Phase A exit report, The ablation ladder so far (+12 more)
 
 ### Community 17 - "ADR-11: LLM Tiering — gpt-4o-mini"
-Cohesion: 0.27
-Nodes (10): Three-Way Citation Counting, T8: ADR-11 LLM Benchmark, ADR-11: LLM Tiering — gpt-4o-mini, ADR-15: Zero-Tolerance Claim Suppression, ADR-3: Post-Generation Claim Verification, ADR-4: Self-Hosted NLI Model for Production Verification, Post-Generation Claim Verification, claude-haiku-4-5 (+2 more)
+Cohesion: 0.38
+Nodes (7): T10: Phase A exit report, T8: ADR-11 LLM Benchmark, ADR-11: LLM Tiering — gpt-4o-mini, ADR-4: Self-Hosted NLI Model for Production Verification, claude-haiku-4-5, gpt-4o-mini, Substantive-Correctness Grading Protocol (§9.2)
 
 ### Community 18 - "test_decompose.py"
 Cohesion: 0.12
@@ -187,44 +181,40 @@ Cohesion: 0.23
 Nodes (15): chunks(), ctx(), models_(), fixture, CI starts with an empty Qdrant. The suite's "needs an ingested corpus" guard…, No corpus" and "no Qdrant" must not look alike: only the 404 is swallowed., sync(), test_a_broken_qdrant_still_raises() (+7 more)
 
 ### Community 20 - "cli.py"
-Cohesion: 0.18
-Nodes (26): Connection, io, Namespace, fetch(), fetch_usc(), ingest_case(), ingest_ecfr(), ingest_pubs() (+18 more)
+Cohesion: 0.05
+Nodes (79): asyncio, BackgroundTasks, BaseModel, Connection, create(), main(), Path, restore() (+71 more)
 
-### Community 23 - "snapshot.py"
-Cohesion: 0.29
-Nodes (9): create(), main(), Path, Freeze the corpus so CI can retrieve against it without a 90-minute ingest. The…, restore(), httpx, os, client() (+1 more)
+### Community 23 - "embed_bench.py"
+Cohesion: 0.27
+Nodes (8): datetime, build(), collection_for(), main(), ADR-18: choose the dense embedding model by measuring it on the pilot set. uv…, Index every chunk with one model into its own collection; returns build time., score(), time
 
 ### Community 24 - "decompose.py"
-Cohesion: 0.12
-Nodes (19): collections_abc, dataclasses, functools, SparseVector, citation_graph(), neighbors(), Split a question into typed sub-queries, and route each to the sources that can…, Held opinions within `hops` citation steps of the seeds, in either direction;… (+11 more)
+Cohesion: 0.15
+Nodes (10): collections_abc, functools, citation_graph(), neighbors(), Split a question into typed sub-queries, and route each to the sources that can…, Held opinions within `hops` citation steps of the seeds, in either direction;…, (edges, held opinions), loaded once: 5,278 edges is small enough to walk in…, The plan's one tax year, or None: no year, or several ("2016 and 2026"), filter… (+2 more)
 
 ### Community 26 - "test_usc.py"
 Cohesion: 0.16
 Nodes (14): chunks(), of(), fixture, Statute chunker tests against eight real sections in…, test_en_dash_section_number_becomes_a_hyphen(), test_heading_folds_into_its_first_child(), test_neighbouring_subsections_pack_into_a_range(), test_notes_are_not_text_and_source_credit_is_the_history() (+6 more)
 
-### Community 27 - "ragas_eval.py"
-Cohesion: 0.13
-Nodes (25): argparse, collections, datetime, dotenv, cost_of(), estimate(), judge(), main() (+17 more)
+### Community 27 - "llm_bench.py"
+Cohesion: 0.17
+Nodes (15): argparse, dotenv, cost_of(), estimate(), judge(), main(), ADR-11: choose the LLM by measuring answers, not by price alone. uv run python…, Rough spend before committing: RAG prompts dominate the input tokens. (+7 more)
 
-### Community 28 - "caselaw.py"
-Cohesion: 0.13
-Nodes (22): LTTextBox, pdfminer_high_level, pdfminer_layout, re, fetch(), fold_numbers(), font_size(), get() (+14 more)
+### Community 28 - "rerank"
+Cohesion: 0.50
+Nodes (4): Loaded once per process and per model, like the embedding models., Re-score candidates with a cross-encoder, which reads query and chunk together.…, rerank(), _reranker()
 
 ### Community 29 - "jobs.py"
-Cohesion: 0.20
-Nodes (12): Redis, client(), create(), create_table(), Event, notify(), publish(), Durable job records for the query pipeline (ADR-9). A query takes 20-30s across… (+4 more)
+Cohesion: 0.22
+Nodes (11): Redis, client(), Event, notify(), publish(), Durable job records for the query pipeline (ADR-9). A query takes 20-30s across…, One server-sent event. The blank line is the record separator., Append a stage to the record, then notify listeners. Record first: a listener… (+3 more)
 
-### Community 30 - "store_bench.py"
-Cohesion: 0.23
-Nodes (11): load(), main(), pg_filtered(), pg_hybrid(), qd_filtered(), qd_hybrid(), ADR-17 revisit trigger: Qdrant against pgvector on identical data. uv run…, Top-k inside one section: approximate (HNSW) or exact (sequential scan). (+3 more)
+### Community 30 - "retrieve.py"
+Cohesion: 0.14
+Nodes (18): dataclasses, load(), main(), pg_filtered(), pg_hybrid(), qd_filtered(), qd_hybrid(), ADR-17 revisit trigger: Qdrant against pgvector on identical data. uv run… (+10 more)
 
 ### Community 31 - "TaxCite — Phase C exit report"
 Cohesion: 0.15
 Nodes (12): §9.3 recalibration, C0: the ceiling, before building, Extraction quality, Failures, with examples, How the case-law baseline moved, Open problems handed on, TaxCite — Phase C exit report, The gate (+4 more)
-
-### Community 32 - "index.py"
-Cohesion: 0.16
-Nodes (18): qdrant_client, QdrantClient, batched(), count(), create_collection(), edition(), point_id(), Embed chunks and keep a Qdrant collection in step with Postgres. Postgres is… (+10 more)
 
 ### Community 33 - "ADR-13: Sanitized Rendering Only, Structured Fields for UI Elements"
 Cohesion: 0.33
@@ -232,78 +222,62 @@ Nodes (6): ADR-13: Sanitized Rendering Only, Structured Fields for UI Elements, 
 
 ### Community 34 - "test_metrics.py"
 Cohesion: 0.11
-Nodes (28): build(), collection_for(), main(), ADR-18: choose the dense embedding model by measuring it on the pilot set. uv…, Index every chunk with one model into its own collection; returns build time., score(), mrr(), ndcg_at_k() (+20 more)
+Nodes (26): mrr(), ndcg_at_k(), recall_at_k(), The section a citation belongs to, ignoring paragraph depth. '26 CFR…, section_of(), parametrize, The metrics must be right before any number computed with them means anything., Instruction is not a guarantee; the model sometimes wraps its JSON in prose. (+18 more)
 
 ### Community 35 - "retrieval.py"
-Cohesion: 0.14
-Nodes (16): cached_decompose(), first_hits(), groups(), main(), needs_case_law(), Path, Score retrieval against the pilot set: the first rungs of the §9 ablation…, A row whose gold includes an opinion: routing must send a sub-query to the case… (+8 more)
-
-### Community 37 - "edition_filter"
-Cohesion: 0.25
-Nodes (8): Filter, edition_filter(), One source or several; several is how B7 routes a sub-query to the corpora that…, Keep chunks with no edition (everything but publications, and undated…, source_filter(), D3's filter, against Qdrant's own semantics (in-memory), not a re-…, test_edition_filter_keeps_undated_chunks_and_nearby_editions(), kept()
+Cohesion: 0.13
+Nodes (18): collections, cached_decompose(), first_hits(), groups(), main(), needs_case_law(), Path, Score retrieval against the pilot set: the first rungs of the §9 ablation… (+10 more)
 
 ### Community 38 - "ADR-17: Vector Store — Qdrant, Not pgvector"
-Cohesion: 0.20
-Nodes (12): Postgres Service (pgvector/pgvector:pg16), Approximate Search Loses 22% Under a Strict Filter, T6b: Qdrant vs pgvector Benchmark, ADR-12: Backup and Disaster Recovery, ADR-17: Vector Store — Qdrant, Not pgvector, ADR-2: Bi-Temporal Fact Validity, Bi-Temporal Fact Validity, Single-Engineer Operational Bus Factor (+4 more)
+Cohesion: 0.15
+Nodes (16): Postgres Service (pgvector/pgvector:pg16), Qdrant Service (compose), Approximate Search Loses 22% Under a Strict Filter, Repository Map, T6b: Qdrant vs pgvector Benchmark, ADR-12: Backup and Disaster Recovery, ADR-17: Vector Store — Qdrant, Not pgvector, ADR-2: Bi-Temporal Fact Validity (+8 more)
 
 ### Community 39 - "search"
-Cohesion: 0.18
-Nodes (17): Top-k chunks for a query. Modes are the rungs of the eval ablation ladder (§9):…, search(), hit(), RRF ties used to break differently per process, moving a chunk across the k…, The cross-encoder's job: an example that quotes a rule is not the rule., No final 280A regulations exist, so the home-office rules live only in Pub 587., test_dense_finds_the_hobby_loss_factor(), test_hybrid_returns_k_hits_with_payload() (+9 more)
+Cohesion: 0.11
+Nodes (25): Filter, edition_filter(), One source or several; several is how B7 routes a sub-query to the corpora that…, Keep chunks with no edition (everything but publications, and undated…, Top-k chunks for a query. Modes are the rungs of the eval ablation ladder (§9):…, search(), source_filter(), hit() (+17 more)
 
 ### Community 40 - "generate.py"
-Cohesion: 0.20
-Nodes (15): Answer, answer_from_groups(), answer_from_hits(), cost(), effective_note(), format_sources(), _generate(), parse_citations() (+7 more)
+Cohesion: 0.26
+Nodes (14): Answer, answer_from_groups(), answer_from_hits(), effective_note(), format_sources(), _generate(), parse_citations(), Answer a question, with and without retrieval. Two modes, because the §9… (+6 more)
 
-### Community 41 - "Chunk"
-Cohesion: 0.07
-Nodes (45): Chunk, The unit every ingester produces and every store consumes., Stable primary key. A citation alone is not unique: one citation can need…, amendment_entries(), clause_for(), covers(), effective_rule(), evidenced() (+37 more)
+### Community 41 - "usc_notes.py"
+Cohesion: 0.09
+Nodes (35): amendment_entries(), clause_for(), covers(), effective_rule(), evidenced(), link(), notes(), own_designation() (+27 more)
 
-### Community 42 - "as_of_match"
-Cohesion: 0.50
-Nodes (4): as_of_match(), Year-level match of the plan's as-of against the row's tax year. None = not…, parametrize, test_as_of_match()
+### Community 42 - "sys"
+Cohesion: 0.22
+Nodes (8): kappa(), Cohen's kappa for two raters over the same items., sys, parametrize, The temporal gate's scoring rules (D2), on fixture values: no API calls., test_as_of_match(), test_kappa_hand_computed(), test_pass_needs_a_correct_answer_and_no_as_of_miss()
+
+### Community 43 - "TaxCite — Phase D exit report"
+Cohesion: 0.12
+Nodes (15): §9.3 recalibration, A gate that passed while the system refused half its questions, D0: what the rows needed, before building, Effective dates (D4), Failures, with examples, Open problems handed on, Reproducing, TaxCite — Phase D exit report (+7 more)
+
+### Community 44 - "TaxCite — Status"
+Cohesion: 0.22
+Nodes (8): Stable primary key. A citation alone is not unique: one citation can need…, Decisions Log, Environment, Findings worth remembering, Now, Pending housekeeping, Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`), TaxCite — Status
 
 ### Community 48 - "SubQuery"
 Cohesion: 0.25
 Nodes (5): merge(), parse(), (sub-queries, as_of, fallback reason). Never raises. A decomposition that…, One ranked list of k, round-robin across sub-queries, first occurrence wins.…, SubQuery
 
-### Community 49 - "store.py"
-Cohesion: 0.33
-Nodes (6): psycopg, psycopg_types_json, held_at(), datetime, Postgres storage for chunks. One table, created on demand. Writes are…, (key, text) TaxCite held for `citation` at `at`, current or since retired (D6).
-
-### Community 50 - "irs_pubs.py"
-Cohesion: 0.18
-Nodes (14): skipif, edition_year(), fetch(), page_texts(), parse(), Path, Ingest IRS publications (PDF). Publications have no paragraph numbering to cut…, Sliding windows with overlap; a short page yields a single window. (+6 more)
-
-### Community 51 - "aggregate"
-Cohesion: 0.18
-Nodes (12): aggregate(), Judged, None when there is nothing to score: a refusal, or an answer making no claim., Refusals are excluded from the mean and reported separately (§9.2). Averaging a…, judged(), An answer the extractor found nothing in would otherwise score 0/0., A row with one claim per entry in `supported`., Averaging refusals in either direction breaks the gate: 0 punishes the… (+4 more)
-
-### Community 52 - "strip_boilerplate"
-Cohesion: 0.36
-Nodes (8): _normalise(), Drop lines that repeat across most pages at the top or bottom of the page.…, strip_boilerplate(), clean(), edge_count(), edges(), Edges must never cover the whole page, or a 5-line page is deleted entirely., test_short_pages_never_lose_everything()
-
-### Community 54 - "MissingCredentials"
-Cohesion: 0.40
-Nodes (5): MissingCredentials, RuntimeError, Raised instead of the SDK's generic auth error, which does not say what to set., Fail early and specifically. The SDK raises a generic TypeError at request…, _require_credentials()
-
-### Community 55 - "dehyphenate"
-Cohesion: 0.50
-Nodes (4): dehyphenate(), Join words split across a line break ("mo-\ntel" or "mo- tel" -> "motel"). A…, test_dehyphenate_joins_line_wrapped_words(), test_dehyphenate_keeps_real_hyphens()
+### Community 54 - "call_model"
+Cohesion: 0.29
+Nodes (7): call_model(), MissingCredentials, RuntimeError, Raised instead of the SDK's generic auth error, which does not say what to set., Fail early and specifically. The SDK raises a generic TypeError at request…, One completion. Returns (text, input_tokens, output_tokens). The two providers…, _require_credentials()
 
 ## Knowledge Gaps
-- **67 isolated node(s):** `taxcite`, `What exists`, `The ablation ladder`, `Phase C's baseline`, `Faithfulness` (+62 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 388 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **80 isolated node(s):** `taxcite`, `What exists`, `The ablation ladder`, `Phase C's baseline`, `Faithfulness` (+75 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 404 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Chunk` connect `Chunk` to `test_ecfr.py`, `ecfr.py`, `store.py`, `irs_pubs.py`, `cli.py`, `caselaw.py`?**
-  _High betweenness centrality (0.249) - this node is a cross-community bridge._
-- **Why does `Decisions Log` connect `Chunk` to `T2: Ingest eCFR Title 26`?**
-  _High betweenness centrality (0.225) - this node is a cross-community bridge._
-- **Why does `eCFR Chunking Decisions` connect `T2: Ingest eCFR Title 26` to `Chunk`, `ADR-17: Vector Store — Qdrant, Not pgvector`?**
-  _High betweenness centrality (0.155) - this node is a cross-community bridge._
+- **Why does `Chunk` connect `ecfr.py` to `usc_notes.py`, `cli.py`, `TaxCite — Status`, `test_ecfr.py`?**
+  _High betweenness centrality (0.240) - this node is a cross-community bridge._
+- **Why does `Decisions Log` connect `TaxCite — Status` to `T2: Ingest eCFR Title 26`?**
+  _High betweenness centrality (0.217) - this node is a cross-community bridge._
+- **Why does `eCFR Chunking Decisions` connect `T2: Ingest eCFR Title 26` to `TaxCite — Status`, `ADR-17: Vector Store — Qdrant, Not pgvector`?**
+  _High betweenness centrality (0.150) - this node is a cross-community bridge._
 - **Are the 7 inferred relationships involving `Chunk` (e.g. with `parse()` and `covers()`) actually correct?**
   _`Chunk` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 15 inferred relationships involving `Hit` (e.g. with `chunks()` and `Decomposition`) actually correct?**
@@ -311,4 +285,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Are the 18 inferred relationships involving `conn()` (e.g. with `main()` and `restore()`) actually correct?**
   _`conn()` has 18 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `taxcite`, `What exists`, `The ablation ladder` to the rest of the system?**
-  _67 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _80 weakly-connected nodes found - possible documentation gaps or missing edges._

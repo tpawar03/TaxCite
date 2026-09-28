@@ -38,32 +38,6 @@
   },
   "nodes": [
     {
-      "id": "eval_ragas_eval_budget",
-      "label": "Budget",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": "budget",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L94"
-    },
-    {
-      "id": "eval_ragas_eval_costcap",
-      "label": "CostCap",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": "costcap",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L89"
-    },
-    {
       "id": "eval_ragas_eval_judged",
       "label": "Judged",
       "_callable": true,
@@ -75,6 +49,19 @@
       "norm_label": "judged",
       "source_file": "eval/ragas_eval.py",
       "source_location": "L105"
+    },
+    {
+      "id": "src_taxcite_api_query",
+      "label": "Query",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "conn",
+      "file_type": "code",
+      "norm_label": "query",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L41"
     },
     {
       "id": "src_taxcite_jobs_event",
@@ -90,17 +77,30 @@
       "source_location": "L44"
     },
     {
-      "id": "src_taxcite_api_query",
-      "label": "Query",
+      "id": "eval_ragas_eval_budget",
+      "label": "Budget",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "query",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L41"
+      "norm_label": "budget",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L94"
+    },
+    {
+      "id": "eval_ragas_eval_costcap",
+      "label": "CostCap",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "code",
+      "norm_label": "costcap",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L89"
     },
     {
       "id": "src_taxcite_generate_answer",
@@ -113,20 +113,7 @@
       "file_type": "code",
       "norm_label": "answer",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L59"
-    },
-    {
-      "id": "src_taxcite_generate_missingcredentials",
-      "label": "MissingCredentials",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "generate.py",
-      "file_type": "code",
-      "norm_label": "missingcredentials",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L129"
+      "source_location": "L65"
     },
     {
       "id": "src_taxcite_retrieve_hit",
@@ -152,7 +139,20 @@
       "file_type": "code",
       "norm_label": "subquery",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L104"
+      "source_location": "L109"
+    },
+    {
+      "id": "src_taxcite_generate_missingcredentials",
+      "label": "MissingCredentials",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "call_model",
+      "file_type": "code",
+      "norm_label": "missingcredentials",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L147"
     },
     {
       "id": "src_taxcite_decompose_decomposition",
@@ -165,7 +165,7 @@
       "file_type": "code",
       "norm_label": "decomposition",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L119"
+      "source_location": "L124"
     },
     {
       "id": "src_taxcite_chunk_chunk",
@@ -206,42 +206,6 @@
       "source_location": "L186"
     },
     {
-      "id": "eval_ragas_eval_budget_charge",
-      "label": ".charge()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": ".charge()",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L98"
-    },
-    {
-      "id": "eval_ragas_eval_extract_claims",
-      "label": "extract_claims()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": "extract_claims()",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L135"
-    },
-    {
-      "id": "eval_ragas_eval_judge_claims",
-      "label": "judge_claims()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": "judge_claims()",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L142"
-    },
-    {
       "id": "eval_ragas_eval_judged_faithfulness",
       "label": ".faithfulness()",
       "_callable": true,
@@ -275,19 +239,7 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L209"
-    },
-    {
-      "id": "eval_ragas_eval_parse_json",
-      "label": "parse_json()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": "parse_json()",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L126"
+      "source_location": "L215"
     },
     {
       "id": "eval_ragas_eval_pipeline_answer",
@@ -302,40 +254,100 @@
       "source_location": "L159"
     },
     {
-      "id": "eval_temporal_main",
-      "label": "main()",
+      "id": "eval_ragas_eval_refusals_ok",
+      "label": "refusals_ok()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
       "community_name": "ragas_eval.py",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "eval/temporal.py",
-      "source_location": "L65"
+      "norm_label": "refusals_ok()",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L209"
     },
     {
-      "id": "tests_test_metrics_test_a_claim_the_judge_skipped_counts_as_unsupported",
-      "label": "test_a_claim_the_judge_skipped_counts_as_unsupported()",
+      "id": "tests_test_metrics_judged",
+      "label": "judged()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
       "community_name": "ragas_eval.py",
       "file_type": "code",
-      "norm_label": "test_a_claim_the_judge_skipped_counts_as_unsupported()",
+      "norm_label": "judged()",
       "source_file": "tests/test_metrics.py",
-      "source_location": "L134"
+      "source_location": "L86"
     },
     {
-      "id": "tests_test_metrics_test_judging_no_claims_costs_nothing",
-      "label": "test_judging_no_claims_costs_nothing()",
+      "id": "tests_test_metrics_test_a_refusal_is_not_scored_as_zero_or_as_one",
+      "label": "test_a_refusal_is_not_scored_as_zero_or_as_one()",
       "_callable": true,
       "_origin": "ast",
       "community": 0,
       "community_name": "ragas_eval.py",
       "file_type": "code",
-      "norm_label": "test_judging_no_claims_costs_nothing()",
+      "norm_label": "test_a_refusal_is_not_scored_as_zero_or_as_one()",
       "source_file": "tests/test_metrics.py",
-      "source_location": "L145"
+      "source_location": "L93"
+    },
+    {
+      "id": "tests_test_metrics_test_aggregate_counts_claims_and_unsupported_claims",
+      "label": "test_aggregate_counts_claims_and_unsupported_claims()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "code",
+      "norm_label": "test_aggregate_counts_claims_and_unsupported_claims()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L118"
+    },
+    {
+      "id": "tests_test_metrics_test_an_answer_with_no_claims_is_reported_not_averaged",
+      "label": "test_an_answer_with_no_claims_is_reported_not_averaged()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "code",
+      "norm_label": "test_an_answer_with_no_claims_is_reported_not_averaged()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L109"
+    },
+    {
+      "id": "tests_test_metrics_test_faithfulness_is_the_supported_ratio",
+      "label": "test_faithfulness_is_the_supported_ratio()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "code",
+      "norm_label": "test_faithfulness_is_the_supported_ratio()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L104"
+    },
+    {
+      "id": "tests_test_metrics_test_refusal_rate_gate",
+      "label": "test_refusal_rate_gate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "code",
+      "norm_label": "test_refusal_rate_gate()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L172"
+    },
+    {
+      "id": "src_taxcite_ingest_irs_pubs_edition_year",
+      "label": "edition_year()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "test_irs_pubs.py",
+      "file_type": "code",
+      "norm_label": "edition_year()",
+      "source_file": "src/taxcite/ingest/irs_pubs.py",
+      "source_location": "L128"
     },
     {
       "id": "src_taxcite_ingest_irs_pubs_normalise",
@@ -432,6 +444,18 @@
       "norm_label": "page()",
       "source_file": "tests/test_irs_pubs.py",
       "source_location": "L14"
+    },
+    {
+      "id": "tests_test_irs_pubs_test_edition_year_and_title",
+      "label": "test_edition_year_and_title()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "test_irs_pubs.py",
+      "file_type": "code",
+      "norm_label": "test_edition_year_and_title()",
+      "source_file": "tests/test_irs_pubs.py",
+      "source_location": "L69"
     },
     {
       "id": "tests_test_irs_pubs_test_fetch_rejects_a_non_pdf",
@@ -1898,6 +1922,30 @@
       "source_location": "L79"
     },
     {
+      "id": "src_taxcite_cli_fetch",
+      "label": "fetch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "cli.py",
+      "file_type": "code",
+      "norm_label": "fetch()",
+      "source_file": "src/taxcite/cli.py",
+      "source_location": "L55"
+    },
+    {
+      "id": "src_taxcite_cli_fetch_usc",
+      "label": "fetch_usc()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "cli.py",
+      "file_type": "code",
+      "norm_label": "fetch_usc()",
+      "source_file": "src/taxcite/cli.py",
+      "source_location": "L115"
+    },
+    {
       "id": "src_taxcite_cli_ingest_case",
       "label": "ingest_case()",
       "_callable": true,
@@ -2018,18 +2066,6 @@
       "source_location": "L218"
     },
     {
-      "id": "src_taxcite_store_connect",
-      "label": "connect()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "cli.py",
-      "file_type": "code",
-      "norm_label": "connect()",
-      "source_file": "src/taxcite/store.py",
-      "source_location": "L114"
-    },
-    {
       "id": "src_taxcite_store_count",
       "label": "count()",
       "_callable": true,
@@ -2066,52 +2102,64 @@
       "source_location": "L136"
     },
     {
-      "id": "eval_snapshot_create",
-      "label": "create()",
+      "id": "eval_ragas_eval_parse_json",
+      "label": "parse_json()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "snapshot.py",
+      "community_name": "parse_json",
       "file_type": "code",
-      "norm_label": "create()",
-      "source_file": "eval/snapshot.py",
-      "source_location": "L31"
+      "norm_label": "parse_json()",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L126"
     },
     {
-      "id": "eval_snapshot_main",
-      "label": "main()",
+      "id": "tests_test_metrics_test_a_judge_that_returns_junk_does_not_crash_the_run",
+      "label": "test_a_judge_that_returns_junk_does_not_crash_the_run()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "snapshot.py",
+      "community_name": "parse_json",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "eval/snapshot.py",
-      "source_location": "L80"
+      "norm_label": "test_a_judge_that_returns_junk_does_not_crash_the_run()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L154"
     },
     {
-      "id": "eval_snapshot_restore",
-      "label": "restore()",
+      "id": "tests_test_metrics_test_json_is_found_inside_chatter",
+      "label": "test_json_is_found_inside_chatter()",
       "_callable": true,
       "_origin": "ast",
       "community": 23,
-      "community_name": "snapshot.py",
+      "community_name": "parse_json",
       "file_type": "code",
-      "norm_label": "restore()",
-      "source_file": "eval/snapshot.py",
-      "source_location": "L60"
+      "norm_label": "test_json_is_found_inside_chatter()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L158"
     },
     {
-      "id": "src_taxcite_index_client",
-      "label": "client()",
+      "id": "src_taxcite_decompose_citation_graph",
+      "label": "citation_graph()",
       "_callable": true,
       "_origin": "ast",
-      "community": 23,
-      "community_name": "snapshot.py",
+      "community": 24,
+      "community_name": "decompose.py",
       "file_type": "code",
-      "norm_label": "client()",
-      "source_file": "src/taxcite/index.py",
-      "source_location": "L37"
+      "norm_label": "citation_graph()",
+      "source_file": "src/taxcite/decompose.py",
+      "source_location": "L210"
+    },
+    {
+      "id": "src_taxcite_decompose_neighbors",
+      "label": "neighbors()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "decompose.py",
+      "file_type": "code",
+      "norm_label": "neighbors()",
+      "source_file": "src/taxcite/decompose.py",
+      "source_location": "L195"
     },
     {
       "id": "src_taxcite_decompose_tax_year",
@@ -2123,7 +2171,7 @@
       "file_type": "code",
       "norm_label": "tax_year()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L227"
+      "source_location": "L233"
     },
     {
       "id": "src_taxcite_retrieve_embed",
@@ -2135,7 +2183,7 @@
       "file_type": "code",
       "norm_label": "embed()",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "src_taxcite_retrieve_models",
@@ -2147,7 +2195,7 @@
       "file_type": "code",
       "norm_label": "_models()",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L38"
+      "source_location": "L39"
     },
     {
       "id": "src_taxcite_retrieve_rerank",
@@ -2159,7 +2207,7 @@
       "file_type": "code",
       "norm_label": "rerank()",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L60"
+      "source_location": "L61"
     },
     {
       "id": "src_taxcite_retrieve_reranker",
@@ -2171,7 +2219,7 @@
       "file_type": "code",
       "norm_label": "_reranker()",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L53"
+      "source_location": "L54"
     },
     {
       "id": "tests_test_usc_chunks",
@@ -2371,7 +2419,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "cost_of()",
       "source_file": "eval/llm_bench.py",
@@ -2383,23 +2431,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "estimate()",
       "source_file": "eval/llm_bench.py",
       "source_location": "L100"
-    },
-    {
-      "id": "eval_llm_bench_judge",
-      "label": "judge()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 27,
-      "community_name": "temporal.py",
-      "file_type": "code",
-      "norm_label": "judge()",
-      "source_file": "eval/llm_bench.py",
-      "source_location": "L78"
     },
     {
       "id": "eval_llm_bench_main",
@@ -2407,7 +2443,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "eval/llm_bench.py",
@@ -2419,7 +2455,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "report()",
       "source_file": "eval/llm_bench.py",
@@ -2431,107 +2467,107 @@
       "_callable": true,
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "pick()",
       "source_file": "eval/llm_bench.py",
       "source_location": "L179"
     },
     {
-      "id": "eval_embed_bench_build",
-      "label": "build()",
+      "id": "src_taxcite_api_get_query",
+      "label": "get_query()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "build()",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L42"
+      "norm_label": "get_query()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L70"
     },
     {
-      "id": "eval_embed_bench_collection_for",
-      "label": "collection_for()",
+      "id": "src_taxcite_api_post_query",
+      "label": "post_query()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "collection_for()",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L38"
+      "norm_label": "post_query()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L51"
     },
     {
-      "id": "eval_embed_bench_main",
-      "label": "main()",
+      "id": "src_taxcite_api_run_job",
+      "label": "_run_job()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L81"
+      "norm_label": "_run_job()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L64"
     },
     {
-      "id": "eval_embed_bench_main_avg",
-      "label": "avg()",
+      "id": "src_taxcite_api_stream_events",
+      "label": "stream_events()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "avg()",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L104"
+      "norm_label": "stream_events()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L79"
     },
     {
-      "id": "eval_embed_bench_score",
-      "label": "score()",
+      "id": "src_taxcite_api_stream_events_events",
+      "label": "events()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "score()",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L60"
+      "norm_label": "events()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L92"
     },
     {
-      "id": "src_taxcite_generate_section_of",
-      "label": "section_of()",
+      "id": "src_taxcite_jobs_get",
+      "label": "get()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "section_of()",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L85"
+      "norm_label": "get()",
+      "source_file": "src/taxcite/jobs.py",
+      "source_location": "L99"
     },
     {
-      "id": "tests_test_metrics_test_section_of_strips_paragraph_markers",
-      "label": "test_section_of_strips_paragraph_markers()",
+      "id": "src_taxcite_store_connect",
+      "label": "connect()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "test_section_of_strips_paragraph_markers()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L52"
+      "norm_label": "connect()",
+      "source_file": "src/taxcite/store.py",
+      "source_location": "L114"
     },
     {
-      "id": "tests_test_metrics_test_section_of_understands_every_source",
-      "label": "test_section_of_understands_every_source()",
+      "id": "tests_test_store_conn",
+      "label": "conn()",
       "_callable": true,
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "test_section_of_understands_every_source()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L78"
+      "norm_label": "conn()",
+      "source_file": "tests/test_store.py",
+      "source_location": "L17"
     },
     {
       "id": "src_taxcite_jobs_client",
@@ -2591,7 +2627,7 @@
       "file_type": "code",
       "norm_label": "is_terminal()",
       "source_file": "src/taxcite/jobs.py",
-      "source_location": "L155"
+      "source_location": "L156"
     },
     {
       "id": "src_taxcite_jobs_notify",
@@ -2627,7 +2663,7 @@
       "file_type": "code",
       "norm_label": "replay()",
       "source_file": "src/taxcite/jobs.py",
-      "source_location": "L151"
+      "source_location": "L152"
     },
     {
       "id": "eval_store_bench_load",
@@ -2822,6 +2858,66 @@
       "source_location": "L128"
     },
     {
+      "id": "eval_embed_bench_build",
+      "label": "build()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "build()",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "eval_embed_bench_collection_for",
+      "label": "collection_for()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "collection_for()",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "eval_embed_bench_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "eval_embed_bench_main_avg",
+      "label": "avg()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "avg()",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L104"
+    },
+    {
+      "id": "eval_embed_bench_score",
+      "label": "score()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "score()",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L60"
+    },
+    {
       "id": "eval_retrieval_mrr",
       "label": "mrr()",
       "_callable": true,
@@ -2858,16 +2954,16 @@
       "source_location": "L91"
     },
     {
-      "id": "tests_test_metrics_judged",
-      "label": "judged()",
+      "id": "src_taxcite_generate_section_of",
+      "label": "section_of()",
       "_callable": true,
       "_origin": "ast",
       "community": 34,
       "community_name": "test_metrics.py",
       "file_type": "code",
-      "norm_label": "judged()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L86"
+      "norm_label": "section_of()",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L103"
     },
     {
       "id": "tests_test_metrics_test_a_group_counts_once_even_when_several_members_are_retrieved",
@@ -2880,54 +2976,6 @@
       "norm_label": "test_a_group_counts_once_even_when_several_members_are_retrieved()",
       "source_file": "tests/test_metrics.py",
       "source_location": "L67"
-    },
-    {
-      "id": "tests_test_metrics_test_a_judge_that_returns_junk_does_not_crash_the_run",
-      "label": "test_a_judge_that_returns_junk_does_not_crash_the_run()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "test_a_judge_that_returns_junk_does_not_crash_the_run()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L154"
-    },
-    {
-      "id": "tests_test_metrics_test_a_refusal_is_not_scored_as_zero_or_as_one",
-      "label": "test_a_refusal_is_not_scored_as_zero_or_as_one()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "test_a_refusal_is_not_scored_as_zero_or_as_one()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L93"
-    },
-    {
-      "id": "tests_test_metrics_test_aggregate_counts_claims_and_unsupported_claims",
-      "label": "test_aggregate_counts_claims_and_unsupported_claims()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "test_aggregate_counts_claims_and_unsupported_claims()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L118"
-    },
-    {
-      "id": "tests_test_metrics_test_an_answer_with_no_claims_is_reported_not_averaged",
-      "label": "test_an_answer_with_no_claims_is_reported_not_averaged()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "test_an_answer_with_no_claims_is_reported_not_averaged()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L109"
     },
     {
       "id": "tests_test_metrics_test_any_member_satisfies_a_group",
@@ -2954,18 +3002,6 @@
       "source_location": "L46"
     },
     {
-      "id": "tests_test_metrics_test_faithfulness_is_the_supported_ratio",
-      "label": "test_faithfulness_is_the_supported_ratio()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "test_faithfulness_is_the_supported_ratio()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L104"
-    },
-    {
       "id": "tests_test_metrics_test_gold_can_name_one_chunk_of_a_shared_label",
       "label": "test_gold_can_name_one_chunk_of_a_shared_label()",
       "_callable": true,
@@ -2976,18 +3012,6 @@
       "norm_label": "test_gold_can_name_one_chunk_of_a_shared_label()",
       "source_file": "tests/test_metrics.py",
       "source_location": "L163"
-    },
-    {
-      "id": "tests_test_metrics_test_json_is_found_inside_chatter",
-      "label": "test_json_is_found_inside_chatter()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "test_json_is_found_inside_chatter()",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L158"
     },
     {
       "id": "tests_test_metrics_test_mrr_is_one_over_first_hit_rank",
@@ -3062,16 +3086,28 @@
       "source_location": "L22"
     },
     {
-      "id": "tests_test_metrics_test_the_cost_cap_stops_a_run",
-      "label": "test_the_cost_cap_stops_a_run()",
+      "id": "tests_test_metrics_test_section_of_strips_paragraph_markers",
+      "label": "test_section_of_strips_paragraph_markers()",
       "_callable": true,
       "_origin": "ast",
       "community": 34,
       "community_name": "test_metrics.py",
       "file_type": "code",
-      "norm_label": "test_the_cost_cap_stops_a_run()",
+      "norm_label": "test_section_of_strips_paragraph_markers()",
       "source_file": "tests/test_metrics.py",
-      "source_location": "L125"
+      "source_location": "L52"
+    },
+    {
+      "id": "tests_test_metrics_test_section_of_understands_every_source",
+      "label": "test_section_of_understands_every_source()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "test_section_of_understands_every_source()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L78"
     },
     {
       "id": "eval_retrieval_cached_decompose",
@@ -3206,52 +3242,52 @@
       "source_location": "L36"
     },
     {
-      "id": "src_taxcite_retrieve_edition_filter",
-      "label": "edition_filter()",
+      "id": "eval_snapshot_create",
+      "label": "create()",
       "_callable": true,
       "_origin": "ast",
       "community": 37,
-      "community_name": "edition_filter",
+      "community_name": "client",
       "file_type": "code",
-      "norm_label": "edition_filter()",
-      "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L83"
+      "norm_label": "create()",
+      "source_file": "eval/snapshot.py",
+      "source_location": "L31"
     },
     {
-      "id": "src_taxcite_retrieve_source_filter",
-      "label": "source_filter()",
+      "id": "eval_snapshot_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 37,
-      "community_name": "edition_filter",
+      "community_name": "client",
       "file_type": "code",
-      "norm_label": "source_filter()",
-      "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L74"
+      "norm_label": "main()",
+      "source_file": "eval/snapshot.py",
+      "source_location": "L85"
     },
     {
-      "id": "tests_test_retrieve_test_edition_filter_keeps_undated_chunks_and_nearby_editions",
-      "label": "test_edition_filter_keeps_undated_chunks_and_nearby_editions()",
+      "id": "eval_snapshot_restore",
+      "label": "restore()",
       "_callable": true,
       "_origin": "ast",
       "community": 37,
-      "community_name": "edition_filter",
+      "community_name": "client",
       "file_type": "code",
-      "norm_label": "test_edition_filter_keeps_undated_chunks_and_nearby_editions()",
-      "source_file": "tests/test_retrieve.py",
-      "source_location": "L91"
+      "norm_label": "restore()",
+      "source_file": "eval/snapshot.py",
+      "source_location": "L60"
     },
     {
-      "id": "tests_test_retrieve_test_edition_filter_keeps_undated_chunks_and_nearby_editions_kept",
-      "label": "kept()",
+      "id": "src_taxcite_index_client",
+      "label": "client()",
       "_callable": true,
       "_origin": "ast",
       "community": 37,
-      "community_name": "edition_filter",
+      "community_name": "client",
       "file_type": "code",
-      "norm_label": "kept()",
-      "source_file": "tests/test_retrieve.py",
-      "source_location": "L102"
+      "norm_label": "client()",
+      "source_file": "src/taxcite/index.py",
+      "source_location": "L37"
     },
     {
       "id": "src_taxcite_retrieve_search",
@@ -3263,7 +3299,7 @@
       "file_type": "code",
       "norm_label": "search()",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L92"
+      "source_location": "L93"
     },
     {
       "id": "tests_test_retrieve_hit",
@@ -3410,112 +3446,172 @@
       "source_location": "L50"
     },
     {
-      "id": "src_taxcite_api_check",
-      "label": "_check()",
+      "id": "eval_llm_bench_judge",
+      "label": "judge()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "_check()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L21"
+      "norm_label": "judge()",
+      "source_file": "eval/llm_bench.py",
+      "source_location": "L78"
     },
     {
-      "id": "src_taxcite_api_get_query",
-      "label": "get_query()",
+      "id": "eval_ragas_eval_budget_charge",
+      "label": ".charge()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "get_query()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L70"
+      "norm_label": ".charge()",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L98"
     },
     {
-      "id": "src_taxcite_api_health",
-      "label": "health()",
+      "id": "eval_ragas_eval_extract_claims",
+      "label": "extract_claims()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "health()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L30"
+      "norm_label": "extract_claims()",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L135"
     },
     {
-      "id": "src_taxcite_api_post_query",
-      "label": "post_query()",
+      "id": "eval_ragas_eval_judge_claims",
+      "label": "judge_claims()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "post_query()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L51"
+      "norm_label": "judge_claims()",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L142"
     },
     {
-      "id": "src_taxcite_api_run_job",
-      "label": "_run_job()",
+      "id": "eval_temporal_as_of_match",
+      "label": "as_of_match()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "_run_job()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L64"
+      "norm_label": "as_of_match()",
+      "source_file": "eval/temporal.py",
+      "source_location": "L44"
     },
     {
-      "id": "src_taxcite_api_stream_events",
-      "label": "stream_events()",
+      "id": "eval_temporal_kappa",
+      "label": "kappa()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "stream_events()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L79"
+      "norm_label": "kappa()",
+      "source_file": "eval/temporal.py",
+      "source_location": "L56"
     },
     {
-      "id": "src_taxcite_api_stream_events_events",
-      "label": "events()",
+      "id": "eval_temporal_main",
+      "label": "main()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "events()",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L92"
+      "norm_label": "main()",
+      "source_file": "eval/temporal.py",
+      "source_location": "L65"
     },
     {
-      "id": "src_taxcite_jobs_get",
-      "label": "get()",
+      "id": "eval_temporal_passed",
+      "label": "passed()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "src/taxcite/jobs.py",
-      "source_location": "L99"
+      "norm_label": "passed()",
+      "source_file": "eval/temporal.py",
+      "source_location": "L52"
     },
     {
-      "id": "tests_test_store_conn",
-      "label": "conn()",
+      "id": "tests_test_metrics_test_a_claim_the_judge_skipped_counts_as_unsupported",
+      "label": "test_a_claim_the_judge_skipped_counts_as_unsupported()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "conn()",
-      "source_file": "tests/test_store.py",
-      "source_location": "L17"
+      "norm_label": "test_a_claim_the_judge_skipped_counts_as_unsupported()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "tests_test_metrics_test_judging_no_claims_costs_nothing",
+      "label": "test_judging_no_claims_costs_nothing()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "code",
+      "norm_label": "test_judging_no_claims_costs_nothing()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L145"
+    },
+    {
+      "id": "tests_test_metrics_test_the_cost_cap_stops_a_run",
+      "label": "test_the_cost_cap_stops_a_run()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "code",
+      "norm_label": "test_the_cost_cap_stops_a_run()",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L125"
+    },
+    {
+      "id": "tests_test_temporal_test_kappa_hand_computed",
+      "label": "test_kappa_hand_computed()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "code",
+      "norm_label": "test_kappa_hand_computed()",
+      "source_file": "tests/test_temporal.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "src_taxcite_decompose_decomposition_cost_usd",
+      "label": ".cost_usd()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "generate.py",
+      "file_type": "code",
+      "norm_label": ".cost_usd()",
+      "source_file": "src/taxcite/decompose.py",
+      "source_location": "L143"
+    },
+    {
+      "id": "src_taxcite_generate_answer_cost_usd",
+      "label": ".cost_usd()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "generate.py",
+      "file_type": "code",
+      "norm_label": ".cost_usd()",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L77"
     },
     {
       "id": "src_taxcite_generate_answer_from_groups",
@@ -3527,7 +3623,7 @@
       "file_type": "code",
       "norm_label": "answer_from_groups()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L217"
+      "source_location": "L235"
     },
     {
       "id": "src_taxcite_generate_answer_from_hits",
@@ -3539,7 +3635,7 @@
       "file_type": "code",
       "norm_label": "answer_from_hits()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L208"
+      "source_location": "L226"
     },
     {
       "id": "src_taxcite_generate_answer_refused",
@@ -3551,19 +3647,31 @@
       "file_type": "code",
       "norm_label": ".refused()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L75"
+      "source_location": "L81"
     },
     {
-      "id": "src_taxcite_generate_call_model",
-      "label": "call_model()",
+      "id": "src_taxcite_generate_cost",
+      "label": "cost()",
       "_callable": true,
       "_origin": "ast",
       "community": 40,
       "community_name": "generate.py",
       "file_type": "code",
-      "norm_label": "call_model()",
+      "norm_label": "cost()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L151"
+      "source_location": "L59"
+    },
+    {
+      "id": "src_taxcite_generate_effective_note",
+      "label": "effective_note()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "generate.py",
+      "file_type": "code",
+      "norm_label": "effective_note()",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L85"
     },
     {
       "id": "src_taxcite_generate_format_sources",
@@ -3575,7 +3683,7 @@
       "file_type": "code",
       "norm_label": "format_sources()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L79"
+      "source_location": "L97"
     },
     {
       "id": "src_taxcite_generate_generate",
@@ -3587,7 +3695,7 @@
       "file_type": "code",
       "norm_label": "_generate()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L247"
+      "source_location": "L269"
     },
     {
       "id": "src_taxcite_generate_parse_citations",
@@ -3599,19 +3707,7 @@
       "file_type": "code",
       "norm_label": "parse_citations()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L104"
-    },
-    {
-      "id": "src_taxcite_generate_require_credentials",
-      "label": "_require_credentials()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "generate.py",
-      "file_type": "code",
-      "norm_label": "_require_credentials()",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L133"
+      "source_location": "L122"
     },
     {
       "id": "src_taxcite_ingest_usc_notes_amendment_entries",
@@ -3890,64 +3986,16 @@
       "source_location": "L39"
     },
     {
-      "id": "eval_temporal_as_of_match",
-      "label": "as_of_match()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "pytest",
-      "file_type": "code",
-      "norm_label": "as_of_match()",
-      "source_file": "eval/temporal.py",
-      "source_location": "L44"
-    },
-    {
-      "id": "eval_temporal_kappa",
-      "label": "kappa()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "pytest",
-      "file_type": "code",
-      "norm_label": "kappa()",
-      "source_file": "eval/temporal.py",
-      "source_location": "L56"
-    },
-    {
-      "id": "eval_temporal_passed",
-      "label": "passed()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "pytest",
-      "file_type": "code",
-      "norm_label": "passed()",
-      "source_file": "eval/temporal.py",
-      "source_location": "L52"
-    },
-    {
       "id": "tests_test_temporal_test_as_of_match",
       "label": "test_as_of_match()",
       "_callable": true,
       "_origin": "ast",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "file_type": "code",
       "norm_label": "test_as_of_match()",
       "source_file": "tests/test_temporal.py",
       "source_location": "L22"
-    },
-    {
-      "id": "tests_test_temporal_test_kappa_hand_computed",
-      "label": "test_kappa_hand_computed()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "pytest",
-      "file_type": "code",
-      "norm_label": "test_kappa_hand_computed()",
-      "source_file": "tests/test_temporal.py",
-      "source_location": "L34"
     },
     {
       "id": "tests_test_temporal_test_pass_needs_a_correct_answer_and_no_as_of_miss",
@@ -3955,11 +4003,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "file_type": "code",
       "norm_label": "test_pass_needs_a_correct_answer_and_no_as_of_miss()",
       "source_file": "tests/test_temporal.py",
       "source_location": "L26"
+    },
+    {
+      "id": "src_taxcite_chunk_chunk_key",
+      "label": ".key()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "code",
+      "norm_label": ".key()",
+      "source_file": "src/taxcite/chunk.py",
+      "source_location": "L23"
     },
     {
       "id": "src_taxcite_decompose_decomposition_searched",
@@ -3971,7 +4031,7 @@
       "file_type": "code",
       "norm_label": ".searched()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L130"
+      "source_location": "L135"
     },
     {
       "id": "src_taxcite_decompose_merge",
@@ -3983,7 +4043,7 @@
       "file_type": "code",
       "norm_label": "merge()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L317"
+      "source_location": "L323"
     },
     {
       "id": "src_taxcite_decompose_parse",
@@ -3995,7 +4055,7 @@
       "file_type": "code",
       "norm_label": "parse()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L151"
+      "source_location": "L156"
     },
     {
       "id": "src_taxcite_decompose_subquery_searchable",
@@ -4007,7 +4067,7 @@
       "file_type": "code",
       "norm_label": ".searchable()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L114"
+      "source_location": "L119"
     },
     {
       "id": "src_taxcite_decompose_subquery_sources",
@@ -4019,7 +4079,31 @@
       "file_type": "code",
       "norm_label": ".sources()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L110"
+      "source_location": "L115"
+    },
+    {
+      "id": "src_taxcite_api_check",
+      "label": "_check()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "api.py",
+      "file_type": "code",
+      "norm_label": "_check()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_taxcite_api_health",
+      "label": "health()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "api.py",
+      "file_type": "code",
+      "norm_label": "health()",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L30"
     },
     {
       "id": "src_taxcite_store_held_at",
@@ -4027,7 +4111,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "file_type": "code",
       "norm_label": "held_at()",
       "source_file": "src/taxcite/store.py",
@@ -4574,76 +4658,76 @@
       "source_location": "L44"
     },
     {
-      "id": "src_taxcite_cli_fetch",
-      "label": "fetch()",
+      "id": "src_taxcite_retrieve_edition_filter",
+      "label": "edition_filter()",
       "_callable": true,
       "_origin": "ast",
       "community": 50,
-      "community_name": "fetch",
+      "community_name": "edition_filter",
       "file_type": "code",
-      "norm_label": "fetch()",
-      "source_file": "src/taxcite/cli.py",
-      "source_location": "L55"
+      "norm_label": "edition_filter()",
+      "source_file": "src/taxcite/retrieve.py",
+      "source_location": "L84"
     },
     {
-      "id": "src_taxcite_cli_fetch_usc",
-      "label": "fetch_usc()",
+      "id": "src_taxcite_retrieve_source_filter",
+      "label": "source_filter()",
       "_callable": true,
       "_origin": "ast",
       "community": 50,
-      "community_name": "fetch",
+      "community_name": "edition_filter",
       "file_type": "code",
-      "norm_label": "fetch_usc()",
-      "source_file": "src/taxcite/cli.py",
-      "source_location": "L115"
+      "norm_label": "source_filter()",
+      "source_file": "src/taxcite/retrieve.py",
+      "source_location": "L75"
     },
     {
-      "id": "src_taxcite_chunk_chunk_key",
-      "label": ".key()",
+      "id": "tests_test_retrieve_test_edition_filter_keeps_undated_chunks_and_nearby_editions",
+      "label": "test_edition_filter_keeps_undated_chunks_and_nearby_editions()",
       "_callable": true,
       "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
+      "community": 50,
+      "community_name": "edition_filter",
       "file_type": "code",
-      "norm_label": ".key()",
-      "source_file": "src/taxcite/chunk.py",
-      "source_location": "L23"
+      "norm_label": "test_edition_filter_keeps_undated_chunks_and_nearby_editions()",
+      "source_file": "tests/test_retrieve.py",
+      "source_location": "L91"
     },
     {
-      "id": "src_taxcite_decompose_decomposition_cost_usd",
-      "label": ".cost_usd()",
+      "id": "tests_test_retrieve_test_edition_filter_keeps_undated_chunks_and_nearby_editions_kept",
+      "label": "kept()",
       "_callable": true,
       "_origin": "ast",
-      "community": 52,
-      "community_name": "cost",
+      "community": 50,
+      "community_name": "edition_filter",
       "file_type": "code",
-      "norm_label": ".cost_usd()",
-      "source_file": "src/taxcite/decompose.py",
-      "source_location": "L138"
+      "norm_label": "kept()",
+      "source_file": "tests/test_retrieve.py",
+      "source_location": "L102"
     },
     {
-      "id": "src_taxcite_generate_answer_cost_usd",
-      "label": ".cost_usd()",
+      "id": "src_taxcite_generate_call_model",
+      "label": "call_model()",
       "_callable": true,
       "_origin": "ast",
-      "community": 52,
-      "community_name": "cost",
+      "community": 54,
+      "community_name": "call_model",
       "file_type": "code",
-      "norm_label": ".cost_usd()",
+      "norm_label": "call_model()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L71"
+      "source_location": "L169"
     },
     {
-      "id": "src_taxcite_generate_cost",
-      "label": "cost()",
+      "id": "src_taxcite_generate_require_credentials",
+      "label": "_require_credentials()",
       "_callable": true,
       "_origin": "ast",
-      "community": 52,
-      "community_name": "cost",
+      "community": 54,
+      "community_name": "call_model",
       "file_type": "code",
-      "norm_label": "cost()",
+      "norm_label": "_require_credentials()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L53"
+      "source_location": "L151"
     },
     {
       "id": "src_taxcite_decompose_answer",
@@ -4655,7 +4739,7 @@
       "file_type": "code",
       "norm_label": "answer()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L338"
+      "source_location": "L344"
     },
     {
       "id": "src_taxcite_decompose_chunks",
@@ -4667,19 +4751,7 @@
       "file_type": "code",
       "norm_label": "chunks()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L287"
-    },
-    {
-      "id": "src_taxcite_decompose_citation_graph",
-      "label": "citation_graph()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "retrieve",
-      "file_type": "code",
-      "norm_label": "citation_graph()",
-      "source_file": "src/taxcite/decompose.py",
-      "source_location": "L204"
+      "source_location": "L293"
     },
     {
       "id": "src_taxcite_decompose_decompose",
@@ -4691,7 +4763,7 @@
       "file_type": "code",
       "norm_label": "decompose()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L179"
+      "source_location": "L184"
     },
     {
       "id": "src_taxcite_decompose_decomposition_facts",
@@ -4703,7 +4775,7 @@
       "file_type": "code",
       "norm_label": ".facts()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L134"
+      "source_location": "L139"
     },
     {
       "id": "src_taxcite_decompose_decomposition_groups",
@@ -4715,19 +4787,7 @@
       "file_type": "code",
       "norm_label": ".groups()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L141"
-    },
-    {
-      "id": "src_taxcite_decompose_neighbors",
-      "label": "neighbors()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "retrieve",
-      "file_type": "code",
-      "norm_label": "neighbors()",
-      "source_file": "src/taxcite/decompose.py",
-      "source_location": "L189"
+      "source_location": "L146"
     },
     {
       "id": "src_taxcite_decompose_retrieve",
@@ -4739,7 +4799,7 @@
       "file_type": "code",
       "norm_label": "retrieve()",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L233"
+      "source_location": "L239"
     },
     {
       "id": "src_taxcite_ingest_citations_flags",
@@ -5354,18 +5414,6 @@
       "source_location": "L85"
     },
     {
-      "id": "src_taxcite_ingest_irs_pubs_edition_year",
-      "label": "edition_year()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "ecfr.py",
-      "file_type": "code",
-      "norm_label": "edition_year()",
-      "source_file": "src/taxcite/ingest/irs_pubs.py",
-      "source_location": "L128"
-    },
-    {
       "id": "src_taxcite_ingest_irs_pubs_fetch",
       "label": "fetch()",
       "_callable": true,
@@ -5558,24 +5606,12 @@
       "source_location": "L29"
     },
     {
-      "id": "tests_test_irs_pubs_test_edition_year_and_title",
-      "label": "test_edition_year_and_title()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "ecfr.py",
-      "file_type": "code",
-      "norm_label": "test_edition_year_and_title()",
-      "source_file": "tests/test_irs_pubs.py",
-      "source_location": "L69"
-    },
-    {
       "id": "status_decisions_log",
       "label": "Decisions Log",
       "_origin": "ast",
       "author": null,
       "captured_at": null,
-      "community": 51,
+      "community": 44,
       "community_name": "TaxCite \u2014 Status",
       "contributor": null,
       "file_type": "document",
@@ -5597,24 +5633,13 @@
       "source_location": "L1"
     },
     {
-      "id": "eval_ragas_eval_py_path",
+      "id": "path",
       "label": "Path",
       "_origin": "ast",
       "community": 0,
       "community_name": "ragas_eval.py",
       "file_type": "code",
       "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "eval_ragas_eval_py_runtimeerror",
-      "label": "RuntimeError",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "code",
-      "norm_label": "runtimeerror",
       "source_file": "",
       "source_location": ""
     },
@@ -5641,28 +5666,6 @@
       "source_location": "L115"
     },
     {
-      "id": "eval_ragas_eval_rationale_127",
-      "label": "The judge returns JSON by instruction, not by API guarantee, so parse\u2026",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "rationale",
-      "norm_label": "the judge returns json by instruction, not by api guarantee, so parse...",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L127"
-    },
-    {
-      "id": "eval_ragas_eval_rationale_143",
-      "label": "One batched call per row, not one per claim (ADR-10).",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "ragas_eval.py",
-      "file_type": "rationale",
-      "norm_label": "one batched call per row, not one per claim (adr-10).",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L143"
-    },
-    {
       "id": "eval_ragas_eval_rationale_161",
       "label": "Run the full pipeline once per run index and reuse it, so re-judging is free.\u2026",
       "_origin": "ast",
@@ -5685,26 +5688,59 @@
       "source_location": "L187"
     },
     {
-      "id": "eval_ragas_eval_rationale_90",
-      "label": "Raised instead of quietly spending: an eval that can call a model in a loop\u2026",
+      "id": "eval_ragas_eval_rationale_210",
+      "label": "Refusals sit outside the faithfulness mean (see `aggregate`), so a build that\u2026",
       "_origin": "ast",
       "community": 0,
       "community_name": "ragas_eval.py",
       "file_type": "rationale",
-      "norm_label": "raised instead of quietly spending: an eval that can call a model in a loop...",
+      "norm_label": "refusals sit outside the faithfulness mean (see `aggregate`), so a build that...",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L90"
+      "source_location": "L210"
     },
     {
-      "id": "tests_test_metrics_rationale_135",
-      "label": "Silence is not support: a missing verdict must not quietly become a pass.",
+      "id": "tests_test_metrics_rationale_110",
+      "label": "An answer the extractor found nothing in would otherwise score 0/0.",
       "_origin": "ast",
       "community": 0,
       "community_name": "ragas_eval.py",
       "file_type": "rationale",
-      "norm_label": "silence is not support: a missing verdict must not quietly become a pass.",
+      "norm_label": "an answer the extractor found nothing in would otherwise score 0/0.",
       "source_file": "tests/test_metrics.py",
-      "source_location": "L135"
+      "source_location": "L110"
+    },
+    {
+      "id": "tests_test_metrics_rationale_173",
+      "label": "D7's first build: faithfulness passed at 0.866 while refusing more than half\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "rationale",
+      "norm_label": "d7's first build: faithfulness passed at 0.866 while refusing more than half...",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L173"
+    },
+    {
+      "id": "tests_test_metrics_rationale_87",
+      "label": "A row with one claim per entry in `supported`.",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "rationale",
+      "norm_label": "a row with one claim per entry in `supported`.",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "tests_test_metrics_rationale_94",
+      "label": "Averaging refusals in either direction breaks the gate: 0 punishes the\u2026",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "file_type": "rationale",
+      "norm_label": "averaging refusals in either direction breaks the gate: 0 punishes the...",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L94"
     },
     {
       "id": "skipif",
@@ -6584,6 +6620,17 @@
       "source_location": "L108"
     },
     {
+      "id": "src_taxcite_init",
+      "label": "taxcite/__init__.py",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "test_jobs.py",
+      "file_type": "code",
+      "norm_label": "taxcite/__init__.py",
+      "source_file": "src/taxcite/__init__.py",
+      "source_location": "L1"
+    },
+    {
       "id": "tests_test_health",
       "label": "test_health.py",
       "_origin": "ast",
@@ -6749,6 +6796,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_taxcite_cli_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "cli.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
       "id": "src_taxcite_cli_rationale_1",
       "label": "Command line: fetch, parse, store and index the corpora. taxcite ingest ecfr\u2026",
       "_origin": "ast",
@@ -6760,6 +6818,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_taxcite_cli_rationale_116",
+      "label": "Title 26 USLM XML for a release point (default: the current one), cached on\u2026",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "cli.py",
+      "file_type": "rationale",
+      "norm_label": "title 26 uslm xml for a release point (default: the current one), cached on...",
+      "source_file": "src/taxcite/cli.py",
+      "source_location": "L116"
+    },
+    {
       "id": "src_taxcite_cli_rationale_50",
       "label": "The date eCFR considers Title 26 current to.",
       "_origin": "ast",
@@ -6769,6 +6838,17 @@
       "norm_label": "the date ecfr considers title 26 current to.",
       "source_file": "src/taxcite/cli.py",
       "source_location": "L50"
+    },
+    {
+      "id": "src_taxcite_cli_rationale_56",
+      "label": "Download one part (or a single section) of Title 26, cached on disk. The API\u2026",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "cli.py",
+      "file_type": "rationale",
+      "norm_label": "download one part (or a single section) of title 26, cached on disk. the api...",
+      "source_file": "src/taxcite/cli.py",
+      "source_location": "L56"
     },
     {
       "id": "src_taxcite_store_rationale_137",
@@ -6796,37 +6876,37 @@
       "version": "0.1.0"
     },
     {
-      "id": "eval_snapshot",
-      "label": "snapshot.py",
+      "id": "parametrize",
+      "label": "parametrize",
       "_origin": "ast",
       "community": 23,
-      "community_name": "snapshot.py",
+      "community_name": "parse_json",
       "file_type": "code",
-      "norm_label": "snapshot.py",
-      "source_file": "eval/snapshot.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "eval_snapshot_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "snapshot.py",
-      "file_type": "code",
-      "norm_label": "path",
+      "norm_label": "parametrize",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "eval_snapshot_rationale_1",
-      "label": "Freeze the corpus so CI can retrieve against it without a 90-minute ingest. The\u2026",
+      "id": "eval_ragas_eval_rationale_127",
+      "label": "The judge returns JSON by instruction, not by API guarantee, so parse\u2026",
       "_origin": "ast",
       "community": 23,
-      "community_name": "snapshot.py",
+      "community_name": "parse_json",
       "file_type": "rationale",
-      "norm_label": "freeze the corpus so ci can retrieve against it without a 90-minute ingest. the...",
-      "source_file": "eval/snapshot.py",
-      "source_location": "L1"
+      "norm_label": "the judge returns json by instruction, not by api guarantee, so parse...",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L127"
+    },
+    {
+      "id": "tests_test_metrics_rationale_159",
+      "label": "Instruction is not a guarantee; the model sometimes wraps its JSON in prose.",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "parse_json",
+      "file_type": "rationale",
+      "norm_label": "instruction is not a guarantee; the model sometimes wraps its json in prose.",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L159"
     },
     {
       "id": "sparsevector",
@@ -6873,7 +6953,29 @@
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_decompose_rationale_228",
+      "id": "src_taxcite_decompose_rationale_196",
+      "label": "Held opinions within `hops` citation steps of the seeds, in either direction;\u2026",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "decompose.py",
+      "file_type": "rationale",
+      "norm_label": "held opinions within `hops` citation steps of the seeds, in either direction;...",
+      "source_file": "src/taxcite/decompose.py",
+      "source_location": "L196"
+    },
+    {
+      "id": "src_taxcite_decompose_rationale_211",
+      "label": "(edges, held opinions), loaded once: 5,278 edges is small enough to walk in\u2026",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "decompose.py",
+      "file_type": "rationale",
+      "norm_label": "(edges, held opinions), loaded once: 5,278 edges is small enough to walk in...",
+      "source_file": "src/taxcite/decompose.py",
+      "source_location": "L211"
+    },
+    {
+      "id": "src_taxcite_decompose_rationale_234",
       "label": "The plan's one tax year, or None: no year, or several (\"2016 and 2026\"), filter\u2026",
       "_origin": "ast",
       "community": 24,
@@ -6881,7 +6983,7 @@
       "file_type": "rationale",
       "norm_label": "the plan's one tax year, or none: no year, or several (\"2016 and 2026\"), filter...",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L228"
+      "source_location": "L234"
     },
     {
       "id": "src_taxcite_retrieve_rationale_1",
@@ -6895,7 +6997,7 @@
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_retrieve_rationale_39",
+      "id": "src_taxcite_retrieve_rationale_40",
       "label": "Loaded once per process and per model: ~4s, which every query would otherwise\u2026",
       "_origin": "ast",
       "community": 24,
@@ -6903,10 +7005,10 @@
       "file_type": "rationale",
       "norm_label": "loaded once per process and per model: ~4s, which every query would otherwise...",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L39"
+      "source_location": "L40"
     },
     {
-      "id": "src_taxcite_retrieve_rationale_54",
+      "id": "src_taxcite_retrieve_rationale_55",
       "label": "Loaded once per process and per model, like the embedding models.",
       "_origin": "ast",
       "community": 24,
@@ -6914,10 +7016,10 @@
       "file_type": "rationale",
       "norm_label": "loaded once per process and per model, like the embedding models.",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L54"
+      "source_location": "L55"
     },
     {
-      "id": "src_taxcite_retrieve_rationale_61",
+      "id": "src_taxcite_retrieve_rationale_62",
       "label": "Re-score candidates with a cross-encoder, which reads query and chunk together.\u2026",
       "_origin": "ast",
       "community": 24,
@@ -6925,7 +7027,7 @@
       "file_type": "rationale",
       "norm_label": "re-score candidates with a cross-encoder, which reads query and chunk together....",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L61"
+      "source_location": "L62"
     },
     {
       "id": "tests_test_usc",
@@ -6965,7 +7067,7 @@
       "label": "llm_bench.py",
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "llm_bench.py",
       "source_file": "eval/llm_bench.py",
@@ -6976,21 +7078,10 @@
       "label": "rejudge.py",
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "code",
       "norm_label": "rejudge.py",
       "source_file": "eval/rejudge.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "eval_temporal",
-      "label": "temporal.py",
-      "_origin": "ast",
-      "community": 27,
-      "community_name": "temporal.py",
-      "file_type": "code",
-      "norm_label": "temporal.py",
-      "source_file": "eval/temporal.py",
       "source_location": "L1"
     },
     {
@@ -6998,7 +7089,7 @@
       "label": "ADR-11: choose the LLM by measuring answers, not by price alone. uv run python\u2026",
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "rationale",
       "norm_label": "adr-11: choose the llm by measuring answers, not by price alone. uv run python...",
       "source_file": "eval/llm_bench.py",
@@ -7009,88 +7100,99 @@
       "label": "Rough spend before committing: RAG prompts dominate the input tokens.",
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "rationale",
       "norm_label": "rough spend before committing: rag prompts dominate the input tokens.",
       "source_file": "eval/llm_bench.py",
       "source_location": "L101"
     },
     {
-      "id": "eval_llm_bench_rationale_79",
-      "label": "Grade one answer. `alt` applies the same rubric in different words, which is\u2026",
-      "_origin": "ast",
-      "community": 27,
-      "community_name": "temporal.py",
-      "file_type": "rationale",
-      "norm_label": "grade one answer. `alt` applies the same rubric in different words, which is...",
-      "source_file": "eval/llm_bench.py",
-      "source_location": "L79"
-    },
-    {
       "id": "eval_rejudge_rationale_1",
       "label": "Re-grade stored answers without regenerating them (judging is the cheap half).\u2026",
       "_origin": "ast",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "file_type": "rationale",
       "norm_label": "re-grade stored answers without regenerating them (judging is the cheap half)....",
       "source_file": "eval/rejudge.py",
       "source_location": "L1"
     },
     {
-      "id": "eval_temporal_rationale_1",
-      "label": "Temporal accuracy (Phase D gate, \u00a79.3): is the answer right for the year the\u2026",
-      "_origin": "ast",
-      "community": 27,
-      "community_name": "temporal.py",
-      "file_type": "rationale",
-      "norm_label": "temporal accuracy (phase d gate, \u00a79.3): is the answer right for the year the...",
-      "source_file": "eval/temporal.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "eval_embed_bench",
-      "label": "embed_bench.py",
+      "id": "backgroundtasks",
+      "label": "BackgroundTasks",
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
       "file_type": "code",
-      "norm_label": "embed_bench.py",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L1"
+      "norm_label": "backgroundtasks",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "eval_embed_bench_rationale_1",
-      "label": "ADR-18: choose the dense embedding model by measuring it on the pilot set. uv\u2026",
+      "id": "basemodel",
+      "label": "BaseModel",
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
-      "file_type": "rationale",
-      "norm_label": "adr-18: choose the dense embedding model by measuring it on the pilot set. uv...",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L1"
+      "community_name": "conn",
+      "file_type": "code",
+      "norm_label": "basemodel",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "eval_embed_bench_rationale_43",
-      "label": "Index every chunk with one model into its own collection; returns build time.",
+      "id": "post",
+      "label": "post",
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
-      "file_type": "rationale",
-      "norm_label": "index every chunk with one model into its own collection; returns build time.",
-      "source_file": "eval/embed_bench.py",
-      "source_location": "L43"
+      "community_name": "conn",
+      "file_type": "code",
+      "norm_label": "post",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_taxcite_generate_rationale_86",
-      "label": "The section a citation belongs to, ignoring paragraph depth. '26 CFR\u2026",
+      "id": "streamingresponse",
+      "label": "StreamingResponse",
       "_origin": "ast",
       "community": 28,
-      "community_name": "embed_bench.py",
+      "community_name": "conn",
+      "file_type": "code",
+      "norm_label": "streamingresponse",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "tests_test_store_py_fixture",
+      "label": "fixture",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "conn",
+      "file_type": "code",
+      "norm_label": "fixture",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_taxcite_api_rationale_52",
+      "label": "Accept a question and return immediately (ADR-9). The pipeline runs 20-30s,\u2026",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "conn",
       "file_type": "rationale",
-      "norm_label": "the section a citation belongs to, ignoring paragraph depth. '26 cfr...",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L86"
+      "norm_label": "accept a question and return immediately (adr-9). the pipeline runs 20-30s,...",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "src_taxcite_api_rationale_80",
+      "label": "Server-sent events for one job. Replays whatever the record already holds, then\u2026",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "conn",
+      "file_type": "rationale",
+      "norm_label": "server-sent events for one job. replays whatever the record already holds, then...",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L80"
     },
     {
       "id": "redis",
@@ -7481,6 +7583,17 @@
       "source_location": "L74"
     },
     {
+      "id": "eval_embed_bench",
+      "label": "embed_bench.py",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "code",
+      "norm_label": "embed_bench.py",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L1"
+    },
+    {
       "id": "tests_test_metrics",
       "label": "test_metrics.py",
       "_origin": "ast",
@@ -7492,15 +7605,37 @@
       "source_location": "L1"
     },
     {
-      "id": "tests_test_metrics_py_parametrize",
-      "label": "parametrize",
+      "id": "eval_embed_bench_rationale_1",
+      "label": "ADR-18: choose the dense embedding model by measuring it on the pilot set. uv\u2026",
       "_origin": "ast",
       "community": 34,
       "community_name": "test_metrics.py",
-      "file_type": "code",
-      "norm_label": "parametrize",
-      "source_file": "",
-      "source_location": ""
+      "file_type": "rationale",
+      "norm_label": "adr-18: choose the dense embedding model by measuring it on the pilot set. uv...",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "eval_embed_bench_rationale_43",
+      "label": "Index every chunk with one model into its own collection; returns build time.",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "rationale",
+      "norm_label": "index every chunk with one model into its own collection; returns build time.",
+      "source_file": "eval/embed_bench.py",
+      "source_location": "L43"
+    },
+    {
+      "id": "src_taxcite_generate_rationale_104",
+      "label": "The section a citation belongs to, ignoring paragraph depth. '26 CFR\u2026",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "test_metrics.py",
+      "file_type": "rationale",
+      "norm_label": "the section a citation belongs to, ignoring paragraph depth. '26 cfr...",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L104"
     },
     {
       "id": "tests_test_metrics_rationale_1",
@@ -7514,28 +7649,6 @@
       "source_location": "L1"
     },
     {
-      "id": "tests_test_metrics_rationale_110",
-      "label": "An answer the extractor found nothing in would otherwise score 0/0.",
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "rationale",
-      "norm_label": "an answer the extractor found nothing in would otherwise score 0/0.",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L110"
-    },
-    {
-      "id": "tests_test_metrics_rationale_159",
-      "label": "Instruction is not a guarantee; the model sometimes wraps its JSON in prose.",
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "rationale",
-      "norm_label": "instruction is not a guarantee; the model sometimes wraps its json in prose.",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L159"
-    },
-    {
       "id": "tests_test_metrics_rationale_164",
       "label": "C6: three chunks share \"T.C. Memo. 2023-128, at *15\" and only #3 states the\u2026",
       "_origin": "ast",
@@ -7545,28 +7658,6 @@
       "norm_label": "c6: three chunks share \"t.c. memo. 2023-128, at *15\" and only #3 states the...",
       "source_file": "tests/test_metrics.py",
       "source_location": "L164"
-    },
-    {
-      "id": "tests_test_metrics_rationale_87",
-      "label": "A row with one claim per entry in `supported`.",
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "rationale",
-      "norm_label": "a row with one claim per entry in `supported`.",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L87"
-    },
-    {
-      "id": "tests_test_metrics_rationale_94",
-      "label": "Averaging refusals in either direction breaks the gate: 0 punishes the\u2026",
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "test_metrics.py",
-      "file_type": "rationale",
-      "norm_label": "averaging refusals in either direction breaks the gate: 0 punishes the...",
-      "source_file": "tests/test_metrics.py",
-      "source_location": "L94"
     },
     {
       "id": "eval_retrieval",
@@ -7611,17 +7702,6 @@
       "norm_label": "gold",
       "source_file": "",
       "source_location": ""
-    },
-    {
-      "id": "src_taxcite_init",
-      "label": "taxcite/__init__.py",
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "retrieval.py",
-      "file_type": "code",
-      "norm_label": "taxcite/__init__.py",
-      "source_file": "src/taxcite/__init__.py",
-      "source_location": "L1"
     },
     {
       "id": "eval_retrieval_rationale_1",
@@ -7690,48 +7770,15 @@
       "source_location": "L1"
     },
     {
-      "id": "filter",
-      "label": "Filter",
+      "id": "eval_snapshot_py_path",
+      "label": "Path",
       "_origin": "ast",
       "community": 37,
-      "community_name": "edition_filter",
+      "community_name": "client",
       "file_type": "code",
-      "norm_label": "filter",
+      "norm_label": "path",
       "source_file": "",
       "source_location": ""
-    },
-    {
-      "id": "src_taxcite_retrieve_rationale_75",
-      "label": "One source or several; several is how B7 routes a sub-query to the corpora that\u2026",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "edition_filter",
-      "file_type": "rationale",
-      "norm_label": "one source or several; several is how b7 routes a sub-query to the corpora that...",
-      "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L75"
-    },
-    {
-      "id": "src_taxcite_retrieve_rationale_84",
-      "label": "Keep chunks with no edition (everything but publications, and undated\u2026",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "edition_filter",
-      "file_type": "rationale",
-      "norm_label": "keep chunks with no edition (everything but publications, and undated...",
-      "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L84"
-    },
-    {
-      "id": "tests_test_retrieve_rationale_92",
-      "label": "D3's filter, against Qdrant's own semantics (in-memory), not a re-\u2026",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "edition_filter",
-      "file_type": "rationale",
-      "norm_label": "d3's filter, against qdrant's own semantics (in-memory), not a re-...",
-      "source_file": "tests/test_retrieve.py",
-      "source_location": "L92"
     },
     {
       "id": "status",
@@ -7757,7 +7804,7 @@
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_retrieve_rationale_96",
+      "id": "src_taxcite_retrieve_rationale_97",
       "label": "Top-k chunks for a query. Modes are the rungs of the eval ablation ladder (\u00a79):\u2026",
       "_origin": "ast",
       "community": 39,
@@ -7765,7 +7812,7 @@
       "file_type": "rationale",
       "norm_label": "top-k chunks for a query. modes are the rungs of the eval ablation ladder (\u00a79):...",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L96"
+      "source_location": "L97"
     },
     {
       "id": "tests_test_retrieve_rationale_37",
@@ -7801,114 +7848,103 @@
       "source_location": "L87"
     },
     {
-      "id": "backgroundtasks",
-      "label": "BackgroundTasks",
+      "id": "eval_temporal",
+      "label": "temporal.py",
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "backgroundtasks",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "basemodel",
-      "label": "BaseModel",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "conn",
-      "file_type": "code",
-      "norm_label": "basemodel",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "get",
-      "label": "get",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "conn",
-      "file_type": "code",
-      "norm_label": "get",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "post",
-      "label": "post",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "conn",
-      "file_type": "code",
-      "norm_label": "post",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "response",
-      "label": "Response",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "conn",
-      "file_type": "code",
-      "norm_label": "response",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_taxcite_api",
-      "label": "api.py",
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "conn",
-      "file_type": "code",
-      "norm_label": "api.py",
-      "source_file": "src/taxcite/api.py",
+      "norm_label": "temporal.py",
+      "source_file": "eval/temporal.py",
       "source_location": "L1"
     },
     {
-      "id": "streamingresponse",
-      "label": "StreamingResponse",
+      "id": "runtimeerror",
+      "label": "RuntimeError",
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "code",
-      "norm_label": "streamingresponse",
+      "norm_label": "runtimeerror",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "tests_test_store_py_fixture",
-      "label": "fixture",
+      "id": "eval_llm_bench_rationale_79",
+      "label": "Grade one answer. `alt` applies the same rubric in different words, which is\u2026",
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
-      "file_type": "code",
-      "norm_label": "fixture",
-      "source_file": "",
-      "source_location": ""
+      "community_name": "temporal.py",
+      "file_type": "rationale",
+      "norm_label": "grade one answer. `alt` applies the same rubric in different words, which is...",
+      "source_file": "eval/llm_bench.py",
+      "source_location": "L79"
     },
     {
-      "id": "src_taxcite_api_rationale_52",
-      "label": "Accept a question and return immediately (ADR-9). The pipeline runs 20-30s,\u2026",
+      "id": "eval_ragas_eval_rationale_143",
+      "label": "One batched call per row, not one per claim (ADR-10).",
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "rationale",
-      "norm_label": "accept a question and return immediately (adr-9). the pipeline runs 20-30s,...",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L52"
+      "norm_label": "one batched call per row, not one per claim (adr-10).",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L143"
     },
     {
-      "id": "src_taxcite_api_rationale_80",
-      "label": "Server-sent events for one job. Replays whatever the record already holds, then\u2026",
+      "id": "eval_ragas_eval_rationale_90",
+      "label": "Raised instead of quietly spending: an eval that can call a model in a loop\u2026",
       "_origin": "ast",
       "community": 4,
-      "community_name": "conn",
+      "community_name": "temporal.py",
       "file_type": "rationale",
-      "norm_label": "server-sent events for one job. replays whatever the record already holds, then...",
-      "source_file": "src/taxcite/api.py",
-      "source_location": "L80"
+      "norm_label": "raised instead of quietly spending: an eval that can call a model in a loop...",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "eval_temporal_rationale_1",
+      "label": "Temporal accuracy (Phase D gate, \u00a79.3): is the answer right for the year the\u2026",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "rationale",
+      "norm_label": "temporal accuracy (phase d gate, \u00a79.3): is the answer right for the year the...",
+      "source_file": "eval/temporal.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "eval_temporal_rationale_45",
+      "label": "Year-level match of the plan's as-of against the row's tax year. None = not\u2026",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "rationale",
+      "norm_label": "year-level match of the plan's as-of against the row's tax year. none = not...",
+      "source_file": "eval/temporal.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "eval_temporal_rationale_57",
+      "label": "Cohen's kappa for two raters over the same items.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "rationale",
+      "norm_label": "cohen's kappa for two raters over the same items.",
+      "source_file": "eval/temporal.py",
+      "source_location": "L57"
+    },
+    {
+      "id": "tests_test_metrics_rationale_135",
+      "label": "Silence is not support: a missing verdict must not quietly become a pass.",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "temporal.py",
+      "file_type": "rationale",
+      "norm_label": "silence is not support: a missing verdict must not quietly become a pass.",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L135"
     },
     {
       "id": "src_taxcite_generate",
@@ -7922,17 +7958,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_generate_py_runtimeerror",
-      "label": "RuntimeError",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "generate.py",
-      "file_type": "code",
-      "norm_label": "runtimeerror",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "src_taxcite_generate_rationale_1",
       "label": "Answer a question, with and without retrieval. Two modes, because the \u00a79\u2026",
       "_origin": "ast",
@@ -7944,7 +7969,7 @@
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_generate_rationale_105",
+      "id": "src_taxcite_generate_rationale_123",
       "label": "Split the answer's citations three ways: exact, derived, unsupported. The three\u2026",
       "_origin": "ast",
       "community": 40,
@@ -7952,43 +7977,10 @@
       "file_type": "rationale",
       "norm_label": "split the answer's citations three ways: exact, derived, unsupported. the three...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L105"
+      "source_location": "L123"
     },
     {
-      "id": "src_taxcite_generate_rationale_130",
-      "label": "Raised instead of the SDK's generic auth error, which does not say what to set.",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "generate.py",
-      "file_type": "rationale",
-      "norm_label": "raised instead of the sdk's generic auth error, which does not say what to set.",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L130"
-    },
-    {
-      "id": "src_taxcite_generate_rationale_134",
-      "label": "Fail early and specifically. The SDK raises a generic TypeError at request\u2026",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "generate.py",
-      "file_type": "rationale",
-      "norm_label": "fail early and specifically. the sdk raises a generic typeerror at request...",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L134"
-    },
-    {
-      "id": "src_taxcite_generate_rationale_154",
-      "label": "One completion. Returns (text, input_tokens, output_tokens). The two providers\u2026",
-      "_origin": "ast",
-      "community": 40,
-      "community_name": "generate.py",
-      "file_type": "rationale",
-      "norm_label": "one completion. returns (text, input_tokens, output_tokens). the two providers...",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L154"
-    },
-    {
-      "id": "src_taxcite_generate_rationale_209",
+      "id": "src_taxcite_generate_rationale_227",
       "label": "Synthesis only, over chunks already retrieved. Split out from `answer` so a\u2026",
       "_origin": "ast",
       "community": 40,
@@ -7996,10 +7988,10 @@
       "file_type": "rationale",
       "norm_label": "synthesis only, over chunks already retrieved. split out from `answer` so a...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L209"
+      "source_location": "L227"
     },
     {
-      "id": "src_taxcite_generate_rationale_219",
+      "id": "src_taxcite_generate_rationale_237",
       "label": "Synthesis over sources grouped by the sub-query that retrieved them (B7). The\u2026",
       "_origin": "ast",
       "community": 40,
@@ -8007,10 +7999,10 @@
       "file_type": "rationale",
       "norm_label": "synthesis over sources grouped by the sub-query that retrieved them (b7). the...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L219"
+      "source_location": "L237"
     },
     {
-      "id": "src_taxcite_generate_rationale_240",
+      "id": "src_taxcite_generate_rationale_262",
       "label": "Answer a question with retrieval (`rag`) or without it (`closed_book`).",
       "_origin": "ast",
       "community": 40,
@@ -8018,7 +8010,18 @@
       "file_type": "rationale",
       "norm_label": "answer a question with retrieval (`rag`) or without it (`closed_book`).",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L240"
+      "source_location": "L262"
+    },
+    {
+      "id": "src_taxcite_generate_rationale_86",
+      "label": "D7: flag statute text whose latest amendment took effect after the question's\u2026",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "generate.py",
+      "file_type": "rationale",
+      "norm_label": "d7: flag statute text whose latest amendment took effect after the question's...",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L86"
     },
     {
       "id": "src_taxcite_ingest_usc_notes",
@@ -8175,11 +8178,22 @@
       "source_location": "L1"
     },
     {
+      "id": "eval_snapshot",
+      "label": "snapshot.py",
+      "_origin": "ast",
+      "community": 42,
+      "community_name": "pathlib",
+      "file_type": "code",
+      "norm_label": "snapshot.py",
+      "source_file": "eval/snapshot.py",
+      "source_location": "L1"
+    },
+    {
       "id": "tests_test_temporal",
       "label": "test_temporal.py",
       "_origin": "ast",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "file_type": "code",
       "norm_label": "test_temporal.py",
       "source_file": "tests/test_temporal.py",
@@ -8190,47 +8204,322 @@
       "label": "parametrize",
       "_origin": "ast",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "file_type": "code",
       "norm_label": "parametrize",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "eval_temporal_rationale_45",
-      "label": "Year-level match of the plan's as-of against the row's tax year. None = not\u2026",
+      "id": "eval_snapshot_rationale_1",
+      "label": "Freeze the corpus so CI can retrieve against it without a 90-minute ingest. The\u2026",
       "_origin": "ast",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "file_type": "rationale",
-      "norm_label": "year-level match of the plan's as-of against the row's tax year. none = not...",
-      "source_file": "eval/temporal.py",
-      "source_location": "L45"
-    },
-    {
-      "id": "eval_temporal_rationale_57",
-      "label": "Cohen's kappa for two raters over the same items.",
-      "_origin": "ast",
-      "community": 42,
-      "community_name": "pytest",
-      "file_type": "rationale",
-      "norm_label": "cohen's kappa for two raters over the same items.",
-      "source_file": "eval/temporal.py",
-      "source_location": "L57"
+      "norm_label": "freeze the corpus so ci can retrieve against it without a 90-minute ingest. the...",
+      "source_file": "eval/snapshot.py",
+      "source_location": "L1"
     },
     {
       "id": "tests_test_temporal_rationale_1",
       "label": "The temporal gate's scoring rules (D2), on fixture values: no API calls.",
       "_origin": "ast",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "file_type": "rationale",
       "norm_label": "the temporal gate's scoring rules (d2), on fixture values: no api calls.",
       "source_file": "tests/test_temporal.py",
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_decompose_rationale_152",
+      "id": "eval_results_phase_d",
+      "label": "phase_d.md",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "phase_d.md",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "eval_results_phase_d_9_3_recalibration",
+      "label": "\u00a79.3 recalibration",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "\u00a79.3 recalibration",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L187"
+    },
+    {
+      "id": "eval_results_phase_d_a_gate_that_passed_while_the_system_refused_half_its_questions",
+      "label": "A gate that passed while the system refused half its questions",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "a gate that passed while the system refused half its questions",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L45"
+    },
+    {
+      "id": "eval_results_phase_d_d0_what_the_rows_needed_before_building",
+      "label": "D0: what the rows needed, before building",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "d0: what the rows needed, before building",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L66"
+    },
+    {
+      "id": "eval_results_phase_d_effective_dates_d4",
+      "label": "Effective dates (D4)",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "effective dates (d4)",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L143"
+    },
+    {
+      "id": "eval_results_phase_d_failures_with_examples",
+      "label": "Failures, with examples",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "failures, with examples",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L165"
+    },
+    {
+      "id": "eval_results_phase_d_open_problems_handed_on",
+      "label": "Open problems handed on",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "open problems handed on",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L216"
+    },
+    {
+      "id": "eval_results_phase_d_reproducing",
+      "label": "Reproducing",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "reproducing",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L229"
+    },
+    {
+      "id": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "label": "TaxCite \u2014 Phase D exit report",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "taxcite \u2014 phase d exit report",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "eval_results_phase_d_the_gate",
+      "label": "The gate",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "the gate",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L28"
+    },
+    {
+      "id": "eval_results_phase_d_the_gate_row_by_row",
+      "label": "The gate, row by row",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "the gate, row by row",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L119"
+    },
+    {
+      "id": "eval_results_phase_d_the_ladder",
+      "label": "The ladder",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "the ladder",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L81"
+    },
+    {
+      "id": "eval_results_phase_d_the_same_retrieval_a_different_score",
+      "label": "The same retrieval, a different score",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "the same retrieval, a different score",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L55"
+    },
+    {
+      "id": "eval_results_phase_d_transaction_time_d6",
+      "label": "Transaction time (D6)",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "transaction time (d6)",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L157"
+    },
+    {
+      "id": "eval_results_phase_d_what_exists",
+      "label": "What exists",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "what exists",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L13"
+    },
+    {
+      "id": "eval_results_phase_d_what_phase_d_got_wrong",
+      "label": "What Phase D got wrong",
+      "_origin": "ast",
+      "community": 43,
+      "community_name": "TaxCite \u2014 Phase D exit report",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "what phase d got wrong",
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L201"
+    },
+    {
+      "id": "status_environment",
+      "label": "Environment",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "environment",
+      "source_file": "STATUS.md",
+      "source_location": "L68"
+    },
+    {
+      "id": "status_findings_worth_remembering",
+      "label": "Findings worth remembering",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "findings worth remembering",
+      "source_file": "STATUS.md",
+      "source_location": "L55"
+    },
+    {
+      "id": "status_now",
+      "label": "Now",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "now",
+      "source_file": "STATUS.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "status_pending_housekeeping",
+      "label": "Pending housekeeping",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "pending housekeeping",
+      "source_file": "STATUS.md",
+      "source_location": "L73"
+    },
+    {
+      "id": "status_phase_a_progress_plan_tasks_plan_md_tasks_tasks_todo_md",
+      "label": "Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "phase a progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)",
+      "source_file": "STATUS.md",
+      "source_location": "L16"
+    },
+    {
+      "id": "status_taxcite_status",
+      "label": "TaxCite \u2014 Status",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "taxcite \u2014 status",
+      "source_file": "STATUS.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_taxcite_chunk_rationale_24",
+      "label": "Stable primary key. A citation alone is not unique: one citation can need\u2026",
+      "_origin": "ast",
+      "community": 44,
+      "community_name": "TaxCite \u2014 Status",
+      "file_type": "rationale",
+      "norm_label": "stable primary key. a citation alone is not unique: one citation can need...",
+      "source_file": "src/taxcite/chunk.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "eval_ragas_eval_py_path",
+      "label": "Path",
+      "_origin": "ast",
+      "community": 45,
+      "community_name": "Path",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_taxcite_decompose_rationale_157",
       "label": "(sub-queries, as_of, fallback reason). Never raises. A decomposition that\u2026",
       "_origin": "ast",
       "community": 48,
@@ -8238,10 +8527,10 @@
       "file_type": "rationale",
       "norm_label": "(sub-queries, as_of, fallback reason). never raises. a decomposition that...",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L152"
+      "source_location": "L157"
     },
     {
-      "id": "src_taxcite_decompose_rationale_318",
+      "id": "src_taxcite_decompose_rationale_324",
       "label": "One ranked list of k, round-robin across sub-queries, first occurrence wins.\u2026",
       "_origin": "ast",
       "community": 48,
@@ -8249,14 +8538,47 @@
       "file_type": "rationale",
       "norm_label": "one ranked list of k, round-robin across sub-queries, first occurrence wins....",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L318"
+      "source_location": "L324"
+    },
+    {
+      "id": "get",
+      "label": "get",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "api.py",
+      "file_type": "code",
+      "norm_label": "get",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "response",
+      "label": "Response",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "api.py",
+      "file_type": "code",
+      "norm_label": "response",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_taxcite_api",
+      "label": "api.py",
+      "_origin": "ast",
+      "community": 49,
+      "community_name": "api.py",
+      "file_type": "code",
+      "norm_label": "api.py",
+      "source_file": "src/taxcite/api.py",
+      "source_location": "L1"
     },
     {
       "id": "src_taxcite_store",
       "label": "store.py",
       "_origin": "ast",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "file_type": "code",
       "norm_label": "store.py",
       "source_file": "src/taxcite/store.py",
@@ -8267,7 +8589,7 @@
       "label": "datetime",
       "_origin": "ast",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "file_type": "code",
       "norm_label": "datetime",
       "source_file": "",
@@ -8278,7 +8600,7 @@
       "label": "Postgres storage for chunks. One table, created on demand. Writes are\u2026",
       "_origin": "ast",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "file_type": "rationale",
       "norm_label": "postgres storage for chunks. one table, created on demand. writes are...",
       "source_file": "src/taxcite/store.py",
@@ -8289,7 +8611,7 @@
       "label": "(key, text) TaxCite held for `citation` at `at`, current or since retired (D6).",
       "_origin": "ast",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "file_type": "rationale",
       "norm_label": "(key, text) taxcite held for `citation` at `at`, current or since retired (d6).",
       "source_file": "src/taxcite/store.py",
@@ -8439,120 +8761,114 @@
       "source_location": "L71"
     },
     {
-      "id": "src_taxcite_cli_py_path",
-      "label": "Path",
+      "id": "filter",
+      "label": "Filter",
       "_origin": "ast",
       "community": 50,
-      "community_name": "fetch",
+      "community_name": "edition_filter",
       "file_type": "code",
-      "norm_label": "path",
+      "norm_label": "filter",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_taxcite_cli_rationale_116",
-      "label": "Title 26 USLM XML for a release point (default: the current one), cached on\u2026",
+      "id": "src_taxcite_retrieve_rationale_76",
+      "label": "One source or several; several is how B7 routes a sub-query to the corpora that\u2026",
       "_origin": "ast",
       "community": 50,
-      "community_name": "fetch",
+      "community_name": "edition_filter",
       "file_type": "rationale",
-      "norm_label": "title 26 uslm xml for a release point (default: the current one), cached on...",
-      "source_file": "src/taxcite/cli.py",
-      "source_location": "L116"
+      "norm_label": "one source or several; several is how b7 routes a sub-query to the corpora that...",
+      "source_file": "src/taxcite/retrieve.py",
+      "source_location": "L76"
     },
     {
-      "id": "src_taxcite_cli_rationale_56",
-      "label": "Download one part (or a single section) of Title 26, cached on disk. The API\u2026",
+      "id": "src_taxcite_retrieve_rationale_85",
+      "label": "Keep chunks with no edition (everything but publications, and undated\u2026",
       "_origin": "ast",
       "community": 50,
-      "community_name": "fetch",
+      "community_name": "edition_filter",
       "file_type": "rationale",
-      "norm_label": "download one part (or a single section) of title 26, cached on disk. the api...",
-      "source_file": "src/taxcite/cli.py",
-      "source_location": "L56"
+      "norm_label": "keep chunks with no edition (everything but publications, and undated...",
+      "source_file": "src/taxcite/retrieve.py",
+      "source_location": "L85"
     },
     {
-      "id": "status_environment",
-      "label": "Environment",
+      "id": "tests_test_retrieve_rationale_92",
+      "label": "D3's filter, against Qdrant's own semantics (in-memory), not a re-\u2026",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "environment",
-      "source_file": "STATUS.md",
-      "source_location": "L68"
-    },
-    {
-      "id": "status_findings_worth_remembering",
-      "label": "Findings worth remembering",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "findings worth remembering",
-      "source_file": "STATUS.md",
-      "source_location": "L55"
-    },
-    {
-      "id": "status_now",
-      "label": "Now",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "now",
-      "source_file": "STATUS.md",
-      "source_location": "L5"
-    },
-    {
-      "id": "status_pending_housekeeping",
-      "label": "Pending housekeeping",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "pending housekeeping",
-      "source_file": "STATUS.md",
-      "source_location": "L73"
-    },
-    {
-      "id": "status_phase_a_progress_plan_tasks_plan_md_tasks_tasks_todo_md",
-      "label": "Phase A progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "phase a progress (plan: `tasks/plan.md`, tasks: `tasks/todo.md`)",
-      "source_file": "STATUS.md",
-      "source_location": "L16"
-    },
-    {
-      "id": "status_taxcite_status",
-      "label": "TaxCite \u2014 Status",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "taxcite \u2014 status",
-      "source_file": "STATUS.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_taxcite_chunk_rationale_24",
-      "label": "Stable primary key. A citation alone is not unique: one citation can need\u2026",
-      "_origin": "ast",
-      "community": 51,
-      "community_name": "TaxCite \u2014 Status",
+      "community": 50,
+      "community_name": "edition_filter",
       "file_type": "rationale",
-      "norm_label": "stable primary key. a citation alone is not unique: one citation can need...",
-      "source_file": "src/taxcite/chunk.py",
-      "source_location": "L24"
+      "norm_label": "d3's filter, against qdrant's own semantics (in-memory), not a re-...",
+      "source_file": "tests/test_retrieve.py",
+      "source_location": "L92"
+    },
+    {
+      "id": "eval_ragas_eval_py_runtimeerror",
+      "label": "RuntimeError",
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "RuntimeError",
+      "file_type": "code",
+      "norm_label": "runtimeerror",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "tests_test_metrics_py_parametrize",
+      "label": "parametrize",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "parametrize",
+      "file_type": "code",
+      "norm_label": "parametrize",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_taxcite_generate_py_runtimeerror",
+      "label": "RuntimeError",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "call_model",
+      "file_type": "code",
+      "norm_label": "runtimeerror",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_taxcite_generate_rationale_148",
+      "label": "Raised instead of the SDK's generic auth error, which does not say what to set.",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "call_model",
+      "file_type": "rationale",
+      "norm_label": "raised instead of the sdk's generic auth error, which does not say what to set.",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L148"
+    },
+    {
+      "id": "src_taxcite_generate_rationale_152",
+      "label": "Fail early and specifically. The SDK raises a generic TypeError at request\u2026",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "call_model",
+      "file_type": "rationale",
+      "norm_label": "fail early and specifically. the sdk raises a generic typeerror at request...",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L152"
+    },
+    {
+      "id": "src_taxcite_generate_rationale_172",
+      "label": "One completion. Returns (text, input_tokens, output_tokens). The two providers\u2026",
+      "_origin": "ast",
+      "community": 54,
+      "community_name": "call_model",
+      "file_type": "rationale",
+      "norm_label": "one completion. returns (text, input_tokens, output_tokens). the two providers...",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L172"
     },
     {
       "id": "eval_results_phase_b",
@@ -8699,7 +9015,7 @@
       "source_location": "L175"
     },
     {
-      "id": "src_taxcite_decompose_rationale_142",
+      "id": "src_taxcite_decompose_rationale_147",
       "label": "(sub-query, its chunks) for the synthesis prompt, limited to `keep` if given.\u2026",
       "_origin": "ast",
       "community": 7,
@@ -8707,10 +9023,10 @@
       "file_type": "rationale",
       "norm_label": "(sub-query, its chunks) for the synthesis prompt, limited to `keep` if given....",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L142"
+      "source_location": "L147"
     },
     {
-      "id": "src_taxcite_decompose_rationale_180",
+      "id": "src_taxcite_decompose_rationale_185",
       "label": "One structured-output call (ADR-11). Temperature 0 and a fixed seed, so a re-\u2026",
       "_origin": "ast",
       "community": 7,
@@ -8718,32 +9034,10 @@
       "file_type": "rationale",
       "norm_label": "one structured-output call (adr-11). temperature 0 and a fixed seed, so a re-...",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L180"
+      "source_location": "L185"
     },
     {
-      "id": "src_taxcite_decompose_rationale_190",
-      "label": "Held opinions within `hops` citation steps of the seeds, in either direction;\u2026",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "retrieve",
-      "file_type": "rationale",
-      "norm_label": "held opinions within `hops` citation steps of the seeds, in either direction;...",
-      "source_file": "src/taxcite/decompose.py",
-      "source_location": "L190"
-    },
-    {
-      "id": "src_taxcite_decompose_rationale_205",
-      "label": "(edges, held opinions), loaded once: 5,278 edges is small enough to walk in\u2026",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "retrieve",
-      "file_type": "rationale",
-      "norm_label": "(edges, held opinions), loaded once: 5,278 edges is small enough to walk in...",
-      "source_file": "src/taxcite/decompose.py",
-      "source_location": "L205"
-    },
-    {
-      "id": "src_taxcite_decompose_rationale_236",
+      "id": "src_taxcite_decompose_rationale_242",
       "label": "Search once per sub-query, filtered to the sources its kind allows. Fills\u2026",
       "_origin": "ast",
       "community": 7,
@@ -8751,10 +9045,10 @@
       "file_type": "rationale",
       "norm_label": "search once per sub-query, filtered to the sources its kind allows. fills...",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L236"
+      "source_location": "L242"
     },
     {
-      "id": "src_taxcite_decompose_rationale_288",
+      "id": "src_taxcite_decompose_rationale_294",
       "label": "The k chunks synthesis sees: every sub-query's hits, ordered by the cross-\u2026",
       "_origin": "ast",
       "community": 7,
@@ -8762,10 +9056,10 @@
       "file_type": "rationale",
       "norm_label": "the k chunks synthesis sees: every sub-query's hits, ordered by the cross-...",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L288"
+      "source_location": "L294"
     },
     {
-      "id": "src_taxcite_decompose_rationale_340",
+      "id": "src_taxcite_decompose_rationale_346",
       "label": "Decompose, retrieve per sub-query, synthesize over the grouped sources. `plan`\u2026",
       "_origin": "ast",
       "community": 7,
@@ -8773,7 +9067,7 @@
       "file_type": "rationale",
       "norm_label": "decompose, retrieve per sub-query, synthesize over the grouped sources. `plan`...",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L340"
+      "source_location": "L346"
     },
     {
       "id": "src_taxcite_ingest_citations_rationale_344",
@@ -10997,6 +11291,18 @@
       "source_url": null
     },
     {
+      "id": "taxcite",
+      "label": "taxcite",
+      "_origin": "semantic",
+      "community": 0,
+      "community_name": "ragas_eval.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "taxcite",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "fastapi_testclient",
       "label": "fastapi_testclient",
       "_origin": "semantic",
@@ -11029,30 +11335,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "zipfile",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "os",
-      "label": "os",
-      "_origin": "semantic",
-      "community": 23,
-      "community_name": "snapshot.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "os",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "subprocess",
-      "label": "subprocess",
-      "_origin": "semantic",
-      "community": 23,
-      "community_name": "snapshot.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "subprocess",
       "source_file": "",
       "type": "external"
     },
@@ -11093,23 +11375,11 @@
       "type": "external"
     },
     {
-      "id": "argparse",
-      "label": "argparse",
-      "_origin": "semantic",
-      "community": 27,
-      "community_name": "temporal.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "argparse",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "datetime",
       "label": "datetime",
       "_origin": "semantic",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "datetime",
@@ -11121,7 +11391,7 @@
       "label": "dotenv",
       "_origin": "semantic",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "dotenv",
@@ -11133,22 +11403,10 @@
       "label": "json",
       "_origin": "semantic",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "json",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pathlib",
-      "label": "pathlib",
-      "_origin": "semantic",
-      "community": 27,
-      "community_name": "temporal.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pathlib",
       "source_file": "",
       "type": "external"
     },
@@ -11157,7 +11415,7 @@
       "label": "statistics",
       "_origin": "semantic",
       "community": 27,
-      "community_name": "temporal.py",
+      "community_name": "llm_bench.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "statistics",
@@ -11165,35 +11423,11 @@
       "type": "external"
     },
     {
-      "id": "time",
-      "label": "time",
-      "_origin": "semantic",
-      "community": 28,
-      "community_name": "embed_bench.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "time",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "qdrant_client",
-      "label": "qdrant_client",
-      "_origin": "semantic",
-      "community": 32,
-      "community_name": "index.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "qdrant_client",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "uuid",
       "label": "uuid",
       "_origin": "semantic",
-      "community": 32,
-      "community_name": "index.py",
+      "community": 29,
+      "community_name": "jobs.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "uuid",
@@ -11201,11 +11435,23 @@
       "type": "external"
     },
     {
-      "id": "math",
-      "label": "math",
+      "id": "time",
+      "label": "time",
       "_origin": "semantic",
       "community": 34,
       "community_name": "test_metrics.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "time",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "math",
+      "label": "math",
+      "_origin": "semantic",
+      "community": 35,
+      "community_name": "retrieval.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "math",
@@ -11213,50 +11459,26 @@
       "type": "external"
     },
     {
-      "id": "asyncio",
-      "label": "asyncio",
+      "id": "argparse",
+      "label": "argparse",
       "_origin": "semantic",
-      "community": 4,
-      "community_name": "conn",
+      "community": 42,
+      "community_name": "pathlib",
       "external": true,
       "file_type": "concept",
-      "norm_label": "asyncio",
+      "norm_label": "argparse",
       "source_file": "",
       "type": "external"
     },
     {
-      "id": "fastapi",
-      "label": "fastapi",
+      "id": "pathlib",
+      "label": "pathlib",
       "_origin": "semantic",
-      "community": 4,
-      "community_name": "conn",
+      "community": 42,
+      "community_name": "pathlib",
       "external": true,
       "file_type": "concept",
-      "norm_label": "fastapi",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "fastapi_responses",
-      "label": "fastapi_responses",
-      "_origin": "semantic",
-      "community": 4,
-      "community_name": "conn",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "fastapi_responses",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "pydantic",
-      "label": "pydantic",
-      "_origin": "semantic",
-      "community": 4,
-      "community_name": "conn",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "pydantic",
+      "norm_label": "pathlib",
       "source_file": "",
       "type": "external"
     },
@@ -11265,10 +11487,22 @@
       "label": "pytest",
       "_origin": "semantic",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "external": true,
       "file_type": "concept",
       "norm_label": "pytest",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "subprocess",
+      "label": "subprocess",
+      "_origin": "semantic",
+      "community": 42,
+      "community_name": "pathlib",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "subprocess",
       "source_file": "",
       "type": "external"
     },
@@ -11277,46 +11511,10 @@
       "label": "sys",
       "_origin": "semantic",
       "community": 42,
-      "community_name": "pytest",
+      "community_name": "pathlib",
       "external": true,
       "file_type": "concept",
       "norm_label": "sys",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "taxcite_ingest_ecfr",
-      "label": "taxcite_ingest_ecfr",
-      "_origin": "semantic",
-      "community": 43,
-      "community_name": "taxcite_ingest_ecfr",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "taxcite_ingest_ecfr",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "taxcite",
-      "label": "taxcite",
-      "_origin": "semantic",
-      "community": 44,
-      "community_name": "taxcite",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "taxcite",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "taxcite_ingest",
-      "label": "taxcite_ingest",
-      "_origin": "semantic",
-      "community": 45,
-      "community_name": "taxcite_ingest",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "taxcite_ingest",
       "source_file": "",
       "type": "external"
     },
@@ -11345,11 +11543,59 @@
       "type": "external"
     },
     {
+      "id": "asyncio",
+      "label": "asyncio",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "api.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "asyncio",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "fastapi",
+      "label": "fastapi",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "api.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "fastapi",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "fastapi_responses",
+      "label": "fastapi_responses",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "api.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "fastapi_responses",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "os",
+      "label": "os",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "api.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "os",
+      "source_file": "",
+      "type": "external"
+    },
+    {
       "id": "psycopg",
       "label": "psycopg",
       "_origin": "semantic",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "psycopg",
@@ -11361,10 +11607,70 @@
       "label": "psycopg_types_json",
       "_origin": "semantic",
       "community": 49,
-      "community_name": "store.py",
+      "community_name": "api.py",
       "external": true,
       "file_type": "concept",
       "norm_label": "psycopg_types_json",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "pydantic",
+      "label": "pydantic",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "api.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "pydantic",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "qdrant_client",
+      "label": "qdrant_client",
+      "_origin": "semantic",
+      "community": 49,
+      "community_name": "api.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "qdrant_client",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "xml_etree_elementtree",
+      "label": "xml_etree_elementtree",
+      "_origin": "semantic",
+      "community": 5,
+      "community_name": "test_ecfr.py",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "xml_etree_elementtree",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "taxcite_ingest",
+      "label": "taxcite_ingest",
+      "_origin": "semantic",
+      "community": 58,
+      "community_name": "taxcite_ingest",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "taxcite_ingest",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "taxcite_ingest_ecfr",
+      "label": "taxcite_ingest_ecfr",
+      "_origin": "semantic",
+      "community": 59,
+      "community_name": "taxcite_ingest_ecfr",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "taxcite_ingest_ecfr",
       "source_file": "",
       "type": "external"
     },
@@ -11461,18 +11767,6 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "re",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "xml_etree_elementtree",
-      "label": "xml_etree_elementtree",
-      "_origin": "semantic",
-      "community": 9,
-      "community_name": "ecfr.py",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "xml_etree_elementtree",
       "source_file": "",
       "type": "external"
     }
@@ -11647,30 +11941,6 @@
       "weight": 1.0
     },
     {
-      "source": "eval_ragas_eval_budget_charge",
-      "target": "src_taxcite_generate_cost",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L99",
-      "weight": 1.0
-    },
-    {
-      "source": "eval_ragas_eval_extract_claims",
-      "target": "src_taxcite_generate_call_model",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L136",
-      "weight": 1.0
-    },
-    {
       "source": "eval_ragas_eval_extract_claims",
       "target": "eval_ragas_eval_parse_json",
       "relation": "calls",
@@ -11680,18 +11950,6 @@
       "context": "call",
       "source_file": "eval/ragas_eval.py",
       "source_location": "L139",
-      "weight": 1.0
-    },
-    {
-      "source": "eval_ragas_eval_judge_claims",
-      "target": "src_taxcite_generate_call_model",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -11715,7 +11973,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L237",
+      "source_location": "L245",
       "weight": 1.0
     },
     {
@@ -11727,7 +11985,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L246",
+      "source_location": "L254",
       "weight": 1.0
     },
     {
@@ -11739,7 +11997,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L248",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -11751,7 +12009,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L251",
+      "source_location": "L259",
       "weight": 1.0
     },
     {
@@ -11763,7 +12021,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L252",
+      "source_location": "L260",
       "weight": 1.0
     },
     {
@@ -11775,19 +12033,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L260",
+      "source_location": "L268",
       "weight": 1.0
     },
     {
-      "source": "eval_ragas_eval_pipeline_answer",
-      "target": "eval_retrieval_cached_decompose",
+      "source": "eval_ragas_eval_main",
+      "target": "eval_ragas_eval_refusals_ok",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/ragas_eval.py",
-      "source_location": "L170",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -12015,7 +12273,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/snapshot.py",
-      "source_location": "L88",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -12027,7 +12285,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/snapshot.py",
-      "source_location": "L88",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -12039,7 +12297,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/snapshot.py",
-      "source_location": "L71",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -12140,6 +12398,18 @@
     },
     {
       "source": "eval_temporal_main",
+      "target": "eval_llm_bench_judge",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "eval/temporal.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_temporal_main",
       "target": "eval_temporal_passed",
       "relation": "calls",
       "_origin": "ast",
@@ -12147,7 +12417,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L106",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -12159,7 +12429,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L119",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -12171,7 +12441,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L81",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -12183,7 +12453,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L86",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -12195,7 +12465,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L87",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -12207,7 +12477,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L88",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -12219,24 +12489,12 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "eval/temporal.py",
-      "source_location": "L89",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
       "source": "eval_temporal_main",
       "target": "eval_ragas_eval_judge_claims",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "eval/temporal.py",
-      "source_location": "L92",
-      "weight": 1.0
-    },
-    {
-      "source": "eval_temporal_main",
-      "target": "eval_llm_bench_judge",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12867,7 +13125,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L348",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -12879,7 +13137,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L348",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -12891,7 +13149,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L350",
+      "source_location": "L356",
       "weight": 1.0
     },
     {
@@ -12903,7 +13161,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L351",
+      "source_location": "L357",
       "weight": 1.0
     },
     {
@@ -12915,7 +13173,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L302",
+      "source_location": "L308",
       "weight": 1.0
     },
     {
@@ -12927,7 +13185,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L302",
+      "source_location": "L308",
       "weight": 1.0
     },
     {
@@ -12939,7 +13197,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L207",
+      "source_location": "L213",
       "weight": 1.0
     },
     {
@@ -12951,7 +13209,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L182",
+      "source_location": "L188",
       "weight": 1.0
     },
     {
@@ -12963,7 +13221,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L184",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -12975,7 +13233,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L185",
+      "source_location": "L191",
       "weight": 1.0
     },
     {
@@ -12987,7 +13245,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L139",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -12999,7 +13257,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L158",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -13011,7 +13269,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L256",
+      "source_location": "L262",
       "weight": 1.0
     },
     {
@@ -13023,7 +13281,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L261",
+      "source_location": "L267",
       "weight": 1.0
     },
     {
@@ -13035,7 +13293,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L277",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -13047,7 +13305,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L279",
+      "source_location": "L285",
       "weight": 1.0
     },
     {
@@ -13059,7 +13317,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L243",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -13071,7 +13329,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L244",
+      "source_location": "L266",
       "weight": 1.0
     },
     {
@@ -13083,59 +13341,11 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L72",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
       "source": "src_taxcite_generate_answer_from_groups",
-      "target": "src_taxcite_generate_format_sources",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L229",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate_answer_from_groups",
-      "target": "src_taxcite_generate_generate",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L235",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate_answer_from_hits",
-      "target": "src_taxcite_generate_generate",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L214",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate_call_model",
-      "target": "src_taxcite_generate_require_credentials",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L172",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate_generate",
       "target": "src_taxcite_generate_format_sources",
       "relation": "calls",
       "_origin": "ast",
@@ -13147,6 +13357,66 @@
       "weight": 1.0
     },
     {
+      "source": "src_taxcite_generate_answer_from_groups",
+      "target": "src_taxcite_generate_generate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L256",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate_answer_from_hits",
+      "target": "src_taxcite_generate_generate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate_call_model",
+      "target": "src_taxcite_generate_require_credentials",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate_format_sources",
+      "target": "src_taxcite_generate_effective_note",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate_generate",
+      "target": "src_taxcite_generate_format_sources",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L272",
+      "weight": 1.0
+    },
+    {
       "source": "src_taxcite_generate_generate",
       "target": "src_taxcite_generate_call_model",
       "relation": "calls",
@@ -13155,7 +13425,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L260",
+      "source_location": "L283",
       "weight": 1.0
     },
     {
@@ -13167,7 +13437,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L261",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -13179,7 +13449,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L124",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -13191,7 +13461,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L141",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -14931,7 +15201,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/jobs.py",
-      "source_location": "L152",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -15015,7 +15285,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/jobs.py",
-      "source_location": "L138",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -15027,7 +15297,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L46",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -15039,7 +15309,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L69",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -15051,7 +15321,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L105",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -15063,7 +15333,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L109",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -15075,7 +15345,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L114",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -15087,7 +15357,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -15099,7 +15369,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L140",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -15111,7 +15381,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L149",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -17072,7 +17342,7 @@
     },
     {
       "source": "tests_test_metrics_test_a_judge_that_returns_junk_does_not_crash_the_run",
-      "target": "tests_test_metrics_py_parametrize",
+      "target": "parametrize",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -17163,7 +17433,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L338",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -17175,7 +17445,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L141",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -17187,7 +17457,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L130",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -17199,7 +17469,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L317",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
@@ -17307,7 +17577,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -17319,7 +17589,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -17524,18 +17794,6 @@
       "context": "import",
       "source_file": "eval/ragas_eval.py",
       "source_location": "L22",
-      "weight": 1.0
-    },
-    {
-      "source": "eval_ragas_eval",
-      "target": "eval_retrieval_cached_decompose",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "eval/ragas_eval.py",
-      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -18171,7 +18429,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -18183,7 +18441,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -18195,7 +18453,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -18207,7 +18465,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -18219,7 +18477,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -18231,7 +18489,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L346",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -19328,7 +19586,7 @@
     },
     {
       "source": "eval_ragas_eval",
-      "target": "src_taxcite_init",
+      "target": "taxcite",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19820,7 +20078,7 @@
     },
     {
       "source": "src_taxcite_decompose",
-      "target": "collections_abc",
+      "target": "datetime",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19832,7 +20090,7 @@
     },
     {
       "source": "src_taxcite_decompose",
-      "target": "dataclasses",
+      "target": "collections_abc",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19844,7 +20102,7 @@
     },
     {
       "source": "src_taxcite_decompose",
-      "target": "functools",
+      "target": "dataclasses",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -19856,6 +20114,18 @@
     },
     {
       "source": "src_taxcite_decompose",
+      "target": "functools",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/taxcite/decompose.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_decompose",
       "target": "src_taxcite_generate",
       "relation": "imports_from",
       "_origin": "ast",
@@ -19863,7 +20133,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L27",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -19875,7 +20145,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -20792,7 +21062,7 @@
     },
     {
       "source": "eval_ragas_eval_pipeline_answer",
-      "target": "eval_ragas_eval_py_path",
+      "target": "path",
       "relation": "references",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -20991,7 +21261,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L287",
+      "source_location": "L293",
       "weight": 1.0
     },
     {
@@ -21399,7 +21669,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L233",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -21411,7 +21681,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L217",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -21423,7 +21693,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L208",
+      "source_location": "L226",
       "weight": 1.0
     },
     {
@@ -21483,7 +21753,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -21495,7 +21765,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -21639,7 +21909,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L206",
+      "source_location": "L212",
       "weight": 1.0
     },
     {
@@ -21833,13 +22103,24 @@
     },
     {
       "source": "eval_ragas_eval",
-      "target": "eval_ragas_eval_main",
+      "target": "eval_ragas_eval_refusals_ok",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eval/ragas_eval.py",
       "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_ragas_eval",
+      "target": "eval_ragas_eval_main",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L215",
       "weight": 1.0
     },
     {
@@ -22195,6 +22476,171 @@
       "weight": 1.0
     },
     {
+      "source": "eval_results_phase_d",
+      "target": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_the_gate_row_by_row",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_what_exists",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_effective_dates_d4",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_transaction_time_d6",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_failures_with_examples",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_9_3_recalibration",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_what_phase_d_got_wrong",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L201",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_open_problems_handed_on",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_reproducing",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_the_gate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_d0_what_the_rows_needed_before_building",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_taxcite_phase_d_exit_report",
+      "target": "eval_results_phase_d_the_ladder",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_the_gate",
+      "target": "eval_results_phase_d_a_gate_that_passed_while_the_system_refused_half_its_questions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_results_phase_d_the_gate",
+      "target": "eval_results_phase_d_the_same_retrieval_a_different_score",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/results/phase_d.md",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
       "source": "eval_retrieval",
       "target": "eval_retrieval_mrr",
       "relation": "contains",
@@ -22323,7 +22769,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "eval/snapshot.py",
-      "source_location": "L80",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -22719,7 +23165,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L104",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -22730,7 +23176,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L119",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -22741,7 +23187,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L151",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -22752,7 +23198,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L179",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -22763,7 +23209,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L189",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -22774,7 +23220,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L204",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -22785,7 +23231,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L227",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -22796,7 +23242,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L233",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -22807,7 +23253,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L287",
+      "source_location": "L293",
       "weight": 1.0
     },
     {
@@ -22818,7 +23264,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L317",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
@@ -22829,117 +23275,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L338",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_parse_citations",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L104",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_missingcredentials",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L129",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_require_credentials",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L133",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_call_model",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L151",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_answer_from_hits",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L208",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_answer_from_groups",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L217",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_answer",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L238",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_generate",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L247",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_cost",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L53",
-      "weight": 1.0
-    },
-    {
-      "source": "src_taxcite_generate",
-      "target": "src_taxcite_generate_format_sources",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/taxcite/generate.py",
-      "source_location": "L79",
+      "source_location": "L344",
       "weight": 1.0
     },
     {
@@ -22950,7 +23286,128 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_parse_citations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_missingcredentials",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_require_credentials",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_call_model",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_answer_from_hits",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_answer_from_groups",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L235",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_answer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_generate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L269",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_cost",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_effective_note",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
       "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate",
+      "target": "src_taxcite_generate_format_sources",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -23951,7 +24408,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/jobs.py",
-      "source_location": "L151",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -23962,7 +24419,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/jobs.py",
-      "source_location": "L155",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -24061,7 +24518,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L38",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -24072,7 +24529,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -24083,7 +24540,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -24094,7 +24551,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L60",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -24105,7 +24562,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -24116,7 +24573,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -24127,7 +24584,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -26398,6 +26855,17 @@
     },
     {
       "source": "tests_test_metrics",
+      "target": "tests_test_metrics_test_refusal_rate_gate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_metrics",
       "target": "tests_test_metrics_test_recall_ignores_duplicates",
       "relation": "contains",
       "_origin": "ast",
@@ -27113,7 +27581,7 @@
     },
     {
       "source": "eval_ragas_eval_costcap",
-      "target": "eval_ragas_eval_py_runtimeerror",
+      "target": "runtimeerror",
       "relation": "inherits",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -27141,7 +27609,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L129",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -27196,7 +27664,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L130",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -27207,7 +27675,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L134",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -27218,7 +27686,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L138",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -27229,7 +27697,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L141",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -27240,7 +27708,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L110",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -27251,7 +27719,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L114",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -27262,7 +27730,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L71",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -27273,7 +27741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L75",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -27406,6 +27874,17 @@
       "confidence_score": 1.0,
       "source_file": "eval/ragas_eval.py",
       "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_ragas_eval_rationale_210",
+      "target": "eval_ragas_eval_refusals_ok",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L210",
       "weight": 1.0
     },
     {
@@ -27695,113 +28174,113 @@
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_142",
+      "source": "src_taxcite_decompose_rationale_147",
       "target": "src_taxcite_decompose_decomposition_groups",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L142",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_152",
+      "source": "src_taxcite_decompose_rationale_157",
       "target": "src_taxcite_decompose_parse",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L152",
+      "source_location": "L157",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_180",
+      "source": "src_taxcite_decompose_rationale_185",
       "target": "src_taxcite_decompose_decompose",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L180",
+      "source_location": "L185",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_190",
+      "source": "src_taxcite_decompose_rationale_196",
       "target": "src_taxcite_decompose_neighbors",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L190",
+      "source_location": "L196",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_205",
+      "source": "src_taxcite_decompose_rationale_211",
       "target": "src_taxcite_decompose_citation_graph",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L205",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_228",
+      "source": "src_taxcite_decompose_rationale_234",
       "target": "src_taxcite_decompose_tax_year",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L228",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_236",
+      "source": "src_taxcite_decompose_rationale_242",
       "target": "src_taxcite_decompose_retrieve",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L236",
+      "source_location": "L242",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_288",
+      "source": "src_taxcite_decompose_rationale_294",
       "target": "src_taxcite_decompose_chunks",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L288",
+      "source_location": "L294",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_318",
+      "source": "src_taxcite_decompose_rationale_324",
       "target": "src_taxcite_decompose_merge",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L318",
+      "source_location": "L324",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_decompose_rationale_340",
+      "source": "src_taxcite_decompose_rationale_346",
       "target": "src_taxcite_decompose_answer",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L340",
+      "source_location": "L346",
       "weight": 1.0
     },
     {
@@ -27816,85 +28295,96 @@
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_105",
+      "source": "src_taxcite_generate_rationale_104",
+      "target": "src_taxcite_generate_section_of",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "src_taxcite_generate_rationale_123",
       "target": "src_taxcite_generate_parse_citations",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L105",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_130",
+      "source": "src_taxcite_generate_rationale_148",
       "target": "src_taxcite_generate_missingcredentials",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L130",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_134",
+      "source": "src_taxcite_generate_rationale_152",
       "target": "src_taxcite_generate_require_credentials",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L134",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_154",
+      "source": "src_taxcite_generate_rationale_172",
       "target": "src_taxcite_generate_call_model",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L154",
+      "source_location": "L172",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_209",
+      "source": "src_taxcite_generate_rationale_227",
       "target": "src_taxcite_generate_answer_from_hits",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L209",
+      "source_location": "L227",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_219",
+      "source": "src_taxcite_generate_rationale_237",
       "target": "src_taxcite_generate_answer_from_groups",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L219",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_240",
+      "source": "src_taxcite_generate_rationale_262",
       "target": "src_taxcite_generate_answer",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L240",
+      "source_location": "L262",
       "weight": 1.0
     },
     {
       "source": "src_taxcite_generate_rationale_86",
-      "target": "src_taxcite_generate_section_of",
+      "target": "src_taxcite_generate_effective_note",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -28707,69 +29197,69 @@
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_retrieve_rationale_39",
+      "source": "src_taxcite_retrieve_rationale_40",
       "target": "src_taxcite_retrieve_models",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L39",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_retrieve_rationale_54",
+      "source": "src_taxcite_retrieve_rationale_55",
       "target": "src_taxcite_retrieve_reranker",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L54",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_retrieve_rationale_61",
+      "source": "src_taxcite_retrieve_rationale_62",
       "target": "src_taxcite_retrieve_rerank",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_retrieve_rationale_75",
+      "source": "src_taxcite_retrieve_rationale_76",
       "target": "src_taxcite_retrieve_source_filter",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L75",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_retrieve_rationale_84",
+      "source": "src_taxcite_retrieve_rationale_85",
       "target": "src_taxcite_retrieve_edition_filter",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L84",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_retrieve_rationale_96",
+      "source": "src_taxcite_retrieve_rationale_97",
       "target": "src_taxcite_retrieve_search",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/retrieve.py",
-      "source_location": "L96",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -29246,6 +29736,17 @@
       "weight": 1.0
     },
     {
+      "source": "tests_test_metrics_rationale_173",
+      "target": "tests_test_metrics_test_refusal_rate_gate",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
       "source": "tests_test_metrics_rationale_87",
       "target": "tests_test_metrics_judged",
       "relation": "rationale_for",
@@ -29409,7 +29910,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "eval/snapshot.py",
-      "source_location": "L73",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -29857,6 +30358,54 @@
       "weight": 1.0
     },
     {
+      "source": "eval_ragas_eval_budget_charge",
+      "target": "src_taxcite_generate_cost",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_ragas_eval_extract_claims",
+      "target": "src_taxcite_generate_call_model",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_ragas_eval_judge_claims",
+      "target": "src_taxcite_generate_call_model",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "eval_ragas_eval_pipeline_answer",
+      "target": "eval_retrieval_cached_decompose",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "eval/ragas_eval.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
       "source": "eval_store_bench_main",
       "target": "src_taxcite_generate_section_of",
       "relation": "calls",
@@ -30145,6 +30694,18 @@
       "weight": 1.0
     },
     {
+      "source": "tests_test_metrics_test_refusal_rate_gate",
+      "target": "eval_ragas_eval_refusals_ok",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "context": "call",
+      "source_file": "tests/test_metrics.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
       "source": "tests_test_metrics_test_section_of_strips_paragraph_markers",
       "target": "src_taxcite_generate_section_of",
       "relation": "calls",
@@ -30273,7 +30834,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L287",
+      "source_location": "L293",
       "weight": 0.8
     },
     {
@@ -30285,7 +30846,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L317",
+      "source_location": "L323",
       "weight": 0.8
     },
     {
@@ -30297,7 +30858,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L217",
+      "source_location": "L235",
       "weight": 0.8
     },
     {
@@ -30309,7 +30870,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L208",
+      "source_location": "L226",
       "weight": 0.8
     },
     {
@@ -30321,7 +30882,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L79",
+      "source_location": "L97",
       "weight": 0.8
     },
     {
@@ -30333,7 +30894,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L247",
+      "source_location": "L269",
       "weight": 0.8
     },
     {
@@ -30345,7 +30906,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L104",
+      "source_location": "L122",
       "weight": 0.8
     },
     {
@@ -30409,6 +30970,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_taxcite_generate_effective_note",
+      "target": "src_taxcite_retrieve_hit",
+      "relation": "uses",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "context": "parameter_type",
+      "source_file": "src/taxcite/generate.py",
+      "source_location": "L85",
+      "weight": 0.8
+    },
+    {
       "source": "src_taxcite_ingest_usc_notes_covers",
       "target": "src_taxcite_chunk_chunk",
       "relation": "uses",
@@ -30452,7 +31025,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "eval/temporal.py",
-      "source_location": "L111",
+      "source_location": "L115",
       "weight": 0.8
     },
     {
@@ -30474,7 +31047,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L141",
+      "source_location": "L146",
       "weight": 0.8
     },
     {
@@ -30485,7 +31058,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L255",
+      "source_location": "L261",
       "weight": 0.8
     },
     {
@@ -30496,7 +31069,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "src/taxcite/decompose.py",
-      "source_location": "L107",
+      "source_location": "L112",
       "weight": 0.8
     },
     {
@@ -30507,7 +31080,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L66",
+      "source_location": "L72",
       "weight": 0.8
     },
     {
@@ -32513,5 +33086,5 @@
       "source_file": "eval/results/phase_a.md"
     }
   ],
-  "built_at_commit": "b2dc3dba43c69b28d0e20bb464b54ff904112ec9"
+  "built_at_commit": "12ffe7da65ab20d7e1afacb623a7027cfe57d52b"
 }
