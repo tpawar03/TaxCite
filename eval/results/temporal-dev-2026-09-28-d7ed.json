@@ -1,0 +1,525 @@
+{
+  "questions": "eval/dev.jsonl",
+  "judge": "claude-haiku-4-5",
+  "repeats": 3,
+  "k": 8,
+  "accuracy_per_repeat": [
+    0.42857142857142855,
+    0.42857142857142855,
+    0.42857142857142855
+  ],
+  "grounded_accuracy_per_repeat": [
+    0.14285714285714285,
+    0.14285714285714285,
+    0.14285714285714285
+  ],
+  "as_of_accuracy": 0.8461538461538461,
+  "kappa": 0.8761061946902655,
+  "judge_cost_usd": 0.12285499999999998,
+  "stopped": null,
+  "rows": [
+    {
+      "id": "D26",
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "All of the mortgage interest paid on a $900,000 mortgage is deductible"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D27",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The clean vehicle credit is not available for vehicles acquired for personal use",
+        "The client cannot claim the clean vehicle credit for either vehicle"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D28",
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2021, the residential clean energy credit for solar energy systems is 26% of qualified solar electric property expenditures",
+        "The 26% credit applies to systems placed in service before January 1, 2022"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "D29",
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "superseded_rule"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "superseded_rule"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "superseded_rule"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D30",
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For the tax year 2024, the deduction for qualified overtime compensation under Internal Revenue Code section 162 is not applicable",
+        "The current text of the relevant statute was enacted in 2025",
+        "The statute is effective for taxable years beginning after December 31, 2024",
+        "A nurse cannot deduct overtime premium on her 2024 return"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "D31",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Interest on a loan secured by a personal use vehicle is not deductible as qualified passenger vehicle loan interest if the vehicle was purchased for personal use prior to the tax year in which the interest is being deducted"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "D32",
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": true,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D33",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": false,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D34",
+      "as_of_gold": "2012",
+      "as_of_plan": "2026",
+      "as_of_ok": false,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D35",
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2023, the child and dependent care credit percentage is based on the taxpayer's adjusted gross income (AGI)",
+        "For an AGI of $60,000, the applicable percentage for the child and dependent care credit is 20% of qualifying expenses",
+        "The maximum percentage of the child and dependent care credit is 35% for AGI up to $15,000",
+        "The child and dependent care credit percentage decreases to 20% for AGI above $43,000"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "D36",
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2026, the applicable percentage for the child and dependent care credit starts at 50 percent",
+        "The applicable percentage for a taxpayer with an AGI of $60,000 is 28 percent",
+        "The child and dependent care credit covers 28 percent of $3,000 in day care expenses"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D37",
+      "as_of_gold": "2022 and 2029",
+      "as_of_plan": "2022 and 2029",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For 2029, the deduction for seniors is $6,000 for each qualified individual who has attained age 65 before the close of the taxable year",
+        "A person who turned 70 in 2020 will be able to take the $6,000 senior deduction on their 2029 return"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        },
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": "D38",
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": true,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "id": "D39",
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": true,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        },
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true,
+        true,
+        true
+      ]
+    }
+  ]
+}

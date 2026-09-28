@@ -7587,9 +7587,39 @@
       "model": "gpt-4o-mini",
       "input_tokens": 907,
       "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court ruling Arabian horse breeding showing operation hobby versus business determination"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 907,
+      "output_tokens": 38
     }
   ],
   "Can a social media influencer deduct cable and streaming subscriptions as business expenses?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary business expenses deduction for self-employed individuals"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of cable and streaming subscriptions for social media influencers"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 900,
+      "output_tokens": 62
+    },
     {
       "subqueries": [
         {
@@ -7651,6 +7681,19 @@
       "model": "gpt-4o-mini",
       "input_tokens": 907,
       "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court treatment of farm workers housing insurance pay advances"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 907,
+      "output_tokens": 36
     }
   ],
   "Are toll and parking charges on a spreadsheet enough to substantiate travel expenses?": [
@@ -7679,9 +7722,39 @@
       "model": "gpt-4o-mini",
       "input_tokens": 901,
       "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 901,
+      "output_tokens": 41
     }
   ],
   "Does a taxpayer have income when a life insurance policy they thought they had transferred is terminated?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of life insurance policy termination and transfer of ownership"
+        },
+        {
+          "kind": "case_law",
+          "query": "income recognition upon termination of life insurance policy"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 904,
+      "output_tokens": 59
+    },
     {
       "subqueries": [
         {
@@ -7751,6 +7824,23 @@
       "model": "gpt-4o-mini",
       "input_tokens": 909,
       "output_tokens": 61
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "rental real estate loss allowance phase-out for high-income taxpayers"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has rental income over $100,000"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 909,
+      "output_tokens": 61
     }
   ],
   "What factors decide whether a client's Arabian horse breeding is a business or a hobby, and how has the Tax Court applied them?": [
@@ -7787,6 +7877,23 @@
       "model": "gpt-4o-mini",
       "input_tokens": 911,
       "output_tokens": 65
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "factors for determining whether an activity is engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse breeding hobby loss rules"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 911,
+      "output_tokens": 61
     }
   ],
   "Does a client who fully owns rental houses and manages them count as actively participating for the rental loss allowance, and how has the Tax Court treated such owners?": [
@@ -7823,6 +7930,23 @@
       "model": "gpt-4o-mini",
       "input_tokens": 917,
       "output_tokens": 63
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "active participation in rental real estate activities for loss allowance"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on active participation by owners of rental properties"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 917,
+      "output_tokens": 61
     }
   ],
   "The IRS reclassified a farm's contract workers as employees. Can the farm challenge that in Tax Court, and how has the court ruled on farm workers given housing and advances?": [
@@ -7867,9 +7991,47 @@
       "model": "gpt-4o-mini",
       "input_tokens": 921,
       "output_tokens": 85
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "classification of workers as employees or independent contractors IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on classification of farm workers housing advances"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the farm's contract workers were reclassified as employees by the IRS"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 921,
+      "output_tokens": 87
     }
   ],
   "What records does a client need for travel expenses, and has the Tax Court accepted a spreadsheet of toll and parking charges?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "acceptance of taxpayer-prepared records for toll and parking charges in substantiation of travel expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 910,
+      "output_tokens": 64
+    },
     {
       "subqueries": [
         {
@@ -7939,9 +8101,43 @@
       "model": "gpt-4o-mini",
       "input_tokens": 907,
       "output_tokens": 57
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt of income doctrine"
+        },
+        {
+          "kind": "case_law",
+          "query": "constructive receipt application to terminated life insurance policy"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 907,
+      "output_tokens": 55
     }
   ],
   "Can an influencer deduct streaming subscriptions? What does the Code say about personal expenses, and has the Tax Court ruled on this?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of personal expenses under Internal Revenue Code"
+        },
+        {
+          "kind": "case_law",
+          "query": "influencer deducting streaming subscriptions as business expenses Tax Court rulings"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 911,
+      "output_tokens": 64
+    },
     {
       "subqueries": [
         {
@@ -8011,6 +8207,23 @@
       "model": "gpt-4o-mini",
       "input_tokens": 927,
       "output_tokens": 74
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "exclusion of gain from the sale of a principal residence ownership and use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single and owned and lived in her house for 3 of the last 5 years"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 927,
+      "output_tokens": 74
     }
   ],
   "What is the most a client can deduct for student loan interest, and does their income affect it?": [
@@ -8047,9 +8260,43 @@
       "model": "gpt-4o-mini",
       "input_tokens": 906,
       "output_tokens": 55
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum deduction for student loan interest"
+        },
+        {
+          "kind": "statutory",
+          "query": "income phase-out limits for student loan interest deduction"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 906,
+      "output_tokens": 55
     }
   ],
   "My client itemizes and paid $9,000 of unreimbursed medical bills on $100,000 of AGI. How much is deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "medical expense deduction limitation based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $100,000 of AGI and paid $9,000 of unreimbursed medical bills"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 916,
+      "output_tokens": 70
+    },
     {
       "subqueries": [
         {
@@ -8123,6 +8370,27 @@
       "model": "gpt-4o-mini",
       "input_tokens": 909,
       "output_tokens": 65
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction of business investigation expenses under Internal Revenue Code Section 195"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of investigation expenses for a business before it opens"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client spent $8,000 investigating a business before it opened"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 909,
+      "output_tokens": 91
     }
   ],
   "My client has a $10,000 net capital loss for the year and no capital gains. How much can they use now, and what happens to the rest?": [
@@ -8159,9 +8427,39 @@
       "model": "gpt-4o-mini",
       "input_tokens": 919,
       "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "capital loss deduction limit against ordinary income and carryover rules for net capital losses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 919,
+      "output_tokens": 41
     }
   ],
   "My client is 45 and took $20,000 out of a 401(k). What extra tax applies?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "additional tax on early distributions from qualified retirement plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is 45 and took $20,000 out of a 401(k)"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 909,
+      "output_tokens": 66
+    },
     {
       "subqueries": [
         {
@@ -8223,6 +8521,19 @@
       "model": "gpt-4o-mini",
       "input_tokens": 912,
       "output_tokens": 43
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of educational assistance program benefits under Internal Revenue Code Section 127"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 912,
+      "output_tokens": 38
     }
   ],
   "contemporaneous written acknowledgment $250 charitable contribution substantiation": [
@@ -8251,9 +8562,35 @@
       "model": "gpt-4o-mini",
       "input_tokens": 896,
       "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 896,
+      "output_tokens": 38
     }
   ],
   "Can my client still do a like-kind exchange on business equipment?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "like-kind exchange rules for business property under Internal Revenue Code Section 1031"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 899,
+      "output_tokens": 39
+    },
     {
       "subqueries": [
         {
@@ -8315,6 +8652,23 @@
       "model": "gpt-4o-mini",
       "input_tokens": 914,
       "output_tokens": 67
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cents-per-mile valuation rule for personal use of a company vehicle"
+        },
+        {
+          "kind": "statutory",
+          "query": "what the cents-per-mile rate covers for personal use of a company car"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 914,
+      "output_tokens": 67
     }
   ],
   "What makes an expense reimbursement arrangement an accountable plan?": [
@@ -8323,6 +8677,19 @@
         {
           "kind": "statutory",
           "query": "requirements for an accountable plan under IRS guidelines for expense reimbursements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 896,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for an accountable plan under IRS guidelines for expense reimbursement arrangements"
         }
       ],
       "as_of": null,
@@ -8371,6 +8738,19 @@
       "model": "gpt-4o-mini",
       "input_tokens": 894,
       "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard deduction amount for single filers for tax year 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 894,
+      "output_tokens": 39
     }
   ],
   "My client turns 74 this year, still works for an employer where she owns no stock, and has a 401(k) with that employer. When must she start taking required minimum distributions from it?": [
@@ -8390,6 +8770,23 @@
       "model": "gpt-4o-mini",
       "input_tokens": 927,
       "output_tokens": 75
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "required minimum distribution starting age for 401(k) plans"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client turns 74 this year and still works for an employer where she owns no stock"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 927,
+      "output_tokens": 70
     },
     {
       "subqueries": [
@@ -8557,6 +8954,678 @@
       "model": "gpt-4o-mini",
       "input_tokens": 906,
       "output_tokens": 48
+    }
+  ],
+  "My married clients bought their home in 2012 with a $900,000 mortgage. On their 2016 joint return, could they deduct all of the mortgage interest?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 921,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 921,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 921,
+      "output_tokens": 73
+    }
+  ],
+  "My client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away. Can she claim the clean vehicle credit for each?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 935,
+      "output_tokens": 92
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed them in service immediately"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 935,
+      "output_tokens": 68
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements and limitations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use in 2025 and placed both in service immediately"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 935,
+      "output_tokens": 66
+    }
+  ],
+  "My client's rooftop solar system was installed and completed in June 2021. What percentage of the cost can he take as the residential clean energy credit?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 916,
+      "output_tokens": 74
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 916,
+      "output_tokens": 73
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for residential clean energy credit for solar energy systems installed in 2021"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's rooftop solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 916,
+      "output_tokens": 73
+    }
+  ],
+  "My client had a new heat pump installed in her home in February 2026. Can she take the energy efficient home improvement credit on her 2026 return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 919,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements and installation dates"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 919,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for heat pumps installed in 2026"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 919,
+      "output_tokens": 72
+    }
+  ],
+  "A nurse worked a lot of overtime in 2024. Can she deduct the overtime premium on her 2024 return under the deduction for qualified overtime compensation?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 918,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 918,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 918,
+      "output_tokens": 41
+    }
+  ],
+  "My client bought a new car for personal use in March 2024 with a loan secured by the car. Can she deduct the interest she pays on that loan in 2025 under the new car loan interest deduction?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 with a loan secured by the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 930,
+      "output_tokens": 75
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and secured a loan with the car"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 930,
+      "output_tokens": 75
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and will pay interest in 2025"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 930,
+      "output_tokens": 77
+    }
+  ],
+  "For 2023, a payment app paid my client $8,000 for 50 sales of used household goods. Was the app required to report the payments to her on Form 1099-K?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 927,
+      "output_tokens": 75
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 927,
+      "output_tokens": 70
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party payment networks under Form 1099-K"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 927,
+      "output_tokens": 70
+    }
+  ],
+  "Are moving expenses for a new job deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 895,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 895,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for moving expenses under the Tax Cuts and Jobs Act"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 895,
+      "output_tokens": 38
+    }
+  ],
+  "The IRS assessed my client's 2012 income tax on June 3, 2014. There has been no installment agreement, levy, court proceeding or anything else that would extend the period. Can the IRS levy on her bank account in September 2026?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 939,
+      "output_tokens": 113
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for IRS collection of tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014 and there has been no installment agreement, levy, court proceeding or anything else that would extend the period"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 939,
+      "output_tokens": 112
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 939,
+      "output_tokens": 97
+    }
+  ],
+  "My single client had adjusted gross income of $60,000 in 2023 and paid $3,000 of day care for her 6-year-old so she could work. What percentage of those expenses did her child and dependent care credit cover for 2023?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 940,
+      "output_tokens": 79
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with an adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 940,
+      "output_tokens": 78
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for child and dependent care credit for tax year 2023"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and paid $3,000 for day care"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 940,
+      "output_tokens": 79
+    }
+  ],
+  "My single client has adjusted gross income of $60,000 and is paying $3,000 of day care this year for her 6-year-old so she can work. What percentage of those expenses will her child and dependent care credit cover on this year's return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 939,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 939,
+      "output_tokens": 84
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "child and dependent care credit percentage for qualifying expenses based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 939,
+      "output_tokens": 84
+    }
+  ],
+  "My client, a single retiree, turned 70 in 2020. Could she take the $6,000 deduction for seniors on her 2022 return, and will she be able to on her 2029 return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 933,
+      "output_tokens": 72
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to an individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 933,
+      "output_tokens": 71
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for taxpayers age 65 or older for contributions to a traditional individual retirement account"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 933,
+      "output_tokens": 72
+    }
+  ],
+  "What standard mileage rate applies to business driving in 2026?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 899,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 899,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 899,
+      "output_tokens": 41
+    }
+  ],
+  "What was the standard mileage rate for business driving in 2024?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 900,
+      "output_tokens": 41
     }
   ]
 }

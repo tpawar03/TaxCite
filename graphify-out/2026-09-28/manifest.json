@@ -108,9 +108,9 @@
     "semantic_hash": ""
   },
   "src/taxcite/generate.py": {
-    "mtime": 1790567818.468002,
-    "seen": 1790568444.441111,
-    "ast_hash": "cfccdf0df7b308d14014864d3baf3af0",
+    "mtime": 1790190544.330361,
+    "seen": 1790190545.722271,
+    "ast_hash": "3ef58693cdb23803fdf7521dd42707d9",
     "semantic_hash": ""
   },
   "src/taxcite/index.py": {
@@ -138,15 +138,15 @@
     "semantic_hash": ""
   },
   "src/taxcite/jobs.py": {
-    "mtime": 1790567572.944312,
-    "seen": 1790568444.4412632,
-    "ast_hash": "339e754e410aafca2f583d2c1c328705",
+    "mtime": 1790565807.4495943,
+    "seen": 1790567069.4384441,
+    "ast_hash": "8c414314c8d50aeef4b5803ad856fbcf",
     "semantic_hash": ""
   },
   "src/taxcite/retrieve.py": {
-    "mtime": 1790567572.9434063,
-    "seen": 1790568444.4412632,
-    "ast_hash": "51a50f0da27de57f02d94a3f00fffb2b",
+    "mtime": 1790563995.4024255,
+    "seen": 1790564509.68347,
+    "ast_hash": "4fde67b3c558dcd6774fedf053feb949",
     "semantic_hash": ""
   },
   "src/taxcite/store.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": ""
   },
   "STATUS.md": {
-    "mtime": 1790568442.316905,
-    "seen": 1790568444.4415832,
-    "ast_hash": "0903b044273b5e15c26c868fa1cc281e",
+    "mtime": 1790567394.7850387,
+    "seen": 1790567396.338985,
+    "ast_hash": "acdf1a08b1d44c1d68ac80b3685c5fa8",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -228,15 +228,15 @@
     "semantic_hash": "ead8cb9392f80bc82e974c5588f08213"
   },
   "tasks/plan.md": {
-    "mtime": 1790568442.316375,
-    "seen": 1790568444.441937,
-    "ast_hash": "ac18d9d6bc61214960e53a4026f9e96b",
+    "mtime": 1790567394.7849202,
+    "seen": 1790567396.33944,
+    "ast_hash": "355f7290339f503eb6a7c30d8f26d19c",
     "semantic_hash": ""
   },
   "tasks/todo.md": {
-    "mtime": 1790568442.315807,
-    "seen": 1790568444.441937,
-    "ast_hash": "2cfd7b4de31eb09dd2bfad5816ba91b0",
+    "mtime": 1790567394.7847219,
+    "seen": 1790567396.3394408,
+    "ast_hash": "1bd5475fdbdaf967ce6261d1c60a0963",
     "semantic_hash": ""
   },
   "eval/results/retrieval-2026-09-21-k10-before-usc.json": {
@@ -330,9 +330,9 @@
     "semantic_hash": ""
   },
   "src/taxcite/decompose.py": {
-    "mtime": 1790567818.4681756,
-    "seen": 1790568444.441111,
-    "ast_hash": "14f893c9b93d6b8ded3b3b5bb51600e9",
+    "mtime": 1790565807.4494543,
+    "seen": 1790567069.438303,
+    "ast_hash": "5ddb2715770935ecbd228331d0fd9253",
     "semantic_hash": ""
   },
   "tests/test_decompose.py": {
@@ -576,9 +576,9 @@
     "semantic_hash": ""
   },
   "eval/temporal.py": {
-    "mtime": 1790567603.7769942,
-    "seen": 1790568444.4410088,
-    "ast_hash": "055bb25d2c04ef0f566b9149036f505b",
+    "mtime": 1790564240.4980586,
+    "seen": 1790564509.683192,
+    "ast_hash": "2067717e7f6d743880d756d0413fe6f1",
     "semantic_hash": ""
   },
   "tests/test_temporal.py": {
@@ -651,42 +651,6 @@
     "mtime": 1790567160.5913332,
     "seen": 1790567396.338009,
     "ast_hash": "67a8ca09bc51881d013bd5dfff40bd35",
-    "semantic_hash": ""
-  },
-  "eval/results/decompositions-d7.json": {
-    "mtime": 1790568441.4245887,
-    "seen": 1790568444.4402912,
-    "ast_hash": "a9483abb9218246c20af5dad5e830532",
-    "semantic_hash": ""
-  },
-  "eval/results/temporal-answers-d7.json": {
-    "mtime": 1790568311.205101,
-    "seen": 1790568444.4408572,
-    "ast_hash": "afbf60e82423c789d33a8ce2bb265165",
-    "semantic_hash": ""
-  },
-  "eval/results/temporal-answers-d7ed.json": {
-    "mtime": 1790568167.1710513,
-    "seen": 1790568444.4408581,
-    "ast_hash": "a6e71aa88a8727997f507542155ae5e6",
-    "semantic_hash": ""
-  },
-  "eval/results/temporal-dev-2026-09-27-d7.json": {
-    "mtime": 1790567992.9584534,
-    "seen": 1790568444.4409118,
-    "ast_hash": "a63e9d574f2b9fce9b67db96d2c40a9e",
-    "semantic_hash": ""
-  },
-  "eval/results/temporal-dev-2026-09-28-d7ed.json": {
-    "mtime": 1790568173.5769832,
-    "seen": 1790568444.440958,
-    "ast_hash": "da363d5a458f7971937c58ba78a2b535",
-    "semantic_hash": ""
-  },
-  "eval/results/temporal-golden-2026-09-28-d7.json": {
-    "mtime": 1790568320.8311465,
-    "seen": 1790568444.440958,
-    "ast_hash": "a052a90535dd6ec7d7147c8775f49d5c",
     "semantic_hash": ""
   }
 }

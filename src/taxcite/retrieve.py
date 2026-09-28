@@ -32,6 +32,7 @@ class Hit:
     section: str
     source: str
     key: str = ""  # the chunk itself: several chunks can share one citation label (C2, C6)
+    effective: dict | None = None  # statute (D4): when this text's latest amendment applies
 
 
 @cache
@@ -80,9 +81,19 @@ def source_filter(source: str | Sequence[str] | None) -> models.Filter | None:
     return models.Filter(must=[models.FieldCondition(key="source", match=match)])
 
 
+def edition_filter(year: int, back: int, forward: int) -> models.Filter:
+    """Keep chunks with no edition (everything but publications, and undated publications) and
+    publications whose edition lies within [year - back, year + forward] (D3)."""
+    return models.Filter(should=[
+        models.IsEmptyCondition(is_empty=models.PayloadField(key="edition")),
+        models.FieldCondition(key="edition", range=models.Range(gte=year - back, lte=year + forward)),
+    ])
+
+
 def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence[str] | None = None,
            collection: str = COLLECTION, qc=None, dense_name: str = DENSE_MODEL,
-           rerank_name: str = RERANK_MODEL, sections: Sequence[str] | None = None) -> list[Hit]:
+           rerank_name: str = RERANK_MODEL, sections: Sequence[str] | None = None,
+           year: int | None = None, editions: tuple[int, int] = (0, 0)) -> list[Hit]:
     """Top-k chunks for a query.
 
     Modes are the rungs of the eval ablation ladder (§9): "sparse" is BM25 only,
@@ -90,6 +101,7 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
     Which one wins is query-dependent, so T4 measures it rather than assuming.
     A "+rerank" suffix ("hybrid+rerank") reranks those candidates with a cross-encoder.
     `sections` limits the search to those sections, e.g. the opinions a citation hop reached (C5).
+    `year` limits publications to editions within `editions` = (back, forward) years of it (D3).
     """
     qc = qc or client()
     mode, _, suffix = mode.partition("+")
@@ -99,17 +111,23 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
     if sections:
         within = models.FieldCondition(key="section", match=models.MatchAny(any=list(sections)))
         flt = models.Filter(must=[*(flt.must if flt else []), within])
+    if year is not None:
+        flt = models.Filter(must=[*(flt.must if flt else []), edition_filter(year, *editions)])
+    # Filtered dense search is exact: approximate kept 99.2% of the exact top 50 under the edition
+    # filter (min 96%) for 3 ms less (D3); ADR-17 measured 22% lost under a strict filter. Sparse is exact already.
+    exact = models.SearchParams(exact=True) if year is not None else None
     dense, sparse = embed(query, dense_name)
     limit = RERANK_CANDIDATES if suffix else k + OVERFETCH
     if mode == "dense":
-        result = qc.query_points(collection, query=dense, using="dense", limit=limit, query_filter=flt)
+        result = qc.query_points(collection, query=dense, using="dense", limit=limit, query_filter=flt,
+                                 search_params=exact)
     elif mode == "sparse":
         result = qc.query_points(collection, query=sparse, using="sparse", limit=limit, query_filter=flt)
     elif mode == "hybrid":
         result = qc.query_points(
             collection,
             prefetch=[
-                models.Prefetch(query=dense, using="dense", limit=PREFETCH, filter=flt),
+                models.Prefetch(query=dense, using="dense", limit=PREFETCH, filter=flt, params=exact),
                 models.Prefetch(query=sparse, using="sparse", limit=PREFETCH, filter=flt),
             ],
             query=models.FusionQuery(fusion=models.Fusion.RRF),
@@ -121,7 +139,8 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
 
     hits = [
         Hit(citation=p.payload["citation"], heading=p.payload["heading"], text=p.payload["text"],
-            score=p.score, section=p.payload["section"], source=p.payload["source"], key=p.payload.get("key", ""))
+            score=p.score, section=p.payload["section"], source=p.payload["source"], key=p.payload.get("key", ""),
+            effective=p.payload.get("effective"))
         for p in result.points
     ]
     # Reciprocal rank fusion produces exact ties (1/61 + 1/63 is a common total). When

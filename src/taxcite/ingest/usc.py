@@ -10,6 +10,7 @@ import re
 import xml.etree.ElementTree as ET
 
 from taxcite.chunk import Chunk, estimate_tokens, renumber
+from taxcite.ingest import usc_notes
 from taxcite.ingest.ecfr import Block, pack
 
 PREFIX = "26 U.S.C. §"
@@ -132,4 +133,8 @@ def parse(xml) -> list[Chunk]:
     point = meta.get("docPublicationName", "").partition("@")[2]
     revision = f"Pub. L. {point}" if point else None
     sections = (e for e in root.iter() if tag(e) == "section" and e.get("identifier", "").startswith(SECTION_ID))
-    return [c for s in sections for c in chunk_section(s, as_of, revision)]
+    chunks = [c for s in sections for c in chunk_section(s, as_of, revision)]
+    by_key = {c.key: c for c in chunks}
+    for key, effective in usc_notes.link(root, chunks).items():  # D4: when each text's latest amendment applies
+        by_key[key].effective = effective
+    return chunks

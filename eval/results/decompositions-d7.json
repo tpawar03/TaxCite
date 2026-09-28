@@ -1,0 +1,1545 @@
+{
+  "My married clients bought their home in 2012 with a $900,000 mortgage. On their 2016 joint return, could they deduct all of the mortgage interest?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "mortgage interest deduction limits for qualified residence interest for tax year 2016"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients have a $900,000 mortgage and filed a joint return in 2016"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1030,
+      "output_tokens": 74
+    }
+  ],
+  "My client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away. Can she claim the clean vehicle credit for each?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "clean vehicle credit eligibility requirements for electric vehicles placed in service"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought two new electric cars for personal use, one on August 20, 2025 and one on October 15, 2025, and placed both in service right away."
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1044,
+      "output_tokens": 91
+    }
+  ],
+  "My client's rooftop solar system was installed and completed in June 2021. What percentage of the cost can he take as the residential clean energy credit?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of cost eligible for the residential clean energy credit for solar energy systems placed in service before 2022"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the solar system was installed and completed in June 2021"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 74
+    }
+  ],
+  "My client had a new heat pump installed in her home in February 2026. Can she take the energy efficient home improvement credit on her 2026 return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a new heat pump installed in her home in February 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 69
+    }
+  ],
+  "A nurse worked a lot of overtime in 2024. Can she deduct the overtime premium on her 2024 return under the deduction for qualified overtime compensation?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified overtime compensation under Internal Revenue Code section 162"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1027,
+      "output_tokens": 41
+    }
+  ],
+  "My client bought a new car for personal use in March 2024 with a loan secured by the car. Can she deduct the interest she pays on that loan in 2025 under the new car loan interest deduction?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of interest on a loan secured by a personal use vehicle"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client bought a new car for personal use in March 2024 and is paying interest on the loan in 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1039,
+      "output_tokens": 80
+    }
+  ],
+  "For 2023, a payment app paid my client $8,000 for 50 sales of used household goods. Was the app required to report the payments to her on Form 1099-K?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client received $8,000 for 50 sales of used household goods in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1036,
+      "output_tokens": 79
+    }
+  ],
+  "Are moving expenses for a new job deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of moving expense deduction for tax years after 2017"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1004,
+      "output_tokens": 42
+    }
+  ],
+  "The IRS assessed my client's 2012 income tax on June 3, 2014. There has been no installment agreement, levy, court proceeding or anything else that would extend the period. Can the IRS levy on her bank account in September 2026?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for collection of federal income tax liabilities"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS levy authority after expiration of statute of limitations for collection"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRS assessed the client's 2012 income tax on June 3, 2014, with no extensions"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 99
+    }
+  ],
+  "My single client had adjusted gross income of $60,000 in 2023 and paid $3,000 of day care for her 6-year-old so she could work. What percentage of those expenses did her child and dependent care credit cover for 2023?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single, has adjusted gross income of $60,000, and paid $3,000 for day care for a 6-year-old"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 87
+    }
+  ],
+  "My single client has adjusted gross income of $60,000 and is paying $3,000 of day care this year for her 6-year-old so she can work. What percentage of those expenses will her child and dependent care credit cover on this year's return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is single with adjusted gross income of $60,000 and has $3,000 in day care expenses for a 6-year-old"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1048,
+      "output_tokens": 86
+    }
+  ],
+  "My client, a single retiree, turned 70 in 2020. Could she take the $6,000 deduction for seniors on her 2022 return, and will she be able to on her 2029 return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for taxpayers age 50 and older"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a single retiree who turned 70 in 2020"
+        }
+      ],
+      "as_of": "2022 and 2029",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1042,
+      "output_tokens": 78
+    }
+  ],
+  "What standard mileage rate applies to business driving in 2026?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 39
+    }
+  ],
+  "What was the standard mileage rate for business driving in 2024?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
+    }
+  ],
+  "Could an employee deduct unreimbursed job expenses on a 2016 return, and can they on a 2026 return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        },
+        {
+          "kind": "statutory",
+          "query": "deductibility of unreimbursed employee expenses for taxable year 2016"
+        }
+      ],
+      "as_of": "2016 and 2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    }
+  ],
+  "What was the section 179 expensing limit for property a client placed in service in 2023?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing limit for property placed in service in 2023"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 43
+    }
+  ],
+  "Can a state-licensed medical marijuana dispensary deduct its ordinary business expenses for its 2026 tax year?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "limitations on deductions for expenses related to the trafficking of controlled substances under Internal Revenue Code Section 280E"
+        },
+        {
+          "kind": "case_law",
+          "query": "tax treatment of medical marijuana dispensaries ordinary business expenses Section 280E"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a state-licensed medical marijuana dispensary"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 100
+    }
+  ],
+  "For her 2016 return, could my client deduct expenses of a hobby that produced some income?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss deduction limitations under Internal Revenue Code Section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "factors determining whether an activity is engaged in for profit under Section 183"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had a hobby that produced some income"
+        }
+      ],
+      "as_of": "2016",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 91
+    }
+  ],
+  "My client filed and paid her 2022 return on April 18, 2023. In May 2026 she found a deduction she missed. Can she still claim a refund?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "time limit for claiming a refund for overpayment of tax, including missed deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed and paid her 2022 return on April 18, 2023 and found a missed deduction in May 2026"
+        }
+      ],
+      "as_of": "2022",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1033,
+      "output_tokens": 84
+    }
+  ],
+  "My client filed his 2021 return on October 1, 2022 with no extension, and left out income equal to 30 percent of the gross income he reported. The IRS opened an audit in September 2026. Is it too late to assess?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for assessment of tax under Internal Revenue Code section 6501"
+        },
+        {
+          "kind": "statutory",
+          "query": "exceptions to the three-year statute of limitations for substantial omissions of income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client omitted income equal to 30 percent of the gross income reported on the 2021 return"
+        }
+      ],
+      "as_of": "2021",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1049,
+      "output_tokens": 104
+    }
+  ],
+  "My client's 2024 return was due April 15, 2025. He had no extension and filed on August 30, 2025, with $10,000 of tax unpaid. What is the failure-to-file addition?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "failure-to-file penalty for late filing of tax return"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client filed his 2024 return late on August 30, 2025, with $10,000 of tax unpaid"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1043,
+      "output_tokens": 77
+    }
+  ],
+  "What is the cap on the state and local tax deduction for a married couple with modified AGI of $300,000 for 2026?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cap on state and local tax deduction for married couples with modified AGI"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 42
+    }
+  ],
+  "Are restaurant meals with clients 100 percent deductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of business meals and entertainment expenses, temporary 100 percent deduction for restaurant meals"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 46
+    }
+  ],
+  "Can a waiter deduct his tips on his 2024 return under the new deduction for qualified tips?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for qualified tips under Internal Revenue Code section 162(a)"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a waiter who receives tips"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1015,
+      "output_tokens": 63
+    }
+  ],
+  "My client acquired one machine on January 10, 2025 and another on March 3, 2025, and placed both in service in March 2025. What bonus depreciation applies to each?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "bonus depreciation rules for qualified property placed in service in 2025"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client acquired one machine on January 10, 2025 and another on March 3, 2025, both placed in service in March 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1037,
+      "output_tokens": 87
+    }
+  ],
+  "A client's horse breeding and showing operation has made a profit in 2 of the last 7 years. Is it presumed to be engaged in for profit?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "presumption of profit motive for horse breeding activity under IRS guidelines"
+        },
+        {
+          "kind": "case_law",
+          "query": "profit motive presumption horse breeding operation two out of seven years"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's horse breeding and showing operation has made a profit in 2 of the last 7 years"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1026,
+      "output_tokens": 99
+    }
+  ],
+  "My self-employed client runs her business from a spare bedroom that the children also use for homework in the evenings. Can she take a home office deduction?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for home office deduction exclusive use regular use"
+        },
+        {
+          "kind": "case_law",
+          "query": "home office deduction mixed use space children homework"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is self-employed and uses a spare bedroom for business and children's homework"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1025,
+      "output_tokens": 87
+    }
+  ],
+  "Can a home office deduction create a loss if the business earns very little income?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "home office deduction limitations and requirements"
+        },
+        {
+          "kind": "case_law",
+          "query": "home office deduction creating a loss with minimal business income"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1011,
+      "output_tokens": 58
+    }
+  ],
+  "What does a client have to prove to deduct business gifts or car expenses for listed property?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for deducting business gifts, including substantiation and limits"
+        },
+        {
+          "kind": "statutory",
+          "query": "deduction requirements for car expenses related to listed property"
+        },
+        {
+          "kind": "case_law",
+          "query": "adequate proof for business gifts and listed property expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 88
+    }
+  ],
+  "business meals deduction 50 percent limitation food and beverages": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "50 percent limitation on the deduction for business meals and entertainment expenses"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1005,
+      "output_tokens": 40
+    }
+  ],
+  "How much can a business deduct for gifts to one customer in a year?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for business gifts to a single recipient"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 38
+    }
+  ],
+  "My self-employed consultant client took an 18-month engagement in another city. Can they deduct their travel expenses while away from home?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of travel expenses for self-employed individuals away from home"
+        },
+        {
+          "kind": "case_law",
+          "query": "travel expenses deduction for self-employed consultants engaged in temporary work away from home"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is self-employed and took an 18-month engagement in another city"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 97
+    }
+  ],
+  "section 179 expensing dollar limitation": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing dollar limitation for taxable year 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1002,
+      "output_tokens": 39
+    }
+  ],
+  "If business use of a client's car falls to 40 percent, can they still take accelerated depreciation on it?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "accelerated depreciation for vehicles under Section 168 and limitations for business use percentage"
+        },
+        {
+          "kind": "case_law",
+          "query": "impact of business use percentage on eligibility for accelerated depreciation"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's business use of the car has fallen to 40 percent"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 93
+    }
+  ],
+  "How many hours does someone need to work in real estate to qualify as a real estate professional for the passive loss rules?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "real estate professional status requirements for passive activity loss rules, including hours worked"
+        },
+        {
+          "kind": "case_law",
+          "query": "court interpretations of real estate professional status and hours worked for passive loss rules"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 70
+    }
+  ],
+  "A client actively manages a rental house and has about $120,000 of adjusted gross income. Can they deduct the rental loss against their wages?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "passive activity loss deduction rules for rental real estate activities"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in rental activities and deductibility of losses"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client actively manages a rental house and has about $120,000 of adjusted gross income"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 94
+    }
+  ],
+  "Does a client with $350 of net earnings from a side business owe self-employment tax?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "self-employment tax threshold for net earnings"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $350 of net earnings from a side business"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 61
+    }
+  ],
+  "substantial understatement of income tax threshold individual": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "substantial understatement of income tax threshold for individuals"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1002,
+      "output_tokens": 35
+    }
+  ],
+  "What is the rate of the accuracy-related penalty on an underpayment?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "accuracy-related penalty for underpayment of tax"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 34
+    }
+  ],
+  "Can a client avoid the accuracy-related penalty by showing they acted reasonably and in good faith?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "accuracy-related penalty reasonable cause and good faith exception"
+        },
+        {
+          "kind": "case_law",
+          "query": "court rulings on reasonable cause and good faith for avoiding accuracy-related penalties"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 65
+    }
+  ],
+  "When does the burden of proof shift to the IRS in a tax case?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof in tax cases under Internal Revenue Code section 7491"
+        },
+        {
+          "kind": "case_law",
+          "query": "shifting burden of proof to IRS in tax disputes"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 67
+    }
+  ],
+  "six year assessment period omission of more than 25 percent of gross income": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "six-year assessment period for omission of more than 25 percent of gross income"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
+    }
+  ],
+  "How long does the IRS normally have to assess additional tax after a client files their return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "time limit for IRS to assess additional tax after filing a return"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 40
+    }
+  ],
+  "What is the deadline for filing a claim for a tax refund?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deadline for filing a claim for a tax refund under Internal Revenue Code section 6511"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 43
+    }
+  ],
+  "How small does a corporation or partnership have to be to meet the gross receipts test?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "gross receipts test for small corporations and partnerships under Internal Revenue Code section 448"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 43
+    }
+  ],
+  "Who counts as an employee for Social Security and Medicare (FICA) tax purposes?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "definition of employee for FICA tax purposes under Internal Revenue Code Section 3121(d)"
+        },
+        {
+          "kind": "statutory",
+          "query": "FICA tax applicability to employees and independent contractors"
+        },
+        {
+          "kind": "case_law",
+          "query": "court interpretations of employee status for FICA tax liability"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 93
+    }
+  ],
+  "recordkeeping requirement every person liable for tax": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for taxpayers under Internal Revenue Code"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1003,
+      "output_tokens": 35
+    }
+  ],
+  "A self-employed client wants to deduct groceries and household bills as business costs. Is that allowed?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary expenses for a trade or business"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of personal expenses as business costs"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is self-employed and wants to deduct groceries and household bills"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 86
+    }
+  ],
+  "Can a client claim miscellaneous itemized deductions, like unreimbursed employee expenses, on a 2024 return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 43
+    }
+  ],
+  "280E deductions disallowed trafficking controlled substances legal under state law": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "disallowance of deductions under section 280E for trafficking controlled substances"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer deductions for businesses trafficking controlled substances legal under state law"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 68
+    }
+  ],
+  "A cash-method client received a payment in December. Which year's income is it?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cash method of accounting income recognition timing"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1011,
+      "output_tokens": 35
+    }
+  ],
+  "What is the penalty for filing a tax return late?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "penalty for failure to file a tax return timely under Internal Revenue Code section 6651"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1006,
+      "output_tokens": 44
+    }
+  ],
+  "Is the deduction for hobby expenses under section 183(b)(2) an above-the-line deduction, or a miscellaneous itemized deduction subject to the 2-percent floor?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for hobby expenses under section 183(b)(2) treatment as above-the-line or miscellaneous itemized deduction"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of hobby expenses as miscellaneous itemized deductions subject to 2-percent floor"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 81
+    }
+  ],
+  "Do hours spent 'on call' for rental properties count toward the 750-hour real estate professional test?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "real estate professional status hours requirement including on-call hours"
+        },
+        {
+          "kind": "case_law",
+          "query": "hours spent on call rental properties real estate professional test"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 62
+    }
+  ],
+  "How did the Tax Court decide whether Conservation Reserve Program (CRP) payments are self-employment income or excluded rentals from real estate?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on Conservation Reserve Program payments self-employment income versus excluded rental income from real estate"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1022,
+      "output_tokens": 47
+    }
+  ],
+  "Can a medical practice get section 530 relief from employment taxes for physicians it treated as independent contractors, even if it filed its information returns late?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 530 relief from employment taxes for independent contractors"
+        },
+        {
+          "kind": "case_law",
+          "query": "timeliness of filing information returns and section 530 relief"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the medical practice treated physicians as independent contractors and filed information returns late"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 89
+    }
+  ],
+  "Tax Court jurisdiction section 7436 worker classification additions to tax penalties": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction under section 7436 regarding worker classification"
+        },
+        {
+          "kind": "statutory",
+          "query": "additions to tax and penalties related to worker classification under section 7436"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 68
+    }
+  ],
+  "Is the sole shareholder and president of an S corporation an employee for employment tax purposes, and can the corporation claim section 530 relief?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "employee status of shareholders in an S corporation for employment tax purposes"
+        },
+        {
+          "kind": "statutory",
+          "query": "section 530 relief for employment tax liability"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is the sole shareholder and president of an S corporation"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1022,
+      "output_tokens": 87
+    }
+  ],
+  "If an IRA custodian's check is routed through the IRA owner to buy stock for the IRA, is that a taxable distribution to the owner?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxable distribution rules for individual retirement accounts"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRA custodian check routed through owner taxable distribution"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the IRA custodian's check is routed through the IRA owner to buy stock for the IRA"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 90
+    }
+  ],
+  "If a self-directed IRA buys American Eagle coins and the owner keeps them at home, is that a distribution?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "distribution rules for self-directed individual retirement accounts and prohibited transactions"
+        },
+        {
+          "kind": "case_law",
+          "query": "self-directed IRA ownership of precious metals and implications of personal possession on distributions"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 68
+    }
+  ],
+  "An IRA's partnership interest was distributed to the owner, who later put cash into a new IRA instead of the interest itself. Does that qualify as a rollover?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "rollover contributions to individual retirement accounts, requirements for cash contributions instead of property"
+        },
+        {
+          "kind": "case_law",
+          "query": "tax treatment of cash contributions to IRA after distribution of partnership interest"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the owner received a partnership interest distribution and contributed cash to a new IRA"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1027,
+      "output_tokens": 96
+    }
+  ],
+  "If a taxpayer leases property to a business they are involved in, is the lease income passive even if they materially participate?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "passive activity loss rules and material participation"
+        },
+        {
+          "kind": "case_law",
+          "query": "lease income characterization passive activity material participation"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 57
+    }
+  ],
+  "Before applying the codified economic substance doctrine to a transaction, does a court have to decide whether the doctrine is relevant?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "economic substance doctrine application and relevance"
+        },
+        {
+          "kind": "case_law",
+          "query": "court determination of relevance of economic substance doctrine in tax cases"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 59
+    }
+  ],
+  "Can a partnership that files a Tax Court petition after the deadline under section 6234(a) get equitable tolling?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "equitable tolling under section 6234(a) for Tax Court petitions"
+        },
+        {
+          "kind": "case_law",
+          "query": "partnership equitable tolling Tax Court petition deadline"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 66
+    }
+  ],
+  "Are a farmer's heavy-duty pickup trucks subject to the strict substantiation rules for listed property?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "listed property definition and substantiation requirements for heavy-duty pickup trucks"
+        },
+        {
+          "kind": "case_law",
+          "query": "application of strict substantiation rules to heavy-duty pickup trucks used in farming"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 68
+    }
+  ],
+  "Will the Tax Court estimate a client's business expenses under the Cohan rule if the client kept records but didn't produce proof of payment?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Cohan rule estimation of business expenses when taxpayer has records but lacks proof of payment"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court application of Cohan rule for business expense deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client kept records but did not produce proof of payment"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 93
+    }
+  ],
+  "Can a taxpayer be treated as materially participating in a business because they materially participated in a related business for five of the last ten years?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "material participation tests for passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in a related business five of the last ten years"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1022,
+      "output_tokens": 62
+    }
+  ],
+  "What happens when a taxpayer with a full-time job claims real estate professional status but cannot show more time in real estate than in their other work?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for qualifying as a real estate professional under Internal Revenue Code Section 469"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer burden of proof for real estate professional status full-time employment"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the taxpayer has a full-time job and cannot show more time in real estate than in their other work"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1024,
+      "output_tokens": 103
+    }
+  ],
+  "Can owners deduct bed-and-breakfast expenses if they also used the B&B personally?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of expenses for property used for both business and personal purposes"
+        },
+        {
+          "kind": "case_law",
+          "query": "allocation of expenses for mixed-use property bed-and-breakfast personal use"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the property is used both for business and personal purposes"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 92
+    }
+  ],
+  "Can a taxpayer deduct a loss for money forfeited to the government after a criminal conviction?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of losses from illegal activities forfeited to the government"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer deductions for losses resulting from criminal convictions forfeiture"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 66
+    }
+  ],
+  "When evaluating an offer in compromise from a cannabis business, can the IRS ignore expenses that section 280E makes nondeductible?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 280E disallowance of deductions for expenses related to the trafficking of controlled substances"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS treatment of expenses in offer in compromise for cannabis businesses under section 280E"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    }
+  ],
+  "Does a penalty approval form that only refers to the individual partners satisfy the written supervisory approval requirement for penalties against the partnership?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "written supervisory approval requirement for penalties against partnerships"
+        },
+        {
+          "kind": "case_law",
+          "query": "sufficiency of penalty approval forms for partnerships individual partners"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1019,
+      "output_tokens": 61
+    }
+  ],
+  "Are vehicles used only to drive passengers for hire subject to the strict substantiation requirements of section 274(d)?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "strict substantiation requirements for vehicle expenses under section 274(d)"
+        },
+        {
+          "kind": "case_law",
+          "query": "application of section 274(d) to vehicles used for passenger transport for hire"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1017,
+      "output_tokens": 70
+    }
+  ],
+  "Has the Tax Court allowed a taxpayer to deduct the expenses of their bowling activities as a business?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on deductibility of expenses for bowling activities as a business"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 41
+    }
+  ],
+  "Will the Tax Court allow a home office deduction for a converted in-law suite with its own entrance, and for a spare room the taxpayer says he used only for work?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for home office deduction under Internal Revenue Code section 280A"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on home office deductions for converted spaces and exclusive use requirements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the taxpayer claims to have used a spare room only for work and has a converted in-law suite with its own entrance"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 106
+    }
+  ],
+  "Can a taxpayer deduct a home office for an activity the court has found is not engaged in for profit?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for home office expenses, requirements for business use"
+        },
+        {
+          "kind": "case_law",
+          "query": "home office deduction limitations for activities not engaged in for profit"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1016,
+      "output_tokens": 64
+    }
+  ],
+  "Has the Tax Court found spa workers who pay booth rent to be independent contractors rather than employees?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on spa workers booth rent independent contractors versus employees"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 37
+    }
+  ],
+  "Settlement money was paid into my client's lawyer's trust account in December but held there because of a fee dispute. Is it income that year or when it is released?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt doctrine income recognition for settlement proceeds"
+        },
+        {
+          "kind": "case_law",
+          "query": "timing of income recognition for settlement funds held in trust account due to fee dispute"
+        },
+        {
+          "kind": "client_fact",
+          "query": "settlement money was paid into the lawyer's trust account in December 2026"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 96
+    }
+  ],
+  "My client has an unprofitable hobby of restoring and selling vintage bikes. For 2023 they earned $3,000 from it and spent $5,000. Can they deduct any expenses against the $3,000?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss deduction limitations under Internal Revenue Code section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby versus business determination factors"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client earned $3,000 and spent $5,000 on the hobby"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1041,
+      "output_tokens": 89
+    }
+  ],
+  "My client lives in Iowa, doesn't farm, and received Conservation Reserve Program payments in 2006 on land he owns. Are those payments subject to self-employment tax?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "tax treatment of Conservation Reserve Program payments for self-employment tax purposes"
+        },
+        {
+          "kind": "case_law",
+          "query": "self-employment tax applicability to Conservation Reserve Program payments"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client lives in Iowa and does not farm"
+        }
+      ],
+      "as_of": "2006",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 87
+    }
+  ],
+  "My client qualifies as a real estate professional and owns six rental houses. He never elected to treat them as one activity, and he is heavily involved in only two. Are all six rental losses nonpassive?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "real estate professional status and passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of multiple rental properties as separate activities for real estate professionals"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client owns six rental houses and is heavily involved in only two"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1037,
+      "output_tokens": 90
+    }
+  ]
+}
