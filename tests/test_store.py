@@ -102,6 +102,8 @@ def test_an_unchanged_reingest_keeps_its_recorded_time_and_retires_nothing(conn)
     ("usc", "26 U.S.C. § 280A(c)(1)", "280A", False, ("statute", "enacted", 4)),
     ("ecfr", "26 CFR 1.274-2(a)", "1.274-2", False, ("regulation", "final", 4)),
     ("ecfr", "26 CFR 1.274-5T(c)(1)", "1.274-5T", False, ("regulation", "temporary", 4)),
+    ("ecfr", "26 CFR 1.274-5A(c)(6)", "1.274-5A", False, ("regulation", "final_prior_version", 4)),
+    ("ecfr", "26 CFR 1.263A-1(b)(4)", "1.263A-1", False, ("regulation", "final", 4)),  # "A" inside a section number
     ("ecfr", "26 CFR 1.482-1T(f)", "1.482-1T", True, ("regulation", "temporary_partly_expired", 4)),
     ("case", "140 T.C. No. 16, at *1-2", "140 T.C. No. 16", False, ("opinion", "reported", 3)),
     ("case", "T.C. Memo. 2004-207, at *3", "T.C. Memo. 2004-207", False, ("opinion", "memorandum", 2)),

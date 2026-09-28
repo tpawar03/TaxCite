@@ -1766,9 +1766,9 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
   - The hand-checked *Banaitis* row never goes stale (the Supreme Court's word is final).
   - The grader who designed the fixes also graded the re-check. The censuses reduce that dependence; your spot-check is still owed.
 
-**Decisions for you from the validation:**
-1. The "A"-suffix prior-version final regulations: label them (e.g. `final_prior_version`) for E4 to weigh, exclude them, or leave them.
-2. The CI gate at exactly 0.70: keep the threshold. E4 re-baselines on this corpus and a new snapshot, and should not lower it.
+**Decisions (yours, 2026-09-28):**
+1. **The "A" sections are labelled `final_prior_version`** (level 4, like every regulation), so E4 can weigh them. That's 136 chunks: §1.274-5A 29, §1.482-1A/-2A/-7A 92, §1.1402(e)-1A–5A 15. My validation notes said 142, which was an arithmetic slip. Applied through `chunk.authority()` and the backfill: 136 rows updated, a second run updates 0. Tested, including "1.263A-1", where the "A" sits inside the section number (246 tests).
+2. **The CI gate stays at 0.70.** Labelling is metadata only, so ranking is unchanged at 0.7000. E4 re-baselines on this corpus and a new snapshot.
 
 **Dependencies:** E2
 **Files:** `eval/results/`

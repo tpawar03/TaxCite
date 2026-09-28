@@ -49,6 +49,8 @@ def authority(source: str, citation: str, section: str, partly_expired: bool = F
     elif source == "ecfr":
         kind, level = "regulation", 4
         status = ("temporary_partly_expired" if partly_expired else "temporary") if section.endswith("T") else "final"
+        if re.search(r"\dA$", section):  # eCFR keeps an earlier regime's rules as "…A" (§1.274-5A): final, but a
+            status = "final_prior_version"  # prior version whose years the corpus never states; E4 weighs it
     elif source == "case" and REPORTED.search(citation):
         kind, status, level = "opinion", "reported", 3
     elif source == "case" and MEMO.search(citation):
