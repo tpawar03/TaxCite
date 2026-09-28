@@ -1546,7 +1546,16 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
   - dev: D08 (keep Pub 527 p. 20), D14, D16, D18, D19, D21, D23, D26, D27
   - Tested on copies: the validator passes both (0 of 115, 0 of 39) and flags every class of bad tag.
 - **A data bug:** D14's reference answer starts ",500 of interest" where "$2,500" was lost (shell interpolation of `$2` at authoring, most likely). No other row in golden, dev or pilot has the pattern. Fixed: "$2,500" restored. No code reads reference answers for retrieval, so no score moves.
-- **Still to do:** guards (golden: G-C03 + ≥3; dev: ≥4 from D13, D20, D30, D31, D34, D36, D37); read G-X09 and G-X19 for `reviewing_court`; write the new rows (golden: 2 `reported_over_memo`; dev: 3 `reported_over_memo`, 2 `reviewing_court`, 1 counter-pair guard).
+- **Guards and reads done (2026-09-28, uncommitted for your diff review):**
+  - **Guard candidates:** rows whose top-1 is gold in 5 of 5 plan sets (golden 19, dev 16). **Most are exposed:** a gold opinion or publication leads, and a non-gold statute or regulation also sits in the top 8. In golden, 13 of 19: 6 of 7 case-law and 7 of 8 compound are like this; in dev, D24's gold publication is. The competing sources are mostly irrelevant statutes (§408(m), §420(f)(7), §453B(e)(2), §7471) that a flat "statute beats opinion" prior would promote to top-1. D03's is a reversed reported opinion on another topic (*Morehouse*), which a "reported beats memo" prior would put above the gold memo.
+  - **Tagged `guard`** (`controls` = all gold; `competes` = the higher-authority non-gold hits in the top 8, plan set 0):
+    - golden: G-C03 (the reversed opinion *is* the answer), G-C08, G-C12, G-C17, G-C20, G-X10, G-X28 (exposed), G-S13 (statute leads, the control)
+    - dev: D02, D03, D05, D10, D24 (exposed), D13, D34 (statute leads)
+  - **G-X09 tagged `reviewing_court`:** a non-gold page of the reversed *Menard* leads with the disguised-dividend reasoning the Seventh Circuit rejected; §162(a)-(b) isn't in the pool at k=8.
+  - **G-X19 not tagged:** its top-1, T.C. Memo. 2025-50 at *5, applies the Eleventh Circuit's rule under *Golsen* (*Kroner*): same level as the gold, and correct. It's a `binding_on` row (Phase G), not a level conflict.
+  - Validator 0/115, 0/39.
+- **What the guards change for E4:** a flat per-level prior is now expected to fail its own guards. The prior has to be scoped: applied among the candidates of a statutory sub-query (routing already types them), or as a margin tie-break, not across the whole merged list. E4's candidates (a)–(c) are measured with that scoping as well as without, and the guard rows are scored alongside the conflict rows.
+- **Still to do:** write the new rows (golden: 2 `reported_over_memo`; dev: 3 `reported_over_memo`, 2 `reviewing_court`, 1 counter-pair guard).
 
 **Out of scope:** the expired temporary regulations (§1.988-1T/-2T are foreign currency, outside the Phase B topics; E2 handles them as metadata, not rows); E4's baseline top-1 on these rows (E4's first step, with 5 live-planner plan sets for every tagged row, dev included: dev's B rows have no D7 plans yet, ~$0.05).
 
@@ -1600,7 +1609,7 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 
 ## E4: Authority-weighted rerank
 
-**Description:** In `decompose.chunks()`, add an authority prior to the cross-encoder score before the rest of the slots are filled. Candidates, compared on dev (E1's conflict rows and all other dev rows): (a) an additive prior per level; (b) a tie-break inside a score margin; (c) a reserved controlling slot, D3b's statute slot generalised to regulations; each with and without (d) searching deeper than synthesis reads (pool at k=20, pick 8: E0 found 45.6 of 119 gold groups out of the k=8 pool). Expired temporary-regulation text demoted. **No blanket reversed-opinion demotion** (E0: G-C03 needs *Morehouse*, G-X02 needs it demoted; that's `binding_on`, Phase G). Nothing is removed from the pool. Chosen on dev; golden scored once.
+**Description:** In `decompose.chunks()`, add an authority prior to the cross-encoder score before the rest of the slots are filled. Candidates, compared on dev (E1's conflict rows and all other dev rows): (a) an additive prior per level; (b) a tie-break inside a score margin; (c) a reserved controlling slot, D3b's statute slot generalised to regulations; each scoped to a statutory sub-query's own candidates, and unscoped (E1's guards: a flat prior promotes irrelevant statutes above gold opinions); each with and without (d) searching deeper than synthesis reads (pool at k=20, pick 8: E0 found 45.6 of 119 gold groups out of the k=8 pool). Expired temporary-regulation text demoted. **No blanket reversed-opinion demotion** (E0: G-C03 needs *Morehouse*, G-X02 needs it demoted; that's `binding_on`, Phase G). Nothing is removed from the pool. Chosen on dev; golden scored once.
 
 **Acceptance criteria:**
 - [ ] Conflict subset: controlling source at top-1, before and after, dev and golden; the gate reads "changes top-1 to the controlling source"
