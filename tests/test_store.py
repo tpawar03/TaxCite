@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 
 from taxcite import store
-from taxcite.chunk import authority, expiry, revision
+from taxcite.chunk import authority, expiry, revision, sunset
 from taxcite.ingest.ecfr import parse
 
 SECTION = """<ECFR><DIV8 N="1.test-1" TYPE="SECTION">
@@ -138,3 +138,15 @@ def test_save_stores_the_profile(conn):
     store.save(conn, chunks())
     (profile,) = conn.execute("SELECT authority FROM chunks WHERE source = 'test'").fetchone()
     assert profile == {"type": "unknown", "status": "unknown", "level": 0}  # 'test' is no real source
+
+
+@pytest.mark.parametrize("cita, expired", [
+    ("[T.D. 8253, 54 FR 20542, May 12, 1989]", True),     # §1.469-4T: after the cutoff, 3 years long gone
+    ("[T.D. 8175, 53 FR 5700, Feb. 25, 1988, as amended by T.D. 8253, 54 FR 20535, May 12, 1989]", False),  # issued before it
+    ("[T.D. 8215, 53 FR 27043, July 18, 1988]", False),
+    ("[59 FR 11922, Mar. 15, 1994]", True),               # no T.D. number in the note: the date still decides
+    ("[T.D. 9999, 90 FR 1, Jan. 5, 2025]", False),        # issued after the cutoff but not yet 3 years old
+    (None, False),
+])
+def test_section_7805e2_sunsets_temporary_regulations_issued_after_1988(cita, expired):
+    assert sunset(cita, "2026-09-17") is expired

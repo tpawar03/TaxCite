@@ -200,3 +200,19 @@ def test_a_failed_lookup_fails_open_and_rolls_back():
     out = c.flags(conn, ["140 T.C. No. 16", "T.C. Memo. 2004-207"], NOW)
     assert {f["status"] for f in out.values()} == {"unknown"} and set(out) == {"140 T.C. No. 16", "T.C. Memo. 2004-207"}
     assert conn.rolled_back  # the job publishes the answer on this connection next
+
+
+def test_a_decided_appeal_whose_ruling_did_not_parse_is_not_pending():
+    """E3 (Gregory): CourtListener found the Eleventh Circuit's opinion but its ruling didn't parse."""
+    for kind in ("decided", "appealed"):  # "appealed": rows recorded before E3
+        f = c.flag([("courtlistener", kind, "69 F.4th 762 (ca11 2023)", NOW)], NOW)
+        assert f["status"] == "decided" and f["by"] == "69 F.4th 762 (ca11 2023)" and "could not be read" in f["note"]
+
+
+def test_a_hand_checked_record_overrides_a_one_level_reading():
+    """E3 (Banaitis): reversed in part by the Ninth Circuit, which the Supreme Court reversed in Banks."""
+    [(cite, kind, by, _)] = c.MANUAL
+    rows = [("courtlistener", "reversed in part", "340 F.3d 1074 (ca9 2003)", NOW - DAY), ("manual", kind, by, NOW)]
+    f = c.flag(rows, NOW)
+    assert (f["status"], f["by"], f["sources"]) == ("upheld", by, ["a hand-checked record"])
+    assert "Banks" in f["note"] and cite == "T.C. Memo. 2002-5"

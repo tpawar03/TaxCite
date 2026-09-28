@@ -446,7 +446,7 @@ Full task details are in `tasks/todo.md` (Phase E section).
 
 ### Slice 2 — Metadata
 - [x] E2: Authority profile at ingestion (28,389 points profiled, unknown 0, counts as E0 predicted; 4 expired chunks excluded; no re-embed)
-- [ ] E3: Stratified 150-chunk hand check (≥95% field-level)
+- [x] E3: Stratified 150-chunk hand check: first sample not met (regulation status 77.5%, treatment 86.7%); four fixes (§7805(e)(2) sunset, decided appeals, a hand-checked Banaitis record, corrected reissue dates); fresh 146-row re-check 100% per field (treatment caveat)
 
 ### Slice 3 — Ranking and answers
 - [ ] E4: Authority-weighted rerank

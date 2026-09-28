@@ -15,7 +15,7 @@ from psycopg.types.json import Jsonb
 from qdrant_client import QdrantClient, models
 
 from taxcite import store
-from taxcite.chunk import Chunk, authority, expiry, revision
+from taxcite.chunk import Chunk, authority, expiry, revision, sunset
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 COLLECTION = os.environ.get("QDRANT_COLLECTION", "chunks")
@@ -153,7 +153,8 @@ def backfill_authority(conn, qc: QdrantClient, name: str = COLLECTION, sources: 
     for r in rows:
         if r["source"] == "ecfr" and r["section"].endswith("T"):
             temporary.setdefault(r["section"], []).append(r)
-    ended = {s: expiry("\n".join(r["text"] for r in rs), rs[0]["as_of"]) for s, rs in temporary.items()}
+    ended = {s: "whole" if sunset(rs[0]["cita"], rs[0]["as_of"]) else expiry("\n".join(r["text"] for r in rs), rs[0]["as_of"])
+             for s, rs in temporary.items()}  # §7805(e)(2) first (E3), then the regulation's own clause
 
     expired: list[str] = []  # keys that were indexable and now aren't
     for section, rs in temporary.items():

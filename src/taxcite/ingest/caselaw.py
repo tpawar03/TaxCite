@@ -12,6 +12,7 @@ import json
 import re
 import time
 from collections import Counter
+from datetime import datetime
 from pathlib import Path
 
 import httpx
@@ -158,17 +159,25 @@ def pages_label(first: int, last: int) -> str:
     return f"at *{first}" if first == last else f"at *{first}-{last}"
 
 
+FILED = re.compile(r"\bFiled ([A-Z][a-z]{2,8})\.? (\d{1,2}), (\d{4})")
+
+
 def parse(path: Path, op: dict) -> list[Chunk]:
     """Paragraphs packed up to MAX_TOKENS, each chunk opening with the previous chunk's
     last paragraph (§3.2), so a reference like "that test" keeps its antecedent."""
     cite = op["citation"]
     caption = re.sub(r",? Petitioners?$", "", op["caseCaption"]) + " v. Commissioner"
-    filed = op["filingDate"][:10]
+    filed, revision = op["filingDate"][:10], None
+    paras = paragraphs(path)
+    # A corrected reissue is listed by the correction's date; the opinion's own line has the filing date (E3: Caan)
+    if "(Corrected)" in op.get("documentTitle", "") and (m := FILED.search(" ".join(t for _, t in paras[:20]))):
+        filed = datetime.strptime(f"{m[1][:3]} {m[2]} {m[3]}", "%b %d %Y").date().isoformat()
+        revision = f"filed {filed}; corrected {op['filingDate'][:10]}"
 
     def make(label: str, text: str, excluded: str | None = None) -> Chunk:
-        return Chunk(label, cite, caption, text, estimate_tokens(text), None, filed, excluded, source="case")
+        return Chunk(label, cite, caption, text, estimate_tokens(text), None, filed, excluded, source="case",
+                     source_revision=revision)
 
-    paras = paragraphs(path)
     if sum(len(t.split()) for _, t in paras) < MIN_WORDS:
         return [make(cite, "", excluded="no_text")]
 

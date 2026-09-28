@@ -1712,11 +1712,30 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
    - *Banaitis* reads "reversed in part", but the Supreme Court reversed that reversal (*Banks*, 2005). Treatment is tracked one appeal deep.
 3. **One corrected reissue:** DAWSON lists *Estate of Caan* (161 T.C. No. 6) by its corrected version's date (Nov. 14, 2023); the opinion says "Filed October 18, 2023". It's the only "(Corrected)" title among the 307.
 
-**Proposed fixes (awaiting your decision), then a re-check on a fresh sample (new seed, same strata: D4's rule):**
+**Fixes (all four approved 2026-09-28 and applied), then a re-check on a fresh sample (D4's rule):**
 - (a) `chunk.expiry` also applies §7805(e)(2): a temporary regulation whose first Treasury Decision in `cita` postdates Nov. 20, 1988 and is more than 3 years before the snapshot is `expired`, excluded like §1.988-1T. That's about 151 more chunks out of the index, including all of §1.469-4T. `temporary_partly_expired` then disappears: both sections it described are wholly expired. The alternative, keeping §1.469-4T with a valid-time window for pre-1992 years, is a Phase D mechanism no row needs.
 - (b) `flags()`: an appeal with a decided appellate citation and an unparsed outcome reads "decided; outcome not read", not "appealed" (pending). That fixes the *Gregory* class in code.
 - (c) *Banaitis*: one hand-entered treatment row (source `manual`, citing *Banks* and T.C. Memo. 2025-80 at *11), or leave it as a documented limitation. It's the only two-level chain known; finding others needs the Phase H refresh.
 - (d) *Caan*: when DAWSON's title says "(Corrected)", take the filing date from the opinion's own "Filed" line. One opinion.
+
+**Applied 2026-09-28:**
+- (a) `chunk.sunset()` reads the issue date from `cita`. The eCFR parser and the backfill exclude sunsetted sections. **151 chunks left the index** (§1.469-4T 126, §1.482-1T 14, §1.446-3T 9, §1.167(a)-13T 1, §1.704-1T 1); `temporary_partly_expired` is gone. Temporary regulations in force: 285 (all issued 1984–July 1988).
+- (b) `flags()`: an appeal CourtListener found but couldn't read is `decided` ("Decided on appeal …; the outcome could not be read"), not `appealed`. *Gregory* now reads so. Old `appealed` rows are read the same way.
+- (c) `citations.MANUAL`: a hand-checked record overrides the automated sources. *Banaitis* is `upheld` with *Banks* and its evidence in the note. `load()` writes it on every rebuild.
+- (d) The case-law parser takes a corrected reissue's filing date from the opinion's own line. *Caan*'s 55 chunks were re-saved: filed 2023-10-18, "corrected 2023-11-14" in `source_revision`, payload moved, no text versions recorded.
+- 10 tests (244 pass).
+
+**Re-check on a fresh sample** (`e3_sample.py --seed 20260929 --exclude` the first; `phase-e-handcheck-authority-20260929.txt`): 146 rows, no chunk from the first sample, no opinion reused in the memo or treatment strata.
+
+| field | correct |
+|---|---|
+| type | 146/146 |
+| status | 146/146 (regulations 40/40; temporary 20/20: 4 expired §1.469-4T, 16 in force) |
+| source_revision | 146/146 (17 opinion dates checkable only against DAWSON, reported as circular) |
+| treatment | 11/11, affirmances only |
+
+- **Gate: met on the fresh sample, with one caveat.** Every adverse or pending opinion (6) was in the first sample, so no fresh draw can re-test them. The *Banaitis* and *Gregory* fixes are verified by their tests and records, not by the re-check. The first sample's 86.7% stands as that field's measured accuracy before the fix.
+- Why only 146: the treatment stratum ran out of fresh opinions (11 affirmed ones were left).
 
 **Dependencies:** E2
 **Files:** `eval/results/`

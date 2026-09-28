@@ -12,6 +12,9 @@ MEMO = re.compile(r"T\.C\. Memo\. \d{4}-\d+")
 # section ... expires May 7, 2018"). Pre-1988 temporary regulations carry no such clause and stay in force.
 EXPIRES = re.compile(r"applicability of (this section|paragraphs?\b.*?) expires (?:on )?(?:or before )?"
                      r"([A-Z][a-z]+ \d{1,2}, \d{4})")
+# The source note's first date is the issuing Treasury Decision's: "[T.D. 8253, 54 FR 20542, May 12, 1989]"
+ISSUED = re.compile(r"\b([A-Z][a-z]{2,8})\.? (\d{1,2}), (\d{4})")
+SUNSET_FROM = date(1988, 11, 20)  # §7805(e)(2) applies to temporary regulations issued after this date
 
 
 @dataclass
@@ -80,6 +83,18 @@ def expiry(text: str, as_of) -> str | None:
                 return "whole"
             found = "partly"
     return found
+
+
+def sunset(cita: str | None, as_of) -> bool:
+    """§7805(e)(2): a temporary regulation issued after Nov. 20, 1988 expires within 3 years of issuance,
+    whatever its own text says (E3 found §1.469-4T, 1989, labelled in force beside its final §1.469-4).
+    Earlier temporary regulations have no statutory end and stay in force. Dated against the snapshot."""
+    m = ISSUED.search(cita or "")
+    if not m:
+        return False
+    issued = datetime.strptime(f"{m[1][:3]} {m[2]} {m[3]}", "%b %d %Y").date()
+    ends = issued.replace(year=issued.year + 3, day=28) if (issued.month, issued.day) == (2, 29) else issued.replace(year=issued.year + 3)
+    return issued > SUNSET_FROM and ends <= date.fromisoformat(str(as_of))
 
 
 def estimate_tokens(text: str) -> int:

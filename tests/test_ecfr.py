@@ -236,3 +236,12 @@ def test_a_section_its_own_clause_ended_is_excluded_as_expired():
     </DIV8></ECFR>"""
     assert {c.excluded for c in parse(p(xml), "2026-09-17")} == {"expired"}
     assert {c.excluded for c in parse(p(xml), "2019-01-01")} == {None}   # in force at that snapshot
+
+
+def test_a_temporary_regulation_past_its_statutory_sunset_is_excluded():
+    """E3: §7805(e)(2) ends a post-1988 temporary regulation within 3 years, whatever its text says."""
+    xml = """<ECFR><DIV8 N="1.469-9T" TYPE="SECTION"><HEAD>§ 1.469-9T Test (temporary).</HEAD>
+      <P>(a) <I>Rule.</I> Something applies.</P><CITA>[T.D. 8253, 54 FR 20542, May 12, 1989]</CITA>
+    </DIV8></ECFR>"""
+    assert {c.excluded for c in parse(p(xml), "2026-09-17")} == {"expired"}
+    assert {c.excluded for c in parse(p(xml.replace("May 12, 1989", "Feb. 25, 1988")), "2026-09-17")} == {None}
