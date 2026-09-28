@@ -445,7 +445,7 @@ Full task details are in `tasks/todo.md` (Phase E section).
 - [x] E1's rows are approved (2026-09-28)
 
 ### Slice 2 — Metadata
-- [ ] E2: Authority profile at ingestion
+- [x] E2: Authority profile at ingestion (28,389 points profiled, unknown 0, counts as E0 predicted; 4 expired chunks excluded; no re-embed)
 - [ ] E3: Stratified 150-chunk hand check (≥95% field-level)
 
 ### Slice 3 — Ranking and answers

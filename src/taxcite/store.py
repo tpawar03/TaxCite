@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 import psycopg
 from psycopg.types.json import Jsonb
 
-from taxcite.chunk import Chunk
+from taxcite.chunk import Chunk, authority, expiry, revision
 
 DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://taxcite:taxcite@localhost:5433/taxcite")
 
@@ -99,13 +99,15 @@ HELD_AT = """
 
 UPSERT = """
     INSERT INTO chunks (key, source, citation, part, section, heading, text, tokens, cita, as_of, fetched_at,
-                        excluded, source_revision, effective, recorded_at)
+                        excluded, source_revision, effective, authority, recorded_at)
     VALUES (%(key)s, %(source)s, %(citation)s, %(part)s, %(section)s, %(heading)s, %(text)s, %(tokens)s,
-            %(cita)s, %(as_of)s, %(fetched_at)s, %(excluded)s, %(source_revision)s, %(effective)s, %(fetched_at)s)
+            %(cita)s, %(as_of)s, %(fetched_at)s, %(excluded)s, %(source_revision)s, %(effective)s, %(authority)s,
+            %(fetched_at)s)
     ON CONFLICT (key) DO UPDATE SET
         heading = EXCLUDED.heading, text = EXCLUDED.text, tokens = EXCLUDED.tokens,
         cita = EXCLUDED.cita, as_of = EXCLUDED.as_of, fetched_at = EXCLUDED.fetched_at,
         excluded = EXCLUDED.excluded, source_revision = EXCLUDED.source_revision, effective = EXCLUDED.effective,
+        authority = EXCLUDED.authority,
         recorded_at = CASE WHEN chunks.text IS DISTINCT FROM EXCLUDED.text
                            THEN EXCLUDED.recorded_at ELSE chunks.recorded_at END
 """
@@ -121,7 +123,8 @@ def create_table(conn: psycopg.Connection) -> None:
     # Added in Phase B, so Phase A's table needs the column. Checked first because
     # ALTER takes an exclusive lock even with IF NOT EXISTS, and would queue behind
     # any long-running reader (an ingest embedding for an hour).
-    for column, kind in (("source_revision", "text"), ("effective", "jsonb"), ("recorded_at", "timestamptz")):
+    for column, kind in (("source_revision", "text"), ("effective", "jsonb"), ("recorded_at", "timestamptz"),
+                         ("authority", "jsonb")):
         has_column = conn.execute(
             "SELECT 1 FROM information_schema.columns WHERE table_name = 'chunks' AND column_name = %s", (column,)
         ).fetchone()
@@ -142,7 +145,11 @@ def save(conn: psycopg.Connection, chunks: list[Chunk], fetched_at: datetime | N
     if not chunks:
         return 0
     stamp = fetched_at or datetime.now(timezone.utc)
-    rows = [{**vars(c), "key": c.key, "fetched_at": stamp, "effective": c.effective and Jsonb(c.effective)}
+    # E2: a regulation whose own clause ended some of its paragraphs is labelled for the whole section
+    partly = {c.section for c in chunks if c.source == "ecfr" and expiry(c.text, c.as_of) == "partly"}
+    rows = [{**vars(c), "key": c.key, "fetched_at": stamp, "effective": c.effective and Jsonb(c.effective),
+             "source_revision": c.source_revision or revision(c.source, c.as_of),
+             "authority": Jsonb(authority(c.source, c.citation, c.section, c.section in partly))}
             for c in chunks]
     with conn.cursor() as cur:
         cur.executemany(UPSERT, rows)

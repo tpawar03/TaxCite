@@ -1619,15 +1619,36 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 - It prints the count per `type`/`status`, the `unknown` count, and the expired keys.
 
 **Acceptance criteria:**
-- [ ] Every indexed chunk has a profile, and `unknown` is 0 or each case is explained
-- [ ] Counts match E0's inventory: statute 10,768; regulations 5,609 (440 temporary, 4 excluded as expired); opinions 9,973 (958 reported, 9,015 memo); publications 2,043
-- [ ] Re-running the backfill changes nothing, and D6's trigger records no text versions for it (only `authority` and `source_revision` change, not `text`)
-- [ ] `index.sync` writes `authority` into the payload for new points; `Hit.authority` is filled on search
-- [ ] Snapshot round-trip on a throwaway database: dump, restore, and `authority` survives (D6's restore lesson)
+- [x] Every indexed chunk has a profile, and `unknown` is 0 or each case is explained
+- [x] Counts match E0's inventory: statute 10,768; regulations 5,609 (440 temporary, 4 excluded as expired); opinions 9,973 (958 reported, 9,015 memo); publications 2,043
+- [x] Re-running the backfill changes nothing, and D6's trigger records no text versions for it (only `authority` and `source_revision` change, not `text`)
+- [x] `index.sync` writes `authority` into the payload for new points; `Hit.authority` is filled on search
+- [x] Snapshot round-trip on a throwaway database: dump, restore, and `authority` survives (D6's restore lesson)
 
 **Verification:**
-- [ ] Tests: `authority()` on one fixture chunk per row of the table above, including an unknown; the payload carries `authority` into `Hit` (in-memory Qdrant, as D3's edition test does); the backfill is idempotent
-- [ ] `uv run pytest -q` passes; the CI retrieval gate is unchanged (no ranking change in E2)
+- [x] Tests: `authority()` on one fixture chunk per row of the table above, including an unknown; the payload carries `authority` into `Hit` (in-memory Qdrant, as D3's edition test does); the backfill is idempotent
+- [x] `uv run pytest -q` passes; the CI retrieval gate is unchanged (no ranking change in E2)
+
+**Built 2026-09-28.**
+- **Code:**
+  - `chunk.authority()`, `chunk.revision()` and `chunk.expiry()` live in `chunk.py`, the module every ingester and the store already share.
+  - `store.save()` computes the profile and the default revision for every write, so no ingester changed; that's lazier than editing three ingesters, with the same result.
+  - The eCFR parser excludes a section its own clause ended, dated against the snapshot, not today.
+  - `index.sync` writes the payload, `Hit.authority` reads it, and `taxcite authority` runs the backfill.
+- **Backfill:** 28,747 rows read, 28,743 updated, 28,389 points given a profile, in about 5 s with no re-embedding. Expired sections §1.988-1T and -2T (4 chunks) were re-saved as `expired` through `store.save`, so their keys changed as a re-ingest's would. The old points were deleted, and D6's trigger kept the 4 old versions. It recorded nothing for the metadata-only updates.
+- **Counts, all as E0 predicted:**
+  - statute: 10,768
+  - regulations: 5,169 final, 413 temporary, 23 temporary_partly_expired (5,605 = 5,609 − 4 expired)
+  - opinions: 958 reported, 9,015 memorandum
+  - publications: 2,043
+  - **unknown: 0**
+  - `source_revision` null: 0 in every source
+- **Checks:**
+  - A second run updates 0 rows.
+  - Snapshot round-trip on a throwaway database (created from `template0`: the local `template1` has a collation-version mismatch, left alone): 28,747 rows, all with profile and revision.
+  - CI retrieval gate unchanged: 0.7200.
+  - 234 tests (15 new, in `test_store.py`, `test_ecfr.py` and `test_index.py`).
+- **For E4:** CI restores `corpus-2026-09-28`, which predates E2, so its rows have no profile. The first PR that ranks on authority needs a new snapshot published (your call, as before).
 
 **Dependencies:** E0
 **Files:** `src/taxcite/store.py` (column, `authority()`, save), `src/taxcite/index.py` (payload), `src/taxcite/retrieve.py` (`Hit.authority`), `src/taxcite/ingest/{ecfr,caselaw,irs_pubs}.py` (`source_revision`), `src/taxcite/cli.py` (the backfill command), `tests/`

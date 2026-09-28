@@ -33,6 +33,7 @@ class Hit:
     source: str
     key: str = ""  # the chunk itself: several chunks can share one citation label (C2, C6)
     effective: dict | None = None  # statute (D4): when this text's latest amendment applies
+    authority: dict | None = None  # E2: {"type", "status", "level"}, from structured fields only (ADR-13)
 
 
 @cache
@@ -140,7 +141,7 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
     hits = [
         Hit(citation=p.payload["citation"], heading=p.payload["heading"], text=p.payload["text"],
             score=p.score, section=p.payload["section"], source=p.payload["source"], key=p.payload.get("key", ""),
-            effective=p.payload.get("effective"))
+            effective=p.payload.get("effective"), authority=p.payload.get("authority"))
         for p in result.points
     ]
     # Reciprocal rank fusion produces exact ties (1/61 + 1/63 is a common total). When

@@ -226,3 +226,13 @@ def test_preamble_is_not_packed_with_a_designated_unit():
     cs = parse(ET.fromstring(xml), AS_OF)
     with_a = [c for c in cs if "A taxpayer shall do the thing" in c.text]
     assert all(c.citation.endswith("(a)") for c in with_a)
+
+
+def test_a_section_its_own_clause_ended_is_excluded_as_expired():
+    """E2: §1.988-1T says "The applicability of this section expires on December 6, 2019"."""
+    xml = """<ECFR><DIV8 N="1.988-9T" TYPE="SECTION"><HEAD>§ 1.988-9T Test (temporary).</HEAD>
+      <P>(a) <I>Rule.</I> Something applies.</P>
+      <P>(b) <I>Expiration date.</I> The applicability of this section expires on December 6, 2019.</P>
+    </DIV8></ECFR>"""
+    assert {c.excluded for c in parse(p(xml), "2026-09-17")} == {"expired"}
+    assert {c.excluded for c in parse(p(xml), "2019-01-01")} == {None}   # in force at that snapshot

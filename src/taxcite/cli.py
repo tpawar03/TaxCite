@@ -268,6 +268,20 @@ def load_citations(args: argparse.Namespace) -> int:
     return 0
 
 
+def backfill_authority(args: argparse.Namespace) -> int:
+    """E2: give rows stored before E2 their authority profile and source revision, without re-embedding."""
+    with store.connect() as conn:
+        store.create_table(conn)
+        r = index.backfill_authority(conn, index.client())
+        print(f"  {r['rows']} rows read, {r['updated']} updated, {r['points']} points given a profile")
+        print(f"  expired, removed from the index: {len(r['expired'])} {r['expired']}")
+        for kind, status, n in conn.execute(
+                "SELECT authority->>'type', authority->>'status', count(*) FROM chunks WHERE excluded IS NULL "
+                "GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
+            print(f"  {kind or 'NO PROFILE':12} {status or '':26} {n}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="taxcite")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -304,6 +318,9 @@ def main(argv: list[str] | None = None) -> int:
     cite.add_argument("--recheck", action="store_true",
                       help="re-query CourtListener for opinions filed in the last 3 years (others come from cache)")
     cite.set_defaults(func=load_citations)
+
+    auth = sub.add_parser("authority", help="backfill authority profiles and source revisions (E2; no re-embedding)")
+    auth.set_defaults(func=backfill_authority)
 
     find = sub.add_parser("search", help="search the indexed corpus")
     find.add_argument("query")
