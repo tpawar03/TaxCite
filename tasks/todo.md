@@ -2108,6 +2108,6 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 ---
 
 ## ✅ Checkpoint: Phase E complete
-- [ ] Authority metadata ≥95% field-level on the 150-chunk stratified sample
-- [ ] Controlling source moves to top-1 on the golden conflict subset; ≤2-point Recall@20 regression per category
+- [ ] Authority metadata ≥95% field-level on the 150-chunk stratified sample: **not met on the first sample** (regulation status 75.0%, treatment 86.7%); met on a fresh 146-row re-check after four fixes (treatment re-checked on affirmances only)
+- [ ] Controlling source moves to top-1 on the golden conflict subset; ≤2-point Recall@20 regression per category: conflict **not met** (2.2 of 23 reachable rows vs a pre-registered 12); regression met (none down; statutory +12.5); guards 8/8 kept
 - [x] Tests and both CI gates green on a new snapshot: `corpus-2026-09-29`; retrieval 0.7400 (run 36521274499), faithfulness 0.894 ± 0.015 at refusals 0.113 (run 36521320779)
