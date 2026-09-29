@@ -2,6 +2,8 @@
 
     uv run python eval/temporal.py --questions eval/dev.jsonl --repeats 3   # calibrate on dev
     uv run python eval/temporal.py                                          # golden, once, at the end
+    uv run python eval/temporal.py --questions eval/dev.jsonl --rows authority --samples 5 \
+        --plan-cache eval/results/decompositions-d7.json --answers-cache eval/results/temporal-answers-e5.json   # E5
 
 A row passes when both halves hold:
   as-of   the plan's year is the row's tax year (no judge; D0 found "as-of" means two things,
@@ -38,6 +40,10 @@ from retrieval import cached_decompose  # noqa: E402
 load_dotenv()
 
 ANSWERS = RESULTS / "temporal-answers.json"
+# E5: `--rows authority` scores E1's tagged rows (no tax year, so no as-of half) and counts the judge's
+# "authority_misweighted" tag. `--samples N` makes answer i from plan set i: synthesis is temperature 0,
+# so the planner's routing is the variance that reaches the answer (Phase D: re-judging one answer per
+# row measured only the judge).
 KAPPA_MIN = 0.7  # §9.2
 
 
@@ -62,6 +68,27 @@ def kappa(a: list[str], b: list[str]) -> float:
     return 1.0 if expected == 1 else (observed - expected) / (1 - expected)
 
 
+def sample_summary(out: list[dict]) -> dict[str, list]:
+    """Per sample index: rates over the rows, first judge repeat (E5). Conflict and guard rows apart."""
+    res: dict[str, list] = {}
+    for i in sorted({o["sample"] for o in out}):
+        s = [o for o in out if o["sample"] == i]
+        conflict = [o for o in s if o["kind"] not in (None, "guard")]
+        rate = lambda rs, f: round(sum(map(f, rs)) / len(rs), 3) if rs else None  # noqa: E731
+        for key, val in {
+            "correct": rate(s, lambda o: o["grades"][0]["grade"] == "correct"),
+            "incorrect": rate(s, lambda o: o["grades"][0]["grade"] == "incorrect"),
+            "grounded": rate(s, lambda o: o["grounded"]),
+            "refused": rate(s, lambda o: o["refused"]),
+            "conflict: authority_misweighted": sum(o["grades"][0]["defect"] == "authority_misweighted" for o in conflict) if conflict else None,
+            "conflict: correct": rate(conflict, lambda o: o["grades"][0]["grade"] == "correct"),
+            "guards: correct": rate([o for o in s if o["kind"] == "guard"], lambda o: o["grades"][0]["grade"] == "correct"),
+        }.items():
+            if val is not None:
+                res.setdefault(key, []).append(val)
+    return res
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--questions", default="eval/golden.jsonl")
@@ -72,13 +99,16 @@ def main() -> int:
     ap.add_argument("--answers-cache", default=str(ANSWERS))
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json")
     ap.add_argument("--editions", help="turn D3's edition filter on for this run, e.g. 1,0 (off live until D7 decides)")
+    ap.add_argument("--rows", choices=("temporal", "authority"), default="temporal",
+                    help="temporal rows (the Phase D gate) or E1's authority-tagged rows (E5)")
+    ap.add_argument("--samples", type=int, default=1, metavar="N", help="answers per row, answer i from plan set i")
     args = ap.parse_args()
     if args.editions:
         from taxcite import decompose as dc
         dc.EDITIONS = tuple(int(x) for x in args.editions.split(","))
 
     rows = [json.loads(l) for l in open(args.questions) if l.strip()]
-    rows = [r for r in rows if r["category"] == "temporal"]
+    rows = [r for r in rows if (r["category"] == "temporal" if args.rows == "temporal" else "authority" in r)]
     cache_path, plan_path = Path(args.answers_cache), Path(args.plan_cache)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     plans = json.loads(plan_path.read_text()) if plan_path.exists() else {}
@@ -86,10 +116,10 @@ def main() -> int:
 
     out, stopped = [], None
     try:
-        for r in rows:
-            plan = cached_decompose(r["question"], plans, plan_path, 0)
-            ans = pipeline_answer(r["question"], args.k, cache, cache_path, 0, plans, plan_path)
-            ok = as_of_match(plan.as_of, r["as_of"])
+        for r, i in [(r, i) for r in rows for i in range(args.samples)]:
+            plan = cached_decompose(r["question"], plans, plan_path, i)
+            ans = pipeline_answer(r["question"], args.k, cache, cache_path, i, plans, plan_path, plan_set=i)
+            ok = as_of_match(plan.as_of, r["as_of"]) if args.rows == "temporal" else None
             claims = [] if ans["refused"] else extract_claims(ans["text"], args.judge, budget)
             # the question is a source too: restating its facts, or arithmetic on them, is not a memory claim
             given = [{"citation": "the question", "text": r["question"]}]
@@ -103,13 +133,14 @@ def main() -> int:
                     budget.charge(args.judge, g["in"], g["out"])
                 grades.append({"grade": g1["grade"], "defect": g1["defect"],
                                "alt_grade": g2["grade"], "alt_defect": g2["defect"]})
-            out.append({"id": r["id"], "as_of_gold": r["as_of"], "as_of_plan": plan.as_of,
+            out.append({"id": r["id"], "sample": i, "kind": r.get("authority", {}).get("kind"),
+                        "as_of_gold": r["as_of"], "as_of_plan": plan.as_of,
                         "as_of_ok": ok, "refused": ans["refused"], "grounded": grounded,
                         "unsupported": [claims[v["index"]] for v in verdicts if not v.get("supported")],
                         "grades": grades,
                         "passes": [passed(ok, g["grade"]) for g in grades]})
             marks = " ".join(g["grade"][:4] + "/" + g["alt_grade"][:4] for g in grades)
-            print(f"  {r['id']:<6} as-of {str(r['as_of']):<14} plan {str(plan.as_of):<6} "
+            print(f"  {r['id']:<6} s{i} as-of {str(r['as_of']):<14} plan {str(plan.as_of):<6} "
                   f"{'-' if ok is None else 'ok' if ok else 'XX'}  {'  ' if grounded else 'UG'}  {marks}  "
                   f"${budget.spent:.3f}", flush=True)
     except CostCap as e:
@@ -120,6 +151,11 @@ def main() -> int:
         return 1
     per_repeat = [sum(o["passes"][i] for o in out) / len(out) for i in range(len(out[0]["passes"]))]
     grounded = [sum(o["passes"][i] and o["grounded"] for o in out) / len(out) for i in range(len(per_repeat))]
+    by_sample = sample_summary(out) if args.samples > 1 or args.rows == "authority" else None
+    if by_sample:
+        print("\nper sample (answer i from plan set i), mean ± sd over samples:")
+        for key, vals in by_sample.items():
+            print(f"  {key:<32} {statistics.mean(vals):.3f} ± {statistics.stdev(vals) if len(vals) > 1 else 0:.3f}   {vals}")
     k = kappa([g["grade"] for o in out for g in o["grades"]],
               [g["alt_grade"] for o in out for g in o["grades"]])
     scored = [o for o in out if o["as_of_ok"] is not None]
@@ -138,6 +174,7 @@ def main() -> int:
     path = RESULTS / f"temporal-{Path(args.questions).stem}-{date.today()}{tag}.json"
     path.write_text(json.dumps({
         "questions": args.questions, "judge": args.judge, "repeats": args.repeats, "k": args.k,
+        "rows_kind": args.rows, "samples": args.samples, "by_sample": by_sample,
         "accuracy_per_repeat": per_repeat, "grounded_accuracy_per_repeat": grounded, "as_of_accuracy": as_of_acc, "kappa": k,
         "judge_cost_usd": budget.spent, "stopped": stopped, "rows": out}, indent=2))
     print(f"wrote {path}")

@@ -1957,7 +1957,7 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
   - grounded rate
   - refusal rate
 
-  Plus refusals on all 41 scored dev rows. About 90 answers and 180 judgements: under $1.
+  Plus refusals and faithfulness through the standing faithfulness harness, which scores dev's 25 B rows (the gate's own row set, not all 41: corrected when step 0 ran). The 18 tagged rows' refusals come from their 5 samples. About 90 answers and 180 judgements: under $1.
 
 **Candidates (prompt only; retrieval unchanged):**
 - **(i) Labels only.** Each source header gains "Authority: …" from the profile, through a fixed map (below). Rule 4 is unchanged.
@@ -1965,7 +1965,7 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - There is no year-style conditional variant. Nearly every question's top 8 mixes levels, so "only when levels differ" would be almost every question anyway; that's the measured reason (E0's top-8 mix).
 
 **Choosing on dev (rules fixed before measuring):**
-1. Refusal rate on all 41 dev rows at most 0.05 above baseline, and ≤ 0.25 (the standing gate's bound).
+1. Refusal rate at most 0.05 above baseline, on the faithfulness harness's dev rows and on the tagged rows' samples, and ≤ 0.25 (the standing gate's bound).
 2. Grounded rate on the 18 tagged rows at most 0.05 below baseline.
 3. Among those, the fewest "authority misweighted" tags on the 10 conflict rows, then the most graded correct. Ties go to (i).
 - If neither passes rules 1–2, labels ship in the API response only, and the prompt stays as it is.
