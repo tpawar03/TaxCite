@@ -2058,6 +2058,13 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - **The departure, in one line:** rule 3 ranked by a count too small to resolve (1 vs 4 misweighted tags of 50), and the arm it picked has a demonstrated misattribution that the grounding rule can't see. The rule would have needed a per-citation support check to see it.
 - **For the next pre-registration:** add citation-level support (does the cited source state the claim?) as a rule, not just answer-level grounding.
 
+**Golden faithfulness gate, run locally as CI runs it (2026-09-28): incomplete, 2 of 5 runs.**
+- Command: `ragas_eval.py --repeats 5 --max-cost 5.00 --fail-under 0.855 --max-refusal-rate 0.25 --answers-cache eval/results/pipeline-answers-e5.json`, with CI's plan cache.
+- **Run 1: 0.881 at refusals 0.135. Run 2: 0.889 at 0.135.** Both clear 0.855 and 0.25, in line with Phase D's healthy 0.882 at 0.125–0.156.
+- **Stopped in run 3** by an Anthropic API error, "credit balance is too low" (the judge is `claude-haiku-4-5`); $1.10 spent. Not a gate verdict.
+- To finish: top up the Anthropic credit and re-run the same command. The answers for runs 1–2 and part of run 3 are cached in `pipeline-answers-e5.json` (not committed, like CI's default cache), so only the judge re-runs for those.
+- Still open for E6: the workflow's own note asks for the healthy **and** broken bands to be re-measured after any pipeline change. E4 and E5 are both pipeline changes. Your decision.
+
 **Dependencies:** E2, E4 (and your snapshot, for the CI faithfulness run)
 **Files:** `src/taxcite/generate.py` (headers, rule 4, the label map), `src/taxcite/jobs.py` (`authorities`), `src/taxcite/cli.py` (`ask` output), `eval/temporal.py` (`--rows`, `--samples`), `tests/`
 **Scope:** M
