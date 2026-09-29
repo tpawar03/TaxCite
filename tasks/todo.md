@@ -2028,7 +2028,28 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
   - On D08, the `keep` row (Pub 527 is the better evidence), the answer cites the publication's plain-English test ("management decisions in a significant and bona fide sense") to 26 U.S.C. § 469(i)(6)(A), which doesn't say it. Faithfulness 0.67 → 0.25.
   - The cause is the clause "cite the higher source for the rule itself". Rule 2's grounding check didn't catch it, because grounding reads the answer's claims against all its sources, not each claim against the source it cites.
   - Dev faithfulness overall: 0.842 → 0.813 (down on D07, D08, D10, D12, D17, D18, D23; up on D02, D05, D06, D25). D18's drop reads as judge noise (near-identical answer).
-- **Proposed (awaiting your decision):** a candidate (ii′) without that clause, measured on dev by the same rules: "…the higher authority governs… Say which you followed." Plus faithfulness with 3 repeats on the baseline and (ii′), so the ~0.03 differences have a spread next to them. Golden stays untouched. Cost ≈ $1.50.
+- ~~**Proposed (awaiting your decision):**~~ Measured (your decision): a candidate (ii′) without that clause, measured on dev by the same rules: "…the higher authority governs… Say which you followed." Plus faithfulness with 3 repeats on the baseline and (ii′), so the ~0.03 differences have a spread next to them. Golden stays untouched. Cost ≈ $1.50.
+
+**(ii′) measured on dev (2026-09-28)** (`temporal-dev-2026-09-28-e5rule4b.json`; faithfulness ×3: `ragas-dev-2026-09-28-ragas-answers-e5rule4b.json`, baseline ×3: `…-e5base3.json`):
+
+| dev | baseline | (i) | (ii) | **(ii′)** |
+|---|---|---|---|---|
+| refusals, tagged (rule 1: ≤ +0.05) | 0.022 | 0.045 | 0.056 | 0.067 (+0.045, just inside) |
+| refusals, faithfulness rows | 0.000 | 0.000 | 0.000 | 0.000 / 0.000 / 0.040 |
+| grounded, tagged (rule 2) | 0.645 | 0.633 | 0.756 | **0.789** |
+| "authority_misweighted", of 50 (rule 3) | 3 | 2 | **1** | 4 |
+| correct: all / conflict / guards | 0.344 / 0.34 / 0.35 | 0.278 | **0.400** / 0.38 / 0.43 | 0.322 / 0.32 / 0.33 |
+| dev faithfulness | **0.821 ± 0.015** (×3) | 0.788 (×1) | 0.813 (×1) | **0.835 ± 0.043** (×3) |
+| D08 faithfulness (the misattribution row) | 0.57 / 0.67 / 0.80 | 0.80 | **0.25** | 0.67 / 0.67 / 1.00 |
+| κ | 0.909 | 0.845 | 0.886 | 0.920 |
+
+- **The pre-registered rules, applied as written to all three candidates, still choose (ii):** it passes rules 1–2 and has the fewest misweighted tags (1). (ii′) passes rules 1–2 too, with 4 tags.
+- **Why the rules don't settle it:**
+  - Rule 3's counts (1, 2, 3, 4 of 50) are within one row's flip: D23 alone accounts for most.
+  - The correctness spread across samples is ~0.05 sd, so (ii)'s 0.400 against (ii′)'s 0.322 is about 1.5 sd.
+  - The one difference with a demonstrated mechanism is (ii)'s misattribution. Rule 2's grounding check can't see it, because it doesn't check a claim against the source it cites.
+- **Recommendation: (ii′).** It keeps the grounding gain (+0.14, the largest of any arm) without (ii)'s misattribution; faithfulness equals the baseline within noise; and its correctness and misweighted counts are indistinguishable from the others at this sample size. **This departs from the rule as written,** and the report will say so.
+- **The alternatives:** (ii) as the rules pick it, knowing it cites publications' words to statutes; or labels in the API only, with the prompt unchanged.
 
 **Dependencies:** E2, E4 (and your snapshot, for the CI faithfulness run)
 **Files:** `src/taxcite/generate.py` (headers, rule 4, the label map), `src/taxcite/jobs.py` (`authorities`), `src/taxcite/cli.py` (`ask` output), `eval/temporal.py` (`--rows`, `--samples`), `tests/`

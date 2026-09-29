@@ -50,7 +50,11 @@ RULE_4_AUTHORITY = ("4. Each source is labelled with its authority. Where source
                     "governs: statute and regulation, then a reported Tax Court opinion, then a Tax Court memorandum "
                     "opinion, then an IRS publication. Say which you followed. A lower source may explain the rule in "
                     "plain words, but cite the higher source for the rule itself.")
-assert RULE_4 in RAG_SYSTEM
+# (ii′), after dev: (ii) without its last sentence. "Cite the higher source for the rule itself" made the model
+# cite a publication's own words to the statute (D08: faithfulness 0.67 -> 0.25), a misattribution
+RULE_4_AUTHORITY_B = RULE_4_AUTHORITY.removesuffix(" A lower source may explain the rule in plain words, but cite "
+                                                   "the higher source for the rule itself.")
+assert RULE_4 in RAG_SYSTEM and RULE_4_AUTHORITY_B.endswith("Say which you followed.")
 
 # E5: what an authority profile is called, wherever it's shown. One fixed map, fed only by E2's structured
 # profile, never by what a source's text says about itself (ADR-13, FR-14): a document can't promote itself.

@@ -156,7 +156,7 @@ def judge_claims(claims: list[str], contexts: list[dict], model: str, budget: Bu
             for i in range(len(claims))]
 
 
-PROMPTS = ("shipped", "labels", "labels+rule4")
+PROMPTS = ("shipped", "labels", "labels+rule4", "labels+rule4b")
 
 
 def set_prompt(arm: str) -> None:
@@ -164,8 +164,8 @@ def set_prompt(arm: str) -> None:
     widens rule 4 to every level. Use a separate --answers-cache per arm: cached answers don't know their prompt."""
     from taxcite import generate as g
     g.SOURCE_LABELS = arm != "shipped"
-    if arm == "labels+rule4":
-        g.RAG_SYSTEM = g.RAG_SYSTEM.replace(g.RULE_4, g.RULE_4_AUTHORITY)
+    if arm in ("labels+rule4", "labels+rule4b"):  # (ii), and (ii′) without its "cite the higher source" clause
+        g.RAG_SYSTEM = g.RAG_SYSTEM.replace(g.RULE_4, g.RULE_4_AUTHORITY if arm == "labels+rule4" else g.RULE_4_AUTHORITY_B)
 
 
 def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: int,
