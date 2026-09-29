@@ -450,7 +450,7 @@ Full task details are in `tasks/todo.md` (Phase E section).
 
 ### Slice 3 — Ranking and answers
 - [x] E4: Authority-weighted rerank: scoped prior 0.5 shipped; golden conflict criterion **not met** (2.2/23 vs 12), guards 8/8, Recall@20 statutory +12.5; exact dense search adopted (approximate drifted)
-- [ ] E5: Authority in answers
+- [ ] E5: Authority in answers (briefed 2026-09-28: samples = one answer per cached plan set; candidates labels only vs labels + widened rule 4, chosen on dev by fixed rules; API labels from a fixed map)
 
 ### Checkpoint: Phase E complete
 - [ ] E6: Phase E exit report (`eval/results/phase_e.md`): both gates stated as met or not; ≤2-point regression per category; CI green with a new snapshot
