@@ -22,7 +22,7 @@ met:** 2.2 of 23 reachable conflict rows reached their target, against 12.
 | Exact dense search | Always (was approximate unless filtered): approximate results drifted with Qdrant's re-optimisation |
 | Authority in answers | Each source's header carries its label; rule 4: "the higher authority governs … Say which you followed"; every citation in the API response carries `authorities` from one fixed label map (ADR-13) |
 | Eval | E1's `authority` tags (golden 24 conflict + 8 guard rows, dev 10 + 8); `authority_facts` in `eval/retrieval.py`; `--rows authority --samples N` (answer *i* from plan set *i*) and `--prompt` in the answer scorers; `eval/e0_authority.py`, `eval/e3_sample.py`, `eval/e4_choose.py` |
-| CI | The retrieval gate scores the shipped arm, `route+statute1+prior0.5-scoped` (0.740 locally; floor 0.70) |
+| CI | Snapshot `corpus-2026-09-29` (28,238 vectors). The retrieval gate scores the shipped arm, `route+statute1+prior0.5-scoped`: **0.7400 in CI** (run 36521274499; floor 0.70). Faithfulness 0.894 ± 0.015 in CI |
 | Tests | 258 |
 
 ## The gates
@@ -33,7 +33,7 @@ met:** 2.2 of 23 reachable conflict rows reached their target, against 12.
 | Reranking changes top-1 on a curated authority-conflict subset (§7), pre-registered as ≥ half of the golden conflict rows whose controlling source is in the pool reach their target | ≥ 12 of 23 | **2.2** (2, 2, 2, 2, 3 over 5 plan sets) | **not met** |
 | Guards (rows right before) still right | ≤ 1 of 8 lost | 0 of 8 lost, every plan set; the `keep` source stays in the top 8 | met |
 | Recall@20 regression from the authority rerank (§9.3) | ≤ 2 points, every category | none down: statutory **+12.5**, temporal +9.1, compound +2.6, case law 0 | met |
-| Faithfulness (standing CI gate) | ≥ 0.855, refusals ≤ 0.25 | **0.886 ± 0.014** at refusals **0.127** (local, CI's command, 5 runs) | met (CI run awaits the new snapshot) |
+| Faithfulness (standing CI gate) | ≥ 0.855, refusals ≤ 0.25 | **CI on `corpus-2026-09-29`: 0.894 ± 0.015 at refusals 0.113** (run 36521320779); local: 0.886 ± 0.014 at 0.127 | met |
 
 The conflict criterion is reported as not met and not reinterpreted. §9.3 gave no number; one was fixed with you
 before golden was scored. One change was made to the tagged set before golden scoring, with your approval:
@@ -210,7 +210,6 @@ Variants on the choice (statute above regulation; "A" sections demoted; plus dee
 | Treatment beyond one appeal (*Banaitis*-type chains); "none" treatments unverified (281 opinions) | Phase H (the weekly refresh) |
 | Temporary sections amended after 1988: paragraph-level sunsets unresolved | open |
 | 87 opinions (28%) with no Filed line: dates rest on DAWSON | open |
-| New snapshot, so CI tests the prior and the prompt | you |
 | Faithfulness threshold's healthy and broken bands after E4/E5 | your decision |
 | Latency of the authority prior | measure on the next uncached run |
 

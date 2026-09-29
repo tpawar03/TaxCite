@@ -453,7 +453,7 @@ Full task details are in `tasks/todo.md` (Phase E section).
 - [x] E5: Authority in answers: labels in the API/CLI and source headers; (ii′) shipped (departure from rule 3); golden faithfulness 0.886 ± 0.014 at refusals 0.127 (local); golden answer quality unchanged within noise; reversed opinions misweighted because synthesis never sees treatment
 
 ### Checkpoint: Phase E complete
-- [x] E6: Phase E exit report (`eval/results/phase_e.md`, drafted 2026-09-29): metadata not met → met on re-check; conflict criterion not met; recall and guards met; faithfulness met locally. CI on a new snapshot still to do
+- [x] E6: Phase E exit report (`eval/results/phase_e.md`, drafted 2026-09-29): metadata not met → met on re-check; conflict criterion not met; recall and guards met; faithfulness met locally. CI green on `corpus-2026-09-29` (retrieval 0.7400, faithfulness 0.894)
 
 ## Risks and Mitigations
 

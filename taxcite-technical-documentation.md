@@ -54,7 +54,7 @@ Baselines later phases must beat, now including Phase E's:
 | Recall@20, all golden rows, shipped | **0.656** on the 86 B rows (0.634 on all 98 scored; statutory 0.732, compound 0.488, case law 0.807, temporal 0.424), with the authority prior under exact search; Phase D's arm 0.606 | the ladder's current top |
 | Per-sub-query sufficiency gate | not built; `G-I11` over-refuses a half-answerable question | Phase F (the sufficiency gate is built there) |
 | Negative treatment | Built in Phase C: 3/3 reversed golden rows flagged, 0 false flags; 26/26 held-opinion flags match hand-verified records. Pending appeals (G-C11, *Patel*) are invisible to every source; corpus-only flags go stale on 2026-09-29 | Phase H: the weekly refresh; Phase E: acting on treatment in ranking |
-| Faithfulness, healthy | **0.886 ± 0.014** at refusals 0.127 (Phase E, local, 5 runs; Phase C 0.8715) | the standing CI gate, at 0.855; its bands not re-measured after E4/E5 |
+| Faithfulness, healthy | **0.894 ± 0.015** at refusals 0.113 (Phase E, CI on `corpus-2026-09-29`, 5 runs; local 0.886 ± 0.014; Phase C 0.8715) | the standing CI gate, at 0.855; its bands not re-measured after E4/E5 |
 
 Two measurement facts that govern how any of these may be compared. The pipeline has a **noise floor**: the same configuration scores sd 0.013 on golden faithfulness even with decompositions pinned and synthesis at temperature 0, because OpenAI's `temperature=0` is best effort. And **three samples are not enough to see it** -- reading a trend from three runs misled Phase B four separate times. Every comparison from here reports a mean and a standard deviation over at least five runs, against a cached plan set.
 
