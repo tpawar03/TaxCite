@@ -231,7 +231,7 @@ def run_search(args: argparse.Namespace) -> int:
 
 
 def run_ask(args: argparse.Namespace) -> int:
-    from taxcite.generate import MissingCredentials, answer
+    from taxcite.generate import MissingCredentials, answer, authorities
 
     from taxcite.generate import MODEL
 
@@ -245,7 +245,10 @@ def run_ask(args: argparse.Namespace) -> int:
     if result.refused:
         print("  [refused: insufficient evidence]")
     if result.citations:
-        print(f"  citations ({len(result.citations)}): " + "; ".join(result.citations))
+        labels = authorities(result)
+        print(f"  citations ({len(result.citations)}):")
+        for c in result.citations + result.derived_citations:
+            print(f"    {c}  [{labels[c]['label']}]")
     if result.unsupported_citations:
         print("  !! citations not in the retrieved sources: " + "; ".join(result.unsupported_citations))
     print(f"  {result.model} · {result.mode} · {result.input_tokens} in / {result.output_tokens} out "

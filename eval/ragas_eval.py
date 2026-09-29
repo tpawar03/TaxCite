@@ -156,6 +156,18 @@ def judge_claims(claims: list[str], contexts: list[dict], model: str, budget: Bu
             for i in range(len(claims))]
 
 
+PROMPTS = ("shipped", "labels", "labels+rule4")
+
+
+def set_prompt(arm: str) -> None:
+    """E5's prompt arms: "labels" puts each source's authority label in its header; "labels+rule4" also
+    widens rule 4 to every level. Use a separate --answers-cache per arm: cached answers don't know their prompt."""
+    from taxcite import generate as g
+    g.SOURCE_LABELS = arm != "shipped"
+    if arm == "labels+rule4":
+        g.RAG_SYSTEM = g.RAG_SYSTEM.replace(g.RULE_4, g.RULE_4_AUTHORITY)
+
+
 def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: int,
                     plans: dict | None = None, plan_path: Path | None = None, plan_set: int = 0) -> dict:
     """Run the full pipeline once per run index and reuse it, so re-judging is free.
@@ -235,6 +247,7 @@ def main() -> int:
     ap.add_argument("--max-refusal-rate", type=float, metavar="RATE",
                     help="exit non-zero if the mean refusal rate is above this; the faithfulness mean excludes refusals")
     ap.add_argument("--answers-cache", default=str(ANSWERS), help="'' regenerates every run")
+    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's synthesis prompt arm")
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json",
                     help="pin decompositions from this cache; '' re-plans every run (noisy)")
     ap.add_argument("--pin-answers", action="store_true",
@@ -242,6 +255,7 @@ def main() -> int:
                          "from the pipeline's (the gate needs to know which half to pin)")
     args = ap.parse_args()
 
+    set_prompt(args.prompt)
     rows = [json.loads(line) for line in open(args.questions) if line.strip()]
     rows = [r for r in rows if r.get("scored_from") == "B"]
     if args.limit:
@@ -300,7 +314,10 @@ def main() -> int:
                     print(f"      unsupported: {claim[:96]}")
                     print(f"                   why: {str(v.get('why'))[:90]}")
 
-    out = RESULTS / f"ragas-{date.today()}.json"
+    # named by question set and answer cache, like the temporal scorer: same-day arms used to overwrite each other
+    stem = Path(args.answers_cache).stem if args.answers_cache else ANSWERS.stem
+    tag = "" if stem == ANSWERS.stem else f"-{stem}"
+    out = RESULTS / f"ragas-{Path(args.questions).stem}-{date.today()}{tag}.json"
     out.write_text(json.dumps({
         "judge": args.judge, "k": args.k, "repeats": args.repeats, "gate": GATE,
         "questions": args.questions, "stopped": stopped,

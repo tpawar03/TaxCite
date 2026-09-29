@@ -34,7 +34,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent))
 from llm_bench import judge  # noqa: E402
-from ragas_eval import JUDGE, RESULTS, Budget, CostCap, extract_claims, judge_claims, pipeline_answer  # noqa: E402
+from ragas_eval import JUDGE, PROMPTS, RESULTS, Budget, CostCap, extract_claims, judge_claims, pipeline_answer, set_prompt  # noqa: E402
 from retrieval import cached_decompose  # noqa: E402
 
 load_dotenv()
@@ -102,11 +102,13 @@ def main() -> int:
     ap.add_argument("--rows", choices=("temporal", "authority"), default="temporal",
                     help="temporal rows (the Phase D gate) or E1's authority-tagged rows (E5)")
     ap.add_argument("--samples", type=int, default=1, metavar="N", help="answers per row, answer i from plan set i")
+    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's synthesis prompt arm")
     args = ap.parse_args()
     if args.editions:
         from taxcite import decompose as dc
         dc.EDITIONS = tuple(int(x) for x in args.editions.split(","))
 
+    set_prompt(args.prompt)
     rows = [json.loads(l) for l in open(args.questions) if l.strip()]
     rows = [r for r in rows if (r["category"] == "temporal" if args.rows == "temporal" else "authority" in r)]
     cache_path, plan_path = Path(args.answers_cache), Path(args.plan_cache)

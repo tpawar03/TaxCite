@@ -108,7 +108,7 @@ def get(conn, job_id: str) -> dict | None:
 def run(conn, job_id: str, question: str, k: int = 8) -> None:
     """The pipeline, reporting each stage. Phases C-F add their steps here."""
     from taxcite import decompose as dc
-    from taxcite.generate import OPINION_RE, answer_from_groups
+    from taxcite.generate import OPINION_RE, answer_from_groups, authorities
     from taxcite.ingest.citations import flags
 
     try:
@@ -141,6 +141,8 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "citations": result.citations,
             "derived_citations": result.derived_citations,
             "unsupported_citations": result.unsupported_citations,
+            # E5: every citation's authority, from E2's stored profile through a fixed label map (ADR-13)
+            "authorities": authorities(result),
             "refused": result.refused,
             "model": result.model,
             "cost_usd": round(result.cost_usd + plan.cost_usd, 6),
