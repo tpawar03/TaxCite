@@ -1,0 +1,2564 @@
+{
+ "plan_cache": "eval/results/decompositions.json",
+ "plan_sets": 1,
+ "arm": "route+statute1",
+ "summary": {
+  "k8/case_law": {
+   "rows": 6,
+   "top1_kind": {
+    "memo": "5.00",
+    "regulation": "1.00"
+   },
+   "inverted1": "0.00",
+   "rows_displaced": "0.00",
+   "rows_outranked": "0.00",
+   "gold_not_in_pool": "2.00",
+   "gold_groups": "6.00"
+  },
+  "k8/compound": {
+   "rows": 6,
+   "top1_kind": {
+    "memo": "5.00",
+    "pub": "1.00"
+   },
+   "inverted1": "1.00",
+   "rows_displaced": "0.00",
+   "rows_outranked": "2.00",
+   "gold_not_in_pool": "7.00",
+   "gold_groups": "12.00"
+  },
+  "k8/statutory": {
+   "rows": 13,
+   "top1_kind": {
+    "memo": "1.00",
+    "pub": "7.00",
+    "regulation": "1.00",
+    "statute": "4.00"
+   },
+   "inverted1": "6.00",
+   "rows_displaced": "0.00",
+   "rows_outranked": "6.00",
+   "gold_not_in_pool": "5.00",
+   "gold_groups": "16.00"
+  },
+  "k8/temporal": {
+   "rows": 13,
+   "top1_kind": {
+    "pub": "4.00",
+    "regulation": "1.00",
+    "statute": "8.00"
+   },
+   "inverted1": "2.00",
+   "rows_displaced": "1.00",
+   "rows_outranked": "2.00",
+   "gold_not_in_pool": "7.00",
+   "gold_groups": "17.00"
+  },
+  "k8/all": {
+   "rows": 38,
+   "top1_kind": {
+    "memo": "11.00",
+    "pub": "12.00",
+    "regulation": "3.00",
+    "statute": "12.00"
+   },
+   "inverted1": "9.00",
+   "rows_displaced": "1.00",
+   "rows_outranked": "10.00",
+   "gold_not_in_pool": "21.00",
+   "gold_groups": "51.00"
+  },
+  "k20/case_law": {
+   "rows": 6,
+   "top1_kind": {
+    "memo": "5.00",
+    "regulation": "1.00"
+   },
+   "inverted1": "0.00",
+   "rows_displaced": "0.00",
+   "rows_outranked": "0.00",
+   "gold_not_in_pool": "1.00",
+   "gold_groups": "6.00"
+  },
+  "k20/compound": {
+   "rows": 6,
+   "top1_kind": {
+    "memo": "5.00",
+    "pub": "1.00"
+   },
+   "inverted1": "2.00",
+   "rows_displaced": "0.00",
+   "rows_outranked": "2.00",
+   "gold_not_in_pool": "4.00",
+   "gold_groups": "12.00"
+  },
+  "k20/statutory": {
+   "rows": 13,
+   "top1_kind": {
+    "memo": "1.00",
+    "pub": "6.00",
+    "regulation": "1.00",
+    "statute": "5.00"
+   },
+   "inverted1": "6.00",
+   "rows_displaced": "0.00",
+   "rows_outranked": "7.00",
+   "gold_not_in_pool": "4.00",
+   "gold_groups": "16.00"
+  },
+  "k20/temporal": {
+   "rows": 13,
+   "top1_kind": {
+    "pub": "4.00",
+    "regulation": "1.00",
+    "statute": "8.00"
+   },
+   "inverted1": "3.00",
+   "rows_displaced": "1.00",
+   "rows_outranked": "3.00",
+   "gold_not_in_pool": "6.00",
+   "gold_groups": "17.00"
+  },
+  "k20/all": {
+   "rows": 38,
+   "top1_kind": {
+    "memo": "11.00",
+    "pub": "11.00",
+    "regulation": "3.00",
+    "statute": "13.00"
+   },
+   "inverted1": "11.00",
+   "rows_displaced": "1.00",
+   "rows_outranked": "12.00",
+   "gold_not_in_pool": "15.00",
+   "gold_groups": "51.00"
+  }
+ },
+ "inventory": {
+  "chunks_by_source": {
+   "case": 9973,
+   "irs_pub": 2043,
+   "ecfr": 5609,
+   "usc": 10768
+  },
+  "opinions": {
+   "memo": 279,
+   "tc": 28
+  },
+  "source_revision_values": {
+   "case": 0,
+   "ecfr": 0,
+   "irs_pub": 0,
+   "usc": 1
+  },
+  "treatment_of_held_opinions": {
+   "none": 281,
+   "affirmed": 20,
+   "reversed": 3,
+   "appealed": 1,
+   "reversed in part": 1,
+   "affirmed in part": 1
+  },
+  "treatment_rows_by_source": [
+   [
+    "corpus",
+    "affirmed",
+    609
+   ],
+   [
+    "corpus",
+    "affirmed in part",
+    8
+   ],
+   [
+    "corpus",
+    "overruled",
+    1
+   ],
+   [
+    "corpus",
+    "reversed",
+    52
+   ],
+   [
+    "corpus",
+    "reversed in part",
+    37
+   ],
+   [
+    "corpus",
+    "unknown",
+    5
+   ],
+   [
+    "corpus",
+    "vacated",
+    5
+   ],
+   [
+    "corpus",
+    "vacated in part",
+    1
+   ],
+   [
+    "courtlistener",
+    "affirmed",
+    13
+   ],
+   [
+    "courtlistener",
+    "affirmed in part",
+    1
+   ],
+   [
+    "courtlistener",
+    "appealed",
+    1
+   ],
+   [
+    "courtlistener",
+    "none",
+    288
+   ],
+   [
+    "courtlistener",
+    "reversed",
+    3
+   ],
+   [
+    "courtlistener",
+    "reversed in part",
+    1
+   ]
+  ],
+  "temporary_regulations": [
+   {
+    "section": "1.162-10T",
+    "chunks": 2,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.162-25T",
+    "chunks": 1,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.167(a)-13T",
+    "chunks": 1,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.167(a)-5T",
+    "chunks": 1,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.168(j)-1T",
+    "chunks": 28,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.274-5T",
+    "chunks": 35,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.274-6T",
+    "chunks": 10,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.280F-1T",
+    "chunks": 2,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.280F-2T",
+    "chunks": 19,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.280F-3T",
+    "chunks": 11,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.280F-4T",
+    "chunks": 2,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.280F-5T",
+    "chunks": 19,
+    "mentions_expiry": false,
+    "final_also_held": false
+   },
+   {
+    "section": "1.446-3T",
+    "chunks": 9,
+    "mentions_expiry": true,
+    "final_also_held": true
+   },
+   {
+    "section": "1.469-1T",
+    "chunks": 49,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.469-2T",
+    "chunks": 55,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.469-3T",
+    "chunks": 6,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.469-4T",
+    "chunks": 126,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.469-5T",
+    "chunks": 21,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.482-1T",
+    "chunks": 14,
+    "mentions_expiry": true,
+    "final_also_held": true
+   },
+   {
+    "section": "1.62-1T",
+    "chunks": 24,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.704-1T",
+    "chunks": 1,
+    "mentions_expiry": false,
+    "final_also_held": true
+   },
+   {
+    "section": "1.988-1T",
+    "chunks": 2,
+    "mentions_expiry": true,
+    "final_also_held": true
+   },
+   {
+    "section": "1.988-2T",
+    "chunks": 2,
+    "mentions_expiry": true,
+    "final_also_held": true
+   }
+  ]
+ },
+ "rows": [
+  {
+   "id": "D01",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2025-35, at *17-18#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 8
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D01",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2025-35, at *23-24#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 20
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D02",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2026-69, at *15#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 6,
+    "regulation": 1,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D02",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2026-69, at *15#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 12,
+    "statute": 4,
+    "pub": 1,
+    "regulation": 3
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D03",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2012-184, at *11-13#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 7,
+    "tc": 1
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D03",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2012-184, at *11-13#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 17,
+    "tc": 3
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D04",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2023-4, at *19#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 8
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D04",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2023-4, at *19#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 20
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D05",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2026-33, at *12-13#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 5,
+    "statute": 2,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D05",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2026-33, at *12-13#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 15,
+    "statute": 3,
+    "pub": 1,
+    "tc": 1
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D06",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 CFR 1.469-9(j)#body#1",
+   "top1_kind": "regulation",
+   "mix": {
+    "regulation": 1,
+    "pub": 2,
+    "statute": 4,
+    "temp_regulation": 1
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 527 (2025), p. 20#body#4",
+      "IRS Pub 17 (2025), p. 25#body#6"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D06",
+   "category": "case_law",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 CFR 1.469-9(j)#body#1",
+   "top1_kind": "regulation",
+   "mix": {
+    "regulation": 1,
+    "pub": 6,
+    "temp_regulation": 3,
+    "statute": 10
+   },
+   "groups": [
+    {
+     "level": 2,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 527 (2025), p. 20#body#4",
+      "IRS Pub 17 (2025), p. 25#body#6",
+      "IRS Pub 527 (2025), p. 21#body#5"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D07",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2025-35, at *17-18#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 6,
+    "regulation": 1,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2025-35, at *17-18#body#1",
+      "T.C. Memo. 2010-216, at *26-27#body#1",
+      "T.C. Memo. 2025-35, at *18#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D07",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2025-35, at *17-18#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 18,
+    "regulation": 1,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2025-35, at *17-18#body#1",
+      "T.C. Memo. 2010-216, at *26-27#body#1",
+      "T.C. Memo. 2013-54, at *53-55#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 3,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D08",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 527 (2025), p. 20#body#3",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 2,
+    "memo": 5,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 3,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 527 (2025), p. 20#body#3",
+      "T.C. Memo. 2024-106, at *12-13#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 527 (2025), p. 20#body#3",
+      "IRS Pub 527 (2025), p. 19#body#4"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D08",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 527 (2025), p. 20#body#3",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 2,
+    "memo": 14,
+    "statute": 2,
+    "regulation": 1,
+    "temp_regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 3,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 527 (2025), p. 20#body#3",
+      "T.C. Memo. 2024-106, at *12-13#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 7,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 527 (2025), p. 20#body#3"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D09",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2012-184, at *11-13#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 5,
+    "pub": 2,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2012-184, at *1-3#body#1",
+      "T.C. Memo. 2009-234, at *5#body#1",
+      "T.C. Memo. 2012-184, at *4-6#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D09",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2012-184, at *11-13#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 10,
+    "pub": 2,
+    "tc": 4,
+    "statute": 1,
+    "regulation": 2,
+    "temp_regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2012-184, at *1-3#body#1",
+      "T.C. Memo. 2009-234, at *5#body#1",
+      "T.C. Memo. 2012-184, at *4-6#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D10",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2023-4, at *19#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 4,
+    "pub": 3,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2023-4, at *18-19#body#1",
+      "IRS Pub 463 (2025), p. 40#body#1",
+      "IRS Pub 463 (2025), p. 36#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D10",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2023-4, at *19#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 12,
+    "pub": 6,
+    "statute": 1,
+    "regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2023-4, at *18-19#body#1",
+      "IRS Pub 463 (2025), p. 40#body#1",
+      "IRS Pub 463 (2025), p. 36#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D11",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2007-189, at *20-21#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 6,
+    "pub": 1,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2007-189, at *20-21#body#1",
+      "IRS Pub 17 (2025), p. 63#body#2",
+      "T.C. Memo. 2026-33, at *8#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 3,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 63#body#2"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D11",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2007-189, at *20-21#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 13,
+    "pub": 3,
+    "regulation": 3,
+    "statute": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 17,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "T.C. Memo. 2007-189, at *20-21#body#1",
+      "T.C. Memo. 2024-16, at *5#body#1",
+      "T.C. Memo. 2025-97, at *41-42#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 63#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D12",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2026-69, at *15#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 6,
+    "statute": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2026-69, at *17#body#1",
+      "T.C. Memo. 2026-69, at *18-19#body#1",
+      "T.C. Memo. 2026-69, at *16-17#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D12",
+   "category": "compound",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2026-69, at *15#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 12,
+    "statute": 4,
+    "regulation": 4
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "T.C. Memo. 2026-69, at *17#body#1",
+      "T.C. Memo. 2026-69, at *18-19#body#1",
+      "T.C. Memo. 2026-69, at *16-17#body#1"
+     ]
+    },
+    {
+     "level": 2,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D13",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 121(a)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 5,
+    "pub": 1,
+    "regulation": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 15#body#1"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D13",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 121(a)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 12,
+    "pub": 4,
+    "regulation": 4
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 15#body#1",
+      "IRS Pub 17 (2025), p. 79#body#1",
+      "IRS Pub 587 (2025), p. 16#body#1"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D14",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 71#body#1",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 4,
+    "statute": 4
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 71#body#1",
+      "IRS Pub 17 (2025), p. 83#body#1",
+      "IRS Pub 17 (2025), p. 91#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D14",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 17 (2025), p. 71#body#1",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 9,
+    "statute": 10,
+    "temp_regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 7,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 71#body#1",
+      "IRS Pub 17 (2025), p. 83#body#1",
+      "IRS Pub 587 (2025), p. 23#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D15",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 73#body#4",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 5,
+    "statute": 3
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 73#body#4",
+      "IRS Pub 17 (2025), p. 103#body#3",
+      "IRS Pub 17 (2025), p. 25#body#6"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D15",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 17 (2025), p. 73#body#4",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 9,
+    "statute": 10,
+    "regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 14,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 73#body#4",
+      "IRS Pub 17 (2025), p. 103#body#3",
+      "IRS Pub 17 (2025), p. 25#body#6"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D16",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "T.C. Memo. 2021-9, at *15-16#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 3,
+    "statute": 3,
+    "regulation": 1,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 7,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "T.C. Memo. 2021-9, at *15-16#body#1",
+      "IRS Pub 463 (2025), p. 47#body#2",
+      "T.C. Memo. 2024-79, at *35#body#1"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D16",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "T.C. Memo. 2021-9, at *15-16#body#1",
+   "top1_kind": "memo",
+   "mix": {
+    "memo": 6,
+    "regulation": 3,
+    "pub": 6,
+    "statute": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 16,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "T.C. Memo. 2021-9, at *15-16#body#1",
+      "T.C. Memo. 2012-291, at *18-19#body#1",
+      "IRS Pub 334 (2025), p. 4#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D17",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 1212(a)(1)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 6,
+    "regulation": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D17",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 1212(a)(1)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 15,
+    "regulation": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D18",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 3#body#7",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 3,
+    "statute": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 2,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 3#body#7"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D18",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 17 (2025), p. 3#body#7",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 8,
+    "statute": 12
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 3,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 3#body#7",
+      "IRS Pub 17 (2025), p. 88#body#7"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D19",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 134#body#1",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 3,
+    "statute": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 3,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 134#body#1",
+      "IRS Pub 17 (2025), p. 133#body#6"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D19",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 219(b)(3)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 15,
+    "pub": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 134#body#1",
+      "IRS Pub 17 (2025), p. 133#body#6"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D20",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 170(f)(8)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 7,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D20",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 170(f)(8)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 18,
+    "regulation": 1,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D21",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 334 (2025), p. 18#body#2",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 3,
+    "statute": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 4,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 334 (2025), p. 18#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D21",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 334 (2025), p. 18#body#2",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 7,
+    "statute": 12,
+    "regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 4,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 334 (2025), p. 18#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D22",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 CFR 1.61-21(e)(4)#body#1",
+   "top1_kind": "regulation",
+   "mix": {
+    "regulation": 5,
+    "statute": 3
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 2,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": 4,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D22",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 CFR 1.61-21(e)(4)#body#1",
+   "top1_kind": "regulation",
+   "mix": {
+    "regulation": 12,
+    "pub": 4,
+    "statute": 4
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 2,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D23",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 463 (2025), p. 42#body#4",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 2,
+    "regulation": 2,
+    "statute": 4
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 463 (2025), p. 42#body#4",
+      "IRS Pub 463 (2025), p. 43#body#3"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D23",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 463 (2025), p. 49#body#1",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 5,
+    "regulation": 7,
+    "statute": 8
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 14,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 463 (2025), p. 49#body#1",
+      "IRS Pub 463 (2025), p. 42#body#4",
+      "IRS Pub 463 (2025), p. 43#body#3"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D24",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 3#body#2",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 6,
+    "statute": 2
+   },
+   "groups": [
+    {
+     "level": 1,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D24",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 17 (2025), p. 3#body#2",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 11,
+    "statute": 9
+   },
+   "groups": [
+    {
+     "level": 1,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D25",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 4974(a)-(d)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 5,
+    "regulation": 2,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 87#body#2"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D25",
+   "category": "statutory",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 457(d)(2)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 10,
+    "regulation": 8,
+    "pub": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 89#body#6",
+      "IRS Pub 17 (2025), p. 87#body#2"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D26",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 587 (2025), p. 18#body#4",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 5,
+    "statute": 3
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": true,
+     "displaced": true,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 18#body#4",
+      "IRS Pub 587 (2025), p. 22#body#2",
+      "IRS Pub 587 (2025), p. 24#body#3"
+     ]
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 18#body#4",
+      "IRS Pub 587 (2025), p. 22#body#2",
+      "IRS Pub 587 (2025), p. 24#body#3"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D26",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 587 (2025), p. 18#body#4",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 12,
+    "statute": 8
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": true,
+     "displaced": true,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 18#body#4",
+      "IRS Pub 587 (2025), p. 22#body#2",
+      "IRS Pub 587 (2025), p. 24#body#3"
+     ]
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 18#body#4",
+      "IRS Pub 587 (2025), p. 22#body#2",
+      "IRS Pub 587 (2025), p. 24#body#3"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D27",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 946 (2025), p. 60#body#3",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 4,
+    "statute": 4
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 946 (2025), p. 60#body#3",
+      "IRS Pub 946 (2025), p. 61#body#4",
+      "IRS Pub 463 (2025), p. 24#body#4"
+     ]
+    },
+    {
+     "level": 4,
+     "rank": 7,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 946 (2025), p. 60#body#3",
+      "IRS Pub 946 (2025), p. 61#body#4",
+      "IRS Pub 463 (2025), p. 24#body#4"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D27",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 946 (2025), p. 60#body#3",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 11,
+    "statute": 9
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 946 (2025), p. 60#body#3",
+      "IRS Pub 334 (2025), p. 20#body#4",
+      "IRS Pub 946 (2025), p. 37#body#2"
+     ]
+    },
+    {
+     "level": 4,
+     "rank": 15,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 946 (2025), p. 60#body#3",
+      "IRS Pub 334 (2025), p. 20#body#4",
+      "IRS Pub 946 (2025), p. 37#body#2"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D28",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 7,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 7#body#3"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D28",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 25D(a)-(c)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 18,
+    "pub": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 7#body#3",
+      "IRS Pub 527 (2025), p. 36#body#2"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D29",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 8
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D29",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 25C(d)(2)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 19,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 587 (2025), p. 8#body#1"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D30",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 2,
+    "pub": 6
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 137#body#5",
+      "IRS Pub 17 (2025), p. 78#body#5",
+      "IRS Pub 17 (2025), p. 68#body#6"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D30",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 225(a)-(f)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 9,
+    "pub": 9,
+    "regulation": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    },
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 137#body#5",
+      "IRS Pub 17 (2025), p. 78#body#5",
+      "IRS Pub 17 (2025), p. 68#body#6"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D31",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 1,
+    "pub": 7
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D31",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 163(h)(4)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 5,
+    "pub": 15
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D32",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 4#body#6",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 6,
+    "statute": 1,
+    "regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 4#body#6",
+      "IRS Pub 334 (2025), p. 12#body#2",
+      "IRS Pub 334 (2025), p. 21#body#2"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D32",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 17 (2025), p. 4#body#6",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 11,
+    "regulation": 4,
+    "statute": 5
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 4#body#6",
+      "IRS Pub 334 (2025), p. 12#body#2",
+      "IRS Pub 334 (2025), p. 21#body#2"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D33",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 7,
+    "pub": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 463 (2025), p. 5#body#2"
+     ]
+    },
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D33",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 217(a)-(c)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 12,
+    "pub": 7,
+    "temp_regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 5,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 463 (2025), p. 5#body#2"
+     ]
+    },
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D34",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 6,
+    "memo": 2
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D34",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 6502(a)-(b)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 13,
+    "memo": 7
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D35",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "IRS Pub 17 (2025), p. 34#body#8",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 5,
+    "statute": 3
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": null,
+     "in_pool": false,
+     "displaced": false,
+     "outranked": false,
+     "lower": [
+      "IRS Pub 17 (2025), p. 34#body#8",
+      "IRS Pub 17 (2025), p. 35#body#2",
+      "IRS Pub 17 (2025), p. 132#body#5"
+     ]
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D35",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "IRS Pub 17 (2025), p. 34#body#8",
+   "top1_kind": "pub",
+   "mix": {
+    "pub": 10,
+    "statute": 9,
+    "regulation": 1
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 4,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": true,
+     "lower": [
+      "IRS Pub 17 (2025), p. 34#body#8",
+      "IRS Pub 17 (2025), p. 35#body#2",
+      "IRS Pub 17 (2025), p. 26#body#6"
+     ]
+    }
+   ],
+   "inverted1": true
+  },
+  {
+   "id": "D36",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 5,
+    "pub": 3
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D36",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 21(a)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 12,
+    "pub": 8
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D37",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 5,
+    "pub": 3
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D37",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 U.S.C. \u00a7 151(d)(5)#body#1",
+   "top1_kind": "statute",
+   "mix": {
+    "statute": 11,
+    "pub": 9
+   },
+   "groups": [
+    {
+     "level": 4,
+     "rank": 1,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D38",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 8,
+   "top1": "26 CFR 1.61-21(e)(1)#body#1",
+   "top1_kind": "regulation",
+   "mix": {
+    "regulation": 1,
+    "pub": 5,
+    "statute": 2
+   },
+   "groups": [
+    {
+     "level": 1,
+     "rank": 2,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  },
+  {
+   "id": "D38",
+   "category": "temporal",
+   "plan_set": 0,
+   "k": 20,
+   "top1": "26 CFR 1.61-21(e)(1)#body#1",
+   "top1_kind": "regulation",
+   "mix": {
+    "regulation": 1,
+    "pub": 13,
+    "statute": 6
+   },
+   "groups": [
+    {
+     "level": 1,
+     "rank": 2,
+     "in_pool": true,
+     "displaced": false,
+     "outranked": false,
+     "lower": []
+    }
+   ],
+   "inverted1": false
+  }
+ ]
+}

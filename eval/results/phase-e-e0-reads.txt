@@ -1,0 +1,251 @@
+# E0 reads: plan set 0, k=8. For each, does the LOWER source state the answer in plain
+# English that the gold doesn't? BETTER (states what gold doesn't) / equal (restates the gold's rule) /
+# partly (less than gold) / no. Read by Claude 2026-09-28: BETTER 1, equal 5, partly 2, no 7.
+
+## G-S02
+Q: My self-employed client runs her business from a spare bedroom that the children also use for homework in the evenings. Can she take a home office deduction?
+Reference: No. The business-use exception applies only to the portion of the dwelling unit that is exclusively used on a regular basis as the principal place of business, a place to meet clients or customers, or a separate structure used in the business; mixed personal use of the room fails the exclusive-use test.
+Gold: [['26 U.S.C. § 280A(c)(1)']]
+Lower (pub): IRS Pub 587 (2025), p. 5#body#4
+Patients, Clients, or Customers If you meet or deal with patients, clients, or customers in your home in the normal course of your business, even though you also carry on business at another location, you can deduct your expenses for the part of your home used exclusively and regularly for business if you meet both the following tests. • You physically meet with patients, clients, or customers on your premises. • Their use of your home is substantial and integral to the conduct of your business. Doctors, dentists, attorneys, and other professionals who maintain offices in their homes will generally meet this requirement. Using your home for occasional meetings and telephone calls will not qualify you to deduct expenses for the business use of your home. The part of your home you use exclusively and regularly to meet patients, clients, or customers does not have to be your principal place of business. Example. Sam, a self-employed attorney, works 3 days a week in a rented office, then works 2 days a week at home, in a home office used only for business. Sam regularly meets clients there. The home office qualifies for a business deduction because Sam meets clients there in the normal
+
+Verdict: no. Pub 587 p.5 is the meet-clients test; it names exclusive use in passing but not the mixed-use rule the statute states.
+
+## G-S04
+Q: What does a client have to prove to deduct business gifts or car expenses for listed property?
+Reference: The taxpayer must substantiate, by adequate records or sufficient evidence corroborating the taxpayer's own statement, the amount of the expense, the time and place of travel or date and description of the gift, the business purpose, and the business relationship of the person receiving the benefit. Regulations may exempt expenses below a set amount, and the requirement does not apply to qualified nonpersonal use vehicles.
+Gold: [['26 U.S.C. § 274(c)-(d)', '26 CFR 1.274-5T(c)(1)']]
+Lower (memo): T.C. Memo. 2024-79, at *27#body#1
+4. Travel, meals and entertainment, business gifts, and listed property
+Certain expenses are subject to strict substantiation under section 274(d). Such expenses include those relating to travel, meals and entertainment, gifts, and “listed property” under section 280F(d)(4). § 274(d). For the years in issue, listed property included passenger automobiles and any other property used as a means of transportation. § 280F(d)(4). To comply with the strict substantiation rules, the taxpayer must have adequate records or sufficient evidence corroborating the amount of the expense, the time and the place the expense was incurred, the business purpose of the expense, and the business relationship of the taxpayer to any others benefited by the expense. § 274(d). To substantiate by adequate records, the taxpayer must maintain an account book, a log, a diary, or a similar record and documentary evidence to establish each element of an expenditure. Treas. Reg. § 1.274-5T(c)(2)(i).
+Mr. Henry believes he is entitled to deductions for air and bus travel, hotels, gas, rental cars, car payments, car insurance and repairs, car wash, AAA, toll roads and parking, metro and bus fare, personal meals, mea
+
+Verdict: equal. The memo restates §274(d)'s list word for word from the statute; misses the de minimis and nonpersonal-vehicle exceptions.
+
+## G-S06
+Q: How much can a business deduct for gifts to one customer in a year?
+Reference: Gifts to any one individual are deductible only to the extent the expense, added to earlier gifts to that individual in the same taxable year, does not exceed $25; small imprinted items costing $4.00 or less are not counted as gifts.
+Gold: [['26 U.S.C. § 274(b)', '26 CFR 1.274-3(a)']]
+Lower (pub): IRS Pub 463 (2025), p. 16#body#4
+for meal expenses to a client who reimburses you for these expenses. You aren’t subject to the limitation on meal expenses. If the client can deduct the expenses, the client is subject to the 50% limit. If you (as an independent contractor) have expenses for meals related to providing services for a client but don’t adequately account for and seek reimbursement from the client for those expenses, you are subject to the 50% limit on non-entertainment-related meals and the entertainment-related meal expenses are nondeductible to you. Gifts If you give gifts in the course of your trade or business, you may be able to deduct all or part of the cost. This chapter explains the limits and rules for deducting the costs of gifts. $25 limit. You can deduct no more than $25 for business gifts you give directly or indirectly to each person during your tax year. A gift to a company that is intended for the eventual personal use or benefit of a particular person or a limited class of people will be considered an indirect gift to that particular person or to the individuals within that class of people who receive the gift. Chapter 3 Gifts
+
+Verdict: equal. Pub 463 states the $25 limit plainly, as §274(b) does; misses the $4 imprinted-item rule in the regulation.
+
+## G-S07
+Q: My self-employed consultant client took an 18-month engagement in another city. Can they deduct their travel expenses while away from home?
+Reference: No. A taxpayer is not treated as temporarily away from home during any period of employment that exceeds 1 year, so travel expenses for an assignment expected to last longer than a year are not deductible as away-from-home travel.
+Gold: [['26 U.S.C. § 162(a)-(b)']]
+Lower (memo): T.C. Memo. 2013-71, at *14-16#body#1
+traveling expenses, including amounts expended for meals and lodging, may be
+deducted if they are incurred while the taxpayer is away from home in the
+pursuit of a trade or business. Sec. 162(a)(2). To deduct a travel expense, the
+taxpayer must show that (1) he or she was away from home when he or she
+incurred the expense, (2) the expense is reasonable and necessary, and (3) the
+expense was incurred in pursuit of a trade or business. See Strohmaier v.
+Commissioner, 113 T.C. at 115; see also Commissioner v. Flowers, 326 U.S. at
+470 (interpreting a predecessor to section 162(a)(2)). Under the rule of Correll,
+389 U.S. 299, for a taxpayer to be considered "away from home" within the
+meaning of section 162(a)(2), the taxpayer must be on a trip that requires the
+taxpayer to stop for sleep or a substantial period of rest. See also Strohmaier v.
+Commissioner, 113 T.C. at 115.
+Under this section 162(a) framework, as interpreted in Correll,9 Rehman's
+trips would have to be trips "away from home" for the corresponding expenses to
+be deductible. But all of Rehman's trips for Fidelis took place in the New York
+City area. At no point did Rehman show the client visits took place far enough
+away 
+
+Verdict: no. Away-from-home generally (Correll sleep rule); nothing on the one-year rule.
+
+## G-S08
+Q: section 179 expensing dollar limitation
+Reference: The aggregate cost that may be taken into account under section 179 for any taxable year cannot exceed $2,500,000. That limit is reduced dollar for dollar by the cost of section 179 property placed in service above $4,000,000, and both amounts are indexed for inflation for taxable years beginning after 2025.
+Gold: [['26 U.S.C. § 179(b)(1)']]
+Lower (pub): IRS Pub 946 (2025), p. 18#body#3
+dollar limits on the section 179 deduction may be reduced or increased or there may be additional dollar limits. The general dollar limit is affected by any of the following situations. • The cost of your section 179 property placed in service exceeds $4,000,000. • You placed in service a sport utility or certain other vehicles. • You are married filing a joint or separate return. Costs Exceeding $4,000,000 If the cost of your qualifying section 179 property placed in service in a year is more than $4,000,000, you must generally reduce the dollar limit (but not below zero) by the amount of cost over $4,000,000. If the cost of your section 179 property placed in service during 2025 is $6,500,000 or more, you cannot take a section 179 deduction. Example. In 2025, Jane Ash placed in service machinery costing $4,050,000. This cost is $50,000 more than $4,000,000, so Jane must reduce the dollar limit to $2,450,000 ($2,500,000 − $50,000). • That has an integral enclosure fully enclosing the driver compartment and load carrying device, does not have seating rearward of the driver’s seat, and has no body section protruding more than 30 inches ahead of the leading edge of the windshield. Ma
+
+Verdict: equal. Pub 946 gives the same $2,500,000 / $4,000,000 figures for 2025, plus the $6,500,000 full phase-out.
+
+## G-S09
+Q: If business use of a client's car falls to 40 percent, can they still take accelerated depreciation on it?
+Reference: No. When listed property is not predominantly used (more than 50 percent) in a qualified business use, depreciation for that year and later years must be determined under the alternative depreciation system of section 168(g), and earlier excess depreciation is recaptured.
+Gold: [['26 U.S.C. § 280F(b)', '26 CFR 1.280F-3T(c)']]
+Lower (pub): IRS Pub 463 (2025), p. 31#body#4
+your car is more than 50%. 2 If your car was subject to the maximum limits for depreciation and you have unrecovered basis in the car, you can continue to claim depreciation. See Deductions in years after the recovery period under Depreciation Limits, earlier. Example. In May 2025, you bought and placed in service a car for $17,500. You used it 40% for your consulting business. Because you didn’t use the car more than 50% for business, you can’t take any section 179 deduction or special depreciation allowance, and you must use the straight line method over a 5-year recovery period to recover the cost of your car. You deduct $700 in 2025. This is the lesser of: 1. $700 (($17,500 cost × 40% (0.40) business use) × 10% (0.10) recovery percentage (from column (c) of Table 4-1)), or 2. $4,880 ($12,200 maximum limit × 40% (0.40) business use). Qualified business use 50% or less in a later year. If you use your car more than 50% in qualified business use in the tax year it is placed in service but the business use drops to 50% or less in a later year, you can no longer use an accelerated depreciation method for that car. For the year the business use drops to 50% or less and all later year
+
+Verdict: BETTER. Pub 463 works the exact case (40% business use: no §179, straight line). Misses recapture, which §280F(b) has.
+
+## G-S10
+Q: How many hours does someone need to work in real estate to qualify as a real estate professional for the passive loss rules?
+Reference: More than 750 hours of services during the year in real property trades or businesses in which the taxpayer materially participates, and more than half of all personal services performed in trades or businesses must be in real property trades or businesses. On a joint return, one spouse must separately meet both requirements. Services performed as an employee do not count unless the employee is a 5-percent owner of the employer.
+Gold: [['26 U.S.C. § 469(c)(7)']]
+Lower (memo): T.C. Memo. 2022-40, at *6-7#body#1
+Both Mr. and Mrs. Sezonov’s estimated hours fall well short of the 750 hours that are required to qualify them as real estate professionals in each of the years at issue. For 2013 the Sezonovs estimate that Mrs. Sezonov spent less than 500 combined hours working on both Florida rental properties (including time spent travelling to and from the rental properties from her home in Ohio). For 2014 they estimate that Mrs. Sezenov spent less than 100 hours working on the Florida rental properties. Likewise, they estimate that Mr. Sezonov spent less than 500 hours working on the Florida rental properties in 2013 and less than 50 hours in 2014. Additionally, Mr. Sezonov fails to satisfy the requirement of section 469(c)(7)(B)(i) because he did not spend more time working in the real estate rental business than in his HVAC business in either year.
+Because neither Mr. Sezonov nor Mrs. Sezonov has established that he or she meets the 750-hour requirement for either year, neither qualifies as a real estate professional under section 469(c)(7) for 2013 or 2014. Accordingly, the Florida real estate rental activities in 2013 and
+4 At trial Mrs. Sezonov credibly testified about the types of servic
+
+Verdict: partly. The memo gives the 750 hours; misses the more-than-half test and the joint-return rule.
+
+## G-S11
+Q: A client actively manages a rental house and has about $120,000 of adjusted gross income. Can they deduct the rental loss against their wages?
+Reference: Partly. An individual who actively participates in rental real estate can deduct up to $25,000 of passive losses from it against other income, but the $25,000 is reduced by 50 percent of modified adjusted gross income over $100,000, so at $120,000 the allowance falls to $15,000.
+Gold: [['26 U.S.C. § 469(i)(1)', '26 U.S.C. § 469(i)(2)'], ['26 U.S.C. § 469(i)(3)']]
+Lower (pub): IRS Pub 527 (2025), p. 21#body#5
+. . . . . . . Minus: Depreciation ($120,000 x 3.636% (0.03636)) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9,350 $4,150 4,363 Net rental (loss) for house . . . . . . . . . . . . . . . . . . ($213) You had a net loss for the year. Because you actively participated in your passive rental real estate activity and your loss was less than $25,000, you can deduct the loss on your return. You also meet all of the requirements for not having to file Form 8582. You use Schedule E, Part I, to report your rental income and expenses. You enter your income, expenses, and depreciation for the house in the column for Property A and enter your loss on line 22. Form 4562 isn’t required. 4. Special Situations This chapter discusses some rental real estate activities that are subject to additional rules. Condominiums A condominium is most often a dwelling unit in a multi-unit building, but can also take other forms, such as a townhouse or garden apartment. Chapter 4 Special Situations
+
+Verdict: no. Pub 527 example with a loss under $25,000; nothing on the MAGI phase-out, which is the answer.
+
+## G-S15
+Q: Can a client avoid the accuracy-related penalty by showing they acted reasonably and in good faith?
+Reference: Yes, generally. No penalty under section 6662 or 6663 is imposed on any portion of an underpayment if the taxpayer shows reasonable cause for it and acted in good faith, except for portions attributable to transactions lacking economic substance (section 6662(b)(6)) or disallowed deductions described in section 6662(b)(10); for substantial or gross valuation overstatements of charitable deduction property the exception is limited to cases with a qualified appraisal and a good faith investigation of value.
+Gold: [['26 U.S.C. § 6664(c)']]
+Lower (memo): T.C. Memo. 2026-66, at *24-25#body#1
+section 7491(c),
+Assuming there is a substantial understatement of income tax in this case, petitioners can avoid application of the accuracy-related penalty under section 6662(b)(2) with respect to any portion of the underpayment for which they can show that they had reasonable cause and acted in good faith. § 6664(c)(1); Higbee, 116 T.C. at 448–49. Whether a taxpayer has acted with reasonable cause and in good faith depends upon the pertinent facts and circumstances of a particular case. Treas. Reg. § 1.6664-4(b)(1). We consider, among other factors, the experience, education, and sophistication of the taxpayer; however, the principal consideration is the extent of the taxpayer’s efforts to assess the proper tax liability. Id.; see also Higbee, 116 T.C. at 448. In so assessing, reliance on professional advice may indicate reasonable cause and good faith “if, under all the circumstances, such reliance was reasonable and the taxpayer acted in good faith.” Treas. Reg. § 1.66644(b)(1).
+Petitioners contend that they had a reasonable basis for claiming the theft loss deduction. We agree. Mr. Deutsch credibly testified as to the conversations he had with, and the documents he provided t
+
+Verdict: partly. The memo states the reasonable-cause exception; misses the economic-substance and appraisal exceptions.
+
+## G-S16
+Q: When does the burden of proof shift to the IRS in a tax case?
+Reference: If the taxpayer introduces credible evidence on a factual issue relevant to liability for income, estate or gift tax, the burden of proof on that issue shifts to the Secretary, but only if the taxpayer has substantiated items, kept required records and cooperated with reasonable IRS requests (and, for entities, meets net worth limits).
+Gold: [['26 U.S.C. § 7491(a)-(c)']]
+Lower (memo): T.C. Memo. 2013-90, at *6-7#body#1
+petition for redetermination of the resulting deficiency.
+In deficiency proceedings before the Tax Court, the burden of proof
+generally rests with the taxpayer. Rule 142(a)(1). Section 7491 shifts the burden
+of proof to the.IRS with respect to a given factual issue where a taxpayer (1)
+introduces credible evidence with respect to that issue, (2) meets all applicable
+substantiation requirements, (3) complies with all recordkeeping requirements, and
+(4) cooperates with any reasonable requests for information. Sec. 7491(a); Higbee
+that the burden should shift to the IRS, and the record reflects that they did not
+meet their requirements of recordkeeping and substantiation. Thus, the burden of
+proof remains on Johnson and Smith.
+1. The role of petitioner Smith
+On January 19, 2011, Smith requested innocent spouse relief from the IRS.
+That request was resolved in a stipulation of settled issues, the terms of which are:
+7Some other adjustments were made, but they were all computational.
+
+(cid:16)042
+Johnson alone would be responsible for any increases in tax resulting
+from the Schedule-C-business deductions he claimed;
+(cid:16)042
+Johnson alone would be responsible for increases in tax res
+
+Verdict: equal. The memo lists §7491(a)'s four conditions; misses the net-worth limit for entities.
+
+## G-S19
+Q: What is the deadline for filing a claim for a tax refund?
+Reference: A refund claim must be filed within 3 years from the time the return was filed or 2 years from the time the tax was paid, whichever is later; if no return was filed, within 2 years from payment.
+Gold: [['26 U.S.C. § 6511(a)']]
+Lower (pub): IRS Pub 17 (2025), p. 14#body#3
+of the automatic extension, the term “combat zone” includes the following areas. 1. The Arabian peninsula area, effective January 17, 1991. 2. The Kosovo area, effective March 24, 1999. 3. The Afghanistan area, effective September 19, 2001. See Pub. 3 for more detailed information on the locations comprising each combat zone. Pub. 3 also has information about other tax benefits available to military personnel serving in a combat zone. Extension period. The deadline for filing your return, paying any tax due, filing a claim for refund, and taking other actions with the IRS is extended in two steps. First, your deadline is extended for 180 days after the later of: 1. The last day you are in a combat zone or the last day the area qualifies as a combat zone, or 2. The last day of any continuous qualified hospitalization (defined later) for injury from service in the combat zone. Second, in addition to the 180 days, your deadline is also extended by the number of days you had left to take action with the IRS when you entered the combat zone. For example, you have 31/2 months (January 1–April 15) to file your tax return. Any days left in this period when you entered the combat zone (or t
+
+Verdict: no. Pub 17 on combat-zone extensions; not the 3-year/2-year rule.
+
+## G-S25
+Q: 280E deductions disallowed trafficking controlled substances legal under state law
+Reference: No deduction or credit is allowed for any amount paid or incurred in carrying on a trade or business that consists of trafficking in controlled substances within schedule I or II of the Controlled Substances Act that is prohibited by federal law or the law of the state where it is conducted; legality under state law does not help if federal law prohibits it.
+Gold: [['26 U.S.C. § 280E']]
+Lower (tc): 165 T.C. No. 13, at *8-9#body#1
+IV. Review of Appeals’ Determination
+The Commissioner’s two Notices of Determination provided the same reason for rejecting the offer-in-compromise. The notices stated: “The revenue officer did not allow all other operating expenses per Section 280e [sic] – you are involved in cannabis business, which is considered an illegal business activity for federal purposes.”
+Section 280E provides that no deduction is allowed for amounts paid in carrying on any trade or business if such business consists of trafficking in controlled substances which is prohibited by state or federal law. I.R.C. § 280E. Federal law characterizes marijuana as a Schedule I controlled substance. See Comprehensive Drug Abuse Prevention and Control Act of 1970, Pub. L. No. 91-513, § 202(c), 84 Stat. 1236, 1249 (codified as amended at 21 U.S.C. § 812(c) (2012)); Olive, 139 T.C. at 21. Although the dispensing of medical marijuana is legal under California law, it remained illegal under federal law during the years the underlying liabilities arose, when the offer-in-compromise was made, and when the offer-in-compromise was evaluated. See Olive, 139 T.C. at 39. Even if the trafficking business is legal under state law
+
+Verdict: equal. 165 T.C. No. 13 quotes §280E accurately.
+
+## G-C04
+Q: Can a medical practice get section 530 relief from employment taxes for physicians it treated as independent contractors, even if it filed its information returns late?
+Reference: Yes. The Tax Court held that because the practice never treated the physicians as employees, filed all returns consistently with that treatment, and had a reasonable basis for it, it was entitled to section 530 relief; untimely information returns did not preclude relief in the circumstances.
+Gold: [['120 T.C. No. 15, at *1-2', '120 T.C. No. 15, at *12-13', '120 T.C. No. 15, at *15-17']]
+Lower (memo): T.C. Memo. 2010-205, at *17-19#body#1
+taxes notwithstanding that
+the relationship
+Office toutique,
+Inc. v. Commissioner, 121 T.C. 89, 106 ,(2003),
+relief under act section 530 if it demonstrates:
+(1) It did not
+treat an individual as an employee for employment
+tax purposes
+for any period,
+(2) it filed all required Federal
+tax returns
+consistent with its treatment of
+the individual, and (3)
+it had a
+reasonable basis for not treating the individual as an employee.
+Commissioner, supra.
+A taxpayer is deemed to have had a
+reasonable basis if the taxpayer establishes that
+its treatment
+of
+the individual-was in reasonable reliance on:
+technical advice with respec.t to the taxpayer, or a letter ruling to the taxpayer;
+tax purposes) of
+(for employment
+the
+the industry in which such
+Act sec. 530(a) (2). With respect
+to the third enumerated safe
+harbor, act section 530(e) (2) (B) provides:
+"in no event shall
+the significant segment requirement
+*
+*
+* be construed to require
+a reasonable showing of
+the practice of more than 25 percent of
+the industry (determined by not
+taking into account
+the
+taxpayer)". Small Business Job Protection Act of 1996, Pub. L.
+In addition to the specific safe harbors of act section
+530(a) (2), a taxpayer
+
+Verdict: no. The memo lists §530's elements; the question is the reported opinion's holding on late information returns.
+
+## G-X02
+Q: My client lives in Iowa, doesn't farm, and received Conservation Reserve Program payments in 2006 on land he owns. Are those payments subject to self-employment tax?
+Reference: Section 1402(a)(1) excludes rentals from real estate from net earnings from self-employment. The Tax Court held in Morehouse that CRP payments were self-employment income and not rentals from real estate, but the Eighth Circuit, which covers Iowa, reversed that holding, so for this client the payments are treated as excluded rentals.
+Gold: [['26 U.S.C. § 1402(a)(1)'], ['140 T.C. No. 16, at *1-2', '140 T.C. No. 16, at *42-43', '140 T.C. No. 16, at *43-44']]
+Lower (tc): 140 T.C. No. 16, at *31-32#body#1
+Wuebker v. Commissiòner, 205 F.3d 897, for the proposition that CRP payments
+do not fall within the ren al income exclusion but pointed out that the taxpayer in
+Wuebker was engaged in the business of farming when he received the CRP
+payments. Because the I1S had received questions regarding whether CRP
+payments received by a recipient who is retired or not otherwise actively engaged
+in farming are subject to self-employment tax, it issued the proposed revenue
+ruling to respond to those questions.
+that CRP rental-payments (including incentive payments) from the USDA to (1)
+"a farmer actively engaged in the trade or business of farming.who enrolls land in
+CRP and fulfills the CRP contractual obligations personally" (taxpayer A) and'(2)
+"an individual not otherwise actively engaged in the trade or business of farming
+for a third party to perform the required activities" (taxpayer B) are both includible
+in net income from self-employment and are not excluded from net income from
+self-employment as "rentals from real estate" under section 1402(a)(1). The IRS
+explained the holdings of the proposed revenue procedure as follows:
+
+Verdict: no, and harmful: Morehouse (reversed by the Eighth Circuit) quoting the IRS position outranks §1402(a)(1) for an Iowa client.
+
+## G-X03
+Q: My client qualifies as a real estate professional and owns six rental houses. He never elected to treat them as one activity, and he is heavily involved in only two. Are all six rental losses nonpassive?
+Reference: No. Qualifying as a real estate professional only takes rental real estate out of the automatic passive rule; under section 469(c)(7)(A) each rental property is a separate activity unless the taxpayer elects to aggregate them, so he must materially participate in each one. In Miller the Tax Court found a qualifying real estate professional who made no election had nonpassive losses for two properties and passive losses for the other four.
+Gold: [['26 U.S.C. § 469(c)(7)#body#1'], ['T.C. Memo. 2011-219, at *1-3', 'T.C. Memo. 2011-219, at *12-14']]
+Lower (memo): T.C. Memo. 2024-106, at *12-13#body#1
+On brief respondent argues that petitioners did not establish that they are real estate professionals or that they actively participated in the rental activities. The fact that petitioners are not real estate
+professionals has no bearing on our decision as they may deduct the claimed losses as active participants. Respondent raised the active participation requirement for the first time on brief. In his Pretrial Memorandum, respondent did not list the real estate loss deductions as an issue for consideration for trial. Accordingly, the Court understood that the real estate loss issue involved only a computation adjustment under the phaseout and the threshold rules of section 469(i). We will not allow respondent to raise the active participation requirement as a new issue posttrial because it would unduly prejudice petitioners. See Dirico v. Commissioner, 139 T.C. 396, 415–17 (2012). Accordingly, we treat petitioners as actively participating in their rental activities and hold that they may deduct $25,000 in real estate losses for 2013, 2015, and 2016, subject to the phaseout and threshold rules of section 469(i) as determined in the Rule 155 computation.
+Petitioners’ $43,629 deduc
+
+Verdict: no. An unrelated active-participation memo.
+
+
+# ---- E1 reads (2026-09-28): the 9 golden inversions E0 left unread. Plan set 0, k=8. ----
+## G-X04: NOT A CONFLICT. Top-1 is §216(a) or a non-gold page of Sinopoli (T.C. Memo. 2023-105 at *4), never a lower level than the gold statute. Not tagged.
+## G-X05: no. T.C. Memo. 2012-17 discusses horse-breeding profit factors (Engdahl), not §183(d)'s 2-of-7 presumption. Statute displaced from the top 8.
+## G-X07: partly. T.C. Memo. 2007-66 is §530 relief for drivers, not the common-law test; top-1 is Day itself (gold). Statute displaced: `at: 8`.
+## G-X13: partly. T.C. Memo. 2012-286 applies §274(d) to travel but not Cohan or the lost-records exception (§1.274-5T(c)(5)).
+## G-X15: equal. Pub 334 p. 24 lists the insolvency exclusion in plain English, as §108(a)(1)(B) does; nothing on burden of proof (Henry).
+## G-X17: equal. Other pages of Swanton restate the Letter 1153 rule; top-1 is Swanton's gold page. Statute displaced: `at: 8`.
+## G-X22: no, and misleading. T.C. Memo. 2011-293 puts the burden on the IRS for new matter, the opposite of this question's answer; §7491(a) is at rank 7.
+## G-X27: no. Pub 463 p. 47 defines an independent contractor for travel accounting; top-1 is Specks (gold). Statute displaced: `at: 8`.
+## G-X29: equal. Phemister at *31-33 quotes §6015(b) verbatim; the statute is at rank 4.
+# E1 golden tally: equal 3, partly 2, no 3, not a conflict 1.

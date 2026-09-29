@@ -4,7 +4,7 @@
 import re
 import xml.etree.ElementTree as ET
 
-from taxcite.chunk import Chunk, estimate_tokens, renumber
+from taxcite.chunk import Chunk, estimate_tokens, expiry, renumber, sunset
 
 MAX_TOKENS = 500
 MAX_TABLE_CELLS = 100
@@ -186,6 +186,10 @@ def chunk_section(section, as_of: str, source: str = "ecfr") -> list[Chunk]:
         for i, cells in enumerate(oversized, 1)
     ]
     chunks.extend(make(lbl, text, part=i) for lbl, text, i in pack(body, number))
+    if expiry("\n".join(c.text for c in chunks), as_of) == "whole" or (  # its own clause ended it (E2),
+            number.endswith("T") and sunset(cita, as_of)):                   # or §7805(e)(2) did (E3)
+        for c in chunks:
+            c.excluded = c.excluded or "expired"
     return renumber(chunks)
 
 

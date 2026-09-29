@@ -5,12 +5,17 @@ Qdrant. Dense vectors come from a local embedding model, sparse vectors from
 BM25, and both live in one collection so a single query can fuse them (ADR-6).
 """
 
+import json
 import os
 import time
 import uuid
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 
+from psycopg.types.json import Jsonb
 from qdrant_client import QdrantClient, models
+
+from taxcite import store
+from taxcite.chunk import Chunk, authority, expiry, revision, sunset
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 COLLECTION = os.environ.get("QDRANT_COLLECTION", "chunks")
@@ -24,7 +29,7 @@ BATCH = 16
 NAMESPACE = uuid.UUID("6f1d4f9a-6a5e-5f1e-9a8b-2c3d4e5f6a7b")  # fixed: point ids must be reproducible
 
 ROWS_SQL = """
-    SELECT key, citation, part, section, heading, text, tokens, source, as_of, effective
+    SELECT key, citation, part, section, heading, text, tokens, source, as_of, effective, authority
     FROM chunks WHERE source = %s AND excluded IS NULL ORDER BY key
 """
 
@@ -112,7 +117,8 @@ def sync(conn, qc: QdrantClient, source: str, name: str = COLLECTION, dense=None
                         "section": r["section"], "heading": r["heading"], "text": r["text"],
                         "tokens": r["tokens"], "source": r["source"], "as_of": str(r["as_of"]),
                     } | ({"edition": e} if (e := edition(r["source"], r["as_of"])) else {})
-                      | ({"effective": r["effective"]} if r.get("effective") else {}),
+                      | ({"effective": r["effective"]} if r.get("effective") else {})
+                      | ({"authority": r["authority"]} if r.get("authority") else {}),
                 )
                 for r, d, s in zip(batch, dvecs, svecs)
             ],
@@ -123,6 +129,63 @@ def sync(conn, qc: QdrantClient, source: str, name: str = COLLECTION, dense=None
 
     removed = sweep(qc, source, {r["key"] for r in rows}, name)
     return {"written": written, "removed": removed}
+
+
+def backfill_authority(conn, qc: QdrantClient, name: str = COLLECTION, sources: Sequence[str] | None = None) -> dict:
+    """E2: the authority profile and `source_revision` for rows stored before E2, without re-embedding.
+
+    The same functions `store.save` uses, so the result is what a re-ingest would store. A regulation whose
+    own clause ended the whole section is re-saved as `expired` through `store.save`: the exclusion reason is
+    part of the key, and save's sweep drops the old rows (D6's trigger keeps them), as a re-ingest would.
+    Qdrant gets one `set_payload` per distinct profile, not one call per point. Idempotent.
+    """
+    cols = ("key, source, citation, part, section, heading, text, tokens, cita, as_of, excluded, "
+            "source_revision, effective, authority")
+    with conn.cursor() as cur:
+        if sources:
+            cur.execute(f"SELECT {cols} FROM chunks WHERE source = ANY(%s)", (list(sources),))
+        else:
+            cur.execute(f"SELECT {cols} FROM chunks")
+        names = [d.name for d in cur.description]
+        rows = [dict(zip(names, r)) for r in cur.fetchall()]
+
+    temporary: dict[str, list[dict]] = {}
+    for r in rows:
+        if r["source"] == "ecfr" and r["section"].endswith("T"):
+            temporary.setdefault(r["section"], []).append(r)
+    ended = {s: "whole" if sunset(rs[0]["cita"], rs[0]["as_of"]) else expiry("\n".join(r["text"] for r in rs), rs[0]["as_of"])
+             for s, rs in temporary.items()}  # §7805(e)(2) first (E3), then the regulation's own clause
+
+    expired: list[str] = []  # keys that were indexable and now aren't
+    for section, rs in temporary.items():
+        if ended[section] == "whole" and any(r["excluded"] != "expired" for r in rs):
+            store.save(conn, [Chunk(r["citation"], r["section"], r["heading"], r["text"], r["tokens"], r["cita"],
+                                    str(r["as_of"]), r["excluded"] or "expired", r["part"], r["source"],
+                                    r["source_revision"], r["effective"]) for r in rs])
+            expired += [r["key"] for r in rs if not r["excluded"]]
+    resaved = {r["key"] for s, rs in temporary.items() if ended[s] == "whole" for r in rs}
+
+    updates, groups = [], {}
+    for r in rows:
+        if r["key"] in resaved:
+            continue
+        profile = authority(r["source"], r["citation"], r["section"], ended.get(r["section"]) == "partly")
+        rev = r["source_revision"] or revision(r["source"], r["as_of"])
+        if r["authority"] != profile or r["source_revision"] != rev:
+            updates.append((Jsonb(profile), rev, r["key"]))
+        if not r["excluded"]:
+            groups.setdefault(json.dumps(profile, sort_keys=True), []).append(point_id(r["key"]))
+    with conn.cursor() as cur:
+        cur.executemany("UPDATE chunks SET authority = %s, source_revision = %s WHERE key = %s", updates)
+    conn.commit()
+
+    if expired:
+        qc.delete(name, points_selector=models.PointIdsList(points=[point_id(k) for k in expired]))
+    for profile, ids in groups.items():
+        for i in range(0, len(ids), 1000):
+            qc.set_payload(name, payload={"authority": json.loads(profile)}, points=ids[i:i + 1000])
+    return {"rows": len(rows), "updated": len(updates), "expired": expired,
+            "points": sum(len(ids) for ids in groups.values())}
 
 
 def upsert_with_retry(qc: QdrantClient, name: str, points: list, attempts: int = 3) -> None:

@@ -94,3 +94,14 @@ def test_selection_dedupes_by_citation_and_keeps_the_newest(monkeypatch):
 def test_number_only_pieces_fold_into_the_next_paragraph():
     paras = [(3, "5."), (3, "are liable for additions to tax;"), (3, "$3,234"), (4, "Text."), (4, "12.")]
     assert caselaw.fold_numbers(paras) == [(3, "5. are liable for additions to tax;"), (4, "$3,234 Text."), (4, "12.")]
+
+def test_a_corrected_reissue_keeps_the_opinions_own_filing_date(monkeypatch):
+    """E3 (Estate of Caan): DAWSON lists the correction's date; the opinion says when it was filed."""
+    monkeypatch.setattr(caselaw, "paragraphs", lambda path: [(1, "CORRECTED 161 T.C. No. 6"), (1, "Filed October 18, 2023.")]
+                        + [(2, "word " * 400)])
+    op = {**MEMO, "documentTitle": "T.C. Opinion Judge Copeland (Corrected)161 T.C. No. 6", "filingDate": "2023-11-14T19:26:22Z"}
+    chunks = caselaw.parse(Path("unused.pdf"), op)
+    assert {(c.as_of, c.source_revision) for c in chunks} == {("2023-10-18", "filed 2023-10-18; corrected 2023-11-14")}
+    upper = {**op, "documentTitle": "Memorandum Opinion Judge Lauber CORRECTED Opinion - T.C. Memo. 2025-97"}
+    assert {c.as_of for c in caselaw.parse(Path("unused.pdf"), upper)} == {"2023-10-18"}  # DAWSON's other spelling
+    assert {c.as_of for c in caselaw.parse(Path("unused.pdf"), MEMO)} == {MEMO["filingDate"][:10]}  # not corrected: DAWSON's date

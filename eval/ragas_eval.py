@@ -156,18 +156,41 @@ def judge_claims(claims: list[str], contexts: list[dict], model: str, budget: Bu
             for i in range(len(claims))]
 
 
+PROMPTS = ("shipped", "pre-e5", "labels", "labels+rule4", "labels+rule4b")
+
+
+def set_prompt(arm: str) -> None:
+    """E5's prompt arms, each built from the pre-E5 prompt: "pre-e5" is it unchanged (what "shipped" meant
+    before E5 shipped (ii′)); "labels" adds each source's authority label; "labels+rule4" also widens rule 4;
+    "labels+rule4b" is (ii′), which now ships, so "shipped" leaves the module as it is. Use a separate
+    --answers-cache per arm: cached answers don't know their prompt."""
+    if arm == "shipped":
+        return
+    from taxcite import generate as g
+    rule = {"labels+rule4": g.RULE_4_AUTHORITY, "labels+rule4b": g.RULE_4_AUTHORITY_B}.get(arm, g.RULE_4)
+    g.SOURCE_LABELS = arm != "pre-e5"
+    g.RAG_SYSTEM = g.PRE_E5_SYSTEM.replace(g.RULE_4, rule)
+
+
 def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: int,
-                    plans: dict | None = None, plan_path: Path | None = None) -> dict:
+                    plans: dict | None = None, plan_path: Path | None = None, plan_set: int = 0) -> dict:
     """Run the full pipeline once per run index and reuse it, so re-judging is free.
 
     The plan is pinned from the shared cache (plan set 0), not made fresh each time. Without
     that the planner re-routes 16% of golden questions between runs and the faithfulness score
     moves by sd 0.030 -- wide enough to swallow the 0.05 a broken prompt costs, which would
     leave the gate unable to tell a regression from a Tuesday (log #49).
+
+    `plan_set` pins another cached plan set instead (E5: one answer per plan set is the variance that
+    reaches synthesis, which runs at temperature 0). Each cached answer records its plan set, and a cache
+    built with another one is refused rather than silently reused.
     """
     runs = cache.setdefault(question, [])
+    if run < len(runs) and runs[run].get("plan_set", 0) != plan_set:
+        raise ValueError(f"answer {run} of {question[:40]!r} is cached from plan set {runs[run].get('plan_set', 0)}, "
+                         f"not {plan_set}: use another --answers-cache")
     while len(runs) <= run:
-        pinned = cached_decompose(question, plans, plan_path, 0) if plans is not None else None
+        pinned = cached_decompose(question, plans, plan_path, plan_set if len(runs) == run else 0) if plans is not None else None
         plan, answer = dc.answer(question, k=k, plan=pinned)
         runs.append({
             "text": answer.text,
@@ -177,6 +200,7 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
             "contexts": [{"citation": h.citation, "text": h.text} for h in answer.retrieved],
             "cost_usd": answer.cost_usd + plan.cost_usd,
             "model": answer.model,
+            "plan_set": plan_set if len(runs) == run else 0,
         })
         if path:
             path.write_text(json.dumps(cache, indent=2))
@@ -227,6 +251,7 @@ def main() -> int:
     ap.add_argument("--max-refusal-rate", type=float, metavar="RATE",
                     help="exit non-zero if the mean refusal rate is above this; the faithfulness mean excludes refusals")
     ap.add_argument("--answers-cache", default=str(ANSWERS), help="'' regenerates every run")
+    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's synthesis prompt arm")
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json",
                     help="pin decompositions from this cache; '' re-plans every run (noisy)")
     ap.add_argument("--pin-answers", action="store_true",
@@ -234,6 +259,7 @@ def main() -> int:
                          "from the pipeline's (the gate needs to know which half to pin)")
     args = ap.parse_args()
 
+    set_prompt(args.prompt)
     rows = [json.loads(line) for line in open(args.questions) if line.strip()]
     rows = [r for r in rows if r.get("scored_from") == "B"]
     if args.limit:
@@ -292,7 +318,10 @@ def main() -> int:
                     print(f"      unsupported: {claim[:96]}")
                     print(f"                   why: {str(v.get('why'))[:90]}")
 
-    out = RESULTS / f"ragas-{date.today()}.json"
+    # named by question set and answer cache, like the temporal scorer: same-day arms used to overwrite each other
+    stem = Path(args.answers_cache).stem if args.answers_cache else ANSWERS.stem
+    tag = "" if stem == ANSWERS.stem else f"-{stem}"
+    out = RESULTS / f"ragas-{Path(args.questions).stem}-{date.today()}{tag}.json"
     out.write_text(json.dumps({
         "judge": args.judge, "k": args.k, "repeats": args.repeats, "gate": GATE,
         "questions": args.questions, "stopped": stopped,

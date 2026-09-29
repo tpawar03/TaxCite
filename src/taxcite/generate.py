@@ -44,6 +44,58 @@ Rules:
 4. Regulations and statute outrank IRS publications. Where they differ, follow the regulation and say so.
 5. Be brief: a practitioner wants the rule and the citation, not an essay."""
 
+RULE_4 = "4. Regulations and statute outrank IRS publications. Where they differ, follow the regulation and say so."
+# E5's candidate (ii): the same rule over every level E2 labels; measured on dev before it replaces RULE_4
+RULE_4_AUTHORITY = ("4. Each source is labelled with its authority. Where sources disagree, the higher authority "
+                    "governs: statute and regulation, then a reported Tax Court opinion, then a Tax Court memorandum "
+                    "opinion, then an IRS publication. Say which you followed. A lower source may explain the rule in "
+                    "plain words, but cite the higher source for the rule itself.")
+# (ii′), after dev: (ii) without its last sentence. "Cite the higher source for the rule itself" made the model
+# cite a publication's own words to the statute (D08: faithfulness 0.67 -> 0.25), a misattribution
+RULE_4_AUTHORITY_B = RULE_4_AUTHORITY.removesuffix(" A lower source may explain the rule in plain words, but cite "
+                                                   "the higher source for the rule itself.")
+assert RULE_4 in RAG_SYSTEM and RULE_4_AUTHORITY_B.endswith("Say which you followed.")
+# (ii′) ships (E5, your decision). Dev's pre-registered rule 3 chose (ii) on "authority_misweighted" tags, 1 of 50
+# vs (ii′)'s 4, a margin inside one row's flip; (ii) demonstrably cited a publication's words to the statute
+# (D08), which its grounding rule couldn't see. (ii′): grounded 0.645 -> 0.789, dev faithfulness 0.835 ± 0.043
+# vs 0.821 ± 0.015 before. Recorded as a departure from rule 3.
+PRE_E5_SYSTEM = RAG_SYSTEM
+RAG_SYSTEM = PRE_E5_SYSTEM.replace(RULE_4, RULE_4_AUTHORITY_B)
+
+# E5: what an authority profile is called, wherever it's shown. One fixed map, fed only by E2's structured
+# profile, never by what a source's text says about itself (ADR-13, FR-14): a document can't promote itself.
+LABELS = {
+    ("statute", "enacted"): "Statute",
+    ("regulation", "final"): "Treasury regulation",
+    ("regulation", "temporary"): "Treasury regulation (temporary)",
+    ("regulation", "temporary_partly_expired"): "Treasury regulation (temporary)",
+    ("regulation", "final_prior_version"): "Treasury regulation (earlier version)",
+    ("opinion", "reported"): "Tax Court opinion (reported)",
+    ("opinion", "memorandum"): "Tax Court memorandum opinion",
+    ("publication", "not_binding"): "IRS publication (not binding)",
+}
+UNKNOWN_AUTHORITY = {"type": "unknown", "status": "unknown", "level": 0}
+SOURCE_LABELS = True  # E5: each source's header carries its authority label (on with (ii′))
+
+
+def authority_label(profile: dict | None) -> str:
+    p = profile or {}
+    return LABELS.get((p.get("type"), p.get("status")), "Authority unknown")
+
+
+def authorities(answer: "Answer") -> dict[str, dict]:
+    """Each cited source's authority and label, for the API (E5): an exact citation from its retrieved chunk, a
+    derived one (another paragraph of a retrieved section) from that section's chunk, anything else unknown."""
+    exact = {h.citation: h for h in answer.retrieved}
+    section: dict[str, Hit] = {}
+    for h in answer.retrieved:
+        section.setdefault(section_of(h.citation), h)
+    found = {c: exact.get(c) or section.get(section_of(c)) for c in answer.citations + answer.derived_citations}
+    found |= {c: None for c in answer.unsupported_citations}
+    return {c: {**((h.authority if h else None) or UNKNOWN_AUTHORITY), "label": authority_label(h.authority if h else None)}
+            for c, h in found.items()}
+
+
 # Only for a question with a tax year (D7). Given to every question it made the model refuse 40 of 96
 # golden rows that name no year, faithfulness's refusal rate going 0.13 -> 0.55; the gate itself still
 # passed, because refusals are outside its mean.
@@ -95,8 +147,9 @@ def effective_note(h: Hit, year: int | None) -> str:
 
 
 def format_sources(hits: list[Hit], year: int | None = None) -> str:
+    label = lambda h: f"\nAuthority: {authority_label(h.authority)}" if SOURCE_LABELS and h.authority else ""  # noqa: E731
     return "\n\n".join(
-        f"[{h.citation}] ({h.heading}){effective_note(h, year)}\n{h.text}" for h in hits
+        f"[{h.citation}] ({h.heading}){label(h)}{effective_note(h, year)}\n{h.text}" for h in hits
     )
 
 

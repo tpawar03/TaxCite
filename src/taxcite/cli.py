@@ -231,7 +231,7 @@ def run_search(args: argparse.Namespace) -> int:
 
 
 def run_ask(args: argparse.Namespace) -> int:
-    from taxcite.generate import MissingCredentials, answer
+    from taxcite.generate import MissingCredentials, answer, authorities
 
     from taxcite.generate import MODEL
 
@@ -245,7 +245,10 @@ def run_ask(args: argparse.Namespace) -> int:
     if result.refused:
         print("  [refused: insufficient evidence]")
     if result.citations:
-        print(f"  citations ({len(result.citations)}): " + "; ".join(result.citations))
+        labels = authorities(result)
+        print(f"  citations ({len(result.citations)}):")
+        for c in result.citations + result.derived_citations:
+            print(f"    {c}  [{labels[c]['label']}]")
     if result.unsupported_citations:
         print("  !! citations not in the retrieved sources: " + "; ".join(result.unsupported_citations))
     print(f"  {result.model} · {result.mode} · {result.input_tokens} in / {result.output_tokens} out "
@@ -265,6 +268,20 @@ def load_citations(args: argparse.Namespace) -> int:
         r = citations.load(conn, token, args.recheck)
     print(f"  {r['citations']} citations to {r['cited']} Tax Court opinions; "
           f"{r['corpus']} treatments from subsequent history; {r['appeals']} held opinions appealed; {time.time() - t0:.0f}s")
+    return 0
+
+
+def backfill_authority(args: argparse.Namespace) -> int:
+    """E2: give rows stored before E2 their authority profile and source revision, without re-embedding."""
+    with store.connect() as conn:
+        store.create_table(conn)
+        r = index.backfill_authority(conn, index.client())
+        print(f"  {r['rows']} rows read, {r['updated']} updated, {r['points']} points given a profile")
+        print(f"  expired, removed from the index: {len(r['expired'])} {r['expired']}")
+        for kind, status, n in conn.execute(
+                "SELECT authority->>'type', authority->>'status', count(*) FROM chunks WHERE excluded IS NULL "
+                "GROUP BY 1, 2 ORDER BY 1, 2").fetchall():
+            print(f"  {kind or 'NO PROFILE':12} {status or '':26} {n}")
     return 0
 
 
@@ -304,6 +321,9 @@ def main(argv: list[str] | None = None) -> int:
     cite.add_argument("--recheck", action="store_true",
                       help="re-query CourtListener for opinions filed in the last 3 years (others come from cache)")
     cite.set_defaults(func=load_citations)
+
+    auth = sub.add_parser("authority", help="backfill authority profiles and source revisions (E2; no re-embedding)")
+    auth.set_defaults(func=backfill_authority)
 
     find = sub.add_parser("search", help="search the indexed corpus")
     find.add_argument("query")

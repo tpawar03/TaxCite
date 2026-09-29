@@ -6,6 +6,7 @@ from taxcite import index, store
 from taxcite.ingest.ecfr import parse
 
 COLLECTION = "chunks_test"
+CITE = "26 CFR 1.test-1(a)-(b)"
 SECTION = """<ECFR><DIV8 N="1.test-1" TYPE="SECTION">
   <HEAD>§ 1.test-1 Home office deduction.</HEAD>
   <P>(a) <I>General rule.</I> A taxpayer may deduct expenses for business use of a home.</P>
@@ -110,3 +111,27 @@ def test_a_broken_qdrant_still_raises():
 
     with pytest.raises(Exception):
         index.count(QdrantClient(url="http://localhost:1", timeout=2), name="anything")
+
+
+def test_payload_carries_the_authority_profile_into_hits(ctx, models_):
+    from taxcite.retrieve import search
+    conn, qc = ctx
+    store.save(conn, chunks())
+    sync(conn, qc, models_)
+    (hit,) = search("home office deduction", k=1, collection=COLLECTION, qc=qc)
+    assert hit.authority == {"type": "unknown", "status": "unknown", "level": 0}
+
+
+def test_backfill_fills_rows_stored_before_e2_and_is_idempotent(ctx, models_):
+    conn, qc = ctx
+    store.save(conn, chunks())
+    sync(conn, qc, models_)
+    conn.execute("UPDATE chunks SET authority = NULL WHERE source = 'test'")  # as a pre-E2 row
+    conn.commit()
+    qc.delete_payload(COLLECTION, keys=["authority"], points=[index.point_id(f"{CITE}#body#1")])
+    first = index.backfill_authority(conn, qc, COLLECTION, sources=["test"])
+    assert (first["updated"], first["points"], first["expired"]) == (1, 1, [])
+    assert index.backfill_authority(conn, qc, COLLECTION, sources=["test"])["updated"] == 0
+    (point,) = qc.retrieve(COLLECTION, [index.point_id(f"{CITE}#body#1")])
+    assert point.payload["authority"]["level"] == 0
+    assert conn.execute("SELECT count(*) FROM chunk_versions WHERE source = 'test'").fetchone()[0] == 0  # no text change

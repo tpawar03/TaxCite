@@ -286,7 +286,7 @@ def appeal(client: httpx.Client, op: dict, recheck: bool = False) -> tuple[str, 
             for o in get(client, "/opinions/", cluster=hit["cluster_id"])["results"])})["text"]
         if is_appeal(op, hit, text):
             by = appeal_label((hit["citation"] or [hit["caseName"]])[0], hit["court_id"], hit["dateFiled"][:4])
-            return ruling(text) or "appealed", by, found["fetched"]
+            return ruling(text) or "decided", by, found["fetched"]  # decided on appeal; the ruling didn't parse
     return "none", "", found["fetched"]
 
 
@@ -311,7 +311,15 @@ def upsert(conn, source: str, rows: list[tuple[str, str, str, datetime]]) -> Non
 STALE_DAYS = 7  # the weekly refresh the intent doc allows; Phase H schedules it
 NEGATIVE = ("overruled", "reversed", "vacated", "reversed in part", "vacated in part")  # most serious first
 POSITIVE = ("affirmed in part", "affirmed", "dismissed")
-SOURCES = {"courtlistener": "CourtListener", "corpus": "later Tax Court opinions"}
+SOURCES = {"courtlistener": "CourtListener", "corpus": "later Tax Court opinions", "manual": "a hand-checked record"}
+# Treatment one appeal deep misses a reversal that was itself reversed. Hand-entered where known, with the
+# evidence; it overrides the other sources (E3). (citation, kind, by, note)
+MANUAL = [
+    ("T.C. Memo. 2002-5", "upheld", "Commissioner v. Banks, 543 U.S. 426 (2005)",
+     "Upheld: the Ninth Circuit reversed in part (340 F.3d 1074 (ca9 2003)), and the Supreme Court reversed the "
+     "Ninth Circuit in Commissioner v. Banks, 543 U.S. 426 (2005), decided with Banaitis: a litigant's income "
+     "includes the contingent fee paid to the attorney. T.C. Memo. 2025-80 at *11 states the rule from Banks."),
+]
 
 
 def flag(rows: list[tuple[str, str, str, datetime]], now: datetime) -> dict:
@@ -323,18 +331,24 @@ def flag(rows: list[tuple[str, str, str, datetime]], now: datetime) -> dict:
     if not rows:
         return {"status": "unknown", "by": "", "sources": [], "checked_at": None, "stale": True,
                 "note": "No appeal check on record for this opinion."}
+    if manual := [r for r in rows if r[0] == "manual"]:
+        _, kind_, by, checked = manual[0]
+        note = next(n for _, k, b, n in MANUAL if b == by)
+        return {"status": kind_, "by": by, "sources": [SOURCES["manual"]], "checked_at": f"{checked:%Y-%m-%d}",
+                "stale": False, "note": note}
     kinds = {k for _, k, _, _ in rows if k != "none"}
     neg, pos = [k for k in NEGATIVE if k in kinds], [k for k in POSITIVE if k in kinds]
     status = ("overruled" if "overruled" in kinds else "unknown" if (neg and pos) or "unknown" in kinds
-              else neg[0] if neg else "appealed" if "appealed" in kinds else pos[0] if pos else "none")
+              else neg[0] if neg else "decided" if kinds & {"decided", "appealed"} else pos[0] if pos else "none")
     # the appeal to name: CourtListener's first, it is the primary source (C1)
-    by = next((b for s, k, b, _ in sorted(rows, key=lambda r: r[0] != "courtlistener") if k == status), "")
+    by = next((b for s, k, b, _ in sorted(rows, key=lambda r: r[0] != "courtlistener")
+               if k == status or (status == "decided" and k == "appealed")), "")  # "appealed": rows from before E3
     checked = max(t for _, _, _, t in rows)
     names = [SOURCES[s] for s in sorted({s for s, _, _, _ in rows})]
     notes = {"none": f"No negative treatment found in {' or '.join(names)} as of {checked:%Y-%m-%d}. "
                      "Pending appeals are not tracked.",
              "unknown": "The sources disagree about this opinion's appeal; check it before relying on it.",
-             "appealed": f"Appealed ({by}); the outcome could not be read."}
+             "decided": f"Decided on appeal ({by}); the outcome could not be read. Check it before relying on this opinion."}
     return {"status": status, "by": by, "sources": names, "checked_at": f"{checked:%Y-%m-%d}",
             "stale": now - checked > timedelta(days=STALE_DAYS),
             "note": notes.get(status, f"{status.capitalize()} by {by}.")}
@@ -378,6 +392,7 @@ def load(conn, token: str | None = None, recheck: bool = False) -> dict:
     upsert(conn, "corpus", [(key, ks.pop() if len(ks) == 1 else "unknown", by, checked[(key, by)])
                             for (key, by), ks in seen.items()])
 
+    upsert(conn, "manual", [(c, k, b, datetime.now(timezone.utc)) for c, k, b, _ in MANUAL])
     appeals = 0
     if token:
         with httpx.Client(headers={"User-Agent": USER_AGENT, "Authorization": f"Token {token}"}, timeout=60) as client:
