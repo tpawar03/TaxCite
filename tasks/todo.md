@@ -1430,7 +1430,7 @@ Plan: `tasks/plan.md` (Phase E). Test command: `uv run pytest -q`. Every task le
 
 **Verification:**
 - [x] Every number reproducible from one command (`eval/e0_authority.py`) and its output in `eval/results/phase-e-e0-authority.json`; the hand reads in `phase-e-e0-reads.txt`
-- [ ] You read the D32 tally and ≥3 candidate conflict rows (Checkpoint 1)
+- [x] You read the D32 tally and ≥3 candidate conflict rows (Checkpoint 1): E0 confirmed by you, 2026-09-28
 
 **Done 2026-09-28** (`eval/results/phase-e-e0-authority.json`, `phase-e-e0-reads.txt`; 86 rows × 5 plan sets, 27 min, no API calls. The 11 temporal rows have one cached plan set, so they're out of the 5-set run; a 1-set run had 1 inverted and 1 displaced of 11.)
 
@@ -1526,13 +1526,13 @@ Part 3, conflict rows. **Definition:** a question where a retrieved, relevant so
 4. **Scan 2, across sets:** no citation shared between golden and dev (checked against pilot too). Every kind is present on dev. Gold widened where a publication states the same rule, because a publication can be gold without being the controlling source.
 
 **Acceptance criteria:**
-- [ ] Composition as the table above (or the shortfall stated per kind, with the reason)
-- [ ] `validate_pilot.py` passes both sets, and it now also checks `authority`: every `controls` entry is in the row's gold, and every `controls`, `competes` and `keep` entry exists in the corpus
-- [ ] Each tagged row records whether a `controls` source is in the pool at k=20 on a live-planner plan. Out-of-reach rows are kept, and counted separately in E4 (they're what deeper search is for)
-- [ ] No citation shared between sets; golden edits in logged commits you review
+- [x] Composition as the table above (or the shortfall stated per kind, with the reason): golden 24 + 8, dev 10 + 8; shortfalls in reported-over-memo and dev reviewing-court stated with reasons
+- [x] `validate_pilot.py` passes both sets (0/116, 0/42), and it now also checks `authority`: every `controls` entry is in the row's gold, and every `controls`, `competes` and `keep` entry exists in the corpus
+- [x] Each tagged row records whether a `controls` source is in the pool at k=20 on a live-planner plan (`auth_in_pool` in E4's baseline, 5 live-planner plan sets, k=8 and k=20). Out-of-reach rows are kept, and counted separately in E4 (they're what deeper search is for)
+- [x] No citation shared between sets; golden edits in logged commits you review (`598f338`, `31b195e`, `570b113`; G-C27's untag in `0edc64f`)
 
 **Verification:**
-- [ ] Manual: you approve every row (Checkpoint 1), including the tags on existing golden rows
+- [x] Manual: you approve every row (Checkpoint 1), including the tags on existing golden rows (approved 2026-09-28)
 
 **Progress 2026-09-28: the 18 unread cases are read; 23 golden + 9 dev tags approved and applied, and D14's answer fixed (approved).** Only the `authority` field changed on tagged rows (and `answer` on D14), checked against HEAD; validator 0/115 and 0/39; 219 tests pass.
 - **Verdicts** (in `phase-e-e0-reads.txt` and `phase-e-e0-reads-dev.txt`):
@@ -2000,13 +2000,13 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - [x] **Faithfulness gate re-run** (E4 changed what synthesis reads, E5 changed the prompt): ≥ 0.855, refusals ≤ 0.25: **PASS locally, 0.886 ± 0.014 at refusals 0.127** (5 runs, CI's command); **PASS in CI on `corpus-2026-09-29`: 0.894 ± 0.015 at refusals 0.113** (run 36521320779).
 
 **Verification:**
-- [ ] Tests:
+- [x] Tests (`test_generate.py`: label map, derived label, spoof, headers; `test_temporal.py`: samples, plan-set guard):
   - the label map covers every status E2 produces, and unknown
   - a derived citation takes its section's label
   - the spoof test
   - the prompt headers carry the label only where a profile exists
   - samples map to plan sets
-- [ ] `uv run pytest -q` passes
+- [x] `uv run pytest -q` passes (258)
 
 **Step 0 and both candidates measured on dev (2026-09-28):**
 - `--rows authority --samples 5` and `--prompt` built and tested. Faithfulness results are now named by question set and answer cache.
