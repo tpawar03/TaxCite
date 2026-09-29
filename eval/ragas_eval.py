@@ -156,16 +156,20 @@ def judge_claims(claims: list[str], contexts: list[dict], model: str, budget: Bu
             for i in range(len(claims))]
 
 
-PROMPTS = ("shipped", "labels", "labels+rule4", "labels+rule4b")
+PROMPTS = ("shipped", "pre-e5", "labels", "labels+rule4", "labels+rule4b")
 
 
 def set_prompt(arm: str) -> None:
-    """E5's prompt arms: "labels" puts each source's authority label in its header; "labels+rule4" also
-    widens rule 4 to every level. Use a separate --answers-cache per arm: cached answers don't know their prompt."""
+    """E5's prompt arms, each built from the pre-E5 prompt: "pre-e5" is it unchanged (what "shipped" meant
+    before E5 shipped (ii′)); "labels" adds each source's authority label; "labels+rule4" also widens rule 4;
+    "labels+rule4b" is (ii′), which now ships, so "shipped" leaves the module as it is. Use a separate
+    --answers-cache per arm: cached answers don't know their prompt."""
+    if arm == "shipped":
+        return
     from taxcite import generate as g
-    g.SOURCE_LABELS = arm != "shipped"
-    if arm in ("labels+rule4", "labels+rule4b"):  # (ii), and (ii′) without its "cite the higher source" clause
-        g.RAG_SYSTEM = g.RAG_SYSTEM.replace(g.RULE_4, g.RULE_4_AUTHORITY if arm == "labels+rule4" else g.RULE_4_AUTHORITY_B)
+    rule = {"labels+rule4": g.RULE_4_AUTHORITY, "labels+rule4b": g.RULE_4_AUTHORITY_B}.get(arm, g.RULE_4)
+    g.SOURCE_LABELS = arm != "pre-e5"
+    g.RAG_SYSTEM = g.PRE_E5_SYSTEM.replace(g.RULE_4, rule)
 
 
 def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: int,

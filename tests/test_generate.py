@@ -181,7 +181,23 @@ def test_source_headers_carry_the_label_only_when_switched_on_and_profiled(monke
     profiled = Hit(citation="26 U.S.C. § 1", heading="h", text="t", section="1", source="usc", score=1.0,
                    authority={"type": "statute", "status": "enacted", "level": 4})
     bare = Hit(citation="26 U.S.C. § 2", heading="h", text="t", section="2", source="usc", score=1.0)
-    assert "Authority:" not in g.format_sources([profiled])               # shipped: off
-    monkeypatch.setattr(g, "SOURCE_LABELS", True)
-    out = g.format_sources([profiled, bare])
+    out = g.format_sources([profiled, bare])                               # shipped with (ii′): on
     assert "[26 U.S.C. § 1] (h)\nAuthority: Statute" in out and out.count("Authority:") == 1
+    monkeypatch.setattr(g, "SOURCE_LABELS", False)
+    assert "Authority:" not in g.format_sources([profiled])
+
+
+def test_the_shipped_prompt_is_ii_prime_and_the_eval_arms_rebuild_from_pre_e5(monkeypatch):
+    """E5: (ii′) ships; every eval arm is built from the pre-E5 prompt, so "pre-e5" reproduces the baseline."""
+    import sys
+    from pathlib import Path
+    from taxcite import generate as g
+    sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
+    from ragas_eval import set_prompt
+    assert g.RULE_4_AUTHORITY_B in g.RAG_SYSTEM and g.RULE_4 not in g.RAG_SYSTEM and g.SOURCE_LABELS
+    monkeypatch.setattr(g, "RAG_SYSTEM", g.RAG_SYSTEM)
+    monkeypatch.setattr(g, "SOURCE_LABELS", g.SOURCE_LABELS)
+    set_prompt("pre-e5")
+    assert g.RAG_SYSTEM == g.PRE_E5_SYSTEM and not g.SOURCE_LABELS
+    set_prompt("labels+rule4")
+    assert g.RULE_4_AUTHORITY in g.RAG_SYSTEM and "cite the higher source" in g.RAG_SYSTEM

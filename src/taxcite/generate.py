@@ -55,6 +55,12 @@ RULE_4_AUTHORITY = ("4. Each source is labelled with its authority. Where source
 RULE_4_AUTHORITY_B = RULE_4_AUTHORITY.removesuffix(" A lower source may explain the rule in plain words, but cite "
                                                    "the higher source for the rule itself.")
 assert RULE_4 in RAG_SYSTEM and RULE_4_AUTHORITY_B.endswith("Say which you followed.")
+# (ii′) ships (E5, your decision). Dev's pre-registered rule 3 chose (ii) on "authority_misweighted" tags, 1 of 50
+# vs (ii′)'s 4, a margin inside one row's flip; (ii) demonstrably cited a publication's words to the statute
+# (D08), which its grounding rule couldn't see. (ii′): grounded 0.645 -> 0.789, dev faithfulness 0.835 ± 0.043
+# vs 0.821 ± 0.015 before. Recorded as a departure from rule 3.
+PRE_E5_SYSTEM = RAG_SYSTEM
+RAG_SYSTEM = PRE_E5_SYSTEM.replace(RULE_4, RULE_4_AUTHORITY_B)
 
 # E5: what an authority profile is called, wherever it's shown. One fixed map, fed only by E2's structured
 # profile, never by what a source's text says about itself (ADR-13, FR-14): a document can't promote itself.
@@ -69,7 +75,7 @@ LABELS = {
     ("publication", "not_binding"): "IRS publication (not binding)",
 }
 UNKNOWN_AUTHORITY = {"type": "unknown", "status": "unknown", "level": 0}
-SOURCE_LABELS = False  # E5's candidate (i): the label in each source's header; off until dev decides
+SOURCE_LABELS = True  # E5: each source's header carries its authority label (on with (ii′))
 
 
 def authority_label(profile: dict | None) -> str:
