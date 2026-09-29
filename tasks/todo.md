@@ -2069,6 +2069,22 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - To finish: top up the Anthropic credit and re-run the same command. The answers for runs 1–2 and part of run 3 are cached in `pipeline-answers-e5.json` (not committed, like CI's default cache), so only the judge re-runs for those.
 - Still open for E6: the workflow's own note asks for the healthy **and** broken bands to be re-measured after any pipeline change. E4 and E5 are both pipeline changes. Your decision.
 
+**Golden answer metrics, measured once for E6 (2026-09-29)** (`temporal-golden-2026-09-29-e5golden{,-pre}.json`): 32 tagged rows × 5 samples, the pre-E5 prompt and (ii′), E4's retrieval in both.
+
+| golden | pre-E5 | (ii′), shipped |
+|---|---|---|
+| correct, all | 0.356 ± 0.036 | 0.369 ± 0.068 |
+| correct: conflict / guards | 0.267 / 0.625 | 0.275 / 0.650 |
+| grounded | 0.650 | 0.675 |
+| refused | 0.037 | 0.031 |
+| "authority_misweighted", of 120 conflict answers | 9 | 12 |
+| κ | 0.720 | 0.736 |
+
+- **No measurable effect on golden answer quality:** every difference is inside the sample spread. Dev's grounding gain (+0.14) shrank to +0.025. Dominant defect in both arms: `missing_condition` (58–64 of 120).
+- **The misweighting is concentrated in two reviewing-court rows, in both arms:** G-X02 (*Morehouse*, Iowa; 5/5) and G-X09 (*Menard*, Wisconsin; 4–5/5). **Synthesis never sees the appeal outcome:** Phase C put treatment flags beside the answer, not in the prompt, so the model applies a reversed Tax Court holding to a taxpayer in the reversing circuit. An authority label ("Tax Court opinion (reported)") can't carry that.
+- **Handed on (open):** give synthesis the treatment flag in the source header ("reversed by 769 F.3d 616 (8th Cir. 2014)"), from `flags()`, like the label. That's structured data again, so ADR-13 holds. For E6 to list; not built here.
+- Judge: $1.10 + $1.08.
+
 **Dependencies:** E2, E4 (and your snapshot, for the CI faithfulness run)
 **Files:** `src/taxcite/generate.py` (headers, rule 4, the label map), `src/taxcite/jobs.py` (`authorities`), `src/taxcite/cli.py` (`ask` output), `eval/temporal.py` (`--rows`, `--samples`), `tests/`
 **Scope:** M

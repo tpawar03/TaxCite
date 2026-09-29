@@ -450,7 +450,7 @@ Full task details are in `tasks/todo.md` (Phase E section).
 
 ### Slice 3 — Ranking and answers
 - [x] E4: Authority-weighted rerank: scoped prior 0.5 shipped; golden conflict criterion **not met** (2.2/23 vs 12), guards 8/8, Recall@20 statutory +12.5; exact dense search adopted (approximate drifted)
-- [ ] E5: Authority in answers: labels in the API/CLI and source headers; (ii′) widened rule 4 shipped (a departure from rule 3, your decision); golden faithfulness gate pending
+- [x] E5: Authority in answers: labels in the API/CLI and source headers; (ii′) shipped (departure from rule 3); golden faithfulness 0.886 ± 0.014 at refusals 0.127 (local); golden answer quality unchanged within noise; reversed opinions misweighted because synthesis never sees treatment
 
 ### Checkpoint: Phase E complete
 - [ ] E6: Phase E exit report (`eval/results/phase_e.md`): both gates stated as met or not; ≤2-point regression per category; CI green with a new snapshot
