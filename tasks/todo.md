@@ -2096,8 +2096,10 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 **Description:** `eval/results/phase_e.md` in the shape of `phase_d.md`: E0's findings and decision, the metadata accuracy per field, the ladder with the authority rung, the conflict subset row by row, answers with their sample spread, failures with examples, §9.3 recalibration notes. Update the tech doc's Implementation Status, baselines, §7 and §9.3.
 
 **Acceptance criteria:**
-- [ ] Every number traces to a results file or a command at the foot of the report
-- [ ] Both §9.3 Phase E gates stated as met or not met, with no reinterpretation
+- [x] Every number traces to a results file or a command at the foot of the report
+- [x] Both §9.3 Phase E gates stated as met or not met, with no reinterpretation
+
+**Drafted 2026-09-29:** `eval/results/phase_e.md` (a new file, handed to you to create); tech doc Implementation Status, baselines, §7 and §9.3 updated. Metadata gate: not met, then met on re-check; conflict criterion: not met; recall regression and guards: met; faithfulness: met locally.
 
 **Dependencies:** E4, E5
 **Files:** `eval/results/phase_e.md`, `taxcite-technical-documentation.md`

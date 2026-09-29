@@ -29,23 +29,32 @@ Phase B's headline results are three negatives and one positive, and the negativ
 - **The as-of filter improved recall and made answers worse**, because the later publication editions it removed were the only evidence about retroactive changes. It is built and off.
 - **Recovering an earlier version from the notes has a trap:** a replaced dollar figure can be an inflation-indexed base, not the year's amount (G-T02).
 
-The remaining mechanisms below (authority-aware reranking, claim verification, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+**Phase E is built and measured; its rerank criterion is not met** (report: `eval/results/phase_e.md`, 2026-09-29). Every chunk carries an authority profile from its source and citation form only; ranking reorders each kind of source by authority; every citation in the answer carries its label. Its results:
 
-Baselines later phases must beat, now including Phase D's:
+- **The metadata check failed per field, then passed on a fresh sample after four fixes.** The largest was legal, not technical: §7805(e)(2) ends every temporary regulation issued after 1988 within three years, and §1.469-4T (1989, superseded by the final §1.469-4 in the same corpus) had been labelled in force.
+- **A within-kind authority prior** (score + 0.5 per level, never moving a statute above an opinion) raised golden Recall@20 from 0.606 to 0.656 (statutory +12.5 points, restoring Phase A's publication dilution) and broke no guard row. **It reached target on 2.2 of 23 golden conflict rows, against a pre-registered 12**: most controlling sources are outside the top 8, and the scope that protects guards won't reorder across kinds.
+- **Dense search is exact.** Approximate results drifted as the index re-optimised, enough to move the CI gate by 0.02 on identical code and data.
+- **Authority in answers** changed nothing measurable on golden (faithfulness 0.886 ± 0.014; answer quality within noise). The remaining misweighting is reversed opinions, because synthesis never sees the appeal outcome.
+
+The remaining mechanisms below (claim verification, the sufficiency gate, multi-tenancy) are **not yet built**. §7 and §9 exist to produce that evidence, not just to organize the architecture.
+
+Baselines later phases must beat, now including Phase E's:
 
 | baseline | value | whose problem |
 |---|---|---|
 | Case-law Recall@20, decomposition only | **0.777 ± 0.029**, key-aware scoring on the C2-audited golden set, 5 plan sets (0.815 when a shared page label could earn credit; 0.692 before C2) | Open: page selection for G-C10 and G-C26 (7.7 points) waits on dev rows that exercise it (C6); G-C24's holding copy is unreachable |
 | Graph expansion (ablation rung) | −3.9 case-law, −2.3 / −4.1 all rows (1 / 2 hops), +0.7 s | Off; revisit only with gold reachable through citations (ADR-1) |
 | Publication tables | a table of numbers (G-S28, Pub 946's depreciation caps) isn't in the top 50 even within publications | Phase E (publication handling) |
-| Publication dilution of regulation recall | 12.4 points | Phase E |
+| Publication dilution of regulation recall | 12.4 points in Phase A; **restored in Phase E**: golden statutory Recall@20 0.607 → 0.732 with the within-kind authority prior | closed |
+| Authority metadata | Built in Phase E: 28,238 indexed chunks profiled, 0 unknown; fresh-sample hand check 100% per field (146 rows) after a first sample failed (regulation status 75.0%) | Treatment past one appeal: Phase H |
+| Authority-conflict rows at target (golden, k=8) | **2.2 of 23** reachable rows (pre-registered bar 12); guards 8/8 kept | Open: reach (12 of 23 controlling sources outside the top 8); reversed opinions need treatment in synthesis |
 | Approximate search loss under a strict filter | ~22% under a single-section filter; **0.8%** under the edition filter (exact search used anyway, +3 ms) | Resolved in Phase D for its filter; the filter itself is off |
 | Statute effective dates | Built in Phase D: 1,795 of 2,576 chunks amended since 2012 dated (70%); 48–49/50 on a fresh hand check | Coverage of the remaining 30% open |
 | Temporal accuracy, golden (G-T01–G-T11) | **0.394 ± 0.052** (4–5 of 11); grounded 0.273; as-of extraction 9/10 | Open: retrieval at k=8 (G-T08), inflation-indexed base amounts (G-T02), arithmetic (G-T05, G-T07), planner year (G-T09); Phase F: G-T03 |
-| Recall@20, all golden rows, shipped | **0.602** (statutory 0.607, compound 0.470, case law 0.777), with the statute slot | the ladder's current top |
+| Recall@20, all golden rows, shipped | **0.656** on the 86 B rows (0.634 on all 98 scored; statutory 0.732, compound 0.488, case law 0.807, temporal 0.424), with the authority prior under exact search; Phase D's arm 0.606 | the ladder's current top |
 | Per-sub-query sufficiency gate | not built; `G-I11` over-refuses a half-answerable question | Phase F (the sufficiency gate is built there) |
 | Negative treatment | Built in Phase C: 3/3 reversed golden rows flagged, 0 false flags; 26/26 held-opinion flags match hand-verified records. Pending appeals (G-C11, *Patel*) are invisible to every source; corpus-only flags go stale on 2026-09-29 | Phase H: the weekly refresh; Phase E: acting on treatment in ranking |
-| Faithfulness, healthy | 0.8715 (sd 0.0127, n=6) | the standing CI gate, at 0.855 |
+| Faithfulness, healthy | **0.886 ± 0.014** at refusals 0.127 (Phase E, local, 5 runs; Phase C 0.8715) | the standing CI gate, at 0.855; its bands not re-measured after E4/E5 |
 
 Two measurement facts that govern how any of these may be compared. The pipeline has a **noise floor**: the same configuration scores sd 0.013 on golden faithfulness even with decompositions pinned and synthesis at temperature 0, because OpenAI's `temperature=0` is best effort. And **three samples are not enough to see it** -- reading a trend from three runs misled Phase B four separate times. Every comparison from here reports a mean and a standard deviation over at least five runs, against a cached plan set.
 
@@ -344,7 +353,7 @@ No calendar estimates — this is a dependency order.
 
 **Phase D — Temporal validity.** Add valid-time and transaction-time metadata to statute and case-law chunks, implement as-of filtering, add amendment-versioning to ingestion. **Gate:** ≥90% accuracy on a held-out set of retroactive/amended-rule questions. *As built (2026-09-28, `eval/results/phase_d.md`):* versioning not built (no row needed it); effective dates from the statutory notes; as-of filtering built and off; transaction time as a trigger-fed history table. Gate **not met** (0.394).
 
-**Phase E — Authority-aware retrieval.** Add authority metadata at ingestion (`negative_treatment` arrives earlier, from Phase C's graph), incorporate into reranking, add authority annotations to answer presentation. **Gate:** authority metadata ≥95% field-level accuracy on a 150-chunk hand-labeled sample (§3.2); reranking must change the top-1 result on a curated authority-conflict subset without a >2-point Recall@20 regression elsewhere.
+**Phase E — Authority-aware retrieval.** Add authority metadata at ingestion (`negative_treatment` arrives earlier, from Phase C's graph), incorporate into reranking, add authority annotations to answer presentation. **Gate:** authority metadata ≥95% field-level accuracy on a 150-chunk hand-labeled sample (§3.2); reranking must change the top-1 result on a curated authority-conflict subset without a >2-point Recall@20 regression elsewhere. **Result (2026-09-29, `eval/results/phase_e.md`):** metadata not met on the first sample (regulation status 75.0%, treatment 86.7%), met on a fresh sample after four fixes; conflict subset **not met** (2.2 of 23 reachable rows at target against a pre-registered 12); no Recall@20 regression (statutory +12.5 points); guards 8/8 kept.
 
 **Phase F — Evidence sufficiency + claim verification.** Move the sufficiency check to run pre-synthesis, implemented as a single batched structured-output call per sub-query (ADR-10), not one call per candidate. Stand up the self-hosted NLI model; add the post-generation verification pass, with zero-tolerance suppression of any sub-answer containing a failed claim (ADR-15). **Gate:** entailment F1 ≥0.90 (NLI vs. LLM-as-judge audit per ADR-4), completeness ≥0.85. Begin substantive-correctness grading via the LLM-judge protocol (§9.2); this metric is tracked, not gated, until ≥100 AI-judge-graded examples exist.
 
@@ -716,8 +725,10 @@ Substantive correctness (§5.4, §10) is the hardest metric to produce, and this
 | C | Case-law Recall@20 delta from graph expansion | reported, not gated (C0 ceiling: 0 points; was ≥5) |
 | D | Temporal-filtering accuracy (held-out retroactive/amended set) | ≥90% (measured 0.394: **not met**) |
 | D | Effective-date extraction accuracy (N=50, hand check) | ≥90% (measured 48–49/50) |
-| E | Authority-metadata accuracy (N=150 chunks) | ≥95% |
-| E | Recall@20 regression from authority-aware rerank | ≤2 points |
+| E | Authority-metadata accuracy (N=150 chunks), read per varying field on a stratified sample | ≥95% (first sample: **not met**, regulation status 75.0%; fresh sample after fixes: met, 100%) |
+| E | Recall@20 regression from authority-aware rerank | ≤2 points (met: no category down, statutory +12.5) |
+| E | Conflict rows reaching their target (pre-registered; §7 gave no number) | ≥ half of reachable rows (**not met**: 2.2 of 23) |
+| E | Guard rows kept (added in E1) | ≤1 of 8 lost (met: 0) |
 | F | Citation entailment F1 (NLI vs. LLM-judge audit) | ≥0.90 |
 | F | Citation completeness | ≥0.85 |
 | F | Substantive correctness | tracked, not gated, until N≥100 AI-judge-graded examples exist (§9.2) |
