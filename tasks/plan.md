@@ -541,7 +541,7 @@ Full task details are in `tasks/todo.md` (Phase F section).
 ### Slice 2: Gates around synthesis
 - [ ] F2: Sufficiency gate
 - [x] F3: Structured synthesis ships (arm E′, a recorded departure from the rule): completeness 1.000, fully verified answers 0.523 (0.032), correctness unchanged; faithfulness gate now judged with the question, a floor (ADR-22 revised)
-- [ ] F4: NLI verifier and suppression
+- [x] F4: LLM verifier ships, hiding the failing sentence (your decision, a departure from the rule; ADR-15 revised): 27/30 verdicts agree with a careful read; dev correct 0.365 → 0.278, 9 of 126 answers emptied (hiding whole parts: 64)
 
 ### Slice 3: Measure and report
 - [ ] F5: Phase F eval and ladder rung

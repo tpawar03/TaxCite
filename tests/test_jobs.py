@@ -10,7 +10,7 @@ from taxcite.generate import Answer
 
 client = TestClient(api.app)
 
-STAGES = ["decomposing", "retrieving", "synthesizing", "answer"]
+STAGES = ["decomposing", "retrieving", "synthesizing", "verifying", "answer"]
 
 
 @pytest.fixture(autouse=True)
@@ -155,3 +155,24 @@ def test_the_answer_carries_treatment_flags_for_cited_opinions(monkeypatch, stub
     (_, answer), = [e for e in sse_events(client.get(f"/queries/{job_id}/events").text) if e[0] == "answer"]
     assert seen == [["140 T.C. No. 16"]]  # only opinions are looked up, once each
     assert answer["treatments"] == {"140 T.C. No. 16": {"status": "reversed"}} and answer["text"] == text
+
+
+def test_a_failed_verification_sends_a_refusal_never_the_unverified_answer(monkeypatch, stub_pipeline):
+    """F4, fail closed: the verifier errors, and the answer event carries none of the unverified text."""
+    from taxcite import generate, verify
+
+    data = {"tax_year": None, "not_answerable": [],
+            "sentences": [{"part": 1, "text": "Unverified claim.", "citations": ["26 CFR 1.183-2(b)(3)"]}]}
+    text, _ = generate.render(data, ["hobby loss"])
+    monkeypatch.setattr(generate, "answer_from_groups", lambda q, groups, **k: Answer(
+        text=text, mode="rag", model="stub", citations=["26 CFR 1.183-2(b)(3)"],
+        structured={"data": data, "labels": ["hobby loss"]}))
+
+    def boom(*a, **k):
+        raise TimeoutError("verifier timed out")
+    monkeypatch.setattr(verify, "call_model", boom)
+    job_id = client.post("/queries", json={"question": "q"}).json()["id"]
+    events = dict(sse_events(client.get(f"/queries/{job_id}/events").text))
+    assert events["verifying"] == {"sentences": 1}
+    assert events["answer"]["text"] == verify.UNVERIFIED and events["answer"]["refused"]
+    assert "Unverified claim" not in json.dumps(events["answer"]) and events["answer"]["hidden_sentences"] == 1

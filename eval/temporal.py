@@ -34,7 +34,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent))
 from llm_bench import judge  # noqa: E402
-from ragas_eval import JUDGE, PROMPTS, RESULTS, Budget, CostCap, extract_claims, judge_claims, pipeline_answer, set_prompt  # noqa: E402
+from ragas_eval import JUDGE, PROMPTS, RESULTS, Budget, CostCap, extract_claims, judge_claims, pipeline_answer, set_prompt, set_verify  # noqa: E402
 from retrieval import cached_decompose  # noqa: E402
 
 load_dotenv()
@@ -104,12 +104,15 @@ def main() -> int:
     ap.add_argument("--samples", type=int, default=1, metavar="N", help="answers per row, answer i from plan set i")
     ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
     ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
+    ap.add_argument("--no-verify", action="store_true", help="skip F4's verifier: the unverified pipeline")
+    ap.add_argument("--hide", choices=("part", "sentence"), help="F4's hiding unit for this run")
     args = ap.parse_args()
     if args.editions:
         from taxcite import decompose as dc
         dc.EDITIONS = tuple(int(x) for x in args.editions.split(","))
 
     set_prompt(args.prompt)
+    set_verify(args.no_verify, args.hide)
     rows = [json.loads(l) for l in open(args.questions) if l.strip()]
     # "all" (F3): every answerable row; insufficiency and adversarial rows are F2's and Phase G's
     keep = {"temporal": lambda r: r["category"] == "temporal", "authority": lambda r: "authority" in r,

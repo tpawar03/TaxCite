@@ -2395,9 +2395,83 @@ Faithfulness E: 0.692 ± 0.058, but over only 12–14 of 25 rows (the harness dr
 - [x] Faithfulness gate on golden with the shipped arm, CI's command: 0.869 ± 0.006 with the question shown (the gate's new definition), PASS; refusals 0.002
 - [x] Log entries #82, #83 (local; `docs/` is gitignored)
 
-## F4: NLI verifier and suppression (outline)
+## F4: The verifier, and hiding what fails
 
-The F0 pick served through onnxruntime + `tokenizers` (no torch in production), all claims of an answer in one batch, windowed premises. A section with any non-entailed claim is suppressed whole and reported as insufficient (ADR-15). Threshold set on dev pairs. `verifying` SSE event; the answer stays buffered until verification ends (ADR-9). Suppression rate on dev; ADR-11's trigger (Haiku synthesis) measured on dev if it's too high.
+**Goal:** after synthesis, check every sentence of the answer against the sources it cites, and never show one that fails (ADR-3, ADR-15). Since F3 this is also the pipeline's regression detector: the weekly faithfulness gate became a floor (ADR-22 revised).
+
+**Decided already (Checkpoint 1, F0, F3):**
+- **An LLM verifier, not NLI** (ADR-4 revised): one batched structured-output call per answer, Haiku (the other provider from synthesis, ADR-11). ~$0.0023 an answer, a few seconds.
+- **The judge prompt is F0's fixed one** (V2b): the question and the whole answer as context, the question's client facts taken as given, cited sources judged together, every assertion must hold. Measured: 15/16 on single sentences against a careful read.
+- **The unit is the sentence,** and since F3 each sentence is a JSON item with its citations, so no splitting is needed: the verifier reads the items directly.
+- **A cited opinion counts with every retrieved page of it** (your pinpoint policy); whether the cited page itself holds the claim is recorded apart (`pinpoint`), not hidden.
+
+**What changes:**
+1. **`src/taxcite/verify.py` (new file, handed to you as code).** `verify(question, answer) -> list[Verdict]`: one call over all of an answer's sentences, each with its cited chunks (plus the other retrieved pages of a cited opinion); returns supported / not, which source carried it, and a short reason. The prompt moves here from `eval/f0_verify.py`, which then imports it, so the eval and the product judge the same way.
+2. **`Answer.items`:** `render()` keeps the (part, sentence, citations) items it rendered from, so the verifier needs no re-parsing.
+3. **Hiding** (`apply(answer, verdicts, unit)`): a failed sentence is never shown. What else goes with it is the open question below. A part left with nothing shown says INSUFFICIENT EVIDENCE for that part. The shown text is re-rendered from the surviving items; `Answer` records what was hidden and why (for the eval and the log, not the user).
+4. **Fail closed:** if the verifier call fails or returns nothing usable, nothing unverified is shown: the answer becomes "INSUFFICIENT EVIDENCE: the answer could not be verified", and the job record says why.
+5. **Wiring:** `decompose.answer` (so every eval measures the verified pipeline; `--no-verify` keeps the unverified arm), and `jobs.run` with a `verifying` SSE stage between `synthesizing` and `answer`; the answer stays buffered until verification ends (ADR-9).
+
+**Decision to make on dev (it revises ADR-15 if S wins): what does one failed sentence take down with it?**
+
+| Arm | Hides | For | Against |
+|---|---|---|---|
+| **P** (ADR-15 as written) | the whole part (section) | nothing shown can depend on a hidden sentence | on F3's dev answers, ~44% of sections would go |
+| **S** | only the failing sentence | keeps ADR-15's promise (no unverified claim shown) and hides ~23% of sentences | a surviving sentence can lose its qualifier ("unless…" hidden), so the shown answer can be verified sentence by sentence and still wrong |
+
+**Measured on the shipped E′ dev answers (126 cached answers, 3 samples × 42 rows; no new synthesis):**
+- share of sentences hidden; answers shown whole; answers with at least one part shown; answers emptied;
+- **correctness of what is shown** (`temporal.py`'s judge on the verified text): the check that hiding a sentence didn't make an answer wrong;
+- hidden sentences the verifier got right: a fresh hand-read sample of ~30 verdicts on E′ answers (F0's sample was on pre-F3 answers), stratified hidden/kept;
+- verifier latency and cost per answer.
+
+**Decision rule, fixed before any arm runs (F3's lesson: each metric is first run on a known-good and a known-bad case):**
+0. *Sanity, before measuring:* on a hand-made answer with one fabricated sentence (a real citation on a claim its source doesn't make), both arms hide it and keep the rest as defined; on an all-supported answer, neither hides anything. If either fails, the metric or the code is fixed first.
+1. An arm whose shown answers are less correct than the unverified E′ answers by more than 0.05 is out.
+2. Of the rest, the arm with more answers showing at least one part wins; within 2 points, P (the ADR as written).
+
+**Acceptance:**
+- [ ] `verify.py` with tests (batching, fail-closed, one fabricated sentence hidden, opinion pages, the prompt's context), the prompt shared with `f0_verify.py`
+- [ ] `verifying` stage in the job stream; tests for its order and for a fail-closed answer
+- [ ] Both arms measured on dev with the metrics above; the rule applied; ADR-15 revised if S ships
+- [ ] Hand-read sample of ~30 E′ verdicts, agreement recorded
+- [ ] Latency and cost per answer recorded (against §9.3 H's 35 s p95)
+- [ ] Log entry
+
+**Files:** `src/taxcite/verify.py` (new), `generate.py` (`items`), `decompose.py`, `jobs.py`, `eval/f0_verify.py` (shared prompt), `eval/ragas_eval.py` / `temporal.py` (`--no-verify`), tests.
+
+**Cost estimate:** verifier over 126 cached answers ~$0.30; grading the two arms' shown answers ~$2; a hand sample. **About $3.** Nothing touches golden until F5.
+
+**Out of F4:** the golden audit against an independent model and the verifier's calibration against a seeded failure (both F5); re-pointing a wrong-page citation to the page that holds the claim (recorded, not built).
+
+**Built (2026-09-30):** `verify.py` (new; developed outside the repo, handed to you with its tests): F0's validated prompt, one batched call per answer, cited chunks plus every retrieved page of a cited opinion, a skipped verdict counts as a failure, `apply(unit)`, fail closed (`UNVERIFIED`). `generate.cited_items()` so render and verifier number sentences alike; `Answer.structured / hidden / verdicts / verifier` and the verifier's cost in `cost_usd`. `decompose.VERIFY`; `jobs.run` publishes `verifying` and `hidden_sentences`, and a failed verifier sends a refusal, never the unverified text (test). Eval: `--no-verify`, `--hide`, verdicts cached; `eval/f4_hide.py` (new) shows one verified run three ways on identical verdicts. 278 tests with the new files.
+
+**Results (2026-09-30), dev, 42 rows × 3 samples, one synthesis and one verification per answer, ~$3.40:**
+
+| Arm | Sentences hidden | Answers shown whole | Answers with a part shown | Emptied | Correct | Incorrect | Refused | Grounded | Correct *and* grounded |
+|---|---|---|---|---|---|---|---|---|---|
+| none (unverified) | 0 of 449 | 126 | 126 | 0 | **0.365** ± 0.037 | 0.143 | 0.000 | 0.571 | 0.238 |
+| **S** (the failing sentence) | 109 (24%) | 60 | **117** | 9 | 0.278 ± 0.028 | 0.214 | 0.071 | 0.865 | 0.214 |
+| **P** (its whole part) | 250 (56%) | 60 | 62 | 64 | 0.206 ± 0.014 | 0.556 | 0.508 | 0.944 | 0.190 |
+
+Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 stratified): **27 of 30 agree**; 2 hidden that a careful read keeps (V07, V22: fair paraphrases), 1 kept that should go (V28: "rental income" where the statute says AGI). What it hides is mostly real: wrong section cited (§179D for a §25C credit, §263A(h) for §262, §79 for §72), arithmetic ignoring "or fraction thereof", figures the cited page doesn't give.
+
+**The rule, as written: neither arm ships.** Rule 1 (shown answers no more than 0.05 less correct than unverified, i.e. ≥ 0.315): S 0.278 and P 0.206 both fail. Rule 0's sanity cases passed (tests).
+
+**What the drop is made of (S vs none, 126 answers):** correct → partial 10 (content hidden, answer less complete); partial or correct → incorrect 11, of which **9 are refusals** (every sentence failed; the correctness judge grades INSUFFICIENT EVIDENCE as incorrect); 3 real. Correct-and-grounded barely moves (0.238 → 0.214): most of what verification removes was right only from the model's memory, which the unverified baseline credits. The risk rule 1 targets is real but small: D30 s0 lost its conclusion ("cannot deduct for 2024") and kept only "governed by § 225(a)-(f)".
+
+**Third pre-registered rule in this phase to measure something in tension with its purpose:** rule 1 benchmarks against an unverified answer, so any verifier that removes unsupported-but-correct content fails it by construction. Recorded; the decision is yours.
+
+**Shipped (2026-09-30, your decision): S, the failing sentence only** (`verify.HIDE = "sentence"`), a recorded departure from F4's rule; ADR-15 revised with the numbers above. Recorded next step, not built: rewrite failed sentences once from the verifier's reasons (the D30 risk, and the correctness cost).
+
+**F4 acceptance:**
+- [x] `verify.py` with tests (batching, fail closed, one fabricated sentence hidden, opinion pages, the prompt's context, the shipped unit): 9 tests
+- [x] `verifying` stage in the job stream; a failed verifier sends a refusal (test)
+- [x] Both arms measured on dev; the rule applied (neither passed); S shipped by your decision; ADR-15 revised
+- [x] Verdict check: 27 of 30 (Claude's read), `eval/results/f4-verdict-check.md`
+- [x] Cost ~$0.002 and a few seconds an answer; the §9.3 H latency figure is F5's (p95 over golden)
+- [x] Log entry #84 (local)
+- [ ] `src/taxcite/verify.py`, `tests/test_verify.py`, `eval/f4_hide.py` created by you; `eval/f0_verify.py` still carries its own copy of the prompt (to share once `verify.py` exists)
 
 ## F5: Phase F eval and ladder rung (outline)
 

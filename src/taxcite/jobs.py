@@ -108,7 +108,7 @@ def get(conn, job_id: str) -> dict | None:
 def run(conn, job_id: str, question: str, k: int = 8) -> None:
     """The pipeline, reporting each stage. Phases C-F add their steps here."""
     from taxcite import decompose as dc
-    from taxcite.generate import OPINION_RE, answer_from_groups, authorities
+    from taxcite.generate import OPINION_RE, answer_from_groups, authorities, cited_items
     from taxcite.ingest.citations import flags
 
     try:
@@ -131,6 +131,11 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
         publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
         result = answer_from_groups(question, plan.groups({h.citation for h in hits}), facts=plan.facts,
                                     as_of=plan.as_of)
+        if dc.VERIFY:  # F4: nothing is sent until every sentence is checked (ADR-9: the answer stays buffered)
+            from taxcite import verify
+            publish(conn, job_id, "verifying", {"sentences": len(cited_items(result.structured["data"]))
+                                                if result.structured else 0}, rdb)
+            result = verify.checked(question, result)
         # Is each cited opinion still good law (C4)? Looked up after synthesis and attached beside the
         # answer, never folded into its text; a failed lookup reads "unknown" and the answer still ships.
         opinions = list(dict.fromkeys(m.group() for c in result.citations + result.derived_citations
@@ -144,6 +149,7 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             # E5: every citation's authority, from E2's stored profile through a fixed label map (ADR-13)
             "authorities": authorities(result),
             "refused": result.refused,
+            "hidden_sentences": len(result.hidden),  # F4: failed verification (or went with a failed part)
             "model": result.model,
             "cost_usd": round(result.cost_usd + plan.cost_usd, 6),
         }, rdb)

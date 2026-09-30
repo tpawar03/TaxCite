@@ -395,6 +395,9 @@ def merge(subqueries: Sequence[SubQuery], k: int | None) -> list[Hit]:
     return list(out.values())
 
 
+VERIFY = True  # F4; the eval's --no-verify turns it off to measure the unverified pipeline
+
+
 def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
            route: bool = True, plan: Decomposition | None = None) -> tuple[Decomposition, "object"]:
     """Decompose, retrieve per sub-query, synthesize over the grouped sources.
@@ -408,4 +411,8 @@ def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
     d = retrieve(plan or decompose(question, model=model), k=k, mode=mode, route=route, editions=EDITIONS,
                  statute=STATUTE)
     kept = {h.citation for h in chunks(d, k)}
-    return d, answer_from_groups(question, d.groups(kept), facts=d.facts, model=model, as_of=d.as_of)
+    result = answer_from_groups(question, d.groups(kept), facts=d.facts, model=model, as_of=d.as_of)
+    if VERIFY:  # F4: every sentence checked against its sources; what fails is never shown (ADR-3, ADR-15)
+        from taxcite import verify
+        result = verify.checked(question, result)
+    return d, result

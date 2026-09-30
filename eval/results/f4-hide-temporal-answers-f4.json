@@ -1,0 +1,29 @@
+{
+  "none": {
+    "answers": 126,
+    "answered_unverified": 126,
+    "sentences": 449,
+    "sentences_hidden": 0,
+    "answers_shown_whole": 126,
+    "answers_with_a_part_shown": 126,
+    "answers_emptied": 0
+  },
+  "part": {
+    "answers": 126,
+    "answered_unverified": 126,
+    "sentences": 449,
+    "sentences_hidden": 250,
+    "answers_shown_whole": 60,
+    "answers_with_a_part_shown": 62,
+    "answers_emptied": 64
+  },
+  "sentence": {
+    "answers": 126,
+    "answered_unverified": 126,
+    "sentences": 449,
+    "sentences_hidden": 109,
+    "answers_shown_whole": 60,
+    "answers_with_a_part_shown": 117,
+    "answers_emptied": 9
+  }
+}

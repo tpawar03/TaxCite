@@ -122,23 +122,28 @@ def answer_schema(citations_allowed: list[str]) -> dict:
     })
 
 
+def cited_items(data: dict) -> list[dict]:
+    """The sentences a structured answer can show, in order: text and at least one citation. `render` shows exactly
+    these and the verifier (F4) numbers exactly these, so a verdict's index always names the sentence it judged."""
+    out = []
+    for s in data.get("sentences") or []:
+        text, cites = str(s.get("text", "")).strip(), list(dict.fromkeys(c for c in s.get("citations") or [] if c))
+        if text and cites:
+            out.append({"part": s.get("part"), "text": text, "citations": cites})
+    return out
+
+
 def render(data: dict, labels: list[str]) -> tuple[str, int]:
     """(answer text, sentences dropped) from arm E's JSON. Each sentence ends with its citations, as rule 2 always
     asked; a sentence with none is dropped and counted. A part with nothing answered says INSUFFICIENT EVIDENCE; a
     detail missing from a part that is answered is a note, "Not in the sources: ..." (F3: as INSUFFICIENT EVIDENCE it
     ended 46% of answers)."""
     parts = {n: [] for n in range(1, len(labels) + 1)}
-    dropped = 0
-    for s in data.get("sentences") or []:
-        text, cites = str(s.get("text", "")).strip(), [c for c in s.get("citations") or [] if c]
-        if not text:
-            continue
-        if not cites:
-            dropped += 1
-            continue
-        body = text.rstrip(".").rstrip()
-        parts.setdefault(s.get("part") if s.get("part") in parts else 1, []).append(
-            f"{body} {', '.join(f'[{c}]' for c in dict.fromkeys(cites))}.")
+    shown = cited_items(data)
+    dropped = sum(bool(str(s.get("text", "")).strip()) for s in data.get("sentences") or []) - len(shown)
+    for s in shown:
+        body = s["text"].rstrip(".").rstrip()
+        parts[s["part"] if s["part"] in parts else 1].append(f"{body} {', '.join(f'[{c}]' for c in s['citations'])}.")
     answered = {n for n, lines in parts.items() if lines}
     for m in data.get("not_answerable") or []:
         n = m.get("part") if m.get("part") in parts else 1
@@ -212,13 +217,20 @@ class Answer:
     derived_citations: list[str] = field(default_factory=list)
     unsupported_citations: list[str] = field(default_factory=list)
     dropped_sentences: int = 0  # arm E: sentences the model wrote without a citation, not shown
+    structured: dict | None = None  # arm E: {"data": the model's JSON, "labels": part labels}, for the verifier (F4)
+    hidden: list[dict] = field(default_factory=list)  # F4: sentences the verifier failed, never shown (eval, logs)
+    verdicts: list[dict] = field(default_factory=list)  # F4: one per shown sentence, so the eval can re-hide by unit
+    verify_input_tokens: int = 0
+    verify_output_tokens: int = 0
+    verifier: str = ""
     retrieved: list[Hit] = field(default_factory=list)
     input_tokens: int = 0
     output_tokens: int = 0
 
     @property
     def cost_usd(self) -> float:
-        return cost(self.model, self.input_tokens, self.output_tokens)
+        return (cost(self.model, self.input_tokens, self.output_tokens)
+                + cost(self.verifier, self.verify_input_tokens, self.verify_output_tokens))
 
     @property
     def refused(self) -> bool:
@@ -450,7 +462,8 @@ def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt:
     exact, derived, invented = parse_citations(text, hits)
     return Answer(text=text, mode="rag", model=model, citations=exact, derived_citations=derived,
                   unsupported_citations=invented, retrieved=hits, input_tokens=input_tokens,
-                  output_tokens=output_tokens, dropped_sentences=dropped)
+                  output_tokens=output_tokens, dropped_sentences=dropped,
+                  structured={"data": data, "labels": labels} if isinstance(data, dict) else None)
 
 
 def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,

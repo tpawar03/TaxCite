@@ -213,22 +213,12 @@ def judge(data: dict, model: str, cap: float, field: str = "chunks", out: str = 
           only=lambda p: True) -> float:
     """Judge each pair against `field`'s chunks into `out`. The main pass reads every retrieved page of a cited
     opinion (`chunks`); the pinpoint pass re-reads the pairs that passed, against the cited pages alone (`cited`)."""
-    from ragas_eval import VERDICT_SYSTEM, VERDICTS_SCHEMA, Budget, parse_json
+    from ragas_eval import VERDICTS_SCHEMA, Budget, parse_json
     from taxcite.generate import call_model
 
-    # found by reading 40 of its verdicts (the F0 judge check): without the question, a claim restating the client's
-    # facts can't be supported; without the answer, "Therefore..." has nothing to refer to; and the old wording let a
-    # claim with an unsupported qualifier pass (30 of 40 agreed with a careful read before; after, 15 of 16 sentences,
-    # 16 of 22 multi-sentence spans, where it still misses extra assertions)
-    system = VERDICT_SYSTEM.replace(
-        "supported by the sources provided.",
-        "supported by the sources it cites.\n\nYou also get the question and the whole answer the claims come from. The "
-        "question's facts about the client may be taken as given (they are facts, not law); the answer only tells you "
-        "what a claim refers to. Judge each claim's content against the sources it cites by number, never the others, "
-        "even if another one supports it. A claim citing several sources is supported if they state it together, even "
-        "if some of them say nothing relevant. Every assertion in the claim must be supported: a claim with any "
-        "unsupported part, qualifier or condition is NOT supported.")
-    assert system != VERDICT_SYSTEM
+    # the product's verifier prompt (F4 moved it into taxcite.verify): F0 found it by reading 40 of its verdicts, and
+    # the eval and the product must judge the same way
+    from taxcite.verify import SYSTEM as system
     budget = Budget(cap)
     by_answer = defaultdict(list)  # one call per answer and unit, so a span's verdict can't lean on its sentence's
     for p in data["pairs"]:

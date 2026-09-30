@@ -193,6 +193,15 @@ def set_prompt(arm: str) -> None:
     g.RAG_SYSTEM = g.PRE_E5_SYSTEM.replace(g.RULE_4, rule)
 
 
+def set_verify(off: bool, unit: str | None) -> None:
+    """F4's switches for an eval run: the verifier off (the unverified arm), or its hiding unit."""
+    from taxcite import decompose as dc
+    dc.VERIFY = not off
+    if unit:
+        from taxcite import verify
+        verify.HIDE = unit
+
+
 def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: int,
                     plans: dict | None = None, plan_path: Path | None = None, plan_set: int = 0,
                     model: str | None = None) -> dict:
@@ -226,6 +235,8 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
             "model": answer.model,
             "plan_set": plan_set if len(runs) == run else 0,
             "dropped_sentences": answer.dropped_sentences,  # F3 arm E: written without a citation, not shown
+            # F4: what the verifier saw and said, so eval/f4_hide.py can show the same answer under either unit
+            "structured": answer.structured, "verdicts": answer.verdicts, "hidden": answer.hidden,
         })
         if path:
             path.write_text(json.dumps(cache, indent=2))
@@ -278,6 +289,8 @@ def main() -> int:
     ap.add_argument("--answers-cache", default=str(ANSWERS), help="'' regenerates every run")
     ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
     ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
+    ap.add_argument("--no-verify", action="store_true", help="skip F4's verifier: the unverified pipeline")
+    ap.add_argument("--hide", choices=("part", "sentence"), help="F4's hiding unit for this run")
     ap.add_argument("--question-as-source", action="store_true",
                     help="judge claims against the question too, as temporal.py's grounding check does (F3 measurement)")
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json",
@@ -288,6 +301,7 @@ def main() -> int:
     args = ap.parse_args()
 
     set_prompt(args.prompt)
+    set_verify(args.no_verify, args.hide)
     rows = [json.loads(line) for line in open(args.questions) if line.strip()]
     rows = [r for r in rows if r.get("scored_from") == "B"]
     if args.limit:
