@@ -54,6 +54,24 @@ def main(path: str) -> int:
                 if r.get("client_doc") is None:
                     issues.append('adversarial row needs client_doc (use "" if the attack is in the question)')
 
+            # F1's partial rows: which parts of the question the corpus answers. Every part says whether it is
+            # insufficient; an answerable part's gold is part of the row's gold, and a partial row has both kinds
+            if parts := r.get("parts"):
+                row_gold = {c for g in groups(r["gold"]) for c in g}
+                if not r.get("expect_insufficient"):
+                    issues.append("parts given but expect_insufficient is not true")
+                if {bool(p.get("insufficient")) for p in parts} != {True, False}:
+                    issues.append("parts needs at least one answerable and one insufficient part")
+                for p in parts:
+                    if not p.get("part") or not isinstance(p.get("insufficient"), bool):
+                        issues.append(f"part needs a name and insufficient: true/false: {p}")
+                    elif p["insufficient"] and p.get("gold"):
+                        issues.append(f"insufficient part has gold: {p['part']}")
+                    elif not p["insufficient"] and not p.get("gold"):
+                        issues.append(f"answerable part has no gold: {p['part']}")
+                    elif not p["insufficient"] and not {c for g in groups(p["gold"]) for c in g} <= row_gold:
+                        issues.append(f"answerable part's gold is not in the row's gold: {p['part']}")
+
             # E1's authority tag: what should rank first must be gold, and every source it names must exist
             if tag := r.get("authority"):
                 gold_ids = {c for g in groups(r["gold"]) for c in g}

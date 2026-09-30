@@ -473,3 +473,96 @@ Full task details are in `tasks/todo.md` (Phase E section).
 - **The 12.4-point publication dilution is reported, not gated.** Phase A named restoring it as E's baseline to beat, measured on regulations-only before routing existed. E4 reports regulation recall with and without the rung; the gate stays §9.3's.
 - **Conflict subset: new golden rows, written before E4, reviewed by you.** Alternative: tag existing rows only (probably 3–5 rows, too few to read).
 - **`binding_on` / Golsen is documented, not modelled.** Which circuit's law binds the Tax Court depends on the taxpayer's residence, a client fact. Without client documents (Phase G) there is nothing to key it on. Default: store the reversing circuit where a treatment has one; revisit in Phase G.
+
+---
+
+# Phase F Implementation Plan: Evidence sufficiency + claim verification
+
+_Drafted 2026-09-29; approved the same day with Claude's four defaults. F0 is a go/no-go on the self-hosted NLI verifier (ADR-4). The faithfulness bands are not re-measured at F's start (your decision, 2026-09-29: "in later phases when required")._
+
+## Overview
+
+The tech doc's Phase F (§7, §3.3 steps 6 and 8, ADR-3, ADR-4, ADR-7, ADR-10, ADR-15) adds two checks around synthesis. **Before it:** one batched, structured-output sufficiency call per sub-query; an insufficient sub-query is excluded from what gets synthesized. **After it:** the answer is split into atomic claims, a self-hosted NLI model checks each one against the source it cites, and any sub-answer with a claim that fails is suppressed whole, never shown with a caveat. **Gate (§9.3):** citation entailment F1 ≥0.90 (NLI against an LLM-judge audit), citation completeness ≥0.85. Substantive correctness is graded from here on, tracked but not gated.
+
+**Known before building:**
+- **Refusal lives inside synthesis today.** Rule 3 of `RAG_SYSTEM` ("say exactly: INSUFFICIENT EVIDENCE"). Phase B: 9 of 10 unanswerable golden rows refused in all 3 runs; `G-I06` answered in 0 of 3; 10 of 86 answerable rows refused at least once. `G-I11` (federal half answerable, California half not) refuses both halves: the per-sub-query gate is what's missing, and a test is already waiting for it.
+- **Faithfulness is ~0.89 per claim** (CI, `corpus-2026-09-29`). ADR-15 suppresses a sub-answer on *one* failing claim. With ~5 claims per answer, independent errors at 0.89 would fail about half of all answers. So zero tolerance could turn most answers into refusals. F0 measures this before anything is built. ADR-11's revisit trigger names exactly this case: move synthesis to Haiku if Phase F suppresses too much.
+- **Phase B's citation laundering** (`G-S10`, `G-S14`: a correct answer from memory, cited to a real retrieved chunk that doesn't say it) is the failure the verifier exists to catch. Phase A's citation checker can't see it; only the judge can today.
+- **There are no sub-answers to suppress.** Synthesis writes one answer over grouped sources (`answer_from_groups`). ADR-15's unit has to be made (F3).
+- **Dev has no insufficiency rows** (42 rows: temporal, statutory, case law, compound). A gate tuned on golden's 11 would spend the held-out set.
+- **Claim extraction drops citations.** `ragas_eval.CLAIMS_SYSTEM` strips the brackets, so today's judge checks a claim against *all* retrieved context. Entailment is a claim against *its cited* source, and completeness needs to know which claims carry a citation. Both need claims that keep them.
+- **The reranker runs on onnxruntime (fastembed), with no torch.** An NLI model can be served the same way (an ONNX export with `tokenizers`), so production gains no heavy dependency. A spike-only `transformers` install is fine if F0 needs it.
+
+**Exit condition:** a reviewer asks `G-I11`'s question and gets the federal answer, cited, with the California half stated as insufficient evidence. They ask a question whose draft answer contains a laundered citation, and that sub-answer is suppressed and reported as insufficient, never shown flagged. The SSE stream shows `checking_sufficiency` and `verifying`. The ladder gains its last rung, "+claim verification", with entailment F1, completeness, abstention precision/recall and suppression rate beside it.
+
+Source docs: tech doc §3.3, §5.4, §7, §9, §9.2, §9.3, ADR-3, ADR-4, ADR-7, ADR-10, ADR-11, ADR-15 · `eval/results/phase_b.md` (abstention, citation laundering) · `eval/ragas_eval.py` (the judge).
+
+## Architecture Decisions (for this phase)
+
+- **Entailment F1 is scored on the "not supported" class.** Most claims are supported (~0.89), so F1 on "supported" would pass a verifier that accepts everything (F1 ≈ 0.94). The pair set is (claim, cited source) with the Haiku judge's verdict as the label; the positive class is *not supported*, the thing the verifier must catch. The false-accept rate (judge says unsupported, NLI accepts) is reported beside it. The judge itself is checked first: you read ~40 pairs in F0, as E3 was a hand check (§9.2 has no human in the loop for correctness; this is entailment, and one read of the judge is cheap).
+- **A claim is a sentence with its citation, not an LLM-extracted atom (default; F0 checks it).** Rule 2 already makes every rule sentence end with its citation, so splitting sentences and reading their brackets gives claim + cited source with no extra LLM call on the hot path. F0 compares it with LLM-extracted claims on the same answers. If sentences carry several assertions often enough to hurt F1, runtime decomposition becomes one batched call, like ADR-10.
+- **Premise = the cited chunk, windowed.** Opinion and regulation chunks run past the NLI model's 512 tokens. The claim is checked against overlapping windows of its cited chunk and takes the best entailment. A sentence citing two sources is checked against each; entailed by either passes. A `derived` citation (another paragraph of a retrieved section) is checked against that section's retrieved chunks. An `unsupported` citation fails outright.
+- **Candidates for the NLI model are compared in F0, not chosen now.** A DeBERTa-v3 MNLI/FEVER/ANLI checkpoint (base and large) and a RAG-hallucination model (Vectara HHEM-2.1-open) are scored against the judge's labels. The pick is the smallest one that clears F1 ≥0.90 at acceptable CPU latency. **If none clears it, ADR-4 gets a dated *Revised* note** (for example the LLM judge at runtime, one batched call as ADR-10 does). That's recorded as a finding; the gate isn't lowered to fit.
+- **The sufficiency gate replaces rule 3, one call per searched sub-query (ADR-10).** Input: the sub-query and its reranked candidates. Output (JSON schema): a per-candidate `supports` judgment plus one sub-query verdict. `client_fact` sub-queries are never searched and never gated. An insufficient sub-query is dropped from synthesis and named in the answer as insufficient evidence. All insufficient means no synthesis call at all (the refusal path, §9.3 H's ≤2s). Rule 3 stays as a backstop until F2 measures whether removing it costs anything.
+- **The sub-answer is one section per sub-query (default).** Synthesis already sees sources grouped by sub-query. It writes one section per group, and ADR-15 suppresses a section, not the whole answer. The alternatives are suppressing the whole answer (simple, but it loses `G-I11`'s half answer) or suppressing sentences (it breaks ADR-15). F3 builds it; F0 measures what each unit would suppress.
+- **Completeness = cited claims ÷ material claims.** The LLM claim extractor (the judge side, keeping citations) marks each claim as material or not; a material claim with no bracket is incomplete. It's computed over answers before suppression, so suppression can't inflate it.
+- **Tune on dev, score golden once.** F1 writes dev insufficiency and partial rows before F2 starts. The golden audit rule applies: logged commits you review, no citation shared between sets.
+- **Existing gates keep running.** Faithfulness stays CI's weekly gate, with the refusal-rate bound. Suppressions count as refusals there, which is the point of the bound: a verifier that suppresses everything must fail it. The bound may need a new value after F4, with evidence, recorded.
+
+## Dependency Graph
+
+```
+F0 verification spike (judge check, claim unit, NLI candidates, projected suppression)
+   ├── F1 insufficiency rows (dev + partial rows) + entailment pair sets ─┐
+   └───────────────────────────────────────────────────────────────┐    │
+F2 sufficiency gate (per sub-query, ADR-10; tuned on dev) ◄─────────┼────┘
+   ▼                                                                │
+F3 sectioned synthesis + claims with citations + completeness ◄─────┘
+   ▼
+F4 NLI verifier + zero-tolerance suppression (ADR-15), SSE events
+   ▼
+F5 eval: entailment audit, completeness, abstention P/R, ladder rung, correctness grading
+   ▼
+F6 Phase F exit report
+```
+
+## Task List
+
+Full task details are in `tasks/todo.md` (Phase F section).
+
+### Slice 1: Find out what verification will cost
+- [x] F0: Verification spike: judge fixed after a 40-pair read; 0.86 of cited sentences supported; 475 of 853 sentences uncited; 5 small models 0.22–0.46 F1 vs 0.90 → ADR-4 revised to an LLM verifier; ~18% of answers would be emptied, so F3 first
+- [ ] F1: Insufficiency rows (drafted: 11 dev rows D43–D53, 3 partial, awaiting review; pair sets moved to F5, after F3 changes synthesis)
+
+### Checkpoint 1 (human review)
+- [x] Confirmed 2026-09-30: ADR-4 revised; independent audit reference for the gate; sentence unit with context; F3 before F4
+- [ ] F1's rows are approved
+
+### Slice 2: Gates around synthesis
+- [ ] F2: Sufficiency gate
+- [ ] F3: Sectioned synthesis, claims with citations, completeness
+- [ ] F4: NLI verifier and suppression
+
+### Slice 3: Measure and report
+- [ ] F5: Phase F eval and ladder rung
+- [ ] F6: Phase F exit report
+
+## Risks and Mitigations
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Zero tolerance suppresses most answers (0.89 per claim over ~5 claims) | High | F0 projects the suppression rate first; the unit is a section, not the answer; ADR-11's trigger (Haiku synthesis) is measured on dev if suppression is too high; the refusal-rate bound fails a build that hides everything |
+| A general NLI model doesn't transfer to legal text (PRD §10) | High | F0 scores three candidates against the judge; if none reaches 0.90, ADR-4 is revised with the evidence, not the gate |
+| The judge is the label and is itself wrong | Med | You read ~40 pairs in F0; disagreements are logged, and F1 reported with and without them |
+| F1 on the "supported" class flatters the verifier | Med | Scored on "not supported"; false-accept rate reported |
+| Long chunks exceed the NLI context | Med | Windowed premise, best window wins; F0 reports how many pairs need windowing |
+| The sufficiency gate over-refuses answerable rows (Phase B: 10 of 86 already refuse once) | Med | Abstention precision *and* recall on dev; answerable rows' refusal rate reported before and after |
+| Few insufficiency rows, so one row is many points | Med | F1 adds ≥10 dev rows incl. partials; the report lists every row |
+| CPU latency of the NLI pass on the hot path | Low | F0 times it; batch all claims of an answer in one forward pass; the base model if large is too slow |
+
+## Inputs needed (Claude's defaults; confirm or change)
+
+- **Sub-answer unit: one section per sub-query.** Alternative: suppress the whole answer (simpler; `G-I11` then can't pass).
+- **Claim unit at runtime: sentence + its citation, no LLM call.** F0 can overturn it.
+- **You read ~40 judge-labelled pairs in F0.** Alternative: a second judge and Cohen's κ, as §9.2 does for correctness (no human time, weaker evidence).
+- **Substantive-correctness grading starts in F5 on §9.2's 40-question subset, two judges, κ reported.** Tracked, not gated (N < 100).

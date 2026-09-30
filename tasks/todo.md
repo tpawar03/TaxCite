@@ -2111,3 +2111,189 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - [ ] Authority metadata ≥95% field-level on the 150-chunk stratified sample: **not met on the first sample** (regulation status 75.0%, treatment 86.7%); met on a fresh 146-row re-check after four fixes (treatment re-checked on affirmances only)
 - [ ] Controlling source moves to top-1 on the golden conflict subset; ≤2-point Recall@20 regression per category: conflict **not met** (2.2 of 23 reachable rows vs a pre-registered 12); regression met (none down; statutory +12.5); guards 8/8 kept
 - [x] Tests and both CI gates green on a new snapshot: `corpus-2026-09-29`; retrieval 0.7400 (run 36521274499), faithfulness 0.894 ± 0.015 at refusals 0.113 (run 36521320779)
+
+---
+
+# TaxCite Phase F — Task List
+
+Plan: `tasks/plan.md` (Phase F). Test command: `uv run pytest -q`. Every task leaves the repo runnable. Approved 2026-09-29. F2–F5 are briefed in outline; each gets its full brief after F0, as E's did.
+
+---
+
+## F0: Verification spike
+
+**Goal:** before building, find out (a) whether the judge's labels can be trusted, (b) whether a sentence + citation is a good enough claim unit, (c) whether any self-hosted NLI model reaches F1 ≥0.90 against the judge (ADR-4 go/no-go), and (d) how much ADR-15 would suppress. A diagnosis on existing answers; no product code changes.
+
+**Input:** cached golden answers from the shipped pipeline (`eval/results/pipeline-answers-e5.json` or CI's latest), with their retrieved chunks. No new synthesis calls.
+
+**Steps:**
+1. **Pairs.** Split each answer into sentences; keep those with a bracket; pair each with its cited chunk(s) (exact, derived → section's chunks, unsupported → auto-fail). Count: sentences per answer, share uncited, share citing ≥2 sources, share of premises over 512 tokens.
+2. **Judge labels.** The Haiku judge (`VERDICT_SYSTEM`) labels each pair against its *cited* source only. Also run the existing claim extractor on the same answers, and map its claims back to sentences to see how often one sentence holds more than one claim, and how often they disagree.
+3. **Judge check.** You read ~40 pairs, stratified: judge-unsupported over-sampled (G-S10 and G-S14 included). Agreement reported.
+4. **NLI candidates.** DeBERTa-v3 base and large (MNLI/FEVER/ANLI checkpoint), HHEM-2.1-open. Windowed premises, best window. Per model: F1 and precision/recall on the "not supported" class, false-accept rate, CPU ms per answer. Pick the threshold on half the pairs and report on the other half, so the number isn't tuned on itself.
+5. **Projected suppression.** Under the judge's labels and under the best NLI model: the share of answers suppressed if the unit is (i) the whole answer, (ii) one section per sub-query (approximated by which group each cited chunk came from), (iii) the sentence. Beside it, today's refusal rate (~0.11–0.13).
+6. **Abstention today.** On the 11 insufficiency rows plus answerable rows: refusals from rule 3, as the baseline F2 must beat.
+
+**Acceptance:** an `eval/results/f0_*.md` note with the numbers above; a go/no-go on NLI (or the evidence for ADR-4's revision); a recommended sub-answer unit backed by (5). Log entry.
+
+**Files:** one spike script under `eval/` (new file: you create it from my code block); a dev-only `transformers` dependency if an ONNX export isn't available for a candidate.
+
+**Results (2026-09-30).** Script `eval/f0_verify.py`; outputs `eval/results/f0-pairs.json`, `f0-nli-{base,large,hhem}.json`, `f0-report.json`, `f0-judge-check.md`. 305 distinct golden answers (96 rows × 5 cached runs of the shipped pipeline); 42 refused, 263 answer. Judge spend $0.76 (Haiku, one call per answer and unit), after two judge fixes found by reading its failures: the chunk heading is now in the premise (synthesis saw it; an opinion's case name lives only there), and several cited sources are judged together, not each alone.
+
+| | |
+|---|---|
+| Sentences in answers | 859: **378 cited, 481 uncited** (349 sit before a citation in their paragraph, 132 trail the last one) |
+| Cited sentences per answer / LLM claims per answer | 1.44 / 3.95 |
+| Supported by their **own** citation (judge) | **0.734** of 372 (+6 citing nothing retrieved). Today's faithfulness, against all 8 chunks: 0.886 |
+| Unsupported, by kind (keyword heuristic) | 73 state a rule or holding with an exact citation; 26 apply it to the question |
+| "Answer has a failing claim": sentence unit vs today's judge | agree on 177 of 263; 42 fail only today, 44 only here |
+
+NLI against the judge, "not supported" class, sentence unit (threshold fitted on one half of questions, scored on the other, both ways; halves swing 0.36–0.76, so the mean is the number):
+
+| Model | Held-out F1 | Ceiling (fit on all) | CPU s/answer (M4) |
+|---|---|---|---|
+| DeBERTa-v3 base (MNLI/FEVER/ANLI) | 0.56 | 0.59 | 0.7 |
+| DeBERTa-v3 large (+ling, wanli) | 0.51 | 0.59 | 2.1 |
+| HHEM-2.1-open | **0.61** | 0.67 | 0.7 |
+
+Span unit: 0.42 / 0.51 / 0.52. **No candidate is near 0.90, even at its in-sample ceiling.** Accept-all would score 0.85 on the "supported" class: why the gate reads the other one.
+
+What ADR-15 would hide (judge labels, answers that weren't already refusals):
+
+| Unit | Whole answer | Section (per sub-query kind) | Answer emptied by sections | Claim |
+|---|---|---|---|---|
+| sentence | 0.37 | 0.33 | 0.32 | 0.28 |
+| span | 0.37 | 0.33 | 0.32 | 0.28 |
+
+If an uncited sentence also fails: 0.92 of answers (sentence unit), 0.53 (span). Today 0.14 of answers refuse already.
+
+Abstention today (all 5 runs): 10 of 11 insufficiency rows refuse 5/5; `G-I06` 0/5; `G-I11` refuses both halves 5/5. Answerable rows refuse in 11 of 425 runs.
+
+**Readings, before the judge check (superseded by it, below):**
+1. **The self-hosted NLI verifier is a no-go against the 0.90 gate** (best 0.61). Unless your read shows the judge is wrong, ADR-4 gets a *Revised* note: the runtime verifier is an LLM call, batched per answer (as ADR-10 batches sufficiency). Cost is known: $0.0025 an answer on Haiku.
+2. **Verification can't start from today's answers.** A third of answers would be emptied, on top of 14% refusing. The cause is synthesis: a quarter of cited sentences say more than their own citation does, and most sentences carry no citation. F3 has to change what synthesis writes (cite every sentence; one citation says only what its source says) before F4 suppresses anything, and ADR-11's trigger (Haiku synthesis) is measured on dev there.
+3. **Span beats sentence as the unit** for coverage (uncited-fail 0.53 vs 0.92), at the same suppression.
+
+**Judge check (2026-09-30, done by Claude at your request, two scans; one careful LLM reader, not a human).** First scan: my verdict on all 40 pairs of `f0-judge-check.md`. The judge agrees on **30 of 40** (F1 on "not supported" 0.74). It says "not supported" wrongly 6 times, "supported" wrongly 4. **HHEM agrees on 30 of 40 too (F1 0.76)**, so F0's NLI "no-go" rested on treating a ~75%-accurate judge as ground truth: *not established*. Second scan: the causes, counted over all 744 judged pairs, not just the 40:
+
+| Edge case | Pairs affected | Example | Fix |
+|---|---|---|---|
+| Judge never sees the question, so a claim restating the client's facts can't be supported | 22 name the client, 10 judged unsupported | P13 ($60,000 / $40,000 are the client's, not the case's), P35 ("No," answers the question) | give the question, facts "taken as given, not law" |
+| A sentence alone loses what it refers to | 133 open with Therefore/This/However…, 34 unsupported | P03 ("Therefore" follows "The Eleventh Circuit has concluded…") | give the answer's earlier text as context, not to be judged |
+| A derived citation expanded to every retrieved chunk of its section | 27 pairs, 5 unsupported | P09 (`280A(e)(1)` pulled in (c)(1), (d)(4); judge objected to "irrelevant citations"), P20 (`at *11-12` pulled in `*14`) | map to the chunk that contains it (paragraph prefix, page overlap); whole section only as fallback |
+| Pinpoint to the wrong page of a retrieved opinion | **49 of 99** unsupported cite an opinion with other retrieved pages | P01 (Genecure's reasoning is on a neighbouring page), P32 (nexus holding is in the headnote, `*1-2`) | **a policy decision** (below) |
+| Judge lenient on partly supported multi-sentence claims | 4 of 20 "supported" in the sample | P14, P22/P40 (drops §183(b)'s exception), P27 (first sentence contradicts Pub 527) | "every assertion must be supported; any unsupported part, qualifier or condition fails it" |
+| "Judged together" instruction ignored | P20 | | reworded: "even if some of them say nothing relevant" |
+| Splitter breaks at lowercase `sec.` | 4 fragments ("1402(a)(1) and are not excluded…") | P19, P37 | case-insensitive abbreviations |
+| Nested / multi-citation brackets | 2 in 305 answers (`[26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]`) | P11 | **also in `generate.parse_citations`** (same regex): fix in F3 |
+| Near-duplicate claims across runs | 372 sentence pairs, 306 distinct; judge flips on 1 of 308 | P02/P21, P22/P40 | report distinct n; split stays by question |
+| Judge's "Source N" numbers are its own, not the sheet's order | cosmetic | P03's note | number the sheet the judge's way |
+
+Re-judged the same 40 with the input fixes (question + earlier text + narrowed derived citations), ~$0.10: **V2 35/40 (F1 0.85)**; with the every-part rule, **V2b 36/40 (F1 0.89)**; two of its four remaining disagreements (P24, P35) are ones where a strict reading sides with the judge. Opinion-wide pinpoint (V3b) moves P01, P05, P06, P33 to supported: 33/40 against my cited-page labels, which is the policy difference, not error.
+
+**What this changed (before the re-run below):** F0's headline numbers (0.734 supported; NLI F1 0.51–0.61; ~32% of answers emptied) were measured against the flawed judge and are withdrawn until F0 is re-run with the V2b judge. The NLI verdict and ADR-4's revision wait for that re-run. The finding that stands: uncited sentences (481 of 859) and misattribution are real (P02/P21, P08, P34/P38 are unambiguous).
+
+**Re-run with the fixed judge (2026-09-30; your policy: a claim is checked against every retrieved page of the opinions it cites, the page scored apart).** Judge $1.65 (main pass + page pass); NLI 410 s / 1,212 s / 402 s on the M4 CPU. The splitter fix merged the 4 fragments back (859 → 853 sentences; the two G-C03 check pairs are gone, 38 remain).
+
+| | first run (flawed judge) | re-run |
+|---|---|---|
+| Cited sentences supported by their citation | 0.734 | **0.860** (spans 0.866); today's all-context faithfulness 0.886 |
+| Judge vs my 38 verdicts | 30/40 | **31/38**: single sentences **15/16**, multi-sentence spans 16/22 (lenient on extra assertions) |
+| Opinion claims whose cited *page* doesn't support them (passed on another page) | — | **28 of 168** |
+| Uncited sentences | 481 of 859 | 475 of 853 (343 sit before a citation) |
+
+NLI against the fixed judge, "not supported" class, sentence unit (held out both ways; ceiling = fitted on all):
+
+| Model | Held-out F1 | Ceiling | False accepts | vs my 38 verdicts | CPU s/answer (both units) |
+|---|---|---|---|---|---|
+| DeBERTa-v3 base | 0.22 | 0.42 | 0.60 | 24/38 | 1.6 |
+| DeBERTa-v3 large | 0.40 | 0.47 | 0.65 | 28/38 | 4.7 |
+| HHEM-2.1-open | 0.42 | 0.47 | 0.20 | 24/38 | 1.6 |
+| (the judge itself) | — | — | — | 31/38 | — |
+
+Worse than the first run, for two reasons: unsupported claims are now rarer (14%), and each claim is read against every page of its opinion (870 of 981 premises windowed), so a model taking the best window over many finds spurious entailment. **No NLI model is near 0.90 even in-sample, and the judge beats all three against a careful read. The NLI no-go now stands.**
+
+What ADR-15 would hide (fixed judge, answers that weren't already refusals): sentence unit, whole answer 0.22, **section 0.20, answer emptied by its sections 0.18**, claim 0.15. On top of 0.14 refusing today. If an uncited sentence also failed: 0.90 of answers (sentence unit), 0.42 (span).
+
+**Conclusions for Checkpoint 1 (proposed):**
+1. **ADR-4 revised:** the runtime verifier is an LLM call, one batched call per answer, as ADR-10 batches sufficiency: ~$0.0023 an answer on Haiku (this run's main pass, per unit). Self-hosted NLI measured and rejected (table above).
+2. **The gate needs an independent reference.** If Haiku verifies at runtime, "F1 against the Haiku judge" is circular. Proposed: the verifier is scored against a different model (the audit judge) plus a hand-checked sample, and the audit judge is itself checked on that sample, as done here.
+3. **Unit: the sentence, read with the question and the whole answer as context** (15/16 against 16/22 for spans). Uncited sentences are F3's job: synthesis cites every sentence, so the sentence unit covers the answer.
+4. **Suppression (~18% of answers emptied) is too high to ship as is:** F3 changes synthesis first (cite every sentence, say only what the cited source says), and ADR-11's trigger (Haiku synthesis) is measured on dev there.
+
+**Can a small model be rescued? (2026-09-30, quick test at your request, sentence unit, no judge cost.)** Tried: two checkers built for this task (MiniCheck RoBERTa-L and DeBERTa-v3-L), reading only the reranker's top 3 windows instead of every page (`--premise top`), and triage (small model decides what it's sure of, the LLM the rest; thresholds fitted on one half, ≤2% unsupported among auto-accepts, scored on the other).
+
+| Model | Held-out F1 | Ceiling | Triage: share decided alone | Unsupported let through (of 52) | CPU s/answer |
+|---|---|---|---|---|---|
+| MiniCheck-DeBERTa (best) | **0.46** | 0.54 | **0.36** | 3 | 2.45 (top 3: 1.08) |
+| MiniCheck-RoBERTa | 0.40 | 0.50 | 0.29 | 6 | 1.55 (top 3: 0.67) |
+| HHEM | 0.42 | 0.47 | 0.26 | 3 | 1.56 (top 3: 0.37) |
+| DeBERTa-v3 large | 0.40 | 0.47 | 0.28 | 9 | 4.70 (top 3: 1.07) |
+
+Reading the top 3 windows costs ≤0.05 F1 and is 2–4× faster. **Still nowhere near 0.90; triage would save at most a third of LLM calls (~$0.0008 an answer) while letting 3 of 52 unsupported claims through, which ADR-15's zero tolerance forbids.** Not worth it at this volume. Kept as ADR-4's revisit trigger: if privacy (client documents, Phase G) or volume makes the LLM call a problem, fine-tune MiniCheck-DeBERTa on judge-labelled tax pairs, run it on the top 3 windows, and re-measure triage.
+
+---
+
+## F1: Insufficiency rows and entailment pair sets
+
+**Goal:** give F2 a dev set to tune on and F5 a fixed golden audit set, before anything is tuned.
+- ≥10 dev insufficiency rows, mirroring golden's kinds (future-year figures, state/foreign law, IRS operations, legislation not yet passed) without sharing a citation with golden. ≥3 of them partial (one answerable half, one not), like `G-I11`. `expect_insufficient` gains a per-part form for partials.
+- Entailment pair sets: dev pairs (for F4's threshold) and golden pairs (scored once, F5), from F0's sentence splitter, judge-labelled, frozen as JSON so every NLI run scores the same pairs.
+- `validate_pilot.py` checks the new fields. Golden audit rule: logged commits you review.
+
+**Acceptance:** rows approved by you (Checkpoint 1); pair files committed with their counts.
+
+**Changed after F0 (2026-09-30):** the frozen entailment pair sets move to F5. Pairs are made from answers, and F3 changes how synthesis writes them (every sentence cited), so pairs frozen from today's answers would audit a pipeline that no longer exists. F1 is the rows only.
+
+**Drafted (2026-09-30), `eval/dev.jsonl` D43–D53, `reviewed: false` until you approve:** 11 rows, 3 partial, `scored_from: "F"`, same kinds as golden's 11, no gold shared with golden (checked: golden's gold has no §221, §219, §223, §2503 or Pub 17 p. 76/81).
+
+| Row | Kind (golden sibling) | Question (short) | Why insufficient: checked in the corpus | Trap |
+|---|---|---|---|---|
+| D43 | future figure (G-I01, G-I02) | 2027 gift tax annual exclusion | no chunk has 2027 with gift/exclusion | — |
+| D44 | future figure | 2027 HSA family limit | no chunk has 2027 with health savings | §223(b)(2) base amounts |
+| D45 | state (G-I03/04/09) | Pennsylvania tax on 401(k) distributions | no non-opinion chunk gives PA tax rules | — |
+| D46 | state | Massachusetts rate on short-term gains | none gives an MA rate | §1222, federal rate chunks |
+| D47 | foreign (G-I05) | Germany's tax on a US citizen's German dividends | US federal law only | §245/245A |
+| D48 | IRS operations (G-I06) | TAS case-assignment wait | TAS described, no times | §7811, Pub 17/587 TAS text |
+| D49 | announced rate (G-I07) | short-term AFR, March 2027 | no 2027 rate; may state §1274(d)'s method | — |
+| D50 | future legislation (G-I08) | will Congress repeal §280E? | unknowable; may state current law | Mission Organic pages |
+| D51 | **partial** (G-I11) | student loan interest: federal + New Jersey | federal: §221(a)-(c); NJ: no state law | Pub 17 p. 99 names New Jersey (state benefit funds only) |
+| D52 | **partial** | alimony paid under a 2020 agreement: federal + California | federal: Pub 17 p. 76 (indirect: §§71, 215 repealed and excluded); CA: none | — |
+| D53 | **partial**, future half | traditional IRA limit for 2025 + 2027 | 2025: Pub 17 p. 81 ($7,000); 2027: none | §219(b)(5) still says $5,000 |
+
+Partial rows carry `parts` (`[{part, insufficient, gold}]`); `validate_pilot.py` checks them (each part named and flagged; answerable parts have gold inside the row's gold; at least one of each kind). Golden's G-I11 has no `parts` yet: adding it is a golden edit, proposed for your review, not made.
+
+---
+
+## ✅ Checkpoint 1 (human review)
+- [x] Judge labels read (~40 pairs, by Claude at your request, two scans); agreement recorded (30/40 before fixes; 15/16 sentences, 16/22 spans after)
+- [x] Confirmed by you (2026-09-30): ADR-4 revised (LLM verifier, one call per answer; small models rejected); the gate scored against an independent audit reference; sentence unit with question + whole answer as context; F3 before F4. Sub-answer unit: one section per sub-query (approved with the plan)
+- [ ] F1's rows and pair sets approved
+
+---
+
+## F2: Sufficiency gate (outline)
+
+One structured-output call per searched sub-query over its reranked candidates (ADR-10): per-candidate `supports` + a sub-query verdict. An insufficient sub-query is dropped from synthesis and named as insufficient; all insufficient → no synthesis call. Tuned on dev: abstention precision/recall, answerable rows' refusal rate before and after, whether rule 3 can go. `G-I11`'s waiting test passes. Langfuse span + `checking_sufficiency` SSE event.
+
+## F3: Sectioned synthesis, claims with citations, completeness (outline)
+
+Synthesis writes one section per sub-query (or the unit Checkpoint 1 chose). A claim splitter returns (sentence, citations, section). The judge-side extractor keeps citations and marks materiality; completeness = cited material claims ÷ material claims. Faithfulness on dev unchanged within noise (the prompt changes).
+
+## F4: NLI verifier and suppression (outline)
+
+The F0 pick served through onnxruntime + `tokenizers` (no torch in production), all claims of an answer in one batch, windowed premises. A section with any non-entailed claim is suppressed whole and reported as insufficient (ADR-15). Threshold set on dev pairs. `verifying` SSE event; the answer stays buffered until verification ends (ADR-9). Suppression rate on dev; ADR-11's trigger (Haiku synthesis) measured on dev if it's too high.
+
+## F5: Phase F eval and ladder rung (outline)
+
+Golden, scored once: entailment F1 (not-supported class) + false-accept rate on the frozen pairs; completeness; abstention P/R; suppression rate; faithfulness gate and refusal bound on the new pipeline. "+claim verification" added to the ladder. Correctness grading begins on §9.2's 40-question subset: two judges, κ reported, tracked not gated.
+
+## F6: Phase F exit report
+
+`eval/results/phase_f.md`: gate outcomes, what each check caught (with examples: a laundered citation suppressed, `G-I11`'s half answer), what it cost (suppressions, latency), what F got wrong. Tech doc §7/§9.3 and ADRs updated.
+
+## ✅ Checkpoint: Phase F complete
+- [ ] Citation entailment F1 ≥0.90 (NLI vs. LLM-judge, not-supported class)
+- [ ] Citation completeness ≥0.85
+- [ ] Substantive correctness tracked (N, κ reported)
+- [ ] Tests and both CI gates green on the shipped pipeline
