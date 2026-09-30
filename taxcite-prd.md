@@ -181,7 +181,7 @@ Quality is tracked via an **ablation ladder** — closed-book → dense-only →
 | D | Temporal-filtering accuracy | ≥90% |
 | E | Authority-metadata accuracy (N=150) | ≥95% |
 | E | Recall@20 regression from authority rerank | ≤2 points |
-| F | Citation entailment F1 | ≥0.90 |
+| F | Citation entailment F1 (runtime verifier vs. an independent audit reference; ADR-4 revised 2026-09-30) | ≥0.90 |
 | F | Citation completeness | ≥0.85 |
 | F | Substantive correctness | Tracked, not gated, until ≥100 AI-judge-graded examples exist |
 | G | Cross-tenant leakage failures | 0 |

@@ -384,6 +384,7 @@ No calendar estimates — this is a dependency order.
 **ADR-4: Self-hosted NLI model, not LLM-as-judge, for the production verification pass.**
 *Decision:* Use a specialized, self-hosted NLI/entailment model for the per-query verification pass; reserve LLM-as-judge for the offline eval harness.
 *Trade-off:* Cheaper and faster than a per-claim LLM call, but less nuanced on ambiguous entailment cases; mitigated by periodically auditing the NLI verifier's error rate against LLM-as-judge offline (target F1 ≥0.90, §9.3).
+*Revised (2026-09-30), from the F0 spike.* Measured on 305 cached golden answers, every claim checked against the source it cites. Five self-hosted models (DeBERTa-v3 base and large on MNLI/FEVER/ANLI, HHEM-2.1-open, MiniCheck RoBERTa-L and DeBERTa-v3-L), each with every window and with only the reranker's top 3: held-out F1 on the "not supported" class 0.22–0.46, best in-sample 0.54, against 0.90. Triage (the small model decides what it's sure of) would cut LLM calls by at most a third and let 3 of 52 unsupported claims through, which ADR-15 forbids. **Decision now: the runtime verifier is an LLM call, one batched structured-output call per answer (as ADR-10 batches sufficiency), each sentence judged against the sources it cites, with the question and the whole answer as context;** ~$0.0023 an answer on Haiku. The judge itself was checked first (40 pairs read twice; input fixes took it from 30/40 to 15/16 on single sentences). *Revisit trigger:* if client documents must stay on our servers (Phase G) or volume makes the call costly, fine-tune MiniCheck-DeBERTa on judge-labelled tax pairs, run it on the top-3 windows, and re-measure triage.
 
 **ADR-5: Shared corpus + per-tenant namespace, not fully siloed indices.**
 *Decision:* One statute/case-law index and citation graph serve all tenants; isolation enforced at the query-filter layer.
@@ -729,7 +730,7 @@ Substantive correctness (§5.4, §10) is the hardest metric to produce, and this
 | E | Recall@20 regression from authority-aware rerank | ≤2 points (met: no category down, statutory +12.5) |
 | E | Conflict rows reaching their target (pre-registered; §7 gave no number) | ≥ half of reachable rows (**not met**: 2.2 of 23) |
 | E | Guard rows kept (added in E1) | ≤1 of 8 lost (met: 0) |
-| F | Citation entailment F1 (NLI vs. LLM-judge audit) | ≥0.90 |
+| F | Citation entailment F1 (runtime verifier vs. an independent audit reference: a different judge model, itself checked on hand-read pairs; revised from "NLI vs. LLM-judge" by F0, ADR-4) | ≥0.90 |
 | F | Citation completeness | ≥0.85 |
 | F | Substantive correctness | tracked, not gated, until N≥100 AI-judge-graded examples exist (§9.2) |
 | G | Cross-tenant leakage failures | 0 |
