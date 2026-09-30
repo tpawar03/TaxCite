@@ -1103,6 +1103,32 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1009,
       "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
     }
   ],
   "Could an employee deduct unreimbursed job expenses on a 2016 return, and can they on a 2026 return?": [
@@ -12569,6 +12595,25 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1031,
       "output_tokens": 84
+    }
+  ],
+  "Can my client deduct student loan interest on her federal return, and does New Jersey allow the same deduction on her state return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for student loan interest under Internal Revenue Code section 221"
+        },
+        {
+          "kind": "statutory",
+          "query": "New Jersey state tax treatment of student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 65
     }
   ]
 }

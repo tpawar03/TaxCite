@@ -99,10 +99,11 @@ def main() -> int:
     ap.add_argument("--answers-cache", default=str(ANSWERS))
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json")
     ap.add_argument("--editions", help="turn D3's edition filter on for this run, e.g. 1,0 (off live until D7 decides)")
-    ap.add_argument("--rows", choices=("temporal", "authority"), default="temporal",
+    ap.add_argument("--rows", choices=("temporal", "authority", "all"), default="temporal",
                     help="temporal rows (the Phase D gate) or E1's authority-tagged rows (E5)")
     ap.add_argument("--samples", type=int, default=1, metavar="N", help="answers per row, answer i from plan set i")
-    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's synthesis prompt arm")
+    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
+    ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
     args = ap.parse_args()
     if args.editions:
         from taxcite import decompose as dc
@@ -110,7 +111,10 @@ def main() -> int:
 
     set_prompt(args.prompt)
     rows = [json.loads(l) for l in open(args.questions) if l.strip()]
-    rows = [r for r in rows if (r["category"] == "temporal" if args.rows == "temporal" else "authority" in r)]
+    # "all" (F3): every answerable row; insufficiency and adversarial rows are F2's and Phase G's
+    keep = {"temporal": lambda r: r["category"] == "temporal", "authority": lambda r: "authority" in r,
+            "all": lambda r: r["category"] not in ("insufficiency", "adversarial")}[args.rows]
+    rows = [r for r in rows if keep(r)]
     cache_path, plan_path = Path(args.answers_cache), Path(args.plan_cache)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     plans = json.loads(plan_path.read_text()) if plan_path.exists() else {}
@@ -120,7 +124,8 @@ def main() -> int:
     try:
         for r, i in [(r, i) for r in rows for i in range(args.samples)]:
             plan = cached_decompose(r["question"], plans, plan_path, i)
-            ans = pipeline_answer(r["question"], args.k, cache, cache_path, i, plans, plan_path, plan_set=i)
+            ans = pipeline_answer(r["question"], args.k, cache, cache_path, i, plans, plan_path, plan_set=i,
+                                  model=args.synth_model)
             ok = as_of_match(plan.as_of, r["as_of"]) if args.rows == "temporal" else None
             claims = [] if ans["refused"] else extract_claims(ans["text"], args.judge, budget)
             # the question is a source too: restating its facts, or arithmetic on them, is not a memory claim

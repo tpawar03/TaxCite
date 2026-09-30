@@ -532,15 +532,15 @@ Full task details are in `tasks/todo.md` (Phase F section).
 
 ### Slice 1: Find out what verification will cost
 - [x] F0: Verification spike: judge fixed after a 40-pair read; 0.86 of cited sentences supported; 475 of 853 sentences uncited; 5 small models 0.22–0.46 F1 vs 0.90 → ADR-4 revised to an LLM verifier; ~18% of answers would be emptied, so F3 first
-- [ ] F1: Insufficiency rows (drafted: 11 dev rows D43–D53, 3 partial, awaiting review; pair sets moved to F5, after F3 changes synthesis)
+- [x] F1: Insufficiency rows: 11 dev rows D43–D53 (3 partial, `parts`), approved; `parts` on golden G-I11; pair sets moved to F5, after F3 changes synthesis
 
 ### Checkpoint 1 (human review)
 - [x] Confirmed 2026-09-30: ADR-4 revised; independent audit reference for the gate; sentence unit with context; F3 before F4
-- [ ] F1's rows are approved
+- [x] F1's rows are approved (2026-09-30)
 
 ### Slice 2: Gates around synthesis
 - [ ] F2: Sufficiency gate
-- [ ] F3: Sectioned synthesis, claims with citations, completeness
+- [x] F3: Structured synthesis ships (arm E′, a recorded departure from the rule): completeness 1.000, fully verified answers 0.523 (0.032), correctness unchanged; faithfulness gate now judged with the question, a floor (ADR-22 revised)
 - [ ] F4: NLI verifier and suppression
 
 ### Slice 3: Measure and report

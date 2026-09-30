@@ -8,6 +8,7 @@ Model choice is deliberate: start on the cheapest and fastest model and upgrade
 only if measurement shows a need (T8). Override with TAXCITE_MODEL.
 """
 
+import json
 import os
 import re
 from collections.abc import Sequence
@@ -17,6 +18,9 @@ from pathlib import Path
 from taxcite.retrieve import Hit, search
 
 MODEL = os.environ.get("TAXCITE_MODEL", "gpt-4o-mini")
+# F3: a golden run hung for an hour on one request whose connection had died (the laptop slept); the SDKs' own
+# defaults wait ten minutes per attempt. A synthesis or judge call takes seconds, so two minutes is generous.
+API_TIMEOUT = 120.0
 TOP_K = 8
 MAX_TOKENS = 4000
 
@@ -33,7 +37,12 @@ PRICES = {
 }
 
 CITATION_RE = re.compile(r"\[([^\[\]]+)\]")
+# F0: the model sometimes nests one bracket in another, "[26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]", and
+# CITATION_RE alone then sees only the inner citation
+NESTED_RE = re.compile(r"\[([^\[\]]*?),?\s*\[([^\[\]]+)\]\]")
 OPINION_RE = re.compile(r"\d+ T\.C\. No\. \d+|T\.C\. Memo\. \d{4}-\d+")
+# F3: a section heading as the model writes it: "Part 2: Case law", "**Part 2 – Case law**", "### Part 2. Case law"
+PART_RE = re.compile(r"^[ \t]*(?:#+[ \t]*)?\**[ \t]*Part[ \t]+(\d+)[ \t]*[:.\-–—][ \t]*(.*?)[ \t]*\**[ \t]*$", re.M)
 
 RAG_SYSTEM = """You answer US federal tax questions for an enrolled agent, using only the sources provided.
 
@@ -61,6 +70,87 @@ assert RULE_4 in RAG_SYSTEM and RULE_4_AUTHORITY_B.endswith("Say which you follo
 # vs 0.821 ± 0.015 before. Recorded as a departure from rule 3.
 PRE_E5_SYSTEM = RAG_SYSTEM
 RAG_SYSTEM = PRE_E5_SYSTEM.replace(RULE_4, RULE_4_AUTHORITY_B)
+PRE_F3_SYSTEM = RAG_SYSTEM  # (ii′), shipped until F3; F3's arms build on it
+
+# F3's candidates, measured on dev before either ships. F0: rule 2 asks for a citation only on "every sentence that
+# states a rule", so applications and conclusions go uncited (475 of 853 golden sentences), and 14% of cited
+# sentences say more than their source. A verifier can only check what is cited.
+RULE_2 = ("2. Every sentence that states a rule must end with its citation in square brackets, copied exactly as the "
+          "source header gives it, e.g. [26 CFR 1.183-2(b)(3)], [26 U.S.C. § 183(d)] or [T.C. Memo. 2026-76, at *12].")
+RULE_2_EVERY = ("2. Every sentence must end with the citation of the source it relies on, in square brackets, copied "
+                "exactly as the source header gives it, e.g. [26 CFR 1.183-2(b)(3)], [26 U.S.C. § 183(d)] or "
+                "[T.C. Memo. 2026-76, at *12]. That includes a sentence applying a rule to the client's facts: cite the "
+                "rule it applies. A sentence says only what its cited source says; if you can't cite a source for it, "
+                "leave it out. The client's facts from the question need no citation.")
+SECTIONS_RULE = """
+7. Parts: the sources come in numbered parts, one per part of the question. Answer each part in its own section, headed "Part N: <what it answers>" on a line of its own, in the parts' order. Each section must stand on its own: use only that part's sources and do not rely on another section's conclusion. If there is only one part, write no heading."""
+assert RULE_2 in RAG_SYSTEM
+SECTIONS = False  # F3: number the parts and ask for a section per part
+
+# F3 arm E. Prompting reached 0.60-0.71 completeness, never 0.85: the model writes most sentences cited, not all.
+# So the citation moves into the output's shape: one JSON item per sentence, its citations chosen from the
+# retrieved sources (an enum, so none can be invented), and an item left without one is dropped, not shown.
+RULE_3 = ("3. If the sources do not answer the question, say exactly: INSUFFICIENT EVIDENCE, and explain what is "
+          "missing. Do not guess.")
+RULE_2_STRUCTURED = ("2. Write each sentence as its own item, with the citations of the sources it relies on, chosen "
+                     "from the list. That includes a sentence applying a rule to the client's facts: cite the rule it "
+                     "applies. A sentence says only what its cited sources say; an item without a citation is not shown.")
+RULE_3_STRUCTURED = ("3. If the sources do not answer a part of the question, add that part to not_answerable with what "
+                     "is missing. Do not guess.")
+STRUCTURED_RULE = """
+7. Output: JSON only, in the given shape. "part" is the number of the part a sentence answers (1 if there is one part). One sentence per item. "tax_year" is the year you answer for, or null."""
+assert RULE_3 in RAG_SYSTEM
+# Arm E ships (F3, your decision 2026-09-30), a recorded departure from F3's pre-registered rule, whose two metrics
+# both worked against it: "refused" counted a cited answer with a caveat, and "answers emptied" ignored uncited
+# sentences. On dev: completeness 1.000 (0.438 before), answers fully verified 0.523 (0.032), correctness 0.373 (same),
+# faithfulness with the question as a source 0.864 ± 0.025 (0.859 ± 0.007).
+RAG_SYSTEM = PRE_F3_SYSTEM.replace(RULE_2, RULE_2_STRUCTURED).replace(RULE_3, RULE_3_STRUCTURED)
+STRUCTURED = True
+
+
+def answer_schema(citations_allowed: list[str]) -> dict:
+    """The JSON schema for arm E: strict, so every field is required and nothing else is allowed. Citations are an
+    enum of the retrieved sources' citations: a structured answer cannot cite something it was not given."""
+    obj = lambda props: {"type": "object", "additionalProperties": False,  # noqa: E731
+                         "required": list(props), "properties": props}
+    return obj({
+        "tax_year": {"type": ["string", "null"]},
+        "sentences": {"type": "array", "items": obj({
+            "part": {"type": "integer"}, "text": {"type": "string"},
+            "citations": {"type": "array", "items": {"type": "string", "enum": citations_allowed}}})},
+        "not_answerable": {"type": "array", "items": obj({"part": {"type": "integer"}, "why": {"type": "string"}})},
+    })
+
+
+def render(data: dict, labels: list[str]) -> tuple[str, int]:
+    """(answer text, sentences dropped) from arm E's JSON. Each sentence ends with its citations, as rule 2 always
+    asked; a sentence with none is dropped and counted. A part with nothing answered says INSUFFICIENT EVIDENCE; a
+    detail missing from a part that is answered is a note, "Not in the sources: ..." (F3: as INSUFFICIENT EVIDENCE it
+    ended 46% of answers)."""
+    parts = {n: [] for n in range(1, len(labels) + 1)}
+    dropped = 0
+    for s in data.get("sentences") or []:
+        text, cites = str(s.get("text", "")).strip(), [c for c in s.get("citations") or [] if c]
+        if not text:
+            continue
+        if not cites:
+            dropped += 1
+            continue
+        body = text.rstrip(".").rstrip()
+        parts.setdefault(s.get("part") if s.get("part") in parts else 1, []).append(
+            f"{body} {', '.join(f'[{c}]' for c in dict.fromkeys(cites))}.")
+    answered = {n for n, lines in parts.items() if lines}
+    for m in data.get("not_answerable") or []:
+        n = m.get("part") if m.get("part") in parts else 1
+        why = str(m.get("why", "")).strip()
+        parts[n].append(f"Not in the sources: {why}" if n in answered else f"INSUFFICIENT EVIDENCE: {why}")
+    blocks = []
+    for n, lines in parts.items():
+        if lines:
+            head = f"Part {n}: {labels[n - 1]}\n" if len(labels) > 1 else ""
+            blocks.append(head + " ".join(lines))
+    year = f"Tax year: {data['tax_year']}\n\n" if data.get("tax_year") else ""
+    return year + "\n\n".join(blocks), dropped
 
 # E5: what an authority profile is called, wherever it's shown. One fixed map, fed only by E2's structured
 # profile, never by what a source's text says about itself (ADR-13, FR-14): a document can't promote itself.
@@ -121,6 +211,7 @@ class Answer:
     citations: list[str] = field(default_factory=list)
     derived_citations: list[str] = field(default_factory=list)
     unsupported_citations: list[str] = field(default_factory=list)
+    dropped_sentences: int = 0  # arm E: sentences the model wrote without a citation, not shown
     retrieved: list[Hit] = field(default_factory=list)
     input_tokens: int = 0
     output_tokens: int = 0
@@ -131,7 +222,26 @@ class Answer:
 
     @property
     def refused(self) -> bool:
-        return "INSUFFICIENT EVIDENCE" in self.text.upper()
+        """Says INSUFFICIENT EVIDENCE and cites nothing. F3: a cited answer that flags one missing detail, or answers
+        one part of a two-part question, is an answer, not a refusal (arm E's 58 "refusals" were all cited answers)."""
+        cited = self.citations or self.derived_citations or self.unsupported_citations
+        return "INSUFFICIENT EVIDENCE" in self.text.upper() and not cited
+
+    @property
+    def sections(self) -> list[tuple[str, str]]:
+        return split_sections(self.text)
+
+
+def split_sections(text: str) -> list[tuple[str, str]]:
+    """(label, text) per "Part N: ..." section (F3), the unit ADR-15 hides. No headings: one section, the whole
+    answer. Text before the first heading is its own unlabelled section, so nothing escapes a section's check."""
+    marks = list(PART_RE.finditer(text))
+    if not marks:
+        return [("", text.strip())]
+    out = [("", text[:marks[0].start()].strip())] if text[:marks[0].start()].strip() else []
+    for m, nxt in zip(marks, marks[1:] + [None]):
+        out.append((f"Part {m.group(1)}: {m.group(2)}".rstrip(": "), text[m.end():nxt.start() if nxt else None].strip()))
+    return out
 
 
 def effective_note(h: Hit, year: int | None) -> str:
@@ -172,6 +282,12 @@ def section_of(citation: str) -> str:
     return f"{head}-{tail.split('(')[0]}" if dash else head
 
 
+def citations(text: str) -> list[str]:
+    """Every bracketed citation, once each, in order: nested brackets flattened, "[A; B]" split (F0)."""
+    flat = NESTED_RE.sub(r"[\1], [\2]", text)
+    return list(dict.fromkeys(c.strip() for b in CITATION_RE.findall(flat) for c in b.split(";") if c.strip()))
+
+
 def parse_citations(text: str, retrieved: list[Hit]) -> tuple[list[str], list[str], list[str]]:
     """Split the answer's citations three ways: exact, derived, unsupported.
 
@@ -188,7 +304,7 @@ def parse_citations(text: str, retrieved: list[Hit]) -> tuple[list[str], list[st
     """
     available = {h.citation for h in retrieved}
     sections = {h.section for h in retrieved}
-    cited = list(dict.fromkeys(CITATION_RE.findall(text)))
+    cited = citations(text)
 
     exact = [c for c in cited if c in available]
     rest = [c for c in cited if c not in available]
@@ -233,7 +349,8 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
       claude model cannot get it this way.
     * `json_output` is OpenAI's loose JSON mode: valid JSON, no guaranteed shape.
     * `json_schema` is Anthropic's `output_config` format, which is stricter -- the
-      response conforms to the schema. Worth using wherever the shape matters, but parse
+      response conforms to the schema. For OpenAI models it is sent as strict structured outputs
+      (F3), which also require every property to be listed in `required`. Worth using wherever the shape matters, but parse
       defensively anyway: a refusal or a truncated response still is not your object.
 
     `seed` is OpenAI's best-effort determinism, and best-effort is the operative word:
@@ -244,7 +361,7 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
     if model.startswith("claude"):
         import anthropic
 
-        client = anthropic.Anthropic()
+        client = anthropic.Anthropic(timeout=API_TIMEOUT)
         kwargs = {}
         if json_schema is not None:
             kwargs["output_config"] = {"format": {"type": "json_schema", "schema": json_schema}}
@@ -260,10 +377,13 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
 
     from openai import OpenAI
 
-    client = OpenAI()
+    client = OpenAI(timeout=API_TIMEOUT)
     kwargs = {"temperature": temperature} if temperature is not None else {}
     if json_output:
         kwargs["response_format"] = {"type": "json_object"}
+    if json_schema is not None:  # F3 arm E: OpenAI's strict structured outputs, the counterpart of output_config
+        kwargs["response_format"] = {"type": "json_schema",
+                                     "json_schema": {"name": "answer", "strict": True, "schema": json_schema}}
     if seed is not None:
         kwargs["seed"] = seed
     response = client.chat.completions.create(
@@ -299,15 +419,38 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
     """
     years = sorted(set(re.findall(r"\b(?:19|20)\d\d\b", as_of or "")))
     year = int(years[0]) if years else None  # the earliest year named: the one later text can't govern
-    blocks = [f"## Sources for: {label}\n\n{format_sources(hits, year)}" for label, hits in groups if hits]
+    groups = [(label, hits) for label, hits in groups if hits]
+    blocks = [f"## Part {n}: {label}\n\n{format_sources(hits, year)}" if SECTIONS or STRUCTURED else
+              f"## Sources for: {label}\n\n{format_sources(hits, year)}" for n, (label, hits) in enumerate(groups, 1)]
     if facts:
         blocks.append("## Client facts, supplied by the questioner (not sources; never cite these)\n"
                       + "\n".join(f"- {f}" for f in facts))
     hits = list({h.citation: h for _, group in groups for h in group}.values())
     header = f"Tax year(s) the question is about: {' and '.join(years)}\n" if years else ""
     prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\n{header}Question: {question}"
-    return _generate(question, hits, mode="rag", model=model, prompt=prompt,
-                     system=RAG_SYSTEM + YEAR_RULE if years else RAG_SYSTEM)
+    if STRUCTURED and hits:
+        return _generate_structured(hits, [label for label, _ in groups], model, prompt,
+                                    RAG_SYSTEM + (YEAR_RULE if years else "") + STRUCTURED_RULE)
+    system = RAG_SYSTEM + (YEAR_RULE if years else "") + (SECTIONS_RULE if SECTIONS else "")
+    return _generate(question, hits, mode="rag", model=model, prompt=prompt, system=system)
+
+
+def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt: str, system: str) -> Answer:
+    """Arm E: the answer as JSON items, rendered to the same cited text every other arm writes, so the API, the CLI
+    and the verifier read it unchanged. An unusable response is a refusal, never raw JSON in front of a user."""
+    schema = answer_schema(sorted({h.citation for h in hits}))
+    raw, input_tokens, output_tokens = call_model(system, prompt, model, temperature=0, seed=0, json_schema=schema)
+    try:
+        data = json.loads(raw)
+    except (json.JSONDecodeError, TypeError):
+        data = None
+    text, dropped = render(data, labels) if isinstance(data, dict) else ("", 0)
+    if not text.strip():
+        text = "INSUFFICIENT EVIDENCE: no sentence of the answer could be tied to a source."
+    exact, derived, invented = parse_citations(text, hits)
+    return Answer(text=text, mode="rag", model=model, citations=exact, derived_citations=derived,
+                  unsupported_citations=invented, retrieved=hits, input_tokens=input_tokens,
+                  output_tokens=output_tokens, dropped_sentences=dropped)
 
 
 def answer(question: str, mode: str = "rag", k: int = TOP_K, model: str = MODEL,

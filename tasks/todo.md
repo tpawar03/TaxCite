@@ -2245,7 +2245,7 @@ Reading the top 3 windows costs ≤0.05 F1 and is 2–4× faster. **Still nowher
 
 **Changed after F0 (2026-09-30):** the frozen entailment pair sets move to F5. Pairs are made from answers, and F3 changes how synthesis writes them (every sentence cited), so pairs frozen from today's answers would audit a pipeline that no longer exists. F1 is the rows only.
 
-**Drafted (2026-09-30), `eval/dev.jsonl` D43–D53, `reviewed: false` until you approve:** 11 rows, 3 partial, `scored_from: "F"`, same kinds as golden's 11, no gold shared with golden (checked: golden's gold has no §221, §219, §223, §2503 or Pub 17 p. 76/81).
+**Done (2026-09-30), `eval/dev.jsonl` D43–D53, approved by you and committed (`a5c2023`):** 11 rows, 3 partial, `scored_from: "F"`, same kinds as golden's 11, no gold shared with golden (checked: golden's gold has no §221, §219, §223, §2503 or Pub 17 p. 76/81).
 
 | Row | Kind (golden sibling) | Question (short) | Why insufficient: checked in the corpus | Trap |
 |---|---|---|---|---|
@@ -2261,14 +2261,14 @@ Reading the top 3 windows costs ≤0.05 F1 and is 2–4× faster. **Still nowher
 | D52 | **partial** | alimony paid under a 2020 agreement: federal + California | federal: Pub 17 p. 76 (indirect: §§71, 215 repealed and excluded); CA: none | — |
 | D53 | **partial**, future half | traditional IRA limit for 2025 + 2027 | 2025: Pub 17 p. 81 ($7,000); 2027: none | §219(b)(5) still says $5,000 |
 
-Partial rows carry `parts` (`[{part, insufficient, gold}]`); `validate_pilot.py` checks them (each part named and flagged; answerable parts have gold inside the row's gold; at least one of each kind). Golden's G-I11 has no `parts` yet: adding it is a golden edit, proposed for your review, not made.
+Partial rows carry `parts` (`[{part, insufficient, gold}]`); `validate_pilot.py` checks them (each part named and flagged; answerable parts have gold inside the row's gold; at least one of each kind). Golden's G-I11 gained `parts` (your approval; only that field changed, all 116 golden rows validate).
 
 ---
 
 ## ✅ Checkpoint 1 (human review)
 - [x] Judge labels read (~40 pairs, by Claude at your request, two scans); agreement recorded (30/40 before fixes; 15/16 sentences, 16/22 spans after)
 - [x] Confirmed by you (2026-09-30): ADR-4 revised (LLM verifier, one call per answer; small models rejected); the gate scored against an independent audit reference; sentence unit with question + whole answer as context; F3 before F4. Sub-answer unit: one section per sub-query (approved with the plan)
-- [ ] F1's rows and pair sets approved
+- [x] F1's 11 rows approved by you (2026-09-30), and `parts` added to golden G-I11 (`a5c2023`); pair sets moved to F5
 
 ---
 
@@ -2276,9 +2276,124 @@ Partial rows carry `parts` (`[{part, insufficient, gold}]`); `validate_pilot.py`
 
 One structured-output call per searched sub-query over its reranked candidates (ADR-10): per-candidate `supports` + a sub-query verdict. An insufficient sub-query is dropped from synthesis and named as insufficient; all insufficient → no synthesis call. Tuned on dev: abstention precision/recall, answerable rows' refusal rate before and after, whether rule 3 can go. `G-I11`'s waiting test passes. Langfuse span + `checking_sufficiency` SSE event.
 
-## F3: Sectioned synthesis, claims with citations, completeness (outline)
+## F3: Synthesis that cites every sentence, in sections
 
-Synthesis writes one section per sub-query (or the unit Checkpoint 1 chose). A claim splitter returns (sentence, citations, section). The judge-side extractor keeps citations and marks materiality; completeness = cited material claims ÷ material claims. Faithfulness on dev unchanged within noise (the prompt changes).
+**Goal:** change what synthesis writes, so that F4's verifier has something to check and zero tolerance doesn't empty a fifth of answers. Measured on dev; golden is not touched until F5.
+
+**Why (F0, golden, shipped pipeline):** 475 of 853 sentences carry no citation, and 132 of them come after the last citation, so they're conclusions nothing backs ("Thus, your client must recognize the full amount as income."). Of cited sentences, 14% say more than the source they cite (G-S14's 40% rate, G-S10's 750 hours). ADR-15 on today's answers would empty ~18% of answers, on top of 14% refusing. Rule 2 of `RAG_SYSTEM` asks only for "every sentence that states a rule" to be cited, so applications and conclusions go uncited by design.
+
+**What changes:**
+1. **Rule 2 becomes: every sentence carries a citation, and says only what that source says.** A sentence applying a rule to the client's facts cites the rule it applies; the question's facts need no citation (the verifier takes them as given, F0). A sentence that can't be cited isn't written. Wording is measured, not assumed (arms below).
+2. **One section per searched sub-query** (the unit approved with the plan). `answer_from_groups` already groups sources by sub-query; the prompt numbers the parts and asks for one section per part, each self-contained (no conclusion that leans on another section, since F4 may hide one). A question with one searched sub-query gets one section and no heading. Client facts are never a section. `Answer` gains `sections: list[(label, text)]`, parsed from the section markers; `text` stays the whole answer, so the API and CLI keep working.
+3. **Citation parsing fixed** (F0 found it): `parse_citations` misses nested brackets (`[26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]`) and several citations in one bracket (`[A; B]`). One shared `citations(text)` in `generate.py`, used by `parse_citations` and by the verifier's splitter later; unit tests for both shapes.
+4. **The measurement tools read any answer cache.** `eval/f0_verify.py` gains `--answers` and `--questions` (today it is fixed to the golden E5 cache), so the same pairing and the fixed judge score dev arms. `eval/temporal.py --rows all` grades every answerable row, not only temporal or authority rows.
+
+**Arms, on dev's 42 answerable rows (D43–D53 excluded: they're F2's), 3 samples each (answer i from plan set i, as E5):**
+
+| Arm | Prompt | Synthesis model |
+|---|---|---|
+| A | shipped (ii′) | gpt-4o-mini |
+| B | + rule 2 rewritten (every sentence cited, only what its source says) | gpt-4o-mini |
+| C | B + one section per sub-query | gpt-4o-mini |
+| D | C | claude-haiku-4-5 (ADR-11's revisit trigger: "move synthesis to Haiku if Phase F suppresses too much") |
+
+**Metrics, per arm (all on dev):**
+- **Citation completeness** = cited sentences ÷ all sentences (F0's splitter; §9.3's F gate is ≥0.85, scored on golden in F5).
+- **Cited-source support** = share of cited sentences the fixed judge (F0) finds supported by their own citation (A's golden figure: 0.86).
+- **Projected suppression** = share of answers F4 would empty, and of sections it would hide, under the judge's labels.
+- **Faithfulness** (`ragas_eval.py`, 3 runs) and **refusal rate**; **correctness** (`temporal.py --rows all --samples 3`, §9.2's judge against the reference answer).
+- Cost and latency per answer.
+
+**Decision rule, fixed before any arm runs:**
+1. Refusal rate no more than A's + 0.05, and correctness no lower than A's − 0.05 (one sample-noise band, E5). An arm failing either is out.
+2. Of the rest, the arm with the lowest projected answers emptied wins, if it beats A by ≥5 points; within 2 points of each other, the cheaper arm.
+3. D (Haiku) is taken only if it wins rule 2 by ≥5 points over C, since it's ~7× the synthesis cost. The ADR-11 revision it would trigger is written then.
+4. If no arm reaches completeness ≥0.85 on dev, say so plainly: F5's gate is then at risk, reported, not lowered.
+
+**Also measured, not decided on:** how many sentences still trail the last citation; whether sectioning costs correctness on compound rows (reported per category); the wrong-page rate (28 of 168 on golden in F0).
+
+**Acceptance:**
+- [ ] Tests for `citations()` (nested, multi-citation, plain) and for section parsing (one section, several, missing markers → one section holding the whole text)
+- [ ] All four arms measured on dev with the metrics above, in a results note
+- [ ] One arm shipped by the rule (or a recorded departure, as E5's), in `generate.py`
+- [ ] Faithfulness CI gate still green locally on golden (CI's command) with the shipped arm
+- [ ] Log entry
+
+**Files:** `src/taxcite/generate.py` (rule 2, sections, `citations()`), `src/taxcite/decompose.py` (numbered parts in the synthesis call), tests, `eval/f0_verify.py`, `eval/temporal.py`, `eval/ragas_eval.py` (`--prompt` arms). New files, if any, handed to you as code.
+
+**Cost estimate:** synthesis 4 arms × 42 rows × 3 samples: ~$0.30 on gpt-4o-mini, ~$1.50 for the Haiku arm; judges (support, faithfulness, correctness): ~$4. **About $6 in all.** *Corrected when building (2026-09-30): ~$12. Correctness runs two judges and a grounding check per answer (~$1.5–2.5 an arm), faithfulness makes its own answers per arm, and the support judge runs two passes.*
+
+**Built (2026-09-30), before any arm ran:** `generate.citations()` (nested and packed brackets; `parse_citations` uses it), `split_sections()` and `Answer.sections`, `RULE_2_EVERY`, `SECTIONS_RULE` and the `SECTIONS` switch (numbered parts in `answer_from_groups`; an empty group isn't a part); `ragas_eval --prompt f3-cite|f3-sections` built on the shipped prompt; `--synth-model` in `ragas_eval.py` and `temporal.py` (synthesis only; plans pinned); `temporal.py --rows all`; `f0_verify.py --answers/--questions/--tag` (it now uses `generate.citations`; F0's report reproduces exactly). 4 new tests; 262 pass.
+
+**Risks:** citing every sentence may make answers stiffer or longer (watch length and correctness), or push the model to refuse more (rule 1 catches it). Sections may repeat context across parts (watch length). A sentence can carry a citation and still say more than its source: that's F4's job, and exactly what support measures.
+
+**Results (2026-09-30), dev's 42 answerable rows × 3 samples; ~$8.70 in all.** Files: `eval/results/temporal-dev-2026-09-30-f3{a,b,c,d}.json`, `f0-report-f3-dev-{a,b,c,d}.json`, answer caches `temporal-answers-f3*.json`, `ragas-answers-f3*.json`.
+
+| Arm | Correct (3 samples) | Refused | Faithfulness | Support (cited sentence backed by its source) | Completeness, as registered | Completeness, material sentences only | Answers every sentence cited *and* supported | Answers emptied (registered metric) | Words |
+|---|---|---|---|---|---|---|---|---|---|
+| A shipped | 0.373 ± 0.014 | 0.095 | 0.839 ± 0.037 | 0.752 | 0.356 | 0.438 | 0.032 | **0.295** | 101 |
+| B cite every sentence | 0.310 ± 0.041 | 0.111 | 0.841 ± 0.015 | 0.766 | 0.486 | 0.598 | 0.120 | 0.370 | 106 |
+| C B + sections | 0.349 ± 0.036 | 0.079 | 0.841 ± 0.041 | 0.800 | 0.471 | 0.607 | 0.078 | 0.353 | 119 |
+| D C on Haiku | 0.405 ± 0.024 | **0.206** | 0.874 ± 0.031 (refusals 0.19) | 0.863 | 0.540 | 0.714 | 0.120 | 0.370 | 165 |
+
+**The rule, applied as written:** (1) B fails the correctness guard (0.310 < 0.373 − 0.05); D fails the refusal guard (0.206 > 0.095 + 0.05). (2) C passes both guards but empties *more* answers than A (0.353 vs 0.295), so no arm beats A: **by the rule, nothing ships; A stays.** (4) No arm reaches completeness 0.85 (best 0.71): **F5's completeness gate is at risk**, reported, not lowered.
+
+**The registered metric has the same blind spot E5's rule 3 had.** "Answers emptied" counts only *cited* sentences that fail; an uncited sentence is never checked, so an arm that cites more exposes more sentences and looks worse. Counting an uncited material sentence as unverified (it can't be shown under ADR-15 either), the share of answers that survive whole is A 3%, B 12%, C 8%, D 12%. Recorded here as a finding, not used to override the rule.
+
+**Measurement correction (post hoc, disclosed):** F0's splitter counted structural lines as uncited sentences: section headings (71 in C), the year statement rule 6 requires ("The year I answer for is 2026.", 59 in C), and markdown titles ("**Conclusion**"). §9's completeness is over *material* claims, so the "material sentences only" column excludes them. It moves every arm up ~0.08–0.17 and changes no ranking.
+
+**What the uncited sentences are (C, D):** applications and arithmetic on the question's facts ("Since your client's gain is $200,000 … she can exclude all $200,000"), and plain restatements of a rule the previous sentence cited. The prompt asks for a citation on each; the models write most, not all.
+
+**Conclusion:** prompting moves completeness from 0.44 to 0.60–0.71 but cannot reach 0.85, and under zero tolerance almost no answer survives whole (≤12%). The lever left is structural: synthesis returns sentences as objects with a required `citations` field (JSON schema), so an uncited sentence can't be written, and the verifier checks every one. Proposed as arm E, measured by the same rule plus the fully-verified share. Decision for you.
+
+**Arm E, structured synthesis (2026-09-30, your go; ~$1.40).** `STRUCTURED` in `generate.py`: JSON items, one sentence each with citations from an enum of the retrieved sources (none can be invented); an uncited item is dropped, an unanswerable part renders as INSUFFICIENT EVIDENCE; an unusable response is a refusal. OpenAI strict structured outputs added to `call_model`. `f0_verify.py`'s report now carries `completeness_material` and `answers_fully_verified` (reproduces the table above exactly). 266 tests.
+
+| Arm | Correct | Refused (as detected) | Pure refusals (no cited sentence) | Completeness, material | Support | **Answers fully verified** | Answers emptied (registered) | Sections hidden | Words |
+|---|---|---|---|---|---|---|---|---|---|
+| A shipped | 0.373 ± 0.014 | 0.095 | 9 of 126 | 0.438 | 0.752 | 0.032 | 0.295 | 0.342 | 101 |
+| C cite + sections | 0.349 ± 0.036 | 0.079 | — | 0.607 | 0.800 | 0.078 | 0.353 | 0.397 | 119 |
+| D C on Haiku | 0.405 ± 0.024 | 0.206 | — | 0.714 | 0.863 | 0.120 | 0.370 | 0.387 | 165 |
+| **E structured** | 0.341 ± 0.014 | **0.460** | **0 of 126** | **1.000** | 0.716 | **0.414** | 0.569 | 0.565 | 127 |
+
+Faithfulness E: 0.692 ± 0.058, but over only 12–14 of 25 rows (the harness drops "refused" rows), so not comparable.
+
+**The rule, as written:** E fails the refusal guard (0.460 > 0.145). **But every one of E's 58 "refusals" is a full cited answer with an INSUFFICIENT EVIDENCE caveat appended** for a detail the sources lack (D51: "2026 phase-out thresholds are not provided"); `Answer.refused` matches the phrase anywhere. E's pure refusals are 0 against A's 9. With refusals counted as answers with no cited sentence, E passes both guards (correct 0.341 ≥ 0.323) and then loses rule 2 on "answers emptied" (0.569 vs 0.295), the metric already shown blind to uncited sentences. **By the rule as written, nothing ships; the two measurement flaws both work against E.**
+
+**What E shows:**
+1. Completeness 1.000 by construction; fully verified answers 41% against ≤12% for every prompt arm.
+2. Support falls to 0.716: sentences that other arms left uncited are now cited, and many don't hold (D51: "New Jersey does not conform … [IRS Pub 17 (2025), p. 71]"). The misattribution was always there; E makes it checkable.
+3. Under section-level zero tolerance, E would hide 56% of sections. The unit ADR-15 hides is F4's question, raised now: hiding the failing *sentence* keeps ADR-15's promise (no unverified claim shown) and loses far less.
+4. The caveat habit is noise for users (46% of answers end in INSUFFICIENT EVIDENCE for a detail).
+
+**Arm E′: E with your two fixes, re-measured (2026-09-30, your decision "adopt E with the two fixes").** (1) A detail missing from an answered part renders as "Not in the sources: …", not INSUFFICIENT EVIDENCE; a part with nothing answered still says INSUFFICIENT EVIDENCE. (2) `Answer.refused` = says INSUFFICIENT EVIDENCE *and cites nothing* (was: the phrase anywhere). `f0_verify` recomputes it from the text, and counts "Not in the sources" / INSUFFICIENT EVIDENCE lines as non-material.
+
+| | A (pre-F3) | E′ (ships) |
+|---|---|---|
+| Correct (3 samples) | 0.373 ± 0.014 | **0.373 ± 0.037** |
+| Refused / pure refusals | 0.095 / 9 of 126 | **0.000 / 0** |
+| Completeness, material | 0.438 | **1.000** (12 uncited sentences dropped in 126 answers) |
+| Support (cited sentence backed by its source) | 0.752 | **0.769** |
+| **Answers fully verified** | 0.032 | **0.523** |
+| Sections hidden under section-level zero tolerance | 0.342 | 0.442 |
+| Faithfulness, as the CI gate judges (question hidden) | 0.839 ± 0.037 | 0.777 ± 0.028 |
+| Faithfulness, question as a source | 0.859 ± 0.007 | **0.864 ± 0.025** |
+
+**The faithfulness drop is the gate's judge, not E.** None of E′'s 73 unsupported claims is a "not in the sources" note; many are the client's own facts, which E now writes out in its application sentences ("The client owned and lived in the house for 3 of the last 5 years"), and the gate's judge never sees the question (F0's blind spot, in the other judge). With the question as a source (`ragas_eval.py --question-as-source`, as `temporal.py`'s grounding check already does), E′ equals A.
+
+**Shipped (2026-09-30): arm E′ is the default** (`STRUCTURED = True`; (ii′) kept as `PRE_F3_SYSTEM` and eval arm `pre-f3`), recorded as a departure from F3's pre-registered rule, whose two metrics both worked against it. Every non-shipped eval arm now sets both F3 switches, so an E5 arm can't run structured by accident. 268 tests.
+
+**Golden faithfulness gate with E′ (2026-09-30, CI's command, 5 runs, ~$6 with the rerun).** As CI judges (question hidden): **0.838 ± 0.006, FAIL** (< 0.855). With the question as a source: **0.869 ± 0.006, PASS**. Refusal rate 0.002 (Phase E's shipped build: 0.113), well inside the 0.25 bound. So on golden, as on dev, E′ fails the gate only through the judge's blind spot. Caveats: (a) the pre-F3 build has not been judged with the question on golden, so "E′ equals pre-F3" is shown on dev only (0.864 vs 0.859); (b) E′ answers the ~11% of rows pre-F3 refused, and those are scored now. The first attempt hung for an hour on a dead connection after the laptop slept; `call_model` now gives both SDKs a 2-minute timeout (`API_TIMEOUT`).
+
+**Decision needed (not taken):** shipping E′ needs the gate's judge to see the question. That changes the gate's definition, so the standing rule (re-measure both bands with ≥5 samples after a pipeline change) is now due; you deferred it "until required" on 2026-09-29.
+
+**Gate decision (2026-09-30, your option 1), bands re-measured as the standing rule requires (~$5.50).** Golden, judge shown the question, 5 runs each: pre-F3 0.920 ± 0.012 (refusing ~12%); shipped E′ **0.869 ± 0.006**; E′ with the grounding rule removed (`--prompt broken`, B9's arm rebuilt) **0.870 ± 0.019**. On the 81 rows pre-F3 answered in every run: pre-F3 0.919, E′ 0.899, broken 0.898; E′ scores 0.707 on the 15 rows pre-F3 refused. So E′ costs ~0.02 faithfulness like-for-like, and **the gate can no longer detect B9's regression: under structured synthesis the grounding rule does almost nothing the structure doesn't.** Done: `faithfulness.yml` runs with `--question-as-source` at 0.855 as a floor; ADR-22 revised; §9.3 row noted. **Moved to F5:** calibrate F4's verifier against a seeded failure (e.g., the verifier off, or `broken`), since it is now the detector.
+
+**F3 acceptance:**
+- [x] Tests for `citations()` and section parsing (and structured rendering, the schema, OpenAI strict outputs, the broken arm, refusals): 269 pass
+- [x] Four arms (+ E, E′) measured on dev, results above
+- [x] One arm shipped: E′, by your decision, a recorded departure from the rule (both of its metrics worked against E)
+- [x] Faithfulness gate on golden with the shipped arm, CI's command: 0.869 ± 0.006 with the question shown (the gate's new definition), PASS; refusals 0.002
+- [x] Log entries #82, #83 (local; `docs/` is gitignored)
 
 ## F4: NLI verifier and suppression (outline)
 

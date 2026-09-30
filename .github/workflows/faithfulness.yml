@@ -58,7 +58,18 @@ jobs:
           gh release download --pattern '*' --dir dist "$(gh release list --limit 1 --json tagName --jq '.[0].tagName')"
           uv run python eval/snapshot.py restore --from dist
 
-      # Threshold 0.855, set from BOTH measured bands on the runner (ADR-22):
+      # F3 (2026-09-30, ADR-22 revised): the judge also reads the question (--question-as-source).
+      # Structured synthesis writes out the client's facts when it applies a rule, and a judge that
+      # never saw the question failed them: 0.838 (FAIL) hidden vs 0.869 shown, same answers. Measured
+      # on golden with the question shown, 5 runs each:
+      #   healthy (arm E', shipped)       0.860 / 0.870 / 0.872 / 0.868 / 0.876  mean 0.869 sd 0.006
+      #   grounding rule removed          0.885 / 0.874 / 0.878 / 0.879 / 0.837  mean 0.870 sd 0.019
+      # The bands coincide: with one cited sentence per item and citations restricted to the retrieved
+      # sources, dropping the grounding rule no longer costs faithfulness. So 0.855 is now a quality
+      # FLOOR (healthy sits 2.3 sd of a single run above it, far more for a 5-run mean), not a detector
+      # of that regression. The per-answer verifier (Phase F, F4) is the detector; F5 calibrates it.
+      #
+      # Before F3 -- threshold 0.855, set from BOTH measured bands on the runner (ADR-22):
       #   healthy main                    0.870 / 0.884 / 0.889  mean 0.881 sd 0.010
       #   grounding rule removed          0.849 / 0.841 / 0.842  mean 0.844 sd 0.004
       # The bands do not overlap -- healthy's worst run beats broken's best by 0.021 -- and
@@ -82,7 +93,7 @@ jobs:
       - name: faithfulness
         shell: bash
         run: |
-          uv run python eval/ragas_eval.py --repeats 5 --max-cost 5.00 \
+          uv run python eval/ragas_eval.py --repeats 5 --max-cost 5.00 --question-as-source \
             --fail-under 0.855 --max-refusal-rate 0.25 | tee faithfulness.log
 
       - uses: actions/upload-artifact@v4

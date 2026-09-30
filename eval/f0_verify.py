@@ -32,6 +32,8 @@ ANSWERS = RESULTS / "pipeline-answers-e5.json"
 RAGAS = RESULTS / "ragas-golden-2026-09-28-pipeline-answers-e5.json"  # the same answers, judged the old way
 PAIRS = RESULTS / "f0-pairs.json"
 CHECK = RESULTS / "f0-judge-check.md"
+QUESTIONS = "eval/golden.jsonl"
+REPORT = RESULTS / "f0-report.json"
 MODELS = {
     "base": "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
     "large": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli",
@@ -79,11 +81,18 @@ def sentences(text: str) -> list[str]:
     return out
 
 
-def citations(sentence: str) -> list[str]:
-    """Every citation in a sentence. The model sometimes nests ("[26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]")
-    or packs several into one bracket ("[A; B]"); CITATION_RE alone sees only the innermost."""
-    flat = re.sub(r"\[([^\[\]]*?),?\s*\[([^\[\]]+)\]\]", r"[\1], [\2]", sentence)
-    return list(dict.fromkeys(c.strip() for b in CITATION_RE.findall(flat) for c in b.split(";") if c.strip()))
+def structural(sentence: str) -> bool:
+    """A line that states no claim: a section heading, a markdown title, a label ending in a colon, or the tax-year
+    statement rule 6 asks for. §9's completeness is over material claims, so these are not counted as uncited (F3
+    found F0's count included them: 71 headings and 59 year statements in one arm)."""
+    from taxcite.generate import PART_RE
+    s = sentence.strip().strip("*").strip()
+    if re.match(r"(Not in the sources|INSUFFICIENT EVIDENCE)\b", s, re.I):  # says what's missing, claims nothing
+        return True
+    return bool(PART_RE.match(sentence) or re.match(r"^#+\s", sentence) or s.endswith(":")
+                or (sentence.startswith("**") and sentence.rstrip().endswith("**"))
+                or (len(s) < 90 and re.search(r"\b20\d\d\b", s)
+                    and re.search(r"\b(tax year|year I answer|answer(ing)? for)\b", s, re.I)))
 
 
 def claim_text(sentence: str) -> str:
@@ -136,7 +145,7 @@ def contains(citation: str, chunk: str) -> bool:
 
 
 def build(rows: list[dict], cache: dict) -> dict:
-    from taxcite.generate import section_of
+    from taxcite.generate import citations, section_of
 
     heading = headings(cache)
     answers, pairs = [], []
@@ -146,7 +155,10 @@ def build(rows: list[dict], cache: dict) -> dict:
             run = next(i for i, x in enumerate(runs) if x["text"] == text)
             contexts = [{**c, "heading": heading[(c["citation"], c["text"])]} for c in runs[run]["contexts"]]
             a = {"id": f"{r['id']}#{run}", "row": r["id"], "run": run, "category": r["category"],
-                 "refused": runs[run]["refused"], "text": text, "contexts": contexts, "uncited": 0, "covered": 0,
+                 # recomputed, not read from the cache: F3 narrowed "refused" to "cites nothing", and caches made
+                 # before that marked a cited answer with a caveat as refused
+                 "refused": "INSUFFICIENT EVIDENCE" in text.upper() and not citations(text),
+                 "text": text, "contexts": contexts, "uncited": 0, "covered": 0,
                  "question": r["question"]}
             answers.append(a)
             if a["refused"]:
@@ -159,7 +171,7 @@ def build(rows: list[dict], cache: dict) -> dict:
             for para in text.splitlines():
                 buffer: list[str] = []
                 for s in sentences(para):
-                    cites = citations(s)
+                    cites = citations(s)  # generate's parser (F3), which learned F0's nested and packed brackets
                     if not cites:
                         a["uncited"] += 1
                         buffer.append(s)
@@ -385,6 +397,25 @@ def suppression(answers: list[dict], pairs: list[dict], ok: dict[str, bool], uni
                                                  for a in live) / len(live)}
 
 
+def material(live: list[dict], pairs: list[dict]) -> dict:
+    """Completeness over material sentences, and the share of answers that would survive ADR-15 whole: every
+    material sentence cited and every citation supported (an uncited sentence is unverified, so it can't be shown)."""
+    from taxcite.generate import citations
+    by_answer = defaultdict(list)
+    for p in pairs:
+        if "sentence" in p["units"]:
+            by_answer[p["answer"]].append(p)
+    total = cited = whole = 0
+    for a in live:
+        ss = [s for s in sentences(a["text"]) if citations(s) or not structural(s)]
+        uncited = sum(not citations(s) for s in ss)
+        total, cited = total + len(ss), cited + len(ss) - uncited
+        whole += not uncited and all(not p["auto_fail"] and p.get("judge", False) for p in by_answer[a["id"]])
+    return {"material_sentences": total, "material_cited": cited,
+            "completeness_material": cited / total if total else 0.0,
+            "answers_fully_verified": whole / len(live) if live else 0.0}
+
+
 def report(data: dict) -> dict:
     answers, pairs = data["answers"], data["pairs"]
     live = [a for a in answers if not a["refused"]]
@@ -396,6 +427,7 @@ def report(data: dict) -> dict:
         "cited_sentences": len(sentence_pairs), "uncited_sentences": n_sent - len(sentence_pairs),
         "uncited_covered_by_spans": sum(a["covered"] for a in live),
         "answers_citing_nothing": sum(not any(p["answer"] == a["id"] for p in pairs) for a in live),
+        **material(live, pairs),
         "multi_source": sum(len(p["chunks"]) > 1 for p in sentence_pairs),
         "derived": sum("derived" in p["kinds"] for p in sentence_pairs),
         "auto_fail": sum(p["auto_fail"] for p in sentence_pairs),
@@ -439,7 +471,7 @@ def report(data: dict) -> dict:
 def claim_unit(data: dict) -> dict:
     """Each F0 unit (cited chunks only) against today's faithfulness (LLM-extracted claims, all eight chunks), on
     the same answers: how many claims each makes, and whether they agree on "this answer has a failing claim"."""
-    if not RAGAS.exists():
+    if not RAGAS or not RAGAS.exists():
         return {}
     ragas = json.loads(RAGAS.read_text())["rows"]
     per_run = len(ragas) // 5
@@ -468,7 +500,7 @@ def claim_unit(data: dict) -> dict:
 
 def abstention() -> dict:
     """Rule 3's refusals today, over all 5 cached runs: the baseline F2's gate has to beat."""
-    rows = {json.loads(l)["question"]: json.loads(l) for l in open("eval/golden.jsonl") if l.strip()}
+    rows = {json.loads(l)["question"]: json.loads(l) for l in open(QUESTIONS) if l.strip()}
     cache = json.loads(ANSWERS.read_text())
     out = {"insufficient": {}, "answerable_refusals": 0, "answerable_runs": 0}
     for q, runs in cache.items():
@@ -539,6 +571,7 @@ def agreement(data: dict) -> dict:
 
 
 def main() -> int:
+    global ANSWERS, RAGAS, PAIRS, CHECK, QUESTIONS, REPORT
     ap = argparse.ArgumentParser()
     ap.add_argument("step", choices=("pairs", "nli", "report", "agreement"))
     ap.add_argument("--model", choices=MODELS, default="base")
@@ -546,15 +579,25 @@ def main() -> int:
     ap.add_argument("--max-cost", type=float, default=5.0)
     ap.add_argument("--premise", choices=("all", "top"), default="all", help="nli: every window, or the reranker's top")
     ap.add_argument("--unit", choices=UNITS, help="nli: score only this unit's pairs (faster)")
+    ap.add_argument("--answers", help="score another answer cache (F3's dev arms); needs --tag")
+    ap.add_argument("--questions", default=QUESTIONS, help="the rows those answers are for")
+    ap.add_argument("--tag", default="", help="suffix for this run's files, e.g. -f3-dev-a")
     args = ap.parse_args()
+    if args.answers:
+        if not args.tag:
+            ap.error("--answers needs --tag, so its files can't overwrite F0's")
+        # another pipeline's answers: no old-judge comparison, no check sheet
+        ANSWERS, RAGAS, CHECK = Path(args.answers), None, None
+    QUESTIONS = args.questions
+    PAIRS, REPORT = RESULTS / f"f0-pairs{args.tag}.json", RESULTS / f"f0-report{args.tag}.json"
 
     if args.step == "pairs":
         sys.path.insert(0, str(Path(__file__).parent))
         from dotenv import load_dotenv
         load_dotenv()
-        rows = [json.loads(l) for l in open("eval/golden.jsonl") if l.strip()]
-        rows = [r for r in rows if r.get("scored_from") == "B"]
-        data = json.loads(PAIRS.read_text()) if PAIRS.exists() else build(rows, json.loads(ANSWERS.read_text()))
+        cache = json.loads(ANSWERS.read_text())
+        rows = [r for r in (json.loads(l) for l in open(QUESTIONS) if l.strip()) if r["question"] in cache]
+        data = json.loads(PAIRS.read_text()) if PAIRS.exists() else build(rows, cache)
         try:
             spent = judge(data, args.judge, args.max_cost)
             # the page, scored apart: pairs that passed on the opinion's retrieved pages, re-read on the cited ones
@@ -570,9 +613,9 @@ def main() -> int:
     elif args.step == "report":
         data = json.loads(PAIRS.read_text())
         out = report(data)
-        (RESULTS / "f0-report.json").write_text(json.dumps(out, indent=2))
+        REPORT.write_text(json.dumps(out, indent=2))
         print(json.dumps(out, indent=2))
-        if not CHECK.exists():  # never overwrite your verdicts
+        if CHECK and not CHECK.exists():  # never overwrite your verdicts
             check_sheet(data)
     else:
         print(json.dumps(agreement(json.loads(PAIRS.read_text())), indent=2))
