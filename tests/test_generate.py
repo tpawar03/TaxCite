@@ -290,11 +290,12 @@ def test_render_cites_every_shown_sentence_drops_the_uncited_and_flags_unanswera
                               "not_answerable": [{"part": 1, "why": "the 2026 thresholds"}]}, ["only part"])
     # one part: no heading, no year line; a missing detail of an answered part is a note, not INSUFFICIENT EVIDENCE
     assert one == "Yes [X]. Not in the sources: the 2026 thresholds"
-    # F5: part 0, the bottom line, comes first and unheaded; a note for part 0 goes to part 1
-    top, _ = generate.render({"tax_year": None, "sentences": [{"part": 1, "text": "Rule.", "citations": ["X"]},
-                                                              {"part": 0, "text": "No.", "citations": ["X"]}],
-                              "not_answerable": [{"part": 0, "why": "state law"}]}, ["a", "b"])
-    assert top == "No [X].\n\nPart 1: a\nRule [X]. Not in the sources: state law"
+
+
+def test_the_conclusion_is_the_last_field_generated_and_only_when_asked():
+    on, off = generate.answer_schema(["X"], conclusion=True), generate.answer_schema(["X"])
+    assert list(on["properties"])[-1] == "conclusion" and on["required"][-1] == "conclusion"
+    assert "conclusion" not in off["properties"]
 
 
 def test_a_cited_answer_that_flags_a_gap_is_not_a_refusal(stub):

@@ -126,7 +126,7 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "subqueries": [{"kind": s.kind, "query": s.query} for s in plan.subqueries],
             "fallback": plan.fallback,
         }, rdb)
-        dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE)
+        dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE, siblings=dc.SIBLINGS)
         hits = dc.chunks(plan, k)
         groups, skipped, verdicts = plan.groups({h.citation for h in hits}), [], []
         if dc.GATE:  # F2: a part its sources can't answer is never written

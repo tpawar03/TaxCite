@@ -132,6 +132,9 @@ def main() -> int:
     ap.add_argument("--gate-only", metavar="OUT", help="F2: plan, retrieve and run the gate only; write verdicts to OUT")
     ap.add_argument("--ids", help="comma-separated row ids: only these rows (F2's re-runs of rows the gate changes)")
     ap.add_argument("--hide", choices=("part", "sentence"), help="F4's hiding unit for this run")
+    ap.add_argument("--siblings", type=int, help="F5b: subsections searched inside each section found (default: as shipped)")
+    ap.add_argument("--conclusion", action="store_true", help="F5b C1+C2+C4: conclusion written last, checked, shown first")
+    ap.add_argument("--recite", action="store_true", help="F5b C3: a failed sentence may move to the source that states it")
     args = ap.parse_args()
     if args.editions:
         from taxcite import decompose as dc
@@ -139,6 +142,13 @@ def main() -> int:
 
     set_prompt(args.prompt)
     set_verify(args.no_verify, args.hide, args.gate)
+    if args.siblings is not None:
+        from taxcite import decompose as dc
+        dc.SIBLINGS = args.siblings
+    if args.conclusion or args.recite:
+        from taxcite import generate as g, verify as vf
+        g.CONCLUSION = g.CONCLUSION or args.conclusion
+        vf.RECITE = vf.RECITE or args.recite
     if args.gate_prompt:
         from taxcite import decompose as dc
         dc.SUFFICIENCY_PROMPT = dc.SUFFICIENCY_LENIENT if args.gate_prompt == "lenient" else dc.SUFFICIENCY_SYSTEM

@@ -170,7 +170,7 @@ def set_prompt(arm: str) -> None:
     "labels+rule4b" is (ii′), which now ships, so "shipped" leaves the module as it is. F3's arms build on the
     pre-F3 prompt ((ii′), "pre-f3"): "f3-cite" rewrites rule 2 (every sentence cited, only what its source says),
     "f3-sections" also asks for a section per sub-query, "f3-structured" (arm E, which now ships) writes the answer as
-    JSON items, one sentence each with its citations, without F5's bottom line. Every arm but "shipped" sets both F3 switches, so an older arm
+    JSON items, one sentence each with its citations, without F5b's conclusion. Every arm but "shipped" sets both F3 switches, so an older arm
     can't run structured by accident. Use a separate --answers-cache per arm: cached answers don't know their prompt."""
     from taxcite import generate as g
     if arm == "broken":
@@ -179,7 +179,7 @@ def set_prompt(arm: str) -> None:
         return
     if arm == "shipped":
         return
-    g.SECTIONS, g.STRUCTURED, g.BOTTOM_LINE = arm == "f3-sections", arm == "f3-structured", False
+    g.SECTIONS, g.STRUCTURED, g.CONCLUSION = arm == "f3-sections", arm == "f3-structured", False
     if arm == "f3-structured":
         g.RAG_SYSTEM = g.PRE_F3_SYSTEM.replace(g.RULE_2, g.RULE_2_STRUCTURED).replace(g.RULE_3, g.RULE_3_STRUCTURED)
         return
@@ -248,6 +248,7 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
             # F4: what the verifier saw and said, so eval/f4_hide.py can show the same answer under either unit
             "structured": answer.structured, "verdicts": answer.verdicts, "hidden": answer.hidden,
             "sufficiency": answer.sufficiency,  # F2: the gate's verdict per part
+            "conclusion": answer.conclusion,  # F5b
             "seconds": round(seconds, 2),
         })
         if path:

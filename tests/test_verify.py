@@ -1,6 +1,7 @@
 """Claim verification (F4), tested without spending money: the verifier call is stubbed."""
 
 import json
+from dataclasses import replace
 
 import pytest
 
@@ -137,9 +138,51 @@ def test_sentence_hiding_ships():
     assert verify.HIDE == "sentence"
 
 
-def test_a_failed_bottom_line_is_hidden_without_an_insufficient_evidence_note():
-    answer = structured_answer([
-        {"part": 0, "text": "Yes, with no income limit.", "citations": [STATUTE.citation]},
-        {"part": 1, "text": "Interest on a qualified education loan is deductible.", "citations": [STATUTE.citation]}])
-    shown = verify.apply(answer, [verify.Verdict(0, False, "no"), verify.Verdict(1, True, "yes")], "sentence")
-    assert shown.text == "Part 1: federal deduction\nInterest on a qualified education loan is deductible [26 U.S.C. § 221(a)-(c)]."
+def routed(monkeypatch, replies):
+    """A verifier stub that answers by prompt: SYSTEM gets the next of replies["verify"], the others theirs."""
+    calls = []
+
+    def fake(system, prompt, model, **kw):
+        calls.append(system)
+        kind = {verify.SYSTEM: "verify", verify.RECITE_SYSTEM: "recite", verify.CONCLUSION_SYSTEM: "conclude"}[system]
+        reply = replies[kind].pop(0) if kind == "verify" else replies[kind]
+        return json.dumps(reply), 100, 10
+    monkeypatch.setattr(verify, "call_model", fake)
+    return calls
+
+
+def test_recite_moves_a_failed_sentence_to_the_source_that_states_it_and_rechecks_it(monkeypatch):
+    monkeypatch.setattr(verify, "RECITE", True)
+    calls = routed(monkeypatch, {
+        "verify": [{"verdicts": [{"index": 0, "supported": True, "why": "ok"}, {"index": 1, "supported": False, "why": "x"},
+                                 {"index": 2, "supported": False, "why": "x"}]},
+                   {"verdicts": [{"index": 0, "supported": True, "why": "states it"}]}],
+        "recite": {"recites": [{"index": 0, "source": 3, "why": "page 4"}, {"index": 1, "source": None, "why": "none"}]}})
+    shown = verify.checked("q", ANSWER, "sentence")
+    assert calls == [verify.SYSTEM, verify.RECITE_SYSTEM, verify.SYSTEM]  # one re-check, of the swap only
+    assert "The deduction has no income limit [T.C. Memo. 2020-1, at *4]." in shown.text
+    assert "New Jersey allows" not in shown.text and shown.verdicts[1]["why"].startswith("re-cited")
+
+
+def test_a_conclusion_is_shown_first_only_when_it_follows_from_the_sentences_that_passed(monkeypatch):
+    data = {**ANSWER.structured["data"], "conclusion": "Yes, the interest is deductible."}
+    answer = generate.Answer(text="Tax year: 2025\n\n" + ANSWER.text, mode="rag", model="m", citations=ANSWER.citations,
+                             retrieved=HITS, structured={"data": data, "labels": LABELS})
+    passed = {"verdicts": [{"index": 0, "supported": True, "why": "ok"}, {"index": 1, "supported": False, "why": "x"},
+                           {"index": 2, "supported": False, "why": "x"}]}
+    routed(monkeypatch, {"verify": [passed], "conclude": {"follows": True, "basis": [0, 7], "why": "from 0"}})
+    shown = verify.checked("q", answer, "sentence")
+    assert shown.text.startswith("Short answer: Yes, the interest is deductible [26 U.S.C. § 221(a)-(c)].\n\nPart 1:")
+    assert shown.conclusion["shown"]
+    routed(monkeypatch, {"verify": [passed], "conclude": {"follows": False, "basis": [0], "why": "adds a limit"}})
+    shown = verify.checked("q", answer, "sentence")
+    assert "Short answer" not in shown.text and shown.conclusion == {
+        "text": "Yes, the interest is deductible.", "shown": False, "citations": [], "why": "adds a limit"}
+
+
+def test_no_conclusion_check_when_every_sentence_failed(monkeypatch):
+    data = {**ANSWER.structured["data"], "conclusion": "Yes."}
+    answer = replace(ANSWER, structured={"data": data, "labels": LABELS})
+    calls = routed(monkeypatch, {"verify": [{"verdicts": [{"index": k, "supported": False, "why": "x"} for k in range(3)]}]})
+    shown = verify.checked("q", answer, "sentence")
+    assert calls == [verify.SYSTEM] and shown.refused and shown.conclusion is None

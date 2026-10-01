@@ -107,18 +107,18 @@ assert RULE_3 in RAG_SYSTEM
 # faithfulness with the question as a source 0.864 ± 0.025 (0.859 ± 0.007).
 RAG_SYSTEM = PRE_F3_SYSTEM.replace(RULE_2, RULE_2_STRUCTURED).replace(RULE_3, RULE_3_STRUCTURED)
 STRUCTURED = True
-# F5: golden's authority rows lost 0.10 correctness to arm E (0.365 -> 0.260), the facts there but the conclusion
-# not: 4 of 324 answers opened with Yes/No vs 35 of 96 before. Part 0 is a cited bottom line, shown first.
-BOTTOM_LINE_RULE = """
-8. The first item is part 0, the bottom line: one sentence that answers the question directly ("Yes, ...", "No, ..." where the question asks yes or no), citing the sources it rests on. The parts' items follow it."""
-# Measured on dev, not shipped: correct 0.278 -> 0.238, incorrect 0.214 -> 0.302; the model commits to a wrong
-# Yes/No, and the verifier hid 50 of 126 bottom lines. The code stays for the record, like F2's gate.
-BOTTOM_LINE = False
+# F5b C1: a conclusion, written last so the model reasons before it commits (F5's first try asked for it first: lost
+# 14, won 9, noise), shown first once F5b's conclusion check passes it. C4: items that stand on their own.
+CONCLUSION_RULE = """
+8. Every item must stand on its own: name what it refers to, never "this", "it" or "such" for another item, and never a lead-in like "the following rules:".
+9. Last, "conclusion": one sentence answering the question from your items: "Yes, ...", "No, ...", "It depends: ... if ..., ... if ...", or the short answer when the question isn't yes or no. It adds nothing your items don't say. If no item answers the question, leave it empty."""
+CONCLUSION = False  # F5b: off until measured
 
 
-def answer_schema(citations_allowed: list[str]) -> dict:
+def answer_schema(citations_allowed: list[str], conclusion: bool = False) -> dict:
     """The JSON schema for arm E: strict, so every field is required and nothing else is allowed. Citations are an
-    enum of the retrieved sources' citations: a structured answer cannot cite something it was not given."""
+    enum of the retrieved sources' citations: a structured answer cannot cite something it was not given. Fields are
+    generated in order, so F5b's conclusion comes last."""
     obj = lambda props: {"type": "object", "additionalProperties": False,  # noqa: E731
                          "required": list(props), "properties": props}
     return obj({
@@ -127,6 +127,7 @@ def answer_schema(citations_allowed: list[str]) -> dict:
             "part": {"type": "integer"}, "text": {"type": "string"},
             "citations": {"type": "array", "items": {"type": "string", "enum": citations_allowed}}})},
         "not_answerable": {"type": "array", "items": obj({"part": {"type": "integer"}, "why": {"type": "string"}})},
+        **({"conclusion": {"type": "string"}} if conclusion else {}),
     })
 
 
@@ -146,7 +147,7 @@ def render(data: dict, labels: list[str]) -> tuple[str, int]:
     asked; a sentence with none is dropped and counted. A part with nothing answered says INSUFFICIENT EVIDENCE; a
     detail missing from a part that is answered is a note, "Not in the sources: ..." (F3: as INSUFFICIENT EVIDENCE it
     ended 46% of answers)."""
-    parts = {n: [] for n in range(len(labels) + 1)}  # part 0: the bottom line, first and unheaded
+    parts = {n: [] for n in range(1, len(labels) + 1)}
     shown = cited_items(data)
     dropped = sum(bool(str(s.get("text", "")).strip()) for s in data.get("sentences") or []) - len(shown)
     for s in shown:
@@ -154,13 +155,13 @@ def render(data: dict, labels: list[str]) -> tuple[str, int]:
         parts[s["part"] if s["part"] in parts else 1].append(f"{body} {', '.join(f'[{c}]' for c in s['citations'])}.")
     answered = {n for n, lines in parts.items() if lines}
     for m in data.get("not_answerable") or []:
-        n = m.get("part") if m.get("part") in parts and m.get("part") != 0 else 1
+        n = m.get("part") if m.get("part") in parts else 1
         why = str(m.get("why", "")).strip()
         parts[n].append(f"Not in the sources: {why}" if n in answered else f"INSUFFICIENT EVIDENCE: {why}")
     blocks = []
     for n, lines in parts.items():
         if lines:
-            head = f"Part {n}: {labels[n - 1]}\n" if len(labels) > 1 and n else ""
+            head = f"Part {n}: {labels[n - 1]}\n" if len(labels) > 1 else ""
             blocks.append(head + " ".join(lines))
     year = f"Tax year: {data['tax_year']}\n\n" if data.get("tax_year") else ""
     return year + "\n\n".join(blocks), dropped
@@ -233,6 +234,7 @@ class Answer:
     verify_input_tokens: int = 0
     verify_output_tokens: int = 0
     verifier: str = ""
+    conclusion: dict | None = None  # F5b: {"text", "shown", "citations", "why"} from the conclusion check
     retrieved: list[Hit] = field(default_factory=list)
     input_tokens: int = 0
     output_tokens: int = 0
@@ -468,7 +470,7 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
     if STRUCTURED and hits:
         return _generate_structured(hits, [label for label, _ in groups], model, prompt,
                                     RAG_SYSTEM + (YEAR_RULE if years else "") + STRUCTURED_RULE
-                                    + (BOTTOM_LINE_RULE if BOTTOM_LINE else ""), skipped)
+                                    + (CONCLUSION_RULE if CONCLUSION else ""), skipped)
     system = RAG_SYSTEM + (YEAR_RULE if years else "") + (SECTIONS_RULE if SECTIONS else "")
     result = _generate(question, hits, mode="rag", model=model, prompt=prompt, system=system)
     if skipped:  # the unstructured arms: the skipped parts as plain lines after the answer
@@ -481,7 +483,7 @@ def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt:
                          skipped: Sequence[tuple[str, str]] = ()) -> Answer:
     """Arm E: the answer as JSON items, rendered to the same cited text every other arm writes, so the API, the CLI
     and the verifier read it unchanged. An unusable response is a refusal, never raw JSON in front of a user."""
-    schema = answer_schema(sorted({h.citation for h in hits}))
+    schema = answer_schema(sorted({h.citation for h in hits}), conclusion=CONCLUSION)
     raw, input_tokens, output_tokens = call_model(system, prompt, model, temperature=0, seed=0, json_schema=schema)
     try:
         data = json.loads(raw)

@@ -228,6 +228,7 @@ EDITIONS: tuple[int, int] | None = None
 # reserved for it. Dev Recall@20 0.605 -> 0.724 (statutory 0.654 -> 0.808, temporal 0.423 -> 0.615,
 # case law and compound unchanged); floors of 1, 2 and 3 scored the same at k=20 and at k=8.
 STATUTE = 1
+SIBLINGS = 0  # F5b: subsections searched inside each of the first sections found (off until measured)
 
 # E4, chosen on dev by rules fixed in advance: authority reorders each kind of source's candidates (statute
 # and regulation over publication; reported opinion over memorandum) with a prior of 0.5 per level, and never
@@ -502,7 +503,7 @@ def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
     from taxcite.generate import answer_from_groups, skipped_only
 
     d = retrieve(plan or decompose(question, model=model), k=k, mode=mode, route=route, editions=EDITIONS,
-                 statute=STATUTE)
+                 statute=STATUTE, siblings=SIBLINGS)
     kept = {h.citation for h in chunks(d, k)}
     groups, skipped, verdicts = gate(question, d.groups(kept), d.as_of, model) if GATE else (d.groups(kept), [], [])
     if skipped and not any(hits for _, hits in groups):  # F2: nothing answerable, so nothing is written
