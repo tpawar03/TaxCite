@@ -1,0 +1,735 @@
+{
+  "A client's horse breeding and showing operation has made a profit in 2 of the last 7 years. Is it presumed to be engaged in for profit?": [
+    {
+      "text": "Part 1: presumption of profit motive for horse breeding activity based on profit in 2 of 7 years\nIf for any 2 of 7 consecutive taxable years, the gross income derived from an activity consisting in major part of the breeding, training, showing, or racing of horses exceeds the deductions attributable to such activity, that activity is presumed to be engaged in for profit unless the Commissioner establishes to the contrary [26 CFR 1.183-1(c)(1)].",
+      "refused": false,
+      "citations": [
+        "26 CFR 1.183-1(c)(1)"
+      ],
+      "unsupported_citations": [],
+      "contexts": [
+        {
+          "citation": "26 CFR 1.183-1(c)(1)",
+          "text": "(c) Presumption that activity is engaged in for profit \u2014(1) In general. If for:\n(i) Any 2 of 7 consecutive taxable years, in the case of an activity which consists in major part of the breeding, training, showing, or racing of horses, or\n(ii) Any 2 of 5 consecutive taxable years, in the case of any other activity, the gross income derived from an activity exceeds the deductions attributable to such activity which would be allowed or allowable if the activity were engaged in for profit, such activity is presumed, unless the Commissioner establishes to the contrary, to be engaged in for profit. For purposes of this determination the deduction permitted by section 1202 shall not be taken into account. Such presumption applies with respect to the second profit year and all years subsequent to the second profit year within the 5- or 7-year period beginning with the first profit year. This presumption arises only if the activity is substantially the same activity for each of the relevant taxable years, including the taxable year in question. If the taxpayer does not meet the requirements of section 183(d) and this paragraph, no inference that the activity is not engaged in for profit shall arise by reason of the provisions of section 183. For purposes of this paragraph, a net operating loss deduction is not taken into account as a deduction. For purposes of this subparagraph a short taxable year constitutes a taxable year."
+        },
+        {
+          "citation": "26 CFR 1.183-2(c)",
+          "text": "(c) Examples. The provisions of this section may be illustrated by the following examples:\nExample 1.\nThe taxpayer inherited a farm from her husband in an area which was becoming largely residential, and is now nearly all so. The farm had never made a profit before the taxpayer inherited it, and the farm has since had substantial losses in each year. The decedent from whom the taxpayer inherited the farm was a stockbroker, and he also left the taxpayer substantial stock holdings which yield large income from dividends. The taxpayer lives on an area of the farm which is set aside exclusively for living purposes. A farm manager is employed to operate the farm, but modern methods are not used in operating the farm. The taxpayer was born and raised on a farm, and expresses a strong preference for living on a farm. The taxpayer's activity of farming, based on all the facts and circumstances, could be found not to be engaged in for profit.\nExample 2.\nThe taxpayer is a wealthy individual who is greatly interested in philosophy. During the past 30 years he has written and published at his own expense several pamphlets, and he has engaged in extensive lecturing activity, advocating and disseminating his ideas. He has made a profit from these activities in only occasional years, and the profits in those years were small in relation to the amounts of the losses in all other years. The taxpayer has very sizable income from securities (dividends and capital gains) which constitutes the principal source of his livelihood. The activity of lecturing, publishing pamphlets, and disseminating his ideas is not an activity engaged in by the taxpayer for profit.\nExample 3."
+        },
+        {
+          "citation": "26 CFR 1.183-1(c)(2)",
+          "text": "(2) Examples. The provisions of subparagraph (1) of this paragraph may be illustrated by the following examples, in each of which it is assumed that the taxpayer has not elected, in accordance with section 183(e), to postpone determination of whether the presumption described in section 183(d) and this paragraph is applicable.\nExample 1.\nFor taxable years 1970-74, A, an individual who uses the cash receipts and disbursement method of accounting and the calendar year as the taxable year, is engaged in the activity of farming. In taxable years 1971, 1973, and 1974, A's deductible expenditures with respect to such activity exceed his gross income from the activity. In taxable years 1970 and 1972 A has income from the sale of farm produce of $30,000 for each year. In each of such years A had expenses for feed for his livestock of $10,000, depreciation of equipment of $10,000, and fertilizer cost of $5,000 which he elects to take as a deduction. A also has a net operating loss carryover to taxable year 1970 of $6,000. A is presumed, for taxable years 1972, 1973, and 1974, to have engaged in the activity of farming for profit, since for 2 years of a 5-consecutive-year period the gross income from the activity ($30,000 for each year) exceeded the deductions (computed without regard to the net operating loss) which are allowable in the case of the activity ($25,000 for each year).\nExample 2.\nFor the taxable years 1970 and 1971, B, an individual who uses the cash receipts and disbursement method of accounting and the calendar year as taxable year, engaged in raising pure-bred Charolais cattle for breeding purposes. The operation showed a loss during 1970. At the end of 1971, B sold a substantial portion of his herd and the cattle operation showed a profit for that year. For all subsequent relevant taxable years B continued to keep a few Charolais bulls at stud. In 1972, B started to raise Tennessee Walking Horses for breeding and show purposes, utilizing substantially the same pasture land, barns, and (with structural modifications) the same stalls. The Walking Horse operations showed a small profit in 1973 and losses in 1972 and 1974 through 1976."
+        },
+        {
+          "citation": "26 CFR 1.183-1(c)(5)",
+          "text": "(5) Cross reference. For rules relating to section 183(e) which permits a taxpayer to elect to postpone determination of whether any activity shall be presumed to be \u201can activity engaged in for profit\u201d by operation of the presumption described in section 183(d) and this paragraph until after the close of the fourth taxable year (sixth taxable year, in the case of activity which consists in major part of breeding, training, showing, or racing of horses) following the taxable year in which the taxpayer first engages in the activity, see \u00a7 1.183-3."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 183(a)-(d)",
+          "text": "(a) General rule. In the case of an activity engaged in by an individual or an S corporation, if such activity is not engaged in for profit, no deduction attributable to such activity shall be allowed under this chapter except as provided in this section.\n(b) Deductions allowable. In the case of an activity not engaged in for profit to which subsection (a) applies, there shall be allowed\u2014 (1) the deductions which would be allowable under this chapter for the taxable year without regard to whether or not such activity is engaged in for profit, and\n(2) a deduction equal to the amount of the deductions which would be allowable under this chapter for the taxable year only if such activity were engaged in for profit, but only to the extent that the gross income derived from such activity for the taxable year exceeds the deductions allowable by reason of paragraph (1).\n(c) Activity not engaged in for profit defined. For purposes of this section, the term \u201cactivity not engaged in for profit\u201d means any activity other than one with respect to which deductions are allowable for the taxable year under section 162 or under paragraph (1) or (2) of section 212.\n(d) Presumption. If the gross income derived from an activity for 3 or more of the taxable years in the period of 5 consecutive taxable years which ends with the taxable year exceeds the deductions attributable to such activity (determined without regard to whether or not such activity is engaged in for profit), then, unless the Secretary establishes to the contrary, such activity shall be presumed for purposes of this chapter for such taxable year to be an activity engaged in for profit. In the case of an activity which consists in major part of the breeding, training, showing, or racing of horses, the preceding sentence shall be applied by substituting \u201c2\u201d for \u201c3\u201d and \u201c7\u201d for \u201c5\u201d."
+        },
+        {
+          "citation": "T.C. Memo. 2026-47, at *9",
+          "text": "Section 183\nGenerally, under sections 162(a) and 212(1), a taxpayer may deduct ordinary and necessary expenses paid or incurred in carrying on a trade or business, or for the production or collection of income. Expenses in connection with activities not engaged in for profit, such as activities carried on primarily as a hobby, for sport, or for recreation are not deductible, except to the extent allowable under section 183(b), which limits deductible expenses from activities not engaged in for profit to the amount of gross income derived from that activity. In determining whether an activity was engaged in for profit, a safe harbor in section 183(d) relating to horses allows an activity consisting in major part of breeding, training, showing, or racing horses to be presumed engaged in for profit if it produces gross income exceeding deductions in at least two of the last seven consecutive years ending with the taxable year, unless the Commissioner establishes otherwise. SQH does not clear the hurdle for this presumption as it has not been profitable since its inception in 2001. Consequently, we must inquire further."
+        },
+        {
+          "citation": "T.C. Memo. 2013-54, at *51-52",
+          "text": "Regs. Little information in the expert reports pertained to the time which it\ncustomarily takes to bring a horse breeding operation to profitability, but \"[w]e have\nsaid that the startup phase of a horse-breeding activity may be 5 to 10 years\". Davis\nv. Commissioner, T.C. Memo. 2000-101, slip op. at 25 (citing Engdahl v.\nCommissioner, 72 T.C. 659, 669 (1979), Burrow v. Commissioner, T.C. Memo.\n1990-621, and Starr v. Commissioner, T.C. Memo. 1969-35). Petitioners had three\nyears of significant losses with respect their horse breeding activity but did claim\ncertain income in later years, mostly resulting from surrendering their FEEP interests\nto pay off NELC loans. Considering the facts, we find this factor is neutral.\nG. Amount of Occasional Profits\nThe amount of any occasional profits the taxpayer earned from the activity\nmay show that the taxpayer had a profit motive. See sec. 1.183-2(b)(7), Income\nTax Regs. An occasional small profit from an activity generating large losses or\nfrom an activity in which the taxpayer has made a large investment would not\ngenerally be determinative that the activity is engaged in for profit. E In addition,\n\"A small chance to make a large profit may indicate that a taxpayer has a profit\nobjective even if he or she has large continuous losses.\" Lundquist v.\nCommissioner, T.C. Memo. 1999-83, slip op. at 27 (citing section 1.183-2(b)(7),\nAlthough petitioners did report significant amounts of income after 2004 in\nconnection with their horse breeding activities, this income was not enough to offset\nthe losses incurred through their participation in the activity.\nIn addition, most of\nthis income resulted from petitioners' surrendering their FEEP interests to pay off\nNELC loans or distributions from FEEP, Gastar, or PowerFoal. We believe such\nincome should be disregarded for purposes of this factor, as petitioners were"
+        },
+        {
+          "citation": "T.C. Memo. 2010-216, at *32-33",
+          "text": "to make a comparison between Mr.\nDennis' cattle operation and his horse breeding activity.\nThe\nCourt cannot do so, because the record does not provide any facts\nrelating,to Mr. Dennis' cattle operation.\nFurthermore,\nthe Court\ncannot compare Mr. Dennis' employment at Lewis & Coker with his\ncommencement and operation of a \"business\" of his own.\nTaxpayers' History of\nIncome or Loss\nNext,\nthe Court will examine petitioners' history of\nincome\nor loss.\nA history of substantial\nl\u00f2sses may indicate that the\nTax Regs.\nA series of.losses during the initial or startup phase\nof an activity may not necessarily indicate that\nthe activity is\nnot engaged in for profit.\nSee sec. 1.183-2 (b) (6),\nIncome Tax\nRegs. Where losses continue to be sustained beyond the period\nwhich customarily is necessary to bring the operation to\nprofitable status, such continued losses,\nif not explainable as\ndue to customary business risks or reverses, may indicate that the\nactivity is not being engaged in for profit.\nSee id.\nPetitioners commenced their horse breeding activity in 1999.\nEach year from 1999 through 2004 petitioners made no profits and\nincurred substantial\nlosses.\nIn 2001 Mr. Dennis sold only one\nhorse, and it was at a loss. Petitioners'\nlosses during these\nearly years of their operation.are attributable to the startup\nphase of their activity.\nThe startup phase of a breeding\noperation may last 5 to 10 years.\nSee Engdahl v. Commissioner, 72\nT.C. at 669.\nThe substantial\nlosses incurred in the tax years at\nissue have -fallen within the startup period and do not\nindicate\nactivity.\npetitioners' costs of\nfeeding as many as 46 horses. This Court\nfinds Mr. Dennis'\ntestimony credible as to the duration of\nthe\nactivity.\nThe Court will not consider such losses arising from\nunforeseen or deleterious events as an indication that their"
+        }
+      ],
+      "cost_usd": 0.008250500000000001,
+      "model": "gpt-4o-mini",
+      "plan_set": 0,
+      "dropped_sentences": 0,
+      "structured": {
+        "data": {
+          "tax_year": null,
+          "sentences": [
+            {
+              "part": 1,
+              "text": "If for any 2 of 7 consecutive taxable years, the gross income derived from an activity consisting in major part of the breeding, training, showing, or racing of horses exceeds the deductions attributable to such activity, that activity is presumed to be engaged in for profit unless the Commissioner establishes to the contrary.",
+              "citations": [
+                "26 CFR 1.183-1(c)(1)"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years.",
+              "citations": [
+                "T.C. Memo. 2026-47, at *9"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "Therefore, the client's horse breeding and showing operation is presumed to be engaged in for profit.",
+              "citations": [
+                "26 CFR 1.183-1(c)(1)"
+              ]
+            }
+          ],
+          "not_answerable": [],
+          "conclusion": "Yes, the client's horse breeding and showing operation is presumed to be engaged in for profit."
+        },
+        "labels": [
+          "presumption of profit motive for horse breeding activity based on profit in 2 of 7 years",
+          "horse breeding activity profit motive presumption two out of seven years"
+        ]
+      },
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source 1 directly states this rule for horse breeding activities in 26 CFR 1.183-1(c)(1)(i)."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Source 2 states the operation has NOT been profitable since inception in 2001, contradicting the claim."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Claim depends on Claim 1 being true, which is not supported by the sources."
+        }
+      ],
+      "hidden": [
+        {
+          "part": 1,
+          "text": "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years.",
+          "citations": [
+            "T.C. Memo. 2026-47, at *9"
+          ],
+          "failed": true,
+          "why": "Source 2 states the operation has NOT been profitable since inception in 2001, contradicting the claim."
+        },
+        {
+          "part": 1,
+          "text": "Therefore, the client's horse breeding and showing operation is presumed to be engaged in for profit.",
+          "citations": [
+            "26 CFR 1.183-1(c)(1)"
+          ],
+          "failed": true,
+          "why": "Claim depends on Claim 1 being true, which is not supported by the sources."
+        }
+      ],
+      "sufficiency": [],
+      "conclusion": {
+        "text": "Yes, the client's horse breeding and showing operation is presumed to be engaged in for profit.",
+        "shown": false,
+        "citations": [],
+        "why": "Statement 0 requires gross income to EXCEED deductions in 2 of 7 years. Profit alone does not satisfy this condition."
+      },
+      "seconds": 12.42
+    },
+    {
+      "text": "Short answer: Yes, the horse breeding and showing operation is presumed to be engaged in for profit [26 CFR 1.183-1(c)(1)], [26 U.S.C. \u00a7 183(a)-(d)], [T.C. Memo. 2026-47, at *9].\n\nPart 1: presumption of profit motive for horse breeding activity under IRS guidelines\nIf a horse breeding activity produces gross income exceeding deductions in at least two of the last seven consecutive years, the activity is presumed to be engaged in for profit unless the Commissioner establishes otherwise [26 CFR 1.183-1(c)(1)], [26 U.S.C. \u00a7 183(a)-(d)], [T.C. Memo. 2026-47, at *9]. The presumption applies specifically to activities consisting in major part of breeding, training, showing, or racing horses [26 U.S.C. \u00a7 183(a)-(d)], [T.C. Memo. 2026-47, at *9].",
+      "refused": false,
+      "citations": [
+        "26 CFR 1.183-1(c)(1)",
+        "26 U.S.C. \u00a7 183(a)-(d)",
+        "T.C. Memo. 2026-47, at *9"
+      ],
+      "unsupported_citations": [],
+      "contexts": [
+        {
+          "citation": "26 CFR 1.183-1(c)(1)",
+          "text": "(c) Presumption that activity is engaged in for profit \u2014(1) In general. If for:\n(i) Any 2 of 7 consecutive taxable years, in the case of an activity which consists in major part of the breeding, training, showing, or racing of horses, or\n(ii) Any 2 of 5 consecutive taxable years, in the case of any other activity, the gross income derived from an activity exceeds the deductions attributable to such activity which would be allowed or allowable if the activity were engaged in for profit, such activity is presumed, unless the Commissioner establishes to the contrary, to be engaged in for profit. For purposes of this determination the deduction permitted by section 1202 shall not be taken into account. Such presumption applies with respect to the second profit year and all years subsequent to the second profit year within the 5- or 7-year period beginning with the first profit year. This presumption arises only if the activity is substantially the same activity for each of the relevant taxable years, including the taxable year in question. If the taxpayer does not meet the requirements of section 183(d) and this paragraph, no inference that the activity is not engaged in for profit shall arise by reason of the provisions of section 183. For purposes of this paragraph, a net operating loss deduction is not taken into account as a deduction. For purposes of this subparagraph a short taxable year constitutes a taxable year."
+        },
+        {
+          "citation": "26 CFR 1.183-2(c)",
+          "text": "(c) Examples. The provisions of this section may be illustrated by the following examples:\nExample 1.\nThe taxpayer inherited a farm from her husband in an area which was becoming largely residential, and is now nearly all so. The farm had never made a profit before the taxpayer inherited it, and the farm has since had substantial losses in each year. The decedent from whom the taxpayer inherited the farm was a stockbroker, and he also left the taxpayer substantial stock holdings which yield large income from dividends. The taxpayer lives on an area of the farm which is set aside exclusively for living purposes. A farm manager is employed to operate the farm, but modern methods are not used in operating the farm. The taxpayer was born and raised on a farm, and expresses a strong preference for living on a farm. The taxpayer's activity of farming, based on all the facts and circumstances, could be found not to be engaged in for profit.\nExample 2.\nThe taxpayer is a wealthy individual who is greatly interested in philosophy. During the past 30 years he has written and published at his own expense several pamphlets, and he has engaged in extensive lecturing activity, advocating and disseminating his ideas. He has made a profit from these activities in only occasional years, and the profits in those years were small in relation to the amounts of the losses in all other years. The taxpayer has very sizable income from securities (dividends and capital gains) which constitutes the principal source of his livelihood. The activity of lecturing, publishing pamphlets, and disseminating his ideas is not an activity engaged in by the taxpayer for profit.\nExample 3."
+        },
+        {
+          "citation": "26 CFR 1.183-1(c)(2)",
+          "text": "(2) Examples. The provisions of subparagraph (1) of this paragraph may be illustrated by the following examples, in each of which it is assumed that the taxpayer has not elected, in accordance with section 183(e), to postpone determination of whether the presumption described in section 183(d) and this paragraph is applicable.\nExample 1.\nFor taxable years 1970-74, A, an individual who uses the cash receipts and disbursement method of accounting and the calendar year as the taxable year, is engaged in the activity of farming. In taxable years 1971, 1973, and 1974, A's deductible expenditures with respect to such activity exceed his gross income from the activity. In taxable years 1970 and 1972 A has income from the sale of farm produce of $30,000 for each year. In each of such years A had expenses for feed for his livestock of $10,000, depreciation of equipment of $10,000, and fertilizer cost of $5,000 which he elects to take as a deduction. A also has a net operating loss carryover to taxable year 1970 of $6,000. A is presumed, for taxable years 1972, 1973, and 1974, to have engaged in the activity of farming for profit, since for 2 years of a 5-consecutive-year period the gross income from the activity ($30,000 for each year) exceeded the deductions (computed without regard to the net operating loss) which are allowable in the case of the activity ($25,000 for each year).\nExample 2.\nFor the taxable years 1970 and 1971, B, an individual who uses the cash receipts and disbursement method of accounting and the calendar year as taxable year, engaged in raising pure-bred Charolais cattle for breeding purposes. The operation showed a loss during 1970. At the end of 1971, B sold a substantial portion of his herd and the cattle operation showed a profit for that year. For all subsequent relevant taxable years B continued to keep a few Charolais bulls at stud. In 1972, B started to raise Tennessee Walking Horses for breeding and show purposes, utilizing substantially the same pasture land, barns, and (with structural modifications) the same stalls. The Walking Horse operations showed a small profit in 1973 and losses in 1972 and 1974 through 1976."
+        },
+        {
+          "citation": "26 CFR 1.183-1(c)(5)",
+          "text": "(5) Cross reference. For rules relating to section 183(e) which permits a taxpayer to elect to postpone determination of whether any activity shall be presumed to be \u201can activity engaged in for profit\u201d by operation of the presumption described in section 183(d) and this paragraph until after the close of the fourth taxable year (sixth taxable year, in the case of activity which consists in major part of breeding, training, showing, or racing of horses) following the taxable year in which the taxpayer first engages in the activity, see \u00a7 1.183-3."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 183(a)-(d)",
+          "text": "(a) General rule. In the case of an activity engaged in by an individual or an S corporation, if such activity is not engaged in for profit, no deduction attributable to such activity shall be allowed under this chapter except as provided in this section.\n(b) Deductions allowable. In the case of an activity not engaged in for profit to which subsection (a) applies, there shall be allowed\u2014 (1) the deductions which would be allowable under this chapter for the taxable year without regard to whether or not such activity is engaged in for profit, and\n(2) a deduction equal to the amount of the deductions which would be allowable under this chapter for the taxable year only if such activity were engaged in for profit, but only to the extent that the gross income derived from such activity for the taxable year exceeds the deductions allowable by reason of paragraph (1).\n(c) Activity not engaged in for profit defined. For purposes of this section, the term \u201cactivity not engaged in for profit\u201d means any activity other than one with respect to which deductions are allowable for the taxable year under section 162 or under paragraph (1) or (2) of section 212.\n(d) Presumption. If the gross income derived from an activity for 3 or more of the taxable years in the period of 5 consecutive taxable years which ends with the taxable year exceeds the deductions attributable to such activity (determined without regard to whether or not such activity is engaged in for profit), then, unless the Secretary establishes to the contrary, such activity shall be presumed for purposes of this chapter for such taxable year to be an activity engaged in for profit. In the case of an activity which consists in major part of the breeding, training, showing, or racing of horses, the preceding sentence shall be applied by substituting \u201c2\u201d for \u201c3\u201d and \u201c7\u201d for \u201c5\u201d."
+        },
+        {
+          "citation": "T.C. Memo. 2026-47, at *9",
+          "text": "Section 183\nGenerally, under sections 162(a) and 212(1), a taxpayer may deduct ordinary and necessary expenses paid or incurred in carrying on a trade or business, or for the production or collection of income. Expenses in connection with activities not engaged in for profit, such as activities carried on primarily as a hobby, for sport, or for recreation are not deductible, except to the extent allowable under section 183(b), which limits deductible expenses from activities not engaged in for profit to the amount of gross income derived from that activity. In determining whether an activity was engaged in for profit, a safe harbor in section 183(d) relating to horses allows an activity consisting in major part of breeding, training, showing, or racing horses to be presumed engaged in for profit if it produces gross income exceeding deductions in at least two of the last seven consecutive years ending with the taxable year, unless the Commissioner establishes otherwise. SQH does not clear the hurdle for this presumption as it has not been profitable since its inception in 2001. Consequently, we must inquire further."
+        },
+        {
+          "citation": "T.C. Memo. 2013-54, at *51-52",
+          "text": "Regs. Little information in the expert reports pertained to the time which it\ncustomarily takes to bring a horse breeding operation to profitability, but \"[w]e have\nsaid that the startup phase of a horse-breeding activity may be 5 to 10 years\". Davis\nv. Commissioner, T.C. Memo. 2000-101, slip op. at 25 (citing Engdahl v.\nCommissioner, 72 T.C. 659, 669 (1979), Burrow v. Commissioner, T.C. Memo.\n1990-621, and Starr v. Commissioner, T.C. Memo. 1969-35). Petitioners had three\nyears of significant losses with respect their horse breeding activity but did claim\ncertain income in later years, mostly resulting from surrendering their FEEP interests\nto pay off NELC loans. Considering the facts, we find this factor is neutral.\nG. Amount of Occasional Profits\nThe amount of any occasional profits the taxpayer earned from the activity\nmay show that the taxpayer had a profit motive. See sec. 1.183-2(b)(7), Income\nTax Regs. An occasional small profit from an activity generating large losses or\nfrom an activity in which the taxpayer has made a large investment would not\ngenerally be determinative that the activity is engaged in for profit. E In addition,\n\"A small chance to make a large profit may indicate that a taxpayer has a profit\nobjective even if he or she has large continuous losses.\" Lundquist v.\nCommissioner, T.C. Memo. 1999-83, slip op. at 27 (citing section 1.183-2(b)(7),\nAlthough petitioners did report significant amounts of income after 2004 in\nconnection with their horse breeding activities, this income was not enough to offset\nthe losses incurred through their participation in the activity.\nIn addition, most of\nthis income resulted from petitioners' surrendering their FEEP interests to pay off\nNELC loans or distributions from FEEP, Gastar, or PowerFoal. We believe such\nincome should be disregarded for purposes of this factor, as petitioners were"
+        },
+        {
+          "citation": "T.C. Memo. 2010-216, at *32-33",
+          "text": "to make a comparison between Mr.\nDennis' cattle operation and his horse breeding activity.\nThe\nCourt cannot do so, because the record does not provide any facts\nrelating,to Mr. Dennis' cattle operation.\nFurthermore,\nthe Court\ncannot compare Mr. Dennis' employment at Lewis & Coker with his\ncommencement and operation of a \"business\" of his own.\nTaxpayers' History of\nIncome or Loss\nNext,\nthe Court will examine petitioners' history of\nincome\nor loss.\nA history of substantial\nl\u00f2sses may indicate that the\nTax Regs.\nA series of.losses during the initial or startup phase\nof an activity may not necessarily indicate that\nthe activity is\nnot engaged in for profit.\nSee sec. 1.183-2 (b) (6),\nIncome Tax\nRegs. Where losses continue to be sustained beyond the period\nwhich customarily is necessary to bring the operation to\nprofitable status, such continued losses,\nif not explainable as\ndue to customary business risks or reverses, may indicate that the\nactivity is not being engaged in for profit.\nSee id.\nPetitioners commenced their horse breeding activity in 1999.\nEach year from 1999 through 2004 petitioners made no profits and\nincurred substantial\nlosses.\nIn 2001 Mr. Dennis sold only one\nhorse, and it was at a loss. Petitioners'\nlosses during these\nearly years of their operation.are attributable to the startup\nphase of their activity.\nThe startup phase of a breeding\noperation may last 5 to 10 years.\nSee Engdahl v. Commissioner, 72\nT.C. at 669.\nThe substantial\nlosses incurred in the tax years at\nissue have -fallen within the startup period and do not\nindicate\nactivity.\npetitioners' costs of\nfeeding as many as 46 horses. This Court\nfinds Mr. Dennis'\ntestimony credible as to the duration of\nthe\nactivity.\nThe Court will not consider such losses arising from\nunforeseen or deleterious events as an indication that their"
+        }
+      ],
+      "cost_usd": 0.0042166,
+      "model": "gpt-4o-mini",
+      "plan_set": 1,
+      "dropped_sentences": 0,
+      "structured": {
+        "data": {
+          "tax_year": null,
+          "sentences": [
+            {
+              "part": 1,
+              "text": "If a horse breeding activity produces gross income exceeding deductions in at least two of the last seven consecutive years, the activity is presumed to be engaged in for profit unless the Commissioner establishes otherwise.",
+              "citations": [
+                "26 CFR 1.183-1(c)(1)",
+                "26 U.S.C. \u00a7 183(a)-(d)",
+                "T.C. Memo. 2026-47, at *9"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The presumption applies specifically to activities consisting in major part of breeding, training, showing, or racing horses.",
+              "citations": [
+                "26 U.S.C. \u00a7 183(a)-(d)",
+                "T.C. Memo. 2026-47, at *9"
+              ]
+            }
+          ],
+          "not_answerable": [],
+          "conclusion": "Yes, the horse breeding and showing operation is presumed to be engaged in for profit."
+        },
+        "labels": [
+          "presumption of profit motive for horse breeding activity under IRS guidelines",
+          "profit motive presumption for horse breeding activity two out of seven years"
+        ]
+      },
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "All three sources confirm the two-of-seven-years presumption for horse activities, with Commissioner ability to rebut."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources 2 and 3 both state presumption applies to activities consisting in major part of breeding, training, showing, or racing horses."
+        }
+      ],
+      "hidden": [],
+      "sufficiency": [],
+      "conclusion": {
+        "text": "Yes, the horse breeding and showing operation is presumed to be engaged in for profit.",
+        "shown": true,
+        "citations": [
+          "26 CFR 1.183-1(c)(1)",
+          "26 U.S.C. \u00a7 183(a)-(d)",
+          "T.C. Memo. 2026-47, at *9"
+        ],
+        "why": "Horse breeding and showing operation with profit in 2 of last 7 years meets the statutory presumption under statements 0 and 1."
+      },
+      "seconds": 5.97
+    },
+    {
+      "text": "Part 1: presumption of profit motive for horse breeding activity based on profit in 2 of 7 years\nIf for any 2 of 7 consecutive taxable years, the gross income derived from an activity consisting in major part of the breeding, training, showing, or racing of horses exceeds the deductions attributable to such activity, that activity is presumed to be engaged in for profit unless the Commissioner establishes to the contrary [26 CFR 1.183-1(c)(1)].",
+      "refused": false,
+      "citations": [
+        "26 CFR 1.183-1(c)(1)"
+      ],
+      "unsupported_citations": [],
+      "contexts": [
+        {
+          "citation": "26 CFR 1.183-1(c)(1)",
+          "text": "(c) Presumption that activity is engaged in for profit \u2014(1) In general. If for:\n(i) Any 2 of 7 consecutive taxable years, in the case of an activity which consists in major part of the breeding, training, showing, or racing of horses, or\n(ii) Any 2 of 5 consecutive taxable years, in the case of any other activity, the gross income derived from an activity exceeds the deductions attributable to such activity which would be allowed or allowable if the activity were engaged in for profit, such activity is presumed, unless the Commissioner establishes to the contrary, to be engaged in for profit. For purposes of this determination the deduction permitted by section 1202 shall not be taken into account. Such presumption applies with respect to the second profit year and all years subsequent to the second profit year within the 5- or 7-year period beginning with the first profit year. This presumption arises only if the activity is substantially the same activity for each of the relevant taxable years, including the taxable year in question. If the taxpayer does not meet the requirements of section 183(d) and this paragraph, no inference that the activity is not engaged in for profit shall arise by reason of the provisions of section 183. For purposes of this paragraph, a net operating loss deduction is not taken into account as a deduction. For purposes of this subparagraph a short taxable year constitutes a taxable year."
+        },
+        {
+          "citation": "26 CFR 1.183-2(c)",
+          "text": "(c) Examples. The provisions of this section may be illustrated by the following examples:\nExample 1.\nThe taxpayer inherited a farm from her husband in an area which was becoming largely residential, and is now nearly all so. The farm had never made a profit before the taxpayer inherited it, and the farm has since had substantial losses in each year. The decedent from whom the taxpayer inherited the farm was a stockbroker, and he also left the taxpayer substantial stock holdings which yield large income from dividends. The taxpayer lives on an area of the farm which is set aside exclusively for living purposes. A farm manager is employed to operate the farm, but modern methods are not used in operating the farm. The taxpayer was born and raised on a farm, and expresses a strong preference for living on a farm. The taxpayer's activity of farming, based on all the facts and circumstances, could be found not to be engaged in for profit.\nExample 2.\nThe taxpayer is a wealthy individual who is greatly interested in philosophy. During the past 30 years he has written and published at his own expense several pamphlets, and he has engaged in extensive lecturing activity, advocating and disseminating his ideas. He has made a profit from these activities in only occasional years, and the profits in those years were small in relation to the amounts of the losses in all other years. The taxpayer has very sizable income from securities (dividends and capital gains) which constitutes the principal source of his livelihood. The activity of lecturing, publishing pamphlets, and disseminating his ideas is not an activity engaged in by the taxpayer for profit.\nExample 3."
+        },
+        {
+          "citation": "26 CFR 1.183-1(c)(2)",
+          "text": "(2) Examples. The provisions of subparagraph (1) of this paragraph may be illustrated by the following examples, in each of which it is assumed that the taxpayer has not elected, in accordance with section 183(e), to postpone determination of whether the presumption described in section 183(d) and this paragraph is applicable.\nExample 1.\nFor taxable years 1970-74, A, an individual who uses the cash receipts and disbursement method of accounting and the calendar year as the taxable year, is engaged in the activity of farming. In taxable years 1971, 1973, and 1974, A's deductible expenditures with respect to such activity exceed his gross income from the activity. In taxable years 1970 and 1972 A has income from the sale of farm produce of $30,000 for each year. In each of such years A had expenses for feed for his livestock of $10,000, depreciation of equipment of $10,000, and fertilizer cost of $5,000 which he elects to take as a deduction. A also has a net operating loss carryover to taxable year 1970 of $6,000. A is presumed, for taxable years 1972, 1973, and 1974, to have engaged in the activity of farming for profit, since for 2 years of a 5-consecutive-year period the gross income from the activity ($30,000 for each year) exceeded the deductions (computed without regard to the net operating loss) which are allowable in the case of the activity ($25,000 for each year).\nExample 2.\nFor the taxable years 1970 and 1971, B, an individual who uses the cash receipts and disbursement method of accounting and the calendar year as taxable year, engaged in raising pure-bred Charolais cattle for breeding purposes. The operation showed a loss during 1970. At the end of 1971, B sold a substantial portion of his herd and the cattle operation showed a profit for that year. For all subsequent relevant taxable years B continued to keep a few Charolais bulls at stud. In 1972, B started to raise Tennessee Walking Horses for breeding and show purposes, utilizing substantially the same pasture land, barns, and (with structural modifications) the same stalls. The Walking Horse operations showed a small profit in 1973 and losses in 1972 and 1974 through 1976."
+        },
+        {
+          "citation": "26 CFR 1.183-1(c)(5)",
+          "text": "(5) Cross reference. For rules relating to section 183(e) which permits a taxpayer to elect to postpone determination of whether any activity shall be presumed to be \u201can activity engaged in for profit\u201d by operation of the presumption described in section 183(d) and this paragraph until after the close of the fourth taxable year (sixth taxable year, in the case of activity which consists in major part of breeding, training, showing, or racing of horses) following the taxable year in which the taxpayer first engages in the activity, see \u00a7 1.183-3."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 183(a)-(d)",
+          "text": "(a) General rule. In the case of an activity engaged in by an individual or an S corporation, if such activity is not engaged in for profit, no deduction attributable to such activity shall be allowed under this chapter except as provided in this section.\n(b) Deductions allowable. In the case of an activity not engaged in for profit to which subsection (a) applies, there shall be allowed\u2014 (1) the deductions which would be allowable under this chapter for the taxable year without regard to whether or not such activity is engaged in for profit, and\n(2) a deduction equal to the amount of the deductions which would be allowable under this chapter for the taxable year only if such activity were engaged in for profit, but only to the extent that the gross income derived from such activity for the taxable year exceeds the deductions allowable by reason of paragraph (1).\n(c) Activity not engaged in for profit defined. For purposes of this section, the term \u201cactivity not engaged in for profit\u201d means any activity other than one with respect to which deductions are allowable for the taxable year under section 162 or under paragraph (1) or (2) of section 212.\n(d) Presumption. If the gross income derived from an activity for 3 or more of the taxable years in the period of 5 consecutive taxable years which ends with the taxable year exceeds the deductions attributable to such activity (determined without regard to whether or not such activity is engaged in for profit), then, unless the Secretary establishes to the contrary, such activity shall be presumed for purposes of this chapter for such taxable year to be an activity engaged in for profit. In the case of an activity which consists in major part of the breeding, training, showing, or racing of horses, the preceding sentence shall be applied by substituting \u201c2\u201d for \u201c3\u201d and \u201c7\u201d for \u201c5\u201d."
+        },
+        {
+          "citation": "T.C. Memo. 2026-47, at *9",
+          "text": "Section 183\nGenerally, under sections 162(a) and 212(1), a taxpayer may deduct ordinary and necessary expenses paid or incurred in carrying on a trade or business, or for the production or collection of income. Expenses in connection with activities not engaged in for profit, such as activities carried on primarily as a hobby, for sport, or for recreation are not deductible, except to the extent allowable under section 183(b), which limits deductible expenses from activities not engaged in for profit to the amount of gross income derived from that activity. In determining whether an activity was engaged in for profit, a safe harbor in section 183(d) relating to horses allows an activity consisting in major part of breeding, training, showing, or racing horses to be presumed engaged in for profit if it produces gross income exceeding deductions in at least two of the last seven consecutive years ending with the taxable year, unless the Commissioner establishes otherwise. SQH does not clear the hurdle for this presumption as it has not been profitable since its inception in 2001. Consequently, we must inquire further."
+        },
+        {
+          "citation": "T.C. Memo. 2013-54, at *51-52",
+          "text": "Regs. Little information in the expert reports pertained to the time which it\ncustomarily takes to bring a horse breeding operation to profitability, but \"[w]e have\nsaid that the startup phase of a horse-breeding activity may be 5 to 10 years\". Davis\nv. Commissioner, T.C. Memo. 2000-101, slip op. at 25 (citing Engdahl v.\nCommissioner, 72 T.C. 659, 669 (1979), Burrow v. Commissioner, T.C. Memo.\n1990-621, and Starr v. Commissioner, T.C. Memo. 1969-35). Petitioners had three\nyears of significant losses with respect their horse breeding activity but did claim\ncertain income in later years, mostly resulting from surrendering their FEEP interests\nto pay off NELC loans. Considering the facts, we find this factor is neutral.\nG. Amount of Occasional Profits\nThe amount of any occasional profits the taxpayer earned from the activity\nmay show that the taxpayer had a profit motive. See sec. 1.183-2(b)(7), Income\nTax Regs. An occasional small profit from an activity generating large losses or\nfrom an activity in which the taxpayer has made a large investment would not\ngenerally be determinative that the activity is engaged in for profit. E In addition,\n\"A small chance to make a large profit may indicate that a taxpayer has a profit\nobjective even if he or she has large continuous losses.\" Lundquist v.\nCommissioner, T.C. Memo. 1999-83, slip op. at 27 (citing section 1.183-2(b)(7),\nAlthough petitioners did report significant amounts of income after 2004 in\nconnection with their horse breeding activities, this income was not enough to offset\nthe losses incurred through their participation in the activity.\nIn addition, most of\nthis income resulted from petitioners' surrendering their FEEP interests to pay off\nNELC loans or distributions from FEEP, Gastar, or PowerFoal. We believe such\nincome should be disregarded for purposes of this factor, as petitioners were"
+        },
+        {
+          "citation": "T.C. Memo. 2010-216, at *32-33",
+          "text": "to make a comparison between Mr.\nDennis' cattle operation and his horse breeding activity.\nThe\nCourt cannot do so, because the record does not provide any facts\nrelating,to Mr. Dennis' cattle operation.\nFurthermore,\nthe Court\ncannot compare Mr. Dennis' employment at Lewis & Coker with his\ncommencement and operation of a \"business\" of his own.\nTaxpayers' History of\nIncome or Loss\nNext,\nthe Court will examine petitioners' history of\nincome\nor loss.\nA history of substantial\nl\u00f2sses may indicate that the\nTax Regs.\nA series of.losses during the initial or startup phase\nof an activity may not necessarily indicate that\nthe activity is\nnot engaged in for profit.\nSee sec. 1.183-2 (b) (6),\nIncome Tax\nRegs. Where losses continue to be sustained beyond the period\nwhich customarily is necessary to bring the operation to\nprofitable status, such continued losses,\nif not explainable as\ndue to customary business risks or reverses, may indicate that the\nactivity is not being engaged in for profit.\nSee id.\nPetitioners commenced their horse breeding activity in 1999.\nEach year from 1999 through 2004 petitioners made no profits and\nincurred substantial\nlosses.\nIn 2001 Mr. Dennis sold only one\nhorse, and it was at a loss. Petitioners'\nlosses during these\nearly years of their operation.are attributable to the startup\nphase of their activity.\nThe startup phase of a breeding\noperation may last 5 to 10 years.\nSee Engdahl v. Commissioner, 72\nT.C. at 669.\nThe substantial\nlosses incurred in the tax years at\nissue have -fallen within the startup period and do not\nindicate\nactivity.\npetitioners' costs of\nfeeding as many as 46 horses. This Court\nfinds Mr. Dennis'\ntestimony credible as to the duration of\nthe\nactivity.\nThe Court will not consider such losses arising from\nunforeseen or deleterious events as an indication that their"
+        }
+      ],
+      "cost_usd": 0.008335500000000001,
+      "model": "gpt-4o-mini",
+      "plan_set": 2,
+      "dropped_sentences": 0,
+      "structured": {
+        "data": {
+          "tax_year": null,
+          "sentences": [
+            {
+              "part": 1,
+              "text": "If for any 2 of 7 consecutive taxable years, the gross income derived from an activity consisting in major part of the breeding, training, showing, or racing of horses exceeds the deductions attributable to such activity, that activity is presumed to be engaged in for profit unless the Commissioner establishes to the contrary.",
+              "citations": [
+                "26 CFR 1.183-1(c)(1)"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years.",
+              "citations": [
+                "T.C. Memo. 2026-47, at *9"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "Therefore, the client's horse breeding and showing operation is presumed to be engaged in for profit.",
+              "citations": [
+                "26 CFR 1.183-1(c)(1)"
+              ]
+            }
+          ],
+          "not_answerable": [],
+          "conclusion": "Yes, the client's horse breeding and showing operation is presumed to be engaged in for profit."
+        },
+        "labels": [
+          "presumption of profit motive for horse breeding activity based on profit in 2 of 7 years",
+          "horse breeding activity profit motive presumption two out of seven years"
+        ]
+      },
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source 1 directly states this rule for horse breeding activities in 26 CFR 1.183-1(c)(1)(i)."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Source 2 states SQH has not been profitable since inception in 2001, contradicting the claim of 2 profitable years."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Claim 1 is unsupported, so the presumption conclusion cannot follow despite Source 1's rule."
+        }
+      ],
+      "hidden": [
+        {
+          "part": 1,
+          "text": "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years.",
+          "citations": [
+            "T.C. Memo. 2026-47, at *9"
+          ],
+          "failed": true,
+          "why": "Source 2 states SQH has not been profitable since inception in 2001, contradicting the claim of 2 profitable years."
+        },
+        {
+          "part": 1,
+          "text": "Therefore, the client's horse breeding and showing operation is presumed to be engaged in for profit.",
+          "citations": [
+            "26 CFR 1.183-1(c)(1)"
+          ],
+          "failed": true,
+          "why": "Claim 1 is unsupported, so the presumption conclusion cannot follow despite Source 1's rule."
+        }
+      ],
+      "sufficiency": [],
+      "conclusion": {
+        "text": "Yes, the client's horse breeding and showing operation is presumed to be engaged in for profit.",
+        "shown": false,
+        "citations": [],
+        "why": "Statement requires gross income to exceed deductions in 2 of 7 years. Question only states operation made profit in 2 years, not that income exceeded deductions."
+      },
+      "seconds": 8.86
+    }
+  ],
+  "My self-employed client runs her business from a spare bedroom that the children also use for homework in the evenings. Can she take a home office deduction?": [
+    {
+      "text": "Short answer: No, the client cannot take a home office deduction because the space is not used exclusively for business [26 U.S.C. \u00a7 280A(c)(1)], [T.C. Memo. 2013-125, at *62-63].\n\nPart 2: home office deduction exclusive use children homework shared space\nA taxpayer must use a portion of their home exclusively and regularly for business to qualify for a home office deduction [26 U.S.C. \u00a7 280A(c)(1)]. The exclusive use requirement is an all-or-nothing standard, meaning that if the space is used for both business and personal purposes, it does not qualify for the deduction [T.C. Memo. 2013-125, at *62-63].",
+      "refused": false,
+      "citations": [
+        "26 U.S.C. \u00a7 280A(c)(1)",
+        "T.C. Memo. 2013-125, at *62-63"
+      ],
+      "unsupported_citations": [],
+      "contexts": [
+        {
+          "citation": "IRS Pub 587 (2025), p. 5",
+          "text": "business. Taylor meets all the qualifications, including principal place of business, so the expenses (subject to certain limitations, explained later) can be deducted for the business use of the home. More Than One Trade or Business for The same home office can be the principal place of business two or more separate business activities. Whether your home office is the principal place of business for more than one business activity must be determined separately for each of your trade or business activities. You must use the home office exclusively and regularly for one or more of the following purposes. \u2022 As the principal place of business for one or more of your trades or businesses. \u2022 As a place to meet or deal with patients, clients, or customers in the normal course of one or more of your trades or businesses. \u2022 If your home office is a separate structure, in connection with one or more of your trades or businesses. You can use your home office for more than one trade or business activity, but you cannot use it for any activities that are not related to a trade or business. Place To Meet Patients, Clients, or Customers If you meet or deal with patients, clients, or customers in your home in the normal course of your business, even though you also carry on business at another location, you"
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(c)(1)",
+          "text": "(c) Exceptions for certain business or rental use; limitation on deductions for such use. (1) Certain business use. Subsection (a) shall not apply to any item to the extent such item is allocable to a portion of the dwelling unit which is exclusively used on a regular basis\u2014 (A) as the principal place of business for any trade or business of the taxpayer,\n(B) as a place of business which is used by patients, clients, or customers in meeting or dealing with the taxpayer in the normal course of his trade or business, or\n(C) in the case of a separate structure which is not attached to the dwelling unit, in connection with the taxpayer\u2019s trade or business.\nIn the case of an employee, the preceding sentence shall apply only if the exclusive use referred to in the preceding sentence is for the convenience of his employer. For purposes of subparagraph (A), the term \u201cprincipal place of business\u201d includes a place of business which is used by the taxpayer for the administrative or management activities of any trade or business of the taxpayer if there is no other fixed location of such trade or business where the taxpayer conducts substantial administrative or management activities of such trade or business."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 162(l)(4)",
+          "text": "(4) Deduction not allowed for self-employment tax purposes. The deduction allowable by reason of this subsection shall not be taken into account in determining an individual\u2019s net earnings from self-employment (within the meaning of section 1402(a)) for purposes of chapter 2 for taxable years beginning before January 1, 2010, or after December 31, 2010."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(a)-(b)",
+          "text": "(a) General rule. Except as otherwise provided in this section, in the case of a taxpayer who is an individual or an S corporation, no deduction otherwise allowable under this chapter shall be allowed with respect to the use of a dwelling unit which is used by the taxpayer during the taxable year as a residence.\n(b) Exception for interest, taxes, casualty losses, etc. Subsection (a) shall not apply to any deduction allowable to the taxpayer without regard to its connection with his trade or business (or with his income-producing activity)."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(c)(5)",
+          "text": "(5) Limitation on deductions. In the case of a use described in paragraph (1), (2), or (4), and in the case of a use described in paragraph (3) where the dwelling unit is used by the taxpayer during the taxable year as a residence, the deductions allowed under this chapter for the taxable year by reason of being attributed to such use shall not exceed the excess of\u2014 (A) the gross income derived from such use for the taxable year, over\n(B) the sum of\u2014 (i) the deductions allocable to such use which are allowable under this chapter for the taxable year whether or not such unit (or portion thereof) was so used, and\n(ii) the deductions allocable to the trade or business (or rental activity) in which such use occurs (but which are not allocable to such use) for such taxable year.\nAny amount not allowable as a deduction under this chapter by reason of the preceding sentence shall be taken into account as a deduction (allocable to such use) under this chapter for the succeeding taxable year. Any amount taken into account for any taxable year under the preceding sentence shall be subject to the limitation of the 1st sentence of this paragraph whether or not the dwelling unit is used as a residence during such taxable year."
+        },
+        {
+          "citation": "T.C. Memo. 2024-82, at *10-11",
+          "text": "2. Home Office Deduction\nPetitioner deducted $18,393 and $3,000 for 2011 and 2012, respectively, for alleged business use of a home office. She testified that her 2011 costs were higher because \u201cshe had to configure her home office with all sorts of computer equipment and software to enable her to work from home.\u201d She neglected to include with either return a Form 8829, Expenses for Business Use of Your Home, which is used by taxpayers to calculate the allowable expense amount.\nThe Code generally prohibits deductions for expenses relating to a dwelling unit used by the taxpayer as a residence. See \u00a7 280A(a). Section 280A(c)(1)(A) provides an exception for \u201cany item to the extent such item is allocable to a portion of the dwelling unit which is exclusively used on a regular basis . . . as the principal place of business for any trade or business of the taxpayer.\u201d See Hamacher v. Commissioner, 94\nT.C. 348, 357 (1990) (stating that \u201cexclusive use\u201d is an \u201call-ornothing standard\u201d).\nA taxpayer may have only one principal place of business. See Curphey v. Commissioner, 73 T.C. 766, 776 (1980) (finding that a taxpayer has one principal place of business for each trade or business). To determine the principal place of business, the Court must ascertain the \u201cfocal point\u201d of a taxpayer\u2019s business activities. Jackson v. Commissioner, 76 T.C. 696, 700 (1981). If a taxpayer proves that her residence constituted her \u201cprincipal place of business,\u201d she must also prove what portion of the home was used \u201cexclusively\u201d for that purpose. Otherwise we cannot determine the deductible portion of the relevant expenses. See Sam Goldberger, Inc. v. Commissioner, 88 T.C. 1532, 1556\u201357 (1987)."
+        },
+        {
+          "citation": "T.C. Memo. 2023-128, at *15",
+          "text": "Petitioner deducted $12,840 in rent expenses for his southern California apartment as \u201coffice\u201d expenses under Schedule A miscellaneous itemized deductions for 2011 and 2012. At various points, petitioner has argued that the \u201coffice\u201d expense was a Schedule C expense incurred in connection with Ovium,8 and at other points he has argued that it was a Schedule A expense incurred in connection with his employment at SRA OSS.9 We may consider each of these activities, because expenses attributable to the use of a home office may be deductible in conducting two or more separate business activities. Hamacher v. Commissioner, 94 T.C. 348, 356 (1990). However, if any activity conducted in the home office fails to meet the requirements of section 280A(c)(1), none of the activities meets the exclusive use requirement for the home office. Hamacher, 94 T.C. at 356.\nWith respect to the Ovium activity, petitioner may deduct only an expense allocable to a portion of the apartment that is exclusively used on a regular basis as (1) the principal place of business for any trade or business of the taxpayer or (2) a place of business which is used by patients, clients, or customers in meeting or dealing with the taxpayer in the normal course of his or her trade or business. \u00a7 280A(c)(1)(A) and (B). We have held that the Ovium activity lacked a profit motive; it is therefore not a trade or business. See Commissioner v. Groetzinger, 480 U.S. at 35. As both factors under section 280A(c)(1) require the existence of a trade or business, we hold that petitioner\u2019s use of the home"
+        },
+        {
+          "citation": "T.C. Memo. 2013-125, at *62-63",
+          "text": "per donee for gifts to three individuals--her secretary Karen Barcellas and the two\nother clients that Lydia claimed attended the wine tasting event. Because of the\nfailure to adequately substantiate any of the amount claimed, we will not allow a\ndeduction greater than the Commissioner has.\nClaimed P claimed R allowed R allowed on return\nYear\nin NOD\nin brief\nin brief\nAlthough the Heinbockels didn't claim a home-office deduction on any of\nthe returns at issue, they now argue that they did incur home-office expenses in\nSection 280A(a) states: \"Except as otherwise provided in this section, in the\ncase of a taxpayer who is an individual * * *, no deduction otherwise allowable\nunder this chapter shall be allowed with respect to the use of a dwelling unit which\nis used by the taxpayer during the taxable year as a residence.\" The Code then\nprovides an exception to this general rule to permit a deduction for home-office\nexpenses \"allocable to a portion of the dwelling unit which is exclusively\nused on a regular basis * * * as the principal place of business for any trade or\nhome-office expenses if she shows her home office is:\n(cid:16)042used for a trade or business;\n(cid:16)042used exclusively for that purpose; and\n(cid:16)042her principal place of business.\nyears in question, the spreadsheets detailing the home-office deductions indicate\nthe Heinbockels lived in three different residences. They started 2005 in a 2,200-\nsquare-foot house (204 square feet allocated to the home office), then later that\nyear downsized to an 1,850-square-foot apartment (150-square-foot allocation).\n. Then, sometime in 2006, they moved to a 4,100-square-foot home (255-square-foot\nallocation). Although she didn't describe those locations separately, Lydia testified\nthat in each of those locations \"there was always one room pretty much dedicated"
+        }
+      ],
+      "cost_usd": 0.00764045,
+      "model": "gpt-4o-mini",
+      "plan_set": 0,
+      "dropped_sentences": 0,
+      "structured": {
+        "data": {
+          "tax_year": null,
+          "sentences": [
+            {
+              "part": 2,
+              "text": "A taxpayer must use a portion of their home exclusively and regularly for business to qualify for a home office deduction.",
+              "citations": [
+                "26 U.S.C. \u00a7 280A(c)(1)"
+              ]
+            },
+            {
+              "part": 2,
+              "text": "The exclusive use requirement is an all-or-nothing standard, meaning that if the space is used for both business and personal purposes, it does not qualify for the deduction.",
+              "citations": [
+                "T.C. Memo. 2013-125, at *62-63"
+              ]
+            },
+            {
+              "part": 2,
+              "text": "If the spare bedroom is also used by children for homework, it does not meet the exclusive use requirement for the home office deduction.",
+              "citations": [
+                "T.C. Memo. 2024-82, at *10-11"
+              ]
+            }
+          ],
+          "not_answerable": [],
+          "conclusion": "No, the client cannot take a home office deduction because the space is not used exclusively for business."
+        },
+        "labels": [
+          "requirements for home office deduction exclusive use regular use principal place of business",
+          "home office deduction exclusive use children homework shared space"
+        ]
+      },
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source 1 states the space must be 'exclusively used on a regular basis' for business purposes."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Source 3 cites Hamacher v. Commissioner for the 'all-or-nothing standard' for exclusive use."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Source 2 discusses exclusive use requirement generally but contains no specific reference to children's homework use."
+        }
+      ],
+      "hidden": [
+        {
+          "part": 2,
+          "text": "If the spare bedroom is also used by children for homework, it does not meet the exclusive use requirement for the home office deduction.",
+          "citations": [
+            "T.C. Memo. 2024-82, at *10-11"
+          ],
+          "failed": true,
+          "why": "Source 2 discusses exclusive use requirement generally but contains no specific reference to children's homework use."
+        }
+      ],
+      "sufficiency": [],
+      "conclusion": {
+        "text": "No, the client cannot take a home office deduction because the space is not used exclusively for business.",
+        "shown": true,
+        "citations": [
+          "26 U.S.C. \u00a7 280A(c)(1)",
+          "T.C. Memo. 2013-125, at *62-63"
+        ],
+        "why": "The bedroom is used for both business and homework, failing the exclusive use requirement for home office deductions."
+      },
+      "seconds": 10.32
+    },
+    {
+      "text": "Short answer: No, the client cannot take a home office deduction because the space is not used exclusively for business [IRS Pub 587 (2025), p. 5], [T.C. Memo. 2024-82, at *10-11].\n\nPart 1: requirements for home office deduction exclusive use regular use principal place of business\nA taxpayer can deduct expenses for a portion of their home used exclusively and regularly for business if they meet certain tests [IRS Pub 587 (2025), p. 5]. The exclusive use requirement means that the space must be used only for business purposes and not for any personal use [T.C. Memo. 2024-82, at *10-11]. If the spare bedroom is also used by children for homework, it does not meet the exclusive use requirement for the home office deduction [T.C. Memo. 2024-82, at *10-11]. The home office must be used exclusively for business to qualify for the deduction under 26 U.S.C. \u00a7 280A(c)(1) [26 U.S.C. \u00a7 280A(c)(1)].",
+      "refused": false,
+      "citations": [
+        "IRS Pub 587 (2025), p. 5",
+        "T.C. Memo. 2024-82, at *10-11",
+        "26 U.S.C. \u00a7 280A(c)(1)"
+      ],
+      "unsupported_citations": [],
+      "contexts": [
+        {
+          "citation": "IRS Pub 587 (2025), p. 5",
+          "text": "business. Taylor meets all the qualifications, including principal place of business, so the expenses (subject to certain limitations, explained later) can be deducted for the business use of the home. More Than One Trade or Business for The same home office can be the principal place of business two or more separate business activities. Whether your home office is the principal place of business for more than one business activity must be determined separately for each of your trade or business activities. You must use the home office exclusively and regularly for one or more of the following purposes. \u2022 As the principal place of business for one or more of your trades or businesses. \u2022 As a place to meet or deal with patients, clients, or customers in the normal course of one or more of your trades or businesses. \u2022 If your home office is a separate structure, in connection with one or more of your trades or businesses. You can use your home office for more than one trade or business activity, but you cannot use it for any activities that are not related to a trade or business. Place To Meet Patients, Clients, or Customers If you meet or deal with patients, clients, or customers in your home in the normal course of your business, even though you also carry on business at another location, you"
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(c)(1)",
+          "text": "(c) Exceptions for certain business or rental use; limitation on deductions for such use. (1) Certain business use. Subsection (a) shall not apply to any item to the extent such item is allocable to a portion of the dwelling unit which is exclusively used on a regular basis\u2014 (A) as the principal place of business for any trade or business of the taxpayer,\n(B) as a place of business which is used by patients, clients, or customers in meeting or dealing with the taxpayer in the normal course of his trade or business, or\n(C) in the case of a separate structure which is not attached to the dwelling unit, in connection with the taxpayer\u2019s trade or business.\nIn the case of an employee, the preceding sentence shall apply only if the exclusive use referred to in the preceding sentence is for the convenience of his employer. For purposes of subparagraph (A), the term \u201cprincipal place of business\u201d includes a place of business which is used by the taxpayer for the administrative or management activities of any trade or business of the taxpayer if there is no other fixed location of such trade or business where the taxpayer conducts substantial administrative or management activities of such trade or business."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 162(l)(4)",
+          "text": "(4) Deduction not allowed for self-employment tax purposes. The deduction allowable by reason of this subsection shall not be taken into account in determining an individual\u2019s net earnings from self-employment (within the meaning of section 1402(a)) for purposes of chapter 2 for taxable years beginning before January 1, 2010, or after December 31, 2010."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(a)-(b)",
+          "text": "(a) General rule. Except as otherwise provided in this section, in the case of a taxpayer who is an individual or an S corporation, no deduction otherwise allowable under this chapter shall be allowed with respect to the use of a dwelling unit which is used by the taxpayer during the taxable year as a residence.\n(b) Exception for interest, taxes, casualty losses, etc. Subsection (a) shall not apply to any deduction allowable to the taxpayer without regard to its connection with his trade or business (or with his income-producing activity)."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(c)(5)",
+          "text": "(5) Limitation on deductions. In the case of a use described in paragraph (1), (2), or (4), and in the case of a use described in paragraph (3) where the dwelling unit is used by the taxpayer during the taxable year as a residence, the deductions allowed under this chapter for the taxable year by reason of being attributed to such use shall not exceed the excess of\u2014 (A) the gross income derived from such use for the taxable year, over\n(B) the sum of\u2014 (i) the deductions allocable to such use which are allowable under this chapter for the taxable year whether or not such unit (or portion thereof) was so used, and\n(ii) the deductions allocable to the trade or business (or rental activity) in which such use occurs (but which are not allocable to such use) for such taxable year.\nAny amount not allowable as a deduction under this chapter by reason of the preceding sentence shall be taken into account as a deduction (allocable to such use) under this chapter for the succeeding taxable year. Any amount taken into account for any taxable year under the preceding sentence shall be subject to the limitation of the 1st sentence of this paragraph whether or not the dwelling unit is used as a residence during such taxable year."
+        },
+        {
+          "citation": "T.C. Memo. 2024-82, at *10-11",
+          "text": "2. Home Office Deduction\nPetitioner deducted $18,393 and $3,000 for 2011 and 2012, respectively, for alleged business use of a home office. She testified that her 2011 costs were higher because \u201cshe had to configure her home office with all sorts of computer equipment and software to enable her to work from home.\u201d She neglected to include with either return a Form 8829, Expenses for Business Use of Your Home, which is used by taxpayers to calculate the allowable expense amount.\nThe Code generally prohibits deductions for expenses relating to a dwelling unit used by the taxpayer as a residence. See \u00a7 280A(a). Section 280A(c)(1)(A) provides an exception for \u201cany item to the extent such item is allocable to a portion of the dwelling unit which is exclusively used on a regular basis . . . as the principal place of business for any trade or business of the taxpayer.\u201d See Hamacher v. Commissioner, 94\nT.C. 348, 357 (1990) (stating that \u201cexclusive use\u201d is an \u201call-ornothing standard\u201d).\nA taxpayer may have only one principal place of business. See Curphey v. Commissioner, 73 T.C. 766, 776 (1980) (finding that a taxpayer has one principal place of business for each trade or business). To determine the principal place of business, the Court must ascertain the \u201cfocal point\u201d of a taxpayer\u2019s business activities. Jackson v. Commissioner, 76 T.C. 696, 700 (1981). If a taxpayer proves that her residence constituted her \u201cprincipal place of business,\u201d she must also prove what portion of the home was used \u201cexclusively\u201d for that purpose. Otherwise we cannot determine the deductible portion of the relevant expenses. See Sam Goldberger, Inc. v. Commissioner, 88 T.C. 1532, 1556\u201357 (1987)."
+        },
+        {
+          "citation": "T.C. Memo. 2023-128, at *15",
+          "text": "Petitioner deducted $12,840 in rent expenses for his southern California apartment as \u201coffice\u201d expenses under Schedule A miscellaneous itemized deductions for 2011 and 2012. At various points, petitioner has argued that the \u201coffice\u201d expense was a Schedule C expense incurred in connection with Ovium,8 and at other points he has argued that it was a Schedule A expense incurred in connection with his employment at SRA OSS.9 We may consider each of these activities, because expenses attributable to the use of a home office may be deductible in conducting two or more separate business activities. Hamacher v. Commissioner, 94 T.C. 348, 356 (1990). However, if any activity conducted in the home office fails to meet the requirements of section 280A(c)(1), none of the activities meets the exclusive use requirement for the home office. Hamacher, 94 T.C. at 356.\nWith respect to the Ovium activity, petitioner may deduct only an expense allocable to a portion of the apartment that is exclusively used on a regular basis as (1) the principal place of business for any trade or business of the taxpayer or (2) a place of business which is used by patients, clients, or customers in meeting or dealing with the taxpayer in the normal course of his or her trade or business. \u00a7 280A(c)(1)(A) and (B). We have held that the Ovium activity lacked a profit motive; it is therefore not a trade or business. See Commissioner v. Groetzinger, 480 U.S. at 35. As both factors under section 280A(c)(1) require the existence of a trade or business, we hold that petitioner\u2019s use of the home"
+        },
+        {
+          "citation": "T.C. Memo. 2013-125, at *62-63",
+          "text": "per donee for gifts to three individuals--her secretary Karen Barcellas and the two\nother clients that Lydia claimed attended the wine tasting event. Because of the\nfailure to adequately substantiate any of the amount claimed, we will not allow a\ndeduction greater than the Commissioner has.\nClaimed P claimed R allowed R allowed on return\nYear\nin NOD\nin brief\nin brief\nAlthough the Heinbockels didn't claim a home-office deduction on any of\nthe returns at issue, they now argue that they did incur home-office expenses in\nSection 280A(a) states: \"Except as otherwise provided in this section, in the\ncase of a taxpayer who is an individual * * *, no deduction otherwise allowable\nunder this chapter shall be allowed with respect to the use of a dwelling unit which\nis used by the taxpayer during the taxable year as a residence.\" The Code then\nprovides an exception to this general rule to permit a deduction for home-office\nexpenses \"allocable to a portion of the dwelling unit which is exclusively\nused on a regular basis * * * as the principal place of business for any trade or\nhome-office expenses if she shows her home office is:\n(cid:16)042used for a trade or business;\n(cid:16)042used exclusively for that purpose; and\n(cid:16)042her principal place of business.\nyears in question, the spreadsheets detailing the home-office deductions indicate\nthe Heinbockels lived in three different residences. They started 2005 in a 2,200-\nsquare-foot house (204 square feet allocated to the home office), then later that\nyear downsized to an 1,850-square-foot apartment (150-square-foot allocation).\n. Then, sometime in 2006, they moved to a 4,100-square-foot home (255-square-foot\nallocation). Although she didn't describe those locations separately, Lydia testified\nthat in each of those locations \"there was always one room pretty much dedicated"
+        }
+      ],
+      "cost_usd": 0.0044399,
+      "model": "gpt-4o-mini",
+      "plan_set": 1,
+      "dropped_sentences": 0,
+      "structured": {
+        "data": {
+          "tax_year": null,
+          "sentences": [
+            {
+              "part": 1,
+              "text": "A taxpayer can deduct expenses for a portion of their home used exclusively and regularly for business if they meet certain tests.",
+              "citations": [
+                "IRS Pub 587 (2025), p. 5"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The exclusive use requirement means that the space must be used only for business purposes and not for any personal use.",
+              "citations": [
+                "T.C. Memo. 2024-82, at *10-11"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "If the spare bedroom is also used by children for homework, it does not meet the exclusive use requirement for the home office deduction.",
+              "citations": [
+                "T.C. Memo. 2024-82, at *10-11"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The home office must be used exclusively for business to qualify for the deduction under 26 U.S.C. \u00a7 280A(c)(1).",
+              "citations": [
+                "26 U.S.C. \u00a7 280A(c)(1)"
+              ]
+            }
+          ],
+          "not_answerable": [],
+          "conclusion": "No, the client cannot take a home office deduction because the space is not used exclusively for business."
+        },
+        "labels": [
+          "requirements for home office deduction exclusive use regular use principal place of business",
+          "home office deduction exclusive use test mixed use space children homework"
+        ]
+      },
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source 1 explicitly states taxpayers must use home office exclusively and regularly for business purposes."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Source 3 cites Hamacher case establishing exclusive use as all-or-nothing standard requiring only business use."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Source 3's all-or-nothing exclusive use standard means personal use by children precludes the deduction."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Source 2 \u00a7 280A(c)(1) explicitly requires exclusive and regular use for home office deduction."
+        }
+      ],
+      "hidden": [],
+      "sufficiency": [],
+      "conclusion": {
+        "text": "No, the client cannot take a home office deduction because the space is not used exclusively for business.",
+        "shown": true,
+        "citations": [
+          "IRS Pub 587 (2025), p. 5",
+          "T.C. Memo. 2024-82, at *10-11"
+        ],
+        "why": "Spare bedroom used by children for homework fails exclusive use requirement for home office deduction."
+      },
+      "seconds": 6.39
+    },
+    {
+      "text": "Short answer: No, the client cannot take a home office deduction because the space is not used exclusively for business [T.C. Memo. 2013-125, at *62-63], [T.C. Memo. 2023-128, at *15].\n\nPart 1: requirements for home office deduction exclusive use regular use for business\nA taxpayer can deduct expenses for a portion of their home used exclusively and regularly for business if they meet certain requirements [26 U.S.C. \u00a7 280A(c)(1)]. The exclusive use requirement means that the space must be used only for business purposes and not for any other activities [T.C. Memo. 2013-125, at *62-63]. The home office must be used exclusively for business to qualify for the deduction, and shared use with non-business activities disqualifies it [T.C. Memo. 2023-128, at *15].",
+      "refused": false,
+      "citations": [
+        "T.C. Memo. 2013-125, at *62-63",
+        "T.C. Memo. 2023-128, at *15",
+        "26 U.S.C. \u00a7 280A(c)(1)"
+      ],
+      "unsupported_citations": [],
+      "contexts": [
+        {
+          "citation": "IRS Pub 587 (2025), p. 5",
+          "text": "business. Taylor meets all the qualifications, including principal place of business, so the expenses (subject to certain limitations, explained later) can be deducted for the business use of the home. More Than One Trade or Business for The same home office can be the principal place of business two or more separate business activities. Whether your home office is the principal place of business for more than one business activity must be determined separately for each of your trade or business activities. You must use the home office exclusively and regularly for one or more of the following purposes. \u2022 As the principal place of business for one or more of your trades or businesses. \u2022 As a place to meet or deal with patients, clients, or customers in the normal course of one or more of your trades or businesses. \u2022 If your home office is a separate structure, in connection with one or more of your trades or businesses. You can use your home office for more than one trade or business activity, but you cannot use it for any activities that are not related to a trade or business. Place To Meet Patients, Clients, or Customers If you meet or deal with patients, clients, or customers in your home in the normal course of your business, even though you also carry on business at another location, you"
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(c)(1)",
+          "text": "(c) Exceptions for certain business or rental use; limitation on deductions for such use. (1) Certain business use. Subsection (a) shall not apply to any item to the extent such item is allocable to a portion of the dwelling unit which is exclusively used on a regular basis\u2014 (A) as the principal place of business for any trade or business of the taxpayer,\n(B) as a place of business which is used by patients, clients, or customers in meeting or dealing with the taxpayer in the normal course of his trade or business, or\n(C) in the case of a separate structure which is not attached to the dwelling unit, in connection with the taxpayer\u2019s trade or business.\nIn the case of an employee, the preceding sentence shall apply only if the exclusive use referred to in the preceding sentence is for the convenience of his employer. For purposes of subparagraph (A), the term \u201cprincipal place of business\u201d includes a place of business which is used by the taxpayer for the administrative or management activities of any trade or business of the taxpayer if there is no other fixed location of such trade or business where the taxpayer conducts substantial administrative or management activities of such trade or business."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 162(l)(4)",
+          "text": "(4) Deduction not allowed for self-employment tax purposes. The deduction allowable by reason of this subsection shall not be taken into account in determining an individual\u2019s net earnings from self-employment (within the meaning of section 1402(a)) for purposes of chapter 2 for taxable years beginning before January 1, 2010, or after December 31, 2010."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(a)-(b)",
+          "text": "(a) General rule. Except as otherwise provided in this section, in the case of a taxpayer who is an individual or an S corporation, no deduction otherwise allowable under this chapter shall be allowed with respect to the use of a dwelling unit which is used by the taxpayer during the taxable year as a residence.\n(b) Exception for interest, taxes, casualty losses, etc. Subsection (a) shall not apply to any deduction allowable to the taxpayer without regard to its connection with his trade or business (or with his income-producing activity)."
+        },
+        {
+          "citation": "26 U.S.C. \u00a7 280A(c)(5)",
+          "text": "(5) Limitation on deductions. In the case of a use described in paragraph (1), (2), or (4), and in the case of a use described in paragraph (3) where the dwelling unit is used by the taxpayer during the taxable year as a residence, the deductions allowed under this chapter for the taxable year by reason of being attributed to such use shall not exceed the excess of\u2014 (A) the gross income derived from such use for the taxable year, over\n(B) the sum of\u2014 (i) the deductions allocable to such use which are allowable under this chapter for the taxable year whether or not such unit (or portion thereof) was so used, and\n(ii) the deductions allocable to the trade or business (or rental activity) in which such use occurs (but which are not allocable to such use) for such taxable year.\nAny amount not allowable as a deduction under this chapter by reason of the preceding sentence shall be taken into account as a deduction (allocable to such use) under this chapter for the succeeding taxable year. Any amount taken into account for any taxable year under the preceding sentence shall be subject to the limitation of the 1st sentence of this paragraph whether or not the dwelling unit is used as a residence during such taxable year."
+        },
+        {
+          "citation": "T.C. Memo. 2024-82, at *10-11",
+          "text": "2. Home Office Deduction\nPetitioner deducted $18,393 and $3,000 for 2011 and 2012, respectively, for alleged business use of a home office. She testified that her 2011 costs were higher because \u201cshe had to configure her home office with all sorts of computer equipment and software to enable her to work from home.\u201d She neglected to include with either return a Form 8829, Expenses for Business Use of Your Home, which is used by taxpayers to calculate the allowable expense amount.\nThe Code generally prohibits deductions for expenses relating to a dwelling unit used by the taxpayer as a residence. See \u00a7 280A(a). Section 280A(c)(1)(A) provides an exception for \u201cany item to the extent such item is allocable to a portion of the dwelling unit which is exclusively used on a regular basis . . . as the principal place of business for any trade or business of the taxpayer.\u201d See Hamacher v. Commissioner, 94\nT.C. 348, 357 (1990) (stating that \u201cexclusive use\u201d is an \u201call-ornothing standard\u201d).\nA taxpayer may have only one principal place of business. See Curphey v. Commissioner, 73 T.C. 766, 776 (1980) (finding that a taxpayer has one principal place of business for each trade or business). To determine the principal place of business, the Court must ascertain the \u201cfocal point\u201d of a taxpayer\u2019s business activities. Jackson v. Commissioner, 76 T.C. 696, 700 (1981). If a taxpayer proves that her residence constituted her \u201cprincipal place of business,\u201d she must also prove what portion of the home was used \u201cexclusively\u201d for that purpose. Otherwise we cannot determine the deductible portion of the relevant expenses. See Sam Goldberger, Inc. v. Commissioner, 88 T.C. 1532, 1556\u201357 (1987)."
+        },
+        {
+          "citation": "T.C. Memo. 2023-128, at *15",
+          "text": "Petitioner deducted $12,840 in rent expenses for his southern California apartment as \u201coffice\u201d expenses under Schedule A miscellaneous itemized deductions for 2011 and 2012. At various points, petitioner has argued that the \u201coffice\u201d expense was a Schedule C expense incurred in connection with Ovium,8 and at other points he has argued that it was a Schedule A expense incurred in connection with his employment at SRA OSS.9 We may consider each of these activities, because expenses attributable to the use of a home office may be deductible in conducting two or more separate business activities. Hamacher v. Commissioner, 94 T.C. 348, 356 (1990). However, if any activity conducted in the home office fails to meet the requirements of section 280A(c)(1), none of the activities meets the exclusive use requirement for the home office. Hamacher, 94 T.C. at 356.\nWith respect to the Ovium activity, petitioner may deduct only an expense allocable to a portion of the apartment that is exclusively used on a regular basis as (1) the principal place of business for any trade or business of the taxpayer or (2) a place of business which is used by patients, clients, or customers in meeting or dealing with the taxpayer in the normal course of his or her trade or business. \u00a7 280A(c)(1)(A) and (B). We have held that the Ovium activity lacked a profit motive; it is therefore not a trade or business. See Commissioner v. Groetzinger, 480 U.S. at 35. As both factors under section 280A(c)(1) require the existence of a trade or business, we hold that petitioner\u2019s use of the home"
+        },
+        {
+          "citation": "T.C. Memo. 2013-125, at *62-63",
+          "text": "per donee for gifts to three individuals--her secretary Karen Barcellas and the two\nother clients that Lydia claimed attended the wine tasting event. Because of the\nfailure to adequately substantiate any of the amount claimed, we will not allow a\ndeduction greater than the Commissioner has.\nClaimed P claimed R allowed R allowed on return\nYear\nin NOD\nin brief\nin brief\nAlthough the Heinbockels didn't claim a home-office deduction on any of\nthe returns at issue, they now argue that they did incur home-office expenses in\nSection 280A(a) states: \"Except as otherwise provided in this section, in the\ncase of a taxpayer who is an individual * * *, no deduction otherwise allowable\nunder this chapter shall be allowed with respect to the use of a dwelling unit which\nis used by the taxpayer during the taxable year as a residence.\" The Code then\nprovides an exception to this general rule to permit a deduction for home-office\nexpenses \"allocable to a portion of the dwelling unit which is exclusively\nused on a regular basis * * * as the principal place of business for any trade or\nhome-office expenses if she shows her home office is:\n(cid:16)042used for a trade or business;\n(cid:16)042used exclusively for that purpose; and\n(cid:16)042her principal place of business.\nyears in question, the spreadsheets detailing the home-office deductions indicate\nthe Heinbockels lived in three different residences. They started 2005 in a 2,200-\nsquare-foot house (204 square feet allocated to the home office), then later that\nyear downsized to an 1,850-square-foot apartment (150-square-foot allocation).\n. Then, sometime in 2006, they moved to a 4,100-square-foot home (255-square-foot\nallocation). Although she didn't describe those locations separately, Lydia testified\nthat in each of those locations \"there was always one room pretty much dedicated"
+        }
+      ],
+      "cost_usd": 0.0083603,
+      "model": "gpt-4o-mini",
+      "plan_set": 2,
+      "dropped_sentences": 0,
+      "structured": {
+        "data": {
+          "tax_year": null,
+          "sentences": [
+            {
+              "part": 1,
+              "text": "A taxpayer can deduct expenses for a portion of their home used exclusively and regularly for business if they meet certain requirements.",
+              "citations": [
+                "26 U.S.C. \u00a7 280A(c)(1)"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The exclusive use requirement means that the space must be used only for business purposes and not for any other activities.",
+              "citations": [
+                "T.C. Memo. 2013-125, at *62-63"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "If the spare bedroom is also used by children for homework, it does not meet the exclusive use requirement for the home office deduction.",
+              "citations": [
+                "T.C. Memo. 2024-82, at *10-11"
+              ]
+            },
+            {
+              "part": 1,
+              "text": "The home office must be used exclusively for business to qualify for the deduction, and shared use with non-business activities disqualifies it.",
+              "citations": [
+                "T.C. Memo. 2023-128, at *15"
+              ]
+            }
+          ],
+          "not_answerable": [],
+          "conclusion": "No, the client cannot take a home office deduction because the space is not used exclusively for business."
+        },
+        "labels": [
+          "requirements for home office deduction exclusive use regular use for business",
+          "home office deduction exclusive use shared space children homework"
+        ]
+      },
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source 1 directly states the exclusive use and regular basis requirements for home office deductions."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Source 4 states space must be used 'exclusively used on a regular basis' for business purposes only."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Source 2 discusses exclusive use requirement generally but contains no specific discussion of children's homework use."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Source 3 states if any activity fails exclusive use requirement, none of the activities meets it, supporting shared use disqualification."
+        }
+      ],
+      "hidden": [
+        {
+          "part": 1,
+          "text": "If the spare bedroom is also used by children for homework, it does not meet the exclusive use requirement for the home office deduction.",
+          "citations": [
+            "T.C. Memo. 2024-82, at *10-11"
+          ],
+          "failed": true,
+          "why": "Source 2 discusses exclusive use requirement generally but contains no specific discussion of children's homework use."
+        }
+      ],
+      "sufficiency": [],
+      "conclusion": {
+        "text": "No, the client cannot take a home office deduction because the space is not used exclusively for business.",
+        "shown": true,
+        "citations": [
+          "T.C. Memo. 2013-125, at *62-63",
+          "T.C. Memo. 2023-128, at *15"
+        ],
+        "why": "The bedroom is used by children for homework, violating the exclusive business use requirement stated in statements 1 and 2."
+      },
+      "seconds": 7.79
+    }
+  ]
+}
