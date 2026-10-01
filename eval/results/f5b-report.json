@@ -1,0 +1,76 @@
+{
+  "completeness, before hiding": {
+    "cited": 1160,
+    "material": 1165,
+    "share": 0.9957081545064378
+  },
+  "completeness, as shown": {
+    "cited": 1181,
+    "material": 1188,
+    "share": 0.9941077441077442
+  },
+  "verifier": {
+    "sentences": 1160,
+    "hidden": 210,
+    "answers_emptied": 13,
+    "answers_refused": 13,
+    "answers": 291
+  },
+  "abstention": {
+    "G-I01": {
+      "flagged": 3
+    },
+    "G-I02": {
+      "flagged": 3
+    },
+    "G-I03": {
+      "answered": 2,
+      "refused": 1
+    },
+    "G-I04": {
+      "refused": 2,
+      "flagged": 1
+    },
+    "G-I05": {
+      "refused": 3
+    },
+    "G-I06": {
+      "answered": 3
+    },
+    "G-I07": {
+      "flagged": 3
+    },
+    "G-I08": {
+      "flagged": 2,
+      "answered": 1
+    },
+    "G-I09": {
+      "answered": 3
+    },
+    "G-I10": {
+      "flagged": 3
+    },
+    "G-I11": {
+      "handled": 3
+    }
+  },
+  "conclusion": {
+    "answered": 278,
+    "written": 272,
+    "shown": 231
+  },
+  "recited_sentences": 34,
+  "latency_seconds": {
+    "answered": {
+      "n": 304,
+      "p50": 8.285,
+      "p95": 11.81
+    },
+    "refused": {
+      "n": 19,
+      "p50": 6.94,
+      "p95": 10.03
+    }
+  },
+  "cost_usd_per_answer": 0.007336355709876543
+}

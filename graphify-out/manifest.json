@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/retrieval-gate.yml": {
-    "mtime": 1790639572.237777,
-    "seen": 1790639691.7011468,
-    "ast_hash": "34d8f535a9dc75ce41b17951b5713883",
+    "mtime": 1790882556.9583035,
+    "seen": 1790882557.7003572,
+    "ast_hash": "712cfee9150e0e2905a7fe784348f916",
     "semantic_hash": ""
   },
   ".github/workflows/test.yml": {
@@ -1593,6 +1593,24 @@
     "mtime": 1790869307.1636298,
     "seen": 1790882478.545728,
     "ast_hash": "10e52c11c1401d5e99d1194e8a26eff1",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-dev-2026-10-01-k10-f5b-gate.json": {
+    "mtime": 1790882544.6023586,
+    "seen": 1790882557.7003021,
+    "ast_hash": "ed72c82b999d80dd85bd49727a00ceed",
+    "semantic_hash": ""
+  },
+  "eval/results/temporal-answers-f5b.json": {
+    "mtime": 1790882555.312366,
+    "seen": 1790882557.700324,
+    "ast_hash": "5ac90d6f1a6aef71fb00be793cac9a02",
+    "semantic_hash": ""
+  },
+  "eval/results/temporal-golden-f5b.progress.json": {
+    "mtime": 1790882547.5171206,
+    "seen": 1790882557.7003388,
+    "ast_hash": "78e593b89a5672b1e8dea6eac9619e22",
     "semantic_hash": ""
   }
 }
