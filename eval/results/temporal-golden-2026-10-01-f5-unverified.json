@@ -1,0 +1,7353 @@
+{
+  "questions": "eval/golden.jsonl",
+  "judge": "claude-haiku-4-5",
+  "repeats": 1,
+  "k": 8,
+  "rows_kind": "every",
+  "samples": 3,
+  "by_sample": {
+    "correct": [
+      0.269,
+      0.306,
+      0.343
+    ],
+    "incorrect": [
+      0.287,
+      0.259,
+      0.241
+    ],
+    "grounded": [
+      0.796,
+      0.787,
+      0.796
+    ],
+    "refused": [
+      0.222,
+      0.194,
+      0.204
+    ],
+    "conflict: authority_misweighted": [
+      3,
+      1,
+      2
+    ],
+    "conflict: correct": [
+      0.167,
+      0.25,
+      0.208
+    ],
+    "guards: correct": [
+      0.375,
+      0.25,
+      0.625
+    ]
+  },
+  "accuracy_per_repeat": [
+    0.3055555555555556
+  ],
+  "grounded_accuracy_per_repeat": [
+    0.25308641975308643
+  ],
+  "as_of_accuracy": 0.0,
+  "kappa": 0.7999558985667033,
+  "judge_cost_usd": 1.8418100000000028,
+  "stopped": null,
+  "rows": [
+    {
+      "id": "G-S01",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S01",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years."
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S01",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client's horse breeding and showing operation has made a profit in 2 of the last 7 years"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S02",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S02",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S02",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S03",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A home office deduction can create a loss if the business earns very little income, provided the taxpayer meets the requirements for deducting those expenses"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S03",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Home office expenses that exceed income from the business can create a loss if the business is conducted with a profit motive"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S03",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Home office expenses that exceed income from the business can create a loss if the business is conducted with a profit motive"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S04",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For car expenses related to listed property, the taxpayer must maintain adequate records or sufficient evidence corroborating the business relationship of the taxpayer to any others benefited by the expense"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S04",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A taxpayer must maintain adequate records or sufficient evidence corroborating the business relationship of the taxpayer to any others benefited by a car expense for listed property"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S04",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S05",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S05",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S05",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The deduction for food or beverage expenses is limited to 50 percent unless exceptions in section 274(n)(2) apply"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S06",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S06",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S06",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S07",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Travel expenses for an 18-month engagement may be subject to limitations under section 274 if the travel involved substantial nonbusiness activity"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S07",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "An 18-month engagement may subject travel expenses to limitations under section 274 if the travel involved substantial personal activity"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S07",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S08",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S08",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S08",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S09",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S09",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S09",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S10",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S10",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S10",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S11",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S11",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The passive activity loss deduction exception for rental real estate is fully phased out when adjusted gross income equals or exceeds $150,000"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S11",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S12",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S12",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S12",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S13",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S13",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S13",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S14",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S14",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S14",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S15",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S15",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S15",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S16",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S16",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S16",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S17",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S17",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S17",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S18",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S18",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S18",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S19",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S19",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S19",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S20",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S20",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S20",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S21",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S21",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S21",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S22",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S22",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S22",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S23",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S23",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S23",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S24",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S24",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2024, taxpayers cannot claim unreimbursed employee expenses"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S24",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax years beginning after 2017, miscellaneous itemized deductions, including unreimbursed employee expenses, are suspended and cannot be claimed",
+        "Armed Forces reservists may still claim unreimbursed employee expenses",
+        "Qualified performing artists may still claim unreimbursed employee expenses"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S25",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S25",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S25",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S26",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "You have constructive receipt of income when an amount is credited to your account or made available to you without restriction",
+        "You must report income in the year the property is received or made available to you without restriction",
+        "If a cash-method taxpayer received a payment in December and it was made available to them without restriction, they must include that payment in their income for that year"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S26",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "You have constructive receipt of income when an amount is credited to your account or made available to you without restriction",
+        "You must report the income in the year the property is received or made available to you without restriction",
+        "If the payment was made available to the client in December, it must be included in income for that year"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S26",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "You have constructive receipt of income when an amount is credited to your account or made available to you without restriction",
+        "You must report income in the year the property is received or made available to you without restriction",
+        "If payment was made available in December, it must be included in income for that year"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S27",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-S27",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The failure-to-file penalty is usually 5% for each month or part of a month that a return is late",
+        "The failure-to-file penalty is not more than 25%",
+        "You won't have to pay the failure-to-file penalty if you show that you failed to file on time because of reasonable cause and not because of willful neglect"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S27",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The failure-to-file penalty is usually 5% for each month or part of a month that a return is late",
+        "The failure-to-file penalty is not more than 25%",
+        "You won't have to pay the failure-to-file penalty if you show that you failed to file on time because of reasonable cause and not because of willful neglect"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C01",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C01",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C01",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C02",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C02",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C02",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C03",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C03",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C03",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C04",
+      "sample": 0,
+      "kind": "reported_over_memo",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Timely filing of information returns is a requirement for eligibility under section 530 relief"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C04",
+      "sample": 1,
+      "kind": "reported_over_memo",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C04",
+      "sample": 2,
+      "kind": "reported_over_memo",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The timely filing of information returns is a requirement for eligibility under section 530 relief"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C05",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The Tax Court has jurisdiction under section 7436 to determine worker classification issues",
+        "The Tax Court has jurisdiction to determine additions to tax penalties related to worker classification",
+        "A motion for redetermination of interest can be filed within one year of a Tax Court decision under section 7436"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C05",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The Tax Court has jurisdiction under section 7436 to determine worker classification issues",
+        "The Tax Court has jurisdiction under section 7436 to determine additions to tax penalties related to worker classifications"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C05",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The Tax Court has jurisdiction under section 7436 to determine worker classification issues and any additions to tax penalties related to those classifications"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C06",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C06",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C06",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C07",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C07",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C07",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C08",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C08",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C08",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C09",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C09",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C09",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C10",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If a taxpayer meets the real estate professional criteria, rental income from property leased to a business the taxpayer is involved in may not be considered passive income"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C10",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C10",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C11",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C11",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C11",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C12",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C12",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C12",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C13",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C13",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C13",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C14",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If a taxpayer has kept records but fails to produce proof of payment, the Tax Court may still estimate the expenses but the lack of substantiation bears heavily against the taxpayer"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C14",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "When a taxpayer has kept records but did not produce proof of payment, the Court may still estimate the expenses"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_rule_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C14",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If a taxpayer has kept records but fails to produce proof of payment, the Court may still estimate the expenses"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C15",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C15",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C15",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C16",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C16",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C16",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C17",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C17",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C17",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C18",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C18",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C18",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C19",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C19",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The policy to exclude expenses that are disallowed by section 280E when computing reasonable collection potential is consistent with the congressional intent underlying section 280E"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C19",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C20",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C20",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The written supervisory approval requirement for penalties against partnerships mandates that the approval must be for the penalty assessed against the partnership itself, not just individual partners",
+        "A penalty approval form that only refers to the individual partners does not satisfy the written supervisory approval requirement for penalties against the partnership"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C20",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C21",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C21",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C21",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C22",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C22",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C22",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C23",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C23",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C23",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C24",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "No deduction is allowed for an activity that is not engaged in for profit under section 183"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C24",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "No deduction is allowed for an activity that is not engaged in for profit under section 183"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C24",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If an activity is not engaged in for profit, no deductions attributable to such activity shall be allowed under the tax code",
+        "Deductions for home office expenses are allowable only if the activity is engaged in for profit under section 162 or section 212",
+        "A taxpayer cannot deduct a home office for an activity that the court has found is not engaged in for profit"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C25",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C25",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The court noted that service providers had a landlord/tenant relationship with the spa, which supported their classification as independent contractors"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C25",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C26",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C26",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C26",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X01",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If the client's activity of restoring and selling vintage bikes is unprofitable, the client cannot deduct the expenses against the income earned from this activity"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X01",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client cannot deduct the expenses against the income earned from the vintage bikes activity"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X01",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client cannot deduct the expenses against the income earned from the vintage bikes activity"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X02",
+      "sample": 0,
+      "kind": "reviewing_court",
+      "as_of_gold": "2006",
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If a taxpayer does not materially participate in farming activities, CRP payments received are not included in determining net earnings from self-employment"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X02",
+      "sample": 1,
+      "kind": "reviewing_court",
+      "as_of_gold": "2006",
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X02",
+      "sample": 2,
+      "kind": "reviewing_court",
+      "as_of_gold": "2006",
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X03",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A real estate professional's rental activities are not considered passive activities under section 469(c)(7)"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X03",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A taxpayer qualifies as a real estate professional if more than one-half of their personal services are performed in real property trades or businesses in which they materially participate",
+        "A taxpayer qualifies as a real estate professional if they perform more than 750 hours of services in real property trades or businesses during the taxable year"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X03",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X04",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X04",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X04",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X05",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A presumption that an activity is engaged in for profit arises if gross income from the activity exceeds deductions for any 2 of 5 consecutive taxable years"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X05",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X05",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X06",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X06",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X06",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X07",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X07",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X07",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X08",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X08",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X08",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X09",
+      "sample": 0,
+      "kind": "reviewing_court",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X09",
+      "sample": 1,
+      "kind": "reviewing_court",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X09",
+      "sample": 2,
+      "kind": "reviewing_court",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X10",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X10",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X10",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X11",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X11",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X11",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "If a captive insurance company does not meet the requirements to be considered an insurance company under section 831(b), the premiums may not be deductible"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X12",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X12",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X12",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X13",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X13",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X13",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X14",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X14",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X14",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X15",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "In a Tax Court case, the taxpayer bears the burden of proof to establish the facts necessary to exclude canceled debt from income, including proving insolvency"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X15",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X15",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The taxpayer must prove that they were insolvent at the time of the debt cancellation to exclude the canceled debt from income",
+        "The IRS has the burden of proof to show that the taxpayer was not insolvent if the IRS challenges the taxpayer's claim of insolvency"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X16",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X16",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X16",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X17",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X17",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X17",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X18",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client realized $60,000 of income as commission income"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X18",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client earned a $60,000 sales commission",
+        "A $40,000 offset for rent owed does not reduce the gross income recognized from the sales commission",
+        "The client has $60,000 of income from the sales commission"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X18",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client realized $60,000 of income as commission income in 1996"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X19",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X19",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "In this case, the supervisor's approval was obtained after the penalties were communicated to the client but before the assessment"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X19",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "In the case discussed, the supervisor's approval was obtained after the penalties were communicated to the client but before the assessment"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X20",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X20",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X20",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X21",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X21",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X21",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X22",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X22",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X22",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Failure to cooperate with reasonable requests by the IRS counts heavily against a taxpayer's attempt to shift the burden of proof"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "authority_misweighted"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X23",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X23",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X23",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X24",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X24",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X24",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X25",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X25",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X25",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The IRS classifies payments made to an individual for services rendered as wages rather than royalties if the individual is treated as an employee for employment tax purposes"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X26",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X26",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X26",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X27",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X27",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X27",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X28",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X28",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "authority_misweighted",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X28",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X29",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X29",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X29",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X30",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X30",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X30",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T01",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2016 and 2026",
+      "as_of_plan": "2016 and 2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For taxable year 2016, employees could deduct unreimbursed job expenses as miscellaneous itemized deductions subject to the 2% floor under section 67"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T01",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2016 and 2026",
+      "as_of_plan": "2016 and 2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2016, employees could deduct unreimbursed job expenses as miscellaneous itemized deductions subject to the 2% floor under section 67"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T01",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2016 and 2026",
+      "as_of_plan": "2016 and 2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For taxable year 2016, employees could deduct unreimbursed job expenses as miscellaneous itemized deductions subject to the 2% floor under section 67",
+        "The deduction for unreimbursed employee expenses was limited and not available for employees who did not meet certain criteria under section 62(a)(2)"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T02",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T02",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T02",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T03",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A medical marijuana dispensary cannot deduct its ordinary business expenses for the 2026 tax year due to Section 280E"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T03",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T03",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T04",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T04",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T04",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T05",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2022",
+      "as_of_plan": "2022",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The client's 2022 return is considered filed on April 15, 2024 for purposes of claiming a refund under 26 U.S.C. \u00a7 6513(c)"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T05",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2022",
+      "as_of_plan": "2022",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For purposes of claiming a refund, the return is considered filed on April 15, 2024",
+        "The client can claim a refund for the missed deduction if she files the claim before April 15, 2027"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T05",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2022",
+      "as_of_plan": "2022",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For purposes of claiming a refund, the return is considered filed on April 15, 2024",
+        "The three-year refund period for the client's return expires on April 15, 2027",
+        "May 2026 is within the three-year refund period",
+        "The client can claim a refund for the missed deduction"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T06",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T06",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T06",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T07",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T07",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T07",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T08",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T08",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T08",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T09",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T09",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T09",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_conclusion",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T10",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The deduction for qualified tips under Internal Revenue Code section 162(a) is not applicable for the tax year 2024",
+        "The current text of the relevant sections for qualified tips was enacted in 2025",
+        "The deduction for qualified tips is applicable to taxable years beginning after December 31, 2024",
+        "A waiter cannot deduct tips on a 2024 return under the new deduction for qualified tips"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T10",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The deduction for qualified tips under Internal Revenue Code section 162(a) is not applicable for tax year 2024",
+        "The current text of the statute regarding qualified tips is effective for taxable years beginning after December 31, 2024",
+        "The deduction for qualified tips is not available until 2025"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T10",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The deduction for qualified tips under Internal Revenue Code section 162(a) is not applicable for the tax year 2024",
+        "The current text of the statute regarding qualified tips is effective for taxable years beginning after December 31, 2024",
+        "The deduction for qualified tips is not available until 2025"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-T11",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Property acquired on January 10, 2025, and placed in service in March 2025 qualifies for the 100% bonus depreciation allowance"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T11",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Property acquired on January 10, 2025, and placed in service in March 2025 qualifies for the 100% bonus depreciation allowance"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-T11",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Property acquired on January 10, 2025, and placed in service in March 2025 qualifies for 100% bonus depreciation"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-I01",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I01",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I01",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I02",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I02",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I02",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I03",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I03",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I03",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I04",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I04",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I04",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I05",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I05",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I05",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I06",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-I06",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-I06",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-I07",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I07",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I07",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I08",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I08",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I08",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I09",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I09",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I09",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I10",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I10",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I10",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2027",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-I11",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-I11",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-I11",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": true,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-X31",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X31",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-X31",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S28",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S28",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-S28",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "G-C27",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Working in the business of the LLC indicates material participation"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C27",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Working in the business of an LLC indicates material participation"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "G-C27",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Working in the business of an LLC indicates material participation"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    }
+  ]
+}

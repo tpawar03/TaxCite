@@ -33,6 +33,7 @@ PRICES = {
     "gpt-4o-mini": (0.15, 0.60),
     "claude-haiku-4-5": (1.00, 5.00),
     "claude-sonnet-5": (2.00, 10.00),
+    "claude-sonnet-5-5": (2.00, 10.00),  # F5's reference judge; confirmed 2026-09-30
     "claude-opus-5": (5.00, 25.00),
 }
 
@@ -351,7 +352,7 @@ def _require_credentials(model: str) -> None:
 
 def call_model(system: str, prompt: str, model: str, temperature: float | None = None,
                json_output: bool = False, seed: int | None = None,
-               json_schema: dict | None = None) -> tuple[str, int, int]:
+               json_schema: dict | None = None, effort: str | None = None) -> tuple[str, int, int]:
     """One completion. Returns (text, input_tokens, output_tokens).
 
     The two providers expose different controls, and this function does not pretend
@@ -379,6 +380,8 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
         kwargs = {}
         if json_schema is not None:
             kwargs["output_config"] = {"format": {"type": "json_schema", "schema": json_schema}}
+        if effort:  # F5: Sonnet 5.5 thinks by default; a judge needs little of it, and output is billed at 5x input
+            kwargs.setdefault("output_config", {})["effort"] = effort
         response = client.messages.create(
             model=model,
             max_tokens=MAX_TOKENS,

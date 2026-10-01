@@ -2545,9 +2545,67 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 - [x] Log entry #84 (local)
 - [x] `src/taxcite/verify.py`, `tests/test_verify.py`, `eval/f4_hide.py` created by you; `eval/f0_verify.py` imports the product's prompt (checked identical to F0's); committed `8193fb8`
 
-## F5: Phase F eval and ladder rung (outline)
+## F5: Phase F scored on golden
 
-Golden, scored once: entailment F1 (not-supported class) + false-accept rate on the frozen pairs; completeness; abstention P/R; suppression rate; faithfulness gate and refusal bound on the new pipeline. "+claim verification" added to the ladder. Correctness grading begins on §9.2's 40-question subset: two judges, κ reported, tracked not gated.
+**Goal:** score the finished Phase F pipeline on golden, once, against §9.3's gates as revised: structured synthesis (F3), the verifier hiding failed sentences (F4), no sufficiency gate (F2). Nothing is tuned on golden; every number below is reported as it comes out.
+
+**The gates (§9.3, revised at Checkpoint 1):**
+
+| Gate | Threshold | Scored as |
+|---|---|---|
+| Citation entailment F1 | ≥ 0.90 | the runtime verifier (Haiku) against an **independent reference** on golden's sentences, "not supported" class, false-accept rate beside it |
+| Citation completeness | ≥ 0.85 | material sentences cited ÷ material sentences (`completeness_material`), before hiding and as shown |
+| Substantive correctness | tracked, not gated (N < 100) | §9.2's judge on the 40-question subset, two judges, κ reported (≥ 0.7 to be trusted) |
+
+**The independent reference (Checkpoint 1: the verifier can't grade itself):** a different, stronger model judging the same pairs with the same prompt, its price confirmed before the run. Candidate: the current Sonnet. That reference is itself checked on ~40 stratified pairs read by hand (as F0 and F4 did), and F1 is reported against both the reference and the hand-read pairs.
+
+**One golden run, reused for everything (the lean rule):** golden's 104 non-adversarial rows (93 answerable + 11 insufficiency) × 3 plan sets, shipped pipeline, through `temporal.py --rows every`, storing structured items, verdicts and per-answer latency. From that single run:
+1. **Entailment:** the verifier's verdicts are already in the cache; only the reference judge runs over the same pairs (and the hand-read sample).
+2. **Completeness:** computed from the cached items, no calls.
+3. **Correctness:** `temporal.py`'s grades from the same run; the 40-question subset and κ read from them.
+4. **The ladder's last rung, "+claim verification":** `f4_hide.py` shows the same answers unverified and verified on identical verdicts; graded once more (the unverified view only).
+5. **Abstention (§9):** the 11 `G-I` rows: refusals, partial handling (`G-I11`, now with `parts`), and `G-I06`, answered from nothing in every run since Phase B.
+6. **Operations (§9.3 H, first look):** p50/p95 latency and cost per answer, synthesis path and refusal path.
+
+**Seeded failure, the detector's calibration (moved here from F3, since the faithfulness gate became a floor):** take verified golden answers whose sentences all passed and swap citations between sentences (each sentence now cites a source that doesn't make it). The verifier must hide them. Reported: the share caught (recall) on ~100 seeded sentences, and the share of untouched sentences still kept. Only verifier calls, no synthesis.
+
+**CI on the finished pipeline:** push `phase-f`, dispatch the weekly faithfulness workflow (question shown, 0.855 floor) and the retrieval gate; record both runs. Not counted in this brief's cost (CI's own budget, ~$3).
+
+**Pre-registered:** the thresholds above are §9.3's, unchanged. A gate not met is reported as not met, with what it would take, as Phases D and E did. Before the run, each new metric is checked on a hand-made right and wrong case (the seeded-failure scorer, the abstention scorer, completeness on a shown answer).
+
+**Acceptance:**
+- [ ] Reference judge chosen, priced, and checked on a hand-read sample
+- [ ] Entailment F1 and false-accept rate on golden (against the reference and against the hand-read pairs)
+- [ ] Completeness on golden, before hiding and as shown
+- [ ] Correctness on the 40-question subset, κ between two judges
+- [ ] Abstention on the G-I rows, incl. `G-I06` and `G-I11`
+- [ ] "+claim verification" on the ablation ladder
+- [ ] Seeded-failure recall
+- [ ] Latency p50/p95 and cost per answer
+- [ ] CI runs on `phase-f` recorded
+- [ ] Results note in `eval/results/` and a log entry
+
+**Cost estimate:** golden run ~312 answers × ~$0.0035 (synthesis + verification) ≈ $1.10; correctness grading ≈ $2.20; the unverified view's grading ≈ $2.20; reference judge over ~1,100 sentence pairs ≈ $2–4 depending on the model's price; seeded failure ≈ $0.30. **About $8–10**, the phase's one golden scoring. Golden is run once; any re-run needs your go.
+
+**Results (2026-10-01), golden, scored once: 108 rows × 3 plan sets, shipped pipeline (F3 structured synthesis, F4 sentence hiding, no gate). ~$8.30, plus ~$1.70 of grades lost when Anthropic credit ran out at row 254 (now checkpointed per row).**
+
+| Gate / metric | Result | Threshold | |
+|---|---|---|---|
+| **Citation entailment F1** (verifier vs Sonnet 5.5, 298 sentences, plan set 0, "not supported" class) | **0.63** (precision 0.90, recall 0.48, false accepts 0.52) | ≥ 0.90 | **not met** |
+| …adjusted by a careful read of 40 disagreements (Sonnet right in 27, the verifier in 13) | **≈ 0.72** (precision ≈ 0.93, recall ≈ 0.59) | ≥ 0.90 | **not met** |
+| **Citation completeness**, material sentences | **0.996** before hiding, 0.995 as shown | ≥ 0.85 | **met** |
+| Correctness, answerable rows (n = 291) | 0.241 correct, 0.478 partial, 0.282 incorrect; κ between the two judges 0.80 (trusted) | tracked | |
+| Seeded misattributions caught (citation moved to another section's retrieved source) | **77 of 102 (0.755)** | — | |
+| Abstention, 11 G-I rows × 3 | 9 of 10 wholly insufficient refused 3/3; **`G-I06` answered 3/3** (since Phase B); `G-I10` refused 1, flagged 2; **`G-I11` refused 3/3** (its federal half not answered) | — | |
+| Insufficiency rows correct | 0.818 | — | |
+| Latency (first answer excluded) | answered p50 8.0 s, p95 11.2 s; refused p50 2.7 s, p95 6.2 s | 35 s / 2 s (H, first pass) | answered met; refusal path not |
+| Cost per answer | $0.0039 (planning, synthesis, verification) | — | |
+
+**Ladder, "+claim verification"** (same answers, verifier on vs off): correct 0.247 → 0.241, grounded 0.793 → 0.901, correct *and* grounded 0.253 → 0.275, refused 0.207 → 0.237. On golden, verification costs no measurable correctness (dev, F4: 0.365 → 0.278); 134 of 913 sentences hidden, 9 answers emptied.
+
+**What the verifier misses:** sentences that overstate or over-generalise their source, i.e. a dropped condition or carve-out ("§ 280A disallows" where it limits; § 6013(b)(4)'s extra year for any joint return; "gross income" where § 1402(b) says net earnings; American Eagle coins as collectibles, which § 408(m)(3) excepts; § 469(c)(7) read as "not passive" without material participation). The F0 prompt's "every assertion must hold" rule is in; Haiku applies it loosely.
+
+**A regression signal, not yet confirmed: correctness on golden's 32 authority rows fell from 0.369 (Phase E, ii′, 5 samples) to 0.260 (F5, verified and unverified alike, 3 samples).** Verification isn't the cause (both views 0.260); F3's structured synthesis is the likely one, though on dev it cost nothing (0.373 vs 0.373). Confirming it means running the pre-F3 pipeline on those 32 golden rows (~$1): a diagnosis, not tuning, but golden, so it waits for you.
 
 ## F6: Phase F exit report
 

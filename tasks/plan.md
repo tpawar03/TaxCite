@@ -544,7 +544,7 @@ Full task details are in `tasks/todo.md` (Phase F section).
 - [x] F4: LLM verifier ships, hiding the failing sentence (your decision, a departure from the rule; ADR-15 revised): 27/30 verdicts agree with a careful read; dev correct 0.365 → 0.278, 9 of 126 answers emptied (hiding whole parts: 64)
 
 ### Slice 3: Measure and report
-- [ ] F5: Phase F eval and ladder rung
+- [ ] F5: Phase F scored on golden (briefed 2026-09-30: one golden run reused for every metric; independent reference judge; seeded-failure calibration; ~$8–10)
 - [ ] F6: Phase F exit report
 
 ## Risks and Mitigations

@@ -20,6 +20,7 @@ import argparse
 import json
 import statistics
 import sys
+import time
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -225,7 +226,12 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
                          f"not {plan_set}: use another --answers-cache")
     while len(runs) <= run:
         pinned = cached_decompose(question, plans, plan_path, plan_set if len(runs) == run else 0) if plans is not None else None
+        started = time.monotonic()
         plan, answer = dc.answer(question, k=k, plan=pinned, **({"model": model} if model else {}))
+        seconds = time.monotonic() - started  # F5: retrieval, synthesis and verification, the user's wait
+        from taxcite.verify import UNVERIFIED
+        if answer.text == UNVERIFIED:  # F5: the verifier didn't run (a run died on exhausted credit); never cache that
+            raise RuntimeError(f"verification failed, not caching it as an answer: {answer.hidden[0]['why'] if answer.hidden else ''}")
         runs.append({
             "text": answer.text,
             "refused": answer.refused,
@@ -239,6 +245,7 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
             # F4: what the verifier saw and said, so eval/f4_hide.py can show the same answer under either unit
             "structured": answer.structured, "verdicts": answer.verdicts, "hidden": answer.hidden,
             "sufficiency": answer.sufficiency,  # F2: the gate's verdict per part
+            "seconds": round(seconds, 2),
         })
         if path:
             path.write_text(json.dumps(cache, indent=2))
@@ -316,11 +323,22 @@ def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
 
     print(f"{len(rows)} rows x {args.repeats} run(s), judge {args.judge}, cap ${args.max_cost:.2f}\n")
+    # every judged row is saved as it's done and a crashed run resumes from it (your rule, F5); deleted once the
+    # run's results are written, so a deliberate re-run measures afresh
+    stem = Path(args.answers_cache).stem if args.answers_cache else ANSWERS.stem
+    progress = RESULTS / (f"ragas-{Path(args.questions).stem}-{stem}{'-q' if args.question_as_source else ''}"
+                          f"-{args.judge}.progress.json")
+    done = {(d["run"], d["id"]): d for d in json.loads(progress.read_text())} if progress.exists() else {}
     runs, stopped = [], None
     for run in range(args.repeats):
         judged = []
         try:
             for i, r in enumerate(rows, 1):
+                if (run, r["id"]) in done:
+                    d = done[(run, r["id"])]
+                    judged.append(Judged(id=d["id"], question=r["question"], refused=d["refused"], claims=d["claims"],
+                                         verdicts=d["verdicts"], pipeline_cost=d["pipeline_cost"]))
+                    continue
                 out = pipeline_answer(r["question"], args.k, cache, cache_path,
                                       0 if args.pin_answers else run, plans, plan_path, model=args.synth_model)
                 j = Judged(id=r["id"], question=r["question"], refused=out["refused"],
@@ -331,6 +349,9 @@ def main() -> int:
                     given = [{"citation": "the question", "text": r["question"]}] if args.question_as_source else []
                     j.verdicts = judge_claims(j.claims, given + out["contexts"], args.judge, budget)
                 judged.append(j)
+                done[(run, j.id)] = {"run": run, "id": j.id, "refused": j.refused, "claims": j.claims,
+                                     "verdicts": j.verdicts, "pipeline_cost": j.pipeline_cost}
+                progress.write_text(json.dumps(list(done.values())))
                 mark = "refused" if j.refused else f"{j.faithfulness:.2f}" if j.faithfulness is not None else "no claims"
                 print(f"  run {run + 1} [{i:>3}/{len(rows)}] {j.id:<7} {mark:>9}  judge ${budget.spent:.3f}")
                 sys.stdout.flush()
@@ -378,6 +399,7 @@ def main() -> int:
                   "claims": j.claims, "verdicts": j.verdicts} for judged, _ in runs for j in judged],
     }, indent=2))
     print(f"\nwrote {out}")
+    progress.unlink(missing_ok=True)  # the results are written; the checkpoint has done its job
     ok = True
     if args.fail_under is not None:
         mean = statistics.mean(values) if values else 0.0

@@ -156,9 +156,17 @@ def main() -> int:
     if args.gate_only:
         return gate_only(rows, args, plans, plan_path)
 
+    # F5: each graded row is saved as it's done, and a re-run skips them: a run that died at row 254 of 324 (exhausted
+    # credit) had thrown away every grade it had paid for
+    tag = Path(args.answers_cache).stem.removeprefix(ANSWERS.stem)
+    progress = RESULTS / f"temporal-{Path(args.questions).stem}{tag}.progress.json"
+    done = {(o["id"], o["sample"]): o for o in json.loads(progress.read_text())} if progress.exists() else {}
     out, stopped = [], None
     try:
         for r, i in [(r, i) for r in rows for i in range(args.samples)]:
+            if (r["id"], i) in done:
+                out.append(done[(r["id"], i)])
+                continue
             plan = cached_decompose(r["question"], plans, plan_path, i)
             ans = pipeline_answer(r["question"], args.k, cache, cache_path, i, plans, plan_path, plan_set=i,
                                   model=args.synth_model)
@@ -182,6 +190,7 @@ def main() -> int:
                         "unsupported": [claims[v["index"]] for v in verdicts if not v.get("supported")],
                         "grades": grades,
                         "passes": [passed(ok, g["grade"]) for g in grades]})
+            progress.write_text(json.dumps(out))
             marks = " ".join(g["grade"][:4] + "/" + g["alt_grade"][:4] for g in grades)
             print(f"  {r['id']:<6} s{i} as-of {str(r['as_of']):<14} plan {str(plan.as_of):<6} "
                   f"{'-' if ok is None else 'ok' if ok else 'XX'}  {'  ' if grounded else 'UG'}  {marks}  "
@@ -213,7 +222,6 @@ def main() -> int:
     print(f"judge spend ${budget.spent:.4f}")
 
     # a non-default answer cache is a different arm: name the file for it, so one run can't overwrite another's
-    tag = Path(args.answers_cache).stem.removeprefix(ANSWERS.stem)
     path = RESULTS / f"temporal-{Path(args.questions).stem}-{date.today()}{tag}.json"
     path.write_text(json.dumps({
         "questions": args.questions, "judge": args.judge, "repeats": args.repeats, "k": args.k,
@@ -221,6 +229,7 @@ def main() -> int:
         "accuracy_per_repeat": per_repeat, "grounded_accuracy_per_repeat": grounded, "as_of_accuracy": as_of_acc, "kappa": k,
         "judge_cost_usd": budget.spent, "stopped": stopped, "rows": out}, indent=2))
     print(f"wrote {path}")
+    progress.unlink(missing_ok=True)  # the results are written; the checkpoint has done its job
     return 0
 
 
