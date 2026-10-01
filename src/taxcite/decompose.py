@@ -228,7 +228,9 @@ EDITIONS: tuple[int, int] | None = None
 # reserved for it. Dev Recall@20 0.605 -> 0.724 (statutory 0.654 -> 0.808, temporal 0.423 -> 0.615,
 # case law and compound unchanged); floors of 1, 2 and 3 scored the same at k=20 and at k=8.
 STATUTE = 1
-SIBLINGS = 0  # F5b: subsections searched inside each of the first sections found (off until measured)
+# F5b (your decision 2026-10-01), a recorded departure from F5b's criteria 1 and 4: dev correct and grounded 27 -> 35, incorrect 18 -> 17, refusals 9 -> 15 (1 cost a correct grounded answer), short answer on 75%.
+# Siblings alone (R1): dev Recall@8 0.610 -> 0.683; answers more honest, not more correct, until re-cite (C3).
+SIBLINGS = 6  # subsections searched inside each of the first SIBLING_SECTIONS sections found
 
 # E4, chosen on dev by rules fixed in advance: authority reorders each kind of source's candidates (statute
 # and regulation over publication; reported opinion over memorandum) with a prior of 0.5 per level, and never

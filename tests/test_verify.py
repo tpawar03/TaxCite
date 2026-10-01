@@ -37,6 +37,12 @@ ANSWER = structured_answer([
 ])
 
 
+@pytest.fixture(autouse=True)
+def no_recite(monkeypatch):
+    """Re-cite (F5b C3) ships on; tests that don't stub its call turn it off, and the re-cite test turns it back on."""
+    monkeypatch.setattr(verify, "RECITE", False)
+
+
 @pytest.fixture
 def stub(monkeypatch):
     calls = []

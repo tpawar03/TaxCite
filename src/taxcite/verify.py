@@ -50,8 +50,9 @@ SCHEMA = {
 # F5b C3: a failed sentence may cite the wrong one of the retrieved sources (D24's $15,750 cites p. 3; the chart is
 # p. 97). One call names the source that states it, and the swap is re-checked by SYSTEM, unchanged; text is never
 # rewritten. C2: the conclusion is an inference, judged against the sentences that passed rather than quoted from a
-# source, and shown cited with theirs. Both off until measured.
-RECITE = False
+# source, and shown cited with theirs. The conclusion check runs whenever synthesis wrote one (generate.CONCLUSION).
+# F5b (your decision 2026-10-01), a recorded departure from F5b's criteria 1 and 4: dev correct and grounded 27 -> 35, incorrect 18 -> 17, refusals 9 -> 15 (1 cost a correct grounded answer), short answer on 75%.
+RECITE = True
 RECITE_SYSTEM = """Each claim below failed a check against the source it cited. For each, pick the one source from the list that states the claim fully, every part, qualifier and condition, or null if none does. The question's facts about the client may be taken as given. Never pick a source that states only part of the claim.
 
 Return JSON only: {"recites": [{"index": 0, "source": 3, "why": "..."}]}, one entry per claim. Keep "why" under 15 words."""

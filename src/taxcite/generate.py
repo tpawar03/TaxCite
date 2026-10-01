@@ -112,7 +112,8 @@ STRUCTURED = True
 CONCLUSION_RULE = """
 8. Every item must stand on its own: name what it refers to, never "this", "it" or "such" for another item, and never a lead-in like "the following rules:".
 9. Last, "conclusion": one sentence answering the question from your items: "Yes, ...", "No, ...", "It depends: ... if ..., ... if ...", or the short answer when the question isn't yes or no. It adds nothing your items don't say. If no item answers the question, leave it empty."""
-CONCLUSION = False  # F5b: off until measured
+# F5b (your decision 2026-10-01), a recorded departure from F5b's criteria 1 and 4: dev correct and grounded 27 -> 35, incorrect 18 -> 17, refusals 9 -> 15 (1 cost a correct grounded answer), short answer on 75%.
+CONCLUSION = True
 
 
 def answer_schema(citations_allowed: list[str], conclusion: bool = False) -> dict:

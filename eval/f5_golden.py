@@ -32,6 +32,7 @@ RESULTS = Path("eval/results")
 CACHE = RESULTS / "temporal-answers-f5.json"
 QUESTIONS = "eval/golden.jsonl"
 REFERENCE = "claude-sonnet-5-5"  # stronger than the runtime verifier (Haiku); price confirmed 2026-09-30
+PREFIX = "f5"  # output files: f5-report.json, ...; F5b's golden run writes f5b-*
 FLAG = re.compile(r"INSUFFICIENT EVIDENCE|Not in the sources", re.I)
 
 
@@ -138,9 +139,14 @@ def report() -> dict:
     for q, runs in cache.items():
         if rows[q]["category"] == "insufficiency":
             out["abstention"][rows[q]["id"]] = dict(Counter(abstention(rows[q], e["text"]) for e in runs))
+    answered = [e for _, e in answerable if not e["refused"]]
+    out["conclusion"] = {"answered": len(answered),  # F5b: checked conclusions, shown first when they follow
+                         "written": sum(bool((e.get("conclusion") or {}).get("text")) for e in answered),
+                         "shown": sum(bool((e.get("conclusion") or {}).get("shown")) for e in answered)}
+    out["recited_sentences"] = sum(str(v.get("why", "")).startswith("re-cited") for v in verdicts)
     out["latency_seconds"] = latency(entries)
     out["cost_usd_per_answer"] = statistics.mean(e["cost_usd"] for e in entries)
-    (RESULTS / "f5-report.json").write_text(json.dumps(out, indent=2))
+    (RESULTS / f"{PREFIX}-report.json").write_text(json.dumps(out, indent=2))
     print(json.dumps(out, indent=2))
     return out
 
@@ -148,7 +154,7 @@ def report() -> dict:
 def checkpoint(name: str):
     """(done, save, path): results already paid for in a crashed run, and a function saving one more (your rule: every
     paid row is saved as it's done). The caller deletes the file once its final results are written."""
-    path = RESULTS / f"f5-{name}.progress.json"
+    path = RESULTS / f"{PREFIX}-{name}.progress.json"
     done = json.loads(path.read_text()) if path.exists() else {}
 
     def save(key: str, value) -> None:
@@ -197,7 +203,7 @@ def seeded(n: int = 100) -> dict:
             save(key, [v.supported for v in judge(answer, items, q, verify.VERIFIER)])
         caught, total = caught + sum(not ok for ok in done[key]), total + len(done[key])
     out = {"seeded_sentences": total, "caught": caught, "recall": caught / total if total else 0.0}
-    (RESULTS / "f5-seeded.json").write_text(json.dumps(out, indent=2))
+    (RESULTS / f"{PREFIX}-seeded.json").write_text(json.dumps(out, indent=2))
     path.unlink(missing_ok=True)
     print(json.dumps(out))
     return out
@@ -229,7 +235,7 @@ def audit(sample: int = 0, sheet_n: int = 40) -> dict:
     result = {"pairs": len(pairs), "reference": REFERENCE,
               **f1(pairs, {p["id"]: p["verifier"] for p in pairs}),
               "agreement": sum(p["verifier"] == p["judge"] for p in pairs) / len(pairs) if pairs else 0.0}
-    (RESULTS / "f5-audit.json").write_text(json.dumps({"summary": result, "pairs": pairs}, indent=1))
+    (RESULTS / f"{PREFIX}-audit.json").write_text(json.dumps({"summary": result, "pairs": pairs}, indent=1))
     rng = random.Random(0)
     disagree = [p for p in pairs if p["verifier"] != p["judge"]]
     agree = [p for p in pairs if p["verifier"] == p["judge"]]
@@ -248,7 +254,7 @@ def audit(sample: int = 0, sheet_n: int = 40) -> dict:
         lines += ["**Your verdict:** ", "", f"<details><summary>Verifier / reference</summary>verifier "
                   f"{'yes' if p['verifier'] else 'no'} ({p['verifier_why']}); reference {'yes' if p['judge'] else 'no'} "
                   f"({p['judge_why']})</details>", "", "---", ""]
-    (RESULTS / "f5-reference-check.md").write_text("\n".join(lines))
+    (RESULTS / f"{PREFIX}-reference-check.md").write_text("\n".join(lines))
     path.unlink(missing_ok=True)
     print(json.dumps(result))
     return result
@@ -264,9 +270,13 @@ def ladder() -> None:
 
 
 def main() -> int:
+    global CACHE, PREFIX
     ap = argparse.ArgumentParser()
     ap.add_argument("step", choices=("check", "report", "seeded", "audit", "ladder"))
+    ap.add_argument("--cache", default=str(CACHE), help="the golden answer cache to score (F5b: temporal-answers-f5b.json)")
+    ap.add_argument("--prefix", default=PREFIX, help="output file prefix, so one phase's results don't overwrite another's")
     args = ap.parse_args()
+    CACHE, PREFIX = Path(args.cache), args.prefix
     if args.step != "check":
         from dotenv import load_dotenv
         load_dotenv()

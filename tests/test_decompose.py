@@ -360,3 +360,8 @@ def test_siblings_search_each_found_section_alone_and_skip_what_is_held(monkeypa
     assert calls == [None, ["121"], ["1.121-1"], ["25D"]]  # three sections, best first; 163 is the fourth
     assert [h.citation for h in d.searched[0].hits][len(found):] == [
         "26 U.S.C. § 121(z)", "26 U.S.C. § 1.121-1(z)", "26 U.S.C. § 25D(z)"]  # 121(a) already held, not repeated
+
+
+def test_f5b_ships_siblings_conclusions_and_recite():
+    from taxcite import generate, verify
+    assert (dc.SIBLINGS, dc.SIBLING_SECTIONS, generate.CONCLUSION, verify.RECITE) == (6, 3, True, True)
