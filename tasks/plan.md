@@ -539,7 +539,7 @@ Full task details are in `tasks/todo.md` (Phase F section).
 - [x] F1's rows are approved (2026-09-30)
 
 ### Slice 2: Gates around synthesis
-- [ ] F2: Sufficiency gate
+- [x] F2: Sufficiency gate built and measured, **not shipped** by its rule (refused 23–33 of 126 answerable row-samples before writing vs 9; 7 of them right and verified); `GATE = False`; ADR-7/10 revised (your decision)
 - [x] F3: Structured synthesis ships (arm E′, a recorded departure from the rule): completeness 1.000, fully verified answers 0.523 (0.032), correctness unchanged; faithfulness gate now judged with the question, a floor (ADR-22 revised)
 - [x] F4: LLM verifier ships, hiding the failing sentence (your decision, a departure from the rule; ADR-15 revised): 27/30 verdicts agree with a careful read; dev correct 0.365 → 0.278, 9 of 126 answers emptied (hiding whole parts: 64)
 

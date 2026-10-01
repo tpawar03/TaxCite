@@ -12,7 +12,7 @@ import json
 import os
 import re
 from collections.abc import Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from taxcite.retrieve import Hit, search
@@ -220,6 +220,8 @@ class Answer:
     structured: dict | None = None  # arm E: {"data": the model's JSON, "labels": part labels}, for the verifier (F4)
     hidden: list[dict] = field(default_factory=list)  # F4: sentences the verifier failed, never shown (eval, logs)
     verdicts: list[dict] = field(default_factory=list)  # F4: one per shown sentence, so the eval can re-hide by unit
+    sufficiency: list[dict] = field(default_factory=list)  # F2: the gate's verdict for each part, before synthesis
+    gate_usd: float = 0.0
     verify_input_tokens: int = 0
     verify_output_tokens: int = 0
     verifier: str = ""
@@ -230,7 +232,7 @@ class Answer:
     @property
     def cost_usd(self) -> float:
         return (cost(self.model, self.input_tokens, self.output_tokens)
-                + cost(self.verifier, self.verify_input_tokens, self.verify_output_tokens))
+                + cost(self.verifier, self.verify_input_tokens, self.verify_output_tokens) + self.gate_usd)
 
     @property
     def refused(self) -> bool:
@@ -417,8 +419,18 @@ def answer_from_hits(question: str, hits: list[Hit], model: str = MODEL) -> Answ
     return _generate(question, hits, mode="rag", model=model)
 
 
+def skipped_only(skipped: Sequence[tuple[str, str]], model: str = MODEL) -> Answer:
+    """F2: every part judged insufficient before synthesis. A refusal with what each part lacks, and no model call:
+    nothing is written, so nothing needs verifying (§9.3 H's refusal path)."""
+    labels = [label for label, _ in skipped]
+    text, _ = render({"tax_year": None, "sentences": [],
+                      "not_answerable": [{"part": n, "why": why} for n, (_, why) in enumerate(skipped, 1)]}, labels)
+    return Answer(text=text, mode="rag", model=model)
+
+
 def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
-                       facts: Sequence[str] = (), model: str = MODEL, as_of: str | None = None) -> Answer:
+                       facts: Sequence[str] = (), model: str = MODEL, as_of: str | None = None,
+                       skipped: Sequence[tuple[str, str]] = ()) -> Answer:
     """Synthesis over sources grouped by the sub-query that retrieved them (B7).
 
     The grouping is in the prompt deliberately: a compound question needs the model to
@@ -428,6 +440,9 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
 
     Takes plain data rather than a Decomposition, so `decompose` depends on this
     module and not the other way round.
+
+    `skipped` (F2): (label, what's missing) for parts the sufficiency gate rejected. They never reach the prompt
+    (ADR-7: nothing is generated over insufficient evidence) and are shown after the answered parts.
     """
     years = sorted(set(re.findall(r"\b(?:19|20)\d\d\b", as_of or "")))
     year = int(years[0]) if years else None  # the earliest year named: the one later text can't govern
@@ -442,12 +457,17 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
     prompt = "Sources:\n\n" + "\n\n".join(blocks) + f"\n\n{header}Question: {question}"
     if STRUCTURED and hits:
         return _generate_structured(hits, [label for label, _ in groups], model, prompt,
-                                    RAG_SYSTEM + (YEAR_RULE if years else "") + STRUCTURED_RULE)
+                                    RAG_SYSTEM + (YEAR_RULE if years else "") + STRUCTURED_RULE, skipped)
     system = RAG_SYSTEM + (YEAR_RULE if years else "") + (SECTIONS_RULE if SECTIONS else "")
-    return _generate(question, hits, mode="rag", model=model, prompt=prompt, system=system)
+    result = _generate(question, hits, mode="rag", model=model, prompt=prompt, system=system)
+    if skipped:  # the unstructured arms: the skipped parts as plain lines after the answer
+        result = replace(result, text=result.text + "".join(f"\n\n{label}: INSUFFICIENT EVIDENCE: {why}"
+                                                            for label, why in skipped))
+    return result
 
 
-def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt: str, system: str) -> Answer:
+def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt: str, system: str,
+                         skipped: Sequence[tuple[str, str]] = ()) -> Answer:
     """Arm E: the answer as JSON items, rendered to the same cited text every other arm writes, so the API, the CLI
     and the verifier read it unchanged. An unusable response is a refusal, never raw JSON in front of a user."""
     schema = answer_schema(sorted({h.citation for h in hits}))
@@ -456,6 +476,10 @@ def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt:
         data = json.loads(raw)
     except (json.JSONDecodeError, TypeError):
         data = None
+    if isinstance(data, dict) and skipped:  # F2: the gate's rejected parts follow the answered ones
+        data = {**data, "not_answerable": list(data.get("not_answerable") or [])
+                + [{"part": len(labels) + n, "why": why} for n, (_, why) in enumerate(skipped, 1)]}
+        labels = labels + [label for label, _ in skipped]
     text, dropped = render(data, labels) if isinstance(data, dict) else ("", 0)
     if not text.strip():
         text = "INSUFFICIENT EVIDENCE: no sentence of the answer could be tied to a source."

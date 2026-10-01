@@ -2272,9 +2272,81 @@ Partial rows carry `parts` (`[{part, insufficient, gold}]`); `validate_pilot.py`
 
 ---
 
-## F2: Sufficiency gate (outline)
+## F2: Sufficiency gate
 
-One structured-output call per searched sub-query over its reranked candidates (ADR-10): per-candidate `supports` + a sub-query verdict. An insufficient sub-query is dropped from synthesis and named as insufficient; all insufficient → no synthesis call. Tuned on dev: abstention precision/recall, answerable rows' refusal rate before and after, whether rule 3 can go. `G-I11`'s waiting test passes. Langfuse span + `checking_sufficiency` SSE event.
+**Goal:** before anything is written, decide for each part of the question whether its retrieved sources can answer it, and write nothing for a part that can't (ADR-7, ADR-10, FR-5). F4 hides an unsupported sentence after it's written; F2 keeps it from being written.
+
+**Why (measured, shipped pipeline):**
+- **Golden, Phase B onward:** `G-I06` (amended-return processing times) is answered, from nothing, in every run; `G-I11` (federal home office + California) refuses both halves before F3 and, since F3, answers the federal half but writes about California from sources that don't cover it.
+- **Dev, F4:** 24% of sentences fail verification and 9 of 126 answers are emptied. Some of that is synthesis writing about a part its sources don't cover; a part skipped up front costs nothing to hide.
+- **Refusing is today a sentence the synthesis model chooses to write** (rule 3, now "add the part to not_answerable"). Nothing checks it.
+
+**What changes:**
+1. **`sufficiency(question, label, hits, year) -> Verdict`** in `decompose.py` (or a new `sufficiency.py`, handed to you as code if so): one structured-output call per searched sub-query over its reranked chunks (ADR-10). Output: per chunk `supports: bool`, and for the part `sufficient: bool` with `missing` (what the sources lack). It is told the tax year, so "the 2027 limit" isn't answered from 2025 figures (`G-I10`'s and `D53`'s trap). Model: gpt-4o-mini, as ADR-11 set for this call site; Haiku is the measured alternative only if the gate is wrong too often.
+2. **Wiring in `decompose.answer`:** after `chunks()`, before synthesis. A part judged insufficient is dropped from the synthesis prompt and shown as "Part N: … INSUFFICIENT EVIDENCE: <missing>". All parts insufficient: **no synthesis call and no verifier call**, an immediate refusal (§9.3 H's 2 s refusal path). Client facts are never gated; an unrouted (fallback) plan is one part.
+3. **`checking_sufficiency` stage** in the job stream between `retrieving` and `synthesizing`, with each part's verdict; recorded in the job.
+4. **Fail open or closed?** If the gate's call fails, the part goes to synthesis as today, and F4 still verifies every sentence. *Default: fail open* (the gate saves work; the verifier is the guarantee). Recorded, yours to overrule.
+5. **Measurement:** `temporal.py --rows every` (answerable and insufficiency rows); the job/`Answer` records each part's verdict so the eval can score the gate itself.
+
+**Lean measurement (your call, 2026-09-30: reuse what exists, re-run only what a change touches):**
+1. **Arm A on the 42 answerable rows is F4's shipped run:** `temporal-answers-f4-sentence.json` and its grades. No new run.
+2. **Gate-only pass** (`temporal.py --gate-only`): plan, retrieval and the gate's verdicts for all 53 rows × 3 plan sets, no synthesis, no grading (~160 calls, ~$0.08).
+3. **Full runs only where the gate can change the answer:** the 11 insufficiency rows (A with `--no-gate`, and G), and any answerable row-sample where the gate rejects a part (G, `--ids`). Every other answerable row-sample is identical in G by construction (same plan, same chunks, synthesis at temperature 0, same verifier), so A's grade stands for it.
+
+**Two arms, on the same plans:**
+
+| Arm | Pipeline |
+|---|---|
+| **A** | shipped (F3 synthesis + F4 sentence hiding), no gate |
+| **G** | A + the gate |
+
+| Metric | Rows | Why |
+|---|---|---|
+| **Correct refusals**: D43–D50 refused | 8 wholly insufficient rows | the gate's job |
+| **Partial rows handled**: D51–D53 answer the answerable part (a cited sentence) *and* flag the other (INSUFFICIENT EVIDENCE or "Not in the sources" for it) | 3 partial rows | `G-I11`'s kind |
+| **Wrong refusals**: an answerable row refused | 42 answerable rows | the gate's cost |
+| Correct (the §9.2 judge against the reference) | all 53 | answer quality; on insufficiency rows the reference *is* the abstention |
+| Sentences hidden, answers emptied (F4's metrics) | answerable rows | whether skipping up front leaves less to hide |
+| Gate verdicts against row labels: abstention precision / recall per part | all | §9's abstention metric |
+| Cost and latency per answer, and on the refusal path | all | §4.1, §9.3 H |
+
+**Decision rule, fixed before any arm runs:**
+0. **Sanity first (F3's and F4's lesson: test each metric on a known-good and a known-bad case before the arms run):** "correct refusal" counts a hand-made refusal of D43 as 1 and a cited answer to it as 0; "partial handled" counts a hand-made D51 answer with a cited federal sentence and a New Jersey INSUFFICIENT EVIDENCE line as handled, and the same answer without the line as not; "wrong refusal" counts a refusal of an answerable row and not a partial answer. If any check fails, the metric is fixed before measuring.
+1. **Guard:** G's wrong refusals on the 42 answerable rows exceed A's by more than 0.05 → G is out.
+2. **Guard:** G's correctness on the 42 answerable rows is more than 0.05 below A's → G is out. (Both arms are verified, so neither is credited for unsupported content: F4's trap doesn't apply.)
+3. **G ships if it improves** correct refusals on D43–D50 **or** partial rows handled on D51–D53 by at least 3 of the 24 (resp. 9) row-samples, without making the other worse.
+4. Otherwise A stays, and the finding is the report.
+
+**Acceptance:**
+- [ ] `sufficiency()` with tests (one call per part; schema; the year in the prompt; client facts never gated; all insufficient → no synthesis call; fail open)
+- [ ] A `G-I11`-shaped test: a two-part plan, one part sufficient and one not → one answered part, one INSUFFICIENT EVIDENCE part, synthesis sees only the first (Phase B's "waiting test" doesn't exist in `tests/`; this adds it)
+- [ ] `checking_sufficiency` in the job stream (test for its order and payload)
+- [ ] Both arms measured on dev with the metrics above; the rule applied, sanity checks first
+- [ ] Log entry
+
+**Files:** `src/taxcite/decompose.py` (or new `sufficiency.py`), `generate.py` (render skipped parts), `jobs.py`, `eval/temporal.py` (`--rows every|insufficiency`, `--gate-only`, `--no-gate`, `--ids`), tests.
+
+**Cost estimate:** gate calls ~$0.0005 a part on gpt-4o-mini. With the lean plan: the gate-only pass ~$0.08, 2 × 33 insufficiency row-samples and the changed answerable ones with synthesis, verification and grading: **about $1** (was ~$5). Golden untouched until F5.
+
+**Out of F2:** rewriting failed sentences (F4's recorded next step); tuning the gate on golden (F5 scores it once).
+
+**Built (2026-09-30):** `decompose.sufficiency()` (one gpt-4o-mini structured call per part, the tax year in the prompt, fails open), `gate()`, `GATE`; `generate.skipped_only()` and `answer_from_groups(skipped=)` (a skipped part is never in the prompt; it shows as INSUFFICIENT EVIDENCE after the answered parts); `jobs.run`'s `checking_sufficiency` stage and the refusal path (no synthesis, no verification); `temporal.py --rows every|insufficiency`, `--gate-only`, `--no-gate`, `--gate-prompt`, `--ids`. Tests: the gate's call and verdict, fail open, empty parts left to synthesis, **the G-I11 test** (the answerable part answered, the other never written), nothing answerable → no synthesis call, the job stream's refusal path. 287 tests.
+
+**Results (2026-09-30), lean plan, ~$0.35 in all.** Gate-only passes over all 53 dev rows × 3 plan sets (~$0.10 each), the shipped pipeline's F4 run as the answerable baseline, and one baseline run on the 11 insufficiency rows.
+
+| | strict gate | lenient gate | no gate (shipped) |
+|---|---|---|---|
+| Answerable row-samples refused before writing | **33 of 126** | **23 of 126** | (refused after writing: 9 of 126) |
+| …of which the shipped pipeline got right, verified | 10 | **7** (D04 ×3, D21 ×3, D38) | — |
+| D43–D50 (wholly insufficient) refused | 21 of 24 | 23 of 24 | 13 of 24 |
+| D51–D53 (partial): the bad half alone skipped / handled | 8 of 9 | 6 of 9 | 6 of 9 handled |
+| Correct on the 11 insufficiency rows | — | — | **0.818** |
+
+**The rule:** guard 1 (wrong refusals on answerable rows no more than 0.05 above A's): G refuses at least 23/126 = 0.18 against 0.07, **so both gate prompts fail it, determined without a full gated run.** A stays: `GATE = False`, the code kept and tested. The gate's wrong refusals are the kind it was meant to avoid: D04's cited opinion holds the answer ("no clear conclusion"), D21's answer *is* that §1031 now covers only real property ("the sources don't cover equipment").
+
+**What the shipped pipeline already does on insufficiency rows:** verified federal context plus a "Not in the sources" note (D45: §402(a) on 401(k) payouts, "Pennsylvania … not in the sources"), graded correct. The remaining misses aren't the gate's to fix: D52's federal half is emptied by the verifier (retrieval/support), and 11 of 24 wholly insufficient row-samples get context rather than a bare refusal, which the judge accepts.
+
+**Decided (2026-09-30, your call): ADR-7/10 revised to "measured, not shipped".** ADR-7 and ADR-10 specify this gate. Measurement says it has no job the verifier doesn't already do, and does it worse. The intent rule is to drop an ADR'd component only on evidence and with your confirmation: revise ADR-7/10 to "measured, not shipped", or keep looking for a gate design.
 
 ## F3: Synthesis that cites every sentence, in sections
 
@@ -2471,7 +2543,7 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 - [x] Verdict check: 27 of 30 (Claude's read), `eval/results/f4-verdict-check.md`
 - [x] Cost ~$0.002 and a few seconds an answer; the §9.3 H latency figure is F5's (p95 over golden)
 - [x] Log entry #84 (local)
-- [ ] `src/taxcite/verify.py`, `tests/test_verify.py`, `eval/f4_hide.py` created by you; `eval/f0_verify.py` still carries its own copy of the prompt (to share once `verify.py` exists)
+- [x] `src/taxcite/verify.py`, `tests/test_verify.py`, `eval/f4_hide.py` created by you; `eval/f0_verify.py` imports the product's prompt (checked identical to F0's); committed `8193fb8`
 
 ## F5: Phase F eval and ladder rung (outline)
 

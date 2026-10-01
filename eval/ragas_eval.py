@@ -193,10 +193,11 @@ def set_prompt(arm: str) -> None:
     g.RAG_SYSTEM = g.PRE_E5_SYSTEM.replace(g.RULE_4, rule)
 
 
-def set_verify(off: bool, unit: str | None) -> None:
-    """F4's switches for an eval run: the verifier off (the unverified arm), or its hiding unit."""
+def set_verify(off: bool, unit: str | None, no_gate: bool = False) -> None:
+    """F4's and F2's switches for an eval run: the verifier off (the unverified arm), its hiding unit, the gate off."""
     from taxcite import decompose as dc
     dc.VERIFY = not off
+    dc.GATE = not no_gate
     if unit:
         from taxcite import verify
         verify.HIDE = unit
@@ -237,6 +238,7 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
             "dropped_sentences": answer.dropped_sentences,  # F3 arm E: written without a citation, not shown
             # F4: what the verifier saw and said, so eval/f4_hide.py can show the same answer under either unit
             "structured": answer.structured, "verdicts": answer.verdicts, "hidden": answer.hidden,
+            "sufficiency": answer.sufficiency,  # F2: the gate's verdict per part
         })
         if path:
             path.write_text(json.dumps(cache, indent=2))

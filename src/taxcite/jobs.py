@@ -108,7 +108,7 @@ def get(conn, job_id: str) -> dict | None:
 def run(conn, job_id: str, question: str, k: int = 8) -> None:
     """The pipeline, reporting each stage. Phases C-F add their steps here."""
     from taxcite import decompose as dc
-    from taxcite.generate import OPINION_RE, answer_from_groups, authorities, cited_items
+    from taxcite.generate import OPINION_RE, answer_from_groups, authorities, cited_items, skipped_only
     from taxcite.ingest.citations import flags
 
     try:
@@ -128,10 +128,18 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
         }, rdb)
         dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE)
         hits = dc.chunks(plan, k)
-        publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
-        result = answer_from_groups(question, plan.groups({h.citation for h in hits}), facts=plan.facts,
-                                    as_of=plan.as_of)
-        if dc.VERIFY:  # F4: nothing is sent until every sentence is checked (ADR-9: the answer stays buffered)
+        groups, skipped, verdicts = plan.groups({h.citation for h in hits}), [], []
+        if dc.GATE:  # F2: a part its sources can't answer is never written
+            groups, skipped, verdicts = dc.gate(question, groups, plan.as_of)
+            publish(conn, job_id, "checking_sufficiency", {
+                "parts": [{k: v[k] for k in ("part", "sufficient", "missing")} for v in verdicts]}, rdb)
+        written = not (skipped and not any(h for _, h in groups))
+        if not written:
+            result = skipped_only(skipped)  # nothing answerable: no synthesis, nothing to verify
+        else:
+            publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
+            result = answer_from_groups(question, groups, facts=plan.facts, as_of=plan.as_of, skipped=skipped)
+        if dc.VERIFY and written:  # F4: nothing is sent until every sentence is checked (ADR-9: the answer stays buffered)
             from taxcite import verify
             publish(conn, job_id, "verifying", {"sentences": len(cited_items(result.structured["data"]))
                                                 if result.structured else 0}, rdb)
@@ -151,7 +159,7 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "refused": result.refused,
             "hidden_sentences": len(result.hidden),  # F4: failed verification (or went with a failed part)
             "model": result.model,
-            "cost_usd": round(result.cost_usd + plan.cost_usd, 6),
+            "cost_usd": round(result.cost_usd + plan.cost_usd + sum(v["usd"] for v in verdicts), 6),
         }, rdb)
     except Exception as e:  # the job record must show what happened, not just stop
         publish(conn, job_id, "error", {"type": type(e).__name__, "message": str(e)[:300]}, rdb)

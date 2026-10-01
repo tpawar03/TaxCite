@@ -89,6 +89,28 @@ def sample_summary(out: list[dict]) -> dict[str, list]:
     return res
 
 
+def gate_only(rows: list[dict], args, plans: dict, plan_path: Path) -> int:
+    """F2's cheap pass: for each row and plan set, the parts the shipped pipeline would synthesize and the gate's
+    verdict on each. No synthesis, no grading: what a full run costs is spent only where the gate changes something."""
+    from taxcite import decompose as dc
+    out = []
+    for r, i in [(r, i) for r in rows for i in range(args.samples)]:
+        plan = cached_decompose(r["question"], plans, plan_path, i)
+        d = dc.retrieve(plan, k=args.k, editions=dc.EDITIONS, statute=dc.STATUTE)
+        groups = d.groups({h.citation for h in dc.chunks(d, args.k)})
+        _, skipped, verdicts = dc.gate(r["question"], groups, d.as_of)
+        out.append({"id": r["id"], "sample": i, "category": r["category"], "expect_insufficient": r["expect_insufficient"],
+                    "parts": [{k: v[k] for k in ("part", "sufficient", "missing")} for v in verdicts],
+                    "skipped": len(skipped), "all_skipped": bool(verdicts) and len(skipped) == len(verdicts),
+                    "usd": sum(v["usd"] for v in verdicts)})
+        print(f"  {r['id']:<6} s{i} {r['category']:<13} " + " ".join("ok" if v["sufficient"] else "NO" for v in verdicts)
+              + f"  ${sum(o['usd'] for o in out):.4f}", flush=True)
+    Path(args.gate_only).write_text(json.dumps(out, indent=1))
+    print(f"wrote {args.gate_only}: {sum(o['skipped'] > 0 for o in out)} of {len(out)} row-samples skip a part, "
+          f"${sum(o['usd'] for o in out):.4f}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--questions", default="eval/golden.jsonl")
@@ -99,12 +121,16 @@ def main() -> int:
     ap.add_argument("--answers-cache", default=str(ANSWERS))
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json")
     ap.add_argument("--editions", help="turn D3's edition filter on for this run, e.g. 1,0 (off live until D7 decides)")
-    ap.add_argument("--rows", choices=("temporal", "authority", "all"), default="temporal",
+    ap.add_argument("--rows", choices=("temporal", "authority", "all", "insufficiency", "every"), default="temporal",
                     help="temporal rows (the Phase D gate) or E1's authority-tagged rows (E5)")
     ap.add_argument("--samples", type=int, default=1, metavar="N", help="answers per row, answer i from plan set i")
     ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
     ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
     ap.add_argument("--no-verify", action="store_true", help="skip F4's verifier: the unverified pipeline")
+    ap.add_argument("--no-gate", action="store_true", help="skip F2's sufficiency gate")
+    ap.add_argument("--gate-prompt", choices=("strict", "lenient"), help="F2's gate prompt candidate")
+    ap.add_argument("--gate-only", metavar="OUT", help="F2: plan, retrieve and run the gate only; write verdicts to OUT")
+    ap.add_argument("--ids", help="comma-separated row ids: only these rows (F2's re-runs of rows the gate changes)")
     ap.add_argument("--hide", choices=("part", "sentence"), help="F4's hiding unit for this run")
     args = ap.parse_args()
     if args.editions:
@@ -112,16 +138,23 @@ def main() -> int:
         dc.EDITIONS = tuple(int(x) for x in args.editions.split(","))
 
     set_prompt(args.prompt)
-    set_verify(args.no_verify, args.hide)
+    set_verify(args.no_verify, args.hide, args.no_gate)
+    if args.gate_prompt:
+        from taxcite import decompose as dc
+        dc.SUFFICIENCY_PROMPT = dc.SUFFICIENCY_LENIENT if args.gate_prompt == "lenient" else dc.SUFFICIENCY_SYSTEM
     rows = [json.loads(l) for l in open(args.questions) if l.strip()]
     # "all" (F3): every answerable row; insufficiency and adversarial rows are F2's and Phase G's
     keep = {"temporal": lambda r: r["category"] == "temporal", "authority": lambda r: "authority" in r,
-            "all": lambda r: r["category"] not in ("insufficiency", "adversarial")}[args.rows]
-    rows = [r for r in rows if keep(r)]
+            "all": lambda r: r["category"] not in ("insufficiency", "adversarial"),
+            "insufficiency": lambda r: r["category"] == "insufficiency",  # F2
+            "every": lambda r: r["category"] != "adversarial"}[args.rows]
+    rows = [r for r in rows if keep(r) and (not args.ids or r["id"] in args.ids.split(","))]
     cache_path, plan_path = Path(args.answers_cache), Path(args.plan_cache)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     plans = json.loads(plan_path.read_text()) if plan_path.exists() else {}
     budget = Budget(args.max_cost)
+    if args.gate_only:
+        return gate_only(rows, args, plans, plan_path)
 
     out, stopped = [], None
     try:

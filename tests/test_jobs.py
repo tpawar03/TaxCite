@@ -7,10 +7,11 @@ from fastapi.testclient import TestClient
 
 from taxcite import api, jobs, store
 from taxcite.generate import Answer
+from taxcite.retrieve import Hit
 
 client = TestClient(api.app)
 
-STAGES = ["decomposing", "retrieving", "synthesizing", "verifying", "answer"]
+STAGES = ["decomposing", "retrieving", "synthesizing", "verifying", "answer"]  # F2's gate is off by default
 
 
 @pytest.fixture(autouse=True)
@@ -176,3 +177,19 @@ def test_a_failed_verification_sends_a_refusal_never_the_unverified_answer(monke
     assert events["verifying"] == {"sentences": 1}
     assert events["answer"]["text"] == verify.UNVERIFIED and events["answer"]["refused"]
     assert "Unverified claim" not in json.dumps(events["answer"]) and events["answer"]["hidden_sentences"] == 1
+
+
+def test_a_question_with_nothing_answerable_skips_synthesis_and_verification(monkeypatch, stub_pipeline):
+    """F2's refusal path, with the gate on: the stream shows its verdicts and goes straight to the answer."""
+    from taxcite import decompose as dc
+    monkeypatch.setattr(dc, "GATE", True)
+    monkeypatch.setattr(dc, "search", lambda *a, **k: [Hit(citation="IRS Pub 17 (2025), p. 99", heading="h", text="t",
+                                                         score=1.0, section="Pub 17", source="irs_pub")])
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: hits)
+    monkeypatch.setattr(dc, "call_model", lambda *a, **k: (
+        '{"sources": [], "sufficient": false, "missing": "no state law"}', 1, 1))
+    job_id = client.post("/queries", json={"question": "q"}).json()["id"]
+    events = sse_events(client.get(f"/queries/{job_id}/events").text)
+    assert [n for n, _ in events] == ["decomposing", "retrieving", "checking_sufficiency", "answer"]
+    assert events[2][1]["parts"] == [{"part": "hobby loss deduction limit", "sufficient": False, "missing": "no state law"}]
+    assert events[-1][1]["refused"] and "no state law" in events[-1][1]["text"]

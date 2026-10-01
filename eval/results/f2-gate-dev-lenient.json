@@ -1,0 +1,2806 @@
+[
+ {
+  "id": "D01",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court decisions on Arabian horse breeding showing operation hobby loss rules",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005909999999999998
+ },
+ {
+  "id": "D01",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court decisions on Arabian horse breeding showing operation hobby loss rules",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005909999999999998
+ },
+ {
+  "id": "D01",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court decisions on Arabian horse breeding showing operation hobby versus business determination",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00059115
+ },
+ {
+  "id": "D02",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "ordinary and necessary business expenses deduction for self-employed individuals",
+    "sufficient": false,
+    "missing": "The sources do not provide specific guidance on whether cable and streaming subscriptions can be classified as ordinary and necessary business expenses for a social media influencer."
+   },
+   {
+    "part": "deductibility of cable and streaming subscriptions for social media influencers",
+    "sufficient": false,
+    "missing": "The sources do not provide specific figures or rates for the year 2026 regarding the deductibility of cable and streaming subscriptions."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.00060945
+ },
+ {
+  "id": "D02",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "ordinary and necessary business expenses deduction for self-employed individuals",
+    "sufficient": false,
+    "missing": "The sources do not provide specific guidance on whether cable and streaming subscriptions can be classified as ordinary and necessary business expenses for a social media influencer."
+   },
+   {
+    "part": "deductibility of cable and streaming subscriptions for social media influencers",
+    "sufficient": false,
+    "missing": "The sources do not provide specific figures or rates for the deductibility of cable and streaming subscriptions for the year 2026."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.00060945
+ },
+ {
+  "id": "D02",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "ordinary and necessary business expenses deduction for self-employed individuals",
+    "sufficient": false,
+    "missing": "The sources do not provide specific guidance on whether cable and streaming subscriptions can be classified as ordinary and necessary business expenses for a social media influencer."
+   },
+   {
+    "part": "deductibility of cable and streaming subscriptions for social media influencers",
+    "sufficient": false,
+    "missing": "The sources do not provide specific figures or rates for the year 2026 regarding the deductibility of cable and streaming subscriptions."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.00060945
+ },
+ {
+  "id": "D03",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court treatment of farm workers housing insurance pay advances",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006236999999999999
+ },
+ {
+  "id": "D03",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court treatment of farm workers housing insurance pay advances",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006217499999999999
+ },
+ {
+  "id": "D03",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court treatment of farm workers housing insurance pay advances",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006217499999999999
+ },
+ {
+  "id": "D04",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses",
+    "sufficient": false,
+    "missing": "The sources do not provide specific guidance on whether a spreadsheet alone is adequate for substantiating toll and parking expenses."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00061515
+ },
+ {
+  "id": "D04",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses",
+    "sufficient": false,
+    "missing": "The sources do not provide a clear standard for what constitutes adequate taxpayer-prepared records specifically for toll and parking charges."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00061515
+ },
+ {
+  "id": "D04",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "adequacy of taxpayer-prepared records tolls parking substantiation of travel expenses",
+    "sufficient": false,
+    "missing": "The sources lack specific guidance on whether a spreadsheet alone is adequate for substantiating toll and parking expenses."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0006139499999999999
+ },
+ {
+  "id": "D05",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "tax treatment of life insurance policy termination and transfer",
+    "sufficient": false,
+    "missing": "The sources do not address the tax treatment of life insurance policy termination and transfer."
+   },
+   {
+    "part": "income recognition upon termination of life insurance policy",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0006292499999999999
+ },
+ {
+  "id": "D05",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "tax treatment of life insurance policy termination and transfer of ownership",
+    "sufficient": false,
+    "missing": "The sources do not address the tax treatment of life insurance policy termination and transfer of ownership."
+   },
+   {
+    "part": "taxpayer income recognition upon termination of life insurance policy after attempted transfer",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0006313499999999999
+ },
+ {
+  "id": "D05",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "tax treatment of life insurance policy termination and transfer",
+    "sufficient": false,
+    "missing": "The sources do not address the tax treatment of life insurance policy termination and transfer."
+   },
+   {
+    "part": "income recognition upon termination of life insurance policy after attempted transfer",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0006297
+ },
+ {
+  "id": "D06",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "phase-out of rental real estate loss allowance for high-income taxpayers",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00063375
+ },
+ {
+  "id": "D06",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "phase-out of rental real estate loss allowance for high-income taxpayers",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00063375
+ },
+ {
+  "id": "D06",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "rental loss allowance phase-out for modified adjusted gross income over $100,000",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006342
+ },
+ {
+  "id": "D07",
+  "sample": 0,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "hobby loss rules and factors for determining if an activity is engaged in for profit",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court decisions on horse breeding as a business versus hobby loss rules",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006171
+ },
+ {
+  "id": "D07",
+  "sample": 1,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "hobby loss rules and factors for determining if an activity is engaged in for profit",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court decisions on horse breeding as a business versus hobby loss rules",
+    "sufficient": false,
+    "missing": "The sources do not provide specific figures or rates for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0006261
+ },
+ {
+  "id": "D07",
+  "sample": 2,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "hobby loss rules and factors for determining if an activity is engaged in for profit",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court decisions on horse breeding as a business versus hobby loss rules",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006171
+ },
+ {
+  "id": "D08",
+  "sample": 0,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "active participation in rental real estate activities for purposes of rental loss allowance",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court treatment of fully owning and managing rental properties as active participation",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00076545
+ },
+ {
+  "id": "D08",
+  "sample": 1,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "active participation in rental real estate activities for purposes of rental loss allowance",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court treatment of fully owning and managing rental properties as active participation",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00076545
+ },
+ {
+  "id": "D08",
+  "sample": 2,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "active participation in rental real estate activities for purposes of rental loss allowance",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court treatment of fully owning and managing rental properties in relation to active participation",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0007657499999999999
+ },
+ {
+  "id": "D09",
+  "sample": 0,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "classification of workers as employees versus independent contractors under IRS guidelines",
+    "sufficient": false,
+    "missing": "The sources do not provide information on the classification of workers as employees versus independent contractors under IRS guidelines."
+   },
+   {
+    "part": "Tax Court rulings on classification of farm workers receiving housing and advances",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00066285
+ },
+ {
+  "id": "D09",
+  "sample": 1,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "classification of workers as employees versus independent contractors for tax purposes",
+    "sufficient": false,
+    "missing": "The sources do not provide information on the classification of workers as employees versus independent contractors for tax purposes."
+   },
+   {
+    "part": "Tax Court rulings on classification of farm workers receiving housing and advances",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00066285
+ },
+ {
+  "id": "D09",
+  "sample": 2,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "classification of workers as employees versus independent contractors under IRS guidelines",
+    "sufficient": false,
+    "missing": "The sources do not provide information on the classification of workers as employees versus independent contractors under IRS guidelines."
+   },
+   {
+    "part": "Tax Court rulings on classification of farm workers receiving housing and advances",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00066285
+ },
+ {
+  "id": "D10",
+  "sample": 0,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "recordkeeping requirements for travel expenses",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses",
+    "sufficient": false,
+    "missing": "The sources do not provide a clear acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00061455
+ },
+ {
+  "id": "D10",
+  "sample": 1,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "substantiation requirements for travel expenses",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses",
+    "sufficient": false,
+    "missing": "The sources do not provide a clear acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00061455
+ },
+ {
+  "id": "D10",
+  "sample": 2,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "substantiation requirements for travel expenses",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses",
+    "sufficient": false,
+    "missing": "The sources do not provide a clear acceptance of taxpayer-prepared records for tolls and parking charges in substantiation of travel expenses."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00061455
+ },
+ {
+  "id": "D11",
+  "sample": 0,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "constructive receipt of income doctrine",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "constructive receipt application to terminated life insurance policy",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00059355
+ },
+ {
+  "id": "D11",
+  "sample": 1,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "constructive receipt of income doctrine",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court rulings on constructive receipt and terminated life insurance policies",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00059415
+ },
+ {
+  "id": "D11",
+  "sample": 2,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "constructive receipt of income doctrine",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "constructive receipt application to terminated life insurance policy",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00059355
+ },
+ {
+  "id": "D12",
+  "sample": 0,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deductibility of personal expenses under Internal Revenue Code section 262",
+    "sufficient": false,
+    "missing": "The sources do not provide information specifically about the deductibility of personal expenses under Internal Revenue Code section 262."
+   },
+   {
+    "part": "influencer deducting streaming subscriptions as business expenses Tax Court rulings",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00056385
+ },
+ {
+  "id": "D12",
+  "sample": 1,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deductibility of personal expenses under Internal Revenue Code section 262",
+    "sufficient": false,
+    "missing": "The sources do not provide specific information about the deductibility of personal expenses under Internal Revenue Code section 262."
+   },
+   {
+    "part": "influencer deducting streaming subscriptions as business expenses Tax Court rulings",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00056385
+ },
+ {
+  "id": "D12",
+  "sample": 2,
+  "category": "compound",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deductibility of personal expenses under Internal Revenue Code",
+    "sufficient": false,
+    "missing": "The sources do not provide specific guidance on the deductibility of personal expenses under the Internal Revenue Code for the year 2026."
+   },
+   {
+    "part": "influencer deductibility of streaming subscriptions personal versus business expenses",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0005654999999999999
+ },
+ {
+  "id": "D13",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "exclusion of gain from the sale of a principal residence, ownership and use requirements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005515499999999999
+ },
+ {
+  "id": "D13",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "exclusion of gain from the sale of a principal residence for single taxpayers, ownership and use requirements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.000552
+ },
+ {
+  "id": "D13",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "exclusion of gain from the sale of a principal residence, ownership and use requirements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005515499999999999
+ },
+ {
+  "id": "D14",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "maximum deduction for student loan interest",
+    "sufficient": false,
+    "missing": "The sources do not provide the maximum deduction amount for the year 2026."
+   },
+   {
+    "part": "income phase-out limits for student loan interest deduction",
+    "sufficient": false,
+    "missing": "The sources do not provide the income phase-out limits for the student loan interest deduction for the year 2026."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.0007966499999999999
+ },
+ {
+  "id": "D14",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "maximum deduction for student loan interest",
+    "sufficient": false,
+    "missing": "The sources do not provide the maximum deduction amount for the year 2026."
+   },
+   {
+    "part": "income phase-out limits for student loan interest deduction",
+    "sufficient": false,
+    "missing": "The sources do not provide the income phase-out limits for the student loan interest deduction for the year 2026."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.0007966499999999999
+ },
+ {
+  "id": "D14",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "maximum deduction for student loan interest",
+    "sufficient": false,
+    "missing": "The sources do not provide the maximum deduction amount for the year 2026."
+   },
+   {
+    "part": "income phase-out limits for student loan interest deduction",
+    "sufficient": false,
+    "missing": "The sources do not provide the income phase-out limits for the student loan interest deduction for the year 2026."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.0007966499999999999
+ },
+ {
+  "id": "D15",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "medical expense deduction limitation based on adjusted gross income",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific medical expense deduction limitation based on adjusted gross income for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0003657
+ },
+ {
+  "id": "D15",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "medical expense deduction limitation based on adjusted gross income",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific medical expense deduction limitation based on adjusted gross income for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0003657
+ },
+ {
+  "id": "D15",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "medical expense deduction limitation based on adjusted gross income",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific medical expense deduction limitation based on adjusted gross income for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0003657
+ },
+ {
+  "id": "D16",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction of business investigation expenses under Internal Revenue Code Section 195",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004941
+ },
+ {
+  "id": "D16",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction of business investigation expenses under Internal Revenue Code Section 195",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004941
+ },
+ {
+  "id": "D16",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction of business investigation expenses under Internal Revenue Code Section 195",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004941
+ },
+ {
+  "id": "D17",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "capital loss deduction limit against ordinary income and carryover rules for net capital losses",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0007152
+ },
+ {
+  "id": "D17",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "capital loss deduction limit against ordinary income and carryover rules for net capital losses",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0007152
+ },
+ {
+  "id": "D17",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "capital loss deduction limit against ordinary income and carryover rules for net capital losses",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0007152
+ },
+ {
+  "id": "D18",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "additional tax on early distributions from qualified retirement plans",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005679
+ },
+ {
+  "id": "D18",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "additional tax on early distributions from qualified retirement plans",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005679
+ },
+ {
+  "id": "D18",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "additional tax on early distributions from qualified retirement plans",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005679
+ },
+ {
+  "id": "D19",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "taxability of educational assistance program benefits under Internal Revenue Code Section 127",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005404499999999999
+ },
+ {
+  "id": "D19",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "taxability of educational assistance under section 127 of the Internal Revenue Code",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005404499999999999
+ },
+ {
+  "id": "D19",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "tax treatment of educational assistance program benefits under Internal Revenue Code Section 127",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005404499999999999
+ },
+ {
+  "id": "D20",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004392
+ },
+ {
+  "id": "D20",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004392
+ },
+ {
+  "id": "D20",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "contemporaneous written acknowledgment requirement for charitable contributions of $250 or more",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004392
+ },
+ {
+  "id": "D21",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031",
+    "sufficient": false,
+    "missing": "The sources do not provide information on like-kind exchange rules for business equipment specifically, as they focus on real property."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005353499999999999
+ },
+ {
+  "id": "D21",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031",
+    "sufficient": false,
+    "missing": "The sources do not provide information on like-kind exchange rules for business equipment specifically, as Section 1031 primarily addresses real property."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00053715
+ },
+ {
+  "id": "D21",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "like-kind exchange rules for business equipment under Internal Revenue Code Section 1031",
+    "sufficient": false,
+    "missing": "The sources do not provide information on like-kind exchange rules for business equipment specifically, as Section 1031 primarily addresses real property."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00053715
+ },
+ {
+  "id": "D22",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "cents-per-mile rule for valuing personal use of a company car",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "what the cents-per-mile rate covers for personal use of a company vehicle",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0015769500000000001
+ },
+ {
+  "id": "D22",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "cents-per-mile rule for valuing personal use of a company car",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "what the cents-per-mile rate covers for personal use of a company vehicle",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0015769500000000001
+ },
+ {
+  "id": "D22",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "cents-per-mile rule for valuing personal use of a company car",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "what the cents-per-mile rate covers for personal use of a company vehicle",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0015769500000000001
+ },
+ {
+  "id": "D23",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "requirements for an accountable plan under IRS guidelines",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00054525
+ },
+ {
+  "id": "D23",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "requirements for an accountable plan under IRS guidelines",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "court interpretations of accountable plan requirements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006408
+ },
+ {
+  "id": "D23",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "requirements for an accountable plan under IRS guidelines",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "court interpretations of accountable plan requirements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006408
+ },
+ {
+  "id": "D24",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "standard deduction amount for single filers for tax year 2025",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006596999999999999
+ },
+ {
+  "id": "D24",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "standard deduction amount for single filers for tax year 2025",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006596999999999999
+ },
+ {
+  "id": "D24",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "standard deduction amount for single filers for tax year 2025",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006596999999999999
+ },
+ {
+  "id": "D25",
+  "sample": 0,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "required minimum distribution rules for 401(k) plans, age 73 and older",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005838
+ },
+ {
+  "id": "D25",
+  "sample": 1,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "required minimum distribution rules for 401(k) plans, age 73 and older",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005838
+ },
+ {
+  "id": "D25",
+  "sample": 2,
+  "category": "statutory",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "required minimum distribution rules for 401(k) plans, age 73 and older",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005838
+ },
+ {
+  "id": "D26",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "mortgage interest deduction limits for qualified residence interest for tax year 2016",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005839500000000001
+ },
+ {
+  "id": "D26",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "mortgage interest deduction limits for qualified residence interest under the Tax Cuts and Jobs Act",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005841
+ },
+ {
+  "id": "D26",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "mortgage interest deduction limits for qualified residence interest for tax year 2016",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific mortgage interest deduction limits for qualified residence interest for tax year 2016."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00059655
+ },
+ {
+  "id": "D27",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "clean vehicle credit eligibility requirements for electric vehicles placed in service",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005818500000000001
+ },
+ {
+  "id": "D27",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "clean vehicle credit eligibility requirements for electric vehicles placed in service",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005818500000000001
+ },
+ {
+  "id": "D27",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "clean vehicle credit eligibility requirements for electric vehicles placed in service",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005818500000000001
+ },
+ {
+  "id": "D28",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of cost eligible for the residential clean energy credit for solar energy systems placed in service before 2022",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00055815
+ },
+ {
+  "id": "D28",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005578499999999999
+ },
+ {
+  "id": "D28",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of cost eligible for the residential clean energy credit for solar energy systems installed in 2021",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005578499999999999
+ },
+ {
+  "id": "D29",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004956
+ },
+ {
+  "id": "D29",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004956
+ },
+ {
+  "id": "D29",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "energy efficient home improvement credit eligibility requirements for residential energy property expenditures",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004956
+ },
+ {
+  "id": "D30",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction for qualified overtime compensation under Internal Revenue Code section 162",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005629499999999999
+ },
+ {
+  "id": "D30",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction for qualified overtime compensation under Internal Revenue Code section 162",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005629499999999999
+ },
+ {
+  "id": "D30",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction for qualified overtime compensation under Internal Revenue Code section 162",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005629499999999999
+ },
+ {
+  "id": "D31",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deductibility of interest on a loan secured by a personal use vehicle",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.000465
+ },
+ {
+  "id": "D31",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deductibility of interest on a loan secured by a personal use vehicle",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.000465
+ },
+ {
+  "id": "D31",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deductibility of interest on a loan secured by a personal use vehicle",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.000465
+ },
+ {
+  "id": "D32",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005267999999999999
+ },
+ {
+  "id": "D32",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005267999999999999
+ },
+ {
+  "id": "D32",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "reporting requirements for third-party network transactions under Form 1099-K, including thresholds for reporting",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005267999999999999
+ },
+ {
+  "id": "D33",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "suspension of moving expense deduction for tax years after 2017",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004185
+ },
+ {
+  "id": "D33",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "suspension of moving expense deduction for tax years after 2017",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004185
+ },
+ {
+  "id": "D33",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "suspension of moving expense deduction for tax years after 2017",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0004185
+ },
+ {
+  "id": "D34",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "statute of limitations for collection of federal income tax liabilities",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "IRS levy authority after expiration of statute of limitations for collection",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006582
+ },
+ {
+  "id": "D34",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "statute of limitations for collection of tax liabilities",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "IRS levy authority after expiration of statute of limitations for collection",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006579
+ },
+ {
+  "id": "D34",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "statute of limitations for collection of federal income tax liabilities",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "IRS levy authority after expiration of statute of limitations for collection",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006582
+ },
+ {
+  "id": "D35",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.000555
+ },
+ {
+  "id": "D35",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.000555
+ },
+ {
+  "id": "D35",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "child and dependent care credit percentage based on adjusted gross income for 2023",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005548500000000001
+ },
+ {
+  "id": "D36",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific percentage applicable for the child and dependent care credit for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00052155
+ },
+ {
+  "id": "D36",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific percentage applicable for the child and dependent care credit for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00052155
+ },
+ {
+  "id": "D36",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "percentage of qualifying expenses for the child and dependent care credit based on adjusted gross income",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific percentage applicable for the child and dependent care credit for the year 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00052155
+ },
+ {
+  "id": "D37",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for taxpayers age 50 and older",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00048945
+ },
+ {
+  "id": "D37",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for taxpayers age 50 and older",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00048945
+ },
+ {
+  "id": "D37",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "deduction limit for taxpayers aged 65 or older",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00048825
+ },
+ {
+  "id": "D38",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "standard mileage rate for business use of an automobile for 2026",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005438999999999999
+ },
+ {
+  "id": "D38",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "standard mileage rate for business use of an automobile for 2026",
+    "sufficient": false,
+    "missing": "The sources do not provide the standard mileage rate for business use of an automobile for 2026."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005553
+ },
+ {
+  "id": "D38",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "standard mileage rate for business use of an automobile for 2026",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005438999999999999
+ },
+ {
+  "id": "D39",
+  "sample": 0,
+  "category": "temporal",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "standard mileage rate for business use of an automobile for 2024",
+    "sufficient": false,
+    "missing": "The sources do not provide the standard mileage rate for business use of an automobile specifically for the year 2024."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005748
+ },
+ {
+  "id": "D39",
+  "sample": 1,
+  "category": "temporal",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "standard mileage rate for business use of an automobile for 2024",
+    "sufficient": false,
+    "missing": "The sources do not provide the standard mileage rate for business use of an automobile for 2024."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.000573
+ },
+ {
+  "id": "D39",
+  "sample": 2,
+  "category": "temporal",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "standard mileage rate for business use of an automobile for 2024",
+    "sufficient": false,
+    "missing": "The sources do not provide the standard mileage rate for business use of an automobile specifically for the year 2024."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005748
+ },
+ {
+  "id": "D40",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "burden of proof provisions under section 7491(a)",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "hobby loss burden of proof shifting IRS trial outcomes",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006420000000000001
+ },
+ {
+  "id": "D40",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "burden of proof provisions under section 7491(a)",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "hobby loss burden of proof shifting IRS trial outcomes",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0006420000000000001
+ },
+ {
+  "id": "D40",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "burden of proof provisions under section 7491(a)",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "hobby loss case burden shifting IRS trial outcome",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00064185
+ },
+ {
+  "id": "D41",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court alternative arguments raised for the first time in post-trial briefs",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005876999999999999
+ },
+ {
+  "id": "D41",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court alternative arguments raised for the first time in post-trial briefs",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005876999999999999
+ },
+ {
+  "id": "D41",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court alternative arguments raised for the first time in post-trial briefs",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005876999999999999
+ },
+ {
+  "id": "D42",
+  "sample": 0,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court jurisdiction over IRS classification determinations",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "review of IRS refusal to allow participation in Voluntary Classification Settlement Program",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00070095
+ },
+ {
+  "id": "D42",
+  "sample": 1,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court jurisdiction over IRS classification determinations",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "Tax Court review of IRS refusal to allow Voluntary Classification Settlement Program",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00070095
+ },
+ {
+  "id": "D42",
+  "sample": 2,
+  "category": "case_law",
+  "expect_insufficient": false,
+  "parts": [
+   {
+    "part": "Tax Court jurisdiction over IRS classification determinations",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "review of IRS refusal to allow participation in Voluntary Classification Settlement Program",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.00069705
+ },
+ {
+  "id": "D43",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "annual gift tax exclusion amount for 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the annual gift tax exclusion amount for 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005599499999999999
+ },
+ {
+  "id": "D43",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "annual gift tax exclusion amount for 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the annual gift tax exclusion amount for 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005599499999999999
+ },
+ {
+  "id": "D43",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "annual gift tax exclusion amount for 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the annual gift tax exclusion amount for 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005599499999999999
+ },
+ {
+  "id": "D44",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "maximum contribution limit for health savings accounts for family coverage",
+    "sufficient": false,
+    "missing": "The sources do not provide the maximum contribution limit for health savings accounts for family coverage for the year 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005277
+ },
+ {
+  "id": "D44",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "maximum contribution limit for health savings accounts for family coverage",
+    "sufficient": false,
+    "missing": "The sources do not provide the maximum contribution limit for health savings accounts for family coverage for the year 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005277
+ },
+ {
+  "id": "D44",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "maximum contribution limit for health savings accounts for family coverage",
+    "sufficient": false,
+    "missing": "The sources do not provide the maximum contribution limit for health savings accounts for family coverage for the year 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005277
+ },
+ {
+  "id": "D45",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "taxation of 401(k) distributions in Pennsylvania state income tax",
+    "sufficient": false,
+    "missing": "The sources do not address Pennsylvania state income tax treatment of 401(k) distributions."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00045914999999999997
+ },
+ {
+  "id": "D45",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "taxation of 401(k) distributions in Pennsylvania",
+    "sufficient": false,
+    "missing": "The sources do not address Pennsylvania state tax treatment of 401(k) distributions."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0004581
+ },
+ {
+  "id": "D45",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "taxation of 401(k) distributions in Pennsylvania",
+    "sufficient": false,
+    "missing": "The sources do not address Pennsylvania state tax treatment of 401(k) distributions."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0004581
+ },
+ {
+  "id": "D46",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "Massachusetts income tax rate on short-term capital gains",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about Massachusetts income tax rates, specifically for short-term capital gains."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005949
+ },
+ {
+  "id": "D46",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "Massachusetts income tax rate on short-term capital gains",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about Massachusetts income tax rates, specifically for short-term capital gains."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005949
+ },
+ {
+  "id": "D46",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "Massachusetts income tax rate on short-term capital gains",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about Massachusetts income tax rates."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005906999999999999
+ },
+ {
+  "id": "D47",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "taxation of dividends for non-residents in Germany",
+    "sufficient": false,
+    "missing": "The sources do not address the taxation of dividends for non-residents in Germany."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.0005171999999999999
+ },
+ {
+  "id": "D47",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "taxation of dividends for non-resident aliens in Germany",
+    "sufficient": false,
+    "missing": "The sources do not address the taxation of dividends for non-resident aliens in Germany."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00051795
+ },
+ {
+  "id": "D47",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "taxation of dividends for non-resident aliens in Germany",
+    "sufficient": false,
+    "missing": "The sources do not address the taxation of dividends for non-resident aliens in Germany."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00051795
+ },
+ {
+  "id": "D48",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "current processing time for case assignment by the Taxpayer Advocate Service",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about the current processing time for case assignment by the Taxpayer Advocate Service."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00041834999999999995
+ },
+ {
+  "id": "D48",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "current processing time for case assignment by the Taxpayer Advocate Service",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about the current processing time for case assignment by the Taxpayer Advocate Service."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00041834999999999995
+ },
+ {
+  "id": "D48",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "current processing time for case assignment by the Taxpayer Advocate Service",
+    "sufficient": false,
+    "missing": "The sources do not provide any information regarding the current processing time for case assignment by the Taxpayer Advocate Service."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00041834999999999995
+ },
+ {
+  "id": "D49",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "short-term applicable federal rate for loans made in March 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific short-term applicable federal rate for March 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00046875
+ },
+ {
+  "id": "D49",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "short-term applicable federal rate for loans under Internal Revenue Code Section 1274",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific short-term applicable federal rate for March 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00046905
+ },
+ {
+  "id": "D49",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "short-term applicable federal rate for loans made in March 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the specific short-term applicable federal rate for loans made in March 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00047054999999999997
+ },
+ {
+  "id": "D50",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "Internal Revenue Code section 280E disallowance for cannabis businesses",
+    "sufficient": false,
+    "missing": "The sources do not address the status or potential repeal of section 280E regarding cannabis businesses."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": true,
+  "usd": 0.00047985000000000004
+ },
+ {
+  "id": "D50",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "Section 280E disallowance for cannabis businesses",
+    "sufficient": false,
+    "missing": "The source does not address Section 280E or its disallowance for cannabis businesses."
+   },
+   {
+    "part": "Congressional actions regarding Section 280E cannabis tax treatment",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about current or future congressional actions regarding the repeal of Section 280E."
+   }
+  ],
+  "skipped": 2,
+  "all_skipped": true,
+  "usd": 0.0006194999999999999
+ },
+ {
+  "id": "D50",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "Section 280E disallowance for cannabis businesses",
+    "sufficient": false,
+    "missing": "The source does not address Section 280E or its disallowance for cannabis businesses."
+   },
+   {
+    "part": "court rulings on Section 280E and cannabis businesses",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.00060705
+ },
+ {
+  "id": "D51",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deduction for student loan interest under Internal Revenue Code section 221",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "New Jersey state tax treatment of student loan interest deduction",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about New Jersey's state tax treatment of student loan interest deductions."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0010098
+ },
+ {
+  "id": "D51",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deduction for student loan interest under Internal Revenue Code section 221",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "New Jersey state tax treatment of student loan interest deduction",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about New Jersey's state tax treatment of student loan interest deductions."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0010098
+ },
+ {
+  "id": "D51",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deduction for student loan interest under Internal Revenue Code section 221",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "New Jersey state tax treatment of student loan interest deduction",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about New Jersey's state tax treatment of student loan interest deductions."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0010098
+ },
+ {
+  "id": "D52",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deductibility of alimony payments under divorce agreements executed before 2019",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "treatment of alimony payments for federal tax purposes under pre-2019 agreements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005673
+ },
+ {
+  "id": "D52",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deductibility of alimony payments under divorce agreements executed before 2019",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "treatment of alimony payments for federal tax purposes under pre-2019 agreements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005673
+ },
+ {
+  "id": "D52",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deductibility of alimony payments under divorce agreements executed before 2019",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "treatment of alimony payments for federal tax purposes under pre-2019 agreements",
+    "sufficient": true,
+    "missing": ""
+   }
+  ],
+  "skipped": 0,
+  "all_skipped": false,
+  "usd": 0.0005673
+ },
+ {
+  "id": "D53",
+  "sample": 0,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for 2025",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the deduction limit for contributions to a traditional IRA for the year 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0011595
+ },
+ {
+  "id": "D53",
+  "sample": 1,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for 2025",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide the deduction limit for contributions to a traditional IRA for the year 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0011595
+ },
+ {
+  "id": "D53",
+  "sample": 2,
+  "category": "insufficiency",
+  "expect_insufficient": true,
+  "parts": [
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for 2025",
+    "sufficient": true,
+    "missing": ""
+   },
+   {
+    "part": "deduction limit for contributions to a traditional individual retirement account for 2027",
+    "sufficient": false,
+    "missing": "The sources do not provide any information about the deduction limit for contributions to a traditional IRA for 2027."
+   }
+  ],
+  "skipped": 1,
+  "all_skipped": false,
+  "usd": 0.0011600999999999998
+ }
+]
