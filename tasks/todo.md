@@ -2607,6 +2607,8 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 
 **A regression signal, not yet confirmed: correctness on golden's 32 authority rows fell from 0.369 (Phase E, ii′, 5 samples) to 0.260 (F5, verified and unverified alike, 3 samples).** Verification isn't the cause (both views 0.260); F3's structured synthesis is the likely one, though on dev it cost nothing (0.373 vs 0.373). Confirming it means running the pre-F3 pipeline on those 32 golden rows (~$1): a diagnosis, not tuning, but golden, so it waits for you.
 
+**F5 regression diagnostic (2026-10-01, your go, $0.59 judge + synthesis):** the Phase E prompt (`--prompt pre-f3 --no-verify`) on golden's 32 authority rows, same pinned plans and judge, 3 samples: **correct 0.365** (structured E′ unverified: 0.260; Phase E's own run, samples 0-2: 0.396). Confirmed: F3's structured synthesis costs ~0.10 correctness on golden, not verification. 20 row-samples lost, 10 won; 15 of the 20 lost became "partial: missing condition", only 3 via refusal. Cause seen in the answers: structured answers almost never state the bottom line (4 of 324 open with Yes/No vs 35 of 96 for the old prompt); they list cited facts per sub-query and leave the conclusion to the reader. Dev missed it (0.373 = 0.373). Results `temporal-golden-2026-10-01-f5-pref3.json`.
+
 ## F6: Phase F exit report
 
 `eval/results/phase_f.md`: gate outcomes, what each check caught (with examples: a laundered citation suppressed, `G-I11`'s half answer), what it cost (suppressions, latency), what F got wrong. Tech doc §7/§9.3 and ADRs updated.

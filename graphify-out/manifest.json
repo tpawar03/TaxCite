@@ -565,8 +565,8 @@
   },
   "eval/results/retrieval-golden-2026-09-27-k20-c5-graph.json": {
     "mtime": 1790533180.1422322,
-    "seen": 1790801514.141341,
-    "ast_hash": "",
+    "seen": 1790828092.5047932,
+    "ast_hash": "ee42ab2cfdc26177afb3d22f20e9618e",
     "semantic_hash": ""
   },
   "eval/e0_authority.py": {
@@ -877,14 +877,14 @@
   },
   "eval/results/retrieval-dev-2026-09-28-k20-e4-arms-exact.json": {
     "mtime": 1790637509.9195611,
-    "seen": 1790801514.140973,
-    "ast_hash": "",
+    "seen": 1790828092.504631,
+    "ast_hash": "264b100aea8bc775ff4071b508cce087",
     "semantic_hash": ""
   },
   "eval/results/retrieval-dev-2026-09-28-k8-e4-arms-exact.json": {
     "mtime": 1790637092.3374078,
-    "seen": 1790801514.141052,
-    "ast_hash": "",
+    "seen": 1790828092.5046651,
+    "ast_hash": "051bdf9bfd562c862a68fb61cc0a3cc1",
     "semantic_hash": ""
   },
   "eval/results/retrieval-golden-2026-09-28-k20-e4-golden-gate.json": {
@@ -913,8 +913,8 @@
   },
   "eval/results/temporal-answers-e5base.json": {
     "mtime": 1790641091.451812,
-    "seen": 1790801514.1419241,
-    "ast_hash": "",
+    "seen": 1790828092.505055,
+    "ast_hash": "0b504c20799b4273b1a8ced083a9cef6",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-e5base.json": {
@@ -997,14 +997,14 @@
   },
   "eval/results/temporal-answers-e5labels.json": {
     "mtime": 1790642368.7554638,
-    "seen": 1790801514.141928,
-    "ast_hash": "",
+    "seen": 1790828092.505056,
+    "ast_hash": "6b6048385953899ee2fe75a77272e30c",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5rule4.json": {
     "mtime": 1790643260.7226152,
-    "seen": 1790801514.141929,
-    "ast_hash": "",
+    "seen": 1790828092.505057,
+    "ast_hash": "0f76bc023f17d4f3a5e664a1b8ffcbc3",
     "semantic_hash": ""
   },
   "eval/results/temporal-dev-2026-09-28-e5rule4b.json": {
@@ -1015,8 +1015,8 @@
   },
   "eval/results/temporal-answers-e5rule4b.json": {
     "mtime": 1790644723.8137622,
-    "seen": 1790801514.1419299,
-    "ast_hash": "",
+    "seen": 1790828092.505057,
+    "ast_hash": "cbf3b89b73a213dfce18714427dcf29f",
     "semantic_hash": ""
   },
   "eval/results/ragas-golden-2026-09-28-pipeline-answers-e5.json": {
@@ -1039,14 +1039,14 @@
   },
   "eval/results/temporal-answers-e5golden-pre.json": {
     "mtime": 1790655110.487127,
-    "seen": 1790801514.141925,
-    "ast_hash": "",
+    "seen": 1790828092.505055,
+    "ast_hash": "59350b2f60df5e407907468dcaa0a5be",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5golden.json": {
     "mtime": 1790654580.09047,
-    "seen": 1790801514.141927,
-    "ast_hash": "",
+    "seen": 1790828092.505056,
+    "ast_hash": "c7b518e6cca5b21541664cc786924c9d",
     "semantic_hash": ""
   },
   "eval/results/phase_e.md": {
@@ -1291,44 +1291,44 @@
   },
   "eval/results/f0-pairs-f3-dev-a.json": {
     "mtime": 1790750484.5596192,
-    "seen": 1790807791.642774,
-    "ast_hash": "",
+    "seen": 1790828092.503514,
+    "ast_hash": "bce805bf2cf8be6ff85081dbfb7f2238",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-b.json": {
     "mtime": 1790751766.2124908,
-    "seen": 1790807791.642775,
-    "ast_hash": "",
+    "seen": 1790828092.5035148,
+    "ast_hash": "4429733aeee2dec3e7e76877978ae0ff",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-c.json": {
     "mtime": 1790751821.005788,
-    "seen": 1790807791.642776,
-    "ast_hash": "",
+    "seen": 1790828092.5035148,
+    "ast_hash": "cbf2d3561edda59c16cb1eee2af02a33",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-d.json": {
     "mtime": 1790751883.274435,
-    "seen": 1790807791.6427772,
-    "ast_hash": "",
+    "seen": 1790828092.503516,
+    "ast_hash": "47542f368aedf3043466b0aa55d165dd",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-e.json": {
     "mtime": 1790781603.2702875,
-    "seen": 1790807791.6427772,
-    "ast_hash": "",
+    "seen": 1790828092.503516,
+    "ast_hash": "ae8053c55cb4a1546bad38d8e1652e36",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-e2.json": {
     "mtime": 1790783268.479984,
-    "seen": 1790807791.6427789,
-    "ast_hash": "",
+    "seen": 1790828092.503517,
+    "ast_hash": "9a2975727e44baab5a3f7db72b61c290",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs.json": {
     "mtime": 1790743049.6661377,
-    "seen": 1790807791.6427798,
-    "ast_hash": "",
+    "seen": 1790828092.503517,
+    "ast_hash": "b6b4d83ec64e33dd88061d7f265f7e3f",
     "semantic_hash": ""
   },
   "eval/results/f4-hide-temporal-answers-f4.json": {
@@ -1339,62 +1339,62 @@
   },
   "eval/results/ragas-answers-f3c.json": {
     "mtime": 1790751553.201668,
-    "seen": 1790807791.643713,
-    "ast_hash": "",
+    "seen": 1790828092.504072,
+    "ast_hash": "f7d42f96eb30a29bbd2cd40c1ef03b9b",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3d.json": {
     "mtime": 1790751672.0015996,
-    "seen": 1790807791.643714,
-    "ast_hash": "",
+    "seen": 1790828092.504073,
+    "ast_hash": "87e171c9c7ef9fbac4680708cf70c5c2",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3e.json": {
     "mtime": 1790781127.2250187,
-    "seen": 1790807791.6437151,
-    "ast_hash": "",
+    "seen": 1790828092.504073,
+    "ast_hash": "0440c22fe8feede143da7a8ee66b133f",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3e2.json": {
     "mtime": 1790782694.3609,
-    "seen": 1790807791.643716,
-    "ast_hash": "",
+    "seen": 1790828092.504074,
+    "ast_hash": "b0ee8b147417748c450de848564333b6",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3a.json": {
     "mtime": 1790750396.916152,
-    "seen": 1790807791.6460092,
-    "ast_hash": "",
+    "seen": 1790828092.505076,
+    "ast_hash": "79a30f7f4c7e0245affdf6813bf12f2d",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3b.json": {
     "mtime": 1790751408.7715514,
-    "seen": 1790807791.6460102,
-    "ast_hash": "",
+    "seen": 1790828092.505077,
+    "ast_hash": "5c8d055c7097d12020218fbf2c3607c4",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3c.json": {
     "mtime": 1790751468.398788,
-    "seen": 1790807791.6460109,
-    "ast_hash": "",
+    "seen": 1790828092.505077,
+    "ast_hash": "d48fda9913dfe49ef673becdbb85130b",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3d.json": {
     "mtime": 1790751721.294843,
-    "seen": 1790807791.6460118,
-    "ast_hash": "",
+    "seen": 1790828092.505078,
+    "ast_hash": "dabeeba11c9caa00e5c9d061349e49b2",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3e.json": {
     "mtime": 1790781576.4604023,
-    "seen": 1790807791.646013,
-    "ast_hash": "",
+    "seen": 1790828092.505078,
+    "ast_hash": "36ab997b619e4ded9e8aa2996ac266cc",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3e2.json": {
     "mtime": 1790783219.3768466,
-    "seen": 1790807791.646014,
-    "ast_hash": "",
+    "seen": 1790828092.505079,
+    "ast_hash": "524a083a20dc0d92111836d54c7c6496",
     "semantic_hash": ""
   },
   "eval/results/temporal-dev-2026-09-30-f4-none.json": {
@@ -1453,26 +1453,26 @@
   },
   "eval/results/temporal-answers-f4-none.json": {
     "mtime": 1790805293.5093024,
-    "seen": 1790819275.438077,
-    "ast_hash": "",
+    "seen": 1790828092.505079,
+    "ast_hash": "67d1a85e12c5e8a0a5ddc4e5db4b27e7",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4-part.json": {
     "mtime": 1790805293.5385284,
-    "seen": 1790819275.438078,
-    "ast_hash": "",
+    "seen": 1790828092.50508,
+    "ast_hash": "a1153a1e23e552435b6795fb5294f54c",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4-sentence.json": {
     "mtime": 1790805293.5692658,
-    "seen": 1790819275.4380789,
-    "ast_hash": "",
+    "seen": 1790828092.50508,
+    "ast_hash": "24899cee030ccc54837aaa139ef92312",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4.json": {
     "mtime": 1790805284.3952298,
-    "seen": 1790819275.4380789,
-    "ast_hash": "",
+    "seen": 1790828092.50508,
+    "ast_hash": "fbbb80c44929e6dcbe535c4b1dfb5276",
     "semantic_hash": ""
   },
   "eval/results/temporal-dev-2026-09-30-f2a.json": {
