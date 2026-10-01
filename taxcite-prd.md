@@ -184,6 +184,8 @@ Quality is tracked via an **ablation ladder** — closed-book → dense-only →
 | F | Citation entailment F1 (runtime verifier vs. an independent audit reference; ADR-4 revised 2026-09-30) | ≥0.90 |
 | F | Citation completeness | ≥0.85 |
 | F | Substantive correctness | Tracked, not gated, until ≥100 AI-judge-graded examples exist |
+
+*Phase F results (2026-10-01):* completeness 0.994 (met); entailment F1 0.63 against an independent reference (not met; ADR-4); correctness tracked on 291 golden row-samples, two judges, κ reported in `eval/results/phase_f.md`.
 | G | Cross-tenant leakage failures | 0 |
 | G | Injection corpus pass rate (prompt + render path) | 100% |
 | H | p95 latency (synthesis / refusal) | ≤35s / ≤2s |
