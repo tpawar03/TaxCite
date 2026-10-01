@@ -192,3 +192,11 @@ def test_no_conclusion_check_when_every_sentence_failed(monkeypatch):
     calls = routed(monkeypatch, {"verify": [{"verdicts": [{"index": k, "supported": False, "why": "x"} for k in range(3)]}]})
     shown = verify.checked("q", answer, "sentence")
     assert calls == [verify.SYSTEM] and shown.refused and shown.conclusion is None
+
+
+def test_a_stray_yes_is_dropped_only_when_the_question_is_not_yes_or_no():
+    assert verify.displayed("Yes, the rate is 72.5 cents per mile.", verify.NOT_YES_NO + "ok") == "The rate is 72.5 cents per mile."
+    assert verify.displayed("No: $1,750 is taxable.", verify.NOT_YES_NO) == "$1,750 is taxable."
+    assert verify.displayed("Yes, it is deductible.", "ok") == "Yes, it is deductible."  # a yes/no question keeps it
+    assert verify.displayed("Yesterday's rule applies.", verify.NOT_YES_NO) == "Yesterday's rule applies."
+    assert verify.displayed("Yes.", verify.NOT_YES_NO) == "Yes."  # nothing left to show without it

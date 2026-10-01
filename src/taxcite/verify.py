@@ -14,6 +14,7 @@ If verification itself fails, nothing unverified is shown: the answer becomes a 
 
 import json
 import os
+import re
 from dataclasses import asdict, dataclass, replace
 
 from taxcite.generate import OPINION_RE, Answer, call_model, cited_items, parse_citations, render, section_of
@@ -50,7 +51,8 @@ SCHEMA = {
 # F5b C3: a failed sentence may cite the wrong one of the retrieved sources (D24's $15,750 cites p. 3; the chart is
 # p. 97). One call names the source that states it, and the swap is re-checked by SYSTEM, unchanged; text is never
 # rewritten. C2: the conclusion is an inference, judged against the sentences that passed rather than quoted from a
-# source, and shown cited with theirs. The conclusion check runs whenever synthesis wrote one (generate.CONCLUSION).
+# source, and shown cited with theirs; F5b's golden read found it passing conclusions that answer another question
+# (a federal penalty for a Texas question) or contradict themselves, so it now checks those too. The conclusion check runs whenever synthesis wrote one (generate.CONCLUSION).
 # F5b (your decision 2026-10-01), a recorded departure from F5b's criteria 1 and 4: dev correct and grounded 27 -> 35, incorrect 18 -> 17, refusals 9 -> 15 (1 cost a correct grounded answer), short answer on 75%.
 RECITE = True
 RECITE_SYSTEM = """Each claim below failed a check against the source it cited. For each, pick the one source from the list that states the claim fully, every part, qualifier and condition, or null if none does. The question's facts about the client may be taken as given. Never pick a source that states only part of the claim.
@@ -64,13 +66,13 @@ RECITE_SCHEMA = {
 }
 CONCLUSION_SYSTEM = """You check an answer's conclusion against statements already verified from sources.
 
-The conclusion is supported only if it follows from the numbered statements together with the question's facts about the client. A conclusion that adds a rule, number, date or condition the statements don't contain is NOT supported. A conclusion that ignores a condition or exception the statements make material is NOT supported. Do not use your own knowledge of the law.
+The conclusion is supported only if it answers the question asked and follows from the numbered statements together with the question's facts about the client. A conclusion that adds a rule, number, date or condition the statements don't contain is NOT supported. A conclusion that ignores a condition or exception the statements make material is NOT supported. A conclusion is NOT supported if it answers a different question than the one asked (another jurisdiction, year, taxpayer or subject than the question's, e.g. a federal rule for a state-law question), if the statements are about a different matter than the question, or if it contradicts itself or a statement (e.g. "No, ... is subject to ..." for "is it subject to?"). Do not use your own knowledge of the law.
 
-Return JSON only: {"follows": true, "basis": [0, 2], "why": "..."}. "basis" lists the statements it follows from. Keep "why" under 20 words."""
+Return JSON only: {"follows": true, "basis": [0, 2], "yes_no_question": false, "why": "..."}. "basis" lists the statements it follows from; "yes_no_question" says whether the question asks yes or no. Keep "why" under 20 words."""
 CONCLUSION_SCHEMA = {
-    "type": "object", "additionalProperties": False, "required": ["follows", "basis", "why"],
+    "type": "object", "additionalProperties": False, "required": ["follows", "basis", "yes_no_question", "why"],
     "properties": {"follows": {"type": "boolean"}, "basis": {"type": "array", "items": {"type": "integer"}},
-                   "why": {"type": "string"}},
+                   "yes_no_question": {"type": "boolean"}, "why": {"type": "string"}},
 }
 
 
@@ -150,14 +152,30 @@ def recite(question: str, answer: Answer, items: list[dict], failed: list[int],
 
 def conclude(question: str, conclusion: str, kept: list[dict], model: str = VERIFIER) -> tuple[list[str] | None, str, int, int]:
     """(citations to show the conclusion with, or None if it doesn't follow; why; tokens). Its citations are those of
-    the passed sentences it rests on, so it is shown cited and can't outlive a hidden premise."""
+    the passed sentences it rests on, so it is shown cited and can't outlive a hidden premise. `why` starts "(not
+    yes/no)" when the question doesn't ask yes or no, so the display drops a stray "Yes,"."""
     statements = "\n".join(f"{n}. {item['text']}" for n, item in enumerate(kept))
     data, tin, tout = _json(CONCLUSION_SYSTEM, f"Question: {question}\n\nVerified statements:\n{statements}\n\n"
                                                f"Conclusion: {conclusion}", model, CONCLUSION_SCHEMA)
     basis = [n for n in data.get("basis") or [] if isinstance(n, int) and 0 <= n < len(kept)]
+    why = ("" if data.get("yes_no_question", True) else NOT_YES_NO) + str(data.get("why", ""))
     if not data.get("follows") or not basis:
-        return None, str(data.get("why", "")), tin, tout
-    return list(dict.fromkeys(c for n in basis for c in kept[n]["citations"])), str(data.get("why", "")), tin, tout
+        return None, why, tin, tout
+    return list(dict.fromkeys(c for n in basis for c in kept[n]["citations"])), why, tin, tout
+
+
+NOT_YES_NO = "(not yes/no) "
+YES_NO_RE = re.compile(r"^(yes|no)\b[,:;.]?\s*", re.I)
+
+
+def displayed(conclusion: str, why: str) -> str:
+    """The conclusion as shown: a leading "Yes," or "No," dropped when the question doesn't ask yes or no (F5b dev:
+    "Yes, the 2026 rate is 72.5 cents per mile" for "what is the rate"). Nothing else in it is changed."""
+    text = conclusion.strip()
+    if why.startswith(NOT_YES_NO) and YES_NO_RE.match(text) and YES_NO_RE.sub("", text):
+        rest = YES_NO_RE.sub("", text)
+        text = rest[0].upper() + rest[1:]
+    return text
 
 
 def with_conclusion(text: str, conclusion: str, cites: list[str]) -> str:
@@ -216,7 +234,7 @@ def checked(question: str, answer: Answer, unit: str = HIDE, model: str = VERIFI
             tin, tout = tin + i4, tout + o4
             extra = {"conclusion": {"text": conclusion, "shown": cites is not None, "citations": cites or [], "why": why}}
             if cites:
-                text = with_conclusion(shown.text, conclusion, cites)
+                text = with_conclusion(shown.text, displayed(conclusion, why), cites)
                 exact, derived, invented = parse_citations(text, answer.retrieved)
                 shown = replace(shown, text=text, citations=exact, derived_citations=derived, unsupported_citations=invented)
     except Exception as e:  # noqa: BLE001  any failure, API or parse, must not let an unverified claim through
