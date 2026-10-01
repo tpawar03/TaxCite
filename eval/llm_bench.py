@@ -75,13 +75,17 @@ Defect tags (use "none" for a correct grade):
 Assess substance only, against the reference. Length and confident tone are not evidence."""
 
 
-def judge(question: str, reference: str, candidate: str, model: str, alt: bool = False) -> dict:
+# F5b: diagnostic re-grades only (the rows that change grade between arms); scoring keeps the rubric above unchanged
+WHY = '\n\nAlso add "why": one sentence naming what decided the grade.'
+
+
+def judge(question: str, reference: str, candidate: str, model: str, alt: bool = False, why: bool = False) -> dict:
     """Grade one answer. `alt` applies the same rubric in different words, which is the
     reliability check: a second judge given a *stricter* rubric would measure two
-    different standards rather than agreement."""
+    different standards rather than agreement. `why` asks for the reason too (diagnostics)."""
     prompt = (f"Question: {question}\n\nReference answer: {reference}\n\n"
               f"Answer to grade: {candidate}\n\nReply with JSON only.")
-    text, tin, tout = call_model(JUDGE_SYSTEM_ALT if alt else JUDGE_SYSTEM, prompt, model)
+    text, tin, tout = call_model((JUDGE_SYSTEM_ALT if alt else JUDGE_SYSTEM) + (WHY if why else ""), prompt, model)
     try:
         start, end = text.index("{"), text.rindex("}") + 1
         parsed = json.loads(text[start:end])
@@ -89,7 +93,8 @@ def judge(question: str, reference: str, candidate: str, model: str, alt: bool =
         defect = str(parsed.get("defect", "none")).lower()
     except (ValueError, json.JSONDecodeError):
         grade, defect = "unparsed", "none"
-    return {"grade": grade, "defect": defect, "in": tin, "out": tout, "model": model}
+    return {"grade": grade, "defect": defect, "in": tin, "out": tout, "model": model,
+            **({"why": str(parsed.get("why", "")) if grade != "unparsed" else ""} if why else {})}
 
 
 def cost_of(model: str, tin: int, tout: int) -> float:

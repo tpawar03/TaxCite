@@ -340,3 +340,23 @@ def test_the_gate_is_off_unless_turned_on(monkeypatch):
 def test_the_gate_ships_off():
     """F2: measured on dev and not shipped (its rule's wrong-refusal guard failed); the code stays for the eval."""
     assert dc.GATE is False
+
+
+def test_siblings_search_each_found_section_alone_and_skip_what_is_held(monkeypatch):
+    """F5b: one search per Code section or regulation already found (searched together, the slots refill with
+    chunks already held), at most SIBLING_SECTIONS of them in rank order; publications and opinions aren't expanded."""
+    def sec(citation, section, source="usc"):
+        return Hit(citation=citation, heading="h", text="t", score=1.0, section=section, source=source)
+    found = [sec("26 U.S.C. § 121(a)", "121"), sec("IRS Pub 17 (2025), p. 3", "Pub 17", "irs_pub"),
+             sec("26 CFR 1.121-1(a)", "1.121-1", "ecfr"), sec("26 U.S.C. § 121(b)(5)", "121"),
+             sec("26 U.S.C. § 25D(a)-(c)", "25D"), sec("26 U.S.C. § 163(h)(3)", "163")]
+    calls = []
+
+    def fake_search(q, k, mode, source, sections=None, **kw):
+        calls.append(sections)
+        return [sec(f"26 U.S.C. § {sections[0]}(z)", sections[0]), found[0]] if sections else found
+    monkeypatch.setattr(dc, "search", fake_search)
+    d = dc.retrieve(dc.Decomposition("q", plan(("statutory", "s"))), k=8, siblings=2)
+    assert calls == [None, ["121"], ["1.121-1"], ["25D"]]  # three sections, best first; 163 is the fourth
+    assert [h.citation for h in d.searched[0].hits][len(found):] == [
+        "26 U.S.C. § 121(z)", "26 U.S.C. § 1.121-1(z)", "26 U.S.C. § 25D(z)"]  # 121(a) already held, not repeated

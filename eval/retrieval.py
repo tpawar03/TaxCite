@@ -160,6 +160,9 @@ _BEST = dc.AUTHORITY  # E4's choice, shipped: the CI arm route+statute1+prior0.5
 VARIANTS["route+statute1+prior0.5-scoped+statfirst"] = _SHIPPED | {"authority": _BEST | {"statute_first": True}}
 VARIANTS["route+statute1+prior0.5-scoped+demoteA"] = _SHIPPED | {"authority": _BEST | {"demote_prior": True}}
 VARIANTS["route+statute1+prior0.5-scoped+deep20"] = _SHIPPED | {"authority": _BEST, "search_k": 20}
+# F5b: subsections of the Code sections and regulations already found, pooled for the reranker
+for _n in (4, 6):
+    VARIANTS[f"route+statute1+prior0.5-scoped+sib{_n}"] = _SHIPPED | {"authority": _BEST, "siblings": _n}
 
 
 def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
@@ -173,7 +176,7 @@ def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
                                             cache_path, plan_set),
                            k=how.get("search_k", k), mode=mode, route=how["route"], rewrite=how["rewrite"], hops=how.get("hops", 0),
                            editions=how.get("editions"), statute=how.get("statute", 0),
-                           union=how.get("union", False))
+                           union=how.get("union", False), siblings=how.get("siblings", 0))
         hits = (dc.chunks(plan, k, reranker, authority=how.get("authority")) if how["rerank"]
                 else dc.merge(plan.searched, k))
     else:

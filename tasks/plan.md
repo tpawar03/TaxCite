@@ -663,3 +663,34 @@ The winning pipeline (or the shipped one, if nothing passes) scored once on gold
 18. **Out of scope, recorded**: G-I06 (answered from nothing since Phase B) and the unmet entailment gate's leniency are not what F5b fixes; F6 reports them.
 
 **Budget:** Steps 0–2 free; R1–R3 ~$3; golden ~$3–5. Total ≤ ~$8, under the phase's remaining room.
+
+## Step 0–1 results (2026-10-01, free) and the revised plan
+
+**Step 0 done:** guard test (fails 3× on the buggy `set_verify`, passes on the fix); `judge(..., why=True)` for diagnostic re-grades.
+
+**1.1 Every hidden sentence of dev sample 0, read and tagged (37):**
+
+| Cause | Count | Example | Fix |
+|---|---|---|---|
+| True, but its source was never retrieved (from memory) | 10 | D15 7.5% floor (§ 213 not retrieved); D17 $3,000 (§ 1211); D28 26% (§ 25D(g)) | retrieval (C6) |
+| An application resting on such a fact | 5 | D15 "7.5% of $100,000 is $7,500" | follows the fact |
+| Wrong citation; another retrieved source states it | ~4 sure, ~3 partial (of 12 candidates) | D24 $15,750 in p. 97; D22 formula in (e)(4); D33 suspension in § 217(k) | C3 re-cite |
+| Wrong, distorted, or bad arithmetic: correctly hidden | 7 | D36 "not below 20%" (2026 law: 35%); 22.5 rounded to 22 | none (working as intended) |
+| Sound conclusion from shown premises: false rejection | 2 | D04 "spreadsheet alone not enough"; D26 "$900,000 < $1,000,000, so all deductible" | C2 |
+| Qualifier dropped / fragment | 2 | D20 "but not value"; D23 "must include all of the following rules:" | C4 prompt |
+
+**1.2 Retrieval is the largest cause.** Of dev's gold statute/regulation units (141 × samples), 87 never reach the 8 sources, and in 36 a sibling subsection of the same section did. Measured free (pinned plans, local reranker), **C6 sibling expansion** (one search inside each of the first 3 statute/regulation sections found, 6 chunks each, pooled for the reranker): dev Recall@8 **0.610 → 0.683**, +4 rows (D13 the $250k cap, D28 the 26% rate, D29 the 2025 end date, D30 the effective date), −1 (D26: siblings of unrelated sections pushed § 163(h)(3) out of 8th); section recall 0.805 → 0.780; ~90 ms more a question. 4 siblings: +2 rows; one search over all sections at once: nothing (its slots refilled with chunks already held). A whole section never found (D15 § 213, D17 § 1211) is a different miss that siblings can't fix: recorded, not in F5b.
+
+**1.3 The verifier's false accepts are not concentrated in applications:** applications are 54 of 298 F5 pairs, 25 of 79 unsupported, 12 of 41 false accepts: the same ~50% false-accept rate as rule restatements. C2 must not loosen anything; its gain is ~2 of 37 hidden plus the conclusion item.
+
+**Revised fixes, by measured ceiling:** C6 siblings (largest) > C3 re-cite (~4–7 of 37) > C1+C2 conclusion (the visible gap; ~2 of 37 recovered) > C4 (prompt, rides along).
+
+**Revised runs (dev; paid steps need your go):**
+
+| Run | What | Est. |
+|---|---|---|
+| R1 | C6 (`siblings=6`) + the shipped synthesis and verifier: does recall turn into correct, grounded answers? | ~$1.0 |
+| R2 | C1 + C2 + C3 + C4 on R1's retrieval (or the shipped one, if R1 fails) | ~$1.2 |
+| R3 | One revision if R2 misses one criterion with a clear cause | ~$1.0 |
+
+Edge cases added by Step 1: siblings crowd out a lower-ranked gold section (D26) — watch "section recall" and correctness on such rows; the CI retrieval gate (golden, deterministic) must be re-baselined if C6 ships, and is checked only at Step 4; `SIBLING_SECTIONS = 3` and `siblings = 6` were chosen on dev, so golden is their first unseen test.

@@ -2615,12 +2615,12 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 
 ## F5b: answers that conclude and can be checked (plan: `tasks/plan.md`, F5b)
 
-- [ ] Step 0.2 guard test: no `sufficiency` in eval caches while `GATE` is off
-- [ ] Step 0.3 grader-reason diagnostic for rows that change grade
-- [ ] Step 1 diagnose (free): tag ~36 hidden dev sentences; locate conclusions; split F5's false accepts by sentence type
+- [x] Step 0.2 guard test: eval switches leave the gate as shipped (fails 3× on the buggy version)
+- [x] Step 0.3 `judge(..., why=True)` for diagnostic re-grades (scoring rubric unchanged)
+- [x] Step 1 diagnose (free): 37 hidden sentences tagged; retrieval is the largest cause; C6 sibling expansion measured free: dev Recall@8 0.610 → 0.683 (+4/−1 rows); false accepts not concentrated in applications (results in `tasks/plan.md`, F5b)
 - [ ] Metric checks on hand-made cases (conclusion shown, correct ∧ grounded)
-- [ ] R1: C2 + C3 replay on cached dev answers (~$1, your go)
-- [ ] R2: C1 (+C4) new synthesis (~$1, your go)
+- [ ] R1: C6 siblings + shipped synthesis and verifier on dev (~$1, your go)
+- [ ] R2: C1 + C2 + C3 + C4 on R1's retrieval (~$1.2, your go)
 - [ ] R3 only if R2 misses one criterion with a clear cause
 - [ ] Golden once with the winner and the gate fixed; replaces F5's void figures (~$3–5, your go)
 

@@ -243,9 +243,12 @@ def tax_year(as_of: str | None) -> int | None:
     return int(years[0]) if len(set(years)) == 1 else None
 
 
+SIBLING_SECTIONS = 3  # F5b: the first (best-ranked) sections whose subsections are searched
+
+
 def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = True,
              rewrite: bool = False, hops: int = 0, editions: tuple[int, int] | None = None,
-             statute: int = 0, union: bool = False) -> Decomposition:
+             statute: int = 0, union: bool = False, siblings: int = 0) -> Decomposition:
     """Search once per sub-query, filtered to the sources its kind allows. Fills `hits` in place.
 
     The search text is the **original question**, not the model's rewritten sub-query,
@@ -264,6 +267,10 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
     that many slots for the statute (D3b): the question's plain words find publications first, and
     searched within the statute alone they reach 0.68 of dev's statute gold at k=20. `union` also
     searches the sub-query's own text and pools both (D3b's second candidate).
+
+    `siblings` > 0 (F5b) searches again within the Code sections and regulations already found, for that many
+    more of their subsections: retrieval often finds the right section's wrong piece (§ 121(a) without the cap
+    in (b)(1), § 25D(a)-(c) without the rate in (g)). Pooled; the reranker decides.
     """
     seen: dict[tuple, list[Hit]] = {}  # two sub-queries of one kind would repeat a search
     year = tax_year(d.as_of) if editions is not None else None
@@ -286,6 +293,16 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
                     own.add(h.key or h.citation)
                     s.hits.append(h)
     d.statute_floor = statute
+    if siblings:  # one search per section: searched together, the slots refill with chunks already found
+        for s in (s for s in d.searched if s.kind == "statutory"):
+            within = list(dict.fromkeys(h.section for h in s.hits if h.source in ("usc", "ecfr")))[:SIBLING_SECTIONS]
+            own = {h.key or h.citation for h in s.hits}
+            s.hits = list(s.hits)
+            for section in within:
+                for h in search(d.question, k=siblings, mode=mode, source=("usc", "ecfr"), sections=[section]):
+                    if (h.key or h.citation) not in own:
+                        own.add(h.key or h.citation)
+                        s.hits.append(h)
     if hops:
         edges, held = citation_graph()
         for s in (s for s in d.searched if s.kind == "case_law"):

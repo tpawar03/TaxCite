@@ -58,3 +58,18 @@ def test_an_answer_cached_from_another_plan_set_is_refused():
     cache = {"q": [{"text": "a", "plan_set": 0}]}
     with pytest.raises(ValueError, match="plan set 0, not 3"):
         pipeline_answer("q", 8, cache, None, 0, {}, None, plan_set=3)
+
+
+@pytest.mark.parametrize("off, unit", [(False, None), (True, None), (False, "part")])
+def test_eval_switches_leave_the_gate_as_shipped_unless_asked(monkeypatch, off, unit):
+    # F5: set_verify forced the gate on for every run after F2 shipped it off; 67 of 324 golden answers were its refusals
+    from ragas_eval import set_verify
+    from taxcite import decompose as dc, verify
+    monkeypatch.setattr(dc, "GATE", dc.GATE)
+    monkeypatch.setattr(dc, "VERIFY", dc.VERIFY)
+    monkeypatch.setattr(verify, "HIDE", verify.HIDE)
+    shipped = dc.GATE
+    set_verify(off, unit)
+    assert dc.GATE is shipped
+    set_verify(off, unit, gate=not shipped)
+    assert dc.GATE is (not shipped)
