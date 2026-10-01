@@ -105,7 +105,7 @@ def apply(answer: Answer, verdicts: list[Verdict], unit: str = HIDE) -> Answer:
     failed_parts = {items[k]["part"] for k in failed}
     hide = {k for k, item in enumerate(items) if k in failed or (unit == "part" and item["part"] in failed_parts)}
     kept = [item for k, item in enumerate(items) if k not in hide]
-    emptied = {items[k]["part"] for k in hide} - {item["part"] for item in kept}
+    emptied = {items[k]["part"] for k in hide} - {item["part"] for item in kept} - {0}  # a hidden bottom line just goes
     notes = [m for m in data.get("not_answerable") or [] if m.get("part") not in emptied]
     notes += [{"part": p, "why": "no statement in this part could be verified against its sources."} for p in sorted(emptied, key=str)]
     text, _ = render({**data, "sentences": kept, "not_answerable": notes}, labels)

@@ -127,7 +127,7 @@ def main() -> int:
     ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
     ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
     ap.add_argument("--no-verify", action="store_true", help="skip F4's verifier: the unverified pipeline")
-    ap.add_argument("--no-gate", action="store_true", help="skip F2's sufficiency gate")
+    ap.add_argument("--gate", action=argparse.BooleanOptionalAction, help="F2's sufficiency gate on/off (default: as shipped, off)")
     ap.add_argument("--gate-prompt", choices=("strict", "lenient"), help="F2's gate prompt candidate")
     ap.add_argument("--gate-only", metavar="OUT", help="F2: plan, retrieve and run the gate only; write verdicts to OUT")
     ap.add_argument("--ids", help="comma-separated row ids: only these rows (F2's re-runs of rows the gate changes)")
@@ -138,7 +138,7 @@ def main() -> int:
         dc.EDITIONS = tuple(int(x) for x in args.editions.split(","))
 
     set_prompt(args.prompt)
-    set_verify(args.no_verify, args.hide, args.no_gate)
+    set_verify(args.no_verify, args.hide, args.gate)
     if args.gate_prompt:
         from taxcite import decompose as dc
         dc.SUFFICIENCY_PROMPT = dc.SUFFICIENCY_LENIENT if args.gate_prompt == "lenient" else dc.SUFFICIENCY_SYSTEM

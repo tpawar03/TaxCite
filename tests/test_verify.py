@@ -135,3 +135,11 @@ def test_checked_records_the_verifier_and_its_cost(stub):
 def test_sentence_hiding_ships():
     """F4, your decision: only the failing sentence is hidden (ADR-15 revised); "part" stays available to the eval."""
     assert verify.HIDE == "sentence"
+
+
+def test_a_failed_bottom_line_is_hidden_without_an_insufficient_evidence_note():
+    answer = structured_answer([
+        {"part": 0, "text": "Yes, with no income limit.", "citations": [STATUTE.citation]},
+        {"part": 1, "text": "Interest on a qualified education loan is deductible.", "citations": [STATUTE.citation]}])
+    shown = verify.apply(answer, [verify.Verdict(0, False, "no"), verify.Verdict(1, True, "yes")], "sentence")
+    assert shown.text == "Part 1: federal deduction\nInterest on a qualified education loan is deductible [26 U.S.C. § 221(a)-(c)]."

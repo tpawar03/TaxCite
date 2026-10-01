@@ -9902,6 +9902,32 @@
       "model": "gpt-4o-mini",
       "input_tokens": 900,
       "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
     }
   ],
   "Could an employee deduct unreimbursed job expenses on a 2016 return, and can they on a 2026 return?": [
@@ -10546,6 +10572,157 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1031,
       "output_tokens": 83
+    }
+  ],
+  "My client's hobby-loss case is going to trial. If he meets the section 7491(a) requirements, will the burden shifting to the IRS decide the case?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 62
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client's hobby-loss case is going to trial and he meets the section 7491(a) requirements"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 95
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof provisions under section 7491(a)"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss burden of proof shifting IRS trial outcomes"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1028,
+      "output_tokens": 62
+    }
+  ],
+  "Can a taxpayer win in Tax Court on an alternative argument raised for the first time in its post-trial brief?": [
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court alternative arguments raised for the first time in post-trial briefs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1018,
+      "output_tokens": 40
+    }
+  ],
+  "The IRS reclassified my client's corporate officer as an employee and refused to let the company pay under the Voluntary Classification Settlement Program. Can the Tax Court review that refusal?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "review of IRS refusal to allow participation in Voluntary Classification Settlement Program"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 61
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "jurisdiction of the United States Tax Court over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court review of IRS decisions regarding Voluntary Classification Settlement Program"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 65
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction over IRS classification determinations"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court review of IRS refusal to allow Voluntary Classification Settlement Program"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1029,
+      "output_tokens": 61
     }
   ]
 }

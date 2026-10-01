@@ -170,7 +170,7 @@ def set_prompt(arm: str) -> None:
     "labels+rule4b" is (ii′), which now ships, so "shipped" leaves the module as it is. F3's arms build on the
     pre-F3 prompt ((ii′), "pre-f3"): "f3-cite" rewrites rule 2 (every sentence cited, only what its source says),
     "f3-sections" also asks for a section per sub-query, "f3-structured" (arm E, which now ships) writes the answer as
-    JSON items, one sentence each with its citations. Every arm but "shipped" sets both F3 switches, so an older arm
+    JSON items, one sentence each with its citations, without F5's bottom line. Every arm but "shipped" sets both F3 switches, so an older arm
     can't run structured by accident. Use a separate --answers-cache per arm: cached answers don't know their prompt."""
     from taxcite import generate as g
     if arm == "broken":
@@ -179,7 +179,7 @@ def set_prompt(arm: str) -> None:
         return
     if arm == "shipped":
         return
-    g.SECTIONS, g.STRUCTURED = arm == "f3-sections", arm == "f3-structured"
+    g.SECTIONS, g.STRUCTURED, g.BOTTOM_LINE = arm == "f3-sections", arm == "f3-structured", False
     if arm == "f3-structured":
         g.RAG_SYSTEM = g.PRE_F3_SYSTEM.replace(g.RULE_2, g.RULE_2_STRUCTURED).replace(g.RULE_3, g.RULE_3_STRUCTURED)
         return
@@ -194,11 +194,14 @@ def set_prompt(arm: str) -> None:
     g.RAG_SYSTEM = g.PRE_E5_SYSTEM.replace(g.RULE_4, rule)
 
 
-def set_verify(off: bool, unit: str | None, no_gate: bool = False) -> None:
-    """F4's and F2's switches for an eval run: the verifier off (the unverified arm), its hiding unit, the gate off."""
+def set_verify(off: bool, unit: str | None, gate: bool | None = None) -> None:
+    """F4's and F2's switches for an eval run: the verifier off (the unverified arm), its hiding unit, the gate on or
+    off. `gate=None` keeps what ships: until F5 this forced the gate on, so every run after F2 shipped it off still
+    ran it (F5 found it: 67 of 324 golden answers refused by a gate the product doesn't run)."""
     from taxcite import decompose as dc
     dc.VERIFY = not off
-    dc.GATE = not no_gate
+    if gate is not None:
+        dc.GATE = gate
     if unit:
         from taxcite import verify
         verify.HIDE = unit
