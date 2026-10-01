@@ -566,3 +566,100 @@ Full task details are in `tasks/todo.md` (Phase F section).
 - **Claim unit at runtime: sentence + its citation, no LLM call.** F0 can overturn it.
 - **You read ~40 judge-labelled pairs in F0.** Alternative: a second judge and Cohen's κ, as §9.2 does for correctness (no human time, weaker evidence).
 - **Substantive-correctness grading starts in F5 on §9.2's 40-question subset, two judges, κ reported.** Tracked, not gated (N < 100).
+
+---
+
+# Phase F, F5b research plan: answers that conclude *and* can be checked (2026-10-01)
+
+## Problem, as measured (free analyses on cached runs)
+
+Two goals pull against each other: every sentence cited and verified (F3/F4), and an answer that states its conclusion (Phase E did, uncited).
+
+| Observation | Number | Source |
+|---|---|---|
+| F5's "0.365 → 0.260" regression was mostly the gate bug | on the 50 golden authority row-samples no gate touched: pre-F3 0.42, structured 0.40, verified 0.38 | `clean.py` (scratch) |
+| Structured answers rarely lead with a conclusion, even gate-clean | 4 of 151 open with Yes/No vs 16 of 51 (pre-F3) | answer caches |
+| Verification is where dev loses correctness | dev 0.365 (structured) → 0.278 (verified); 12 row-samples lost, 1 won, 10 of 12 "partial: missing condition" | F4 runs |
+| The verifier hides conclusions | 109 of 461 dev sentences hidden; ~44 of them apply a rule to the client or conclude | `f4-sentence` cache |
+| Some hidden sentences cite the wrong source, not a wrong fact | 16 hidden sentences' numbers appear in another retrieved source (D24: $15,750) | same |
+| Some are false rejections | D16 (correct $5,000 / 180-month arithmetic hidden), D20 (key sentence hidden for omitting "but not value") | read |
+| Bottom line first (part 0) was not a measured loss | lost 14, won 9, sign test p ≈ 0.4 | `f5bl` vs `f4-sentence` |
+| The bottom line was generated **first**, before the evidence | schema order; known effect: constrained decoding emits fields in order, so the answer precedes the reasoning | web: field-order reports |
+| The grader gives no reasons | D02/D05 bottom lines match gold but graded "incorrect: hallucinated_fact"; undiagnosable | `llm_bench.judge` |
+| Dev can only see large effects | 126 row-samples; judge sd ~0.03 per sample; differences < ~0.10 are noise unless paired | sign tests |
+
+And the opposite failure, from F5: the verifier also **accepts** too much (entailment F1 0.63; ~4 in 10 unsupported sentences pass). Any verifier change has to move both errors, not trade one for the other.
+
+## Goal and decision metrics (pre-registered, each tested on known cases first)
+
+Ship a change only if, on dev, paired against the shipped pipeline:
+1. **Conclusion shown** (a verified conclusion item displayed) on ≥ 80% of answerable row-samples (now: ~3%).
+2. **Correct ∧ grounded** (the primary judge grades it correct and every shown claim is supported) not lower: paired lost ≤ won + 3.
+3. **Incorrect** not higher by more than 3 row-samples (a confident wrong conclusion is the worst outcome for a practitioner).
+4. **Completeness** ≥ 0.95 (every shown sentence cited) and refusals on answerable rows not higher.
+5. **Verifier accuracy** on F5's frozen entailment pairs: unsupported-class F1 not lower than 0.63 vs the Sonnet reference (verifier changes only).
+
+Metric checks before any paid run: "conclusion shown" detector on 5 hand-made answers (lead conclusion, hidden conclusion, hedged "it depends", refusal, multi-part); "correct ∧ grounded" on three known rows.
+
+## Step 0: fix the ruler (free unless marked)
+
+- 0.1 **Done:** the eval gate switch keeps the shipped default (`set_verify(gate=None)`).
+- 0.2 **Guard:** a test that fails when an eval answer cache carries a `sufficiency` verdict while `GATE` is off (the check that would have caught the bug).
+- 0.3 **Grader reasons:** a diagnostic re-grade that asks the same rubric for one line of "why", run only on rows that change grade between arms. The scoring grader stays as it is, so grades stay comparable with Phases B–F. (~$0.05 per arm.)
+- 0.4 **Don't correct F5's golden figures now.** They describe a pipeline that won't ship either way; golden is scored once at the end of F5b with the gate fixed (Step 4), which replaces them. Saves ~$3.20 and a second touch of golden. F5's sentence-level results (completeness, verifier precision, the 40-pair read) stand.
+
+## Step 1: diagnose further (free)
+
+- 1.1 Read every hidden sentence in one dev sample (~36) and tag it: wrong source (another retrieved source supports it) / application or conclusion / paraphrase drops a qualifier / truly unsupported / verifier error. Gives each fix in Step 2 its ceiling.
+- 1.2 For each dev answer, find its conclusion sentence (if any) and whether it was hidden, and why.
+- 1.3 Of F5's frozen entailment pairs, how many of the verifier's false accepts are conclusions/applications vs rule restatements (does the leniency live in the same sentence type as the strictness?).
+
+## Step 2: candidate fixes, each aimed at a measured cause
+
+| # | Fix | Cause it targets | Needs new synthesis? |
+|---|---|---|---|
+| C1 | **Conclusion last in the schema, first on screen.** `conclusion: {text, citations, basis: [item indices]}` after `sentences` and `not_answerable`. Allowed forms: "Yes/No, because…", "It depends: yes if A, no if B", "The sources don't settle X; they point to Y", or a one-line summary when the question isn't yes/no. Rendered first as "Short answer:". | Answer committed before reasoning; forced yes/no on mixed evidence | yes |
+| C2 | **Conclusions verified as inferences.** The verifier tags each item rule / application / conclusion in the same call, and judges applications and the conclusion against the *shown* items it builds on plus the client facts: "does this follow?", not "does a source say it?". If a premise is hidden, so is the conclusion. | Conclusions hidden for not being quoted; conclusions surviving on hidden premises | no (verifier only) |
+| C3 | **Re-cite before hiding.** For a failing sentence, the verifier (now shown every retrieved source, not only the cited ones: a larger prompt, ~2× its cost) may name another source that does support it; the citation is swapped and the swap re-checked; never rewritten text. | Wrong-source hides (~16 of 109) | no |
+| C4 | **Self-contained sentences.** Prompt rule: no "this/it/such" pointing to another item. | Orphans (4; low priority, ride along with C1) | yes (with C1) |
+
+Not chosen, and why: lowering the verifier's strictness overall (C5) moves the false-accept rate the wrong way when F5 already found it too lenient; rewriting failed sentences (RARR-style edits) creates new unverified text and needs a second verification loop; Claude-native citations for synthesis means a new synthesis model (a cost and latency change F3's Haiku arm already looked at).
+
+## Step 3: experiments (dev only; paid steps need your go)
+
+Replays first, since they're cheapest: C2 and C3 change only the verifier, so they run over the cached `f4-sentence` answers (verifier ~$0.002/answer + re-grading only rows whose shown text changed).
+
+| Run | What | Est. cost |
+|---|---|---|
+| R1 | C2 + C3 replayed over cached dev answers; entailment pairs re-run for criterion 5 | ~$1.0 |
+| R2 | C1 (+C4) new synthesis, with R1's verifier if it passed, else the shipped one | ~$1.0 |
+| R3 | Only if R2 fails on one criterion with a clear cause: one revision, then stop | ~$1.0 |
+
+Every run saves after each row and resumes. One variable per run where the cost allows; read the lost/won rows of every run, not only the means.
+
+## Step 4: golden once, then F6
+
+The winning pipeline (or the shipped one, if nothing passes) scored once on golden with the gate fixed: correctness, conclusion shown, completeness, entailment (reuse the frozen pairs where answers are unchanged; Sonnet audit only on new sentences), latency, cost. ~$3–5. Then push `phase-f`, CI, and the Phase F exit report.
+
+## Scrutiny: edge cases and missing information
+
+1. **Questions with no yes/no** (D07 "what factors…"): C1 must allow a summary, not force a Yes/No; the "conclusion shown" metric must not count only Yes/No openings.
+2. **Partly answerable questions** (G-I11 federal + state; D51–D53): the conclusion covers what was answered and says what wasn't; it must not cite anything for the missing half.
+3. **Wholly unanswerable**: no conclusion item, or the `refused` metric breaks (a cited conclusion in a refusal would make it "not refused"). Test case required.
+4. **Conclusion hidden, body shown**: the display needs a fallback ("No short answer could be verified; the cited points follow"), not a silent gap.
+5. **Conclusion contradicting its own body**: C2's "does it follow" check must see the body it cites; a conclusion with an empty `basis` is checked against sources like any sentence.
+6. **Tax year and authority**: the conclusion must answer for the plan's tax year and follow the higher authority (rule 4); wrong_tax_year / authority_misweighted defects tracked separately per arm.
+7. **Hedged conclusions and the grader**: "It depends…" may be graded "partial" against a gold answer that commits. Check against the gold answers that are themselves conditional; the grader-reason pass (0.3) shows which.
+8. **The verifier's two errors**: C2 makes the verifier more willing to accept inferences; criterion 5 and step 1.3 make sure the leniency F5 found doesn't grow.
+9. **Index-based `basis`**: indices refer to the model's raw item list, but `cited_items` drops uncited items and `verify.apply` hides failed ones; both must re-map `basis` (unit test), and a `basis` pointing at a dropped item counts as hidden.
+10. **Dev overfitting**: at most three synthesis arms on 42 rows; golden once.
+11. **Noise**: decisions on paired lost/won counts with the rows read; no shipping on a mean difference under ~0.05 alone.
+12. **Gate bug's other victims**: the faithfulness CI gate ran the gate too; its 0.855 floor was set before F2 (unaffected), but the first CI run after the fix is the new reference.
+13. **JSON leakage**: one f5bl bottom line contained `},{` inside its text (gpt-4o-mini under strict schema); add a render-time check that text holds no JSON fragments.
+14. **Product surface**: API payload (`hidden_sentences` indices), the web answer view and tests must show the conclusion first; latency budget (p95 11.2 s of 35 s) leaves room for C3's extra checks.
+15. **Missing information**: no lawyer-reviewed ground truth for "is this conclusion right"; the gold answers stand in. Judge reasons (0.3) are the only window into why a grade changed.
+16. **Replays can't test C2 fully**: cached dev answers have no conclusion item, so R1 measures C2 on application sentences only; its effect on conclusions is first seen in R2.
+17. **A "follows from" check can pass a non sequitur** that sounds plausible; the 40-pair reference read is repeated on R2's conclusions (~20, by Claude, free) before anything ships.
+18. **Out of scope, recorded**: G-I06 (answered from nothing since Phase B) and the unmet entailment gate's leniency are not what F5b fixes; F6 reports them.
+
+**Budget:** Steps 0–2 free; R1–R3 ~$3; golden ~$3–5. Total ≤ ~$8, under the phase's remaining room.

@@ -113,7 +113,7 @@
       "file_type": "code",
       "norm_label": "answer",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L218"
+      "source_location": "L220"
     },
     {
       "id": "src_taxcite_retrieve_hit",
@@ -191,7 +191,7 @@
       "file_type": "code",
       "norm_label": "missingcredentials",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L336"
+      "source_location": "L338"
     },
     {
       "id": "src_taxcite_verify_verdict",
@@ -3781,7 +3781,7 @@
       "file_type": "code",
       "norm_label": "answer_from_groups()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L439"
+      "source_location": "L441"
     },
     {
       "id": "src_taxcite_generate_answer_from_hits",
@@ -3793,7 +3793,7 @@
       "file_type": "code",
       "norm_label": "answer_from_hits()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L421"
+      "source_location": "L423"
     },
     {
       "id": "src_taxcite_generate_answer_refused",
@@ -3805,7 +3805,7 @@
       "file_type": "code",
       "norm_label": ".refused()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L244"
+      "source_location": "L246"
     },
     {
       "id": "src_taxcite_generate_answer_schema",
@@ -3817,7 +3817,7 @@
       "file_type": "code",
       "norm_label": "answer_schema()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L117"
+      "source_location": "L119"
     },
     {
       "id": "src_taxcite_generate_answer_sections",
@@ -3829,7 +3829,7 @@
       "file_type": "code",
       "norm_label": ".sections()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L251"
+      "source_location": "L253"
     },
     {
       "id": "src_taxcite_generate_authorities",
@@ -3841,7 +3841,7 @@
       "file_type": "code",
       "norm_label": "authorities()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L187"
+      "source_location": "L189"
     },
     {
       "id": "src_taxcite_generate_authority_label",
@@ -3853,7 +3853,7 @@
       "file_type": "code",
       "norm_label": "authority_label()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L182"
+      "source_location": "L184"
     },
     {
       "id": "src_taxcite_generate_call_model",
@@ -3865,7 +3865,7 @@
       "file_type": "code",
       "norm_label": "call_model()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L358"
+      "source_location": "L360"
     },
     {
       "id": "src_taxcite_generate_effective_note",
@@ -3877,7 +3877,7 @@
       "file_type": "code",
       "norm_label": "effective_note()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L267"
+      "source_location": "L269"
     },
     {
       "id": "src_taxcite_generate_format_sources",
@@ -3889,7 +3889,7 @@
       "file_type": "code",
       "norm_label": "format_sources()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L279"
+      "source_location": "L281"
     },
     {
       "id": "src_taxcite_generate_generate",
@@ -3901,7 +3901,7 @@
       "file_type": "code",
       "norm_label": "_generate()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L511"
+      "source_location": "L513"
     },
     {
       "id": "src_taxcite_generate_generate_structured",
@@ -3913,7 +3913,7 @@
       "file_type": "code",
       "norm_label": "_generate_structured()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L478"
+      "source_location": "L480"
     },
     {
       "id": "src_taxcite_generate_parse_citations",
@@ -3925,7 +3925,7 @@
       "file_type": "code",
       "norm_label": "parse_citations()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L311"
+      "source_location": "L313"
     },
     {
       "id": "src_taxcite_generate_require_credentials",
@@ -3937,7 +3937,7 @@
       "file_type": "code",
       "norm_label": "_require_credentials()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L340"
+      "source_location": "L342"
     },
     {
       "id": "src_taxcite_generate_split_sections",
@@ -3949,7 +3949,7 @@
       "file_type": "code",
       "norm_label": "split_sections()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L255"
+      "source_location": "L257"
     },
     {
       "id": "tests_test_generate_test_a_label_comes_from_the_profile_never_from_the_source_text",
@@ -4633,7 +4633,7 @@
       "file_type": "code",
       "norm_label": "skipped_only()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L430"
+      "source_location": "L432"
     },
     {
       "id": "src_taxcite_jobs_run",
@@ -6577,7 +6577,7 @@
       "file_type": "code",
       "norm_label": "cited_items()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L131"
+      "source_location": "L133"
     },
     {
       "id": "src_taxcite_generate_render",
@@ -6589,7 +6589,7 @@
       "file_type": "code",
       "norm_label": "render()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L142"
+      "source_location": "L144"
     },
     {
       "id": "src_taxcite_generate_section_of",
@@ -6601,7 +6601,7 @@
       "file_type": "code",
       "norm_label": "section_of()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L286"
+      "source_location": "L288"
     },
     {
       "id": "src_taxcite_verify_apply",
@@ -6769,7 +6769,7 @@
       "file_type": "code",
       "norm_label": "citations()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L305"
+      "source_location": "L307"
     },
     {
       "id": "src_taxcite_decompose_citation_graph",
@@ -6853,7 +6853,7 @@
       "file_type": "code",
       "norm_label": ".cost_usd()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L239"
+      "source_location": "L241"
     },
     {
       "id": "src_taxcite_generate_cost",
@@ -6865,7 +6865,7 @@
       "file_type": "code",
       "norm_label": "cost()",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L212"
+      "source_location": "L214"
     },
     {
       "id": "src_taxcite_retrieve_embed",
@@ -10141,7 +10141,7 @@
       "source_location": "L1"
     },
     {
-      "id": "src_taxcite_generate_rationale_118",
+      "id": "src_taxcite_generate_rationale_120",
       "label": "The JSON schema for arm E: strict, so every field is required and nothing else\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10149,10 +10149,10 @@
       "file_type": "rationale",
       "norm_label": "the json schema for arm e: strict, so every field is required and nothing else...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L118"
+      "source_location": "L120"
     },
     {
-      "id": "src_taxcite_generate_rationale_188",
+      "id": "src_taxcite_generate_rationale_190",
       "label": "Each cited source's authority and label, for the API (E5): an exact citation\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10160,10 +10160,10 @@
       "file_type": "rationale",
       "norm_label": "each cited source's authority and label, for the api (e5): an exact citation...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L188"
+      "source_location": "L190"
     },
     {
-      "id": "src_taxcite_generate_rationale_245",
+      "id": "src_taxcite_generate_rationale_247",
       "label": "Says INSUFFICIENT EVIDENCE and cites nothing. F3: a cited answer that flags one\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10171,10 +10171,10 @@
       "file_type": "rationale",
       "norm_label": "says insufficient evidence and cites nothing. f3: a cited answer that flags one...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L245"
+      "source_location": "L247"
     },
     {
-      "id": "src_taxcite_generate_rationale_256",
+      "id": "src_taxcite_generate_rationale_258",
       "label": "(label, text) per \"Part N: ...\" section (F3), the unit ADR-15 hides. No\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10182,10 +10182,10 @@
       "file_type": "rationale",
       "norm_label": "(label, text) per \"part n: ...\" section (f3), the unit adr-15 hides. no...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L256"
+      "source_location": "L258"
     },
     {
-      "id": "src_taxcite_generate_rationale_268",
+      "id": "src_taxcite_generate_rationale_270",
       "label": "D7: flag statute text whose latest amendment took effect after the question's\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10193,10 +10193,10 @@
       "file_type": "rationale",
       "norm_label": "d7: flag statute text whose latest amendment took effect after the question's...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L268"
+      "source_location": "L270"
     },
     {
-      "id": "src_taxcite_generate_rationale_312",
+      "id": "src_taxcite_generate_rationale_314",
       "label": "Split the answer's citations three ways: exact, derived, unsupported. The three\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10204,10 +10204,10 @@
       "file_type": "rationale",
       "norm_label": "split the answer's citations three ways: exact, derived, unsupported. the three...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L312"
+      "source_location": "L314"
     },
     {
-      "id": "src_taxcite_generate_rationale_341",
+      "id": "src_taxcite_generate_rationale_343",
       "label": "Fail early and specifically. The SDK raises a generic TypeError at request\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10215,10 +10215,10 @@
       "file_type": "rationale",
       "norm_label": "fail early and specifically. the sdk raises a generic typeerror at request...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L341"
+      "source_location": "L343"
     },
     {
-      "id": "src_taxcite_generate_rationale_361",
+      "id": "src_taxcite_generate_rationale_363",
       "label": "One completion. Returns (text, input_tokens, output_tokens). The two providers\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10226,10 +10226,10 @@
       "file_type": "rationale",
       "norm_label": "one completion. returns (text, input_tokens, output_tokens). the two providers...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L361"
+      "source_location": "L363"
     },
     {
-      "id": "src_taxcite_generate_rationale_422",
+      "id": "src_taxcite_generate_rationale_424",
       "label": "Synthesis only, over chunks already retrieved. Split out from `answer` so a\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10237,10 +10237,10 @@
       "file_type": "rationale",
       "norm_label": "synthesis only, over chunks already retrieved. split out from `answer` so a...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L422"
+      "source_location": "L424"
     },
     {
-      "id": "src_taxcite_generate_rationale_442",
+      "id": "src_taxcite_generate_rationale_444",
       "label": "Synthesis over sources grouped by the sub-query that retrieved them (B7). The\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10248,10 +10248,10 @@
       "file_type": "rationale",
       "norm_label": "synthesis over sources grouped by the sub-query that retrieved them (b7). the...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L442"
+      "source_location": "L444"
     },
     {
-      "id": "src_taxcite_generate_rationale_480",
+      "id": "src_taxcite_generate_rationale_482",
       "label": "Arm E: the answer as JSON items, rendered to the same cited text every other\u2026",
       "_origin": "ast",
       "community": 40,
@@ -10259,10 +10259,10 @@
       "file_type": "rationale",
       "norm_label": "arm e: the answer as json items, rendered to the same cited text every other...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L480"
+      "source_location": "L482"
     },
     {
-      "id": "src_taxcite_generate_rationale_504",
+      "id": "src_taxcite_generate_rationale_506",
       "label": "Answer a question with retrieval (`rag`) or without it (`closed_book`).",
       "_origin": "ast",
       "community": 40,
@@ -10270,7 +10270,7 @@
       "file_type": "rationale",
       "norm_label": "answer a question with retrieval (`rag`) or without it (`closed_book`).",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L504"
+      "source_location": "L506"
     },
     {
       "id": "tests_test_generate_rationale_163",
@@ -10945,7 +10945,7 @@
       "source_location": "L479"
     },
     {
-      "id": "src_taxcite_generate_rationale_431",
+      "id": "src_taxcite_generate_rationale_433",
       "label": "F2: every part judged insufficient before synthesis. A refusal with what each\u2026",
       "_origin": "ast",
       "community": 45,
@@ -10953,7 +10953,7 @@
       "file_type": "rationale",
       "norm_label": "f2: every part judged insufficient before synthesis. a refusal with what each...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L431"
+      "source_location": "L433"
     },
     {
       "id": "src_taxcite_jobs_rationale_109",
@@ -13144,7 +13144,7 @@
       "source_location": "L50"
     },
     {
-      "id": "src_taxcite_generate_rationale_337",
+      "id": "src_taxcite_generate_rationale_339",
       "label": "Raised instead of the SDK's generic auth error, which does not say what to set.",
       "_origin": "ast",
       "community": 59,
@@ -13152,7 +13152,7 @@
       "file_type": "rationale",
       "norm_label": "raised instead of the sdk's generic auth error, which does not say what to set.",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L337"
+      "source_location": "L339"
     },
     {
       "id": "eval_results_phase_b",
@@ -13309,7 +13309,7 @@
       "source_location": ""
     },
     {
-      "id": "src_taxcite_generate_rationale_132",
+      "id": "src_taxcite_generate_rationale_134",
       "label": "The sentences a structured answer can show, in order: text and at least one\u2026",
       "_origin": "ast",
       "community": 61,
@@ -13317,10 +13317,10 @@
       "file_type": "rationale",
       "norm_label": "the sentences a structured answer can show, in order: text and at least one...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L132"
+      "source_location": "L134"
     },
     {
-      "id": "src_taxcite_generate_rationale_143",
+      "id": "src_taxcite_generate_rationale_145",
       "label": "(answer text, sentences dropped) from arm E's JSON. Each sentence ends with its\u2026",
       "_origin": "ast",
       "community": 61,
@@ -13328,10 +13328,10 @@
       "file_type": "rationale",
       "norm_label": "(answer text, sentences dropped) from arm e's json. each sentence ends with its...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L143"
+      "source_location": "L145"
     },
     {
-      "id": "src_taxcite_generate_rationale_287",
+      "id": "src_taxcite_generate_rationale_289",
       "label": "The section a citation belongs to, ignoring paragraph depth. '26 CFR\u2026",
       "_origin": "ast",
       "community": 61,
@@ -13339,7 +13339,7 @@
       "file_type": "rationale",
       "norm_label": "the section a citation belongs to, ignoring paragraph depth. '26 cfr...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L287"
+      "source_location": "L289"
     },
     {
       "id": "src_taxcite_verify_rationale_1",
@@ -13474,7 +13474,7 @@
       "source_location": "L52"
     },
     {
-      "id": "src_taxcite_generate_rationale_306",
+      "id": "src_taxcite_generate_rationale_308",
       "label": "Every bracketed citation, once each, in order: nested brackets flattened, \"[A;\u2026",
       "_origin": "ast",
       "community": 62,
@@ -13482,7 +13482,7 @@
       "file_type": "rationale",
       "norm_label": "every bracketed citation, once each, in order: nested brackets flattened, \"[a;...",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L306"
+      "source_location": "L308"
     },
     {
       "id": "sparsevector",
@@ -19629,7 +19629,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L507",
+      "source_location": "L509",
       "weight": 1.0
     },
     {
@@ -19641,7 +19641,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L508",
+      "source_location": "L510",
       "weight": 1.0
     },
     {
@@ -19653,7 +19653,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L240",
+      "source_location": "L242",
       "weight": 1.0
     },
     {
@@ -19665,7 +19665,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L458",
+      "source_location": "L460",
       "weight": 1.0
     },
     {
@@ -19677,7 +19677,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L467",
+      "source_location": "L469",
       "weight": 1.0
     },
     {
@@ -19689,7 +19689,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L471",
+      "source_location": "L473",
       "weight": 1.0
     },
     {
@@ -19701,7 +19701,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L427",
+      "source_location": "L429",
       "weight": 1.0
     },
     {
@@ -19713,7 +19713,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L252",
+      "source_location": "L254",
       "weight": 1.0
     },
     {
@@ -19725,7 +19725,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L193",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -19737,7 +19737,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L196",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
@@ -19749,7 +19749,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L380",
+      "source_location": "L382",
       "weight": 1.0
     },
     {
@@ -19761,7 +19761,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L280",
+      "source_location": "L282",
       "weight": 1.0
     },
     {
@@ -19773,7 +19773,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L282",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -19785,7 +19785,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L514",
+      "source_location": "L516",
       "weight": 1.0
     },
     {
@@ -19797,7 +19797,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L525",
+      "source_location": "L527",
       "weight": 1.0
     },
     {
@@ -19809,7 +19809,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L526",
+      "source_location": "L528",
       "weight": 1.0
     },
     {
@@ -19821,7 +19821,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L482",
+      "source_location": "L484",
       "weight": 1.0
     },
     {
@@ -19833,7 +19833,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L483",
+      "source_location": "L485",
       "weight": 1.0
     },
     {
@@ -19845,7 +19845,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L492",
+      "source_location": "L494",
       "weight": 1.0
     },
     {
@@ -19857,7 +19857,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L495",
+      "source_location": "L497",
       "weight": 1.0
     },
     {
@@ -19869,7 +19869,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L496",
+      "source_location": "L498",
       "weight": 1.0
     },
     {
@@ -19881,7 +19881,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L327",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -19893,7 +19893,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L331",
+      "source_location": "L333",
       "weight": 1.0
     },
     {
@@ -19905,7 +19905,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L148",
+      "source_location": "L150",
       "weight": 1.0
     },
     {
@@ -19917,7 +19917,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L348",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -19929,7 +19929,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L434",
+      "source_location": "L436",
       "weight": 1.0
     },
     {
@@ -19941,7 +19941,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L436",
+      "source_location": "L438",
       "weight": 1.0
     },
     {
@@ -30369,7 +30369,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L439",
+      "source_location": "L441",
       "weight": 1.0
     },
     {
@@ -30381,7 +30381,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L421",
+      "source_location": "L423",
       "weight": 1.0
     },
     {
@@ -34221,7 +34221,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L117",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -34232,7 +34232,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L131",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -34243,7 +34243,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L142",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -34254,7 +34254,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L182",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -34265,7 +34265,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L187",
+      "source_location": "L189",
       "weight": 1.0
     },
     {
@@ -34276,7 +34276,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L212",
+      "source_location": "L214",
       "weight": 1.0
     },
     {
@@ -34287,7 +34287,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L255",
+      "source_location": "L257",
       "weight": 1.0
     },
     {
@@ -34298,7 +34298,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L267",
+      "source_location": "L269",
       "weight": 1.0
     },
     {
@@ -34309,7 +34309,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L279",
+      "source_location": "L281",
       "weight": 1.0
     },
     {
@@ -34320,7 +34320,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L286",
+      "source_location": "L288",
       "weight": 1.0
     },
     {
@@ -34331,7 +34331,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L305",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -34342,7 +34342,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L311",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -34353,7 +34353,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L336",
+      "source_location": "L338",
       "weight": 1.0
     },
     {
@@ -34364,7 +34364,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L340",
+      "source_location": "L342",
       "weight": 1.0
     },
     {
@@ -34375,7 +34375,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L358",
+      "source_location": "L360",
       "weight": 1.0
     },
     {
@@ -34386,7 +34386,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L421",
+      "source_location": "L423",
       "weight": 1.0
     },
     {
@@ -34397,7 +34397,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L430",
+      "source_location": "L432",
       "weight": 1.0
     },
     {
@@ -34408,7 +34408,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L439",
+      "source_location": "L441",
       "weight": 1.0
     },
     {
@@ -34419,7 +34419,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L478",
+      "source_location": "L480",
       "weight": 1.0
     },
     {
@@ -34430,7 +34430,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L502",
+      "source_location": "L504",
       "weight": 1.0
     },
     {
@@ -34441,7 +34441,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L511",
+      "source_location": "L513",
       "weight": 1.0
     },
     {
@@ -39424,7 +39424,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L336",
+      "source_location": "L338",
       "weight": 1.0
     },
     {
@@ -39556,7 +39556,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L239",
+      "source_location": "L241",
       "weight": 1.0
     },
     {
@@ -39567,7 +39567,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L244",
+      "source_location": "L246",
       "weight": 1.0
     },
     {
@@ -39578,7 +39578,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L251",
+      "source_location": "L253",
       "weight": 1.0
     },
     {
@@ -40759,201 +40759,201 @@
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_118",
+      "source": "src_taxcite_generate_rationale_120",
       "target": "src_taxcite_generate_answer_schema",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L118",
+      "source_location": "L120",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_132",
+      "source": "src_taxcite_generate_rationale_134",
       "target": "src_taxcite_generate_cited_items",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L132",
+      "source_location": "L134",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_143",
+      "source": "src_taxcite_generate_rationale_145",
       "target": "src_taxcite_generate_render",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L143",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_188",
+      "source": "src_taxcite_generate_rationale_190",
       "target": "src_taxcite_generate_authorities",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L188",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_245",
+      "source": "src_taxcite_generate_rationale_247",
       "target": "src_taxcite_generate_answer_refused",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L245",
+      "source_location": "L247",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_256",
+      "source": "src_taxcite_generate_rationale_258",
       "target": "src_taxcite_generate_split_sections",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L256",
+      "source_location": "L258",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_268",
+      "source": "src_taxcite_generate_rationale_270",
       "target": "src_taxcite_generate_effective_note",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L268",
+      "source_location": "L270",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_287",
+      "source": "src_taxcite_generate_rationale_289",
       "target": "src_taxcite_generate_section_of",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L287",
+      "source_location": "L289",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_306",
+      "source": "src_taxcite_generate_rationale_308",
       "target": "src_taxcite_generate_citations",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L306",
+      "source_location": "L308",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_312",
+      "source": "src_taxcite_generate_rationale_314",
       "target": "src_taxcite_generate_parse_citations",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L312",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_337",
+      "source": "src_taxcite_generate_rationale_339",
       "target": "src_taxcite_generate_missingcredentials",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L337",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_341",
+      "source": "src_taxcite_generate_rationale_343",
       "target": "src_taxcite_generate_require_credentials",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L341",
+      "source_location": "L343",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_361",
+      "source": "src_taxcite_generate_rationale_363",
       "target": "src_taxcite_generate_call_model",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L361",
+      "source_location": "L363",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_422",
+      "source": "src_taxcite_generate_rationale_424",
       "target": "src_taxcite_generate_answer_from_hits",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L422",
+      "source_location": "L424",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_431",
+      "source": "src_taxcite_generate_rationale_433",
       "target": "src_taxcite_generate_skipped_only",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L431",
+      "source_location": "L433",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_442",
+      "source": "src_taxcite_generate_rationale_444",
       "target": "src_taxcite_generate_answer_from_groups",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L442",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_480",
+      "source": "src_taxcite_generate_rationale_482",
       "target": "src_taxcite_generate_generate_structured",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L480",
+      "source_location": "L482",
       "weight": 1.0
     },
     {
-      "source": "src_taxcite_generate_rationale_504",
+      "source": "src_taxcite_generate_rationale_506",
       "target": "src_taxcite_generate_answer",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L504",
+      "source_location": "L506",
       "weight": 1.0
     },
     {
@@ -44348,7 +44348,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L439",
+      "source_location": "L441",
       "weight": 0.8
     },
     {
@@ -44360,7 +44360,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L421",
+      "source_location": "L423",
       "weight": 0.8
     },
     {
@@ -44372,7 +44372,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L279",
+      "source_location": "L281",
       "weight": 0.8
     },
     {
@@ -44384,7 +44384,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L511",
+      "source_location": "L513",
       "weight": 0.8
     },
     {
@@ -44396,7 +44396,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L478",
+      "source_location": "L480",
       "weight": 0.8
     },
     {
@@ -44408,7 +44408,7 @@
       "confidence_score": 0.95,
       "context": "generic_arg",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L311",
+      "source_location": "L313",
       "weight": 0.8
     },
     {
@@ -44492,7 +44492,7 @@
       "confidence_score": 0.95,
       "context": "parameter_type",
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L267",
+      "source_location": "L269",
       "weight": 0.8
     },
     {
@@ -44689,7 +44689,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L234",
+      "source_location": "L236",
       "weight": 0.8
     },
     {
@@ -44700,7 +44700,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "src/taxcite/generate.py",
-      "source_location": "L191",
+      "source_location": "L193",
       "weight": 0.8
     },
     {

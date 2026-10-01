@@ -2609,9 +2609,20 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 
 **F5 regression diagnostic (2026-10-01, your go, $0.59 judge + synthesis):** the Phase E prompt (`--prompt pre-f3 --no-verify`) on golden's 32 authority rows, same pinned plans and judge, 3 samples: **correct 0.365** (structured E′ unverified: 0.260; Phase E's own run, samples 0-2: 0.396). Confirmed: F3's structured synthesis costs ~0.10 correctness on golden, not verification. 20 row-samples lost, 10 won; 15 of the 20 lost became "partial: missing condition", only 3 via refusal. Cause seen in the answers: structured answers almost never state the bottom line (4 of 324 open with Yes/No vs 35 of 96 for the old prompt); they list cited facts per sub-query and leave the conclusion to the reader. Dev missed it (0.373 = 0.373). Results `temporal-golden-2026-10-01-f5-pref3.json`.
 
-**Bottom-line fix (2026-10-01, your go for recommendation A), measured on dev, not shipped:** a required part-0 item, one cited sentence answering the question directly, shown first (`generate.BOTTOM_LINE_RULE`). Dev, 42 answerable rows × 3, verified, gate off: **correct 0.238 vs 0.278** (F4's shipped run), incorrect 0.302 vs 0.214, refused 0.095. The model commits to a Yes/No that is often wrong, and the verifier hid 50 of 126 bottom lines. `BOTTOM_LINE = False`; the golden confirmation run was not made, since dev failed. Judge spend $0.96 (one run wasted by the bug below).
+**Bottom-line fix (2026-10-01, your go for recommendation A), measured on dev, not shipped:** a required part-0 item, one cited sentence answering the question directly, shown first (`generate.BOTTOM_LINE_RULE`). Dev, 42 answerable rows × 3, verified, gate off: **correct 0.238 vs 0.278** (F4's shipped run), incorrect 0.302 vs 0.214, refused 0.095. The model commits to a Yes/No that is often wrong, and the verifier hid 50 of 126 bottom lines. `BOTTOM_LINE = False`; the golden confirmation run was not made, since dev failed. **Correction (same day):** paired, it lost 14 row-samples and won 9 (sign test p ≈ 0.4): inconclusive, not a measured loss. The bottom line was generated before the evidence (schema order), which F5b's C1 changes. Judge spend $0.96 (one run wasted by the bug below).
 
 **Harness bug found (2026-10-01): every eval run since F2 ran the sufficiency gate,** which ships off. `set_verify()` set `GATE = not no_gate`, so the gate was on unless `--no-gate` was passed; `ragas_eval.py` (which CI runs) never passed it. Affected: all F5 golden figures (the gate refused 67 of 324 answers before they were written, verified and unverified alike), the pre-F3 diagnostic (6 of 96), and this dev run's first pass. Not affected: F2's measurements (gate on purpose, `--no-gate` arm) and everything before F2. Fixed: `set_verify(gate=None)` keeps what ships; `temporal.py --gate/--no-gate`. Dev re-run lean: only the 54 answers the gate touched were regenerated and re-graded (`ungate.py`, scratch), and the 72 untouched kept their grades. **F5's golden correctness, refusal, latency and G-I06/G-I11 figures need the same correction before F6.**
+
+## F5b: answers that conclude and can be checked (plan: `tasks/plan.md`, F5b)
+
+- [ ] Step 0.2 guard test: no `sufficiency` in eval caches while `GATE` is off
+- [ ] Step 0.3 grader-reason diagnostic for rows that change grade
+- [ ] Step 1 diagnose (free): tag ~36 hidden dev sentences; locate conclusions; split F5's false accepts by sentence type
+- [ ] Metric checks on hand-made cases (conclusion shown, correct ∧ grounded)
+- [ ] R1: C2 + C3 replay on cached dev answers (~$1, your go)
+- [ ] R2: C1 (+C4) new synthesis (~$1, your go)
+- [ ] R3 only if R2 misses one criterion with a clear cause
+- [ ] Golden once with the winner and the gate fixed; replaces F5's void figures (~$3–5, your go)
 
 ## F6: Phase F exit report
 

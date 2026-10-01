@@ -1,7 +1,7 @@
 # Graph Report - TaxCite.nosync  (2026-10-01)
 
 ## Corpus Check
-- 233 files · ~12,792,332 words
+- 232 files · ~12,916,886 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 11 file(s) not represented in the graph (top: (none) 3, .jsonl 3, .xml 3)
 
@@ -364,9 +364,9 @@ Nodes (8): create(), main(), Path, Freeze the corpus so CI can retrieve against 
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Chunk` connect `ecfr.py` to `index.py`, `irs_pubs.py`, `test_ecfr.py`, `store.py`, `usc_notes.py`, `TaxCite — Status`?**
-  _High betweenness centrality (0.178) - this node is a cross-community bridge._
+  _High betweenness centrality (0.177) - this node is a cross-community bridge._
 - **Why does `Decisions Log` connect `TaxCite — Status` to `T2: Ingest eCFR Title 26`?**
-  _High betweenness centrality (0.168) - this node is a cross-community bridge._
+  _High betweenness centrality (0.167) - this node is a cross-community bridge._
 - **Why does `eCFR Chunking Decisions` connect `T2: Ingest eCFR Title 26` to `TaxCite — Status`, `ADR-17: Vector Store — Qdrant, Not pgvector`?**
   _High betweenness centrality (0.119) - this node is a cross-community bridge._
 - **Are the 26 inferred relationships involving `Hit` (e.g. with `base()` and `chunks()`) actually correct?**
