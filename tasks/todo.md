@@ -2635,10 +2635,10 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 
 `eval/results/phase_f.md`: gate outcomes, what each check caught (with examples: a laundered citation suppressed, `G-I11`'s half answer), what it cost (suppressions, latency), what F got wrong. Tech doc §7/§9.3 and ADRs updated.
 
-**F6 (2026-10-01):** exit report drafted (`eval/results/phase_f.md`, a new file for you to create); tech doc ADR-1, ADR-4, ADR-15 revised and Phase F baselines added; PRD §9 results note. `phase-f` pushed (your go); CI: tests green (run 36937736469), retrieval gate and faithfulness running.
+**F6 (2026-10-01):** exit report drafted (`eval/results/phase_f.md`, a new file for you to create); tech doc ADR-1, ADR-4, ADR-15 revised and Phase F baselines added; PRD §9 results note. `phase-f` pushed (your go); CI green on the shipped pipeline: tests (run 36937736469); retrieval gate 0.760 ≥ 0.70 (run 36937735731); faithfulness 0.951 ± 0.015 ≥ 0.855 at refusals 0.056 (run 36937738414; $6.24: pipeline $3.58, judge $2.66).
 
 ## ✅ Checkpoint: Phase F complete
 - [ ] Citation entailment F1 ≥0.90 (NLI vs. LLM-judge, not-supported class): **not met**, 0.63 vs Sonnet 5.5 (≈0.72 adjusted)
 - [x] Citation completeness ≥0.85: 0.994 (golden, shipped)
 - [x] Substantive correctness tracked (N, κ reported): 291 golden row-samples, κ 0.72
-- [ ] Tests and both CI gates green on the shipped pipeline
+- [x] Tests and both CI gates green on the shipped pipeline
