@@ -1,0 +1,2980 @@
+{
+  "questions": "eval/dev.jsonl",
+  "judge": "claude-haiku-4-5",
+  "repeats": 1,
+  "k": 8,
+  "rows_kind": "all",
+  "samples": 3,
+  "by_sample": {
+    "correct": [
+      0.357,
+      0.333,
+      0.405
+    ],
+    "incorrect": [
+      0.143,
+      0.143,
+      0.143
+    ],
+    "grounded": [
+      0.548,
+      0.595,
+      0.571
+    ],
+    "refused": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "conflict: authority_misweighted": [
+      0,
+      0,
+      0
+    ],
+    "conflict: correct": [
+      0.4,
+      0.4,
+      0.4
+    ],
+    "guards: correct": [
+      0.375,
+      0.375,
+      0.375
+    ]
+  },
+  "accuracy_per_repeat": [
+    0.36507936507936506
+  ],
+  "grounded_accuracy_per_repeat": [
+    0.23809523809523808
+  ],
+  "as_of_accuracy": 0.0,
+  "kappa": 0.8840490797546012,
+  "judge_cost_usd": 0.9014189999999997,
+  "stopped": null,
+  "rows": [
+    {
+      "id": "D01",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D01",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D01",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D02",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D02",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D02",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D03",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D03",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D03",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D04",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D04",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D04",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D05",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D05",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D05",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D06",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D06",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D06",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D07",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D07",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D07",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "To determine whether an activity is engaged in for profit, the IRS considers the expectation that assets used in the activity may appreciate in value"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D08",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A client who fully owns and manages rental houses counts as actively participating in the rental real estate activity if they own at least 10% of the property and make management decisions in a significant and bona fide sense"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D08",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A client who fully owns and manages rental houses counts as actively participating in the rental real estate activity if they own at least 10% of the property and make management decisions in a significant and bona fide sense",
+        "Active participation in rental real estate includes making decisions such as approving new tenants, deciding on rental terms, and approving expenditures"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D08",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A client who fully owns and manages rental houses can be considered to actively participate in the rental real estate activity if they make management decisions or arrange for others to provide services in a significant and bona fide sense",
+        "The Tax Court has treated fully owning and managing rental properties as sufficient for active participation",
+        "In cases where taxpayers demonstrated significant involvement in managing their rental properties, the Tax Court has upheld their ability to claim rental losses against nonpassive income"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D09",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D09",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D09",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D10",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D10",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D10",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D11",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D11",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_tax_year",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D11",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D12",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Under Internal Revenue Code section 262, personal expenses are not deductible"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D12",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Under Internal Revenue Code section 262, personal expenses are not deductible"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D12",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D13",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A single taxpayer can exclude up to $250,000 of gain from the sale of a principal residence",
+        "The client can exclude the entire $200,000 gain from taxable income"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D13",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A single taxpayer can exclude up to $250,000 of gain from the sale of their principal residence",
+        "The client's $200,000 gain is less than the maximum exclusion amount of $250,000",
+        "The client can exclude the entire $200,000 gain from her taxable income"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D13",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A single taxpayer can exclude up to $250,000 of gain from the sale of a principal residence",
+        "The client's $200,000 gain is less than the maximum exclusion amount of $250,000",
+        "The client can exclude the entire $200,000 gain from her taxable income"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D14",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D14",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D14",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D15",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2026, medical expenses are deductible to the extent they exceed 7.5% of adjusted gross income"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D15",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2026, medical expenses are deductible to the extent they exceed 7.5% of adjusted gross income"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D15",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2026, medical expenses are deductible to the extent they exceed 7.5% of adjusted gross income"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D16",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D16",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D16",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D17",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For the tax year 2026, an individual can deduct a net capital loss against ordinary income up to $3,000",
+        "Remaining net capital loss can be carried over to subsequent years"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D17",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For the tax year 2026, an individual can deduct a net capital loss against ordinary income up to $3,000"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D17",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For the tax year 2026, an individual can deduct a net capital loss against ordinary income up to $3,000",
+        "Remaining net capital loss can be carried over to future years"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D18",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The 10 percent additional tax on early distributions from qualified retirement plans applies to taxpayers under age 59\u00bd",
+        "A taxpayer who is 45 years old and withdraws $20,000 from a 401(k) is subject to the 10 percent additional tax on the entire amount withdrawn"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D18",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "In tax year 2026, a taxpayer who receives a distribution from a qualified retirement plan must pay an additional tax equal to 10 percent of the portion of the distribution includible in gross income",
+        "The 10 percent additional tax applies to early distributions from qualified retirement plans such as 401(k)s for taxpayers under age 59\u00bd"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D18",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2026, a 10 percent additional tax applies to distributions from qualified retirement plans that are includible in gross income",
+        "The 10 percent additional tax applies to early distributions from qualified retirement plans for taxpayers under age 59\u00bd"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D19",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D19",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D19",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D20",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D20",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D20",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D21",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D21",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D21",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D22",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The cents-per-mile rate is to be applied prospectively from the first day of the taxable year following the date of publication of the applicable Revenue Ruling or Revenue Procedure"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D22",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The cents-per-mile rate is applied prospectively from the first day of the taxable year following the date of publication of the applicable Revenue Ruling or Revenue Procedure"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D22",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The cents-per-mile rate is applied prospectively from the first day of the taxable year following the date of publication of the applicable Revenue Ruling or Revenue Procedure"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D23",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D23",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D23",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D24",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D24",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D24",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D25",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The required beginning date for required minimum distributions is April 1 of the year following the year in which the employee attains age 73",
+        "If a client turns 74 in 2026, the required beginning date for distributions will be April 1, 2027"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D25",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A person must begin taking RMDs by their required beginning date even if still working",
+        "The still-working exception to RMD requirements applies only to 5% owners of the business",
+        "The client in this scenario is not a 5% owner of the business"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D25",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The required beginning date for required minimum distributions from a 401(k) plan is April 1 of the year following the year the employee turns 73, unless the employee is still working and the plan allows for deferral of distributions",
+        "A client who turns 74 in 2026 has a required beginning date for RMDs of April 1, 2027, unless she qualifies for an exception due to current employment"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D26",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Clients with a $900,000 mortgage can deduct the mortgage interest paid on the entire amount of the mortgage because it is below the $1,000,000 limit"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D26",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2016, the limit on deduction for qualified residence interest is based on rules in effect prior to the Tax Cuts and Jobs Act",
+        "Taxpayers with a $900,000 mortgage can deduct the mortgage interest paid on that amount"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D26",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": "2016",
+      "as_of_plan": "2016",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The clients could deduct all of the mortgage interest paid on their $900,000 mortgage on their 2016 joint return"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D27",
+      "sample": 0,
+      "kind": "statute_over_lower",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Vehicles placed in service in 2025 are eligible for the clean vehicle credit if they meet the other requirements"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D27",
+      "sample": 1,
+      "kind": "statute_over_lower",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D27",
+      "sample": 2,
+      "kind": "statute_over_lower",
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Vehicles purchased for personal use can qualify for the clean vehicle credit if they meet all eligibility requirements"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D28",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The applicable percentage for the residential clean energy credit for solar energy systems placed in service in 2021 is 26 percent"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D28",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The applicable percentage for the residential clean energy credit for solar energy systems installed in 2021 is 26 percent of the qualified solar electric property expenditures"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D28",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2021",
+      "as_of_plan": "2021",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The applicable percentage for the residential clean energy credit for solar energy systems installed in 2021 is 26 percent"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D29",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The energy efficient home improvement credit does not apply to property for which construction begins after June 30, 2026"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D29",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The energy efficient home improvement credit does not apply to property for which construction begins after June 30, 2026",
+        "A heat pump installed in February 2026 is not eligible for the energy efficient home improvement credit because it falls under the construction timeline that disqualifies it"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D29",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The energy efficient home improvement credit does not apply to property for which construction begins after June 30, 2026",
+        "A heat pump installed in February 2026 is considered to have been installed after the cutoff date for the energy efficient home improvement credit"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "wrong_section_cited",
+          "alt_grade": "incorrect",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D30",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "26 U.S.C. \u00a7 225 was enacted for taxable years beginning after December 31, 2024",
+        "The current text of 26 U.S.C. \u00a7 225 is not applicable for the tax year 2024",
+        "A nurse cannot deduct overtime premium on a 2024 tax return under the deduction for qualified overtime compensation"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D30",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "26 U.S.C. \u00a7 225 was enacted for taxable years beginning after December 31, 2024",
+        "The deduction for qualified overtime compensation under 26 U.S.C. \u00a7 225 is not applicable for the tax year 2024",
+        "A nurse cannot deduct overtime premium on a 2024 return under the deduction for qualified overtime compensation"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D30",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "26 U.S.C. \u00a7 225 was enacted for taxable years beginning after December 31, 2024",
+        "The deduction for qualified overtime compensation under 26 U.S.C. \u00a7 225 is not applicable for the tax year 2024",
+        "A nurse cannot deduct overtime premium on her 2024 return under the deduction for qualified overtime compensation"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D31",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Interest on a loan secured by a vehicle purchased for personal use is generally not deductible as qualified passenger vehicle loan interest"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D31",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Interest paid on a loan secured by a vehicle purchased for personal use is generally not deductible as qualified passenger vehicle loan interest"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D31",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2025",
+      "as_of_plan": "2025",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "Interest on a loan secured by a vehicle purchased for personal use is generally not deductible as qualified passenger vehicle loan interest"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D32",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D32",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D32",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D33",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D33",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D33",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_section_cited",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_section_cited"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D34",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": "2012",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The IRS cannot levy on the client's bank account in September 2026"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D34",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": "2012",
+      "as_of_plan": "2012",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The IRS cannot levy on the client's bank account in September 2026"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D34",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": "2012",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D35",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2023, the percentage of qualifying expenses for the child and dependent care credit is based on adjusted gross income (AGI)",
+        "The percentage of the child and dependent care credit decreases as AGI increases",
+        "The maximum percentage for the child and dependent care credit is 35% for AGI up to $15,000",
+        "The minimum percentage for the child and dependent care credit is 20% for AGI over $43,000",
+        "For a client with AGI of $60,000, the applicable percentage for the child and dependent care credit is 20%",
+        "The child and dependent care credit would cover 20% of $3,000 in day care expenses"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "authority_misweighted",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D35",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2023, the percentage of qualifying expenses for the child and dependent care credit is based on the taxpayer's adjusted gross income (AGI)",
+        "The child and dependent care credit percentage decreases as AGI increases",
+        "The maximum percentage for the child and dependent care credit is 35% for AGI up to $15,000",
+        "The minimum percentage for the child and dependent care credit is 20% for AGI over $43,000",
+        "For a client with AGI of $60,000, the applicable percentage for the child and dependent care credit is 20%",
+        "The credit would cover 20% of $3,000 in day care expenses"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D35",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2023",
+      "as_of_plan": "2023",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2023, the child and dependent care credit percentage is based on adjusted gross income",
+        "The child and dependent care credit percentage decreases as AGI increases",
+        "The maximum child and dependent care credit percentage for tax year 2023 is 35% for AGI up to $15,000",
+        "The minimum child and dependent care credit percentage for tax year 2023 is 20% for AGI over $43,000",
+        "For a client with AGI of $60,000, the applicable child and dependent care credit percentage is 20%",
+        "The child and dependent care credit covers 20% of $3,000 in day care expenses"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D36",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The applicable percentage for the child and dependent care credit cannot go below 20 percent"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D36",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The applicable percentage for the child and dependent care credit cannot go below 20 percent"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "missing_condition",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D36",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The reduction is 22 percentage points (1 percentage point for each $2,000 over $15,000)",
+        "The applicable percentage for the client is 28 percent (50 percent - 22 percentage points)",
+        "The child and dependent care credit is $840 (28 percent of $3,000)"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "superseded_rule"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D37",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2022 and 2029",
+      "as_of_plan": "2022 and 2029",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "For tax year 2022, the standard deduction for individuals who are 65 or older before the close of the taxable year is $6,000"
+      ],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "superseded_rule"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D37",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2022 and 2029",
+      "as_of_plan": "2022 and 2029",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "superseded_rule"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D37",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2022 and 2029",
+      "as_of_plan": "2022 and 2029",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "superseded_rule",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D38",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D38",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D38",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2026",
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    },
+    {
+      "id": "D39",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D39",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D39",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": "2024",
+      "as_of_plan": "2024",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "incorrect",
+          "defect": "hallucinated_fact",
+          "alt_grade": "incorrect",
+          "alt_defect": "hallucinated_fact"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D40",
+      "sample": 0,
+      "kind": "reported_over_memo",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D40",
+      "sample": 1,
+      "kind": "reported_over_memo",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D40",
+      "sample": 2,
+      "kind": "reported_over_memo",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D41",
+      "sample": 0,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A taxpayer is unlikely to win on an alternative argument raised for the first time in a post-trial brief due to the potential for prejudice against the opposing party"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D41",
+      "sample": 1,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A taxpayer is unlikely to win on an alternative argument raised for the first time in a post-trial brief due to the potential for prejudice against the opposing party"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D41",
+      "sample": 2,
+      "kind": "guard",
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "A taxpayer is unlikely to win on an alternative argument raised for the first time in a post-trial brief due to procedural constraints"
+      ],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D42",
+      "sample": 0,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "wrong_tax_year",
+          "alt_grade": "partial",
+          "alt_defect": "missing_condition"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D42",
+      "sample": 1,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": "2026",
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": true,
+      "unsupported": [],
+      "grades": [
+        {
+          "grade": "partial",
+          "defect": "missing_condition",
+          "alt_grade": "partial",
+          "alt_defect": "wrong_tax_year"
+        }
+      ],
+      "passes": [
+        false
+      ]
+    },
+    {
+      "id": "D42",
+      "sample": 2,
+      "kind": null,
+      "as_of_gold": null,
+      "as_of_plan": null,
+      "as_of_ok": null,
+      "refused": false,
+      "grounded": false,
+      "unsupported": [
+        "The Tax Court can review the IRS's refusal to allow participation in the VCSP if the taxpayer meets the eligibility requirements for the program"
+      ],
+      "grades": [
+        {
+          "grade": "correct",
+          "defect": "none",
+          "alt_grade": "correct",
+          "alt_defect": "none"
+        }
+      ],
+      "passes": [
+        true
+      ]
+    }
+  ]
+}

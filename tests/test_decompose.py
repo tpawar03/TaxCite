@@ -252,3 +252,116 @@ def test_chunks_ships_the_scoped_prior_and_none_turns_it_off(monkeypatch):
     assert dc.AUTHORITY == {"rule": "prior", "w": 0.5, "scoped": True}
     assert [h.source for h in dc.chunks(d, 3)] == ["usc", "case", "irs_pub"]      # statute first, opinion kept 2nd
     assert [h.source for h in dc.chunks(d, 3, authority=None)] == ["irs_pub", "case", "usc"]
+
+
+# ---- F2: the sufficiency gate ----------------------------------------------------------------------------------
+
+def verdict(sufficient, missing=""):
+    import json
+    return json.dumps({"sources": [{"index": 0, "supports": sufficient}], "sufficient": sufficient, "missing": missing})
+
+
+def test_the_gate_asks_once_per_part_with_its_year_and_reads_the_verdict(monkeypatch):
+    calls = []
+    monkeypatch.setattr(dc, "call_model", lambda system, prompt, model, **kw: calls.append((prompt, kw)) or (
+        verdict(False, "no 2027 figure"), 400, 20))
+    v = dc.sufficiency("What is the 2027 limit?", "section 179 limit", [hit("26 U.S.C. § 179(b)(1)")], as_of="2027")
+    assert len(calls) == 1 and "Tax year(s) the question is about: 2027" in calls[0][0]
+    assert "Part to answer: section 179 limit" in calls[0][0] and "Source 0: [26 U.S.C. § 179(b)(1)]" in calls[0][0]
+    assert calls[0][1]["json_schema"] == dc.sufficiency_schema() and calls[0][1]["temperature"] == 0
+    assert (v["sufficient"], v["missing"], v["supports"]) == (False, "no 2027 figure", [])
+
+
+def test_the_gate_fails_open(monkeypatch):
+    """The verifier is the guarantee; a failed gate call must not refuse an answerable part."""
+    def boom(*a, **k):
+        raise TimeoutError("gate timed out")
+    monkeypatch.setattr(dc, "call_model", boom)
+    assert dc.sufficiency("q", "part", [hit("A")])["sufficient"]
+    monkeypatch.setattr(dc, "call_model", lambda *a, **k: ("{truncated", 1, 1))
+    v = dc.sufficiency("q", "part", [hit("A")])
+    assert v["sufficient"] and "error" in v
+
+
+def test_gate_skips_insufficient_parts_and_leaves_empty_ones_to_synthesis(monkeypatch):
+    monkeypatch.setattr(dc, "call_model", lambda system, prompt, model, **kw: (
+        verdict("federal" in prompt) if "federal" in prompt else verdict(False, "no state law"), 1, 1))
+    groups = [("federal home office", [hit("26 U.S.C. § 280A(c)(1)")]), ("California rule", [hit("IRS Pub 587 (2025), p. 3")]),
+              ("nothing found", [])]
+    keep, skipped, verdicts = dc.gate("q", groups)
+    assert [label for label, _ in keep] == ["federal home office", "nothing found"]
+    assert skipped == [("California rule", "no state law")] and len(verdicts) == 2  # the empty part isn't judged
+
+
+def gi11(monkeypatch, sufficient_parts):
+    """A G-I11-shaped question: two searched parts, the gate stubbed per part, synthesis stubbed, verifier off."""
+    import json
+    from taxcite import generate
+    fed, ca = hit("26 U.S.C. § 280A(c)(1)", text="exclusive regular use"), hit("IRS Pub 587 (2025), p. 3", text="state?")
+    d = dc.Decomposition("Home office federally, and in California?", plan(("statutory", "federal home office"),
+                                                                          ("statutory", "California home office")))
+    d.subqueries[0].hits, d.subqueries[1].hits = [fed], [ca]
+    monkeypatch.setattr(dc, "retrieve", lambda d, **k: d)
+    monkeypatch.setattr(dc, "chunks", lambda d, k: [fed, ca])
+    monkeypatch.setattr(dc, "VERIFY", False)
+    monkeypatch.setattr(dc, "GATE", True)
+    monkeypatch.setattr(dc, "call_model", lambda system, prompt, model, **kw: (
+        verdict(True) if any(p in prompt for p in sufficient_parts) else verdict(False, "no California law"), 1, 1))
+    synth = []
+    monkeypatch.setattr(generate, "call_model", lambda system, prompt, model, **kw: synth.append(prompt) or (json.dumps(
+        {"tax_year": None, "not_answerable": [],
+         "sentences": [{"part": 1, "text": "Exclusive regular use qualifies.", "citations": [fed.citation]}]}), 1, 1))
+    return d, synth
+
+
+def test_g_i11_answers_the_answerable_part_and_never_writes_the_other(monkeypatch):
+    """Phase B's "waiting test", which never existed: F2 writes it."""
+    d, synth = gi11(monkeypatch, ["Part to answer: federal home office"])
+    _, a = dc.answer(d.question, plan=d)
+    assert len(synth) == 1 and "IRS Pub 587" not in synth[0]  # the California part's source never reached synthesis
+    assert a.text == ("Part 1: federal home office\nExclusive regular use qualifies [26 U.S.C. § 280A(c)(1)].\n\n"
+                      "Part 2: California home office\nINSUFFICIENT EVIDENCE: no California law")
+    assert not a.refused and [v["sufficient"] for v in a.sufficiency] == [True, False]
+
+
+def test_nothing_answerable_means_no_synthesis_call(monkeypatch):
+    d, synth = gi11(monkeypatch, [])
+    _, a = dc.answer(d.question, plan=d)
+    assert synth == [] and a.refused and a.text.count("INSUFFICIENT EVIDENCE") == 2
+
+
+def test_the_gate_is_off_unless_turned_on(monkeypatch):
+    d, synth = gi11(monkeypatch, [])
+    monkeypatch.setattr(dc, "GATE", False)
+    _, a = dc.answer(d.question, plan=d)
+    assert len(synth) == 1 and "IRS Pub 587" in synth[0] and a.sufficiency == []
+
+
+def test_the_gate_ships_off():
+    """F2: measured on dev and not shipped (its rule's wrong-refusal guard failed); the code stays for the eval."""
+    assert dc.GATE is False
+
+
+def test_siblings_search_each_found_section_alone_and_skip_what_is_held(monkeypatch):
+    """F5b: one search per Code section or regulation already found (searched together, the slots refill with
+    chunks already held), at most SIBLING_SECTIONS of them in rank order; publications and opinions aren't expanded."""
+    def sec(citation, section, source="usc"):
+        return Hit(citation=citation, heading="h", text="t", score=1.0, section=section, source=source)
+    found = [sec("26 U.S.C. § 121(a)", "121"), sec("IRS Pub 17 (2025), p. 3", "Pub 17", "irs_pub"),
+             sec("26 CFR 1.121-1(a)", "1.121-1", "ecfr"), sec("26 U.S.C. § 121(b)(5)", "121"),
+             sec("26 U.S.C. § 25D(a)-(c)", "25D"), sec("26 U.S.C. § 163(h)(3)", "163")]
+    calls = []
+
+    def fake_search(q, k, mode, source, sections=None, **kw):
+        calls.append(sections)
+        return [sec(f"26 U.S.C. § {sections[0]}(z)", sections[0]), found[0]] if sections else found
+    monkeypatch.setattr(dc, "search", fake_search)
+    d = dc.retrieve(dc.Decomposition("q", plan(("statutory", "s"))), k=8, siblings=2)
+    assert calls == [None, ["121"], ["1.121-1"], ["25D"]]  # three sections, best first; 163 is the fourth
+    assert [h.citation for h in d.searched[0].hits][len(found):] == [
+        "26 U.S.C. § 121(z)", "26 U.S.C. § 1.121-1(z)", "26 U.S.C. § 25D(z)"]  # 121(a) already held, not repeated
+
+
+def test_f5b_ships_siblings_conclusions_and_recite():
+    from taxcite import generate, verify
+    assert (dc.SIBLINGS, dc.SIBLING_SECTIONS, generate.CONCLUSION, verify.RECITE) == (6, 3, True, True)

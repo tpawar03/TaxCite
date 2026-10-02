@@ -117,7 +117,7 @@ eCFR API, CourtListener bulk API, IRS.gov, and client uploads feed format-specif
 | FR-2 | The system must retrieve each sub-query via hybrid (dense + sparse) search, filtered by the as-of date against each chunk's valid-time window. | Query path step 3 |
 | FR-3 | For every opinion an answer cites, the system must look up its negative treatment in the citation graph (reversed / overruled / on appeal) and flag it on the citation, naming the source; when the graph is unavailable the flag reads "unknown", never "good law". Bounded 1–2 hop expansion of case-law results is kept as a measured ablation rung, off by default. *Revised 2026-09-26 from C0: expansion's ceiling on the golden set is 0 points.* | Query path step 4; ADR-1 (revised) |
 | FR-4 | The system must rerank the combined candidate set using a cross-encoder with authority metadata as an explicit boost/demote signal, not semantic score alone. | Query path step 5; ADR-8 |
-| FR-5 | The system must run an evidence-sufficiency check per sub-query before synthesis, excluding sub-queries below threshold, implemented as one batched structured-output call per sub-query. | Query path step 6; ADR-7, ADR-10 |
+| FR-5 | The system must run an evidence-sufficiency check per sub-query before synthesis, excluding sub-queries below threshold, implemented as one batched structured-output call per sub-query. *Revised 2026-09-30 (F2): built and measured, not shipped; the post-synthesis verifier (FR-7) meets the requirement's intent, that no unsupported content reaches the user.* | Query path step 6; ADR-7, ADR-10 (revised) |
 | FR-6 | The system must generate one synthesized answer, with a citation attached to every claim, generated only over sub-answers that passed the sufficiency gate. | Query path step 7 |
 | FR-7 | The system must run post-generation claim verification on every atomic claim; any sub-answer containing an unentailed or contradicted claim must be suppressed entirely and treated as insufficient evidence — no unverified claim is ever shown to the user, even flagged. | Query path step 8; ADR-3, ADR-4, ADR-15 |
 | FR-8 | The system must surface the authority level of every citation shown to the user. | §5.5 |
@@ -181,9 +181,11 @@ Quality is tracked via an **ablation ladder** — closed-book → dense-only →
 | D | Temporal-filtering accuracy | ≥90% |
 | E | Authority-metadata accuracy (N=150) | ≥95% |
 | E | Recall@20 regression from authority rerank | ≤2 points |
-| F | Citation entailment F1 | ≥0.90 |
+| F | Citation entailment F1 (runtime verifier vs. an independent audit reference; ADR-4 revised 2026-09-30) | ≥0.90 |
 | F | Citation completeness | ≥0.85 |
 | F | Substantive correctness | Tracked, not gated, until ≥100 AI-judge-graded examples exist |
+
+*Phase F results (2026-10-01):* completeness 0.994 (met); entailment F1 0.63 against an independent reference (not met; ADR-4); correctness tracked on 291 golden row-samples, two judges, κ reported in `eval/results/phase_f.md`.
 | G | Cross-tenant leakage failures | 0 |
 | G | Injection corpus pass rate (prompt + render path) | 100% |
 | H | p95 latency (synthesis / refusal) | ≤35s / ≤2s |

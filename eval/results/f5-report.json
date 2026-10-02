@@ -1,0 +1,68 @@
+{
+  "completeness, before hiding": {
+    "cited": 913,
+    "material": 917,
+    "share": 0.9956379498364231
+  },
+  "completeness, as shown": {
+    "cited": 779,
+    "material": 783,
+    "share": 0.9948914431673053
+  },
+  "verifier": {
+    "sentences": 913,
+    "hidden": 134,
+    "answers_emptied": 9,
+    "answers_refused": 49,
+    "answers": 291
+  },
+  "abstention": {
+    "G-I01": {
+      "refused": 3
+    },
+    "G-I02": {
+      "refused": 3
+    },
+    "G-I03": {
+      "refused": 3
+    },
+    "G-I04": {
+      "refused": 3
+    },
+    "G-I05": {
+      "refused": 3
+    },
+    "G-I06": {
+      "answered": 3
+    },
+    "G-I07": {
+      "refused": 3
+    },
+    "G-I08": {
+      "refused": 3
+    },
+    "G-I09": {
+      "refused": 3
+    },
+    "G-I10": {
+      "refused": 1,
+      "flagged": 2
+    },
+    "G-I11": {
+      "refused": 3
+    }
+  },
+  "latency_seconds": {
+    "answered": {
+      "n": 246,
+      "p50": 7.965,
+      "p95": 11.21
+    },
+    "refused": {
+      "n": 77,
+      "p50": 2.73,
+      "p95": 6.17
+    }
+  },
+  "cost_usd_per_answer": 0.003865003549382716
+}

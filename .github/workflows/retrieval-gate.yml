@@ -58,11 +58,12 @@ jobs:
       # was 0.680 with a 0.66 floor), so the floor moves up by the same 0.04.
       # E4: what ships adds the scoped authority prior (0.740 on dev). The floor stays at 0.70 (decided):
       # the prior needs E2's profiles on the points, so it's inert on a snapshot older than E2.
+      # F5b: what ships adds sibling expansion (dev 0.760 at k=10, 0.740 without); the floor stays at 0.70.
       - name: retrieval must not regress
         run: |
           uv run python eval/retrieval.py \
             --pilot eval/dev.jsonl --mode hybrid --k 10 \
-            --decompose route+statute1+prior0.5-scoped --plan-cache eval/results/decompositions.json \
+            --decompose route+statute1+prior0.5-scoped+sib6 --plan-cache eval/results/decompositions.json \
             --fail-under 0.70
 
       - uses: actions/upload-artifact@v4

@@ -1,0 +1,2928 @@
+{
+  "judge": "claude-haiku-4-5",
+  "k": 8,
+  "repeats": 3,
+  "gate": 0.85,
+  "questions": "eval/dev.jsonl",
+  "stopped": null,
+  "summary_per_run": [
+    {
+      "rows": 25,
+      "scored": 25,
+      "faithfulness": 0.8912857142857143,
+      "perfect_rows": 17,
+      "refusals": 0,
+      "refusal_rate": 0.0,
+      "answers_with_no_claim": 0,
+      "claims": 123,
+      "unsupported_claims": 12
+    },
+    {
+      "rows": 25,
+      "scored": 25,
+      "faithfulness": 0.8571904761904762,
+      "perfect_rows": 17,
+      "refusals": 0,
+      "refusal_rate": 0.0,
+      "answers_with_no_claim": 0,
+      "claims": 118,
+      "unsupported_claims": 14
+    },
+    {
+      "rows": 25,
+      "scored": 25,
+      "faithfulness": 0.8425238095238095,
+      "perfect_rows": 16,
+      "refusals": 0,
+      "refusal_rate": 0.0,
+      "answers_with_no_claim": 0,
+      "claims": 126,
+      "unsupported_claims": 16
+    }
+  ],
+  "faithfulness_per_run": [
+    0.8912857142857143,
+    0.8571904761904762,
+    0.8425238095238095
+  ],
+  "judge_cost_usd": 0.45548799999999984,
+  "rows": [
+    {
+      "id": "D01",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Deductions are not allowed for activities that taxpayers carry on primarily for sport, hobby, or recreation in excess of the taxpayer's income from the activity",
+        "For a deduction to be allowed under section 162 or 212, taxpayers must establish that they engaged in the activity for profit as the predominant, primary or principal objective",
+        "The manner in which an activity is conducted can indicate whether it is a business or a hobby",
+        "Taxpayers who have pursued horse breeding as a business rather than a hobby have established by a preponderance of the evidence that their primary objective was to make a profit",
+        "Personal motives in carrying on an activity may suggest that a taxpayer did not engage in the activity for profit, especially where recreational elements exist",
+        "The expertise of taxpayers and their advisors, as well as their consultation with experts, may indicate a profit objective",
+        "The time and effort devoted to an activity can support a finding that taxpayers had a profit objective"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(a) explicitly states this rule."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Wolf v. Commissioner, 4 F.3d 709, 713 (9th Cir. 1993) establishes this standard."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(1) lists manner of conducting activity as a relevant factor."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 states petitioners established this by preponderance of evidence for horse breeding."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(9) addresses personal motives and recreational elements."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(2) provides that expertise and expert consultation may indicate profit objective."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(3) identifies time and effort as evidence of profit objective."
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Expenses are deductible under section 162(a) only if they are primarily undertaken for business purposes rather than personal purposes",
+        "Viewing television and online videos is a common source of personal enjoyment",
+        "Expenses for cable and streaming subscriptions are not deductible if they are not directly related to a taxpayer's business",
+        "Cable and streaming subscription expenses are not deductible under section 162(a) if they were not incurred primarily for business purposes, even if the expenses are typical for influencers"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Stated directly in T.C. Memo. 2026-69 at *16-17 citing Walliser v. Commissioner."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Stated directly in T.C. Memo. 2026-69 at *15 regarding television and online videos."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Stated in T.C. Memo. 2026-69 at *15, citing Minick v. Commissioner rule on cable bills."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *18-19 states even typical influencer expenses are not deductible if not primarily for business purposes."
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court has held that providing housing to farm workers supports the existence of an employer-employee relationship",
+        "The provision of housing, along with payment of job-related expenses and the ability to receive advances on compensation, indicates an intention to create an employment relationship rather than an independent contractor relationship",
+        "Farm workers can be employees for purposes of Federal employment taxes based on the nature of their relationship with the farm owner",
+        "Insurance payments related to farm operations can be claimed as business expense deductions when appropriately allocated between personal and business use",
+        "A significant portion of umbrella insurance policy premiums can be treated as business-related expenses when the farming operation is large and valuable compared to the personal home",
+        "The Tax Court has treated advances on pay as a reduction in future compensation checks, indicating a formal employment relationship where the employer manages compensation"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 states providing residence on farm property supports employer-employee relationship."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 explicitly states these factors are indicative of intention to create employment relationship, not independent contractor relationship."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 holds workers were employees for Federal employment tax purposes based on their relationship with farm owner."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 allows farm insurance deductions as business expenses when appropriately allocated between personal and business use."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 allocated 75% of umbrella insurance premiums as business expenses based on farm operation size exceeding home value."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 describes advances repaid through reducing subsequent compensation checks, evidencing formal employment relationship."
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Travel expenses are subject to heightened substantiation requirements under section 274(d)",
+        "Each element of a traveling expense must be substantiated through adequate records or by sufficient evidence corroborating the taxpayer's own statement",
+        "The petitioners provided a spreadsheet of their travel expenses, which included toll and parking charges",
+        "The expenses did not clearly correspond with the travel destinations on the petitioners' travel logs",
+        "Mr. Simpson did not provide testimony that corroborated the assertions made in the petitioners' travel logs",
+        "The court held that the petitioners failed to satisfy their burden of substantiating the full amount of travel expenses in accordance with section 274 and the regulations",
+        "Toll and parking charges on a spreadsheet alone are not sufficient to substantiate travel expenses without adequate records or corroborating evidence"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 274(d) travel expenses are subject to heightened substantiation requirements per sources."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state each element must be substantiated through adequate records or sufficient corroborating evidence."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 explicitly states petitioners provided a spreadsheet including toll and parking charges."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 states expenses did not clearly correspond with travel destinations on logs."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 states Mr. Simpson's testimony did not corroborate assertions in travel logs."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 holds petitioners failed to satisfy substantiation burden under section 274."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Sources indicate spreadsheet entries lacked specificity and detail required; additional testimony and documentation needed."
+        }
+      ]
+    },
+    {
+      "id": "D05",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Gross income includes nonannuity amounts received under a life insurance contract in excess of the investment in the contract",
+        "A taxpayer must recognize an indirect distribution of an insurance policy's cash surrender value as gross income under section 72",
+        "When a life insurance policy is terminated and the cash surrender value is used to satisfy outstanding loans, the taxpayer is treated as having received a taxable constructive distribution"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source directly states: 'Gross income includes nonannuity amounts received under a life insurance contract in excess of the investment in the contract. I.R.C. \u00a7 72(e)(5).'"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Source states: 'a taxpayer is required to recognize an indirect distribution of an insurance policy's cash surrender value as gross income under section 72.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Source states taxpayer 'is nonetheless treated as having received a taxable constructive distribution' when policy terminates and cash value applied against outstanding loans."
+        }
+      ]
+    },
+    {
+      "id": "D06",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2026, taxpayers with rental income over $100,000 may receive a portion of the $25,000 rental loss allowance subject to phase-out",
+        "The $25,000 rental loss allowance is reduced by 50% of the amount by which the taxpayer's adjusted gross income exceeds $100,000",
+        "If a taxpayer's adjusted gross income is $150,000 or more, they are not eligible for the special $25,000 rental loss allowance"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources confirm income over $100,000 triggers phase-out, reducing but not eliminating the allowance."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(3)(A) explicitly states the $25,000 is reduced by 50% of AGI excess over $100,000."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "IRS Pub 527 and statute state no special allowance if MAGI is $150,000 or more."
+        }
+      ]
+    },
+    {
+      "id": "D07",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "If an activity is not engaged in for profit, no deductions attributable to that activity shall be allowed except as provided in the statute",
+        "The IRS considers the expertise of the taxpayer when determining whether an activity is engaged in for profit",
+        "The IRS considers the time and effort devoted to the activity when determining whether an activity is engaged in for profit",
+        "The IRS considers the manner in which the activity is conducted when determining whether an activity is engaged in for profit",
+        "Personal enjoyment does not automatically classify an activity as a hobby if there is evidence of a profit objective",
+        "In cases involving horse breeding, courts look for evidence of a business plan",
+        "In cases involving horse breeding, courts look for evidence of consultation with experts",
+        "In cases involving horse breeding, courts look for evidence of the taxpayer's efforts to improve profitability",
+        "Substantial time and effort devoted to an activity supports a finding of a profit objective",
+        "A structured approach to breeding and selling horses supports a finding of a profit objective",
+        "Personal enjoyment does not negate a profit motive if the activity is conducted in a business-like manner with the intent to earn a profit"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(a) states no deductions allowed except as provided in the section."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Treas. Reg. \u00a7 1.183-2(b)(2) cited in multiple cases as factor indicating profit objective."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Treas. Reg. \u00a7 1.183-2(b)(3) referenced as factor; sources discuss time and effort devoted."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 discusses manner of conducting activity as factor in profit determination."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 states personal pleasure won't classify activity as hobby if engaged in for profit."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 discusses development of business plan and calculated steps as profit indicators."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Multiple sources discuss consultation with experts as profit objective factor."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo. 2025-35 discusses consulting with experts to improve profitability as profit indicator."
+        },
+        {
+          "index": 8,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 states substantial time and effort supports finding of profit objective."
+        },
+        {
+          "index": 9,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 discusses structured breeding and training plan supporting profit objective."
+        },
+        {
+          "index": 10,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 and 2010-216 establish personal enjoyment doesn't negate profit motive with business-like conduct."
+        }
+      ]
+    },
+    {
+      "id": "D08",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A client who fully owns and manages rental houses counts as actively participating in the rental real estate activity if they own at least 10% of the property and make management decisions in a significant and bona fide sense",
+        "Active participation allows a client to deduct up to $25,000 of rental losses from nonpassive income, subject to certain income limitations",
+        "The Tax Court has treated fully owning and managing rental properties as sufficient for active participation, allowing taxpayers to deduct losses as active participants even if they are not classified as real estate professionals",
+        "In cases where taxpayers demonstrated significant involvement in managing their rental properties, the Tax Court has upheld their claims for rental loss deductions based on active participation"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(6)(A) requires at least 10% interest ownership; management decisions constitute active participation under \u00a7 469(i)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(1) permits $25,000 offset for rental losses with active participation, subject to phaseout per \u00a7 469(i)(3)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2024-106 explicitly held petitioners may deduct $25,000 losses as active participants without real estate professional status."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Multiple Tax Court cases (2010-75, 2024-106) upheld rental loss deductions based on active participation when taxpayers demonstrated significant involvement."
+        }
+      ]
+    },
+    {
+      "id": "D09",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "An employer who receives a notice of determination regarding worker classification may petition the Tax Court for review of the classification and the employment tax owed as a result of that classification",
+        "The Tax Court has ruled that providing housing and covering job-related expenses can indicate an employer-employee relationship rather than an independent contractor relationship",
+        "In the Twin Rivers Farm case, the Tax Court found that the provision of housing and advances on compensation supported the conclusion that the workers were employees for federal employment tax purposes"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2009-234 states an employer who receives a notice of determination concerning worker classification may petition Tax Court for review of employee classification and employment tax owed."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 explicitly states providing residence and covering job-related expenses are indicative of employer-employee relationship, not independent contractor relationship."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 holds workers were employees, citing that petitioner provided residence, covered expenses, and allowed advances on compensation as supportive factors."
+        }
+      ]
+    },
+    {
+      "id": "D10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Taxpayers must keep records sufficient to enable the Commissioner to correctly determine income tax liability, including detailed records of travel expenses",
+        "One method for substantiating travel expenses is through the preparation of a daily diary or record of expenditures, maintained in sufficient detail to identify the amount and nature of any expenditure",
+        "Taxpayers must preserve supporting documents, especially for large or exceptional expenditures",
+        "Detailed records of small expenditures may not be required",
+        "The Tax Court has not accepted a spreadsheet of toll and parking charges as sufficient substantiation for travel expenses when the expenses do not clearly correspond with travel destinations and lack corroborating testimony"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states taxpayers must keep records sufficient to enable Commissioner to determine tax liability, including detailed travel expense records."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) describes daily diary method maintained in sufficient detail to identify amount and nature of expenditure."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) requires preservation of supporting documents, especially for large or exceptional expenditures."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states detailed records of small expenditures like tips will not be required."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2023-4 rejected spreadsheet of toll and parking charges lacking specificity and corroborating testimony."
+        }
+      ]
+    },
+    {
+      "id": "D11",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Income is constructively received when it is credited to a taxpayer's account, set apart for them, or otherwise made available so that they may draw upon it at any time, or could have been drawn upon during the taxable year if notice of intention to withdraw had been given",
+        "Income is not constructively received if the taxpayer's control of its receipt is subject to substantial limitations or restrictions",
+        "The Tax Court has applied the constructive receipt doctrine to cases involving terminated life insurance policies",
+        "When a life insurance policy is terminated, a taxpayer constructively receives taxable income equal to the cash surrender value of the policy used to satisfy outstanding loans against it, even though no cash is actually received"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Regulation 26 CFR 1.451-2(a) states income is constructively received when credited to account, set apart, or made available to draw upon."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Regulation 26 CFR 1.451-2(a) explicitly states income is not constructively received if taxpayer's control is subject to substantial limitations or restrictions."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 applies constructive receipt doctrine to terminated life insurance policy in Atwood and McGowen cases."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 holds taxpayer constructively received $160,900 when policy terminated and cash value satisfied outstanding loans despite no actual cash receipt."
+        }
+      ]
+    },
+    {
+      "id": "D12",
+      "refused": false,
+      "faithfulness": 0.75,
+      "claims": [
+        "Under Internal Revenue Code section 262, personal expenses are not deductible",
+        "Expenses are deductible under section 162(a) only if they are primarily undertaken for business purposes instead of personal purposes",
+        "Payments for television and cable bills are not deductible business expenses if they were not directly related to a taxpayer's business",
+        "In the case of Mr. Sami, the Tax Court found that his streaming subscription expenses were primarily personal and not directly related to his business as a social media influencer"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not cite or discuss Internal Revenue Code section 262."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 states expenses are deductible under section 162(a) only if primarily undertaken for business instead of personal purposes."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 cites Minick v. Commissioner, stating payments for television and cable bills are not deductible if not directly related to business."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 holds Mr. Sami's streaming expenses ($2,896-$3,766) are personal, not directly related to his social media influencer business."
+        }
+      ]
+    },
+    {
+      "id": "D13",
+      "refused": false,
+      "faithfulness": 0.875,
+      "claims": [
+        "To exclude gain from the sale of a principal residence, the taxpayer must own the residence for at least 2 years",
+        "To exclude gain from the sale of a principal residence, the taxpayer must use the residence as a principal residence for at least 2 years during the 5-year period ending on the date of sale",
+        "The client owned and lived in the house for 3 of the last 5 years",
+        "The client meets the ownership and use tests",
+        "A single taxpayer can exclude up to $250,000 of gain from the sale of a principal residence",
+        "The client sold the house at a $200,000 gain",
+        "The $200,000 gain is less than the maximum exclusion amount of $250,000",
+        "The client can exclude the entire $200,000 gain from taxable income"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 121(a) requires property be 'owned...for periods aggregating 2 years or more'"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 121(a) requires 'owned and used...for periods aggregating 2 years or more' during 5-year period ending on sale date"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "This is stated in the question as the given facts"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Client owned and lived in house for 3 of last 5 years, satisfying both 2-year requirements"
+        },
+        {
+          "index": 4,
+          "supported": false,
+          "why": "Sources do not specify the $250,000 exclusion amount for single taxpayers"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "This is stated in the question as the given facts"
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "$200,000 is less than $250,000, though source does not specify the latter amount"
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "Client meets ownership and use tests; $200,000 gain is within available exclusion per \u00a7 121(a)"
+        }
+      ]
+    },
+    {
+      "id": "D14",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The maximum deduction for student loan interest for the taxable year shall not exceed $2,500",
+        "The amount of the student loan interest deduction is subject to a limitation based on modified adjusted gross income (MAGI)",
+        "The student loan interest deduction is reduced if the taxpayer's MAGI exceeds $50,000 for single filers",
+        "The student loan interest deduction is reduced if the taxpayer's MAGI exceeds $100,000 for joint filers",
+        "The reduction in student loan interest deduction is calculated based on the ratio of the excess MAGI over $50,000 to $15,000 for single filers",
+        "The reduction in student loan interest deduction is calculated based on the ratio of the excess MAGI over $100,000 to $30,000 for joint filers"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(1) states deduction shall not exceed $2,500."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(A) provides limitation based on modified adjusted gross income."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B)(i) shows reduction when MAGI exceeds $50,000 for single filers."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B)(i) shows reduction when MAGI exceeds $100,000 for joint filers."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B) specifies ratio of excess MAGI over $50,000 to $15,000."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B) specifies ratio of excess MAGI over $100,000 to $30,000."
+        }
+      ]
+    },
+    {
+      "id": "D15",
+      "refused": false,
+      "faithfulness": 0.6666666666666666,
+      "claims": [
+        "For tax year 2026, medical expenses are deductible to the extent they exceed 7.5% of adjusted gross income",
+        "The client's adjusted gross income is $100,000",
+        "7.5% of the client's adjusted gross income is $7,500"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not specify the 2026 threshold; 26 U.S.C. \u00a7 67(a)-(b) discusses 2% for miscellaneous deductions, not medical expenses under \u00a7 213."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Question states client has $100,000 of AGI."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "7.5% of $100,000 equals $7,500; arithmetic confirmed by sources' reference to percentage thresholds."
+        }
+      ]
+    },
+    {
+      "id": "D16",
+      "refused": false,
+      "faithfulness": 0.5,
+      "claims": [
+        "No deduction is allowed for start-up expenditures except as provided in section 195",
+        "Start-up expenditures include amounts paid or incurred in connection with investigating the creation or acquisition of an active trade or business",
+        "If a taxpayer elects to deduct start-up expenditures, they can deduct the lesser of the amount of start-up expenditures or $5,000 in the year the active trade or business begins",
+        "The remainder of start-up expenditures after the initial deduction is amortized over 180 months",
+        "The client spent $8,000 investigating a business before it opened",
+        "The client's $8,000 in investigation expenses qualify as start-up expenditures",
+        "The client can deduct $5,000 in the first year",
+        "The client must amortize the remaining $3,000 over 180 months"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(a) states no deduction allowed for start-up expenditures except as otherwise provided in section 195."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(c)(1)(A)(i) defines start-up expenditures as amounts paid or incurred in connection with investigating creation or acquisition of active trade or business."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(b)(1)(A) allows deduction in year business begins of lesser of start-up expenditures or $5,000."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(b)(1)(B) requires remainder of start-up expenditures deducted ratably over 180-month period."
+        },
+        {
+          "index": 4,
+          "supported": false,
+          "why": "Sources provide no information about what the client actually spent or on what."
+        },
+        {
+          "index": 5,
+          "supported": false,
+          "why": "Sources define start-up expenditures but do not confirm the client's specific expenses qualify."
+        },
+        {
+          "index": 6,
+          "supported": false,
+          "why": "Cannot confirm client's deduction without establishing their facts meet statutory definition and making election."
+        },
+        {
+          "index": 7,
+          "supported": false,
+          "why": "Cannot confirm specific amortization of client's amounts without establishing facts and election."
+        }
+      ]
+    },
+    {
+      "id": "D17",
+      "refused": false,
+      "faithfulness": 0.5,
+      "claims": [
+        "For the tax year 2026, an individual can deduct a net capital loss against ordinary income up to $3,000",
+        "The remaining net capital loss can be carried over to future years"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources don't specify the $3,000 individual capital loss deduction limit for 2026."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRC \u00a7 1212(a) allows net capital losses to be carried over to future years."
+        }
+      ]
+    },
+    {
+      "id": "D18",
+      "refused": false,
+      "faithfulness": 0.3333333333333333,
+      "claims": [
+        "If a taxpayer receives any amount from a qualified retirement plan, the taxpayer's tax for the taxable year in which such amount is received shall be increased by an amount equal to 10 percent of the portion of such amount which is includible in gross income",
+        "The additional tax applies to early distributions from qualified retirement plans, such as a 401(k), for taxpayers under age 59\u00bd",
+        "A 45-year-old taxpayer who took a $20,000 distribution from a 401(k) is subject to the 10 percent additional tax on early distributions"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 72(t)(1) directly states this rule for qualified retirement plan distributions."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources do not specify that the 10% tax applies only to early distributions or only to those under 59\u00bd."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Sources establish the 10% tax rule but do not address exceptions, conditions, or whether this client qualifies for any."
+        }
+      ]
+    },
+    {
+      "id": "D19",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The gross income of an employee does not include amounts paid by the employer for educational assistance if the assistance is furnished pursuant to a qualifying program",
+        "The maximum exclusion for educational assistance under Section 127 is $5,250 per calendar year",
+        "If an employer paid $7,000 for an employee's tuition, only $5,250 of that amount is excludable from gross income",
+        "If an employer paid $7,000 for an employee's tuition, the taxable amount to the employee is $1,750"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(a)(1) states gross income does not include amounts paid by employer for educational assistance if furnished pursuant to a qualifying program."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(a)(2) explicitly states the maximum exclusion is $5,250 per calendar year."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "If $7,000 paid and maximum exclusion is $5,250, then $5,250 is excludable under \u00a7 127(a)(2)."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "$7,000 minus $5,250 exclusion equals $1,750 taxable to employee under \u00a7 127(a)(2)."
+        }
+      ]
+    },
+    {
+      "id": "D20",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2026, no deduction is allowed for any contribution of $250 or more unless the taxpayer substantiates the contribution by a contemporaneous written acknowledgment from the donee organization",
+        "A written acknowledgment must include the amount of cash and a description of any property other than cash contributed",
+        "A written acknowledgment must state whether the donee organization provided any goods or services in consideration for the contribution",
+        "A written acknowledgment must include a description and good faith estimate of the value of any goods or services provided by the donee organization",
+        "An acknowledgment is considered contemporaneous if the taxpayer obtains it on or before the date the taxpayer files a return for the taxable year in which the contribution was made",
+        "An acknowledgment is considered contemporaneous if the taxpayer obtains it on or before the due date for filing a return for the taxable year in which the contribution was made"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(A) requires contemporaneous written acknowledgment for contributions of $250 or more"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(i) requires amount of cash and description of other property contributed"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(ii) requires statement of whether goods or services were provided in consideration"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(iii) requires description and good faith estimate of goods or services value"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(C)(i) states acknowledgment contemporaneous if obtained on or before filing date"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(C)(ii) states acknowledgment contemporaneous if obtained on or before due date including extensions"
+        }
+      ]
+    },
+    {
+      "id": "D21",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A like-kind exchange is the exchange of property for other like-kind property",
+        "Like-kind exchange is the most common type of nontaxable exchange",
+        "Section 1031 like-kind exchange treatment applies only to exchanges of real property held for use in a trade or business or for investment",
+        "Section 1031 like-kind exchange treatment does not apply to business equipment",
+        "Business equipment does not qualify for like-kind exchange treatment under Section 1031"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 334 directly states this definition."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 334 explicitly describes it as 'the most common type of nontaxable exchange.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "IRS Pub 334 and 26 U.S.C. \u00a7 1031(a) both specify real property only."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Section 1031 applies only to real property, and business equipment is personal property."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Section 1031 explicitly limits treatment to real property, excluding business equipment."
+        }
+      ]
+    },
+    {
+      "id": "D22",
+      "refused": false,
+      "faithfulness": 0.8571428571428571,
+      "claims": [
+        "Under the vehicle cents-per-mile valuation rule, the value of the benefit provided for personal use of a company car is calculated by multiplying the standard mileage rate by the total number of personal miles driven by the employee",
+        "The cents-per-mile rate is applied prospectively from the first day of the taxable year following the date of publication of the applicable Revenue Ruling or Revenue Procedure",
+        "The cents-per-mile rate includes the fair market value of maintenance and insurance for the vehicle",
+        "For miles driven in the United States, Canada, or Mexico, the cents-per-mile rate includes the fair market value of fuel provided by the employer",
+        "If fuel is not provided by the employer, the cents-per-mile rate may be reduced by no more than 5.5 cents or the amount specified in any applicable Revenue Ruling or Revenue Procedure",
+        "The cents-per-mile rate does not reflect the fair market value of any service not specifically identified in the regulations that is provided by the employer with respect to the vehicle",
+        "The employer must include in the employee's income an amount equal to the product of the number of personal miles driven and the appropriate cents-per-mile rate"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) states employer must include amount equal to product of personal miles and cents-per-mile rate."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources do not address prospective application dates or publication of Revenue Rulings/Procedures."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(i) states cents-per-mile rate includes fair market value of maintenance and insurance."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(ii)(A) states rate includes fair market value of fuel for US, Canada, Mexico miles."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(ii)(A) permits reduction by no more than 5.5 cents when fuel not provided."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(iii) states fair market value of other services not reflected in cents-per-mile rate."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) explicitly requires employer include amount equal to personal miles times cents-per-mile rate."
+        }
+      ]
+    },
+    {
+      "id": "D23",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that expenses have a business connection",
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that the employee adequately account to the employer for expenses within a reasonable period of time",
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that any excess reimbursement or allowance be returned within a reasonable period of time",
+        "An arrangement that meets the requirements of business connection, substantiation, and returning amounts in excess of expenses is defined as a reimbursement or other expense allowance arrangement"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) defines reimbursement arrangements as meeting business connection requirements under paragraph (d)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) requires substantiation (paragraph e) and reasonable period under paragraph (g)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) requires returning excess amounts under paragraph (f) within reasonable period."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) defines such arrangement as meeting requirements of paragraphs (d), (e), and (f)."
+        }
+      ]
+    },
+    {
+      "id": "D24",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For 2025, the standard deduction amount for single filers is $15,750"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 17 (2025) p. 97 Table 10-1 states single filer standard deduction is $15,750 for 2025."
+        }
+      ]
+    },
+    {
+      "id": "D25",
+      "refused": false,
+      "faithfulness": 0.8,
+      "claims": [
+        "The client turns 74 in 2026",
+        "The required beginning date for taking required minimum distributions from a 401(k) is April 1 of the year following the year the participant turns 73",
+        "The client's required beginning date is April 1, 2027",
+        "Distributions are not treated as having begun until the required beginning date, even if distributions are taken before that date",
+        "The client must begin taking required minimum distributions by April 1, 2027"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources don't state what year the client turns 74; only that she turns 74 'this year.'"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "CFR 1.401(a)(9)-2(a)(3) example shows required beginning date is April 1 following the calendar year participant attains age 73."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "If client turns 74 this year, she turned 73 last year, so required beginning date is April 1, 2027."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "CFR 1.401(a)(9)-2(a)(3)(ii) states distributions not treated as begun until required beginning date, even if received earlier."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "401(k) is qualified retirement plan subject to IRC 401(a)(9) RMD rules; required beginning date applies."
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Deductions are not allowed for activities that taxpayers carry on primarily for sport, as a hobby, or for recreation in excess of the taxpayer's income from the activity",
+        "For a deduction to be allowed under section 162 or 212, taxpayers must establish that they engaged in the activity for profit as the predominant, primary or principal objective",
+        "The manner in which an activity is conducted can indicate whether the activity is a business or a hobby",
+        "Personal motives in carrying on an activity may indicate that a taxpayer did not engage in the activity for profit, especially where recreational elements exist",
+        "The time and effort devoted to an activity can support a finding that the taxpayer had a profit objective",
+        "A taxpayer's expertise, research, and consultation with experts may indicate a profit objective",
+        "The lack of credible consultation with experts in the industry can indicate that an activity is not engaged in for profit"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 directly states this regulation about deductions for hobby activities."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 cites Wolf v. Commissioner requiring profit as predominant, primary or principal objective."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 discusses manner of activity as factor indicating business vs. hobby."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 and regulations cited discuss personal motives indicating non-profit objective."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 and multiple cases discuss time and effort as supporting profit objective."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2025-35 and regulations state expertise and expert consultation may indicate profit objective."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2025-35 explicitly states lack of credible expert consultation indicates non-profit status."
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Expenses are deductible under section 162(a) only if they are primarily undertaken for business purposes rather than personal purposes",
+        "Viewing television and online videos is a common source of personal enjoyment",
+        "Expenses for cable and streaming subscriptions are not deductible if they are not directly related to a taxpayer's business",
+        "Cable and streaming subscription expenses are not deductible under section 162(a) if they were not incurred primarily for business purposes, even if they are typical for influencers"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Stated directly in T.C. Memo. 2026-69 at *16-17, citing Walliser v. Commissioner."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Stated in T.C. Memo. 2026-69 at *15 regarding Mr. Sami's television expenses."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *15 cites Minick case: 'Payments for television and cable bills are not deductible if not directly related to business.'"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *18-19 states even typical influencer expenses are not deductible if not primarily for business purposes."
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court has held that providing farm workers with housing such as a trailer on the property supports the existence of an employer-employee relationship",
+        "The provision of housing along with job-related expenses covered by the employer indicates an intention to create an employment relationship rather than an independent contractor relationship",
+        "When workers receive advances on their compensation and subsequent checks are reduced to repay the employer for these advances, this further supports an employer-employee relationship",
+        "The Tax Court has recognized that maintaining insurance policies to protect against potential liability is a common business expense for farm operations",
+        "Expenses must be allocated between personal and business use when applicable"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 states workers resided on farm in petitioner-provided trailer, supporting employer-employee relationship finding."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 explicitly holds that providing residence and covering job-related expenses indicates intention to create employment relationship."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 notes workers received compensation advances with subsequent checks reduced for repayment, supporting employer-employee relationship."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 states maintaining insurance to protect against potential liability is common business expense for farming operations."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 allocates umbrella insurance 75% business/personal and T.C. Memo. 2022-117 allocates vehicle expenses between personal and business."
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Travel expenses are subject to heightened substantiation requirements under section 274(d)",
+        "Each element of a traveling expense must be substantiated through adequate records or by sufficient evidence corroborating the taxpayer's own statement",
+        "The petitioners provided a spreadsheet of their travel expenses which included toll and parking charges",
+        "The expenses did not clearly correspond with the travel destinations on the petitioners' travel logs",
+        "Mr. Simpson did not provide testimony that corroborated the assertions made in the petitioners' travel logs",
+        "The petitioners failed to satisfy their burden of substantiating the full amount of travel expenses in accordance with section 274 and the regulations",
+        "Toll and parking charges on a spreadsheet alone are not sufficient to substantiate travel expenses without adequate records or corroborating evidence"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Source explicitly states travel expenses are subject to heightened substantiation requirements under section 274(d)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Source directly states each element must be substantiated through adequate records or sufficient corroborating evidence."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Source confirms petitioners provided a spreadsheet of 2011 travel expenses including toll and parking charges."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Source states disputed expenses do not clearly correspond with travel destinations on petitioners' travel logs."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Source confirms Mr. Simpson's testimony did not corroborate assertions in petitioners' travel logs."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Source holds petitioners failed to satisfy burden of substantiating full travel expenses under section 274."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Sources demonstrate spreadsheet items lacked required specificity and detail; toll/parking charges alone insufficient without corroborating evidence."
+        }
+      ]
+    },
+    {
+      "id": "D05",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Gross income includes nonannuity amounts received under a life insurance contract in excess of the investment in the contract",
+        "A taxpayer must recognize an indirect distribution of an insurance policy's cash surrender value as gross income under section 72",
+        "When a life insurance policy is terminated and the cash surrender value is used to satisfy outstanding loans, the taxpayer is treated as having received a taxable constructive distribution"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 states: 'Gross income includes nonannuity amounts received under a life insurance contract in excess of the investment in the contract. I.R.C. \u00a7 72(e)(5).''"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 at *8 explicitly states: 'a taxpayer is required to recognize an indirect distribution of an insurance policy's cash surrender value as gross income under section 72.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 at *8 states when policies terminated, the insurance company used cash surrender values to satisfy loans, treating this as 'a taxable constructive distribution.'"
+        }
+      ]
+    },
+    {
+      "id": "D06",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Taxpayers with rental income over $100,000 may still qualify for a portion of the $25,000 rental loss allowance, but it is subject to a phase-out",
+        "The $25,000 allowance is reduced by 50% of the amount by which the taxpayer's adjusted gross income exceeds $100,000",
+        "If the taxpayer's adjusted gross income is $150,000 or more, they are not eligible for the special allowance"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources confirm income over $100,000 qualifies for portion of allowance subject to phase-out per section 469(i)(3)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(3)(A) explicitly states $25,000 reduced by 50% of amount AGI exceeds $100,000."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "IRS Pub 527 and 26 U.S.C. \u00a7 469(i)(3) confirm no allowance at $150,000+ AGI ($75,000+ MFS)."
+        }
+      ]
+    },
+    {
+      "id": "D07",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "To determine whether an activity is engaged in for profit, the IRS considers factors including the expertise of the taxpayer, the time and effort devoted to the activity, and the manner in which the activity is conducted",
+        "If an activity is not engaged in for profit, no deductions attributable to that activity shall be allowed except as provided in the statute",
+        "Personal motives such as enjoyment do not negate a profit objective if other factors indicate the activity is conducted for profit",
+        "In cases involving horse breeding, the court looks at whether the taxpayer has developed a business plan and sought expert advice to support a profit objective",
+        "The time and effort the taxpayer devotes to the activity is considered, with substantial involvement suggesting a business rather than a hobby",
+        "The presence of a clear title for horses and the ability to register them can weigh in favor of a finding that the activity is a business as it indicates a focus on profitability"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources cite Treas. Reg. \u00a7 1.183-2(b) factors: expertise, time and effort, and manner of conducting activity."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(a) states no deduction allowed except as provided in the section."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 states personal pleasure won't classify activity as hobby if engaged in for profit as evidenced by other factors."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 discusses business plan development and T.C. Memo. 2025-35 discusses expert consultation as profit objective indicators."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Treas. Reg. \u00a7 1.183-2(b)(3) and T.C. Memo. 2026-76 cite time and effort as factor distinguishing business from hobby."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 states clear title registration weighs in favor of profit objective and business-like manner."
+        }
+      ]
+    },
+    {
+      "id": "D08",
+      "refused": false,
+      "faithfulness": 0.6,
+      "claims": [
+        "A client who fully owns and manages rental houses counts as actively participating in the rental real estate activity if they own at least 10% of the property and make management decisions in a significant and bona fide sense",
+        "Active participation includes making decisions such as approving new tenants, deciding on rental terms, and approving expenditures",
+        "If a client actively participates in rental real estate, they may be able to deduct up to $25,000 of rental losses from their nonpassive income, subject to certain income limitations",
+        "The Tax Court has treated fully owning and managing rental properties as sufficient for active participation, allowing taxpayers to deduct losses as active participants even if they are not classified as real estate professionals",
+        "In cases where taxpayers demonstrated significant involvement in managing their rental properties, the Tax Court has upheld their claims for rental loss deductions based on active participation"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources state 10% ownership requirement but do not define 'significant and bona fide' management decisions."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources define material participation as 'regular, continuous, and substantial' but do not specifically list tenant or expenditure approval as examples."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(1) explicitly allows $25,000 offset for rental losses with active participation, subject to phaseout."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2024-106 held petitioners may deduct $25,000 in real estate losses as active participants without being real estate professionals."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Multiple Tax Court cases upheld rental loss deductions based on active participation despite limited involvement or no real estate professional status."
+        }
+      ]
+    },
+    {
+      "id": "D09",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "An employer who receives a notice of determination regarding worker classification may petition the Tax Court for review of the classification and the employment tax owed as a result of that classification",
+        "The Tax Court has ruled that providing housing to farm workers can indicate an employer-employee relationship rather than an independent contractor relationship",
+        "The Tax Court has ruled that covering job-related expenses for farm workers can indicate an employer-employee relationship rather than an independent contractor relationship",
+        "In cases where farm workers reside on the farm and receive advances on their compensation, these factors support the conclusion that the workers are employees for purposes of Federal employment taxes"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2009-234 states an employer receiving a notice of determination may petition Tax Court for review of worker classification and employment tax under sections 7436(a) and (b)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 holds that providing residence on farm property is indicative of employment relationship, not independent contractor relationship."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 states petitioner covering job-related expenses is far more indicative of employment relationship than independent contractor relationship."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 holds workers residing on farm and receiving compensation advances support employer-employee relationship for employment tax purposes."
+        }
+      ]
+    },
+    {
+      "id": "D10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2026, taxpayers must keep records sufficient to enable the Commissioner to correctly determine income tax liability, including detailed records of travel expenses.",
+        "One method for substantiating travel expenses is through the preparation of a daily diary or record of expenditures, maintained in sufficient detail to identify the amount and nature of any expenditure.",
+        "Taxpayers must preserve supporting documents, especially for large or exceptional expenditures.",
+        "Detailed records of small expenditures may not be required.",
+        "The Tax Court has held that a spreadsheet of travel expenses, including tolls and parking fees, may not be accepted if it lacks specificity and detail required under the regulations.",
+        "In Kyle D. Simpson & Christen Simpson v. Commissioner, the court found that the petitioners failed to substantiate their travel expenses due to insufficient detail in their records."
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states taxpayers must keep records sufficient to enable the Commissioner to determine income tax liability, including detailed records of travel expenses."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) explicitly describes a daily diary or record of expenditures maintained in sufficient detail as one method for substantiating expenses."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states supporting documents should be preserved, especially for large or exceptional expenditures."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states detailed records of small expenditures will not be required."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2023-4 found that a spreadsheet of toll and parking expenses lacked specificity and detail required under Temp. Treas. Reg. \u00a7 1.274-5T(c)(3)(i)(A)."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2023-4 (Kyle D. Simpson case) held petitioners failed to substantiate $464 of travel expenses due to insufficient detail and lack of correlation with travel logs."
+        }
+      ]
+    },
+    {
+      "id": "D11",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Income is constructively received when it is credited to a taxpayer's account, set apart for them, or otherwise made available so that they may draw upon it at any time, or could have been drawn upon during the taxable year if notice of intention to withdraw had been given",
+        "Income is not constructively received if the taxpayer's control of its receipt is subject to substantial limitations or restrictions",
+        "The Tax Court has applied the constructive receipt doctrine to cases involving terminated life insurance policies",
+        "When a life insurance policy is terminated, a taxpayer constructively receives taxable income equal to the cash surrender value of the policy used to satisfy outstanding loans against it, even though no cash was actually received"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.451-2(a) states this exact rule regarding constructive receipt of income."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.451-2(a) explicitly states income is not constructively received if taxpayer's control is subject to substantial limitations or restrictions."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 applies constructive receipt doctrine to terminated life insurance policy in Sawyer case and cites Atwood precedent."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 holds taxpayer constructively received $160,900 from policy termination despite no cash receipt; cash value applied to satisfy loans."
+        }
+      ]
+    },
+    {
+      "id": "D12",
+      "refused": false,
+      "faithfulness": 0.8,
+      "claims": [
+        "Under Internal Revenue Code section 262, personal expenses are not deductible",
+        "Expenses are deductible under section 162(a) only if they are primarily undertaken for business purposes instead of personal purposes",
+        "Payments for television and cable bills are not deductible business expenses if they were not directly related to a taxpayer's business",
+        "In the case of Suleiman Sami, streaming subscription expenses were found to be primarily personal and not directly related to his business as a social media influencer",
+        "Streaming subscription expenses are not deductible under section 162(a) if they were not incurred primarily for business purposes, even if such expenses are typical for influencers"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Section 262 is not cited in the sources provided."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *16 states this principle directly citing Walliser v. Commissioner."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *15 quotes Minick v. Commissioner with this exact language."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *15 holds Sami's streaming expenses are personal expenses he cannot deduct."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2026-69 at *18 explicitly states this rule for influencer streaming expenses."
+        }
+      ]
+    },
+    {
+      "id": "D13",
+      "refused": false,
+      "faithfulness": 0.5714285714285714,
+      "claims": [
+        "To exclude gain from the sale of a principal residence, the taxpayer must own the residence for at least 2 years and use it as the principal residence for at least 2 years during the 5-year period ending on the date of sale",
+        "The client owned and lived in the house for 3 of the last 5 years",
+        "The client meets the ownership and use tests for principal residence exclusion",
+        "A single taxpayer can exclude up to $250,000 of gain from the sale of a principal residence",
+        "The client sold the house at a $200,000 gain",
+        "The $200,000 gain is less than the maximum exclusion amount of $250,000",
+        "The client can exclude the entire $200,000 gain from taxable income"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 121(a) requires owned and used as principal residence for 2+ years during 5-year period."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Stated in the question that client owned and lived in house for 3 of last 5 years."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Client owned 3 years and used 3 years, both exceeding the 2-year requirement of \u00a7 121(a)."
+        },
+        {
+          "index": 3,
+          "supported": false,
+          "why": "Sources do not specify the $250,000 exclusion amount for single taxpayers."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Stated in the question that gain on sale was $200,000."
+        },
+        {
+          "index": 5,
+          "supported": false,
+          "why": "Sources do not provide the specific $250,000 maximum exclusion amount needed for comparison."
+        },
+        {
+          "index": 6,
+          "supported": false,
+          "why": "Cannot determine without confirmation of $250,000 maximum exclusion amount from sources."
+        }
+      ]
+    },
+    {
+      "id": "D14",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The maximum deduction for student loan interest for the taxable year 2026 is $2,500",
+        "The student loan interest deduction is subject to a limitation based on modified adjusted gross income (MAGI)",
+        "The student loan interest deduction is reduced if the taxpayer's MAGI exceeds $50,000",
+        "The student loan interest deduction is reduced if the taxpayer's MAGI exceeds $100,000 for joint returns",
+        "For single filers, the deduction reduction is calculated based on the ratio of the excess MAGI over $50,000 to $15,000",
+        "For joint filers, the deduction reduction is calculated based on the ratio of the excess MAGI over $100,000 to $30,000"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(1) states maximum deduction shall not exceed $2,500"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2) explicitly provides limitation based on modified adjusted gross income"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B) reduces deduction when MAGI exceeds $50,000 threshold"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B) shows $100,000 threshold for joint returns"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B)(i)-(ii) establishes ratio of excess over $50,000 to $15,000 for singles"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B)(i)-(ii) establishes ratio of excess over $100,000 to $30,000 for joint filers"
+        }
+      ]
+    },
+    {
+      "id": "D15",
+      "refused": false,
+      "faithfulness": 0.6666666666666666,
+      "claims": [
+        "For tax year 2026, medical expenses are deductible to the extent they exceed 7.5% of adjusted gross income",
+        "The client's adjusted gross income is $100,000",
+        "7.5% of the client's adjusted gross income is $7,500"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not specify 2026 threshold or provide current medical expense deduction limits."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Question states client paid medical bills on $100,000 of AGI."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "7.5% \u00d7 $100,000 = $7,500, basic arithmetic."
+        }
+      ]
+    },
+    {
+      "id": "D16",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Start-up expenditures include amounts paid or incurred in connection with investigating the creation or acquisition of an active trade or business",
+        "If a taxpayer elects to deduct start-up expenditures, they can deduct the lesser of $5,000 or the amount of start-up expenditures reduced by the amount by which such expenditures exceed $50,000 in the year the active trade or business begins",
+        "The remainder of start-up expenditures must be deducted ratably over a 180-month period beginning with the month in which the active trade or business begins",
+        "No deduction is allowed for start-up expenditures except as provided in section 195"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(c)(1)(A)(i) explicitly defines start-up expenditures as amounts paid or incurred in investigating the creation or acquisition of an active trade or business."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(b)(1)(A) states the lesser of the amount of start-up expenditures or $5,000 reduced by the amount by which such expenditures exceed $50,000."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(b)(1)(B) provides the remainder of start-up expenditures shall be deducted ratably over 180 months beginning with the month the active trade or business begins."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(a) states no deduction is allowed for start-up expenditures except as otherwise provided in section 195."
+        }
+      ]
+    },
+    {
+      "id": "D17",
+      "refused": false,
+      "faithfulness": 0.0,
+      "claims": [
+        "For tax year 2026, an individual can deduct a net capital loss against ordinary income up to $3,000",
+        "The remaining net capital loss can be carried over to future years"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not specify the $3,000 limit applies to individuals in 2026 or any year."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources discuss corporate carryback/carryover rules but not individual carryover provisions."
+        }
+      ]
+    },
+    {
+      "id": "D18",
+      "refused": false,
+      "faithfulness": 0.25,
+      "claims": [
+        "For tax year 2026, a 10 percent additional tax applies to amounts received from qualified retirement plans that are includible in gross income",
+        "The 10 percent additional tax applies to early distributions from qualified retirement plans such as 401(k)s unless an exception applies",
+        "A 45-year-old taxpayer does not meet any exceptions for early withdrawal from a qualified retirement plan",
+        "The 10 percent additional tax applies to a $20,000 distribution from a qualified retirement plan for a 45-year-old taxpayer"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "26 U.S.C. \u00a7 72(t)(1) imposes 10% tax but does not specify it applies only in 2026 or later years."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 72(t)(1) imposes 10% additional tax on early distributions from qualified retirement plans unless exceptions apply."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Sources do not identify exceptions or whether a 45-year-old meets any exception criteria."
+        },
+        {
+          "index": 3,
+          "supported": false,
+          "why": "Sources establish 10% tax applies but do not confirm no exceptions apply to this specific 45-year-old taxpayer."
+        }
+      ]
+    },
+    {
+      "id": "D19",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The gross income of an employee does not include amounts paid by the employer for educational assistance if the assistance is furnished pursuant to a qualifying program",
+        "The maximum exclusion from gross income for educational assistance provided by an employer is $5,250 per calendar year",
+        "The employer paid $7,000 for the employee's tuition",
+        "Only $5,250 of the $7,000 tuition payment is excludable from gross income",
+        "The taxable amount to the employee is $1,750"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(a)(1) states gross income excludes amounts paid by employer for educational assistance if furnished pursuant to qualifying program."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(a)(2) specifies the $5,250 maximum exclusion per calendar year for educational assistance."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "The question explicitly states the employer paid $7,000 of the employee's tuition."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Given $7,000 payment and $5,250 annual limit under \u00a7 127(a)(2), only $5,250 is excludable, assuming qualifying program."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "$7,000 minus $5,250 exclusion equals $1,750 taxable amount to employee."
+        }
+      ]
+    },
+    {
+      "id": "D20",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2026, no deduction is allowed for any contribution of $250 or more unless the taxpayer substantiates the contribution by a contemporaneous written acknowledgment from the donee organization",
+        "A contemporaneous written acknowledgment must include the amount of cash contributed",
+        "A contemporaneous written acknowledgment must include a description of any property contributed",
+        "A contemporaneous written acknowledgment must state whether the donee provided any goods or services in consideration",
+        "A contemporaneous written acknowledgment must include a good faith estimate of the value of any goods or services provided",
+        "An acknowledgment is considered contemporaneous if the taxpayer obtains it on or before the date the taxpayer files a return for the taxable year in which the contribution was made",
+        "An acknowledgment is considered contemporaneous if the taxpayer obtains it on or before the due date for filing a return for the taxable year in which the contribution was made"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(A) states no deduction for $250+ contributions without contemporaneous written acknowledgment"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(i) requires acknowledgment to include amount of cash contributed"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(i) requires acknowledgment to include description of property other than cash"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(ii) requires statement of whether donee provided goods or services in consideration"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(iii) requires good faith estimate of value of goods or services provided"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(C)(i) states acknowledgment is contemporaneous if obtained on or before filing date"
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(C)(ii) states acknowledgment is contemporaneous if obtained on or before due date including extensions"
+        }
+      ]
+    },
+    {
+      "id": "D21",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A like-kind exchange is the exchange of property for other like-kind property",
+        "Like-kind exchange treatment is a type of nontaxable exchange",
+        "Section 1031 like-kind exchange treatment applies only to exchanges of real property held for use in a trade or business or for investment",
+        "Section 1031 like-kind exchange treatment does not apply to business equipment",
+        "A like-kind exchange on business equipment is not permitted under Section 1031"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 334 explicitly states: 'A like-kind exchange is the exchange of property for other like-kind property.'"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 334 states like-kind exchanges are 'the most common type of nontaxable exchange.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "IRS Pub 334 states Section 1031 applies only to 'exchanges of real property held for use in a trade or business or for investment.'"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Section 1031(a)(1) and IRS Pub 334 limit treatment to real property, not business equipment."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Section 1031 explicitly applies only to real property, excluding business equipment exchanges."
+        }
+      ]
+    },
+    {
+      "id": "D22",
+      "refused": false,
+      "faithfulness": 0.875,
+      "claims": [
+        "Under the vehicle cents-per-mile valuation rule, the value of the benefit provided for personal use of a company car is calculated by multiplying the standard mileage rate by the total number of personal miles driven by the employee.",
+        "The cents-per-mile rate is to be applied prospectively from the first day of the taxable year following the date of publication of the applicable Revenue Ruling or Revenue Procedure.",
+        "The cents-per-mile rate includes the fair market value of maintenance and insurance for the vehicle.",
+        "For miles driven in the United States, Canada, or Mexico, the cents-per-mile rate includes the fair market value of fuel provided by the employer.",
+        "If fuel is not provided by the employer, the cents-per-mile rate may be reduced by no more than 5.5 cents or the amount specified in any applicable Revenue Ruling or Revenue Procedure.",
+        "The cents-per-mile rate may not be reduced by the fair market value of any service included in the rate but not provided by the employer.",
+        "The employer must include an amount in the employee's income equal to the product of the number of personal miles driven and the appropriate cents-per-mile rate.",
+        "The term 'personal miles' means all miles for which the employee used the automobile except miles driven in the employee's trade or business of being an employee of the employer."
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) states value equals personal miles times cents-per-mile rate."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources do not address prospective application dates relative to Revenue Rulings or Procedures."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(i) explicitly states maintenance and insurance are included."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(ii)(A) confirms fuel is included for US/Canada/Mexico miles."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(ii)(A) permits reduction by no more than 5.5 cents if fuel not provided."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(i) states rate cannot be reduced for included services not provided."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) requires including amount equal to personal miles times rate."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) defines personal miles as all miles except business miles."
+        }
+      ]
+    },
+    {
+      "id": "D23",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that expenses have a business connection",
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that the employee adequately account to the employer for expenses within a reasonable period of time",
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that any excess reimbursement or allowance be returned within a reasonable period of time",
+        "An arrangement that meets the requirements of business connection, substantiation, and returning amounts in excess of expenses is defined as a reimbursement or other expense allowance arrangement"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) defines accountable plan as meeting requirements including paragraph (d) which covers business connection."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) requires paragraphs (e) substantiation and (f) returning excess amounts, and IRS Pub 463 p.43 discusses adequate accounting requirement."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) requires paragraph (f) returning amounts in excess of expenses within reasonable period per sections (g)."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) directly states arrangement meeting (d), (e), and (f) requirements is defined as reimbursement allowance arrangement."
+        }
+      ]
+    },
+    {
+      "id": "D24",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2025, the standard deduction amount for single filers is $15,750"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 17 (2025) Table 10-1 explicitly states the 2025 standard deduction for Single is $15,750."
+        }
+      ]
+    },
+    {
+      "id": "D25",
+      "refused": false,
+      "faithfulness": 0.6666666666666666,
+      "claims": [
+        "If a client turns 74 in 2026, her required beginning date for minimum distributions from her 401(k) is April 1, 2027",
+        "Distributions are not treated as having begun until the required beginning date, even if distributions are taken before that date",
+        "A client must begin taking required minimum distributions by her required beginning date of April 1, 2027"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources state required beginning date is April 1 following the year attaining age 73, which would be April 1, 2026 for someone turning 74 in 2026."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.401(a)(9)-2(a)(3)(ii) explicitly states distributions not treated as begun until required beginning date, even if received before."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources establish required minimum distribution rules apply to 401(k) plans and distributions must begin by required beginning date."
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Deductions are not allowed for activities that taxpayers carry on primarily for sport, as a hobby, or for recreation in excess of the taxpayer's income from the activity",
+        "For a deduction to be allowed under section 162 or 212, taxpayers must establish that they engaged in the activity for profit as the predominant, primary or principal objective",
+        "The manner in which an activity is conducted can indicate whether it is a business or a hobby",
+        "Personal motives in carrying on an activity may indicate that a taxpayer did not engage in the activity for profit, especially where recreational elements exist",
+        "The time and effort devoted to an activity can support a finding of a profit objective if the activity does not have substantial personal or recreational aspects",
+        "A taxpayer's expertise, research, and consultation with experts may indicate a profit objective",
+        "The Helmicks' horse activity did not appear to be a mere hobby and indicated that they had the requisite profit objective",
+        "The Helmicks' lawsuit to register a horse was motivated by a desire to increase profits, indicating a business-like manner in their horse breeding activities"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(a) explicitly states this rule."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Wolf v. Commissioner, 4 F.3d 709, 713 (9th Cir. 1993) established this standard."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(1) lists manner of activity as a factor."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(9) addresses personal motives as evidence of non-profit intent."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(3) states time and effort indicates profit objective."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.183-2(b)(2) establishes expertise and expert consultation as indicators."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 concludes the Helmicks had requisite profit objective in their horse activity."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220, at *23-25 explicitly states the lawsuit indicated profit motive."
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Expenses are deductible under section 162(a) only if they are primarily undertaken for business purposes rather than personal purposes",
+        "Viewing television and online videos is a common source of personal enjoyment",
+        "Cable and streaming subscription expenses are not deductible if they are not directly related to a taxpayer's business",
+        "Cable and streaming subscription expenses are not deductible under section 162(a) if they were not incurred primarily for business purposes, even if they are typical expenses for influencers"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 at *16-17 states expenses are deductible under section 162(a) only if primarily undertaken for business instead of personal purposes."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 at *15 explicitly states 'Viewing television and online videos is a common source of personal enjoyment.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 at *15 cites Minick holding that 'Payments for television and cable bills are not deductible business expenses if they were not directly related to a taxpayer's business.'"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 at *18-19 explicitly states 'even if Mr. Sami's expenses are typical influencer expenses, they are still not deductible under section 162(a), since they were not incurred primarily for business purposes.'"
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "When farm workers are provided housing such as a trailer on the property, it supports the existence of an employer-employee relationship",
+        "The provision of housing along with job-related expenses covered by the employer indicates an intention to create an employment relationship rather than an independent contractor relationship",
+        "When workers received advances on their compensation and subsequent checks were reduced to repay the employer for these advances, this further supports an employer-employee relationship",
+        "Maintaining insurance policies to protect against potential liabilities related to farm operations is a common business expense",
+        "Insurance expenses must be allocated between personal and business use when applicable",
+        "A significant portion of insurance premiums can be considered business-related expenses when the farming operation's size and value exceeds that of the personal residence"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 states workers residing in trailer on farm property supports employer-employee relationship."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 explicitly states providing residence and covering job-related expenses indicates employment relationship, not independent contractor."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 notes advances on compensation allowed to workers as indicative of employer-employee relationship."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 states maintaining insurance policy to protect against farm liability is common business expense."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 allocates umbrella insurance between personal and business use when policy covers both."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 allocates 75% of umbrella premiums to business when farming operation far exceeds home value."
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Travel expenses are subject to heightened substantiation requirements under section 274(d)",
+        "Each element of a traveling expense must be substantiated through adequate records or by sufficient evidence corroborating the taxpayer's own statement",
+        "Petitioners provided a spreadsheet of their travel expenses which included toll and parking charges",
+        "The expenses did not clearly correspond with the travel destinations on petitioners' travel logs",
+        "Mr. Simpson did not provide testimony that corroborated the assertions made in petitioners' travel logs",
+        "Petitioners failed to satisfy their burden of substantiating the full amount of travel expenses in accordance with section 274 and the regulations",
+        "Toll and parking charges on a spreadsheet alone are not sufficient to substantiate travel expenses without adequate records or corroborating evidence"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources explicitly state travel expenses are subject to heightened substantiation requirements under section 274(d)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state each element must be substantiated through adequate records or sufficient evidence corroborating taxpayer's statement."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 states petitioners provided a spreadsheet including toll tag charges and parking fees."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 states expenses did not clearly correspond with travel destinations on travel logs."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 states Mr. Simpson did not provide corroborating testimony about several expenses."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo 2023-4 holds petitioners failed to satisfy burden of substantiating full amount under section 274."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Sources show spreadsheet alone insufficient; lacks specificity/detail required; no corroborating testimony provided."
+        }
+      ]
+    },
+    {
+      "id": "D05",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Gross income includes nonannuity amounts received under a life insurance contract in excess of the investment in the contract",
+        "A taxpayer must recognize an indirect distribution of an insurance policy's cash surrender value as gross income under section 72",
+        "When a life insurance policy is terminated and the cash surrender value is used to satisfy outstanding loans, the taxpayer is treated as having received a taxable constructive distribution"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 states: 'Gross income includes nonannuity amounts received under a life insurance contract in excess of the investment in the contract. I.R.C. \u00a7 72(e)(5).''"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 explicitly states: 'a taxpayer is required to recognize an indirect distribution of an insurance policy's cash surrender value as gross income under section 72.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 holds: 'the loan repayment is treated as if the cash value of the Policy was transferred to Mr. Sawyer and he in turn repaid the outstanding loans,' resulting in taxable constructive distribution."
+        }
+      ]
+    },
+    {
+      "id": "D06",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "In tax year 2026, taxpayers with rental income over $100,000 may have their special allowance for rental real estate losses reduced",
+        "The special allowance for rental real estate losses is $25,000",
+        "The $25,000 special allowance is phased out by 50% of the amount by which the taxpayer's adjusted gross income exceeds $100,000",
+        "If a taxpayer's adjusted gross income is $150,000 or more, the special allowance is completely phased out and not available"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(3)(A) and IRS Pub 527 confirm allowance is reduced for income over $100,000."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(2) and multiple sources state the $25,000 special allowance amount."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(3)(A) explicitly states allowance reduced by 50% of excess over $100,000."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(3)(A) and IRS Pub 527 confirm no allowance when AGI is $150,000 or more."
+        }
+      ]
+    },
+    {
+      "id": "D07",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The determination of whether an activity is engaged in for profit is governed by 26 U.S.C. \u00a7 183(a)-(d)",
+        "If an activity is not engaged in for profit, no deductions attributable to such activity are allowed except as provided in the statute",
+        "An activity not engaged in for profit is defined as one where deductions are not allowable under section 162 or section 212",
+        "A presumption of profit is established if gross income from the activity exceeds deductions for 3 out of 5 consecutive years",
+        "A presumption of profit is established if gross income from the activity exceeds deductions for 2 out of 7 years for horse-related activities",
+        "Factors to consider in determining a profit objective include the expertise of the taxpayer, the time and effort devoted to the activity, and the manner in which the activity is conducted",
+        "A taxpayer's own expertise and consultation with experts may indicate a profit objective",
+        "Substantial time and effort devoted to an activity can indicate a profit motive",
+        "Personal motives do not negate a profit objective if the activity is conducted in a business-like manner",
+        "The predominant objective must be profit for deductions to be allowed under section 162 or 212"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(a)-(d) directly governs whether activities are engaged in for profit."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(a) states no deductions allowed except as provided in the section."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(c) defines activity not engaged in for profit as one where deductions are not allowable under section 162 or 212."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(d) establishes presumption when gross income exceeds deductions for 3 of 5 years."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(d) substitutes 2 for 3 and 7 for 5 for horse-breeding activities."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Multiple Tax Court cases cite Treas. Reg. \u00a7 1.183-2(b) factors including expertise, time/effort, and manner of conducting activity."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2025-35 states taxpayer expertise and expert consultation may indicate profit objective per regulation."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 recognizes substantial time and effort as indicating profit motive."
+        },
+        {
+          "index": 8,
+          "supported": true,
+          "why": "T.C. Memo. 2010-216 holds personal pleasure does not negate profit if activity is engaged in for profit."
+        },
+        {
+          "index": 9,
+          "supported": true,
+          "why": "T.C. Memo. 2026-76 requires profit as predominant, primary or principal objective for deductions."
+        }
+      ]
+    },
+    {
+      "id": "D08",
+      "refused": false,
+      "faithfulness": 0.6,
+      "claims": [
+        "A client who fully owns and manages rental houses counts as actively participating in the rental real estate activity if they own at least 10% of the property and make management decisions in a significant and bona fide sense",
+        "Active participation includes making decisions such as approving new tenants, deciding on rental terms, and approving expenditures",
+        "If a client actively participates in rental real estate, they may be able to deduct up to $25,000 of rental losses from their nonpassive income, subject to certain income limitations",
+        "The Tax Court has treated fully owning and managing rental properties as sufficient for active participation, allowing taxpayers to deduct losses as active participants even if they are not classified as real estate professionals",
+        "The Tax Court has upheld claims for rental loss deductions based on active participation in cases where taxpayers demonstrated significant involvement in managing their rental properties"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources state 10% ownership requirement and material participation definition but not that management decisions alone satisfy active participation."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources do not specify which management decisions constitute active participation; material participation defined as 'regular, continuous, and substantial' involvement."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(1) explicitly allows up to $25,000 offset for rental losses with active participation, subject to phaseout."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2024-106 treats taxpayers as actively participating in rental activities and allows $25,000 deduction without real estate professional status."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2024-106 upheld rental loss deductions based on active participation; cases show Tax Court allowing deductions for involved owners."
+        }
+      ]
+    },
+    {
+      "id": "D09",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "An employer who receives a notice of determination regarding worker classification may petition the Tax Court for review of the classification and the employment tax owed as a result of that classification",
+        "The Tax Court has ruled that providing housing to farm workers can indicate an employer-employee relationship rather than an independent contractor relationship",
+        "The Tax Court has ruled that covering job-related expenses for farm workers can indicate an employer-employee relationship rather than an independent contractor relationship",
+        "In cases where farm workers reside on the farm and receive advances on their compensation, these factors support the conclusion that the workers are employees for purposes of Federal employment taxes"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7436(a) and (b) and T.C. Memo. 2009-234 confirm employer may petition Tax Court for review of worker classification and employment tax."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 at *11-13 states workers residing on farm in petitioner-provided trailer supports employer-employee relationship."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 at *11-13 explicitly states petitioner covering job-related expenses supports employer-employee relationship."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2012-184 at *11-13 holds that farm workers residing on property and receiving compensation advances support employee status."
+        }
+      ]
+    },
+    {
+      "id": "D10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Taxpayers must keep records sufficient to enable the Commissioner to correctly determine income tax liability, including detailed records of travel expenses",
+        "One method for substantiating travel expenses is through the preparation of a daily diary or record of expenditures, maintained in sufficient detail to identify the amount and nature of any expenditure",
+        "Taxpayers must preserve supporting documents, especially for large or exceptional expenditures",
+        "Detailed records of small expenditures may not be required",
+        "A spreadsheet of travel expenses, including toll and parking charges, must meet heightened substantiation requirements under section 274(d)",
+        "The Tax Court found that a spreadsheet provided by petitioners lacked the specificity and detail required for substantiation under section 274(d)"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states taxpayers must keep records sufficient to enable Commissioner to determine income tax liability, including detailed records of travel expenses."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) identifies daily diary or record as one method for substantiating expenses, maintained in sufficient detail to identify amount and nature."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) explicitly states preservation of supporting documents is required, especially for large or exceptional expenditures."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(2) states detailed records of small expenditures like tips will not be required."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2023-4 confirms spreadsheets of travel expenses, including tolls and parking, must meet section 274(d) heightened substantiation requirements."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2023-4 explicitly held petitioners' spreadsheet lacked specificity and detail required under Temporary Treasury Regulation \u00a7 1.274-5T(c)(3)(i)(A)."
+        }
+      ]
+    },
+    {
+      "id": "D11",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Income is constructively received when it is credited to a taxpayer's account, set apart for them, or otherwise made available so that they may draw upon it at any time, or could have drawn upon it during the taxable year if notice of intention to withdraw had been given",
+        "Income is not constructively received if the taxpayer's control of its receipt is subject to substantial limitations or restrictions",
+        "The Tax Court has applied the constructive receipt doctrine to cases involving terminated life insurance policies",
+        "In Jonathan D. Sawyer v. Commissioner, the court held that the taxpayer constructively received taxable income from the termination of a life insurance policy even though he did not receive cash, because the cash surrender value was used to satisfy outstanding loans"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.451-2(a) states this exact rule regarding constructive receipt of income."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.451-2(a) explicitly states income is not constructively received if taxpayer's control is subject to substantial limitations or restrictions."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 applied constructive receipt doctrine to Sawyer's terminated life insurance policy case."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-33 held Sawyer constructively received $160,900 when policy terminated with cash surrender value applied to loan repayment, despite no actual cash receipt."
+        }
+      ]
+    },
+    {
+      "id": "D12",
+      "refused": false,
+      "faithfulness": 0.75,
+      "claims": [
+        "Under Internal Revenue Code section 262, personal expenses are not deductible",
+        "Expenses are deductible under section 162(a) only if they are primarily undertaken for business purposes instead of personal purposes",
+        "Payments for television and cable bills are not deductible business expenses if they were not directly related to a taxpayer's business",
+        "In the case of Suleiman Sami, streaming subscription expenses were found to be primarily personal and not directly related to his business as a social media influencer"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not cite or discuss IRC section 262 regarding personal expenses."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 explicitly states this rule at *16-17, citing Walliser v. Commissioner."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 quotes this principle from Minick v. Commissioner at *15."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2026-69 holds Mr. Sami's streaming expenses ($2,896-$3,766) are personal, not directly related to business."
+        }
+      ]
+    },
+    {
+      "id": "D13",
+      "refused": false,
+      "faithfulness": 0.5714285714285714,
+      "claims": [
+        "To exclude gain from the sale of a principal residence, the taxpayer must own the residence for at least 2 years and use it as the principal residence for at least 2 years during the 5-year period ending on the date of sale",
+        "The client owned and lived in the house for 3 of the last 5 years",
+        "The client meets the ownership and use tests for principal residence sale exclusion",
+        "A single taxpayer can exclude up to $250,000 of gain from the sale of a principal residence",
+        "The client sold the house at a $200,000 gain",
+        "The client's gain of $200,000 is less than the maximum exclusion amount of $250,000",
+        "The client can exclude the entire $200,000 gain from taxable income"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 121(a) requires ownership and use as principal residence for 2+ years during 5-year period."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "The question states the client owned and lived in the house for 3 of the last 5 years."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Client owned 3 years and used 3 years, exceeding the 2-year requirement in \u00a7 121(a)."
+        },
+        {
+          "index": 3,
+          "supported": false,
+          "why": "No source provided specifies the $250,000 limit for single taxpayers."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "The question states the client sold the house at a $200,000 gain."
+        },
+        {
+          "index": 5,
+          "supported": false,
+          "why": "Claim depends on unsupported claim 3 regarding $250,000 maximum exclusion."
+        },
+        {
+          "index": 6,
+          "supported": false,
+          "why": "Cannot confirm without knowing the actual $250,000 limit from sources provided."
+        }
+      ]
+    },
+    {
+      "id": "D14",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The maximum deduction for student loan interest for tax year 2026 is $2,500",
+        "The student loan interest deduction is subject to a limitation based on modified adjusted gross income (MAGI)",
+        "For single filers, the student loan interest deduction is reduced if MAGI exceeds $50,000",
+        "For joint filers, the student loan interest deduction is reduced if MAGI exceeds $100,000",
+        "For single filers, the reduction in the student loan interest deduction is calculated based on the ratio of the excess MAGI over $50,000 to $15,000",
+        "For joint filers, the reduction in the student loan interest deduction is calculated based on the ratio of the excess MAGI over $100,000 to $30,000"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(1) states maximum deduction does not exceed $2,500"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2) explicitly provides limitation based on modified adjusted gross income"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B)(i) states reduction applies when MAGI exceeds $50,000 for single filers"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B)(i) states reduction applies when MAGI exceeds $100,000 for joint filers"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B) specifies reduction ratio of excess MAGI over $50,000 to $15,000"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 221(b)(2)(B) specifies reduction ratio of excess MAGI over $100,000 to $30,000 for joint filers"
+        }
+      ]
+    },
+    {
+      "id": "D15",
+      "refused": false,
+      "faithfulness": 0.6666666666666666,
+      "claims": [
+        "For the tax year 2026, medical expenses are deductible to the extent they exceed 7.5% of adjusted gross income",
+        "The client's adjusted gross income is $100,000",
+        "7.5% of the client's adjusted gross income is $7,500"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not specify the 2026 threshold; section 213 deduction rules not detailed in provided sources."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Question states client paid $9,000 of medical bills on $100,000 of AGI."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "$7,500 is 7.5% of $100,000 AGI; arithmetic follows from claim 1."
+        }
+      ]
+    },
+    {
+      "id": "D16",
+      "refused": false,
+      "faithfulness": 0.75,
+      "claims": [
+        "No deduction is allowed for start-up expenditures except as provided in section 195",
+        "Start-up expenditures include amounts paid or incurred in connection with investigating the creation or acquisition of an active trade or business",
+        "If a taxpayer elects to deduct start-up expenditures, they can deduct the lesser of the amount of start-up expenditures or $5,000 in the year the active trade or business begins",
+        "The remainder of start-up expenditures after the initial deduction is amortized over 180 months"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Section 195(a) prohibits deductions for start-up expenditures; 195(b) provides an election for deduction, not an exception to the general rule."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(c)(1)(A)(i) explicitly defines start-up expenditures as amounts paid or incurred in investigating the creation or acquisition of an active trade or business."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(b)(1)(A) allows deduction of the lesser of start-up expenditures or $5,000 in the year the active trade or business begins."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 195(b)(1)(B) provides remainder of start-up expenditures shall be allowed ratably over 180-month period."
+        }
+      ]
+    },
+    {
+      "id": "D17",
+      "refused": false,
+      "faithfulness": 0.0,
+      "claims": [
+        "For tax year 2026, a taxpayer can deduct a net capital loss against ordinary income up to $3,000",
+        "Remaining net capital loss can be carried over to future years"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not specify a $3,000 limit or deduction rules for individuals against ordinary income."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources contain carryback/carryover rules only for corporations under 26 U.S.C. \u00a7 1212(a)(1), not individuals."
+        }
+      ]
+    },
+    {
+      "id": "D18",
+      "refused": false,
+      "faithfulness": 0.25,
+      "claims": [
+        "In tax year 2026, a taxpayer who receives a distribution from a qualified retirement plan must pay an additional tax equal to 10 percent of the portion includible in gross income",
+        "The additional tax on early distributions from qualified retirement plans applies to distributions made to taxpayers under the age of 59\u00bd",
+        "A 45-year-old taxpayer who withdrew $20,000 from a 401(k) is subject to the 10 percent additional tax on early distributions",
+        "The 10 percent additional tax on early distributions will apply to the entire $20,000 amount withdrawn by the 45-year-old taxpayer"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 72(t)(1) imposes 10% additional tax on early distributions from qualified retirement plans, includible in gross income."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources state 10% tax applies to early distributions but do not define 'early' or specify age 59\u00bd threshold."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Sources establish 10% tax for early distributions but provide no exceptions or circumstances applicable to this specific situation."
+        },
+        {
+          "index": 3,
+          "supported": false,
+          "why": "Sources do not address whether the entire amount or only a portion would be subject to the 10% tax."
+        }
+      ]
+    },
+    {
+      "id": "D19",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Gross income of an employee does not include amounts paid or expenses incurred by the employer for educational assistance to the employee if the assistance is furnished pursuant to a program described in section 127(b)",
+        "The maximum exclusion for educational assistance furnished to an individual during a calendar year is $5,250",
+        "The employer paid $7,000 of the employee's tuition",
+        "Only the first $5,250 of the $7,000 employer-paid tuition is excluded from gross income",
+        "The amount taxable to the employee is $1,750"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(a)(1) states gross income excludes employer-paid educational assistance under section 127(b) programs."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(a)(2) establishes a $5,250 maximum annual exclusion for educational assistance."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "The question states the employer paid $7,000 of the employee's tuition."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "\u00a7 127(a)(2) limits exclusion to first $5,250, making $7,000 minus $5,250 taxable if program requirements met."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "$7,000 paid minus $5,250 maximum exclusion equals $1,750 taxable amount (assuming program compliance)."
+        }
+      ]
+    },
+    {
+      "id": "D20",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2026, no deduction is allowed for any contribution of $250 or more unless the taxpayer substantiates the contribution by a contemporaneous written acknowledgment from the donee organization.",
+        "A valid acknowledgment must include the amount of cash contributed.",
+        "A valid acknowledgment must include a description of any property contributed.",
+        "A valid acknowledgment must state whether the donee provided any goods or services in consideration for the contribution.",
+        "A valid acknowledgment must include a good faith estimate of the value of any goods or services provided by the donee.",
+        "An acknowledgment is considered contemporaneous if obtained on or before the date the taxpayer files a return for the taxable year in which the contribution was made.",
+        "An acknowledgment is considered contemporaneous if obtained on or before the due date for filing the return for the taxable year in which the contribution was made."
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(A) states no deduction allowed for contributions of $250 or more without contemporaneous written acknowledgment."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(i) requires acknowledgment to include amount of cash contributed."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(i) requires acknowledgment to include description of property other than cash."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(ii) requires acknowledgment to state whether donee provided goods or services."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(B)(iii) requires good faith estimate of value of goods or services provided."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(C)(i) states acknowledgment contemporaneous if obtained on or before filing date."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 170(f)(8)(C)(ii) states acknowledgment contemporaneous if obtained on or before due date for filing."
+        }
+      ]
+    },
+    {
+      "id": "D21",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A like-kind exchange is the exchange of property for other like-kind property",
+        "Like-kind exchange treatment is a common type of nontaxable exchange",
+        "Section 1031 like-kind exchange treatment applies only to exchanges of real property held for use in a trade or business or for investment",
+        "Section 1031 like-kind exchange treatment does not apply to business equipment",
+        "A like-kind exchange on business equipment is not permitted under Section 1031"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 334 defines like-kind exchange as exchange of property for other like-kind property."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 334 states it is the most common type of nontaxable exchange."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "IRS Pub 334 and 26 U.S.C. \u00a7 1031(a) both state treatment applies only to real property."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Section 1031 applies only to real property, not business equipment (tangible personal property)."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Section 1031(a) restricts like-kind exchanges to real property, excluding business equipment."
+        }
+      ]
+    },
+    {
+      "id": "D22",
+      "refused": false,
+      "faithfulness": 0.875,
+      "claims": [
+        "Under the vehicle cents-per-mile valuation rule, the value of the benefit provided for personal use of a company car is calculated by multiplying the standard mileage rate by the total number of personal miles driven by the employee",
+        "The cents-per-mile rate is applied prospectively from the first day of the taxable year following the date of publication of the applicable Revenue Ruling or Revenue Procedure",
+        "The cents-per-mile rate includes the fair market value of maintenance and insurance for the vehicle",
+        "For miles driven in the United States, Canada, or Mexico, the cents-per-mile rate includes the fair market value of fuel provided by the employer",
+        "If fuel is not provided by the employer, the cents-per-mile rate may be reduced by no more than 5.5 cents or the amount specified in any applicable Revenue Ruling or Revenue Procedure",
+        "The cents-per-mile rate may not be reduced by the fair market value of any service included in the rate but not provided by the employer",
+        "The employer must include in the employee's income an amount equal to the product of the number of personal miles driven and the appropriate cents-per-mile rate",
+        "Personal miles means all miles for which the employee used the automobile except miles driven in the employee's trade or business of being an employee of the employer"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) states the value equals personal miles times the cents-per-mile rate."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources do not address prospective application dates or publication timing."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(i) explicitly states the rate includes maintenance and insurance."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(ii)(A) states the rate includes fuel for US, Canada, Mexico."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(ii)(A) permits reduction by no more than 5.5 cents if fuel not provided."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(3)(i) states the rate may not be reduced by services included but not provided."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) requires including amount equal to personal miles times cents-per-mile rate."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "26 CFR 1.61-21(e)(4) defines personal miles as all miles except business miles."
+        }
+      ]
+    },
+    {
+      "id": "D23",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that expenses have a business connection",
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that employees adequately account for expenses within a reasonable period of time",
+        "To be an accountable plan, an employer's reimbursement or allowance arrangement must require that employees return any excess reimbursement or allowance within a reasonable period of time",
+        "An arrangement meeting the requirements of business connection, substantiation, and returning amounts in excess of expenses is defined as a reimbursement or other expense allowance arrangement"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) defines accountable plans as meeting requirements of business connection, substantiation, and returning excess amounts."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 463 p. 43 states adequate accounting within reasonable period is a rule for accountable plans."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) requires returning excess amounts; Pub 463 discusses reasonable period for this requirement."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.62-2(c)(1) explicitly defines reimbursement arrangement as meeting those three specific requirements."
+        }
+      ]
+    },
+    {
+      "id": "D24",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax year 2025, the standard deduction amount for single filers is $15,750"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 17 (2025) Table 10-1 explicitly states standard deduction for single filers is $15,750 for 2025."
+        }
+      ]
+    },
+    {
+      "id": "D25",
+      "refused": false,
+      "faithfulness": 0.6,
+      "claims": [
+        "The client turns 74 in 2026",
+        "The required beginning date for minimum distributions from a 401(k) is April 1 of the year following the year the participant turns 73",
+        "The client's required beginning date for minimum distributions from her 401(k) is April 1, 2027",
+        "Distributions from a 401(k) are not treated as having begun until the required beginning date, even if distributions are taken before that date",
+        "The client must begin taking required minimum distributions from her 401(k) by April 1, 2027, unless she qualifies for an exception"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not state what year the client turns 74; only that she turns 74 'this year'."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.401(a)(9)-2(a)(3)(ii) example states required beginning date is April 1 following year attaining age 73."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "If client turns 74 this year, she turned 73 last year, so required beginning date is April 1, 2027."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.401(a)(9)-2(a)(3)(ii) states distributions not treated as begun until required beginning date, even if received earlier."
+        },
+        {
+          "index": 4,
+          "supported": false,
+          "why": "Sources do not address exceptions applicable to still-employed 401(k) participants; only mention death, disability, severance from employment."
+        }
+      ]
+    }
+  ]
+}

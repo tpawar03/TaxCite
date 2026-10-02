@@ -2111,3 +2111,534 @@ If no candidate meets rules 1 and 2, E4 ships nothing, and the report says so (a
 - [ ] Authority metadata ≥95% field-level on the 150-chunk stratified sample: **not met on the first sample** (regulation status 75.0%, treatment 86.7%); met on a fresh 146-row re-check after four fixes (treatment re-checked on affirmances only)
 - [ ] Controlling source moves to top-1 on the golden conflict subset; ≤2-point Recall@20 regression per category: conflict **not met** (2.2 of 23 reachable rows vs a pre-registered 12); regression met (none down; statutory +12.5); guards 8/8 kept
 - [x] Tests and both CI gates green on a new snapshot: `corpus-2026-09-29`; retrieval 0.7400 (run 36521274499), faithfulness 0.894 ± 0.015 at refusals 0.113 (run 36521320779)
+
+---
+
+# TaxCite Phase F — Task List
+
+Plan: `tasks/plan.md` (Phase F). Test command: `uv run pytest -q`. Every task leaves the repo runnable. Approved 2026-09-29. F2–F5 are briefed in outline; each gets its full brief after F0, as E's did.
+
+---
+
+## F0: Verification spike
+
+**Goal:** before building, find out (a) whether the judge's labels can be trusted, (b) whether a sentence + citation is a good enough claim unit, (c) whether any self-hosted NLI model reaches F1 ≥0.90 against the judge (ADR-4 go/no-go), and (d) how much ADR-15 would suppress. A diagnosis on existing answers; no product code changes.
+
+**Input:** cached golden answers from the shipped pipeline (`eval/results/pipeline-answers-e5.json` or CI's latest), with their retrieved chunks. No new synthesis calls.
+
+**Steps:**
+1. **Pairs.** Split each answer into sentences; keep those with a bracket; pair each with its cited chunk(s) (exact, derived → section's chunks, unsupported → auto-fail). Count: sentences per answer, share uncited, share citing ≥2 sources, share of premises over 512 tokens.
+2. **Judge labels.** The Haiku judge (`VERDICT_SYSTEM`) labels each pair against its *cited* source only. Also run the existing claim extractor on the same answers, and map its claims back to sentences to see how often one sentence holds more than one claim, and how often they disagree.
+3. **Judge check.** You read ~40 pairs, stratified: judge-unsupported over-sampled (G-S10 and G-S14 included). Agreement reported.
+4. **NLI candidates.** DeBERTa-v3 base and large (MNLI/FEVER/ANLI checkpoint), HHEM-2.1-open. Windowed premises, best window. Per model: F1 and precision/recall on the "not supported" class, false-accept rate, CPU ms per answer. Pick the threshold on half the pairs and report on the other half, so the number isn't tuned on itself.
+5. **Projected suppression.** Under the judge's labels and under the best NLI model: the share of answers suppressed if the unit is (i) the whole answer, (ii) one section per sub-query (approximated by which group each cited chunk came from), (iii) the sentence. Beside it, today's refusal rate (~0.11–0.13).
+6. **Abstention today.** On the 11 insufficiency rows plus answerable rows: refusals from rule 3, as the baseline F2 must beat.
+
+**Acceptance:** an `eval/results/f0_*.md` note with the numbers above; a go/no-go on NLI (or the evidence for ADR-4's revision); a recommended sub-answer unit backed by (5). Log entry.
+
+**Files:** one spike script under `eval/` (new file: you create it from my code block); a dev-only `transformers` dependency if an ONNX export isn't available for a candidate.
+
+**Results (2026-09-30).** Script `eval/f0_verify.py`; outputs `eval/results/f0-pairs.json`, `f0-nli-{base,large,hhem}.json`, `f0-report.json`, `f0-judge-check.md`. 305 distinct golden answers (96 rows × 5 cached runs of the shipped pipeline); 42 refused, 263 answer. Judge spend $0.76 (Haiku, one call per answer and unit), after two judge fixes found by reading its failures: the chunk heading is now in the premise (synthesis saw it; an opinion's case name lives only there), and several cited sources are judged together, not each alone.
+
+| | |
+|---|---|
+| Sentences in answers | 859: **378 cited, 481 uncited** (349 sit before a citation in their paragraph, 132 trail the last one) |
+| Cited sentences per answer / LLM claims per answer | 1.44 / 3.95 |
+| Supported by their **own** citation (judge) | **0.734** of 372 (+6 citing nothing retrieved). Today's faithfulness, against all 8 chunks: 0.886 |
+| Unsupported, by kind (keyword heuristic) | 73 state a rule or holding with an exact citation; 26 apply it to the question |
+| "Answer has a failing claim": sentence unit vs today's judge | agree on 177 of 263; 42 fail only today, 44 only here |
+
+NLI against the judge, "not supported" class, sentence unit (threshold fitted on one half of questions, scored on the other, both ways; halves swing 0.36–0.76, so the mean is the number):
+
+| Model | Held-out F1 | Ceiling (fit on all) | CPU s/answer (M4) |
+|---|---|---|---|
+| DeBERTa-v3 base (MNLI/FEVER/ANLI) | 0.56 | 0.59 | 0.7 |
+| DeBERTa-v3 large (+ling, wanli) | 0.51 | 0.59 | 2.1 |
+| HHEM-2.1-open | **0.61** | 0.67 | 0.7 |
+
+Span unit: 0.42 / 0.51 / 0.52. **No candidate is near 0.90, even at its in-sample ceiling.** Accept-all would score 0.85 on the "supported" class: why the gate reads the other one.
+
+What ADR-15 would hide (judge labels, answers that weren't already refusals):
+
+| Unit | Whole answer | Section (per sub-query kind) | Answer emptied by sections | Claim |
+|---|---|---|---|---|
+| sentence | 0.37 | 0.33 | 0.32 | 0.28 |
+| span | 0.37 | 0.33 | 0.32 | 0.28 |
+
+If an uncited sentence also fails: 0.92 of answers (sentence unit), 0.53 (span). Today 0.14 of answers refuse already.
+
+Abstention today (all 5 runs): 10 of 11 insufficiency rows refuse 5/5; `G-I06` 0/5; `G-I11` refuses both halves 5/5. Answerable rows refuse in 11 of 425 runs.
+
+**Readings, before the judge check (superseded by it, below):**
+1. **The self-hosted NLI verifier is a no-go against the 0.90 gate** (best 0.61). Unless your read shows the judge is wrong, ADR-4 gets a *Revised* note: the runtime verifier is an LLM call, batched per answer (as ADR-10 batches sufficiency). Cost is known: $0.0025 an answer on Haiku.
+2. **Verification can't start from today's answers.** A third of answers would be emptied, on top of 14% refusing. The cause is synthesis: a quarter of cited sentences say more than their own citation does, and most sentences carry no citation. F3 has to change what synthesis writes (cite every sentence; one citation says only what its source says) before F4 suppresses anything, and ADR-11's trigger (Haiku synthesis) is measured on dev there.
+3. **Span beats sentence as the unit** for coverage (uncited-fail 0.53 vs 0.92), at the same suppression.
+
+**Judge check (2026-09-30, done by Claude at your request, two scans; one careful LLM reader, not a human).** First scan: my verdict on all 40 pairs of `f0-judge-check.md`. The judge agrees on **30 of 40** (F1 on "not supported" 0.74). It says "not supported" wrongly 6 times, "supported" wrongly 4. **HHEM agrees on 30 of 40 too (F1 0.76)**, so F0's NLI "no-go" rested on treating a ~75%-accurate judge as ground truth: *not established*. Second scan: the causes, counted over all 744 judged pairs, not just the 40:
+
+| Edge case | Pairs affected | Example | Fix |
+|---|---|---|---|
+| Judge never sees the question, so a claim restating the client's facts can't be supported | 22 name the client, 10 judged unsupported | P13 ($60,000 / $40,000 are the client's, not the case's), P35 ("No," answers the question) | give the question, facts "taken as given, not law" |
+| A sentence alone loses what it refers to | 133 open with Therefore/This/However…, 34 unsupported | P03 ("Therefore" follows "The Eleventh Circuit has concluded…") | give the answer's earlier text as context, not to be judged |
+| A derived citation expanded to every retrieved chunk of its section | 27 pairs, 5 unsupported | P09 (`280A(e)(1)` pulled in (c)(1), (d)(4); judge objected to "irrelevant citations"), P20 (`at *11-12` pulled in `*14`) | map to the chunk that contains it (paragraph prefix, page overlap); whole section only as fallback |
+| Pinpoint to the wrong page of a retrieved opinion | **49 of 99** unsupported cite an opinion with other retrieved pages | P01 (Genecure's reasoning is on a neighbouring page), P32 (nexus holding is in the headnote, `*1-2`) | **a policy decision** (below) |
+| Judge lenient on partly supported multi-sentence claims | 4 of 20 "supported" in the sample | P14, P22/P40 (drops §183(b)'s exception), P27 (first sentence contradicts Pub 527) | "every assertion must be supported; any unsupported part, qualifier or condition fails it" |
+| "Judged together" instruction ignored | P20 | | reworded: "even if some of them say nothing relevant" |
+| Splitter breaks at lowercase `sec.` | 4 fragments ("1402(a)(1) and are not excluded…") | P19, P37 | case-insensitive abbreviations |
+| Nested / multi-citation brackets | 2 in 305 answers (`[26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]`) | P11 | **also in `generate.parse_citations`** (same regex): fix in F3 |
+| Near-duplicate claims across runs | 372 sentence pairs, 306 distinct; judge flips on 1 of 308 | P02/P21, P22/P40 | report distinct n; split stays by question |
+| Judge's "Source N" numbers are its own, not the sheet's order | cosmetic | P03's note | number the sheet the judge's way |
+
+Re-judged the same 40 with the input fixes (question + earlier text + narrowed derived citations), ~$0.10: **V2 35/40 (F1 0.85)**; with the every-part rule, **V2b 36/40 (F1 0.89)**; two of its four remaining disagreements (P24, P35) are ones where a strict reading sides with the judge. Opinion-wide pinpoint (V3b) moves P01, P05, P06, P33 to supported: 33/40 against my cited-page labels, which is the policy difference, not error.
+
+**What this changed (before the re-run below):** F0's headline numbers (0.734 supported; NLI F1 0.51–0.61; ~32% of answers emptied) were measured against the flawed judge and are withdrawn until F0 is re-run with the V2b judge. The NLI verdict and ADR-4's revision wait for that re-run. The finding that stands: uncited sentences (481 of 859) and misattribution are real (P02/P21, P08, P34/P38 are unambiguous).
+
+**Re-run with the fixed judge (2026-09-30; your policy: a claim is checked against every retrieved page of the opinions it cites, the page scored apart).** Judge $1.65 (main pass + page pass); NLI 410 s / 1,212 s / 402 s on the M4 CPU. The splitter fix merged the 4 fragments back (859 → 853 sentences; the two G-C03 check pairs are gone, 38 remain).
+
+| | first run (flawed judge) | re-run |
+|---|---|---|
+| Cited sentences supported by their citation | 0.734 | **0.860** (spans 0.866); today's all-context faithfulness 0.886 |
+| Judge vs my 38 verdicts | 30/40 | **31/38**: single sentences **15/16**, multi-sentence spans 16/22 (lenient on extra assertions) |
+| Opinion claims whose cited *page* doesn't support them (passed on another page) | — | **28 of 168** |
+| Uncited sentences | 481 of 859 | 475 of 853 (343 sit before a citation) |
+
+NLI against the fixed judge, "not supported" class, sentence unit (held out both ways; ceiling = fitted on all):
+
+| Model | Held-out F1 | Ceiling | False accepts | vs my 38 verdicts | CPU s/answer (both units) |
+|---|---|---|---|---|---|
+| DeBERTa-v3 base | 0.22 | 0.42 | 0.60 | 24/38 | 1.6 |
+| DeBERTa-v3 large | 0.40 | 0.47 | 0.65 | 28/38 | 4.7 |
+| HHEM-2.1-open | 0.42 | 0.47 | 0.20 | 24/38 | 1.6 |
+| (the judge itself) | — | — | — | 31/38 | — |
+
+Worse than the first run, for two reasons: unsupported claims are now rarer (14%), and each claim is read against every page of its opinion (870 of 981 premises windowed), so a model taking the best window over many finds spurious entailment. **No NLI model is near 0.90 even in-sample, and the judge beats all three against a careful read. The NLI no-go now stands.**
+
+What ADR-15 would hide (fixed judge, answers that weren't already refusals): sentence unit, whole answer 0.22, **section 0.20, answer emptied by its sections 0.18**, claim 0.15. On top of 0.14 refusing today. If an uncited sentence also failed: 0.90 of answers (sentence unit), 0.42 (span).
+
+**Conclusions for Checkpoint 1 (proposed):**
+1. **ADR-4 revised:** the runtime verifier is an LLM call, one batched call per answer, as ADR-10 batches sufficiency: ~$0.0023 an answer on Haiku (this run's main pass, per unit). Self-hosted NLI measured and rejected (table above).
+2. **The gate needs an independent reference.** If Haiku verifies at runtime, "F1 against the Haiku judge" is circular. Proposed: the verifier is scored against a different model (the audit judge) plus a hand-checked sample, and the audit judge is itself checked on that sample, as done here.
+3. **Unit: the sentence, read with the question and the whole answer as context** (15/16 against 16/22 for spans). Uncited sentences are F3's job: synthesis cites every sentence, so the sentence unit covers the answer.
+4. **Suppression (~18% of answers emptied) is too high to ship as is:** F3 changes synthesis first (cite every sentence, say only what the cited source says), and ADR-11's trigger (Haiku synthesis) is measured on dev there.
+
+**Can a small model be rescued? (2026-09-30, quick test at your request, sentence unit, no judge cost.)** Tried: two checkers built for this task (MiniCheck RoBERTa-L and DeBERTa-v3-L), reading only the reranker's top 3 windows instead of every page (`--premise top`), and triage (small model decides what it's sure of, the LLM the rest; thresholds fitted on one half, ≤2% unsupported among auto-accepts, scored on the other).
+
+| Model | Held-out F1 | Ceiling | Triage: share decided alone | Unsupported let through (of 52) | CPU s/answer |
+|---|---|---|---|---|---|
+| MiniCheck-DeBERTa (best) | **0.46** | 0.54 | **0.36** | 3 | 2.45 (top 3: 1.08) |
+| MiniCheck-RoBERTa | 0.40 | 0.50 | 0.29 | 6 | 1.55 (top 3: 0.67) |
+| HHEM | 0.42 | 0.47 | 0.26 | 3 | 1.56 (top 3: 0.37) |
+| DeBERTa-v3 large | 0.40 | 0.47 | 0.28 | 9 | 4.70 (top 3: 1.07) |
+
+Reading the top 3 windows costs ≤0.05 F1 and is 2–4× faster. **Still nowhere near 0.90; triage would save at most a third of LLM calls (~$0.0008 an answer) while letting 3 of 52 unsupported claims through, which ADR-15's zero tolerance forbids.** Not worth it at this volume. Kept as ADR-4's revisit trigger: if privacy (client documents, Phase G) or volume makes the LLM call a problem, fine-tune MiniCheck-DeBERTa on judge-labelled tax pairs, run it on the top 3 windows, and re-measure triage.
+
+---
+
+## F1: Insufficiency rows and entailment pair sets
+
+**Goal:** give F2 a dev set to tune on and F5 a fixed golden audit set, before anything is tuned.
+- ≥10 dev insufficiency rows, mirroring golden's kinds (future-year figures, state/foreign law, IRS operations, legislation not yet passed) without sharing a citation with golden. ≥3 of them partial (one answerable half, one not), like `G-I11`. `expect_insufficient` gains a per-part form for partials.
+- Entailment pair sets: dev pairs (for F4's threshold) and golden pairs (scored once, F5), from F0's sentence splitter, judge-labelled, frozen as JSON so every NLI run scores the same pairs.
+- `validate_pilot.py` checks the new fields. Golden audit rule: logged commits you review.
+
+**Acceptance:** rows approved by you (Checkpoint 1); pair files committed with their counts.
+
+**Changed after F0 (2026-09-30):** the frozen entailment pair sets move to F5. Pairs are made from answers, and F3 changes how synthesis writes them (every sentence cited), so pairs frozen from today's answers would audit a pipeline that no longer exists. F1 is the rows only.
+
+**Done (2026-09-30), `eval/dev.jsonl` D43–D53, approved by you and committed (`a5c2023`):** 11 rows, 3 partial, `scored_from: "F"`, same kinds as golden's 11, no gold shared with golden (checked: golden's gold has no §221, §219, §223, §2503 or Pub 17 p. 76/81).
+
+| Row | Kind (golden sibling) | Question (short) | Why insufficient: checked in the corpus | Trap |
+|---|---|---|---|---|
+| D43 | future figure (G-I01, G-I02) | 2027 gift tax annual exclusion | no chunk has 2027 with gift/exclusion | — |
+| D44 | future figure | 2027 HSA family limit | no chunk has 2027 with health savings | §223(b)(2) base amounts |
+| D45 | state (G-I03/04/09) | Pennsylvania tax on 401(k) distributions | no non-opinion chunk gives PA tax rules | — |
+| D46 | state | Massachusetts rate on short-term gains | none gives an MA rate | §1222, federal rate chunks |
+| D47 | foreign (G-I05) | Germany's tax on a US citizen's German dividends | US federal law only | §245/245A |
+| D48 | IRS operations (G-I06) | TAS case-assignment wait | TAS described, no times | §7811, Pub 17/587 TAS text |
+| D49 | announced rate (G-I07) | short-term AFR, March 2027 | no 2027 rate; may state §1274(d)'s method | — |
+| D50 | future legislation (G-I08) | will Congress repeal §280E? | unknowable; may state current law | Mission Organic pages |
+| D51 | **partial** (G-I11) | student loan interest: federal + New Jersey | federal: §221(a)-(c); NJ: no state law | Pub 17 p. 99 names New Jersey (state benefit funds only) |
+| D52 | **partial** | alimony paid under a 2020 agreement: federal + California | federal: Pub 17 p. 76 (indirect: §§71, 215 repealed and excluded); CA: none | — |
+| D53 | **partial**, future half | traditional IRA limit for 2025 + 2027 | 2025: Pub 17 p. 81 ($7,000); 2027: none | §219(b)(5) still says $5,000 |
+
+Partial rows carry `parts` (`[{part, insufficient, gold}]`); `validate_pilot.py` checks them (each part named and flagged; answerable parts have gold inside the row's gold; at least one of each kind). Golden's G-I11 gained `parts` (your approval; only that field changed, all 116 golden rows validate).
+
+---
+
+## ✅ Checkpoint 1 (human review)
+- [x] Judge labels read (~40 pairs, by Claude at your request, two scans); agreement recorded (30/40 before fixes; 15/16 sentences, 16/22 spans after)
+- [x] Confirmed by you (2026-09-30): ADR-4 revised (LLM verifier, one call per answer; small models rejected); the gate scored against an independent audit reference; sentence unit with question + whole answer as context; F3 before F4. Sub-answer unit: one section per sub-query (approved with the plan)
+- [x] F1's 11 rows approved by you (2026-09-30), and `parts` added to golden G-I11 (`a5c2023`); pair sets moved to F5
+
+---
+
+## F2: Sufficiency gate
+
+**Goal:** before anything is written, decide for each part of the question whether its retrieved sources can answer it, and write nothing for a part that can't (ADR-7, ADR-10, FR-5). F4 hides an unsupported sentence after it's written; F2 keeps it from being written.
+
+**Why (measured, shipped pipeline):**
+- **Golden, Phase B onward:** `G-I06` (amended-return processing times) is answered, from nothing, in every run; `G-I11` (federal home office + California) refuses both halves before F3 and, since F3, answers the federal half but writes about California from sources that don't cover it.
+- **Dev, F4:** 24% of sentences fail verification and 9 of 126 answers are emptied. Some of that is synthesis writing about a part its sources don't cover; a part skipped up front costs nothing to hide.
+- **Refusing is today a sentence the synthesis model chooses to write** (rule 3, now "add the part to not_answerable"). Nothing checks it.
+
+**What changes:**
+1. **`sufficiency(question, label, hits, year) -> Verdict`** in `decompose.py` (or a new `sufficiency.py`, handed to you as code if so): one structured-output call per searched sub-query over its reranked chunks (ADR-10). Output: per chunk `supports: bool`, and for the part `sufficient: bool` with `missing` (what the sources lack). It is told the tax year, so "the 2027 limit" isn't answered from 2025 figures (`G-I10`'s and `D53`'s trap). Model: gpt-4o-mini, as ADR-11 set for this call site; Haiku is the measured alternative only if the gate is wrong too often.
+2. **Wiring in `decompose.answer`:** after `chunks()`, before synthesis. A part judged insufficient is dropped from the synthesis prompt and shown as "Part N: … INSUFFICIENT EVIDENCE: <missing>". All parts insufficient: **no synthesis call and no verifier call**, an immediate refusal (§9.3 H's 2 s refusal path). Client facts are never gated; an unrouted (fallback) plan is one part.
+3. **`checking_sufficiency` stage** in the job stream between `retrieving` and `synthesizing`, with each part's verdict; recorded in the job.
+4. **Fail open or closed?** If the gate's call fails, the part goes to synthesis as today, and F4 still verifies every sentence. *Default: fail open* (the gate saves work; the verifier is the guarantee). Recorded, yours to overrule.
+5. **Measurement:** `temporal.py --rows every` (answerable and insufficiency rows); the job/`Answer` records each part's verdict so the eval can score the gate itself.
+
+**Lean measurement (your call, 2026-09-30: reuse what exists, re-run only what a change touches):**
+1. **Arm A on the 42 answerable rows is F4's shipped run:** `temporal-answers-f4-sentence.json` and its grades. No new run.
+2. **Gate-only pass** (`temporal.py --gate-only`): plan, retrieval and the gate's verdicts for all 53 rows × 3 plan sets, no synthesis, no grading (~160 calls, ~$0.08).
+3. **Full runs only where the gate can change the answer:** the 11 insufficiency rows (A with `--no-gate`, and G), and any answerable row-sample where the gate rejects a part (G, `--ids`). Every other answerable row-sample is identical in G by construction (same plan, same chunks, synthesis at temperature 0, same verifier), so A's grade stands for it.
+
+**Two arms, on the same plans:**
+
+| Arm | Pipeline |
+|---|---|
+| **A** | shipped (F3 synthesis + F4 sentence hiding), no gate |
+| **G** | A + the gate |
+
+| Metric | Rows | Why |
+|---|---|---|
+| **Correct refusals**: D43–D50 refused | 8 wholly insufficient rows | the gate's job |
+| **Partial rows handled**: D51–D53 answer the answerable part (a cited sentence) *and* flag the other (INSUFFICIENT EVIDENCE or "Not in the sources" for it) | 3 partial rows | `G-I11`'s kind |
+| **Wrong refusals**: an answerable row refused | 42 answerable rows | the gate's cost |
+| Correct (the §9.2 judge against the reference) | all 53 | answer quality; on insufficiency rows the reference *is* the abstention |
+| Sentences hidden, answers emptied (F4's metrics) | answerable rows | whether skipping up front leaves less to hide |
+| Gate verdicts against row labels: abstention precision / recall per part | all | §9's abstention metric |
+| Cost and latency per answer, and on the refusal path | all | §4.1, §9.3 H |
+
+**Decision rule, fixed before any arm runs:**
+0. **Sanity first (F3's and F4's lesson: test each metric on a known-good and a known-bad case before the arms run):** "correct refusal" counts a hand-made refusal of D43 as 1 and a cited answer to it as 0; "partial handled" counts a hand-made D51 answer with a cited federal sentence and a New Jersey INSUFFICIENT EVIDENCE line as handled, and the same answer without the line as not; "wrong refusal" counts a refusal of an answerable row and not a partial answer. If any check fails, the metric is fixed before measuring.
+1. **Guard:** G's wrong refusals on the 42 answerable rows exceed A's by more than 0.05 → G is out.
+2. **Guard:** G's correctness on the 42 answerable rows is more than 0.05 below A's → G is out. (Both arms are verified, so neither is credited for unsupported content: F4's trap doesn't apply.)
+3. **G ships if it improves** correct refusals on D43–D50 **or** partial rows handled on D51–D53 by at least 3 of the 24 (resp. 9) row-samples, without making the other worse.
+4. Otherwise A stays, and the finding is the report.
+
+**Acceptance:**
+- [ ] `sufficiency()` with tests (one call per part; schema; the year in the prompt; client facts never gated; all insufficient → no synthesis call; fail open)
+- [ ] A `G-I11`-shaped test: a two-part plan, one part sufficient and one not → one answered part, one INSUFFICIENT EVIDENCE part, synthesis sees only the first (Phase B's "waiting test" doesn't exist in `tests/`; this adds it)
+- [ ] `checking_sufficiency` in the job stream (test for its order and payload)
+- [ ] Both arms measured on dev with the metrics above; the rule applied, sanity checks first
+- [ ] Log entry
+
+**Files:** `src/taxcite/decompose.py` (or new `sufficiency.py`), `generate.py` (render skipped parts), `jobs.py`, `eval/temporal.py` (`--rows every|insufficiency`, `--gate-only`, `--no-gate`, `--ids`), tests.
+
+**Cost estimate:** gate calls ~$0.0005 a part on gpt-4o-mini. With the lean plan: the gate-only pass ~$0.08, 2 × 33 insufficiency row-samples and the changed answerable ones with synthesis, verification and grading: **about $1** (was ~$5). Golden untouched until F5.
+
+**Out of F2:** rewriting failed sentences (F4's recorded next step); tuning the gate on golden (F5 scores it once).
+
+**Built (2026-09-30):** `decompose.sufficiency()` (one gpt-4o-mini structured call per part, the tax year in the prompt, fails open), `gate()`, `GATE`; `generate.skipped_only()` and `answer_from_groups(skipped=)` (a skipped part is never in the prompt; it shows as INSUFFICIENT EVIDENCE after the answered parts); `jobs.run`'s `checking_sufficiency` stage and the refusal path (no synthesis, no verification); `temporal.py --rows every|insufficiency`, `--gate-only`, `--no-gate`, `--gate-prompt`, `--ids`. Tests: the gate's call and verdict, fail open, empty parts left to synthesis, **the G-I11 test** (the answerable part answered, the other never written), nothing answerable → no synthesis call, the job stream's refusal path. 287 tests.
+
+**Results (2026-09-30), lean plan, ~$0.35 in all.** Gate-only passes over all 53 dev rows × 3 plan sets (~$0.10 each), the shipped pipeline's F4 run as the answerable baseline, and one baseline run on the 11 insufficiency rows.
+
+| | strict gate | lenient gate | no gate (shipped) |
+|---|---|---|---|
+| Answerable row-samples refused before writing | **33 of 126** | **23 of 126** | (refused after writing: 9 of 126) |
+| …of which the shipped pipeline got right, verified | 10 | **7** (D04 ×3, D21 ×3, D38) | — |
+| D43–D50 (wholly insufficient) refused | 21 of 24 | 23 of 24 | 13 of 24 |
+| D51–D53 (partial): the bad half alone skipped / handled | 8 of 9 | 6 of 9 | 6 of 9 handled |
+| Correct on the 11 insufficiency rows | — | — | **0.818** |
+
+**The rule:** guard 1 (wrong refusals on answerable rows no more than 0.05 above A's): G refuses at least 23/126 = 0.18 against 0.07, **so both gate prompts fail it, determined without a full gated run.** A stays: `GATE = False`, the code kept and tested. The gate's wrong refusals are the kind it was meant to avoid: D04's cited opinion holds the answer ("no clear conclusion"), D21's answer *is* that §1031 now covers only real property ("the sources don't cover equipment").
+
+**What the shipped pipeline already does on insufficiency rows:** verified federal context plus a "Not in the sources" note (D45: §402(a) on 401(k) payouts, "Pennsylvania … not in the sources"), graded correct. The remaining misses aren't the gate's to fix: D52's federal half is emptied by the verifier (retrieval/support), and 11 of 24 wholly insufficient row-samples get context rather than a bare refusal, which the judge accepts.
+
+**Decided (2026-09-30, your call): ADR-7/10 revised to "measured, not shipped".** ADR-7 and ADR-10 specify this gate. Measurement says it has no job the verifier doesn't already do, and does it worse. The intent rule is to drop an ADR'd component only on evidence and with your confirmation: revise ADR-7/10 to "measured, not shipped", or keep looking for a gate design.
+
+## F3: Synthesis that cites every sentence, in sections
+
+**Goal:** change what synthesis writes, so that F4's verifier has something to check and zero tolerance doesn't empty a fifth of answers. Measured on dev; golden is not touched until F5.
+
+**Why (F0, golden, shipped pipeline):** 475 of 853 sentences carry no citation, and 132 of them come after the last citation, so they're conclusions nothing backs ("Thus, your client must recognize the full amount as income."). Of cited sentences, 14% say more than the source they cite (G-S14's 40% rate, G-S10's 750 hours). ADR-15 on today's answers would empty ~18% of answers, on top of 14% refusing. Rule 2 of `RAG_SYSTEM` asks only for "every sentence that states a rule" to be cited, so applications and conclusions go uncited by design.
+
+**What changes:**
+1. **Rule 2 becomes: every sentence carries a citation, and says only what that source says.** A sentence applying a rule to the client's facts cites the rule it applies; the question's facts need no citation (the verifier takes them as given, F0). A sentence that can't be cited isn't written. Wording is measured, not assumed (arms below).
+2. **One section per searched sub-query** (the unit approved with the plan). `answer_from_groups` already groups sources by sub-query; the prompt numbers the parts and asks for one section per part, each self-contained (no conclusion that leans on another section, since F4 may hide one). A question with one searched sub-query gets one section and no heading. Client facts are never a section. `Answer` gains `sections: list[(label, text)]`, parsed from the section markers; `text` stays the whole answer, so the API and CLI keep working.
+3. **Citation parsing fixed** (F0 found it): `parse_citations` misses nested brackets (`[26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]`) and several citations in one bracket (`[A; B]`). One shared `citations(text)` in `generate.py`, used by `parse_citations` and by the verifier's splitter later; unit tests for both shapes.
+4. **The measurement tools read any answer cache.** `eval/f0_verify.py` gains `--answers` and `--questions` (today it is fixed to the golden E5 cache), so the same pairing and the fixed judge score dev arms. `eval/temporal.py --rows all` grades every answerable row, not only temporal or authority rows.
+
+**Arms, on dev's 42 answerable rows (D43–D53 excluded: they're F2's), 3 samples each (answer i from plan set i, as E5):**
+
+| Arm | Prompt | Synthesis model |
+|---|---|---|
+| A | shipped (ii′) | gpt-4o-mini |
+| B | + rule 2 rewritten (every sentence cited, only what its source says) | gpt-4o-mini |
+| C | B + one section per sub-query | gpt-4o-mini |
+| D | C | claude-haiku-4-5 (ADR-11's revisit trigger: "move synthesis to Haiku if Phase F suppresses too much") |
+
+**Metrics, per arm (all on dev):**
+- **Citation completeness** = cited sentences ÷ all sentences (F0's splitter; §9.3's F gate is ≥0.85, scored on golden in F5).
+- **Cited-source support** = share of cited sentences the fixed judge (F0) finds supported by their own citation (A's golden figure: 0.86).
+- **Projected suppression** = share of answers F4 would empty, and of sections it would hide, under the judge's labels.
+- **Faithfulness** (`ragas_eval.py`, 3 runs) and **refusal rate**; **correctness** (`temporal.py --rows all --samples 3`, §9.2's judge against the reference answer).
+- Cost and latency per answer.
+
+**Decision rule, fixed before any arm runs:**
+1. Refusal rate no more than A's + 0.05, and correctness no lower than A's − 0.05 (one sample-noise band, E5). An arm failing either is out.
+2. Of the rest, the arm with the lowest projected answers emptied wins, if it beats A by ≥5 points; within 2 points of each other, the cheaper arm.
+3. D (Haiku) is taken only if it wins rule 2 by ≥5 points over C, since it's ~7× the synthesis cost. The ADR-11 revision it would trigger is written then.
+4. If no arm reaches completeness ≥0.85 on dev, say so plainly: F5's gate is then at risk, reported, not lowered.
+
+**Also measured, not decided on:** how many sentences still trail the last citation; whether sectioning costs correctness on compound rows (reported per category); the wrong-page rate (28 of 168 on golden in F0).
+
+**Acceptance:**
+- [ ] Tests for `citations()` (nested, multi-citation, plain) and for section parsing (one section, several, missing markers → one section holding the whole text)
+- [ ] All four arms measured on dev with the metrics above, in a results note
+- [ ] One arm shipped by the rule (or a recorded departure, as E5's), in `generate.py`
+- [ ] Faithfulness CI gate still green locally on golden (CI's command) with the shipped arm
+- [ ] Log entry
+
+**Files:** `src/taxcite/generate.py` (rule 2, sections, `citations()`), `src/taxcite/decompose.py` (numbered parts in the synthesis call), tests, `eval/f0_verify.py`, `eval/temporal.py`, `eval/ragas_eval.py` (`--prompt` arms). New files, if any, handed to you as code.
+
+**Cost estimate:** synthesis 4 arms × 42 rows × 3 samples: ~$0.30 on gpt-4o-mini, ~$1.50 for the Haiku arm; judges (support, faithfulness, correctness): ~$4. **About $6 in all.** *Corrected when building (2026-09-30): ~$12. Correctness runs two judges and a grounding check per answer (~$1.5–2.5 an arm), faithfulness makes its own answers per arm, and the support judge runs two passes.*
+
+**Built (2026-09-30), before any arm ran:** `generate.citations()` (nested and packed brackets; `parse_citations` uses it), `split_sections()` and `Answer.sections`, `RULE_2_EVERY`, `SECTIONS_RULE` and the `SECTIONS` switch (numbered parts in `answer_from_groups`; an empty group isn't a part); `ragas_eval --prompt f3-cite|f3-sections` built on the shipped prompt; `--synth-model` in `ragas_eval.py` and `temporal.py` (synthesis only; plans pinned); `temporal.py --rows all`; `f0_verify.py --answers/--questions/--tag` (it now uses `generate.citations`; F0's report reproduces exactly). 4 new tests; 262 pass.
+
+**Risks:** citing every sentence may make answers stiffer or longer (watch length and correctness), or push the model to refuse more (rule 1 catches it). Sections may repeat context across parts (watch length). A sentence can carry a citation and still say more than its source: that's F4's job, and exactly what support measures.
+
+**Results (2026-09-30), dev's 42 answerable rows × 3 samples; ~$8.70 in all.** Files: `eval/results/temporal-dev-2026-09-30-f3{a,b,c,d}.json`, `f0-report-f3-dev-{a,b,c,d}.json`, answer caches `temporal-answers-f3*.json`, `ragas-answers-f3*.json`.
+
+| Arm | Correct (3 samples) | Refused | Faithfulness | Support (cited sentence backed by its source) | Completeness, as registered | Completeness, material sentences only | Answers every sentence cited *and* supported | Answers emptied (registered metric) | Words |
+|---|---|---|---|---|---|---|---|---|---|
+| A shipped | 0.373 ± 0.014 | 0.095 | 0.839 ± 0.037 | 0.752 | 0.356 | 0.438 | 0.032 | **0.295** | 101 |
+| B cite every sentence | 0.310 ± 0.041 | 0.111 | 0.841 ± 0.015 | 0.766 | 0.486 | 0.598 | 0.120 | 0.370 | 106 |
+| C B + sections | 0.349 ± 0.036 | 0.079 | 0.841 ± 0.041 | 0.800 | 0.471 | 0.607 | 0.078 | 0.353 | 119 |
+| D C on Haiku | 0.405 ± 0.024 | **0.206** | 0.874 ± 0.031 (refusals 0.19) | 0.863 | 0.540 | 0.714 | 0.120 | 0.370 | 165 |
+
+**The rule, applied as written:** (1) B fails the correctness guard (0.310 < 0.373 − 0.05); D fails the refusal guard (0.206 > 0.095 + 0.05). (2) C passes both guards but empties *more* answers than A (0.353 vs 0.295), so no arm beats A: **by the rule, nothing ships; A stays.** (4) No arm reaches completeness 0.85 (best 0.71): **F5's completeness gate is at risk**, reported, not lowered.
+
+**The registered metric has the same blind spot E5's rule 3 had.** "Answers emptied" counts only *cited* sentences that fail; an uncited sentence is never checked, so an arm that cites more exposes more sentences and looks worse. Counting an uncited material sentence as unverified (it can't be shown under ADR-15 either), the share of answers that survive whole is A 3%, B 12%, C 8%, D 12%. Recorded here as a finding, not used to override the rule.
+
+**Measurement correction (post hoc, disclosed):** F0's splitter counted structural lines as uncited sentences: section headings (71 in C), the year statement rule 6 requires ("The year I answer for is 2026.", 59 in C), and markdown titles ("**Conclusion**"). §9's completeness is over *material* claims, so the "material sentences only" column excludes them. It moves every arm up ~0.08–0.17 and changes no ranking.
+
+**What the uncited sentences are (C, D):** applications and arithmetic on the question's facts ("Since your client's gain is $200,000 … she can exclude all $200,000"), and plain restatements of a rule the previous sentence cited. The prompt asks for a citation on each; the models write most, not all.
+
+**Conclusion:** prompting moves completeness from 0.44 to 0.60–0.71 but cannot reach 0.85, and under zero tolerance almost no answer survives whole (≤12%). The lever left is structural: synthesis returns sentences as objects with a required `citations` field (JSON schema), so an uncited sentence can't be written, and the verifier checks every one. Proposed as arm E, measured by the same rule plus the fully-verified share. Decision for you.
+
+**Arm E, structured synthesis (2026-09-30, your go; ~$1.40).** `STRUCTURED` in `generate.py`: JSON items, one sentence each with citations from an enum of the retrieved sources (none can be invented); an uncited item is dropped, an unanswerable part renders as INSUFFICIENT EVIDENCE; an unusable response is a refusal. OpenAI strict structured outputs added to `call_model`. `f0_verify.py`'s report now carries `completeness_material` and `answers_fully_verified` (reproduces the table above exactly). 266 tests.
+
+| Arm | Correct | Refused (as detected) | Pure refusals (no cited sentence) | Completeness, material | Support | **Answers fully verified** | Answers emptied (registered) | Sections hidden | Words |
+|---|---|---|---|---|---|---|---|---|---|
+| A shipped | 0.373 ± 0.014 | 0.095 | 9 of 126 | 0.438 | 0.752 | 0.032 | 0.295 | 0.342 | 101 |
+| C cite + sections | 0.349 ± 0.036 | 0.079 | — | 0.607 | 0.800 | 0.078 | 0.353 | 0.397 | 119 |
+| D C on Haiku | 0.405 ± 0.024 | 0.206 | — | 0.714 | 0.863 | 0.120 | 0.370 | 0.387 | 165 |
+| **E structured** | 0.341 ± 0.014 | **0.460** | **0 of 126** | **1.000** | 0.716 | **0.414** | 0.569 | 0.565 | 127 |
+
+Faithfulness E: 0.692 ± 0.058, but over only 12–14 of 25 rows (the harness drops "refused" rows), so not comparable.
+
+**The rule, as written:** E fails the refusal guard (0.460 > 0.145). **But every one of E's 58 "refusals" is a full cited answer with an INSUFFICIENT EVIDENCE caveat appended** for a detail the sources lack (D51: "2026 phase-out thresholds are not provided"); `Answer.refused` matches the phrase anywhere. E's pure refusals are 0 against A's 9. With refusals counted as answers with no cited sentence, E passes both guards (correct 0.341 ≥ 0.323) and then loses rule 2 on "answers emptied" (0.569 vs 0.295), the metric already shown blind to uncited sentences. **By the rule as written, nothing ships; the two measurement flaws both work against E.**
+
+**What E shows:**
+1. Completeness 1.000 by construction; fully verified answers 41% against ≤12% for every prompt arm.
+2. Support falls to 0.716: sentences that other arms left uncited are now cited, and many don't hold (D51: "New Jersey does not conform … [IRS Pub 17 (2025), p. 71]"). The misattribution was always there; E makes it checkable.
+3. Under section-level zero tolerance, E would hide 56% of sections. The unit ADR-15 hides is F4's question, raised now: hiding the failing *sentence* keeps ADR-15's promise (no unverified claim shown) and loses far less.
+4. The caveat habit is noise for users (46% of answers end in INSUFFICIENT EVIDENCE for a detail).
+
+**Arm E′: E with your two fixes, re-measured (2026-09-30, your decision "adopt E with the two fixes").** (1) A detail missing from an answered part renders as "Not in the sources: …", not INSUFFICIENT EVIDENCE; a part with nothing answered still says INSUFFICIENT EVIDENCE. (2) `Answer.refused` = says INSUFFICIENT EVIDENCE *and cites nothing* (was: the phrase anywhere). `f0_verify` recomputes it from the text, and counts "Not in the sources" / INSUFFICIENT EVIDENCE lines as non-material.
+
+| | A (pre-F3) | E′ (ships) |
+|---|---|---|
+| Correct (3 samples) | 0.373 ± 0.014 | **0.373 ± 0.037** |
+| Refused / pure refusals | 0.095 / 9 of 126 | **0.000 / 0** |
+| Completeness, material | 0.438 | **1.000** (12 uncited sentences dropped in 126 answers) |
+| Support (cited sentence backed by its source) | 0.752 | **0.769** |
+| **Answers fully verified** | 0.032 | **0.523** |
+| Sections hidden under section-level zero tolerance | 0.342 | 0.442 |
+| Faithfulness, as the CI gate judges (question hidden) | 0.839 ± 0.037 | 0.777 ± 0.028 |
+| Faithfulness, question as a source | 0.859 ± 0.007 | **0.864 ± 0.025** |
+
+**The faithfulness drop is the gate's judge, not E.** None of E′'s 73 unsupported claims is a "not in the sources" note; many are the client's own facts, which E now writes out in its application sentences ("The client owned and lived in the house for 3 of the last 5 years"), and the gate's judge never sees the question (F0's blind spot, in the other judge). With the question as a source (`ragas_eval.py --question-as-source`, as `temporal.py`'s grounding check already does), E′ equals A.
+
+**Shipped (2026-09-30): arm E′ is the default** (`STRUCTURED = True`; (ii′) kept as `PRE_F3_SYSTEM` and eval arm `pre-f3`), recorded as a departure from F3's pre-registered rule, whose two metrics both worked against it. Every non-shipped eval arm now sets both F3 switches, so an E5 arm can't run structured by accident. 268 tests.
+
+**Golden faithfulness gate with E′ (2026-09-30, CI's command, 5 runs, ~$6 with the rerun).** As CI judges (question hidden): **0.838 ± 0.006, FAIL** (< 0.855). With the question as a source: **0.869 ± 0.006, PASS**. Refusal rate 0.002 (Phase E's shipped build: 0.113), well inside the 0.25 bound. So on golden, as on dev, E′ fails the gate only through the judge's blind spot. Caveats: (a) the pre-F3 build has not been judged with the question on golden, so "E′ equals pre-F3" is shown on dev only (0.864 vs 0.859); (b) E′ answers the ~11% of rows pre-F3 refused, and those are scored now. The first attempt hung for an hour on a dead connection after the laptop slept; `call_model` now gives both SDKs a 2-minute timeout (`API_TIMEOUT`).
+
+**Decision needed (not taken):** shipping E′ needs the gate's judge to see the question. That changes the gate's definition, so the standing rule (re-measure both bands with ≥5 samples after a pipeline change) is now due; you deferred it "until required" on 2026-09-29.
+
+**Gate decision (2026-09-30, your option 1), bands re-measured as the standing rule requires (~$5.50).** Golden, judge shown the question, 5 runs each: pre-F3 0.920 ± 0.012 (refusing ~12%); shipped E′ **0.869 ± 0.006**; E′ with the grounding rule removed (`--prompt broken`, B9's arm rebuilt) **0.870 ± 0.019**. On the 81 rows pre-F3 answered in every run: pre-F3 0.919, E′ 0.899, broken 0.898; E′ scores 0.707 on the 15 rows pre-F3 refused. So E′ costs ~0.02 faithfulness like-for-like, and **the gate can no longer detect B9's regression: under structured synthesis the grounding rule does almost nothing the structure doesn't.** Done: `faithfulness.yml` runs with `--question-as-source` at 0.855 as a floor; ADR-22 revised; §9.3 row noted. **Moved to F5:** calibrate F4's verifier against a seeded failure (e.g., the verifier off, or `broken`), since it is now the detector.
+
+**F3 acceptance:**
+- [x] Tests for `citations()` and section parsing (and structured rendering, the schema, OpenAI strict outputs, the broken arm, refusals): 269 pass
+- [x] Four arms (+ E, E′) measured on dev, results above
+- [x] One arm shipped: E′, by your decision, a recorded departure from the rule (both of its metrics worked against E)
+- [x] Faithfulness gate on golden with the shipped arm, CI's command: 0.869 ± 0.006 with the question shown (the gate's new definition), PASS; refusals 0.002
+- [x] Log entries #82, #83 (local; `docs/` is gitignored)
+
+## F4: The verifier, and hiding what fails
+
+**Goal:** after synthesis, check every sentence of the answer against the sources it cites, and never show one that fails (ADR-3, ADR-15). Since F3 this is also the pipeline's regression detector: the weekly faithfulness gate became a floor (ADR-22 revised).
+
+**Decided already (Checkpoint 1, F0, F3):**
+- **An LLM verifier, not NLI** (ADR-4 revised): one batched structured-output call per answer, Haiku (the other provider from synthesis, ADR-11). ~$0.0023 an answer, a few seconds.
+- **The judge prompt is F0's fixed one** (V2b): the question and the whole answer as context, the question's client facts taken as given, cited sources judged together, every assertion must hold. Measured: 15/16 on single sentences against a careful read.
+- **The unit is the sentence,** and since F3 each sentence is a JSON item with its citations, so no splitting is needed: the verifier reads the items directly.
+- **A cited opinion counts with every retrieved page of it** (your pinpoint policy); whether the cited page itself holds the claim is recorded apart (`pinpoint`), not hidden.
+
+**What changes:**
+1. **`src/taxcite/verify.py` (new file, handed to you as code).** `verify(question, answer) -> list[Verdict]`: one call over all of an answer's sentences, each with its cited chunks (plus the other retrieved pages of a cited opinion); returns supported / not, which source carried it, and a short reason. The prompt moves here from `eval/f0_verify.py`, which then imports it, so the eval and the product judge the same way.
+2. **`Answer.items`:** `render()` keeps the (part, sentence, citations) items it rendered from, so the verifier needs no re-parsing.
+3. **Hiding** (`apply(answer, verdicts, unit)`): a failed sentence is never shown. What else goes with it is the open question below. A part left with nothing shown says INSUFFICIENT EVIDENCE for that part. The shown text is re-rendered from the surviving items; `Answer` records what was hidden and why (for the eval and the log, not the user).
+4. **Fail closed:** if the verifier call fails or returns nothing usable, nothing unverified is shown: the answer becomes "INSUFFICIENT EVIDENCE: the answer could not be verified", and the job record says why.
+5. **Wiring:** `decompose.answer` (so every eval measures the verified pipeline; `--no-verify` keeps the unverified arm), and `jobs.run` with a `verifying` SSE stage between `synthesizing` and `answer`; the answer stays buffered until verification ends (ADR-9).
+
+**Decision to make on dev (it revises ADR-15 if S wins): what does one failed sentence take down with it?**
+
+| Arm | Hides | For | Against |
+|---|---|---|---|
+| **P** (ADR-15 as written) | the whole part (section) | nothing shown can depend on a hidden sentence | on F3's dev answers, ~44% of sections would go |
+| **S** | only the failing sentence | keeps ADR-15's promise (no unverified claim shown) and hides ~23% of sentences | a surviving sentence can lose its qualifier ("unless…" hidden), so the shown answer can be verified sentence by sentence and still wrong |
+
+**Measured on the shipped E′ dev answers (126 cached answers, 3 samples × 42 rows; no new synthesis):**
+- share of sentences hidden; answers shown whole; answers with at least one part shown; answers emptied;
+- **correctness of what is shown** (`temporal.py`'s judge on the verified text): the check that hiding a sentence didn't make an answer wrong;
+- hidden sentences the verifier got right: a fresh hand-read sample of ~30 verdicts on E′ answers (F0's sample was on pre-F3 answers), stratified hidden/kept;
+- verifier latency and cost per answer.
+
+**Decision rule, fixed before any arm runs (F3's lesson: each metric is first run on a known-good and a known-bad case):**
+0. *Sanity, before measuring:* on a hand-made answer with one fabricated sentence (a real citation on a claim its source doesn't make), both arms hide it and keep the rest as defined; on an all-supported answer, neither hides anything. If either fails, the metric or the code is fixed first.
+1. An arm whose shown answers are less correct than the unverified E′ answers by more than 0.05 is out.
+2. Of the rest, the arm with more answers showing at least one part wins; within 2 points, P (the ADR as written).
+
+**Acceptance:**
+- [ ] `verify.py` with tests (batching, fail-closed, one fabricated sentence hidden, opinion pages, the prompt's context), the prompt shared with `f0_verify.py`
+- [ ] `verifying` stage in the job stream; tests for its order and for a fail-closed answer
+- [ ] Both arms measured on dev with the metrics above; the rule applied; ADR-15 revised if S ships
+- [ ] Hand-read sample of ~30 E′ verdicts, agreement recorded
+- [ ] Latency and cost per answer recorded (against §9.3 H's 35 s p95)
+- [ ] Log entry
+
+**Files:** `src/taxcite/verify.py` (new), `generate.py` (`items`), `decompose.py`, `jobs.py`, `eval/f0_verify.py` (shared prompt), `eval/ragas_eval.py` / `temporal.py` (`--no-verify`), tests.
+
+**Cost estimate:** verifier over 126 cached answers ~$0.30; grading the two arms' shown answers ~$2; a hand sample. **About $3.** Nothing touches golden until F5.
+
+**Out of F4:** the golden audit against an independent model and the verifier's calibration against a seeded failure (both F5); re-pointing a wrong-page citation to the page that holds the claim (recorded, not built).
+
+**Built (2026-09-30):** `verify.py` (new; developed outside the repo, handed to you with its tests): F0's validated prompt, one batched call per answer, cited chunks plus every retrieved page of a cited opinion, a skipped verdict counts as a failure, `apply(unit)`, fail closed (`UNVERIFIED`). `generate.cited_items()` so render and verifier number sentences alike; `Answer.structured / hidden / verdicts / verifier` and the verifier's cost in `cost_usd`. `decompose.VERIFY`; `jobs.run` publishes `verifying` and `hidden_sentences`, and a failed verifier sends a refusal, never the unverified text (test). Eval: `--no-verify`, `--hide`, verdicts cached; `eval/f4_hide.py` (new) shows one verified run three ways on identical verdicts. 278 tests with the new files.
+
+**Results (2026-09-30), dev, 42 rows × 3 samples, one synthesis and one verification per answer, ~$3.40:**
+
+| Arm | Sentences hidden | Answers shown whole | Answers with a part shown | Emptied | Correct | Incorrect | Refused | Grounded | Correct *and* grounded |
+|---|---|---|---|---|---|---|---|---|---|
+| none (unverified) | 0 of 449 | 126 | 126 | 0 | **0.365** ± 0.037 | 0.143 | 0.000 | 0.571 | 0.238 |
+| **S** (the failing sentence) | 109 (24%) | 60 | **117** | 9 | 0.278 ± 0.028 | 0.214 | 0.071 | 0.865 | 0.214 |
+| **P** (its whole part) | 250 (56%) | 60 | 62 | 64 | 0.206 ± 0.014 | 0.556 | 0.508 | 0.944 | 0.190 |
+
+Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 stratified): **27 of 30 agree**; 2 hidden that a careful read keeps (V07, V22: fair paraphrases), 1 kept that should go (V28: "rental income" where the statute says AGI). What it hides is mostly real: wrong section cited (§179D for a §25C credit, §263A(h) for §262, §79 for §72), arithmetic ignoring "or fraction thereof", figures the cited page doesn't give.
+
+**The rule, as written: neither arm ships.** Rule 1 (shown answers no more than 0.05 less correct than unverified, i.e. ≥ 0.315): S 0.278 and P 0.206 both fail. Rule 0's sanity cases passed (tests).
+
+**What the drop is made of (S vs none, 126 answers):** correct → partial 10 (content hidden, answer less complete); partial or correct → incorrect 11, of which **9 are refusals** (every sentence failed; the correctness judge grades INSUFFICIENT EVIDENCE as incorrect); 3 real. Correct-and-grounded barely moves (0.238 → 0.214): most of what verification removes was right only from the model's memory, which the unverified baseline credits. The risk rule 1 targets is real but small: D30 s0 lost its conclusion ("cannot deduct for 2024") and kept only "governed by § 225(a)-(f)".
+
+**Third pre-registered rule in this phase to measure something in tension with its purpose:** rule 1 benchmarks against an unverified answer, so any verifier that removes unsupported-but-correct content fails it by construction. Recorded; the decision is yours.
+
+**Shipped (2026-09-30, your decision): S, the failing sentence only** (`verify.HIDE = "sentence"`), a recorded departure from F4's rule; ADR-15 revised with the numbers above. Recorded next step, not built: rewrite failed sentences once from the verifier's reasons (the D30 risk, and the correctness cost).
+
+**F4 acceptance:**
+- [x] `verify.py` with tests (batching, fail closed, one fabricated sentence hidden, opinion pages, the prompt's context, the shipped unit): 9 tests
+- [x] `verifying` stage in the job stream; a failed verifier sends a refusal (test)
+- [x] Both arms measured on dev; the rule applied (neither passed); S shipped by your decision; ADR-15 revised
+- [x] Verdict check: 27 of 30 (Claude's read), `eval/results/f4-verdict-check.md`
+- [x] Cost ~$0.002 and a few seconds an answer; the §9.3 H latency figure is F5's (p95 over golden)
+- [x] Log entry #84 (local)
+- [x] `src/taxcite/verify.py`, `tests/test_verify.py`, `eval/f4_hide.py` created by you; `eval/f0_verify.py` imports the product's prompt (checked identical to F0's); committed `8193fb8`
+
+## F5: Phase F scored on golden
+
+**Goal:** score the finished Phase F pipeline on golden, once, against §9.3's gates as revised: structured synthesis (F3), the verifier hiding failed sentences (F4), no sufficiency gate (F2). Nothing is tuned on golden; every number below is reported as it comes out.
+
+**The gates (§9.3, revised at Checkpoint 1):**
+
+| Gate | Threshold | Scored as |
+|---|---|---|
+| Citation entailment F1 | ≥ 0.90 | the runtime verifier (Haiku) against an **independent reference** on golden's sentences, "not supported" class, false-accept rate beside it |
+| Citation completeness | ≥ 0.85 | material sentences cited ÷ material sentences (`completeness_material`), before hiding and as shown |
+| Substantive correctness | tracked, not gated (N < 100) | §9.2's judge on the 40-question subset, two judges, κ reported (≥ 0.7 to be trusted) |
+
+**The independent reference (Checkpoint 1: the verifier can't grade itself):** a different, stronger model judging the same pairs with the same prompt, its price confirmed before the run. Candidate: the current Sonnet. That reference is itself checked on ~40 stratified pairs read by hand (as F0 and F4 did), and F1 is reported against both the reference and the hand-read pairs.
+
+**One golden run, reused for everything (the lean rule):** golden's 104 non-adversarial rows (93 answerable + 11 insufficiency) × 3 plan sets, shipped pipeline, through `temporal.py --rows every`, storing structured items, verdicts and per-answer latency. From that single run:
+1. **Entailment:** the verifier's verdicts are already in the cache; only the reference judge runs over the same pairs (and the hand-read sample).
+2. **Completeness:** computed from the cached items, no calls.
+3. **Correctness:** `temporal.py`'s grades from the same run; the 40-question subset and κ read from them.
+4. **The ladder's last rung, "+claim verification":** `f4_hide.py` shows the same answers unverified and verified on identical verdicts; graded once more (the unverified view only).
+5. **Abstention (§9):** the 11 `G-I` rows: refusals, partial handling (`G-I11`, now with `parts`), and `G-I06`, answered from nothing in every run since Phase B.
+6. **Operations (§9.3 H, first look):** p50/p95 latency and cost per answer, synthesis path and refusal path.
+
+**Seeded failure, the detector's calibration (moved here from F3, since the faithfulness gate became a floor):** take verified golden answers whose sentences all passed and swap citations between sentences (each sentence now cites a source that doesn't make it). The verifier must hide them. Reported: the share caught (recall) on ~100 seeded sentences, and the share of untouched sentences still kept. Only verifier calls, no synthesis.
+
+**CI on the finished pipeline:** push `phase-f`, dispatch the weekly faithfulness workflow (question shown, 0.855 floor) and the retrieval gate; record both runs. Not counted in this brief's cost (CI's own budget, ~$3).
+
+**Pre-registered:** the thresholds above are §9.3's, unchanged. A gate not met is reported as not met, with what it would take, as Phases D and E did. Before the run, each new metric is checked on a hand-made right and wrong case (the seeded-failure scorer, the abstention scorer, completeness on a shown answer).
+
+**Acceptance:**
+- [ ] Reference judge chosen, priced, and checked on a hand-read sample
+- [ ] Entailment F1 and false-accept rate on golden (against the reference and against the hand-read pairs)
+- [ ] Completeness on golden, before hiding and as shown
+- [ ] Correctness on the 40-question subset, κ between two judges
+- [ ] Abstention on the G-I rows, incl. `G-I06` and `G-I11`
+- [ ] "+claim verification" on the ablation ladder
+- [ ] Seeded-failure recall
+- [ ] Latency p50/p95 and cost per answer
+- [ ] CI runs on `phase-f` recorded
+- [ ] Results note in `eval/results/` and a log entry
+
+**Cost estimate:** golden run ~312 answers × ~$0.0035 (synthesis + verification) ≈ $1.10; correctness grading ≈ $2.20; the unverified view's grading ≈ $2.20; reference judge over ~1,100 sentence pairs ≈ $2–4 depending on the model's price; seeded failure ≈ $0.30. **About $8–10**, the phase's one golden scoring. Golden is run once; any re-run needs your go.
+
+**Results (2026-10-01), golden, scored once: 108 rows × 3 plan sets, shipped pipeline (F3 structured synthesis, F4 sentence hiding, no gate). ~$8.30, plus ~$1.70 of grades lost when Anthropic credit ran out at row 254 (now checkpointed per row).**
+
+| Gate / metric | Result | Threshold | |
+|---|---|---|---|
+| **Citation entailment F1** (verifier vs Sonnet 5.5, 298 sentences, plan set 0, "not supported" class) | **0.63** (precision 0.90, recall 0.48, false accepts 0.52) | ≥ 0.90 | **not met** |
+| …adjusted by a careful read of 40 disagreements (Sonnet right in 27, the verifier in 13) | **≈ 0.72** (precision ≈ 0.93, recall ≈ 0.59) | ≥ 0.90 | **not met** |
+| **Citation completeness**, material sentences | **0.996** before hiding, 0.995 as shown | ≥ 0.85 | **met** |
+| Correctness, answerable rows (n = 291) | 0.241 correct, 0.478 partial, 0.282 incorrect; κ between the two judges 0.80 (trusted) | tracked | |
+| Seeded misattributions caught (citation moved to another section's retrieved source) | **77 of 102 (0.755)** | — | |
+| Abstention, 11 G-I rows × 3 | 9 of 10 wholly insufficient refused 3/3; **`G-I06` answered 3/3** (since Phase B); `G-I10` refused 1, flagged 2; **`G-I11` refused 3/3** (its federal half not answered) | — | |
+| Insufficiency rows correct | 0.818 | — | |
+| Latency (first answer excluded) | answered p50 8.0 s, p95 11.2 s; refused p50 2.7 s, p95 6.2 s | 35 s / 2 s (H, first pass) | answered met; refusal path not |
+| Cost per answer | $0.0039 (planning, synthesis, verification) | — | |
+
+**Ladder, "+claim verification"** (same answers, verifier on vs off): correct 0.247 → 0.241, grounded 0.793 → 0.901, correct *and* grounded 0.253 → 0.275, refused 0.207 → 0.237. On golden, verification costs no measurable correctness (dev, F4: 0.365 → 0.278); 134 of 913 sentences hidden, 9 answers emptied.
+
+**What the verifier misses:** sentences that overstate or over-generalise their source, i.e. a dropped condition or carve-out ("§ 280A disallows" where it limits; § 6013(b)(4)'s extra year for any joint return; "gross income" where § 1402(b) says net earnings; American Eagle coins as collectibles, which § 408(m)(3) excepts; § 469(c)(7) read as "not passive" without material participation). The F0 prompt's "every assertion must hold" rule is in; Haiku applies it loosely.
+
+**A regression signal, not yet confirmed: correctness on golden's 32 authority rows fell from 0.369 (Phase E, ii′, 5 samples) to 0.260 (F5, verified and unverified alike, 3 samples).** Verification isn't the cause (both views 0.260); F3's structured synthesis is the likely one, though on dev it cost nothing (0.373 vs 0.373). Confirming it means running the pre-F3 pipeline on those 32 golden rows (~$1): a diagnosis, not tuning, but golden, so it waits for you.
+
+**F5 regression diagnostic (2026-10-01, your go, $0.59 judge + synthesis):** the Phase E prompt (`--prompt pre-f3 --no-verify`) on golden's 32 authority rows, same pinned plans and judge, 3 samples: **correct 0.365** (structured E′ unverified: 0.260; Phase E's own run, samples 0-2: 0.396). Confirmed: F3's structured synthesis costs ~0.10 correctness on golden, not verification. 20 row-samples lost, 10 won; 15 of the 20 lost became "partial: missing condition", only 3 via refusal. Cause seen in the answers: structured answers almost never state the bottom line (4 of 324 open with Yes/No vs 35 of 96 for the old prompt); they list cited facts per sub-query and leave the conclusion to the reader. Dev missed it (0.373 = 0.373). Results `temporal-golden-2026-10-01-f5-pref3.json`.
+
+**Bottom-line fix (2026-10-01, your go for recommendation A), measured on dev, not shipped:** a required part-0 item, one cited sentence answering the question directly, shown first (`generate.BOTTOM_LINE_RULE`). Dev, 42 answerable rows × 3, verified, gate off: **correct 0.238 vs 0.278** (F4's shipped run), incorrect 0.302 vs 0.214, refused 0.095. The model commits to a Yes/No that is often wrong, and the verifier hid 50 of 126 bottom lines. `BOTTOM_LINE = False`; the golden confirmation run was not made, since dev failed. **Correction (same day):** paired, it lost 14 row-samples and won 9 (sign test p ≈ 0.4): inconclusive, not a measured loss. The bottom line was generated before the evidence (schema order), which F5b's C1 changes. Judge spend $0.96 (one run wasted by the bug below).
+
+**Harness bug found (2026-10-01): every eval run since F2 ran the sufficiency gate,** which ships off. `set_verify()` set `GATE = not no_gate`, so the gate was on unless `--no-gate` was passed; `ragas_eval.py` (which CI runs) never passed it. Affected: all F5 golden figures (the gate refused 67 of 324 answers before they were written, verified and unverified alike), the pre-F3 diagnostic (6 of 96), and this dev run's first pass. Not affected: F2's measurements (gate on purpose, `--no-gate` arm) and everything before F2. Fixed: `set_verify(gate=None)` keeps what ships; `temporal.py --gate/--no-gate`. Dev re-run lean: only the 54 answers the gate touched were regenerated and re-graded (`ungate.py`, scratch), and the 72 untouched kept their grades. **F5's golden correctness, refusal, latency and G-I06/G-I11 figures need the same correction before F6.**
+
+## F5b: answers that conclude and can be checked (plan: `tasks/plan.md`, F5b)
+
+- [x] Step 0.2 guard test: eval switches leave the gate as shipped (fails 3× on the buggy version)
+- [x] Step 0.3 `judge(..., why=True)` for diagnostic re-grades (scoring rubric unchanged)
+- [x] Step 1 diagnose (free): 37 hidden sentences tagged; retrieval is the largest cause; C6 sibling expansion measured free: dev Recall@8 0.610 → 0.683 (+4/−1 rows); false accepts not concentrated in applications (results in `tasks/plan.md`, F5b)
+- [ ] Metric checks on hand-made cases (conclusion shown, correct ∧ grounded)
+- [x] R1: C6 siblings + shipped synthesis and verifier on dev ($0.46 judge + ~$0.3 synthesis/verification; 90 of 126 row-samples changed sources and were re-run, 36 kept F4's answers and grades). Paired vs F4, answered (not refused) only: correct ∧ grounded 27 → 25 (lost 8, gained 6, noise); incorrect 18 → 11; ungrounded 17 → 5 (p≈0.01); **refusals 9 → 22** (p<0.01): 12 of the 14 new ones are answers the verifier emptied, e.g. D25 (the right regulation, 1.401(a)(9)-2(a)(2), now retrieved but a neighbour cited), D26 (siblings pushed § 163(h)(3) out of 8th, as predicted), D30 (the start date isn't in the corpus: an honest refusal). Fails criterion 4 alone; R2 adds C3 on R1's retrieval. **Metric flaw found:** the grader marks some refusals "correct" (6 of 22 here; 25 of 77 on F5 golden, partly the insufficiency rows, where that's right); on answerable rows the decision metrics now count answered rows only.
+- [x] R2 built (free), off by default: `generate.CONCLUSION` (C1: `conclusion` last in the schema; C4: self-contained items), `verify.RECITE` (C3: one call over every retrieved source for failed sentences only; each swap re-checked by the unchanged F0 prompt, text never rewritten), the conclusion check (C2: follows from the sentences that passed plus the client's facts; shown first as "Short answer:", cited with its basis sentences' citations; no check when nothing passed). The verifier's validated prompt is untouched, so criterion 5 can't move. Part-0 bottom line removed. `temporal.py --conclusion --recite --siblings 6`. 295 tests.
+- [x] R2 run on dev (your go; judge $0.80 + pipeline $0.82): siblings 6 + C1–C4. Paired vs F4, answered rows: **correct ∧ grounded 27 → 35** (gained 15, lost 7, p≈0.13); correct 35 → 37; incorrect 18 → 17; refusals 9 → 15 (new: 4 replaced ungrounded answers, 3 are D26's sibling crowd-out, 1 cost a correct grounded answer, D31). Conclusion shown on 83 of 111 answered (75%); 26 rejected by the check, mostly rightly (D13 "entire $200,000" without the cap shown; D18 "10% applies" without the exceptions ruled out), a few strict (D05). 15 sentences re-cited. Ungrounded answers: 16 of 17 for ordinary claims, 1 for its conclusion alone. Pipeline $0.0065 an answer (F4: ~$0.004), p50 8.0 s / p95 13.2 s. Completeness 1.0 by construction (the conclusion carries its basis sentences' citations). Verifier prompt unchanged (criterion 5).
+  **Against the pre-registered rules:** 2 (correct ∧ grounded) ✓, 3 (incorrect) ✓, 5 ✓; **1 missed** (75% < 80%: the check rejecting overreaching conclusions, which is its job); **4 missed** (refusals +6; but only 1 replaced a correct grounded answer — "refusals not higher" counts honest refusals of memory answers as a cost, the F3 metric lesson again). Your decision.
+- [ ] R3 only if R2 misses one criterion with a clear cause
+- [x] **R2 ships (your decision 2026-10-01, a recorded departure from criteria 1 and 4):** `SIBLINGS = 6`, `CONCLUSION = True`, `RECITE = True`; a test pins them. `f5_golden.py --cache --prefix` so F5b's outputs don't overwrite F5's. Seeded and Sonnet-audit steps not re-run (the verifier's prompt is unchanged; F5's sentence-level results stand); conclusions and re-cited sentences read by Claude instead (free).
+- [x] **Golden once, shipped pipeline, gate fixed (2026-10-01; judge $2.19 + pipeline ~$2.38).** Replaces F5's gate-contaminated figures. Answerable rows (291 row-samples): correct 0.368; answered and correct 0.364; **answered, correct and grounded 0.333**; incorrect 0.137; partial 0.454; refused 13. By category correct: statutory 0.488, case law 0.481, compound 0.247, temporal 0.121. **The 32 authority rows vs Phase E (samples 0–2): correct 0.396 → 0.469, answered correct ∧ grounded 0.312 → 0.385, grounded 0.635 → 0.875** (F5's "regression" reversed). Completeness 0.994 as shown (met). Short answer shown on 231 of 278 answered (83%). 34 sentences re-cited; 210 of 1,160 hidden; 13 answers emptied. Latency p50 8.3 s / p95 11.8 s; $0.0073 an answer. Insufficiency rows: refused or flagged on G-I01/02/04/05/07/10, G-I11 handled 3/3 (partial row, now answers its federal half), answered: G-I06 3/3, G-I09 3/3, G-I03 2/3, G-I08 1/3 (no gate; F2's measured choice).
+  Siblings on golden: 54 gold sources gained across 18 rows, 5 lost across 2 (G-T08: § 164(b)(7)'s $40,400 cap pushed out by its siblings; G-S08). Temporal rows mixed: G-T11 ppc → ccc, G-T08 cic → iii (crowd-out), G-T10 ccc → icp; G-T02 ccc → iii is the grader: F5's identical "$1,000,000" was graded correct.
+  **Short answers read by Claude (22, plan set 0):** 10 right, 6 vague but not wrong ("Yes, … meets specific requirements"; "Yes," on non-yes/no questions), **6 wrong or misleading and passed by the check**: G-C21 contradicts itself ("No, … are subject"), G-I06 and G-I09 answer what the sources can't (the check tests "follows from the shown sentences", not "answers this question"), G-T03 overconfident, G-S07 and G-C10 state the wrong condition. Edge case 17, realised.
+
+- [x] **Conclusion check tightened (your go, 2026-10-01; $0.21 checks + $0.38 re-grading, dev replay only, golden not touched again):** the check now also fails a conclusion that answers another question (jurisdiction, year, subject) or contradicts itself or a statement, and reports whether the question is yes/no; a stray leading "Yes,"/"No," is dropped from the display when it isn't ("Short answer: $1,750 is taxable to the employee"). First version also rejected any "Yes" on a non-yes/no question: shown fell 83 → 71 of 111, hiding right answers ("Yes, the 2026 rate is 72.5 cents"), so the display fix replaced that rule. Final, replayed over R2's dev answers (38 changed, re-graded): answered correct ∧ grounded 35 → 36, incorrect 17 → 18, partial 57 → 56 (noise); short answer 83 → 84 of 111; off-question conclusions hidden (D01 "inverts the question", D23). The check isn't deterministic on borderline cases (D16 hidden in one replay, shown in the other). Its effect on golden's six bad short answers is unmeasured (golden used once); F6 reports golden as measured before this change.
+
+## F6: Phase F exit report
+
+`eval/results/phase_f.md`: gate outcomes, what each check caught (with examples: a laundered citation suppressed, `G-I11`'s half answer), what it cost (suppressions, latency), what F got wrong. Tech doc §7/§9.3 and ADRs updated.
+
+**F6 (2026-10-01):** exit report drafted (`eval/results/phase_f.md`, a new file for you to create); tech doc ADR-1, ADR-4, ADR-15 revised and Phase F baselines added; PRD §9 results note. `phase-f` pushed (your go); CI green on the shipped pipeline: tests (run 36937736469); retrieval gate 0.760 ≥ 0.70 (run 36937735731); faithfulness 0.951 ± 0.015 ≥ 0.855 at refusals 0.056 (run 36937738414; $6.24: pipeline $3.58, judge $2.66).
+
+## ✅ Checkpoint: Phase F complete
+- [ ] Citation entailment F1 ≥0.90 (NLI vs. LLM-judge, not-supported class): **not met**, 0.63 vs Sonnet 5.5 (≈0.72 adjusted)
+- [x] Citation completeness ≥0.85: 0.994 (golden, shipped)
+- [x] Substantive correctness tracked (N, κ reported): 291 golden row-samples, κ 0.72
+- [x] Tests and both CI gates green on the shipped pipeline

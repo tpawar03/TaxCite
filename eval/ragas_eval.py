@@ -20,6 +20,7 @@ import argparse
 import json
 import statistics
 import sys
+import time
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -156,24 +157,59 @@ def judge_claims(claims: list[str], contexts: list[dict], model: str, budget: Bu
             for i in range(len(claims))]
 
 
-PROMPTS = ("shipped", "pre-e5", "labels", "labels+rule4", "labels+rule4b")
+PROMPTS = ("shipped", "pre-e5", "labels", "labels+rule4", "labels+rule4b", "pre-f3", "f3-cite", "f3-sections",
+           "f3-structured", "broken")
+# B9's broken arm, rebuilt on whatever ships: the grounding rule dropped, the citation requirement kept, so every
+# citation check still passes it and only faithfulness sees the failure. The gate's bands are measured against it.
+GROUNDING_RULE = "1. Use ONLY the numbered sources. Do not add rules, dollar amounts or dates from memory.\n"
 
 
 def set_prompt(arm: str) -> None:
     """E5's prompt arms, each built from the pre-E5 prompt: "pre-e5" is it unchanged (what "shipped" meant
     before E5 shipped (ii′)); "labels" adds each source's authority label; "labels+rule4" also widens rule 4;
-    "labels+rule4b" is (ii′), which now ships, so "shipped" leaves the module as it is. Use a separate
-    --answers-cache per arm: cached answers don't know their prompt."""
+    "labels+rule4b" is (ii′), which now ships, so "shipped" leaves the module as it is. F3's arms build on the
+    pre-F3 prompt ((ii′), "pre-f3"): "f3-cite" rewrites rule 2 (every sentence cited, only what its source says),
+    "f3-sections" also asks for a section per sub-query, "f3-structured" (arm E, which now ships) writes the answer as
+    JSON items, one sentence each with its citations, without F5b's conclusion. Every arm but "shipped" sets both F3 switches, so an older arm
+    can't run structured by accident. Use a separate --answers-cache per arm: cached answers don't know their prompt."""
+    from taxcite import generate as g
+    if arm == "broken":
+        assert GROUNDING_RULE in g.RAG_SYSTEM, "the shipped prompt no longer has B9's grounding rule to drop"
+        g.RAG_SYSTEM = g.RAG_SYSTEM.replace(GROUNDING_RULE, "")
+        return
     if arm == "shipped":
         return
-    from taxcite import generate as g
+    g.SECTIONS, g.STRUCTURED, g.CONCLUSION = arm == "f3-sections", arm == "f3-structured", False
+    if arm == "f3-structured":
+        g.RAG_SYSTEM = g.PRE_F3_SYSTEM.replace(g.RULE_2, g.RULE_2_STRUCTURED).replace(g.RULE_3, g.RULE_3_STRUCTURED)
+        return
+    if arm == "pre-f3":
+        g.RAG_SYSTEM = g.PRE_F3_SYSTEM
+        return
+    if arm.startswith("f3-"):
+        g.RAG_SYSTEM = g.PRE_F3_SYSTEM.replace(g.RULE_2, g.RULE_2_EVERY)
+        return
     rule = {"labels+rule4": g.RULE_4_AUTHORITY, "labels+rule4b": g.RULE_4_AUTHORITY_B}.get(arm, g.RULE_4)
     g.SOURCE_LABELS = arm != "pre-e5"
     g.RAG_SYSTEM = g.PRE_E5_SYSTEM.replace(g.RULE_4, rule)
 
 
+def set_verify(off: bool, unit: str | None, gate: bool | None = None) -> None:
+    """F4's and F2's switches for an eval run: the verifier off (the unverified arm), its hiding unit, the gate on or
+    off. `gate=None` keeps what ships: until F5 this forced the gate on, so every run after F2 shipped it off still
+    ran it (F5 found it: 67 of 324 golden answers refused by a gate the product doesn't run)."""
+    from taxcite import decompose as dc
+    dc.VERIFY = not off
+    if gate is not None:
+        dc.GATE = gate
+    if unit:
+        from taxcite import verify
+        verify.HIDE = unit
+
+
 def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: int,
-                    plans: dict | None = None, plan_path: Path | None = None, plan_set: int = 0) -> dict:
+                    plans: dict | None = None, plan_path: Path | None = None, plan_set: int = 0,
+                    model: str | None = None) -> dict:
     """Run the full pipeline once per run index and reuse it, so re-judging is free.
 
     The plan is pinned from the shared cache (plan set 0), not made fresh each time. Without
@@ -184,6 +220,8 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
     `plan_set` pins another cached plan set instead (E5: one answer per plan set is the variance that
     reaches synthesis, which runs at temperature 0). Each cached answer records its plan set, and a cache
     built with another one is refused rather than silently reused.
+
+    `model` changes synthesis only when the plan is pinned (F3's Haiku arm); unpinned, it would plan too.
     """
     runs = cache.setdefault(question, [])
     if run < len(runs) and runs[run].get("plan_set", 0) != plan_set:
@@ -191,7 +229,12 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
                          f"not {plan_set}: use another --answers-cache")
     while len(runs) <= run:
         pinned = cached_decompose(question, plans, plan_path, plan_set if len(runs) == run else 0) if plans is not None else None
-        plan, answer = dc.answer(question, k=k, plan=pinned)
+        started = time.monotonic()
+        plan, answer = dc.answer(question, k=k, plan=pinned, **({"model": model} if model else {}))
+        seconds = time.monotonic() - started  # F5: retrieval, synthesis and verification, the user's wait
+        from taxcite.verify import UNVERIFIED
+        if answer.text == UNVERIFIED:  # F5: the verifier didn't run (a run died on exhausted credit); never cache that
+            raise RuntimeError(f"verification failed, not caching it as an answer: {answer.hidden[0]['why'] if answer.hidden else ''}")
         runs.append({
             "text": answer.text,
             "refused": answer.refused,
@@ -201,6 +244,12 @@ def pipeline_answer(question: str, k: int, cache: dict, path: Path | None, run: 
             "cost_usd": answer.cost_usd + plan.cost_usd,
             "model": answer.model,
             "plan_set": plan_set if len(runs) == run else 0,
+            "dropped_sentences": answer.dropped_sentences,  # F3 arm E: written without a citation, not shown
+            # F4: what the verifier saw and said, so eval/f4_hide.py can show the same answer under either unit
+            "structured": answer.structured, "verdicts": answer.verdicts, "hidden": answer.hidden,
+            "sufficiency": answer.sufficiency,  # F2: the gate's verdict per part
+            "conclusion": answer.conclusion,  # F5b
+            "seconds": round(seconds, 2),
         })
         if path:
             path.write_text(json.dumps(cache, indent=2))
@@ -251,7 +300,12 @@ def main() -> int:
     ap.add_argument("--max-refusal-rate", type=float, metavar="RATE",
                     help="exit non-zero if the mean refusal rate is above this; the faithfulness mean excludes refusals")
     ap.add_argument("--answers-cache", default=str(ANSWERS), help="'' regenerates every run")
-    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's synthesis prompt arm")
+    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
+    ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
+    ap.add_argument("--no-verify", action="store_true", help="skip F4's verifier: the unverified pipeline")
+    ap.add_argument("--hide", choices=("part", "sentence"), help="F4's hiding unit for this run")
+    ap.add_argument("--question-as-source", action="store_true",
+                    help="judge claims against the question too, as temporal.py's grounding check does (F3 measurement)")
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json",
                     help="pin decompositions from this cache; '' re-plans every run (noisy)")
     ap.add_argument("--pin-answers", action="store_true",
@@ -260,6 +314,7 @@ def main() -> int:
     args = ap.parse_args()
 
     set_prompt(args.prompt)
+    set_verify(args.no_verify, args.hide)
     rows = [json.loads(line) for line in open(args.questions) if line.strip()]
     rows = [r for r in rows if r.get("scored_from") == "B"]
     if args.limit:
@@ -272,19 +327,35 @@ def main() -> int:
     RESULTS.mkdir(parents=True, exist_ok=True)
 
     print(f"{len(rows)} rows x {args.repeats} run(s), judge {args.judge}, cap ${args.max_cost:.2f}\n")
+    # every judged row is saved as it's done and a crashed run resumes from it (your rule, F5); deleted once the
+    # run's results are written, so a deliberate re-run measures afresh
+    stem = Path(args.answers_cache).stem if args.answers_cache else ANSWERS.stem
+    progress = RESULTS / (f"ragas-{Path(args.questions).stem}-{stem}{'-q' if args.question_as_source else ''}"
+                          f"-{args.judge}.progress.json")
+    done = {(d["run"], d["id"]): d for d in json.loads(progress.read_text())} if progress.exists() else {}
     runs, stopped = [], None
     for run in range(args.repeats):
         judged = []
         try:
             for i, r in enumerate(rows, 1):
+                if (run, r["id"]) in done:
+                    d = done[(run, r["id"])]
+                    judged.append(Judged(id=d["id"], question=r["question"], refused=d["refused"], claims=d["claims"],
+                                         verdicts=d["verdicts"], pipeline_cost=d["pipeline_cost"]))
+                    continue
                 out = pipeline_answer(r["question"], args.k, cache, cache_path,
-                                      0 if args.pin_answers else run, plans, plan_path)
+                                      0 if args.pin_answers else run, plans, plan_path, model=args.synth_model)
                 j = Judged(id=r["id"], question=r["question"], refused=out["refused"],
                            pipeline_cost=out["cost_usd"])
                 if not out["refused"]:
                     j.claims = extract_claims(out["text"], args.judge, budget)
-                    j.verdicts = judge_claims(j.claims, out["contexts"], args.judge, budget)
+                    # F3: the question as a source too, so restating the client's facts isn't counted unsupported
+                    given = [{"citation": "the question", "text": r["question"]}] if args.question_as_source else []
+                    j.verdicts = judge_claims(j.claims, given + out["contexts"], args.judge, budget)
                 judged.append(j)
+                done[(run, j.id)] = {"run": run, "id": j.id, "refused": j.refused, "claims": j.claims,
+                                     "verdicts": j.verdicts, "pipeline_cost": j.pipeline_cost}
+                progress.write_text(json.dumps(list(done.values())))
                 mark = "refused" if j.refused else f"{j.faithfulness:.2f}" if j.faithfulness is not None else "no claims"
                 print(f"  run {run + 1} [{i:>3}/{len(rows)}] {j.id:<7} {mark:>9}  judge ${budget.spent:.3f}")
                 sys.stdout.flush()
@@ -332,6 +403,7 @@ def main() -> int:
                   "claims": j.claims, "verdicts": j.verdicts} for judged, _ in runs for j in judged],
     }, indent=2))
     print(f"\nwrote {out}")
+    progress.unlink(missing_ok=True)  # the results are written; the checkpoint has done its job
     ok = True
     if args.fail_under is not None:
         mean = statistics.mean(values) if values else 0.0

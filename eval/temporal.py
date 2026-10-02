@@ -34,7 +34,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent))
 from llm_bench import judge  # noqa: E402
-from ragas_eval import JUDGE, PROMPTS, RESULTS, Budget, CostCap, extract_claims, judge_claims, pipeline_answer, set_prompt  # noqa: E402
+from ragas_eval import JUDGE, PROMPTS, RESULTS, Budget, CostCap, extract_claims, judge_claims, pipeline_answer, set_prompt, set_verify  # noqa: E402
 from retrieval import cached_decompose  # noqa: E402
 
 load_dotenv()
@@ -89,6 +89,28 @@ def sample_summary(out: list[dict]) -> dict[str, list]:
     return res
 
 
+def gate_only(rows: list[dict], args, plans: dict, plan_path: Path) -> int:
+    """F2's cheap pass: for each row and plan set, the parts the shipped pipeline would synthesize and the gate's
+    verdict on each. No synthesis, no grading: what a full run costs is spent only where the gate changes something."""
+    from taxcite import decompose as dc
+    out = []
+    for r, i in [(r, i) for r in rows for i in range(args.samples)]:
+        plan = cached_decompose(r["question"], plans, plan_path, i)
+        d = dc.retrieve(plan, k=args.k, editions=dc.EDITIONS, statute=dc.STATUTE)
+        groups = d.groups({h.citation for h in dc.chunks(d, args.k)})
+        _, skipped, verdicts = dc.gate(r["question"], groups, d.as_of)
+        out.append({"id": r["id"], "sample": i, "category": r["category"], "expect_insufficient": r["expect_insufficient"],
+                    "parts": [{k: v[k] for k in ("part", "sufficient", "missing")} for v in verdicts],
+                    "skipped": len(skipped), "all_skipped": bool(verdicts) and len(skipped) == len(verdicts),
+                    "usd": sum(v["usd"] for v in verdicts)})
+        print(f"  {r['id']:<6} s{i} {r['category']:<13} " + " ".join("ok" if v["sufficient"] else "NO" for v in verdicts)
+              + f"  ${sum(o['usd'] for o in out):.4f}", flush=True)
+    Path(args.gate_only).write_text(json.dumps(out, indent=1))
+    print(f"wrote {args.gate_only}: {sum(o['skipped'] > 0 for o in out)} of {len(out)} row-samples skip a part, "
+          f"${sum(o['usd'] for o in out):.4f}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--questions", default="eval/golden.jsonl")
@@ -99,28 +121,65 @@ def main() -> int:
     ap.add_argument("--answers-cache", default=str(ANSWERS))
     ap.add_argument("--plan-cache", default="eval/results/decompositions.json")
     ap.add_argument("--editions", help="turn D3's edition filter on for this run, e.g. 1,0 (off live until D7 decides)")
-    ap.add_argument("--rows", choices=("temporal", "authority"), default="temporal",
+    ap.add_argument("--rows", choices=("temporal", "authority", "all", "insufficiency", "every"), default="temporal",
                     help="temporal rows (the Phase D gate) or E1's authority-tagged rows (E5)")
     ap.add_argument("--samples", type=int, default=1, metavar="N", help="answers per row, answer i from plan set i")
-    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's synthesis prompt arm")
+    ap.add_argument("--prompt", choices=PROMPTS, default="shipped", help="E5's and F3's synthesis prompt arms")
+    ap.add_argument("--synth-model", help="synthesis model for this run (F3's arm D); plans stay pinned")
+    ap.add_argument("--no-verify", action="store_true", help="skip F4's verifier: the unverified pipeline")
+    ap.add_argument("--gate", action=argparse.BooleanOptionalAction, help="F2's sufficiency gate on/off (default: as shipped, off)")
+    ap.add_argument("--gate-prompt", choices=("strict", "lenient"), help="F2's gate prompt candidate")
+    ap.add_argument("--gate-only", metavar="OUT", help="F2: plan, retrieve and run the gate only; write verdicts to OUT")
+    ap.add_argument("--ids", help="comma-separated row ids: only these rows (F2's re-runs of rows the gate changes)")
+    ap.add_argument("--hide", choices=("part", "sentence"), help="F4's hiding unit for this run")
+    ap.add_argument("--siblings", type=int, help="F5b: subsections searched inside each section found (default: as shipped)")
+    ap.add_argument("--conclusion", action="store_true", help="F5b C1+C2+C4: conclusion written last, checked, shown first")
+    ap.add_argument("--recite", action="store_true", help="F5b C3: a failed sentence may move to the source that states it")
     args = ap.parse_args()
     if args.editions:
         from taxcite import decompose as dc
         dc.EDITIONS = tuple(int(x) for x in args.editions.split(","))
 
     set_prompt(args.prompt)
+    set_verify(args.no_verify, args.hide, args.gate)
+    if args.siblings is not None:
+        from taxcite import decompose as dc
+        dc.SIBLINGS = args.siblings
+    if args.conclusion or args.recite:
+        from taxcite import generate as g, verify as vf
+        g.CONCLUSION = g.CONCLUSION or args.conclusion
+        vf.RECITE = vf.RECITE or args.recite
+    if args.gate_prompt:
+        from taxcite import decompose as dc
+        dc.SUFFICIENCY_PROMPT = dc.SUFFICIENCY_LENIENT if args.gate_prompt == "lenient" else dc.SUFFICIENCY_SYSTEM
     rows = [json.loads(l) for l in open(args.questions) if l.strip()]
-    rows = [r for r in rows if (r["category"] == "temporal" if args.rows == "temporal" else "authority" in r)]
+    # "all" (F3): every answerable row; insufficiency and adversarial rows are F2's and Phase G's
+    keep = {"temporal": lambda r: r["category"] == "temporal", "authority": lambda r: "authority" in r,
+            "all": lambda r: r["category"] not in ("insufficiency", "adversarial"),
+            "insufficiency": lambda r: r["category"] == "insufficiency",  # F2
+            "every": lambda r: r["category"] != "adversarial"}[args.rows]
+    rows = [r for r in rows if keep(r) and (not args.ids or r["id"] in args.ids.split(","))]
     cache_path, plan_path = Path(args.answers_cache), Path(args.plan_cache)
     cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
     plans = json.loads(plan_path.read_text()) if plan_path.exists() else {}
     budget = Budget(args.max_cost)
+    if args.gate_only:
+        return gate_only(rows, args, plans, plan_path)
 
+    # F5: each graded row is saved as it's done, and a re-run skips them: a run that died at row 254 of 324 (exhausted
+    # credit) had thrown away every grade it had paid for
+    tag = Path(args.answers_cache).stem.removeprefix(ANSWERS.stem)
+    progress = RESULTS / f"temporal-{Path(args.questions).stem}{tag}.progress.json"
+    done = {(o["id"], o["sample"]): o for o in json.loads(progress.read_text())} if progress.exists() else {}
     out, stopped = [], None
     try:
         for r, i in [(r, i) for r in rows for i in range(args.samples)]:
+            if (r["id"], i) in done:
+                out.append(done[(r["id"], i)])
+                continue
             plan = cached_decompose(r["question"], plans, plan_path, i)
-            ans = pipeline_answer(r["question"], args.k, cache, cache_path, i, plans, plan_path, plan_set=i)
+            ans = pipeline_answer(r["question"], args.k, cache, cache_path, i, plans, plan_path, plan_set=i,
+                                  model=args.synth_model)
             ok = as_of_match(plan.as_of, r["as_of"]) if args.rows == "temporal" else None
             claims = [] if ans["refused"] else extract_claims(ans["text"], args.judge, budget)
             # the question is a source too: restating its facts, or arithmetic on them, is not a memory claim
@@ -141,6 +200,7 @@ def main() -> int:
                         "unsupported": [claims[v["index"]] for v in verdicts if not v.get("supported")],
                         "grades": grades,
                         "passes": [passed(ok, g["grade"]) for g in grades]})
+            progress.write_text(json.dumps(out))
             marks = " ".join(g["grade"][:4] + "/" + g["alt_grade"][:4] for g in grades)
             print(f"  {r['id']:<6} s{i} as-of {str(r['as_of']):<14} plan {str(plan.as_of):<6} "
                   f"{'-' if ok is None else 'ok' if ok else 'XX'}  {'  ' if grounded else 'UG'}  {marks}  "
@@ -172,7 +232,6 @@ def main() -> int:
     print(f"judge spend ${budget.spent:.4f}")
 
     # a non-default answer cache is a different arm: name the file for it, so one run can't overwrite another's
-    tag = Path(args.answers_cache).stem.removeprefix(ANSWERS.stem)
     path = RESULTS / f"temporal-{Path(args.questions).stem}-{date.today()}{tag}.json"
     path.write_text(json.dumps({
         "questions": args.questions, "judge": args.judge, "repeats": args.repeats, "k": args.k,
@@ -180,6 +239,7 @@ def main() -> int:
         "accuracy_per_repeat": per_repeat, "grounded_accuracy_per_repeat": grounded, "as_of_accuracy": as_of_acc, "kappa": k,
         "judge_cost_usd": budget.spent, "stopped": stopped, "rows": out}, indent=2))
     print(f"wrote {path}")
+    progress.unlink(missing_ok=True)  # the results are written; the checkpoint has done its job
     return 0
 
 

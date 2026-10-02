@@ -1103,6 +1103,32 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1009,
       "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "standard mileage rate for business use of an automobile for 2024"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1009,
+      "output_tokens": 41
     }
   ],
   "Could an employee deduct unreimbursed job expenses on a 2016 return, and can they on a 2026 return?": [
@@ -12569,6 +12595,529 @@
       "model": "gpt-4o-mini",
       "input_tokens": 1031,
       "output_tokens": 84
+    }
+  ],
+  "Can my client deduct student loan interest on her federal return, and does New Jersey allow the same deduction on her state return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for student loan interest under Internal Revenue Code section 221"
+        },
+        {
+          "kind": "statutory",
+          "query": "New Jersey state tax treatment of student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 65
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for student loan interest under Internal Revenue Code section 221"
+        },
+        {
+          "kind": "statutory",
+          "query": "New Jersey state tax treatment of student loan interest deduction"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has student loan interest to deduct"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 86
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for student loan interest under Internal Revenue Code section 221"
+        },
+        {
+          "kind": "statutory",
+          "query": "New Jersey state tax treatment of student loan interest deduction"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1020,
+      "output_tokens": 65
+    }
+  ],
+  "What will the annual gift tax exclusion be for 2027?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "annual gift tax exclusion amount for 2027"
+        }
+      ],
+      "as_of": "2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 35
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "annual gift tax exclusion amount for 2027"
+        }
+      ],
+      "as_of": "2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 37
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "annual gift tax exclusion amount for 2027"
+        }
+      ],
+      "as_of": "2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 37
+    }
+  ],
+  "What is the maximum 2027 contribution to a health savings account for family coverage?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum contribution limit for health savings accounts for family coverage"
+        }
+      ],
+      "as_of": "2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum contribution limit for health savings accounts for family coverage"
+        }
+      ],
+      "as_of": "2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum contribution limit for health savings accounts for family coverage"
+        }
+      ],
+      "as_of": "2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 36
+    }
+  ],
+  "Does Pennsylvania tax my client's 401(k) distributions on her state return?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxation of 401(k) distributions in Pennsylvania state income tax"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client receives 401(k) distributions"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 62
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxation of 401(k) distributions in Pennsylvania"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client receives 401(k) distributions"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 59
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxation of 401(k) distributions in Pennsylvania"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client receives 401(k) distributions"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1010,
+      "output_tokens": 59
+    }
+  ],
+  "What is the Massachusetts income tax rate on short-term capital gains?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Massachusetts income tax rate on short-term capital gains"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Massachusetts income tax rate on short-term capital gains"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 36
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Massachusetts income tax rate on short-term capital gains"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1008,
+      "output_tokens": 36
+    }
+  ],
+  "How does Germany tax dividends that a US citizen living in Berlin receives from a German company?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxation of dividends for non-residents in Germany"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 34
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxation of dividends for non-resident aliens in Germany"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 35
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxation of dividends for non-resident aliens in Germany"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 35
+    }
+  ],
+  "How long does it currently take the Taxpayer Advocate Service to assign a case to an advocate?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "current processing time for case assignment by the Taxpayer Advocate Service"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "current processing time for case assignment by the Taxpayer Advocate Service"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 38
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "current processing time for case assignment by the Taxpayer Advocate Service"
+        }
+      ],
+      "as_of": "2026",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1014,
+      "output_tokens": 38
+    }
+  ],
+  "What is the short-term applicable federal rate for a loan made in March 2027?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "short-term applicable federal rate for loans made in March 2027"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 37
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "short-term applicable federal rate for loans under Internal Revenue Code Section 1274"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 39
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "short-term applicable federal rate for loans made in March 2027"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1013,
+      "output_tokens": 37
+    }
+  ],
+  "Is Congress going to repeal the section 280E disallowance for cannabis businesses?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Internal Revenue Code section 280E disallowance for cannabis businesses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 37
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Section 280E disallowance for cannabis businesses"
+        },
+        {
+          "kind": "case_law",
+          "query": "Congressional actions regarding Section 280E cannabis tax treatment"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 58
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Section 280E disallowance for cannabis businesses"
+        },
+        {
+          "kind": "case_law",
+          "query": "court rulings on Section 280E and cannabis businesses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1012,
+      "output_tokens": 58
+    }
+  ],
+  "Is alimony my client pays under a divorce agreement signed in 2020 deductible on her federal return, and how does California treat it?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of alimony payments under divorce agreements executed before 2019"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of alimony payments for federal tax purposes under pre-2019 agreements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client pays alimony under a divorce agreement signed in 2020"
+        }
+      ],
+      "as_of": "2020",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 100
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of alimony payments under divorce agreements executed before 2019"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of alimony payments for federal tax purposes under pre-2019 agreements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client pays alimony under a divorce agreement signed in 2020"
+        }
+      ],
+      "as_of": "2020",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 100
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of alimony payments under divorce agreements executed before 2019"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of alimony payments for federal tax purposes under pre-2019 agreements"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client pays alimony under a divorce agreement signed in 2020"
+        }
+      ],
+      "as_of": "2020",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1023,
+      "output_tokens": 100
+    }
+  ],
+  "How much could my client contribute to a traditional IRA for 2025, and what will the limit be for 2027?": [
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for 2025"
+        },
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for 2027"
+        }
+      ],
+      "as_of": "2025 and 2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for 2025"
+        },
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for 2027"
+        }
+      ],
+      "as_of": "2025 and 2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
+    },
+    {
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for 2025"
+        },
+        {
+          "kind": "statutory",
+          "query": "deduction limit for contributions to a traditional individual retirement account for 2027"
+        }
+      ],
+      "as_of": "2025 and 2027",
+      "fallback": "",
+      "model": "gpt-4o-mini",
+      "input_tokens": 1021,
+      "output_tokens": 76
     }
   ]
 }

@@ -1,0 +1,64 @@
+{
+  "shape": {
+    "answers": 111,
+    "refused": 0,
+    "sentences": 642,
+    "cited_sentences": 438,
+    "uncited_sentences": 204,
+    "uncited_covered_by_spans": 0,
+    "answers_citing_nothing": 0,
+    "material_sentences": 438,
+    "material_cited": 438,
+    "completeness_material": 1.0,
+    "answers_fully_verified": 0.5225225225225225,
+    "multi_source": 123,
+    "derived": 0,
+    "auto_fail": 0,
+    "premises": 691,
+    "premises_windowed": 574
+  },
+  "sentence": {
+    "judged": 438,
+    "judge_supported": 0.769406392694064,
+    "accept_all_f1_on_supported_class": 0.8696774193548387,
+    "suppression": {
+      "judge": {
+        "answers": 111,
+        "claims": 438,
+        "whole_answer": 0.4774774774774775,
+        "section": 0.4418604651162791,
+        "answer_emptied_by_sections": 0.4144144144144144,
+        "claim": 0.23059360730593606,
+        "whole_answer_if_uncited_fails": 0.990990990990991
+      }
+    },
+    "nli": {}
+  },
+  "span": {
+    "judged": 438,
+    "judge_supported": 0.769406392694064,
+    "accept_all_f1_on_supported_class": 0.8696774193548387,
+    "suppression": {
+      "judge": {
+        "answers": 111,
+        "claims": 438,
+        "whole_answer": 0.4774774774774775,
+        "section": 0.4418604651162791,
+        "answer_emptied_by_sections": 0.4144144144144144,
+        "claim": 0.23059360730593606,
+        "whole_answer_if_uncited_fails": 0.990990990990991
+      }
+    },
+    "nli": {}
+  },
+  "pinpoint": {
+    "supported_via_another_page_checked": 111,
+    "cited_page_does_not_support": 6
+  },
+  "vs_todays_judge": {},
+  "abstention": {
+    "insufficient": {},
+    "answerable_refusals": 0,
+    "answerable_runs": 126
+  }
+}

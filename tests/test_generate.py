@@ -187,17 +187,179 @@ def test_source_headers_carry_the_label_only_when_switched_on_and_profiled(monke
     assert "Authority:" not in g.format_sources([profiled])
 
 
-def test_the_shipped_prompt_is_ii_prime_and_the_eval_arms_rebuild_from_pre_e5(monkeypatch):
-    """E5: (ii′) ships; every eval arm is built from the pre-E5 prompt, so "pre-e5" reproduces the baseline."""
+def test_e5_arms_rebuild_from_pre_e5_and_run_unstructured(monkeypatch):
+    """E5: every E5 arm is built from the pre-E5 prompt, so "pre-e5" reproduces that baseline; since F3 ships
+    structured synthesis, an E5 arm must also switch it off, or it would run structured by accident."""
     import sys
     from pathlib import Path
     from taxcite import generate as g
     sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
     from ragas_eval import set_prompt
     assert g.RULE_4_AUTHORITY_B in g.RAG_SYSTEM and g.RULE_4 not in g.RAG_SYSTEM and g.SOURCE_LABELS
-    monkeypatch.setattr(g, "RAG_SYSTEM", g.RAG_SYSTEM)
-    monkeypatch.setattr(g, "SOURCE_LABELS", g.SOURCE_LABELS)
+    for name in ("RAG_SYSTEM", "SOURCE_LABELS", "STRUCTURED", "SECTIONS"):
+        monkeypatch.setattr(g, name, getattr(g, name))
     set_prompt("pre-e5")
-    assert g.RAG_SYSTEM == g.PRE_E5_SYSTEM and not g.SOURCE_LABELS
+    assert g.RAG_SYSTEM == g.PRE_E5_SYSTEM and not g.SOURCE_LABELS and not g.STRUCTURED
     set_prompt("labels+rule4")
     assert g.RULE_4_AUTHORITY in g.RAG_SYSTEM and "cite the higher source" in g.RAG_SYSTEM
+
+
+def test_structured_synthesis_ships_and_pre_f3_restores_ii_prime(monkeypatch):
+    """F3: arm E ships ((ii′)'s rules with rules 2 and 3 for JSON items); "pre-f3" is the baseline it replaced."""
+    import sys
+    from pathlib import Path
+    from taxcite import generate as g
+    sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
+    from ragas_eval import set_prompt
+    assert g.STRUCTURED and g.RULE_2_STRUCTURED in g.RAG_SYSTEM and g.RULE_3_STRUCTURED in g.RAG_SYSTEM
+    assert g.RULE_4_AUTHORITY_B in g.RAG_SYSTEM and g.SOURCE_LABELS
+    for name in ("RAG_SYSTEM", "STRUCTURED", "SECTIONS"):
+        monkeypatch.setattr(g, name, getattr(g, name))
+    set_prompt("pre-f3")
+    assert g.RAG_SYSTEM == g.PRE_F3_SYSTEM and not g.STRUCTURED and g.RULE_2 in g.RAG_SYSTEM
+
+
+def test_citations_flatten_nested_brackets_and_split_packed_ones():
+    """F0 found both shapes in golden answers; the old regex saw only the inner citation of a nested pair."""
+    text = ("Officers are employees [26 U.S.C. § 3121(d)(1), [119 T.C. No. 5, at *7-8]]. Uniform capitalization "
+            "applies [26 U.S.C. § 263A(f)(1)(A); T.C. Memo. 2013-52, at *28-30]. Again [26 U.S.C. § 3121(d)(1)].")
+    assert generate.citations(text) == ["26 U.S.C. § 3121(d)(1)", "119 T.C. No. 5, at *7-8",
+                                        "26 U.S.C. § 263A(f)(1)(A)", "T.C. Memo. 2013-52, at *28-30"]
+    assert generate.citations("No citation here.") == []
+
+
+def test_sections_split_on_part_headings_in_the_forms_models_write():
+    text = ("**Part 1: Federal rule**\nDeductible [26 U.S.C. § 221(a)-(c)].\n\n"
+            "### Part 2 – New Jersey\nINSUFFICIENT EVIDENCE: no state law in the sources.")
+    assert generate.split_sections(text) == [
+        ("Part 1: Federal rule", "Deductible [26 U.S.C. § 221(a)-(c)]."),
+        ("Part 2: New Jersey", "INSUFFICIENT EVIDENCE: no state law in the sources.")]
+
+
+def test_an_answer_without_headings_is_one_section_and_a_preamble_is_its_own():
+    assert generate.split_sections("One part only [26 U.S.C. § 183(d)].\n") == [("", "One part only [26 U.S.C. § 183(d)].")]
+    assert generate.split_sections("Short answer: yes.\nPart 1: Rule\nText.")[0] == ("", "Short answer: yes.")
+    assert generate.split_sections("A sentence about part 2 of the code.") == [("", "A sentence about part 2 of the code.")]
+
+
+def test_f3_arms_rewrite_rule_2_and_only_the_sections_arm_numbers_parts(stub, monkeypatch):
+    import sys
+    from pathlib import Path
+    from taxcite import generate as g
+    sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
+    from ragas_eval import set_prompt
+    for name in ("RAG_SYSTEM", "SECTIONS", "STRUCTURED"):
+        monkeypatch.setattr(g, name, getattr(g, name))
+    groups = [("home office rule", HITS[:1]), ("state rule", []), ("publication", HITS[1:])]
+
+    set_prompt("f3-cite")
+    assert g.RULE_2_EVERY in g.RAG_SYSTEM and g.RULE_2 not in g.RAG_SYSTEM and g.RULE_4_AUTHORITY_B in g.RAG_SYSTEM
+    g.answer_from_groups("q?", groups)
+    assert "## Sources for: home office rule" in stub["prompt"] and "Part 1" not in stub["system"]
+
+    set_prompt("f3-sections")
+    g.answer_from_groups("q?", groups)
+    # an empty group isn't a part, so the parts are numbered 1 and 2, not 1 and 3
+    assert "## Part 1: home office rule" in stub["prompt"] and "## Part 2: publication" in stub["prompt"]
+    assert "Part N:" in stub["system"] and g.RULE_2_EVERY in stub["system"]
+
+
+def test_the_structured_schema_only_allows_retrieved_citations():
+    schema = generate.answer_schema(["26 U.S.C. § 221(a)-(c)", "IRS Pub 17 (2025), p. 81"])
+    item = schema["properties"]["sentences"]["items"]
+    assert item["properties"]["citations"]["items"]["enum"] == ["26 U.S.C. § 221(a)-(c)", "IRS Pub 17 (2025), p. 81"]
+    # OpenAI strict mode: every object closed and every property required
+    for obj in (schema, item, schema["properties"]["not_answerable"]["items"]):
+        assert obj["additionalProperties"] is False and set(obj["required"]) == set(obj["properties"])
+
+
+def test_render_cites_every_shown_sentence_drops_the_uncited_and_flags_unanswerable_parts():
+    data = {"tax_year": "2025",
+            "sentences": [{"part": 1, "text": "Interest on a qualified education loan is deductible.",
+                           "citations": ["26 U.S.C. § 221(a)-(c)"]},
+                          {"part": 1, "text": "So your client can deduct it.", "citations": []},
+                          {"part": 9, "text": "The cap is $2,500.", "citations": ["26 U.S.C. § 221(a)-(c)", "26 U.S.C. § 221(a)-(c)"]}],
+            "not_answerable": [{"part": 2, "why": "no New Jersey law in the sources"}]}
+    text, dropped = generate.render(data, ["federal deduction", "New Jersey"])
+    assert dropped == 1
+    assert text == ("Tax year: 2025\n\n"
+                    "Part 1: federal deduction\nInterest on a qualified education loan is deductible [26 U.S.C. § 221(a)-(c)]. "
+                    "The cap is $2,500 [26 U.S.C. § 221(a)-(c)].\n\n"
+                    "Part 2: New Jersey\nINSUFFICIENT EVIDENCE: no New Jersey law in the sources")
+    one, _ = generate.render({"tax_year": None, "sentences": [{"part": 1, "text": "Yes.", "citations": ["X"]}],
+                              "not_answerable": [{"part": 1, "why": "the 2026 thresholds"}]}, ["only part"])
+    # one part: no heading, no year line; a missing detail of an answered part is a note, not INSUFFICIENT EVIDENCE
+    assert one == "Yes [X]. Not in the sources: the 2026 thresholds"
+
+
+def test_the_conclusion_is_the_last_field_generated_and_only_when_asked():
+    on, off = generate.answer_schema(["X"], conclusion=True), generate.answer_schema(["X"])
+    assert list(on["properties"])[-1] == "conclusion" and on["required"][-1] == "conclusion"
+    assert "conclusion" not in off["properties"]
+
+
+def test_a_cited_answer_that_flags_a_gap_is_not_a_refusal(stub):
+    stub["reply"] = "Deductible [26 CFR 1.183-2(b)(3)]. INSUFFICIENT EVIDENCE: nothing on the state return."
+    assert not generate.answer_from_hits("q", HITS).refused
+    stub["reply"] = "INSUFFICIENT EVIDENCE: the sources do not cover this."
+    assert generate.answer_from_hits("q", HITS).refused
+
+
+def test_structured_synthesis_renders_json_and_refuses_on_an_unusable_response(stub, monkeypatch):
+    import json as _json
+    import sys
+    from pathlib import Path
+    from taxcite import generate as g
+    sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
+    from ragas_eval import set_prompt
+    for name in ("RAG_SYSTEM", "SECTIONS", "STRUCTURED"):
+        monkeypatch.setattr(g, name, getattr(g, name))
+    set_prompt("f3-structured")
+    assert g.RULE_2_STRUCTURED in g.RAG_SYSTEM and g.RULE_3_STRUCTURED in g.RAG_SYSTEM and g.RULE_3 not in g.RAG_SYSTEM
+    stub["reply"] = _json.dumps({"tax_year": None, "not_answerable": [], "sentences": [
+        {"part": 1, "text": "Time and effort matter.", "citations": ["26 CFR 1.183-2(b)(3)"]},
+        {"part": 1, "text": "Uncited aside.", "citations": []}]})
+    a = g.answer_from_groups("q?", [("rule", HITS)])
+    assert a.text == "Time and effort matter [26 CFR 1.183-2(b)(3)]."
+    assert a.citations == ["26 CFR 1.183-2(b)(3)"] and a.dropped_sentences == 1 and not a.refused
+    assert stub["json_schema"]["properties"]["sentences"]["items"]["properties"]["citations"]["items"]["enum"] == \
+        sorted(h.citation for h in HITS)
+    stub["reply"] = "{truncated"
+    assert g.answer_from_groups("q?", [("rule", HITS)]).refused
+
+
+def test_openai_gets_the_schema_as_strict_structured_outputs(monkeypatch):
+    import openai
+    seen = {}
+
+    class Fake:
+        def __init__(self, *a, **k):
+            self.chat = self
+            self.completions = self
+
+        def create(self, **kw):
+            seen.update(kw)
+            msg = type("M", (), {"content": "{}"})
+            usage = type("U", (), {"prompt_tokens": 1, "completion_tokens": 1})
+            return type("R", (), {"choices": [type("C", (), {"message": msg})], "usage": usage})
+
+    monkeypatch.setenv("OPENAI_API_KEY", "test")
+    monkeypatch.setattr(openai, "OpenAI", Fake)
+    generate.call_model("s", "p", "gpt-4o-mini", json_schema={"type": "object"})
+    assert seen["response_format"] == {"type": "json_schema",
+                                       "json_schema": {"name": "answer", "strict": True, "schema": {"type": "object"}}}
+
+
+def test_the_broken_arm_drops_only_the_grounding_rule_from_the_shipped_prompt(monkeypatch):
+    """B9's calibration arm, rebuilt on the shipped (structured) prompt for F3's band re-measurement."""
+    import sys
+    from pathlib import Path
+    from taxcite import generate as g
+    sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
+    from ragas_eval import GROUNDING_RULE, set_prompt
+    for name in ("RAG_SYSTEM", "STRUCTURED", "SECTIONS"):
+        monkeypatch.setattr(g, name, getattr(g, name))
+    shipped = g.RAG_SYSTEM
+    set_prompt("broken")
+    assert g.RAG_SYSTEM == shipped.replace(GROUNDING_RULE, "") and g.RAG_SYSTEM != shipped
+    assert g.STRUCTURED and g.RULE_2_STRUCTURED in g.RAG_SYSTEM

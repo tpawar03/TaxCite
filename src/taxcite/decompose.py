@@ -228,6 +228,9 @@ EDITIONS: tuple[int, int] | None = None
 # reserved for it. Dev Recall@20 0.605 -> 0.724 (statutory 0.654 -> 0.808, temporal 0.423 -> 0.615,
 # case law and compound unchanged); floors of 1, 2 and 3 scored the same at k=20 and at k=8.
 STATUTE = 1
+# F5b (your decision 2026-10-01), a recorded departure from F5b's criteria 1 and 4: dev correct and grounded 27 -> 35, incorrect 18 -> 17, refusals 9 -> 15 (1 cost a correct grounded answer), short answer on 75%.
+# Siblings alone (R1): dev Recall@8 0.610 -> 0.683; answers more honest, not more correct, until re-cite (C3).
+SIBLINGS = 6  # subsections searched inside each of the first SIBLING_SECTIONS sections found
 
 # E4, chosen on dev by rules fixed in advance: authority reorders each kind of source's candidates (statute
 # and regulation over publication; reported opinion over memorandum) with a prior of 0.5 per level, and never
@@ -243,9 +246,12 @@ def tax_year(as_of: str | None) -> int | None:
     return int(years[0]) if len(set(years)) == 1 else None
 
 
+SIBLING_SECTIONS = 3  # F5b: the first (best-ranked) sections whose subsections are searched
+
+
 def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = True,
              rewrite: bool = False, hops: int = 0, editions: tuple[int, int] | None = None,
-             statute: int = 0, union: bool = False) -> Decomposition:
+             statute: int = 0, union: bool = False, siblings: int = 0) -> Decomposition:
     """Search once per sub-query, filtered to the sources its kind allows. Fills `hits` in place.
 
     The search text is the **original question**, not the model's rewritten sub-query,
@@ -264,6 +270,10 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
     that many slots for the statute (D3b): the question's plain words find publications first, and
     searched within the statute alone they reach 0.68 of dev's statute gold at k=20. `union` also
     searches the sub-query's own text and pools both (D3b's second candidate).
+
+    `siblings` > 0 (F5b) searches again within the Code sections and regulations already found, for that many
+    more of their subsections: retrieval often finds the right section's wrong piece (§ 121(a) without the cap
+    in (b)(1), § 25D(a)-(c) without the rate in (g)). Pooled; the reranker decides.
     """
     seen: dict[tuple, list[Hit]] = {}  # two sub-queries of one kind would repeat a search
     year = tax_year(d.as_of) if editions is not None else None
@@ -286,6 +296,16 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
                     own.add(h.key or h.citation)
                     s.hits.append(h)
     d.statute_floor = statute
+    if siblings:  # one search per section: searched together, the slots refill with chunks already found
+        for s in (s for s in d.searched if s.kind == "statutory"):
+            within = list(dict.fromkeys(h.section for h in s.hits if h.source in ("usc", "ecfr")))[:SIBLING_SECTIONS]
+            own = {h.key or h.citation for h in s.hits}
+            s.hits = list(s.hits)
+            for section in within:
+                for h in search(d.question, k=siblings, mode=mode, source=("usc", "ecfr"), sections=[section]):
+                    if (h.key or h.citation) not in own:
+                        own.add(h.key or h.citation)
+                        s.hits.append(h)
     if hops:
         edges, held = citation_graph()
         for s in (s for s in d.searched if s.kind == "case_law"):
@@ -395,6 +415,85 @@ def merge(subqueries: Sequence[SubQuery], k: int | None) -> list[Hit]:
     return list(out.values())
 
 
+VERIFY = True  # F4; the eval's --no-verify turns it off to measure the unverified pipeline
+# F2, measured and not shipped (by its pre-registered rule): on dev's 42 answerable rows x 3 plan sets the gate refused
+# 33 (strict prompt) or 23 (lenient) outright, against 9 for the shipped pipeline, and 7 of the lenient gate's refusals
+# were answers the shipped pipeline got right and the verifier kept. Without it, the 11 insufficiency rows already
+# score 0.818 correct: federal context, verified, plus "Not in the sources" for the state or year it can't answer.
+# The code stays (tested; the eval's --gate-prompt and --gate-only measure it); GATE turns it on.
+GATE = False
+
+# F2 (ADR-7, ADR-10): before synthesis, one call per part decides whether its sources can answer it. A part they
+# can't answer is never written. gpt-4o-mini, as ADR-11 set for this call site.
+SUFFICIENCY_SYSTEM = """You decide whether the numbered sources can answer one part of a US federal tax question.
+
+Return JSON only, in the given shape. For each source, "supports" is true if it states something this part's answer
+needs. "sufficient" is true only if the sources together state what the answer needs, for the tax year asked about
+if one is given: a figure for another year, a rule from another jurisdiction (a state, another country), or a
+general description without the specific fact asked for is not sufficient. The question's facts about the client
+are given; only the law has to come from the sources. If not sufficient, "missing" says in one sentence what the
+sources lack; otherwise it is empty."""
+
+
+SUFFICIENCY_PROMPT = SUFFICIENCY_SYSTEM  # the eval's --gate-prompt picks the candidate
+
+
+# Second candidate (F2, dev's gate-only pass): the first refused 33 of 126 answerable row-samples outright, e.g. a
+# parking-receipt question whose cited opinion holds exactly the answer, for "no clear conclusion". This one keeps
+# the gate to what synthesis can't fix: another jurisdiction, another year's figure when the figure is the point, a
+# topic the sources don't address. A missing detail stays with synthesis, which notes it ("Not in the sources").
+SUFFICIENCY_LENIENT = """You decide whether the numbered sources can answer one part of a US federal tax question.
+
+Return JSON only, in the given shape. For each source, "supports" is true if it states something this part's answer
+needs. "sufficient" is false only if one of these holds: the sources do not address this part's topic at all; the
+part asks about another jurisdiction (a state, another country) and the sources are US federal law; or the part
+asks for a specific figure or rate for a year (for example a limit for 2027) and no source gives it for that year.
+Otherwise "sufficient" is true, even if the sources leave some details out or the answer needs applying the rule
+to the client's facts: the answer will say what is missing. The question's facts about the client are given. If not
+sufficient, "missing" says in one sentence what the sources lack; otherwise it is empty."""
+
+
+def sufficiency_schema() -> dict:
+    obj = lambda props: {"type": "object", "additionalProperties": False,  # noqa: E731
+                         "required": list(props), "properties": props}
+    return obj({"sources": {"type": "array", "items": obj({"index": {"type": "integer"}, "supports": {"type": "boolean"}})},
+                "sufficient": {"type": "boolean"}, "missing": {"type": "string"}})
+
+
+def sufficiency(question: str, part: str, hits: list[Hit], as_of: str | None = None, model: str = MODEL) -> dict:
+    """The gate's verdict on one part: {"part", "sufficient", "missing", "supports", "usd"}. Fails open: if the call
+    or its response fails, the part goes to synthesis as before, and the verifier (F4) still checks every sentence."""
+    sources = "\n\n".join(f"Source {i}: [{h.citation}] ({h.heading})\n{h.text}" for i, h in enumerate(hits))
+    year = f"Tax year(s) the question is about: {as_of}\n" if as_of else ""
+    try:
+        raw, tin, tout = call_model(SUFFICIENCY_PROMPT, f"Question: {question}\n{year}Part to answer: {part}\n\n"
+                                    f"Sources:\n\n{sources}", model, temperature=0, seed=0,
+                                    json_schema=sufficiency_schema())
+        data = json.loads(raw)
+        return {"part": part, "sufficient": bool(data["sufficient"]), "missing": str(data.get("missing", "")),
+                "supports": [s["index"] for s in data.get("sources", []) if s.get("supports")], "usd": cost(model, tin, tout)}
+    except Exception as e:  # noqa: BLE001  the gate saves work; the verifier is the guarantee
+        return {"part": part, "sufficient": True, "missing": "", "supports": [], "usd": 0.0, "error": str(e)[:200]}
+
+
+def gate(question: str, groups: list[tuple[str, list[Hit]]], as_of: str | None = None,
+         model: str = MODEL) -> tuple[list[tuple[str, list[Hit]]], list[tuple[str, str]], list[dict]]:
+    """(parts to synthesize, (label, missing) for parts skipped, every verdict). A part with no retrieved chunk isn't
+    judged: synthesis handles it as before."""
+    keep, skipped, verdicts = [], [], []
+    for label, hits in groups:
+        if not hits:
+            keep.append((label, hits))
+            continue
+        v = sufficiency(question, label, hits, as_of, model)
+        verdicts.append(v)
+        if v["sufficient"]:
+            keep.append((label, hits))
+        else:
+            skipped.append((label, v["missing"]))
+    return keep, skipped, verdicts
+
+
 def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
            route: bool = True, plan: Decomposition | None = None) -> tuple[Decomposition, "object"]:
     """Decompose, retrieve per sub-query, synthesize over the grouped sources.
@@ -403,9 +502,17 @@ def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
     planner is not deterministic, and on the golden set 16% of questions get routed differently
     between runs, which moved faithfulness by sd 0.030 until this was wired up (log #49).
     """
-    from taxcite.generate import answer_from_groups
+    from taxcite.generate import answer_from_groups, skipped_only
 
     d = retrieve(plan or decompose(question, model=model), k=k, mode=mode, route=route, editions=EDITIONS,
-                 statute=STATUTE)
+                 statute=STATUTE, siblings=SIBLINGS)
     kept = {h.citation for h in chunks(d, k)}
-    return d, answer_from_groups(question, d.groups(kept), facts=d.facts, model=model, as_of=d.as_of)
+    groups, skipped, verdicts = gate(question, d.groups(kept), d.as_of, model) if GATE else (d.groups(kept), [], [])
+    if skipped and not any(hits for _, hits in groups):  # F2: nothing answerable, so nothing is written
+        result = skipped_only(skipped, model)
+    else:
+        result = answer_from_groups(question, groups, facts=d.facts, model=model, as_of=d.as_of, skipped=skipped)
+    if VERIFY:  # F4: every sentence checked against its sources; what fails is never shown (ADR-3, ADR-15)
+        from taxcite import verify
+        result = verify.checked(question, result)
+    return d, replace(result, sufficiency=verdicts, gate_usd=sum(v["usd"] for v in verdicts))
