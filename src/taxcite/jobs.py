@@ -37,6 +37,9 @@ SCHEMA = (
     )
     """,
     "CREATE INDEX IF NOT EXISTS jobs_created_idx ON jobs (created_at DESC)",
+    # Phase G: every job belongs to a tenant. Rows from before have none and are visible to no one.
+    "ALTER TABLE jobs ADD COLUMN IF NOT EXISTS tenant uuid",
+    "CREATE INDEX IF NOT EXISTS jobs_tenant_idx ON jobs (tenant, created_at DESC)",
 )
 
 
@@ -60,11 +63,20 @@ def create_table(conn) -> None:
     conn.commit()
 
 
-def create(conn, question: str) -> str:
+def create(conn, question: str, tenant: str) -> str:
     job_id = str(uuid.uuid4())
-    conn.execute("INSERT INTO jobs (id, question, status) VALUES (%s, %s, 'queued')", (job_id, question))
+    conn.execute("INSERT INTO jobs (id, question, status, tenant) VALUES (%s, %s, 'queued', %s)",
+                 (job_id, question, tenant))
     conn.commit()
     return job_id
+
+
+def count_today(conn, tenant: str | None = None) -> int:
+    """Jobs created since midnight UTC: one tenant's, or everyone's (the quotas)."""
+    (n,) = conn.execute(
+        "SELECT count(*) FROM jobs WHERE created_at >= date_trunc('day', now(), 'UTC') "
+        "AND (%(t)s::uuid IS NULL OR tenant = %(t)s::uuid)", {"t": tenant}).fetchone()
+    return n
 
 
 def publish(conn, job_id: str, event: str, data: dict | None = None, rdb: redis.Redis | None = None) -> Event:
@@ -96,9 +108,14 @@ def notify(job_id: str, payload: dict, rdb: redis.Redis | None = None) -> bool:
         return False
 
 
-def get(conn, job_id: str) -> dict | None:
+def get(conn, job_id: str, tenant: str) -> dict | None:
+    """The job, if it exists and is this tenant's. Another tenant's job is None, exactly like a missing one."""
+    try:
+        uuid.UUID(job_id)
+    except ValueError:
+        return None
     row = conn.execute(
-        "SELECT id, question, status, stages, created_at FROM jobs WHERE id = %s", (job_id,)
+        "SELECT id, question, status, stages, created_at FROM jobs WHERE id = %s AND tenant = %s", (job_id, tenant)
     ).fetchone()
     if not row:
         return None

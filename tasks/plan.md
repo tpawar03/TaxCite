@@ -694,3 +694,120 @@ The winning pipeline (or the shipped one, if nothing passes) scored once on gold
 | R3 | One revision if R2 misses one criterion with a clear cause | ~$1.0 |
 
 Edge cases added by Step 1: siblings crowd out a lower-ranked gold section (D26) — watch "section recall" and correctness on such rows; the CI retrieval gate (golden, deterministic) must be re-baselined if C6 ships, and is checked only at Step 4; `SIBLING_SECTIONS = 3` and `siblings = 6` were chosen on dev, so golden is their first unseen test.
+
+---
+
+# Phase G Implementation Plan: Multi-tenant + hardening
+
+_Drafted 2026-10-28; approved the same day with Claude's defaults (tracing: OpenTelemetry → Langfuse Cloud, your choice). G0 is free; the paid steps (G4, G6) need your go and Anthropic credit (exhausted since 2026-10-05; the live verifier fails closed until it's topped up)._
+
+## Overview
+
+The tech doc's Phase G (§7, §3.2 upload threat model, §3.4, ADR-5, ADR-13, ADR-14; PRD G6, FR-11, FR-14, FR-17) adds the one thing every earlier phase deferred: **the client's own documents**, per tenant, behind auth and quotas. **Gate (§9.3):** cross-tenant leakage test, **0 failures**; injection corpus, **100%** on both the prompt path (ADR-14) and the render path (ADR-13), before any client document is ingested outside tests. Unlike A–F, G's gates are pass/fail security properties, not rates: one leak or one executed payload fails the phase.
+
+**Known before building (read from the code, 2026-10-28):**
+- **There is no tenant anywhere.** `POST /queries` is unauthenticated; `GET /queries/{id}` and `/events` return any job to anyone holding its id. That is today's leak: a question about a client is visible to whoever has the id (UUIDs make it unlikely, not impossible; logs and URLs carry them).
+- **Every vector read goes through one function**, `retrieve.search` (`query_points`, three call sites in one place). Decomposition, siblings and the statute floor all call it. So the tenant filter has one place to live, and the leakage test has one place to prove it.
+- **Postgres reads that would leak if client chunks shared the `chunks` table:** `index.py` rebuilds the Qdrant collection from `SELECT … FROM chunks` (with or without a source filter), so a client chunk in that table would be re-indexed into the public collection on the next rebuild; `store.py`'s history lookup reads by citation. CI also restores the public collection from a published snapshot, which must never contain client data.
+- **Client facts already exist as a sub-query kind** (`client_fact`), never searched: today the facts go straight from the question to synthesis. Phase G gives that kind something to search.
+- **The citation graph holds only public opinions.** ADR-5's "including graph-traversal queries" is satisfied by construction if no client data is ever written to `citations`/`treatments`; the leakage test asserts that rather than assuming it.
+- **No tracing exists** (Langfuse was never stood up; §3.4's redaction-before-span invariant has no span to protect). G1b adds it (your decision, 2026-10-28: OpenTelemetry to Langfuse Cloud), so the invariant has spans to check before client documents arrive in G2.
+- **No frontend exists.** ADR-13's render-path suite needs a page to render into. The frontend stack is an open decision (PRD §12 item 3); G has to make it.
+- **The golden set already holds 8 adversarial rows** (G-A01–A08, `scored_from: G`): injection, XSS, fabricated authority, prompt exfiltration, badge spoofing, PII, cross-tenant existence, and a user asking to drop citations. G-A07 and G-A08 are `reviewed: false`. They are held out: G needs its own dev corpus to build against.
+- **Structured synthesis already blocks the easiest attack.** Citations are an enum of retrieved sources (F3), so a document can't make the answer cite "§ 183(z)" as a source; it can still make the model *say* it. The verifier (F4) checks sentences against cited sources, which is the second line against G-A01/G-A03-style payloads.
+
+**Exit condition:** two demo tenants, each with an API key. Tenant A uploads a synthetic W-2 and an intake memo, asks a compound question, and gets an answer that cites the statute, an opinion and *its own document*, labelled "client document" from structured fields. Tenant B asks about A's client by name and gets "no such document" with nothing that reveals A's exists; B can't read A's jobs, events or documents (404, never 403). A malicious upload (instruction override, XSS, fake badge, SSN) changes nothing: the answer ignores it, the page shows it as inert text, the SSN never appears. Both suites and the leakage test run in CI.
+
+Source docs: tech doc §3.2, §3.3 step 1, §3.4, §7, §9.1, §9.3, ADR-5, ADR-13, ADR-14 · PRD G6, FR-11, FR-14, FR-17, §12 · `eval/golden.jsonl` G-A01–A08.
+
+## Architecture Decisions (for this phase)
+
+- **Client data never shares a table or collection with the public corpus.** Client chunks go to a `client_chunks` Postgres table and a `client_docs` Qdrant collection with a required, indexed `tenant` payload field (`is_tenant` index: Qdrant's own multitenancy partitioning). ADR-5 holds: one shared public corpus, one shared client collection, isolation by query filter, no per-tenant infrastructure. Separation by table removes two leak paths found above (the index rebuild, the CI snapshot) without a single filter line. *Alternative:* a `tenant` column on `chunks` and a payload field on the public collection; it costs a filter on every public read and puts client data in the snapshot.
+- **One function builds the tenant filter, and it can't be called without a tenant.** `search(..., tenant=...)` on `source="client"` raises if `tenant` is missing; the filter is `must: tenant == caller`. No other code reads `client_docs`. A test asserts there is no other `query_points`/`scroll` call site on it.
+- **Auth: one API key per tenant (default).** `Authorization: Bearer <key>`; a `tenants` table stores the key's SHA-256, never the key. One FastAPI dependency resolves the tenant on every route except `/health`. No roles: a tenant is a practice, and every key in it can do everything (PRD §5's open question on staff stays open). *Alternative:* JWT from a hosted auth provider (Supabase Auth); real logins, but an outside dependency the gate doesn't need and a demo would have to sign up for.
+- **Foreign resources are 404, never 403.** A job, document or event stream of another tenant answers exactly as one that doesn't exist (G-A07: existence disclosure is a failure).
+- **Quotas in Postgres (default):** per tenant per day, queries ≤ 50 and uploads ≤ 20, counted from `jobs`/`client_documents` rows (exact and durable, no new store); upload ≤ 10 MB and ≤ 50 pages; 429 with the reset time. A global daily query cap protects the <$50/mo budget. The numbers are first guesses (FR-17's size is `[DECISION NEEDED]`); they live in one place.
+- **Uploads (FR-17, §3.2):** allowlist by content sniffing, not extension: PDF, PNG, JPEG, TIFF. PDFs with a text layer use pdfminer (already a dependency); scanned pages and images go through OCR. Any page whose extraction fails or comes back empty is stored as "extraction failed — excluded from retrieval" and reported to the uploader, never indexed. Chunking: §3.2's fallback (~300-token windows, 15% overlap) for everything; form-field chunking waits for a row it would fix (recorded as a departure).
+- **PII is redacted at ingestion, before anything is stored or embedded.** SSN- and EIN-shaped strings (and ITINs) become `[SSN redacted]` in the extracted text. Nothing downstream (chunks, vectors, prompts, answers, jobs, logs) can then hold them. This is stronger than §3.4's "before any span" and covers the no-tracing case. The G-A06 canary is asserted absent from every store after ingestion.
+- **ADR-14 at the model boundary:** client chunks reach synthesis inside a labelled `<client_document id=… name=…>` block, with the system prompt's existing rule that sources are reference material extended to say documents may contain instructions to be ignored. The verifier sees the same blocks. A client chunk's authority label is a fixed structured value, `client document` (level 0), from the upload record, never from its text (ADR-13).
+- **`client_fact` sub-queries search the tenant's documents.** Facts stated in the question still pass straight to synthesis as now; documents add facts the question didn't state. A tenant with no documents skips the search (no call).
+- **Frontend: one static page served by FastAPI, vanilla JS, `textContent` only (default).** No framework, no build step, no `innerHTML` anywhere (a test greps for it). Citation chips and badges are built from the API's structured `authorities` fields (E5). It satisfies ADR-13 by construction and becomes the demo page. *Alternative:* a React/Next app; more to secure and host for the same screen.
+- **Injection corpus: dev is synthetic and separate; golden A-rows are scored once.** ~24 synthetic dev documents across the attack classes the golden rows name (override, exfiltration, fabricated authority, XSS/markup, badge spoofing, PII, cross-tenant probing, user-channel citation dropping), plus benign documents that *read* like instructions ("please note the following applies", ADR-14's false-positive risk), which must still be used as facts. Pass/fail is asserted by deterministic checks wherever possible (canary absent, fabricated citation absent, every rule sentence cited, no script executed, DOM matches allowlist); an LLM judge only where meaning matters (G-A01: "did it say employees can fully deduct?"), with every judge failure read.
+- **Tracing: OpenTelemetry in the code, Langfuse Cloud as the backend (your decision, 2026-10-28; a departure from §3.4's self-hosted Langfuse).** Self-hosted Langfuse v3 needs ClickHouse, Redis and S3-style storage beside Postgres: more to run and back up (ADR-12) than the rest of the stack, on free-tier hosting. One `traced` decorator opens an OTel span per pipeline step (decompose, retrieve, rerank, synthesize, verify, conclude, re-cite), with model, tokens, cost and latency as attributes; the OTLP exporter points at Langfuse Cloud by environment variables, so swapping backends is configuration. Tracing never blocks an answer: export is batched and failures are dropped (ADR-16). Traces leave our servers; acceptable because client data is synthetic (intent doc) and PII is redacted at upload, before any span (G2). Spans carry the tenant id, never document text beyond what redaction leaves. *Revisit trigger:* real client data, or the free tier's limits (unverified at planning; checked in G1b).
+- **CI:** the leakage test and the render-path suite run on every PR with a stubbed LLM (free; isolation lives in retrieval and the API, not the model). The prompt-path suite needs the live model, so it runs on PRs touching ingestion, prompts, retrieval or rendering, and before any deploy (~$0.30 a run).
+- **Existing gates keep running.** The retrieval gate must be unchanged by G (client data is in another collection). Faithfulness CI stays paused (your decision, 2026-10-06) unless you re-enable it.
+
+## Dependency Graph
+
+```
+G0 threat model + inventory of every read path and endpoint (free)
+   ▼
+G1 tenants, API keys, quotas, 404-for-foreign; leakage harness (red first)
+   ▼
+G1b tracing: OTel spans per step → Langfuse Cloud; tenant on every span
+   ▼
+G2 upload → allowlist → extract/OCR → PII redaction → client_chunks + client_docs
+   ▼
+G3 client_fact searches the tenant's documents; ADR-14 blocks; verifier and labels
+   ├──────────────────────────────┐
+   ▼                              ▼
+G4 prompt-path injection corpus  G5 static page + render-path suite (Playwright)
+   └──────────────┬───────────────┘
+                  ▼
+G6 gate run: leakage 0, both suites 100%, golden A-rows once, existing gates unchanged
+   ▼
+G7 Phase G exit report
+```
+
+## Task List
+
+Full task details are in `tasks/todo.md` (Phase G section).
+
+### Slice 1: Know the surface
+- [x] G0: Threat model and inventory: every endpoint, every store read and write, every place text crosses into a prompt or the page; today's leaks listed; G-A07/G-A08 reviewed
+
+### Checkpoint 1 (human review)
+- [x] G0's inventory and the defaults below confirmed; G-A07 (fixed) and G-A08 approved (2026-10-28)
+
+### Slice 2: Tenancy and documents
+- [x] G1: Tenants, API keys, quotas, 404-for-foreign; leakage harness red before, green after (`tests/test_leakage.py`, yours to create)
+- [ ] G1b: Tracing (OTel → Langfuse Cloud), one span per pipeline step, cost and latency per span
+- [ ] G2: Client-document ingestion (allowlist, size, extraction, OCR, redaction, list, delete)
+- [ ] G3: Documents in answers (client_fact search, ADR-14 blocks, structured label, verifier)
+
+### Checkpoint 2 (human review)
+- [ ] Leakage harness green on G1–G3; one end-to-end demo question per tenant read by you
+
+### Slice 3: Hardening
+- [ ] G4: Prompt-path injection corpus (dev, synthetic) to 100%
+- [ ] G5: Static page and render-path suite to 100%
+
+### Slice 4: Measure and report
+- [ ] G6: Gate run, golden adversarial rows once
+- [ ] G7: Phase G exit report
+
+## Risks and Mitigations
+
+| Risk | Impact | Mitigation |
+|---|---|---|
+| A read path the filter doesn't cover (a new call site, a cache, the Redis channel) | High | G0 inventories every read; one filter function that raises without a tenant; a test that fails on any other call site touching `client_docs`; leakage probes hit every endpoint, not only search |
+| Existence disclosure (403 vs 404, a different refusal wording, timing) | High | 404 everywhere; the leakage test compares B's response with and without A's matching document and requires them identical apart from ids |
+| An injection payload the corpus didn't think of | High | Corpus built from the golden rows' attack classes plus published payload lists; G's 100% is necessary, not sufficient (tech doc §10); ADR-13 makes the render path safe by construction (`textContent`), not by filtering |
+| Hardening makes answers ignore real client facts ("please note the following applies") | Med | Benign instruction-like documents in the corpus must still be used; reported beside the attack pass rate |
+| OCR on the hosting box (tesseract is a system package, absent today) | Med | G0 checks it on the target image; if it's a problem, scanned uploads fall back to "extraction failed — excluded" and only text-layer PDFs are indexed (recorded) |
+| Anthropic credit is empty; the verifier fails closed | Med | Leakage and render suites need no model; G4/G6 wait for credit and your go; spend estimated per step |
+| PII in a shape the regex misses (spaced or OCR-mangled SSNs) | Med | Patterns tested on OCR'd fixtures; the canary appears in several shapes; residual risk recorded |
+| Traces carry client text or PII to a hosted backend | Med | Redaction at upload precedes every span (G2); the G-A06 canary is searched for in exported spans (G2's test reads the exporter, not the dashboard); prompts recorded only after redaction |
+| Langfuse Cloud down or over its free limit | Low | Export is async and failures are dropped; answers unaffected (ADR-16); the backend is one env var |
+| Quotas set too tight for the demo, or too loose for the budget | Low | One config block; global daily cap sized from F's $0.0073 an answer |
+
+## Inputs needed (Claude's defaults; confirm or change)
+
+- **Auth: one API key per tenant, hashed in Postgres, no roles.** Alternative: hosted JWT auth (Supabase).
+- **Client data in its own table and collection** (`client_chunks`, `client_docs` with an `is_tenant` index), not a tenant column on the public corpus.
+- **Frontend: one static page, vanilla JS, `textContent` only**; it is also the demo page. Alternative: React/Next.
+- **OCR: tesseract for scanned pages and images**; if hosting can't carry it, text-layer PDFs only. Alternative: no OCR in G at all.
+- **Limits:** 10 MB / 50 pages per upload; 50 queries and 20 uploads per tenant per day; a global daily query cap.
+- ~~Tracing backend~~ **Decided (2026-10-28): OpenTelemetry → Langfuse Cloud** (free tier).
+- **`binding_on` / Golsen stays out of G.** Client documents now make the taxpayer's circuit knowable, but G's gate is security, and only G-X02/G-X19 need it. Alternative: a small G3b that reads the circuit from a client fact and demotes an opinion reversed by that circuit, measured on those rows.
+- **Hosting and the live URL stay in Phase H** (with resilience and load). G's gates run locally and in CI.

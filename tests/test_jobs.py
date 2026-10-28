@@ -14,12 +14,20 @@ client = TestClient(api.app)
 STAGES = ["decomposing", "retrieving", "synthesizing", "verifying", "answer"]  # F2's gate is off by default
 
 
+TENANT = {}  # this module's tenant id, for the tests that read the record directly
+
+
 @pytest.fixture(autouse=True)
 def clean():
     with store.connect() as conn:
         jobs.create_table(conn)
         conn.execute("DELETE FROM jobs")
+        conn.execute(store.TENANTS)
+        conn.execute("DELETE FROM tenants WHERE name LIKE 'test-%'")
+        key = store.create_tenant(conn, "test-jobs")
         conn.commit()
+        TENANT["id"] = store.tenant_for(conn, key)
+    client.headers["Authorization"] = f"Bearer {key}"
     yield
 
 
@@ -94,7 +102,7 @@ def test_a_failing_pipeline_is_recorded_not_swallowed(monkeypatch):
     assert events[-1][0] == "error"
     assert events[-1][1]["type"] == "RuntimeError"
     with store.connect() as conn:
-        assert jobs.get(conn, job_id)["status"] == "error"
+        assert jobs.get(conn, job_id, TENANT["id"])["status"] == "error"
 
 
 def test_the_answer_is_one_event_not_a_token_stream(stub_pipeline):
@@ -111,7 +119,7 @@ def test_live_events_arrive_over_redis_while_the_job_runs():
     import time
 
     with store.connect() as conn:
-        job_id = jobs.create(conn, "slow question")
+        job_id = jobs.create(conn, "slow question", TENANT["id"])
 
     def worker():
         time.sleep(0.2)

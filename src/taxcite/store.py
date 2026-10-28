@@ -4,7 +4,9 @@ One table, created on demand. Writes are idempotent: re-ingesting the same
 source updates rows in place and removes rows that no longer exist upstream.
 """
 
+import hashlib
 import os
+import secrets
 from datetime import datetime, timezone
 
 import psycopg
@@ -113,8 +115,40 @@ UPSERT = """
 """
 
 
+# Phase G: a tenant is a practice. Only the key's SHA-256 is stored; the key is shown once, at creation.
+TENANTS = """
+    CREATE TABLE IF NOT EXISTS tenants (
+        id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        name       text NOT NULL,
+        key_sha256 text NOT NULL UNIQUE,
+        created_at timestamptz NOT NULL DEFAULT now()
+    )
+"""
+
+
 def connect(url: str | None = None) -> psycopg.Connection:
     return psycopg.connect(url or DATABASE_URL)
+
+
+def create_tenant(conn: psycopg.Connection, name: str) -> str:
+    """Create a tenant and return its API key. The caller commits."""
+    conn.execute(TENANTS)
+    key = secrets.token_urlsafe(32)
+    conn.execute("INSERT INTO tenants (name, key_sha256) VALUES (%s, %s)", (name, _sha256(key)))
+    return key
+
+
+def tenant_for(conn: psycopg.Connection, key: str) -> str | None:
+    """The tenant id an API key belongs to, or None."""
+    try:
+        row = conn.execute("SELECT id FROM tenants WHERE key_sha256 = %s", (_sha256(key),)).fetchone()
+    except psycopg.errors.UndefinedTable:  # no tenant created yet: every key is unknown
+        return None
+    return str(row[0]) if row else None
+
+
+def _sha256(key: str) -> str:
+    return hashlib.sha256(key.encode()).hexdigest()
 
 
 def create_table(conn: psycopg.Connection) -> None:

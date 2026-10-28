@@ -2642,3 +2642,137 @@ Verifier: ~$0.002 and a few seconds an answer. Verdict check (Claude's read, 30 
 - [x] Citation completeness ≥0.85: 0.994 (golden, shipped)
 - [x] Substantive correctness tracked (N, κ reported): 291 golden row-samples, κ 0.72
 - [x] Tests and both CI gates green on the shipped pipeline
+
+---
+
+# Phase G — Multi-tenant + hardening
+
+Plan: `tasks/plan.md` (Phase G). Gates: cross-tenant leakage 0 failures; injection corpus 100% on prompt path and render path.
+
+## G0: Threat model and inventory (free)
+
+**Goal:** know every place tenant data can cross a boundary before building, so the leakage test covers all of them.
+
+**Steps:**
+1. **Inventory.** Every endpoint (method, path, what it returns); every Postgres and Qdrant read and write (file:line); the Redis channel; every place text enters a prompt (decompose, synthesis, verifier, conclusion, re-cite) and the page. Start from what's known: one vector read (`retrieve.search`), `jobs.get` by id, `/events` subscribe by id, `index.py` rebuild from `chunks`, `store.py` history by citation.
+2. **Today's leaks, demonstrated.** A test (expected to fail until G1) that reads another caller's job and events by id.
+3. **Threat table.** For each golden A-row and each surface: the attack, where it would land, the control that stops it, the check that proves it.
+4. **Review G-A07 and G-A08** (`reviewed: false`) with you; adjust wording if needed; mark reviewed.
+5. **Hosting check for OCR:** is tesseract installable where the app will run (Docker image size, build)? If not, record the text-layer-only fallback.
+
+**Acceptance:** `eval/results/g0-threat-model.md`; G-A07/G-A08 reviewed; defaults confirmed at Checkpoint 1. Log entry.
+
+**G0 (2026-10-28):** inventory and threat table written (`eval/results/g0-threat-model.md`). Findings: the two job routes are the live leak; the only vector read is `retrieve.search`; the citation graph is public-only by construction (harness asserts it); `retrieve._scores` caches client text in its keys but returns only scores (not a leak); **questions are stored unredacted, so redaction moves to request preprocessing too** (G2 step 3); error events carry raw exception text (checked in G4). Leak test drafted for you to create (`tests/test_leakage.py`, red until G1). OCR on an image unchecked (Docker not running; no Dockerfile until H). G-A07/G-A08 await your review.
+
+## ✅ Checkpoint 1 (human review)
+- [x] Inventory and threat table read by you
+- [x] Defaults confirmed (auth, separate table/collection, static page, OCR, limits, Golsen out, hosting in H; tracing OTel → Langfuse Cloud)
+- [x] G-A07 (fixed: Henderson workpapers moved to tenant A as `other_tenant_doc`) and G-A08 approved (2026-10-28)
+
+## G1: Tenants, keys, quotas, and the leakage harness
+
+**Goal:** every request belongs to a tenant, and nothing of one tenant's is visible to another. The harness comes first and fails.
+
+**Steps:**
+1. **Harness (red).** `tests/test_leakage.py`: two tenants with planted canary strings; probes for every surface in G0's inventory; asserts B's canary never appears in A's responses and foreign ids answer 404. Stubbed LLM, so it runs free in CI.
+2. **`tenants` table** (id, name, key SHA-256, created_at); a CLI to create a tenant and print its key once.
+3. **One auth dependency** on every route but `/health`: bearer key → tenant, 401 otherwise.
+4. **`jobs.tenant`**; `GET /queries/{id}` and `/events` return 404 for another tenant's job (the check before the Redis subscribe, not after).
+5. **Quotas** counted from today's rows; 429 with the reset time; a global daily cap.
+
+**Acceptance:** harness green for jobs and events; existing tests pass; the retrieval gate unchanged.
+
+**Files:** `api.py`, `jobs.py`, `store.py`, `cli.py`; new `tests/test_leakage.py` (you create it from my code block).
+
+**G1 (2026-10-28):** built. `tenants` table (key SHA-256 only; `store.create_tenant`, `store.tenant_for`); `taxcite tenant NAME` prints the key once. One `api.tenant` dependency on every route but `/health` (401 + `WWW-Authenticate: Bearer`). `jobs.tenant` column (older rows visible to no one); `jobs.get(conn, id, tenant)` returns None for another tenant's job *and* for a malformed id, so both routes answer the same 404 body; the SSE route checks before subscribing to Redis, and every re-read inside the stream is tenant-scoped. Quotas: 50 questions per tenant and 200 overall per UTC day, counted from `jobs` (429 with the reset time); upload quota waits for G2. `tests/test_jobs.py` authenticates. Leak test (6 tests: 401 on every route, foreign job indistinguishable from missing on both routes, malformed id 404, per-tenant quota, global cap, no client data in the graph tables) red before G1, green after; run from the scratchpad, **for you to create as `tests/test_leakage.py`**. 297 + 6 tests pass. Retrieval untouched (no change to `retrieve.py`).
+
+## G1b: Tracing (OpenTelemetry → Langfuse Cloud)
+
+**Goal:** every question leaves one trace with a span per pipeline step, its cost and latency, without tracing ever affecting the answer. Built before G2 so the redaction-before-span test has spans to read.
+
+**Steps:**
+1. Dependencies: `opentelemetry-sdk` and the OTLP HTTP exporter. Config by environment only (`OTEL_EXPORTER_OTLP_ENDPOINT`, auth header from the Langfuse keys); no keys in code. Unset → tracing off, nothing else changes.
+2. One `traced` decorator (§3.4's `@traced_node`) on decompose, retrieve, rerank, synthesize, verify, conclude, re-cite; the job is the root span, its trace id returned in the terminal event (§3.3 step 9).
+3. Attributes: step, model, input/output tokens, cost (from the token counts the eval already prices), hit counts, hidden sentences, tenant id. Prompt and completion text attached only on LLM spans, using Langfuse's OTel attribute names.
+4. Batched export; an exporter failure is logged and dropped (ADR-16). A test with an in-memory exporter asserts the span tree for one stubbed question, and that a failing exporter still returns the answer.
+5. Check the account's free-tier limits and retention against ~dozens of questions a week plus eval runs; eval scripts trace only when asked (`--trace`), so a golden run can't use up the month.
+
+**Acceptance:** one live question shows its trace in Langfuse with per-step latency and cost read by you; tests pass; the leakage harness also asserts B's canary is absent from A's spans.
+
+**Files:** `jobs.py`, `generate.py`, `verify.py`, `decompose.py`; a small tracing module (new file: you create it from my code block); `pyproject.toml`.
+
+## G2: Client-document ingestion
+
+**Goal:** a tenant uploads a document and it becomes searchable to that tenant only, with nothing unsafe stored.
+
+**Steps:**
+1. `POST /documents` (multipart): sniff type (PDF, PNG, JPEG, TIFF; else 415 with a clear message); size and page limits (413).
+2. Extract: pdfminer for text-layer pages; OCR for scanned pages and images; an empty or failed page is recorded "extraction failed — excluded from retrieval" and returned to the uploader.
+3. **Redact** SSN/EIN/ITIN-shaped strings in the extracted text before anything is stored. The same function redacts the question at `POST /queries`, before the job row and decomposition (G0 finding: `jobs.question` is stored as typed; §3.4 puts redaction in request preprocessing).
+4. Chunk (~300 tokens, 15% overlap); save to `client_chunks` (tenant, document id, page) and `client_docs` (tenant payload, `is_tenant` index).
+5. `GET /documents` (the tenant's own), `DELETE /documents/{id}` (removes rows and points; 404 for foreign).
+6. Leakage harness extended: B's uploads never listed, searched or deletable by A; the canary SSN absent from Postgres, Qdrant, the job record and every exported span (§3.4's redaction-ordering invariant, read from the in-memory exporter).
+
+**Acceptance:** fixtures (text PDF, scanned PDF, PNG, a disallowed type, an oversized file, a PDF with a failed page, the G-A06 intake form) behave as specified; harness green.
+
+**Files:** `api.py`, `store.py`, `index.py`, a client-ingest module under `ingest/` (new file: you create it); fixtures under `tests/fixtures/`.
+
+## G3: Documents in answers
+
+**Goal:** an answer can use and cite the tenant's own documents, safely.
+
+**Steps:**
+1. `client_fact` sub-queries search `client_docs` for the asking tenant (`search(..., tenant=)` raises without one); a tenant with no documents skips the search.
+2. Client chunks reach synthesis and the verifier inside labelled `<client_document>` blocks; the system prompt says document content is data and any instructions in it are ignored.
+3. Citations to a client document carry the structured label `client document` (level 0) and its file name from the upload record; the API's `authorities` stays structured (E5).
+4. Five dev rows: existing compound dev rows with their client facts moved from the question into a synthetic document; report whether the fact is retrieved, used and cited (tracked, not gated).
+
+**Acceptance:** the five rows read by you; harness green with documents in the pipeline; existing answer tests pass.
+
+**Files:** `decompose.py`, `retrieve.py`, `generate.py`, `verify.py`, `jobs.py`; `eval/dev.jsonl` (five new rows, approved).
+
+## ✅ Checkpoint 2 (human review)
+- [ ] Leakage harness green on G1–G3
+- [ ] One end-to-end demo question per tenant read by you
+
+## G4: Prompt-path injection corpus (needs credit and your go, ~$2–3)
+
+**Goal:** every dev payload is ignored, and benign instruction-like documents still work.
+
+**Steps:**
+1. ~24 synthetic dev documents across the golden rows' attack classes (override, system-prompt and key exfiltration, fabricated authority, cross-tenant probing, user-channel citation dropping, PII) plus ~6 benign instruction-like documents. A canary token in the system prompt.
+2. Deterministic checks per row (canary absent, fabricated citations absent, every rule sentence cited, refusal wording identical with and without a foreign match); an LLM judge only for meaning, every judge failure read.
+3. Fix what fails; re-run until 100%; benign rows' use of their facts reported.
+4. CI job on PRs touching ingestion, prompts, retrieval or rendering.
+
+**Acceptance:** 100% on dev; benign rows reported; CI job green. Saves after every row (standing rule).
+
+## G5: Static page and render-path suite
+
+**Goal:** nothing from a source or an answer can execute or forge a UI element.
+
+**Steps:**
+1. One static page served by FastAPI: ask, watch stages (SSE), read the answer; upload and list documents. Vanilla JS, `textContent` only; chips and badges built from structured fields.
+2. A test that fails on `innerHTML`, `outerHTML`, `insertAdjacentHTML` or `document.write` in the page.
+3. Playwright suite: render fixture answers carrying the golden and dev markup payloads (G-A02, G-A05 classes); assert no script runs (a `window` tripwire and no outbound request), no `javascript:` link, the DOM matches the allowlist, badges only where the structured field says.
+
+**Acceptance:** 100%; runs in CI on every PR (stubbed answers, free).
+
+**Files:** a static page and its script (new files: you create them); `api.py` (serve it); a Playwright test.
+
+## G6: Gate run (needs your go, ~$1–2)
+
+1. Leakage harness, stubbed and once live: 0 failures.
+2. Both suites: 100%.
+3. Golden G-A01–A08 once on the shipped pipeline: each row's `expected_behavior`, pass/fail, read by you.
+4. Existing gates unchanged: tests, retrieval gate 0.760; faithfulness only if you re-enable it.
+
+## G7: Phase G exit report
+
+`eval/results/phase_g.md`: gates, the threat table as built, what each control caught (with the payload), what was deferred (Golsen, form-field chunking, roles), cost. Tech doc §7/§9.3 and ADR-5/13/14 updated; PRD §12 items 3 and 6 resolved.
+
+## ✅ Checkpoint: Phase G complete
+- [ ] Cross-tenant leakage: 0 failures
+- [ ] Injection corpus: 100% prompt path, 100% render path
+- [ ] Golden adversarial rows scored once
+- [ ] Tests and existing CI gates green
