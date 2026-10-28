@@ -21,6 +21,8 @@ from datetime import datetime
 
 import redis
 
+from taxcite import tracing
+
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6380/0")
 CHANNEL = "job:{id}"
 TERMINAL = ("answer", "error")
@@ -122,8 +124,9 @@ def get(conn, job_id: str, tenant: str) -> dict | None:
     return {"id": str(row[0]), "question": row[1], "status": row[2], "stages": row[3], "created_at": row[4]}
 
 
-def run(conn, job_id: str, question: str, k: int = 8) -> None:
-    """The pipeline, reporting each stage. Phases C-F add their steps here."""
+@tracing.traced("query")
+def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None) -> None:
+    """The pipeline, reporting each stage. Phases C-F add their steps here. One run is one trace (G1b)."""
     from taxcite import decompose as dc
     from taxcite.generate import OPINION_RE, answer_from_groups, authorities, cited_items, skipped_only
     from taxcite.ingest.citations import flags
@@ -132,6 +135,7 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
         rdb = client()
     except redis.RedisError:
         rdb = None  # the pipeline continues without live events
+    tracing.annotate({"job.id": job_id, "langfuse.user.id": tenant})
     try:
         publish(conn, job_id, "decomposing", {}, rdb)
         plan = dc.decompose(question)
@@ -163,6 +167,7 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             result = verify.checked(question, result)
         # Is each cited opinion still good law (C4)? Looked up after synthesis and attached beside the
         # answer, never folded into its text; a failed lookup reads "unknown" and the answer still ships.
+        tracing.annotate({"chunks": len(hits), "hidden_sentences": len(result.hidden), "refused": result.refused})
         opinions = list(dict.fromkeys(m.group() for c in result.citations + result.derived_citations
                                       if (m := OPINION_RE.search(c))))
         publish(conn, job_id, "answer", {
@@ -177,9 +182,12 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "hidden_sentences": len(result.hidden),  # F4: failed verification (or went with a failed part)
             "model": result.model,
             "cost_usd": round(result.cost_usd + plan.cost_usd + sum(v["usd"] for v in verdicts), 6),
+            "trace_id": tracing.trace_id(),  # None when tracing is off
         }, rdb)
     except Exception as e:  # the job record must show what happened, not just stop
-        publish(conn, job_id, "error", {"type": type(e).__name__, "message": str(e)[:300]}, rdb)
+        tracing.annotate({"langfuse.observation.level": "ERROR", "error.type": type(e).__name__})
+        publish(conn, job_id, "error", {"type": type(e).__name__, "message": str(e)[:300],
+                                        "trace_id": tracing.trace_id()}, rdb)
 
 
 def replay(job: dict) -> list[Event]:

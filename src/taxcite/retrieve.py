@@ -13,6 +13,7 @@ from functools import cache, lru_cache
 from qdrant_client import models
 
 from taxcite.index import COLLECTION, DENSE_MODEL, SPARSE_MODEL, client
+from taxcite.tracing import traced
 
 PREFETCH = 50  # candidates per branch before fusion
 OVERFETCH = 20  # extra results requested so a tie at the k boundary is resolved here, not by the store
@@ -66,6 +67,7 @@ def _scores(name: str, query: str, docs: tuple[str, ...]) -> tuple[float, ...]:
     return tuple(float(s) for s in _reranker(name).rerank(query, list(docs)))
 
 
+@traced("rerank")
 def rerank(query: str, hits: list[Hit], k: int, name: str = RERANK_MODEL) -> list[Hit]:
     """Re-score candidates with a cross-encoder, which reads query and chunk together.
 

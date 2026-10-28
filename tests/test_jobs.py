@@ -4,6 +4,10 @@ import json
 
 import pytest
 from fastapi.testclient import TestClient
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import SimpleSpanProcessor, SpanExporter
+from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 
 from taxcite import api, jobs, store
 from taxcite.generate import Answer
@@ -201,3 +205,47 @@ def test_a_question_with_nothing_answerable_skips_synthesis_and_verification(mon
     assert [n for n, _ in events] == ["decomposing", "retrieving", "checking_sufficiency", "answer"]
     assert events[2][1]["parts"] == [{"part": "hobby loss deduction limit", "sufficient": False, "missing": "no state law"}]
     assert events[-1][1]["refused"] and "no state law" in events[-1][1]["text"]
+
+
+class BrokenExporter(SpanExporter):
+    def export(self, spans):
+        raise ConnectionError("Langfuse is down")
+
+
+# G1b: spans go to memory here, and every test in this module also runs with an exporter that raises.
+SPANS = InMemorySpanExporter()
+if not isinstance(trace.get_tracer_provider(), TracerProvider):
+    trace.set_tracer_provider(TracerProvider())
+for exporter in (SPANS, BrokenExporter()):
+    trace.get_tracer_provider().add_span_processor(SimpleSpanProcessor(exporter))
+
+
+def test_one_question_is_one_trace_with_a_span_per_step(monkeypatch):
+    """Models and search stubbed at the call, so the traced steps themselves run. The verifier fails, as in F4."""
+    from taxcite import decompose as dc
+    from taxcite import generate, verify
+
+    cite = "IRS Pub 17 (2025), p. 99"
+    monkeypatch.setattr(dc, "call_model", lambda *a, **k: (
+        '{"subqueries": [{"kind": "statutory", "query": "hobby loss"}], "as_of": "2026"}', 1, 1))
+    monkeypatch.setattr(dc, "search", lambda *a, **k: [Hit(citation=cite, heading="h", text="t", score=1.0,
+                                                         section="Pub 17", source="irs_pub")])
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: hits)
+    monkeypatch.setattr(generate, "call_model", lambda *a, **k: (json.dumps(
+        {"tax_year": None, "not_answerable": [], "sentences": [{"part": 1, "text": "Yes.", "citations": [cite]}]}), 1, 1))
+
+    def boom(*a, **k):
+        raise TimeoutError("verifier timed out")
+    monkeypatch.setattr(verify, "call_model", boom)
+    SPANS.clear()
+    job_id = client.post("/queries", json={"question": "q"}).json()["id"]
+    answer = dict(sse_events(client.get(f"/queries/{job_id}/events").text))["answer"]
+
+    assert answer["refused"]  # the broken exporter cost nothing: the answer arrived
+    spans = {s.name: s for s in SPANS.get_finished_spans()}
+    root = spans["query"]
+    assert root.parent is None and format(root.context.trace_id, "032x") == answer["trace_id"]
+    assert root.attributes["job.id"] == job_id and root.attributes["langfuse.user.id"] == TENANT["id"]
+    for step in ("decompose", "retrieve", "synthesize", "verify"):
+        assert spans[step].parent.span_id == root.context.span_id, step
+    assert spans["verify"].status.status_code == trace.StatusCode.ERROR

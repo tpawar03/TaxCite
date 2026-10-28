@@ -771,7 +771,7 @@ Full task details are in `tasks/todo.md` (Phase G section).
 
 ### Slice 2: Tenancy and documents
 - [x] G1: Tenants, API keys, quotas, 404-for-foreign; leakage harness red before, green after (`tests/test_leakage.py`, yours to create)
-- [ ] G1b: Tracing (OTel → Langfuse Cloud), one span per pipeline step, cost and latency per span
+- [x] G1b: Tracing (OTel → Langfuse Cloud), one span per pipeline step, cost and latency per span
 - [ ] G2: Client-document ingestion (allowlist, size, extraction, OCR, redaction, list, delete)
 - [ ] G3: Documents in answers (client_fact search, ADR-14 blocks, structured label, verifier)
 

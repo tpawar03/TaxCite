@@ -27,6 +27,7 @@ from functools import cache
 
 from taxcite.generate import MODEL, call_model, cost
 from taxcite.retrieve import RERANK_MODEL, Hit, rerank, search
+from taxcite.tracing import traced
 
 # Which sources each kind of sub-query may search. () means never searched; None means
 # every source, which is Phase A's behaviour and what the fallback falls back to.
@@ -181,6 +182,7 @@ def parse(text: str, question: str) -> tuple[list[SubQuery], str | None, str]:
     return subs, as_of, ""
 
 
+@traced("decompose")
 def decompose(question: str, model: str = MODEL) -> Decomposition:
     """One structured-output call (ADR-11). Temperature 0 and a fixed seed, so a re-run
     of the eval measures the change under test and not a different plan."""
@@ -249,6 +251,7 @@ def tax_year(as_of: str | None) -> int | None:
 SIBLING_SECTIONS = 3  # F5b: the first (best-ranked) sections whose subsections are searched
 
 
+@traced("retrieve")
 def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = True,
              rewrite: bool = False, hops: int = 0, editions: tuple[int, int] | None = None,
              statute: int = 0, union: bool = False, siblings: int = 0) -> Decomposition:
@@ -476,6 +479,7 @@ def sufficiency(question: str, part: str, hits: list[Hit], as_of: str | None = N
         return {"part": part, "sufficient": True, "missing": "", "supports": [], "usd": 0.0, "error": str(e)[:200]}
 
 
+@traced("sufficiency")
 def gate(question: str, groups: list[tuple[str, list[Hit]]], as_of: str | None = None,
          model: str = MODEL) -> tuple[list[tuple[str, list[Hit]]], list[tuple[str, str]], list[dict]]:
     """(parts to synthesize, (label, missing) for parts skipped, every verdict). A part with no retrieved chunk isn't

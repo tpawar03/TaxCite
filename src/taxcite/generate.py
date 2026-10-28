@@ -16,6 +16,7 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from taxcite.retrieve import Hit, search
+from taxcite.tracing import generation, traced
 
 MODEL = os.environ.get("TAXCITE_MODEL", "gpt-4o-mini")
 # F3: a golden run hung for an hour on one request whose connection had died (the laptop slept); the SDKs' own
@@ -360,6 +361,7 @@ def _require_credentials(model: str) -> None:
         )
 
 
+@traced("llm")
 def call_model(system: str, prompt: str, model: str, temperature: float | None = None,
                json_output: bool = False, seed: int | None = None,
                json_schema: dict | None = None, effort: str | None = None) -> tuple[str, int, int]:
@@ -400,7 +402,9 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
             **kwargs,
         )
         text = "".join(b.text for b in response.content if b.type == "text")
-        return text, response.usage.input_tokens, response.usage.output_tokens
+        tin, tout = response.usage.input_tokens, response.usage.output_tokens
+        generation(model, system, prompt, text, tin, tout, cost(model, tin, tout))
+        return text, tin, tout
 
     from openai import OpenAI
 
@@ -419,8 +423,9 @@ def call_model(system: str, prompt: str, model: str, temperature: float | None =
         messages=[{"role": "system", "content": system}, {"role": "user", "content": prompt}],
         **kwargs,
     )
-    usage = response.usage
-    return response.choices[0].message.content or "", usage.prompt_tokens, usage.completion_tokens
+    text, tin, tout = response.choices[0].message.content or "", response.usage.prompt_tokens, response.usage.completion_tokens
+    generation(model, system, prompt, text, tin, tout, cost(model, tin, tout))
+    return text, tin, tout
 
 
 def answer_from_hits(question: str, hits: list[Hit], model: str = MODEL) -> Answer:
@@ -441,6 +446,7 @@ def skipped_only(skipped: Sequence[tuple[str, str]], model: str = MODEL) -> Answ
     return Answer(text=text, mode="rag", model=model)
 
 
+@traced("synthesize")
 def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
                        facts: Sequence[str] = (), model: str = MODEL, as_of: str | None = None,
                        skipped: Sequence[tuple[str, str]] = ()) -> Answer:

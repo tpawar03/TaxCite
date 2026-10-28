@@ -2701,6 +2701,8 @@ Plan: `tasks/plan.md` (Phase G). Gates: cross-tenant leakage 0 failures; injecti
 
 **Files:** `jobs.py`, `generate.py`, `verify.py`, `decompose.py`; a small tracing module (new file: you create it from my code block); `pyproject.toml`.
 
+**Status (2026-10-28):** built; 304 tests pass. Spans: `query` (root, the job), `decompose`, `retrieve`, `rerank`, `sufficiency`, `synthesize`, `verify`, `re-cite`, `conclude`, `llm` (every model call: model, tokens, cost, prompt, completion as Langfuse generation attributes). `trace_id` in the answer and the error event. Tracing turns on in the API's lifespan, so tests (TestClient without `with`) and evals never export. Changes from the steps above: step 5's `--trace` is skipped (nothing outside the API calls `setup()`, so no eval can use up the month; add the flag to the one script that needs it); the leakage-harness canary-in-spans check moves to G2, because with stubbed models no span carries text yet. Free-tier limits still unchecked: read them in the Langfuse account settings. **Done:** live trace `535ddb4cabf609506ec62a4990a97352` shows per-step latency, and tokens and cost on both `llm` generations; its `verify` span is ERROR (Anthropic key rejected, 401), so that answer failed closed.
+
 ## G2: Client-document ingestion
 
 **Goal:** a tenant uploads a document and it becomes searchable to that tenant only, with nothing unsafe stored.

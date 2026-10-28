@@ -17,6 +17,8 @@ dependencies = [
     "openai>=3.16.2",
     "python-dotenv>=1.2.3",
     "eyecite>=2.7.8",
+    "opentelemetry-sdk>=1.45.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.45.1",
 ]
 
 [project.scripts]

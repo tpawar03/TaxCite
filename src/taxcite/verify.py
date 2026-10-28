@@ -18,6 +18,7 @@ import re
 from dataclasses import asdict, dataclass, replace
 
 from taxcite.generate import OPINION_RE, Answer, call_model, cited_items, parse_citations, render, section_of
+from taxcite.tracing import traced
 
 VERIFIER = os.environ.get("TAXCITE_VERIFIER", "claude-haiku-4-5")  # the other provider from synthesis (ADR-11)
 # F4 (your decision 2026-09-30), a recorded departure from F4's pre-registered rule, which neither unit passed: shown
@@ -116,6 +117,7 @@ def _json(system: str, prompt: str, model: str, schema: dict) -> tuple[dict, int
         raise VerificationFailed(f"unusable verifier response: {raw[:120]!r}") from e
 
 
+@traced("verify")
 def verify(question: str, answer: Answer, model: str = VERIFIER,
            items: list[dict] | None = None) -> tuple[list[Verdict], int, int]:
     """(one verdict per shown sentence, input tokens, output tokens). One call for the whole answer (ADR-10's
@@ -132,6 +134,7 @@ def verify(question: str, answer: Answer, model: str = VERIFIER,
             for k in range(len(items))], tin, tout
 
 
+@traced("re-cite")
 def recite(question: str, answer: Answer, items: list[dict], failed: list[int],
            model: str = VERIFIER) -> tuple[dict[int, str], int, int]:
     """{item index: the retrieved citation that states it} for failed items, from one call over every retrieved
@@ -150,6 +153,7 @@ def recite(question: str, answer: Answer, items: list[dict], failed: list[int],
     return picks, tin, tout
 
 
+@traced("conclude")
 def conclude(question: str, conclusion: str, kept: list[dict], model: str = VERIFIER) -> tuple[list[str] | None, str, int, int]:
     """(citations to show the conclusion with, or None if it doesn't follow; why; tokens). Its citations are those of
     the passed sentences it rests on, so it is shown cited and can't outlive a hidden premise. `why` starts "(not

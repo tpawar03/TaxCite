@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
 
 import psycopg
@@ -10,13 +11,22 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
 
-from taxcite import jobs, store
+from taxcite import jobs, store, tracing
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://taxcite:taxcite@localhost:5433/taxcite")
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6380/0")
 
-app = FastAPI(title="TaxCite")
+
+@asynccontextmanager
+async def lifespan(app):
+    # G1b: tracing is on when the Langfuse keys are set. At startup, not import: tests build their TestClient
+    # without `with`, so the lifespan never runs and no test sends a span to Langfuse.
+    tracing.setup()
+    yield
+
+
+app = FastAPI(title="TaxCite", lifespan=lifespan)
 
 
 def _check(probe) -> str:
@@ -80,13 +90,13 @@ def post_query(query: Query, background: BackgroundTasks, who: str = Depends(ten
         jobs.create_table(conn)
         _over_quota(conn, who)
         job_id = jobs.create(conn, query.question, who)
-    background.add_task(_run_job, job_id, query.question, query.k)
+    background.add_task(_run_job, job_id, query.question, query.k, who)
     return {"id": job_id, "events": f"/queries/{job_id}/events"}
 
 
-def _run_job(job_id: str, question: str, k: int) -> None:
+def _run_job(job_id: str, question: str, k: int, tenant: str) -> None:
     with store.connect() as conn:
-        jobs.run(conn, job_id, question, k=k)
+        jobs.run(conn, job_id, question, k=k, tenant=tenant)
 
 
 @app.get("/queries/{job_id}")
