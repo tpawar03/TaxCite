@@ -361,7 +361,7 @@ def _require_credentials(model: str) -> None:
         )
 
 
-@traced("llm")
+@traced("llm", io=False)
 def call_model(system: str, prompt: str, model: str, temperature: float | None = None,
                json_output: bool = False, seed: int | None = None,
                json_schema: dict | None = None, effort: str | None = None) -> tuple[str, int, int]:

@@ -249,3 +249,11 @@ def test_one_question_is_one_trace_with_a_span_per_step(monkeypatch):
     for step in ("decompose", "retrieve", "synthesize", "verify"):
         assert spans[step].parent.span_id == root.context.span_id, step
     assert spans["verify"].status.status_code == trace.StatusCode.ERROR
+    # every step shows what it was given and what it returned; chunks by citation, never by text
+    assert json.loads(spans["decompose"].attributes["langfuse.observation.input"]) == {"question": "q"}
+    assert "hobby loss" in spans["decompose"].attributes["langfuse.observation.output"]
+    assert cite in spans["synthesize"].attributes["langfuse.observation.input"]
+    assert '"t"' not in spans["synthesize"].attributes["langfuse.observation.input"]
+    assert "Yes." in spans["synthesize"].attributes["langfuse.observation.output"]
+    assert "<Connection>" in spans["query"].attributes["langfuse.observation.input"]
+    assert spans["query"].attributes["langfuse.observation.output"] == answer["text"]

@@ -6,13 +6,59 @@ so tracing can neither slow an answer nor fail one (the rule ADR-16 set for Redi
 """
 
 import base64
+import dataclasses
+import functools
+import inspect
 import json
 import os
 
 from opentelemetry import trace
 
 tracer = trace.get_tracer("taxcite")
-traced = tracer.start_as_current_span  # also a decorator: @traced("decompose") wraps every call in a span
+
+
+def traced(name: str, io: bool = True):
+    """A span around every call. With `io`, the arguments passed and the result are the span's input and
+    output in Langfuse; `call_model` sets its own (`generation`), so it turns this off."""
+    def wrap(fn):
+        signature = inspect.signature(fn)
+
+        @functools.wraps(fn)
+        def inner(*args, **kwargs):
+            with tracer.start_as_current_span(name) as span:
+                if io and span.is_recording():
+                    span.set_attribute("langfuse.observation.input",
+                                       _json(signature.bind(*args, **kwargs).arguments))
+                result = fn(*args, **kwargs)
+                if io and result is not None and span.is_recording():
+                    span.set_attribute("langfuse.observation.output", _json(result))
+                return result
+        return inner
+    return wrap
+
+
+def _brief(x, depth: int = 0):
+    """A readable, bounded copy of a step's arguments or result."""
+    if isinstance(x, str):
+        return x if len(x) <= 1000 else x[:1000] + "…"
+    if x is None or isinstance(x, (int, float, bool)):
+        return x
+    if depth > 4:
+        return "…"
+    if dataclasses.is_dataclass(x) and not isinstance(x, type):
+        if hasattr(x, "citation") and hasattr(x, "score"):  # a retrieved chunk: the llm span shows its text
+            return {"citation": x.citation, "score": round(x.score, 4)}
+        return {f.name: _brief(getattr(x, f.name), depth + 1) for f in dataclasses.fields(x)}
+    if isinstance(x, dict):
+        return {str(k): _brief(v, depth + 1) for k, v in x.items()}
+    if isinstance(x, (list, tuple, set, frozenset)):
+        items = [_brief(v, depth + 1) for v in list(x)[:50]]
+        return items + [f"… {len(x) - 50} more"] if len(x) > 50 else items
+    return f"<{type(x).__name__}>"  # a connection, a client: never its repr
+
+
+def _json(x) -> str:
+    return json.dumps(_brief(x), default=str)
 
 
 def setup() -> bool:

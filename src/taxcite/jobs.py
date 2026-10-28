@@ -167,7 +167,8 @@ def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None)
             result = verify.checked(question, result)
         # Is each cited opinion still good law (C4)? Looked up after synthesis and attached beside the
         # answer, never folded into its text; a failed lookup reads "unknown" and the answer still ships.
-        tracing.annotate({"chunks": len(hits), "hidden_sentences": len(result.hidden), "refused": result.refused})
+        tracing.annotate({"chunks": len(hits), "hidden_sentences": len(result.hidden), "refused": result.refused,
+                          "langfuse.observation.output": result.text})  # the trace's output in Langfuse
         opinions = list(dict.fromkeys(m.group() for c in result.citations + result.derived_citations
                                       if (m := OPINION_RE.search(c))))
         publish(conn, job_id, "answer", {
