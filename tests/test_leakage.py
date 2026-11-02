@@ -5,8 +5,10 @@ import uuid
 import pytest
 from fastapi.testclient import TestClient
 
-from taxcite import api, jobs, store
+from taxcite import api, index, jobs, retrieve, store
 from taxcite.generate import Answer
+from taxcite.ingest import client_docs
+from test_documents import pdf
 
 client = TestClient(api.app)
 
@@ -17,8 +19,10 @@ def clean():
         jobs.create_table(conn)
         conn.execute("DELETE FROM jobs")
         conn.execute(store.TENANTS)
-        conn.execute("DELETE FROM tenants WHERE name LIKE 'test-%'")
+        client_docs.create_tables(conn)
+        conn.execute("DELETE FROM tenants WHERE name LIKE 'test-%'")  # their documents cascade
         conn.commit()
+        client_docs.sweep(conn, index.client())  # and their points
 
 
 @pytest.fixture
@@ -89,3 +93,34 @@ def test_no_client_data_reaches_the_citation_graph(stub_pipeline):
         for table, cols in (("citations", "citing || cited"), ("treatments", "citation || by_citation")):
             (n,) = conn.execute(f"SELECT count(*) FROM {table} WHERE {cols} LIKE '%%CANARY%%'").fetchone()
             assert n == 0
+
+
+HENDERSON = "Henderson workpapers. Depreciation schedule: delivery van placed in service 2024, MACRS 5-year, basis 41200."
+
+
+def test_another_tenants_document_is_never_listed_searched_or_deletable():
+    """G-A07's setup: A holds the Henderson workpapers; B can't find, see or remove them, nor tell they exist."""
+    a, b = key("A"), key("B")
+    with store.connect() as conn:
+        a_id, b_id = (store.tenant_for(conn, h["Authorization"].split()[1]) for h in (a, b))
+    doc = client.post("/documents", files={"file": ("henderson.pdf", pdf(HENDERSON))}, headers=a).json()["id"]
+
+    assert client.get("/documents", headers=b).json() == {"documents": []}
+    assert retrieve.search(HENDERSON, k=10, collection=index.CLIENT_COLLECTION, tenant=b_id) == []
+    missing = client.delete(f"/documents/{uuid.uuid4()}", headers=b)
+    r = client.delete(f"/documents/{doc}", headers=b)
+    assert r.status_code == missing.status_code == 404 and r.json() == missing.json()
+    assert client.delete("/documents/not-a-uuid", headers=b).status_code == 404
+
+    assert [d["id"] for d in client.get("/documents", headers=a).json()["documents"]] == [doc]  # still A's
+    assert retrieve.search(HENDERSON, k=1, collection=index.CLIENT_COLLECTION, tenant=a_id)[0].citation == "henderson.pdf, p. 1"
+    assert client.delete(f"/documents/{doc}", headers=a).status_code == 204
+    assert retrieve.search(HENDERSON, k=10, collection=index.CLIENT_COLLECTION, tenant=a_id) == []  # points go too
+
+
+def test_document_routes_need_a_known_key():
+    for headers in ({}, {"Authorization": "Bearer not-a-key"}):
+        assert client.post("/documents", files={"file": ("w.pdf", pdf("x"))}, headers=headers).status_code == 401
+        assert client.get("/documents", headers=headers).status_code == 401
+        assert client.delete(f"/documents/{uuid.uuid4()}", headers=headers).status_code == 401
+

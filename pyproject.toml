@@ -19,6 +19,8 @@ dependencies = [
     "eyecite>=2.7.8",
     "opentelemetry-sdk>=1.45.1",
     "opentelemetry-exporter-otlp-proto-http>=1.45.1",
+    "python-multipart>=0.0.33",
+    "pypdfium2>=5.14.0",
 ]
 
 [project.scripts]

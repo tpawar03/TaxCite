@@ -2719,6 +2719,8 @@ Plan: `tasks/plan.md` (Phase G). Gates: cross-tenant leakage 0 failures; injecti
 
 **Files:** `api.py`, `store.py`, `index.py`, a client-ingest module under `ingest/` (new file: you create it); fixtures under `tests/fixtures/`.
 
+**Status (2026-11-02):** done; 316 tests pass, OCR included (tesseract 5.5.4 reads both scan fixtures verbatim; the scanned SSN is redacted). Departures: `store.py` unchanged (the schema lives in `ingest/client_docs.py`); fixtures are built in `tests/test_documents.py`, not stored as files (a hand-written text PDF, a Pillow "scan", a pypdfium2 image-only PDF); OCR calls the `tesseract` CLI (no Python binding) and renders scanned PDF pages with pypdfium2 (new dependency, as is python-multipart); uploads are synchronous (50-page text PDF: 16 s); `search(..., tenant=)` landed now (G3 step 1's guard) because the harness needs it. Added: `client_docs.sweep` removes Qdrant points of deleted tenants (Postgres cascades, Qdrant can't). The SSN pattern needs both separators or neither: one optional separator also matched ZIP+4. Leakage harness: B can't list, search or delete A's document, and the 404 matches a random id's; the G-A06 canary is absent from the response, Postgres, Qdrant, the job record and every exported span.
+
 ## G3: Documents in answers
 
 **Goal:** an answer can use and cite the tenant's own documents, safely.

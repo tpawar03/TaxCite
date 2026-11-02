@@ -12,7 +12,7 @@ from functools import cache, lru_cache
 
 from qdrant_client import models
 
-from taxcite.index import COLLECTION, DENSE_MODEL, SPARSE_MODEL, client
+from taxcite.index import CLIENT_COLLECTION, COLLECTION, DENSE_MODEL, SPARSE_MODEL, client
 from taxcite.tracing import traced
 
 PREFETCH = 50  # candidates per branch before fusion
@@ -102,7 +102,7 @@ def edition_filter(year: int, back: int, forward: int) -> models.Filter:
 def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence[str] | None = None,
            collection: str = COLLECTION, qc=None, dense_name: str = DENSE_MODEL,
            rerank_name: str = RERANK_MODEL, sections: Sequence[str] | None = None,
-           year: int | None = None, editions: tuple[int, int] = (0, 0)) -> list[Hit]:
+           year: int | None = None, editions: tuple[int, int] = (0, 0), tenant: str | None = None) -> list[Hit]:
     """Top-k chunks for a query.
 
     Modes are the rungs of the eval ablation ladder (§9): "sparse" is BM25 only,
@@ -111,12 +111,19 @@ def search(query: str, k: int = 10, mode: str = "hybrid", source: str | Sequence
     A "+rerank" suffix ("hybrid+rerank") reranks those candidates with a cross-encoder.
     `sections` limits the search to those sections, e.g. the opinions a citation hop reached (C5).
     `year` limits publications to editions within `editions` = (back, forward) years of it (D3).
+    `tenant` limits the search to that tenant's points: the one tenant filter (G0), and the client collection
+    can't be searched without it.
     """
     qc = qc or client()
     mode, _, suffix = mode.partition("+")
     if suffix not in ("", "rerank"):
         raise ValueError(f"unknown mode suffix {suffix!r}; only '+rerank' exists")
+    if collection == CLIENT_COLLECTION and tenant is None:
+        raise ValueError("client documents are searched for one tenant: pass tenant=")
     flt = source_filter(source)
+    if tenant is not None:
+        mine = models.FieldCondition(key="tenant", match=models.MatchValue(value=tenant))
+        flt = models.Filter(must=[*(flt.must if flt else []), mine])
     if sections:
         within = models.FieldCondition(key="section", match=models.MatchAny(any=list(sections)))
         flt = models.Filter(must=[*(flt.must if flt else []), within])

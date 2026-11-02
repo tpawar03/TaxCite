@@ -257,3 +257,16 @@ def test_one_question_is_one_trace_with_a_span_per_step(monkeypatch):
     assert "Yes." in spans["synthesize"].attributes["langfuse.observation.output"]
     assert "<Connection>" in spans["query"].attributes["langfuse.observation.input"]
     assert spans["query"].attributes["langfuse.observation.output"] == answer["text"]
+
+
+def test_a_question_is_redacted_before_the_job_row_and_every_span(stub_pipeline):
+    """§3.4's ordering invariant, G-A06's canary: redaction at POST /queries, before anything stores or traces it."""
+    SPANS.clear()
+    job_id = client.post("/queries", json={"question": "My SSN is 123-45-6789. Can I deduct my van?"}).json()["id"]
+    client.get(f"/queries/{job_id}/events")
+    with store.connect() as conn:
+        job = jobs.get(conn, job_id, TENANT["id"])
+    exported = json.dumps([dict(s.attributes) for s in SPANS.get_finished_spans()])
+    assert job["question"] == "My SSN is [REDACTED SSN]. Can I deduct my van?"
+    assert "[REDACTED SSN]" in exported and "6789" not in exported and "6789" not in json.dumps(job, default=str)
+

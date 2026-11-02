@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "eval/embed_bench.py": {
-    "mtime": 1793222890.939199,
-    "seen": 1793226828.454303,
-    "ast_hash": "ecf4ba153d973cae38cc6096354f1446",
+    "mtime": 1793244632.9878676,
+    "seen": 1793244998.0980039,
+    "ast_hash": "7f23293d89730ded83fdccdf6bbc8a08",
     "semantic_hash": ""
   },
   "eval/llm_bench.py": {
@@ -66,9 +66,9 @@
     "semantic_hash": "84e22314505ccce8789a425888a654b5"
   },
   "eval/retrieval.py": {
-    "mtime": 1790904560.3989763,
-    "seen": 1790904561.082397,
-    "ast_hash": "ec04ce3809155a0aab3759b9b69f82f5",
+    "mtime": 1793229704.3523788,
+    "seen": 1793231033.88664,
+    "ast_hash": "ecd00998d7988aa0643f2bb325a671f1",
     "semantic_hash": ""
   },
   "eval/store_bench.py": {
@@ -210,9 +210,9 @@
     "semantic_hash": ""
   },
   "STATUS.md": {
-    "mtime": 1793226826.9099336,
-    "seen": 1793226828.457619,
-    "ast_hash": "3ad31a96c9107b4f8b0cfaca1f5cf416",
+    "mtime": 1793244996.5466113,
+    "seen": 1793244998.101307,
+    "ast_hash": "d75c22678d2599d49cfcd694862160ec",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
@@ -565,7 +565,7 @@
   },
   "eval/results/retrieval-golden-2026-09-27-k20-c5-graph.json": {
     "mtime": 1790533180.1422322,
-    "seen": 1793220571.699702,
+    "seen": 1793231947.112621,
     "ast_hash": "",
     "semantic_hash": ""
   },
@@ -1441,229 +1441,229 @@
   },
   "eval/results/f0-pairs-f3-dev-a.json": {
     "mtime": 1790904560.1022458,
-    "seen": 1793220571.6996632,
+    "seen": 1793231947.11258,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-b.json": {
     "mtime": 1790904560.108973,
-    "seen": 1793220571.6996639,
+    "seen": 1793231947.112581,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-c.json": {
     "mtime": 1790904560.1121237,
-    "seen": 1793220571.6996639,
+    "seen": 1793231947.112581,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-d.json": {
     "mtime": 1790904560.1198418,
-    "seen": 1793220571.6996648,
+    "seen": 1793231947.112582,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-e.json": {
     "mtime": 1790904560.1241682,
-    "seen": 1793220571.699666,
+    "seen": 1793231947.112582,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs-f3-dev-e2.json": {
     "mtime": 1790904560.1325579,
-    "seen": 1793220571.699666,
+    "seen": 1793231947.112583,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/f0-pairs.json": {
     "mtime": 1790904560.1409051,
-    "seen": 1793220571.699667,
+    "seen": 1793231947.112583,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3c.json": {
     "mtime": 1790904560.1803792,
-    "seen": 1793220571.699681,
+    "seen": 1793231947.1125991,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3d.json": {
     "mtime": 1790904560.1822295,
-    "seen": 1793220571.699681,
+    "seen": 1793231947.1125991,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3e.json": {
     "mtime": 1790904560.1839492,
-    "seen": 1793220571.699682,
+    "seen": 1793231947.1126,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/ragas-answers-f3e2.json": {
     "mtime": 1790904560.1878736,
-    "seen": 1793220571.699682,
+    "seen": 1793231947.1126,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/retrieval-dev-2026-09-28-k20-e4-arms-exact.json": {
     "mtime": 1790904560.2128217,
-    "seen": 1793220571.699696,
+    "seen": 1793231947.112614,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/retrieval-dev-2026-09-28-k8-e4-arms-exact.json": {
     "mtime": 1790904560.2252517,
-    "seen": 1793220571.6996968,
+    "seen": 1793231947.1126149,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5base.json": {
     "mtime": 1790904560.2537258,
-    "seen": 1793220571.699708,
+    "seen": 1793231947.112629,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5golden-pre.json": {
     "mtime": 1790904560.264152,
-    "seen": 1793220571.699709,
+    "seen": 1793231947.112629,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5golden.json": {
     "mtime": 1790904560.2796047,
-    "seen": 1793220571.699709,
+    "seen": 1793231947.1126301,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5labels.json": {
     "mtime": 1790904560.285338,
-    "seen": 1793220571.69971,
+    "seen": 1793231947.1126301,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5rule4.json": {
     "mtime": 1790904560.2880893,
-    "seen": 1793220571.69971,
+    "seen": 1793231947.1126301,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-e5rule4b.json": {
     "mtime": 1790904560.2903838,
-    "seen": 1793220571.69971,
+    "seen": 1793231947.112631,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3a.json": {
     "mtime": 1790904560.2956872,
-    "seen": 1793220571.699711,
+    "seen": 1793231947.112632,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3b.json": {
     "mtime": 1790904560.298703,
-    "seen": 1793220571.699711,
+    "seen": 1793231947.112632,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3c.json": {
     "mtime": 1790904560.3049452,
-    "seen": 1793220571.699712,
+    "seen": 1793231947.112632,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3d.json": {
     "mtime": 1790904560.3077013,
-    "seen": 1793220571.699712,
+    "seen": 1793231947.112633,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3e.json": {
     "mtime": 1790904560.3097873,
-    "seen": 1793220571.699713,
+    "seen": 1793231947.112633,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f3e2.json": {
     "mtime": 1790904560.3131204,
-    "seen": 1793220571.699713,
+    "seen": 1793231947.1126342,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4-none.json": {
     "mtime": 1790904560.3171647,
-    "seen": 1793220571.699713,
+    "seen": 1793231947.1126342,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4-part.json": {
     "mtime": 1790904560.3208957,
-    "seen": 1793220571.699714,
+    "seen": 1793231947.1126342,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4-sentence.json": {
     "mtime": 1790904560.3252933,
-    "seen": 1793220571.699714,
+    "seen": 1793231947.112635,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f4.json": {
     "mtime": 1790904560.3330722,
-    "seen": 1793220571.699714,
+    "seen": 1793231947.112635,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5-pref3.json": {
     "mtime": 1790904560.3383536,
-    "seen": 1793220571.6997151,
+    "seen": 1793231947.112635,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5-unverified.json": {
     "mtime": 1790904560.348852,
-    "seen": 1793220571.6997151,
+    "seen": 1793231947.1126359,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5.json": {
     "mtime": 1790904560.356456,
-    "seen": 1793220571.6997151,
+    "seen": 1793231947.1126359,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5b-r1.json": {
     "mtime": 1790904560.3617644,
-    "seen": 1793220571.699716,
+    "seen": 1793231947.1126359,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5b-r2.json": {
     "mtime": 1790904560.3649657,
-    "seen": 1793220571.699716,
+    "seen": 1793231947.112637,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5b-r2c.json": {
     "mtime": 1790904560.3689442,
-    "seen": 1793220571.699716,
+    "seen": 1793231947.112637,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5b-r2d.json": {
     "mtime": 1790904560.3722086,
-    "seen": 1793220571.699717,
+    "seen": 1793231947.112638,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5b.json": {
     "mtime": 1790904560.382806,
-    "seen": 1793220571.699718,
+    "seen": 1793231947.112639,
     "ast_hash": "",
     "semantic_hash": ""
   },
   "eval/results/temporal-answers-f5bl.json": {
     "mtime": 1790904560.3884351,
-    "seen": 1793220571.699718,
+    "seen": 1793231947.112639,
     "ast_hash": "",
     "semantic_hash": ""
   },
@@ -1683,6 +1683,48 @@
     "mtime": 1793220790.385902,
     "seen": 1793220864.132543,
     "ast_hash": "ac9b1510f01190c8efa794786d856531",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-dev-2026-10-28-k10-bgebase.json": {
+    "mtime": 1793229746.2028158,
+    "seen": 1793231033.8856819,
+    "ast_hash": "fb997cfe5aa94927ebcd01f7f3f7f1c3",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-dev-2026-10-28-k10-kanon.json": {
+    "mtime": 1793229961.4848576,
+    "seen": 1793231033.885683,
+    "ast_hash": "12dbdf719143fc2e63362fb90378fb02",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-dev-2026-10-28-k10-qwen.json": {
+    "mtime": 1793230218.2993145,
+    "seen": 1793231033.885684,
+    "ast_hash": "9fd9e7d71a78649ff7405535aec4f236",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-golden-2026-10-28-k10-bgebase.json": {
+    "mtime": 1793229858.5609653,
+    "seen": 1793231033.885919,
+    "ast_hash": "e347d210fbb0914efc079f8e18579b3c",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-golden-2026-10-28-k10-kanon.json": {
+    "mtime": 1793230515.1553805,
+    "seen": 1793231033.885919,
+    "ast_hash": "acc5a8710b38f0a614e28455178397d0",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-golden-2026-10-28-k10-qwen.json": {
+    "mtime": 1793231008.53458,
+    "seen": 1793231033.88592,
+    "ast_hash": "6bf2778df48c8f9b9481ebe7f0177d46",
+    "semantic_hash": ""
+  },
+  "eval/results/retrieval-golden-2026-10-28-k10-qwen-keepalive.json": {
+    "mtime": 1793244968.6974845,
+    "seen": 1793244998.0998242,
+    "ast_hash": "fbe0cde2993d19d2faaec61738782b92",
     "semantic_hash": ""
   }
 }

@@ -6,12 +6,13 @@ from datetime import datetime, timedelta, timezone
 
 import psycopg
 import redis
-from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Response
+from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Response, UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
 
-from taxcite import jobs, store, tracing
+from taxcite import index, jobs, store, tracing
+from taxcite.ingest import client_docs
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://taxcite:taxcite@localhost:5433/taxcite")
@@ -86,11 +87,12 @@ def post_query(query: Query, background: BackgroundTasks, who: str = Depends(ten
     The pipeline runs 20-30s, longer than free-tier proxies keep a connection open,
     so the client gets an id and watches /queries/{id}/events instead.
     """
+    question = client_docs.redact(query.question)  # G0 finding: before the job row, the pipeline and any span
     with store.connect() as conn:
         jobs.create_table(conn)
         _over_quota(conn, who)
-        job_id = jobs.create(conn, query.question, who)
-    background.add_task(_run_job, job_id, query.question, query.k, who)
+        job_id = jobs.create(conn, question, who)
+    background.add_task(_run_job, job_id, question, query.k, who)
     return {"id": job_id, "events": f"/queries/{job_id}/events"}
 
 
@@ -174,3 +176,30 @@ def stream_events(job_id: str, who: str = Depends(tenant)) -> StreamingResponse:
 
     return StreamingResponse(events(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.post("/documents", status_code=201)
+def post_document(file: UploadFile, who: str = Depends(tenant)) -> dict:
+    """Upload one client document (G2). Synchronous: a 50-page text PDF took 16 s, embedding included.
+    ponytail: a long scan through OCR can outlast a free-tier proxy's timeout; run it as a job (ADR-9) if hosting does."""
+    data = file.file.read(client_docs.MAX_BYTES + 1)  # one byte over is enough to refuse it
+    with store.connect() as conn:
+        try:
+            return client_docs.ingest(conn, index.client(), who, file.filename or "document", data)
+        except client_docs.Rejected as e:
+            raise HTTPException(status_code=e.status, detail=str(e))
+
+
+@app.get("/documents")
+def get_documents(who: str = Depends(tenant)) -> dict:
+    with store.connect() as conn:
+        return {"documents": client_docs.documents(conn, who)}
+
+
+@app.delete("/documents/{doc_id}", status_code=204)
+def delete_document(doc_id: str, who: str = Depends(tenant)) -> Response:
+    with store.connect() as conn:
+        if not client_docs.delete(conn, index.client(), who, doc_id):
+            raise HTTPException(status_code=404, detail="no such document")
+    return Response(status_code=204)
+
