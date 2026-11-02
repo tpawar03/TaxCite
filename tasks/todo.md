@@ -2735,6 +2735,8 @@ Plan: `tasks/plan.md` (Phase G). Gates: cross-tenant leakage 0 failures; injecti
 
 **Files:** `decompose.py`, `retrieve.py`, `generate.py`, `verify.py`, `jobs.py`; `eval/dev.jsonl` (five new rows, approved).
 
+**Status (2026-11-02):** steps 1–3 built, 320 tests pass. Step 1 departs in where the search runs: `dc.client_hits`, after `chunks` and outside it (public retrieval unchanged), searching with the client facts *and* the question, since a plan for "summarize the intake form" may have no client fact. Step 2's rule is conditional on documents being present (measured prompts unchanged otherwise). Step 4: rows approved, in `eval/dev-documents.jsonl` (not `dev.jsonl`: every dev script reads it, and five rows would shift dev's population). Run 2026-11-02 ($0.036): retrieved 5/5, cited 4/5; findings in `eval/results/g3-documents.md`. Added on your call: a conclusion cited only to client documents is not shown (D56). Left: Checkpoint 2.
+
 ## ✅ Checkpoint 2 (human review)
 - [ ] Leakage harness green on G1–G3
 - [ ] One end-to-end demo question per tenant read by you

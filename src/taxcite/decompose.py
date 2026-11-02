@@ -25,7 +25,10 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field, replace
 from functools import cache
 
+from qdrant_client import models
+
 from taxcite.generate import MODEL, call_model, cost
+from taxcite.index import CLIENT_COLLECTION, client
 from taxcite.retrieve import RERANK_MODEL, Hit, rerank, search
 from taxcite.tracing import traced
 
@@ -395,6 +398,25 @@ def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: in
             break
         chosen.setdefault(h.citation, h)
     return sorted(chosen.values(), key=lambda h: -h.score)[:k]
+
+
+CLIENT_K = 3  # per search; a first guess, like G2's limits
+
+
+@traced("client_documents")
+def client_hits(d: Decomposition, tenant: str, k: int = CLIENT_K) -> list[Hit]:
+    """G3: the asking tenant's own document chunks, searched with each client fact and with the question itself
+    (a plan can have no client fact for "summarize the intake form"). Kept out of `chunks` on purpose: public
+    retrieval, and every number measured on it, are unchanged. A tenant with no documents searches nothing."""
+    qc = client()
+    if not qc.collection_exists(CLIENT_COLLECTION) or not qc.count(CLIENT_COLLECTION, count_filter=models.Filter(
+            must=[models.FieldCondition(key="tenant", match=models.MatchValue(value=tenant))])).count:
+        return []
+    found: dict[str, Hit] = {}
+    for query in [*d.facts, d.question]:
+        for h in search(query, k=k, collection=CLIENT_COLLECTION, tenant=tenant):
+            found.setdefault(h.citation, h)
+    return list(found.values())
 
 
 def merge(subqueries: Sequence[SubQuery], k: int | None) -> list[Hit]:

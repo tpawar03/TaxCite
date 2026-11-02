@@ -18,7 +18,7 @@ from pdfminer.layout import LTTextContainer
 from qdrant_client import models
 
 from taxcite import index, retrieve, store
-from taxcite.chunk import estimate_tokens
+from taxcite.chunk import authority, estimate_tokens
 from taxcite.ingest.irs_pubs import OVERLAP, TARGET_TOKENS, windows
 
 # First guesses (plan G), in one place: FR-17 left the size open.
@@ -180,7 +180,8 @@ def ingest(conn, qc, tenant: str, name: str, data: bytes) -> dict:
                 vector={"dense": d.tolist(),
                         "sparse": models.SparseVector(indices=s.indices.tolist(), values=s.values.tolist())},
                 payload={"tenant": tenant, "document": doc, "key": r["key"], "citation": r["citation"],
-                         "heading": name, "section": doc, "source": "client", "page": r["page"], "text": r["text"]})
+                         "heading": name, "section": doc, "source": "client", "page": r["page"], "text": r["text"],
+                         "authority": authority("client", r["citation"], doc)})
             for r, d, s in zip(rows, dense.embed(bodies), sparse.embed(bodies))])
     conn.commit()
     return {"id": doc, "name": name, "kind": file_kind, "pages": len(texts), "chunks": len(rows),

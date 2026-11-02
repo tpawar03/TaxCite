@@ -149,6 +149,7 @@ def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None)
         }, rdb)
         dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE, siblings=dc.SIBLINGS)
         hits = dc.chunks(plan, k)
+        documents = dc.client_hits(plan, tenant) if tenant else []  # G3
         groups, skipped, verdicts = plan.groups({h.citation for h in hits}), [], []
         if dc.GATE:  # F2: a part its sources can't answer is never written
             groups, skipped, verdicts = dc.gate(question, groups, plan.as_of)
@@ -158,8 +159,9 @@ def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None)
         if not written:
             result = skipped_only(skipped)  # nothing answerable: no synthesis, nothing to verify
         else:
-            publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
-            result = answer_from_groups(question, groups, facts=plan.facts, as_of=plan.as_of, skipped=skipped)
+            publish(conn, job_id, "synthesizing", {"chunks": len(hits), "documents": len(documents)}, rdb)
+            result = answer_from_groups(question, groups, facts=plan.facts, as_of=plan.as_of, skipped=skipped,
+                                        documents=documents)
         if dc.VERIFY and written:  # F4: nothing is sent until every sentence is checked (ADR-9: the answer stays buffered)
             from taxcite import verify
             publish(conn, job_id, "verifying", {"sentences": len(cited_items(result.structured["data"]))

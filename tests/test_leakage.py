@@ -1,5 +1,6 @@
 """Cross-tenant leakage (Phase G gate: 0 failures). Grows with G2 (documents) and G3 (answers)."""
 
+import json
 import uuid
 
 import pytest
@@ -8,7 +9,7 @@ from fastapi.testclient import TestClient
 from taxcite import api, index, jobs, retrieve, store
 from taxcite.generate import Answer
 from taxcite.ingest import client_docs
-from test_documents import pdf
+from test_documents import ask, pdf, stub_models  # noqa: F401 (a fixture)
 
 client = TestClient(api.app)
 
@@ -123,4 +124,17 @@ def test_document_routes_need_a_known_key():
         assert client.post("/documents", files={"file": ("w.pdf", pdf("x"))}, headers=headers).status_code == 401
         assert client.get("/documents", headers=headers).status_code == 401
         assert client.delete(f"/documents/{uuid.uuid4()}", headers=headers).status_code == 401
+
+
+def test_another_tenants_document_never_reaches_an_answer(stub_models):
+    """G-A07: B's prompts are identical with and without A's Henderson workpapers, and never show them."""
+    a, b = key("A"), key("B")
+    question = "What does the Henderson engagement's depreciation schedule show?"
+    before = ask(b, question)["answer"]
+    client.post("/documents", files={"file": ("henderson.pdf", pdf(HENDERSON))}, headers=a)
+    after = ask(b, question)["answer"]
+    assert stub_models["synthesis"][0] == stub_models["synthesis"][1] and stub_models["verify"][0] == stub_models["verify"][1]
+    assert {k: v for k, v in before.items() if k != "trace_id"} == {k: v for k, v in after.items() if k != "trace_id"}
+    sent = json.dumps(stub_models)
+    assert "41200" not in sent and "henderson.pdf" not in sent and "client_document" not in sent
 
