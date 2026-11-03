@@ -265,3 +265,16 @@ def test_a_conclusion_resting_only_on_a_client_document_is_not_shown(stub_models
     answer = ask(h, "What wages does my client's W-2 report?")["answer"]
     assert "The W-2 reports Box 1 wages [w2.pdf, p. 1]." in answer["text"] and "deductible" not in answer["text"]
 
+
+def test_only_a_question_naming_an_upload_gets_the_no_such_document_rule(stub_models):
+    """Checkpoint 2: B asked about "Maria Lopez's intake memo" and was answered from case law instead. With nothing
+    on file the note is added in code and the prompts stay the ones measured before G3; with documents, rule 11."""
+    _, h = tenant("A")
+    answer = ask(h, "What does Maria Lopez's intake memo say about her losses?")["answer"]
+    assert generate.NO_DOCUMENT in answer["text"]
+    upload(h, "w2.pdf", pdf(W2))
+    ask(h, "What does Maria Lopez's intake memo say about her losses?")
+    ask(h, "My client ignored the IRS's requests for documents. What did T.C. Memo. 2021-50 hold?")
+    (none, _), (asked, _), (plain, _) = stub_models["synthesis"]
+    assert generate.ASKED_RULE not in none and generate.ASKED_RULE in asked and generate.ASKED_RULE not in plain
+

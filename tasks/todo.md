@@ -2740,6 +2740,7 @@ Plan: `tasks/plan.md` (Phase G). Gates: cross-tenant leakage 0 failures; injecti
 ## ✅ Checkpoint 2 (human review)
 - [ ] Leakage harness green on G1–G3
 - [ ] One end-to-end demo question per tenant read by you
+  - Run 2026-11-02: `eval/results/g3-demo.md`. Open: A cites no statute or opinion (retrieval). B: "no such document is on file" added in code when a question names an upload and none is on file (prompt rule ignored live); B's off-topic legal part is still shown.
 
 ## G4: Prompt-path injection corpus (needs credit and your go, ~$2–3)
 
