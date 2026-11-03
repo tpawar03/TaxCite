@@ -189,6 +189,19 @@ def test_statute_floor_searches_the_statute_and_keeps_it_through_reranking(monke
     assert not {h.source for h in dc.chunks(off, 3, floor=0)} & {"usc"}   # off: the pool never had it
 
 
+def test_the_sub_querys_own_statute_hit_is_kept_past_the_reranker(monkeypatch):
+    """Checkpoint 2: the question's words ranked § 461(l) first and § 183 out of the top 6; the planner's "activity
+    not engaged in for profit" found § 183 first, and the reranker, scoring against the question, would drop it."""
+    question = [hit(f"26 U.S.C. § 461(l)({i})", source="usc") for i in range(1, 5)]
+    own = [hit("26 U.S.C. § 183(a)-(d)", source="usc")]
+    monkeypatch.setattr(dc, "search", lambda q, k, mode, source, **kw: own[:k] if q == "for profit" else question)
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: sorted(hits, key=lambda h: h in own))  # last
+    d = dc.retrieve(dc.Decomposition("q", plan(("statutory", "for profit"))), k=3, statute=1, planned=1)
+    assert "26 U.S.C. § 183(a)-(d)" in [h.citation for h in dc.chunks(d, 3)]
+    off = dc.retrieve(dc.Decomposition("q", plan(("statutory", "for profit"))), k=3, statute=1)
+    assert "26 U.S.C. § 183(a)-(d)" not in [h.citation for h in dc.chunks(off, 3)]
+
+
 def scored(citation, score, source, kind, status, lvl):
     return Hit(citation=citation, heading="h", text="t", score=score, section=citation, source=source,
                authority={"type": kind, "status": status, "level": lvl})

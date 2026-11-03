@@ -2740,7 +2740,74 @@ Plan: `tasks/plan.md` (Phase G). Gates: cross-tenant leakage 0 failures; injecti
 ## ✅ Checkpoint 2 (human review)
 - [ ] Leakage harness green on G1–G3
 - [ ] One end-to-end demo question per tenant read by you
-  - Run 2026-11-02: `eval/results/g3-demo.md`. Open: A cites no statute or opinion (retrieval). B: "no such document is on file" added in code when a question names an upload and none is on file (prompt rule ignored live); B's off-topic legal part is still shown.
+  - Run 2026-11-02: `eval/results/g3-demo.md`. Both fixed 2026-11-02: A cites § 183 and an opinion (planned statute slot; golden Recall@10 0.568 → 0.603); B gets "no such document is on file" alone. Every exit-condition row yes. Faithfulness re-measured: 0.951 with the slot vs 0.948 without (neutral within noise; floor 0.855). Left: your review.
+
+## G3b: Users, login and data scope per admin (added 2026-11-02, your decisions; **deferred to after Phase H, optional**)
+
+**Deferred (your decision, 2026-11-02):** not built in Phase G. The success criteria (live URL, eval dashboard) don't need it, and it's generic SaaS plumbing across every route and test, so G4–G7 and Phase H come first. The plan below is kept as written, to build after H if time allows; a smaller version (per-user keys, two roles, no sessions or lockout, about a day) is the fallback.
+
+**Goal:** one firm. Inside it, many admins; each admin has their own members. A document is seen only by the member who uploaded it and that member's admin. Nothing crosses between admins, or between two members of one admin.
+
+**Your decisions (2026-11-02):**
+- **One firm.** The deployment has a single tenant row. The tenant column and its tests stay (built, tested, free to keep), but the boundary that matters is now the admin's team.
+- **An admin's own upload is seen only by that admin**, the same rule as a member's ("uploader and uploader's admin"; for an admin that's just themselves).
+- **An admin's question uses one person's documents, chosen per question**: their own, or one of their members'. One answer never mixes two people's clients.
+- **The operator creates admins** (a CLI; no owner role in the app). **Each member has exactly one admin**, who creates them.
+
+**The scope model.** Every document, chunk, Qdrant point and job carries two ids, fixed at write time:
+
+| Field | Member uploads | Admin uploads |
+|---|---|---|
+| `owner` | the member | the admin |
+| `admin` | the member's admin | the admin |
+
+One function, `scope(user)`, turns the caller into a filter, and every read goes through it (Postgres `WHERE` and the Qdrant `Filter`, the way `search(..., tenant=)` works today):
+
+| Caller | Can see (list, read, events, delete) | An answer searches |
+|---|---|---|
+| member *m* | `owner = m` | `owner = m` |
+| admin *a* | `admin = a` (own uploads and every member's) | `owner = for_user`, where `for_user` is *a* or one of *a*'s members (default *a*); anyone else is 404 |
+
+Qdrant payload gains `owner` and `admin` (both indexed); `tenant` stays. Filtering on stored ids, not on a join, keeps one filter function and no lookup per search.
+
+**Jobs.** A job records `asked_by`, `for_user` (whose documents it used) and `admin`. Visible to the asker and the asker's admin. A member doesn't see questions their admin asked about their documents (default; the answer is the admin's work).
+
+**Users and keys.**
+- `users`: tenant, email, role (`admin` / `member`), `admin_id` (null for admins, required for members), scrypt hash and salt (`hashlib.scrypt`, no new dependency).
+- Sessions: `POST /login` returns a random token, stored as SHA-256 with a 12-hour expiry; `POST /logout` deletes it.
+- **API keys become per-user** and carry that user's scope. A firm-wide key would see across admins, which is the one thing this model forbids, so the old tenant key goes. Tests, evals and CI use keys of test users.
+- Login hardening: one response and timing for unknown email or wrong password; 5 failures per email per 15 minutes, then 429.
+
+**Routes.**
+- Admin only (a member gets 403): `POST /members` (creates a member under the caller), `GET /members` (the caller's team only), `DELETE /members/{id}` (another admin's member is 404).
+- `POST /queries` takes an optional `for_user`: admins only; it must be the caller or one of the caller's members, else 404.
+- Admins can't see other admins or their members: no route lists them.
+
+**Lifecycle.**
+- **A member is removed:** their documents and jobs pass to their admin (`owner` becomes the admin, in Postgres and in one Qdrant `set_payload` by filter). Client files aren't lost when staff leave.
+- **An admin is removed (CLI):** refused while they have members (reassign or remove them first); their own documents are deleted.
+- **Moving a member to another admin:** out of scope. It would rewrite `admin` on every one of their rows and points; add it when someone needs it.
+
+**Quotas.** Per user (uploads 20/day, queries 50/day) plus the global daily cap; per-firm counting would let one person exhaust everyone's.
+
+**Tracing.** `langfuse.user.id` becomes the user id; spans also carry `admin`. Redaction is unchanged.
+
+**Leakage harness, rebuilt as an actor matrix.** Admin A1 with members m1 and m2; admin A2 with member m3. Every endpoint (list, read, events, delete, search, answers, members routes) is probed for each pair:
+- m1 → m2's document, m1 → A1's own document, m1 → A2 or m3: 404, and m1's answer identical with and without their uploads (G-A07's test, one level down)
+- A1 → m1, m2: visible; A1 asking `for_user=m1` uses only m1's documents; A1 → A2, m3 (documents, jobs, `for_user=m3`, `DELETE /members/m3`): 404
+- m1 → admin routes: 403
+- after m1 is removed, A1 owns m1's documents and m2 still can't see them
+
+**Steps:**
+1. `users`, `sessions`, per-user `api_keys`; the operator CLI (`create-admin`); `POST /login`, `/logout`; one auth dependency resolves (user, role, admin).
+2. `owner` and `admin` on `client_documents`, `client_chunks`, Qdrant points and jobs; `scope(user)`; `search(..., tenant=)` becomes `search(..., scope=)` and still raises without one.
+3. `for_user` on `POST /queries`; members routes; member removal hands documents to the admin.
+4. Leakage harness as above (red first, then green); existing tests moved from the tenant key to user keys.
+5. G5's page: a login form and, for admins, a "documents of:" picker that sets `for_user`.
+
+**Acceptance:** every cell of the actor matrix holds (0 failures); existing tests pass on user keys; no new dependency; `eval/results/g0-threat-model.md` updated with the new routes and the scope model.
+
+**Files:** `store.py`, `api.py`, `jobs.py`, `retrieve.py`, `decompose.py`, `ingest/client_docs.py`, `cli.py`; `tests/test_auth.py` (new, yours to create), `tests/test_leakage.py`, `tests/test_documents.py`.
 
 ## G4: Prompt-path injection corpus (needs credit and your go, ~$2–3)
 

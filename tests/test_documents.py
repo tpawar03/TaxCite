@@ -266,6 +266,20 @@ def test_a_conclusion_resting_only_on_a_client_document_is_not_shown(stub_models
     assert "The W-2 reports Box 1 wages [w2.pdf, p. 1]." in answer["text"] and "deductible" not in answer["text"]
 
 
+def test_a_question_only_about_documents_none_on_file_gets_only_the_note(stub_models, monkeypatch):
+    """Checkpoint 2: B's plan wanted only client facts, and the fallback's public search answered substantiation law
+    above the note. With nothing on file there is nothing to search: no retrieval, no synthesis."""
+    from taxcite import decompose as dc
+
+    _, h = tenant("A")
+    monkeypatch.setattr(dc, "call_model", lambda *a, **k: (json.dumps(
+        {"as_of": None, "subqueries": [{"kind": "client_fact", "query": "Maria Lopez's cake business losses"}]}), 1, 1))
+    monkeypatch.setattr(dc, "retrieve", lambda *a, **k: pytest.fail("public retrieval ran"))
+    answer = ask(h, "What does Maria Lopez's intake memo say about her cake business losses?")["answer"]
+    assert answer["text"].endswith(generate.NO_DOCUMENT) and answer["citations"] == []
+    assert stub_models["synthesis"] == [] and stub_models["verify"] == []
+
+
 def test_only_a_question_naming_an_upload_gets_the_no_such_document_rule(stub_models):
     """Checkpoint 2: B asked about "Maria Lopez's intake memo" and was answered from case law instead. With nothing
     on file the note is added in code and the prompts stay the ones measured before G3; with documents, rule 11."""

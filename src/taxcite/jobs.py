@@ -128,7 +128,8 @@ def get(conn, job_id: str, tenant: str) -> dict | None:
 def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None) -> None:
     """The pipeline, reporting each stage. Phases C-F add their steps here. One run is one trace (G1b)."""
     from taxcite import decompose as dc
-    from taxcite.generate import OPINION_RE, answer_from_groups, authorities, cited_items, skipped_only
+    from taxcite.generate import (DOCUMENT_ASKED, NO_DOCUMENT, OPINION_RE, answer_from_groups, authorities,
+                                  cited_items, skipped_only)
     from taxcite.ingest.citations import flags
 
     try:
@@ -147,11 +148,17 @@ def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None)
             "subqueries": [{"kind": s.kind, "query": s.query} for s in plan.subqueries],
             "fallback": plan.fallback,
         }, rdb)
-        dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE, siblings=dc.SIBLINGS)
-        hits = dc.chunks(plan, k)
         documents = dc.client_hits(plan, tenant) if tenant else []  # G3
-        groups, skipped, verdicts = plan.groups({h.citation for h in hits}), [], []
-        if dc.GATE:  # F2: a part its sources can't answer is never written
+        # Checkpoint 2: the plan wants only client facts, the question names an upload, and none is on file. The
+        # fallback's public search would answer a question nobody asked (B got substantiation case law).
+        only_documents = (plan.fallback == "no searchable sub-query" and not documents
+                          and bool(DOCUMENT_ASKED.search(question)))
+        hits, groups, skipped, verdicts = [], [], [("The client's uploaded documents", NO_DOCUMENT)], []
+        if not only_documents:
+            dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE, siblings=dc.SIBLINGS, planned=dc.PLANNED)
+            hits = dc.chunks(plan, k)
+            groups, skipped = plan.groups({h.citation for h in hits}), []
+        if dc.GATE and not only_documents:  # F2: a part its sources can't answer is never written
             groups, skipped, verdicts = dc.gate(question, groups, plan.as_of)
             publish(conn, job_id, "checking_sufficiency", {
                 "parts": [{k: v[k] for k in ("part", "sufficient", "missing")} for v in verdicts]}, rdb)

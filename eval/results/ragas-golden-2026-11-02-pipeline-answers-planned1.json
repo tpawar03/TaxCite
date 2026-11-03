@@ -1,0 +1,3327 @@
+{
+  "judge": "claude-haiku-4-5",
+  "k": 8,
+  "repeats": 1,
+  "gate": 0.85,
+  "questions": "eval/golden.jsonl",
+  "stopped": null,
+  "summary_per_run": [
+    {
+      "rows": 96,
+      "scored": 90,
+      "faithfulness": 0.9513888888888888,
+      "perfect_rows": 80,
+      "refusals": 6,
+      "refusal_rate": 0.0625,
+      "answers_with_no_claim": 0,
+      "claims": 408,
+      "unsupported_claims": 11
+    }
+  ],
+  "faithfulness_per_run": [
+    0.9513888888888888
+  ],
+  "judge_cost_usd": 0.5267010000000002,
+  "rows": [
+    {
+      "id": "G-S01",
+      "refused": false,
+      "faithfulness": 0.5,
+      "claims": [
+        "If for any 2 of 7 consecutive taxable years, the gross income derived from an activity consisting in major part of the breeding, training, showing, or racing of horses exceeds the deductions attributable to such activity, that activity is presumed to be engaged in for profit unless the Commissioner establishes to the contrary",
+        "The client's horse breeding and showing operation is presumed to be engaged in for profit"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.183-1(c)(1) and 26 U.S.C. \u00a7 183(d) state this exact presumption for horse activities."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Client made profit in only 2 of 7 years, but sources don't confirm gross income exceeded deductions in those years."
+        }
+      ]
+    },
+    {
+      "id": "G-S02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The home office deduction requires that the space used for business is used exclusively for business purposes",
+        "The exclusive use requirement is an all-or-nothing standard",
+        "If a space is used for any non-business purpose such as children's homework, it does not qualify for the home office deduction",
+        "A taxpayer may only have one principal place of business",
+        "The determination of a principal place of business must consider the focal point of the taxpayer's business activities"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources require exclusive use on regular basis for home office deduction eligibility."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2024-82 states exclusive use is an 'all-or-nothing standard.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "If any non-business use occurs, exclusive use requirement fails under Hamacher precedent cited in sources."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Curphey v. Commissioner holds taxpayer has one principal place of business per trade/business."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Jackson v. Commissioner requires ascertaining the 'focal point' of business activities to determine principal place."
+        }
+      ]
+    },
+    {
+      "id": "G-S03",
+      "refused": false,
+      "faithfulness": 0.3333333333333333,
+      "claims": [
+        "A home office deduction is only allowed if allocable to a portion of the dwelling unit which is exclusively used on a regular basis as the taxpayer's principal place of business",
+        "A home office deduction can create a loss if the business earns very little income",
+        "Home office expenses may create a loss if the business earns very little income, as long as the expenses are properly attributable to the portion of the property used for the business and meet the requirements of section 280A"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2023-128 directly states this requirement from \u00a7 280A(a)."
+        },
+        {
+          "index": 1,
+          "supported": false,
+          "why": "Sources discuss home office deduction requirements but do not address whether deductions can create losses."
+        },
+        {
+          "index": 2,
+          "supported": false,
+          "why": "Sources describe home office deduction eligibility but do not address loss creation with low income."
+        }
+      ]
+    },
+    {
+      "id": "G-S04",
+      "refused": false,
+      "faithfulness": 0.75,
+      "claims": [
+        "A taxpayer must satisfy the strict substantiation requirements of section 274(d) to deduct business gifts",
+        "For car expenses related to listed property, a taxpayer must meet the strict substantiation requirements of section 274(d)",
+        "Deductions for car expenses must include records that state the business purpose of the expenses",
+        "Deductions for car expenses must include a mileage log for travel"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 274(d) imposes strict substantiation requirements for gifts; case law confirms this applies to business gifts."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state listed property includes passenger automobiles and section 274(d) strict substantiation applies to listed property."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2013-198 states records must state business purpose; this is required under section 274(d) substantiation."
+        },
+        {
+          "index": 3,
+          "supported": false,
+          "why": "Sources require business purpose documentation but do not mandate a mileage log specifically; only general substantiation required."
+        }
+      ]
+    },
+    {
+      "id": "G-S05",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The deduction for business meals is limited to 50 percent of the expense",
+        "The 50 percent limit on meal expenses applies if the expense is otherwise deductible and is not covered by an exception",
+        "Exceptions to the 50 percent limit may apply when food or beverages are provided to the general public or sold to customers in a bona fide transaction",
+        "No deduction is allowed for business meals if the expense is lavish or extravagant",
+        "No deduction is allowed for business meals unless the taxpayer or an employee is present at the furnishing of the food or beverages"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 274(n)(1) states meal expenses deduction limited to 50 percent."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 463 states 50% limit applies if expense is otherwise deductible and not covered by exceptions."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.274-12(c)(2) examples show exceptions when food consumed primarily by general public."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 274(k)(1)(A) requires expense not be lavish or extravagant under circumstances."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 274(k)(1)(B) requires taxpayer or employee present at furnishing of food or beverages."
+        }
+      ]
+    },
+    {
+      "id": "G-S06",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A business can deduct gifts to a single recipient up to $25 per year",
+        "The $25 annual limitation applies to the total of all gifts made to that individual during the taxable year",
+        "If a partnership makes a gift, the $25 limitation applies at both the partnership level and the individual partner level",
+        "A husband and wife are treated as one taxpayer for the purpose of the $25 annual limitation on gifts"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.274-3(a) and 26 U.S.C. \u00a7 274(b)(1) both state deduction allowed up to $25 per individual per year."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.274-3(a) states expenses cannot exceed $25 when added to prior gift expenses to that individual during the taxable year."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.274-3(f)(1) explicitly states the $25 limitation applies at both partnership and individual partner levels."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 CFR 1.274-3(f)(2) and 26 U.S.C. \u00a7 274(b)(2)(B) both state husband and wife are treated as one taxpayer for the $25 limitation."
+        }
+      ]
+    },
+    {
+      "id": "G-S07",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A self-employed individual may deduct travel expenses incurred while away from home in pursuit of a trade or business under section 162(a)(2)",
+        "To qualify for deduction under section 162(a)(2), the traveling expense must be reasonable and necessary",
+        "To qualify for deduction under section 162(a)(2), the traveling expense must be incurred while the taxpayer was traveling away from home",
+        "To qualify for deduction under section 162(a)(2), the traveling expense must be directly related to the conduct of the taxpayer's trade or business",
+        "The term 'away from home' means the taxpayer must be on a trip that requires the taxpayer to stop for sleep or a substantial period of rest",
+        "If the engagement in another city is considered temporary, the taxpayer's tax home may remain unchanged, allowing for the deduction of travel expenses",
+        "If the engagement exceeds one year, the taxpayer may not be treated as temporarily away from home, which could affect the deductibility of travel expenses"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state self-employed individuals may deduct traveling expenses while away from home in pursuit of trade or business under section 162(a)(2)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2026-43 lists reasonable and necessary as first requirement for section 162(a)(2) deduction."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2026-43 lists traveling away from home as second requirement for section 162(a)(2) deduction."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2026-43 lists directly related to trade or business conduct as third requirement."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2013-71 cites Correll rule requiring trip to require sleep or substantial rest period to be away from home."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo 2026-43 states tax home may remain unchanged if period at new location is temporary."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 162(a) flush language states employment period exceeding 1 year not treated as temporary away from home."
+        }
+      ]
+    },
+    {
+      "id": "G-S08",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The aggregate cost of section 179 property that a taxpayer may elect to expense under section 179 for any taxable year is subject to a dollar limitation",
+        "For taxable years beginning in 2003 and thereafter, the section 179 dollar limitation is $25,000",
+        "The section 179 dollar limitation is reduced by the amount of any excess section 179 property placed in service during the taxable year",
+        "The section 179(b)(1) limitation is reduced by the amount by which the cost of section 179 property placed in service during the taxable year exceeds $4,000,000",
+        "For enterprise zone businesses, the section 179(b)(1) limitation is increased by the lesser of $35,000 or the cost of section 179 property which is qualified zone property placed in service during the taxable year",
+        "A husband and wife who file a joint income tax return are treated as one taxpayer in determining the amount of the section 179 dollar limitation",
+        "The section 179 dollar limitation applies to each taxpayer and not to each trade or business in which the taxpayer has an interest"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.179-2(a) states there is a dollar limitation on aggregate cost of section 179 property."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.179-2(b)(1) specifies $25,000 for taxable years beginning in 2003 and thereafter."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.179-2(b)(1) states dollar limitation is reduced by excess section 179 property placed in service."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 179(b)(2) states limitation is reduced by amount cost exceeds $4,000,000."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 1397A(a)(1) increases section 179(b)(1) limitation by lesser of $35,000 or qualified zone property cost."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 CFR 1.179-2(b)(5)(i) states joint return filers are treated as one taxpayer for dollar limitation."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 CFR 1.179-2(a) states dollar limitation applies to each taxpayer, not each trade or business."
+        }
+      ]
+    },
+    {
+      "id": "G-S09",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "If the business use of a car falls to 50% or less, the taxpayer can no longer use an accelerated depreciation method for that car",
+        "For the year the business use drops to 50% or less and all later years in the recovery period, the taxpayer must use the straight line depreciation method over a 5-year recovery period",
+        "If the business use percentage does not exceed 50% of total use, the depreciation deduction is determined under the alternative depreciation system",
+        "Property for which trade or business use does not exceed 50% of its total use is not considered qualified property for accelerated depreciation"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 463 explicitly states taxpayers must no longer use accelerated depreciation when business use drops to 50% or less."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 463 states straight line depreciation over 5-year recovery period applies when business use drops to 50% or less for that year and all later years."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 280F(b)(1) and (3) state depreciation is determined under alternative depreciation system when business use does not exceed 50%."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2024-76 cites \u00a7\u00a7 168(k)(2)(D) and 280F(b)(1), (3) stating property not exceeding 50% trade or business use is not qualified property."
+        }
+      ]
+    },
+    {
+      "id": "G-S10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "To qualify as a real estate professional for the tax year, an individual must perform more than 750 hours of services during the tax year in real property trades or businesses in which they materially participate"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(c)(7)(B)(ii) requires more than 750 hours of services in real property trades or businesses in which taxpayer materially participates."
+        }
+      ]
+    },
+    {
+      "id": "G-S11",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A client who actively participates in rental real estate activities may deduct up to $25,000 of passive activity losses against ordinary income if their adjusted gross income is below certain thresholds",
+        "The maximum allowable loss deduction of $25,000 is reduced by 50% for each dollar of modified adjusted gross income over $100,000",
+        "The client's deduction will be limited because their income exceeds $100,000"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(i)(1) allows up to $25,000 offset for active participants; phaseout begins at $150,000 per \u00a7 469(i)(3)(A)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Multiple sources confirm 50% reduction for each dollar over $100,000 of modified AGI per \u00a7 469(i)(3)(A)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Client's $120,000 AGI exceeds $100,000 threshold, triggering phaseout under \u00a7 469(i)(3)(A)."
+        }
+      ]
+    },
+    {
+      "id": "G-S12",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Self-employment income does not include net earnings from self-employment when the amount is less than $400 for the taxable year",
+        "An individual with only $350 of net earnings from self-employment for the taxable year would not have any self-employment income"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.1402(b)-1(c) states self-employment income excludes earnings less than $400."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.1402(b)-1(c) explicitly states an individual with $300 would have no self-employment income, same applies to $350."
+        }
+      ]
+    },
+    {
+      "id": "G-S13",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The threshold for substantial understatement of income tax for individuals is defined in 26 U.S.C. \u00a7 6662(d)(1)",
+        "For individuals, a substantial understatement of income tax exists when the understatement exceeds the greater of 10 percent of the tax required to be shown on the return or $5,000"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6662(d)(1) contains the definition of substantial understatement for individuals."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6662(d)(1)(A) states the threshold is the greater of 10% of required tax or $5,000."
+        }
+      ]
+    },
+    {
+      "id": "G-S14",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "If an underpayment is attributable to fraud, the fraud penalty is 75% of the portion of the underpayment attributable to fraud"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6663(a) explicitly states a 75% penalty on the portion of underpayment attributable to fraud."
+        }
+      ]
+    },
+    {
+      "id": "G-S15",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer may avoid the accuracy-related penalty by showing reasonable cause for the underpayment and that the taxpayer acted in good faith",
+        "The accuracy-related penalty does not apply with respect to any portion of the underpayment for which the taxpayer shows reasonable cause and good faith",
+        "Whether a taxpayer has acted with reasonable cause and in good faith depends upon the pertinent facts and circumstances of a particular case",
+        "The determination of whether a taxpayer acted with reasonable cause and in good faith is made on a case-by-case basis",
+        "The determination of reasonable cause and good faith takes into account all pertinent facts and circumstances, including the taxpayer's efforts to assess the proper tax liability",
+        "The determination of reasonable cause and good faith takes into account the taxpayer's knowledge, experience, and education"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Multiple sources confirm taxpayers may avoid accuracy-related penalty by showing reasonable cause and good faith."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6664(d)(1) and multiple cases state penalty does not apply if reasonable cause and good faith shown."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-66 explicitly states reasonable cause and good faith depend on pertinent facts and circumstances."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Multiple sources confirm determination is made on case-by-case basis considering all pertinent facts and circumstances."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Multiple sources state determination includes taxpayer's efforts to assess proper tax liability among pertinent facts."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Multiple sources confirm determination considers taxpayer's knowledge, experience, and education as relevant factors."
+        }
+      ]
+    },
+    {
+      "id": "G-S16",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The burden of proof shifts to the IRS when the taxpayer introduces credible evidence regarding a factual issue relevant to ascertaining the taxpayer's tax liability under Internal Revenue Code section 7491(a)-(c)",
+        "The taxpayer must comply with all applicable substantiation requirements for the factual issue in order for the burden of proof to shift to the IRS",
+        "The taxpayer must maintain all required records for the factual issue in order for the burden of proof to shift to the IRS",
+        "The taxpayer must cooperate with reasonable requests for information from the IRS regarding the factual issue in order for the burden of proof to shift to the IRS",
+        "If the taxpayer is a corporation, the corporation's net worth must not exceed $7,000,000 at the time the petition was filed for the burden of proof to shift to the IRS",
+        "The taxpayer bears the burden of proving that the requirements for shifting the burden of proof under section 7491 have been met",
+        "The IRS's determinations in a notice of deficiency are generally presumed correct and the taxpayer bears the burden of proving them erroneous unless the burden shifts under section 7491"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491(a)(1) states if taxpayer introduces credible evidence with respect to any factual issue relevant to ascertaining tax liability, the Secretary shall have the burden of proof."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491(a)(2)(A) requires taxpayer complied with substantiation requirements for the burden to shift."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491(a)(2)(B) requires taxpayer maintained all required records for the burden to shift."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491(a)(2)(B) requires taxpayer cooperated with reasonable requests from the Secretary for the burden to shift."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2024-3 states corporations must have net worth not exceeding $7,000,000 at petition filing under section 7491(a)(2)(C)."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2024-3 states taxpayer bears burden of proving requirements for shifting burden of proof have been met."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Multiple Tax Court memos confirm IRS determinations presumed correct and taxpayer bears burden unless section 7491 applies."
+        }
+      ]
+    },
+    {
+      "id": "G-S17",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The six-year assessment period applies when a taxpayer omits from gross income an amount exceeding 25 percent of the gross income stated in the return",
+        "Tax may be assessed at any time within 6 years after the return was filed if more than 25 percent of gross income is omitted",
+        "Amounts disclosed in the return or in a statement attached to the return are not considered omitted from gross income",
+        "For purposes of the 6-year assessment period, gross income includes the total amounts received or accrued from the sale of goods or services, prior to any deductions"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6501(e)(1)(A)(i) states six-year assessment period applies when omitted amount exceeds 25 percent of gross income stated in return."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6501(e)(1)(A) states tax may be assessed within 6 years if omitted amount exceeds 25 percent of gross income stated."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6501(e)(1)(B)(iii) states amounts disclosed in return or attached statement are not counted as omitted."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6501(e)(1)(B)(i) defines gross income as total amounts received from sales prior to diminution by cost."
+        }
+      ]
+    },
+    {
+      "id": "G-S18",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The IRS normally has 3 years to assess additional tax after a client files their return",
+        "If a joint return is made, the IRS has an additional year to assess tax after the filing of such joint return"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6501(a) states tax shall be assessed within 3 years after the return was filed."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6013(b)(4) provides periods of limitations include one year immediately after filing of joint return."
+        }
+      ]
+    },
+    {
+      "id": "G-S19",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A claim for credit or refund of an overpayment of tax must be filed within 3 years from the filing date of the return or 2 years from the payment date, whichever period expires later",
+        "If no return was filed, a claim for credit or refund must be filed within 2 years from the payment date",
+        "No credit or refund shall be allowed or made after the expiration of the period of limitation for filing a claim unless the claim is filed within such period",
+        "If an agreement extending the period for assessment of a tax is made within the period prescribed for filing a claim, the period for filing the claim shall not expire prior to 6 months after the expiration of the assessment period"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6511(a) states claim must be filed within 3 years from return filing or 2 years from tax payment, whichever expires later."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6511(a) states if no return filed, claim must be filed within 2 years from tax payment."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6511(b)(1) prohibits credit or refund after expiration of period unless claim filed within such period."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6511(c)(1) states period for filing claim shall not expire prior to 6 months after expiration of assessment period."
+        }
+      ]
+    },
+    {
+      "id": "G-S20",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A corporation or partnership must have average annual gross receipts not exceeding $25,000,000 to meet the gross receipts test",
+        "A corporation or partnership meets the gross receipts test if its average annual gross receipts for the 3-taxable-year period does not exceed $25,000,000",
+        "All persons treated as a single employer under certain sections shall be treated as one person for purposes of the gross receipts test",
+        "If an entity was not in existence for the entire 3-year period, the gross receipts test shall be applied based on the period during which the entity was in existence",
+        "For any taxable year of less than 12 months, gross receipts shall be annualized by multiplying the gross receipts for the short period by 12 and dividing by the number of months in the short period",
+        "Gross receipts for any taxable year shall be reduced by returns and allowances made during that year",
+        "Any reference to an entity in the gross receipts test includes any predecessor of such entity"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(1) states average annual gross receipts must not exceed $25,000,000."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(1) specifies the 3-taxable-year period ending with the preceding taxable year."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(2) states all persons treated as single employer shall be treated as one person."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(3)(A) provides this rule for entities not in existence entire 3-year period."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(3)(B) specifies the annualization calculation for short taxable years."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(3)(C) states gross receipts reduced by returns and allowances."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 448(c)(3)(D) states references to entity include any predecessor."
+        }
+      ]
+    },
+    {
+      "id": "G-S21",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "An employee for FICA tax purposes includes individuals defined under the Federal Insurance Contributions Act",
+        "An employee for FICA tax purposes includes certain self-employed individuals",
+        "For self-employment income tax purposes, the term 'employee' has the same meaning as when used in the Federal Insurance Contributions Act",
+        "The term 'employee' includes any participant in an individual retirement plan",
+        "The term 'employee' includes the individual for whose benefit an individual retirement plan was established",
+        "The term 'employee' includes an individual who is an employee within the meaning of section 401(c)(1) relating to self-employed individuals"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.1402(d)-1 states employee and wages have same meaning as in FICA."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(c)(2) defines employee to include self-employed individuals under 401(c)(1)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 CFR 1.1402(d)-1 explicitly states this for self-employment income tax purposes."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 72(t)(5) defines employee to include any participant in individual retirement plan."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 72(t)(5) includes individual for whose benefit IRP was established."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 127(c)(2) includes individual who is employee within 401(c)(1) meaning."
+        }
+      ]
+    },
+    {
+      "id": "G-S22",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Every person liable for tax must keep records as specified by the Secretary",
+        "Each taxpayer is required to maintain accounting records that enable them to file a correct return",
+        "Each person liable for tax under certain subchapters must keep a daily record showing the gross amount of all wagers",
+        "Every person disposing of containers for distilled spirits must keep records that enable them to render a correct return",
+        "The Secretary shall keep a record of all sales of property, which includes details relevant to tax liability"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6001 states every person liable for tax shall keep such records as the Secretary prescribes."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.446-1(a)(4) requires taxpayers maintain accounting records enabling them to file correct returns."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 4403 requires persons liable for tax under that subchapter keep daily records of all wagers."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 5301(b) requires persons disposing of distilled spirit containers keep records enabling correct returns."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6340(a) requires Secretary keep records of sales including tax information and all proceedings."
+        }
+      ]
+    },
+    {
+      "id": "G-S23",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Groceries are not allowed as business costs",
+        "Household bills are not allowed as business costs",
+        "Household bills such as utilities and rent are generally not deductible unless a portion of the residence is used exclusively for business purposes",
+        "No deduction is allowed for household expenses unless they are allocable to a portion of the dwelling unit used exclusively on a regular basis as the taxpayer's principal place of business"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources indicate household expenses, including groceries (meals), are not deductible personal expenses under general rules."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state household bills like utilities and rent are not deductible as general personal expenses under section 162."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2023-128 explicitly states household expenses are not deductible unless allocable to business use portion under section 280A."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2023-128 directly states no home office deduction allowed unless exclusively used regularly as principal place of business."
+        }
+      ]
+    },
+    {
+      "id": "G-S24",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For tax years beginning after 2017, miscellaneous itemized deductions, including unreimbursed employee expenses, are suspended and cannot be claimed",
+        "The suspension of miscellaneous itemized deductions applies to all expenses subject to the 2%-of-AGI limitation, including unreimbursed employee expenses",
+        "The suspension of deductions for moving expenses applies to tax years beginning after 2017, which includes the 2024 tax year",
+        "A client cannot claim miscellaneous itemized deductions, including unreimbursed employee expenses, on a 2024 return"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 17 and 463 confirm suspension of miscellaneous itemized deductions subject to 2%-AGI limitation for tax years after 2017."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 17 states miscellaneous itemized deductions subject to 2%-AGI limitation can no longer be claimed, including unreimbursed employee expenses."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 217(k) explicitly suspends moving expense deductions for tax years beginning after December 31, 2017."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "IRS Pub 17 and sources confirm unreimbursed employee expenses as miscellaneous itemized deductions cannot be claimed on 2024 returns."
+        }
+      ]
+    },
+    {
+      "id": "G-S25",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Section 280E disallows deductions or credits for any amount paid or incurred in carrying on the trade or business of trafficking in controlled substances",
+        "Trafficking in controlled substances is prohibited by federal law",
+        "Federal law characterizes marijuana as a Schedule I controlled substance",
+        "Marijuana trafficking is illegal under federal law regardless of state legality",
+        "Section 280E applies to businesses engaged in trafficking controlled substances even if the trafficking business is legal under state law",
+        "Section 280E disallows deductions for expenses related to businesses engaged in trafficking controlled substances"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 280E explicitly states 'No deduction or credit shall be allowed' for trafficking in controlled substances."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state marijuana is prohibited by federal law as a Schedule I controlled substance under the Controlled Substances Act."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Multiple sources confirm federal law characterizes marijuana as a Schedule I controlled substance under the Comprehensive Drug Abuse Prevention and Control Act."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "165 T.C. No. 13 states: 'Even if the trafficking business is legal under state law, being illegal under federal law results in the application of section 280E.'"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2024-98 confirms section 280E disallows deductions for trafficking in controlled substances 'prohibited by federal law but not prohibited by California law.'"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Multiple sources confirm section 280E disallows deductions for expenses in controlled substance trafficking businesses."
+        }
+      ]
+    },
+    {
+      "id": "G-S26",
+      "refused": true,
+      "faithfulness": null,
+      "claims": [],
+      "verdicts": []
+    },
+    {
+      "id": "G-S27",
+      "refused": true,
+      "faithfulness": null,
+      "claims": [],
+      "verdicts": []
+    },
+    {
+      "id": "G-C01",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The deduction for hobby expenses under section 183(b)(2) is not an above-the-line deduction",
+        "The deduction for hobby expenses under section 183(b)(2) is an itemized deduction",
+        "The deduction for hobby expenses under section 183(b)(2) is a miscellaneous itemized deduction",
+        "Miscellaneous itemized deductions are subject to section 67(a)'s 2-percent floor",
+        "Miscellaneous itemized deductions are allowed only to the extent that the aggregate of such deductions exceeds 2 percent of adjusted gross income"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax Court held that section 183(b)(2) is not identified in section 62(a) as above-the-line deduction."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Tax Court stated section 183(b)(2) is properly viewed as an itemized deduction under Part VI."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Tax Court held section 183(b)(2) constitutes a miscellaneous itemized deduction as it is not listed in section 67(b)."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Section 67(a) states miscellaneous itemized deductions allowed only to extent aggregate exceeds 2% of AGI."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Section 67(a) explicitly provides this limitation for miscellaneous itemized deductions."
+        }
+      ]
+    },
+    {
+      "id": "G-C02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Travel time does not count toward the 750-hour test for real estate professional status",
+        "Travel time is considered commuting rather than work associated with managing rental properties"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2012-83 states travel time doesn't count toward the 750 hour test."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2012-83 describes travel between home and work site as commuting, not work qualifying for 750 hours."
+        }
+      ]
+    },
+    {
+      "id": "G-C03",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court determined that Conservation Reserve Program (CRP) payments are includible in self-employment income under I.R.C. section 1401",
+        "The taxpayer was engaged in a trade or business during the years in issue",
+        "There was a nexus between the taxpayer's trade or business and the CRP payments received",
+        "CRP payments do not constitute 'rentals from real estate' within the meaning of I.R.C. section 1402(a)(1)",
+        "CRP payments are not excluded from the calculation of net earnings from self-employment",
+        "Although the CRP statute refers to the payments as rental payments, the substance of the payments does not qualify them as rentals from real estate",
+        "CRP payments are made in exchange for conducting activities that meet the commitments of a CRP contract, rather than for the right to use or occupy real property",
+        "The self-employment tax provisions are construed broadly in favor of treating income as earnings from self-employment",
+        "CRP payments received by the taxpayer must be included in the calculation of net earnings from self-employment",
+        "CRP payments are subject to self-employment tax"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Court held CRP payments includible in self-employment income under section 1401."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Court found taxpayer engaged in trade or business during years in issue."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Court held nexus existed between CRP payments and taxpayer's business activity."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Court held CRP payments do not constitute rentals from real estate under section 1402(a)(1)."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Court held CRP payments not excluded from net earnings calculation."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Court examined substance of payments, concluding form as rental does not determine tax treatment."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "IRS Notice 2006-108 states CRP payments made for conducting activities, not use/occupancy rights."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "Court cited Braddock for broad construction favoring self-employment income treatment."
+        },
+        {
+          "index": 8,
+          "supported": true,
+          "why": "Court held CRP payments must be included in net earnings from self-employment calculation."
+        },
+        {
+          "index": 9,
+          "supported": true,
+          "why": "Court sustained determination that CRP payments subject to self-employment tax."
+        }
+      ]
+    },
+    {
+      "id": "G-C04",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A medical practice can qualify for section 530 relief from employment taxes if it did not treat physicians as employees for any period",
+        "A medical practice must have consistently filed all federal tax returns required to be filed with respect to physicians on a basis consistent with treating them as independent contractors",
+        "Timely filing of information returns is a requirement for section 530 relief",
+        "Untimely filing of information returns does not necessarily preclude eligibility for section 530 relief under certain circumstances",
+        "A medical practice must have a reasonable basis for not treating physicians as employees",
+        "Reliance on industry practices can provide a reasonable basis for not treating physicians as employees",
+        "Reliance on technical advice can provide a reasonable basis for not treating physicians as employees"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state section 530 relief requires not treating individual as employee for any period."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Multiple sources explicitly require consistent filing of all required federal tax returns consistent with independent contractor treatment."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources discuss timely filing requirement throughout Internal Revenue Code for Forms 1096 and 1099."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "120 T.C. No. 15 holds untimely filing does not preclude section 530 relief under these circumstances."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "All sources confirm reasonable basis requirement is mandatory for section 530 relief eligibility."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Sources cite industry practice as safe harbor for reasonable basis under section 530(a)(2)."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Sources explicitly identify technical advice as basis for reasonable reliance under section 530(a)(2)."
+        }
+      ]
+    },
+    {
+      "id": "G-C05",
+      "refused": false,
+      "faithfulness": 0.75,
+      "claims": [
+        "The Tax Court has jurisdiction under section 7436 regarding worker classification and additions to tax penalties",
+        "The Tax Court can redetermine the correct amount of any deficiency, including additions to tax, if a claim is asserted by the Secretary at or before the hearing",
+        "The Tax Court's decision in proceedings under section 7436 becomes final 90 days after the decision is entered",
+        "The Tax Court may determine the applicability of any penalty or addition to tax for which the partnership may be liable under the relevant subchapter"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources discuss section 7436 but do not address worker classification or additions to tax penalties specifically."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6214(a) states Tax Court jurisdiction to redetermine deficiency and determine additions to tax if Secretary asserts claim."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7481(b) states Tax Court decision under section 7436(c) becomes final 90 days after entered."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6234(c) grants courts jurisdiction to determine applicability of penalties and additions to tax for partnerships."
+        }
+      ]
+    },
+    {
+      "id": "G-C06",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The sole shareholder and president of an S corporation is considered an employee for employment tax purposes under section 3121(d)(1).",
+        "An S corporation cannot avoid FICA and FUTA liabilities by characterizing payments for services as distributions of net income rather than wages.",
+        "To claim section 530 relief, a taxpayer must satisfy three requirements, including having a reasonable basis for not treating an individual as an employee.",
+        "To claim section 530 relief, the taxpayer must not have treated the individual as an employee for any period.",
+        "To claim section 530 relief, the taxpayer must have consistently treated the individual as not being an employee on all tax returns for periods after December 31, 1978.",
+        "To claim section 530 relief, the taxpayer must have a reasonable basis for not treating the individual as an employee.",
+        "The sole shareholder and president failed to meet the requirement of having a reasonable basis for not treating the individual as an employee."
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "119 T.C. No. 5 held that sole shareholder and president was an employee under section 3121(d)(1)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Veterinary Surgical Consultants case cited in T.C. Memo cases states employer cannot avoid FICA/FUTA by characterizing payments as distributions."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "119 T.C. No. 5 states section 530(a)(1) requires three requirements including reasonable basis."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "119 T.C. No. 5 lists first requirement: taxpayer must not have treated individual as employee for any period."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "119 T.C. No. 5 lists second requirement: consistently treated individual as not being employee on tax returns after December 31, 1978."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "119 T.C. No. 5 lists third requirement: taxpayer must have had reasonable basis for not treating as employee."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "119 T.C. No. 5 held respondent failed to meet third requirement of reasonable basis under section 530."
+        }
+      ]
+    },
+    {
+      "id": "G-C07",
+      "refused": false,
+      "faithfulness": 0.5,
+      "claims": [
+        "Routing a check through the IRA owner to buy stock for the IRA is a taxable distribution to the owner",
+        "If IRA funds are subject to the taxpayer's unfettered command, it results in a taxable distribution"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Ancira case held no taxable distribution when check routed through owner as conduit to purchase stock."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state taxpayers have income when exercising complete dominion; constructive receipt occurs with unfettered command."
+        }
+      ]
+    },
+    {
+      "id": "G-C08",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "If a self-directed IRA acquires any collectible, it is treated as a distribution from the IRA in an amount equal to the cost to the IRA of the collectible",
+        "American Eagle coins are collectibles under IRA rules",
+        "An owner of a self-directed IRA may not take actual and unfettered possession of the IRA assets",
+        "When coins or bullion are in the physical possession of the IRA owner, there is no independent oversight that could prevent the owner from invading retirement funds",
+        "If an IRA owner has complete unfettered control over coins and is free to use them in any way, this results in taxable distributions from the IRA"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 408(m)(1) states acquisition of any collectible is treated as a distribution in amount equal to cost."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 408(m)(2)(D) includes 'any stamp or coin' in collectible definition; McNulty case confirms AE coins are collectibles."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Tax Court Opinion states 'An owner of a self-directed IRA may not take actual and unfettered possession of the IRA assets.'"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Tax Court Opinion states coins in physical possession of IRA owner means 'no independent oversight that could prevent the owner from invading her retirement funds.'"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Tax Court Opinion holds owner's 'complete dominion' and 'unfettered command' over coins results in taxable IRA distributions."
+        }
+      ]
+    },
+    {
+      "id": "G-C09",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "An IRA distribution is not taxable if the entire amount received, including money and any other property, is contributed into another IRA within 60 days of the distribution",
+        "A taxpayer may not change the character of any noncash distributed property between the time of the distribution and the time of the contribution",
+        "Section 408(d)(3)(A)(i) requires the same money or the same property to be transferred in a rollover, rather than merely similar property or property of equivalent value",
+        "In the Estate of James E. Caan, the taxpayer liquidated a partnership interest and contributed cash proceeds to an IRA, which did not qualify as a rollover because the character of the property was changed from partnership interest to cash"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 408(d)(3)(A)(i) and 161 T.C. No. 6 both state this requirement."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "161 T.C. No. 6 at *20 explicitly states this rule and cites Lemishow and Treasury Regulation \u00a7 1.408-4(b)(1)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "161 T.C. No. 6 at *22-23 holds that section 408(d)(3)(A)(i) requires the same money or same property, not merely similar property."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "161 T.C. No. 6 at *22 states that liquidating the P&A Interest changed its character and did not qualify as a rollover under section 408(d)(3)(A)(i)."
+        }
+      ]
+    },
+    {
+      "id": "G-C10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Lease income is generally passive unless the taxpayer qualifies as a real estate professional and meets the material participation requirements",
+        "A taxpayer may avoid having their real estate activity classified as a per se passive activity if they are a qualifying real estate professional and satisfy the material participation requirements",
+        "To qualify as a real estate professional, a taxpayer must perform more than one-half of their personal services in real property trades or businesses in which they materially participate",
+        "To qualify as a real estate professional, a taxpayer must perform more than 750 hours of service during the taxable year in real property trades or businesses",
+        "If a taxpayer qualifies as a real estate professional, their rental activities are not treated as per se passive activities",
+        "If a taxpayer qualifies as a real estate professional, their rental activities are subject to the material participation requirements of section 469(c)(1)"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state rental activities are generally per se passive regardless of material participation, with exceptions for real estate professionals."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2012-343 states taxpayer may avoid per se passive classification if qualifying real estate professional and satisfies material participation."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(c)(7)(B) requires more than one-half of personal services in real property trades where taxpayer materially participates."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(c)(7)(B) requires more than 750 hours of service in real property trades where taxpayer materially participates."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2012-358 states rental activities of real estate professionals are not per se passive activities."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo 2012-358 confirms real estate professional activities subject to material participation requirements of section 469(c)(1)."
+        }
+      ]
+    },
+    {
+      "id": "G-C11",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A court must decide whether the economic substance doctrine is relevant before applying it to a transaction",
+        "The codified economic substance doctrine applies only to transactions to which the economic substance doctrine is relevant",
+        "Section 7701(o)(1) requires a relevancy determination before applying the economic substance doctrine",
+        "The determination of whether the economic substance doctrine is relevant to a transaction must be made in the same manner as if section 7701(o) had never been enacted",
+        "The codified economic substance doctrine does not apply to every transaction and may be applied only when it is relevant"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 7701(o)(1) conditions application on relevancy; section 7701(o)(5) expressly requires the determination."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Section 7701(o)(1) states doctrine applies '[i]n the case of any transaction to which the economic substance doctrine is relevant.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Court concludes statute requires relevancy determination through statutory text analysis of section 7701(o)."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Section 7701(o)(5)(C) directly states determination made 'in the same manner as if this subsection had never been enacted.'"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Legislative history confirms doctrine not intended for every transaction and applies only when relevant."
+        }
+      ]
+    },
+    {
+      "id": "G-C12",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A partnership that files a Tax Court petition after the deadline under section 6234(a) can obtain equitable tolling if it meets the necessary criteria",
+        "The 90-day deadline in section 6234(a) is subject to equitable tolling",
+        "For equitable tolling to apply under section 6234(a), the petitioner must establish that it pursued its rights diligently",
+        "For equitable tolling to apply under section 6234(a), extraordinary circumstances outside of the petitioner's control must have prevented it from filing on time",
+        "Nothing in the text or structure of section 6234(a) or its related provisions rebuts the presumption in favor of equitable tolling",
+        "The Tax Court has held that equitable tolling applies to the deadline for filing a petition under section 6234(a)"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state 90-day deadline is subject to equitable tolling and petitioner must meet necessary criteria."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Tax Court explicitly held the 90-day deadline in section 6234(a) is subject to equitable tolling."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources state petitioner must establish it pursued rights diligently as one equitable tolling requirement."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Sources require showing extraordinary circumstances outside control prevented timely filing for equitable tolling."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Tax Court directly stated nothing in section 6234(a) rebuts presumption favoring equitable tolling."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "167 T.C. No. 11 held equitable tolling applies to section 6234(a) deadline in that case."
+        }
+      ]
+    },
+    {
+      "id": "G-C13",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Heavy-duty pickup trucks modified for farming use may not be subject to strict substantiation rules if they are not likely to be used for personal purposes",
+        "Section 274(d) strict substantiation requirements generally apply to pickup trucks and vans unless the truck or van has been specially modified so it is not likely to be used more than a de minimis amount for personal purposes",
+        "Pickup trucks used exclusively for farming purposes and modified such that they are not likely to be used more than a de minimis amount for personal purposes are exempt from strict substantiation requirements",
+        "Taxpayers must substantiate vehicle expenses by maintaining a contemporaneous log, trip sheet, or similar record along with corroborating documentary evidence to meet strict substantiation requirements"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state pickup trucks not likely to be used more than de minimis amount for personal purposes are exempt from strict substantiation rules."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.274-5(k)(8) and case law directly state this rule about pickup trucks and vans."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2022-117 holds modified farm pickup trucks not likely used for personal purposes exempt from strict substantiation."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2024-91 states taxpayers must maintain contemporaneous log, trip sheet, and corroborating documentary evidence."
+        }
+      ]
+    },
+    {
+      "id": "G-C14",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Cohan rule allows the Tax Court to estimate allowable deductions when a taxpayer establishes that a deductible expense has been incurred but cannot substantiate the exact amount",
+        "Taxpayers are required to maintain records sufficient to establish the amounts of allowable deductions and to enable the IRS to determine the correct tax liability",
+        "If a taxpayer fails to produce adequate records or credible evidence, the burden remains on the taxpayer to establish entitlement to the deductions claimed",
+        "The Tax Court may not estimate expenses if the taxpayer could have and should have maintained the necessary records"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Multiple sources explicitly state the Cohan rule allows estimation when taxpayer establishes expense but cannot substantiate exact amount."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(3) and T.C. Memo. 2024-49 state taxpayers must maintain sufficient records to substantiate amounts."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2013-215 explicitly states burden remains on taxpayer when failing to produce credible evidence and adequate records."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2024-95 states Cohan inappropriate when proper recordkeeping feasible and reasonably expected, citing Joseph and Lerch."
+        }
+      ]
+    },
+    {
+      "id": "G-C15",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer can be treated as materially participating in a business if the taxpayer materially participated in a related business for five of the last ten years.",
+        "Under the passive activity loss rules, a taxpayer is treated as materially participating in an activity if the taxpayer materially participated in the activity for any five out of the ten years immediately preceding the taxable year.",
+        "The five of ten test applies to an activity that is the same over time.",
+        "Regulations allow for a comparison of a taxpayer's current-year activities with preceding-year activities.",
+        "If there is substantial similarity between a current-year activity and activities that a taxpayer materially participated in during a preceding year, then that preceding year counts as one year in applying the five of ten test to the current-year activity.",
+        "A taxpayer is treated as materially participating in an activity for a prior taxable year if the activity includes significant section 469 activities that are substantially the same as significant section 469 activities that were included in an activity in which the taxpayer materially participated during that prior taxable year."
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources confirm taxpayer can materially participate if substantially similar activities were materially participated in for five of last ten years."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2022-49 explicitly states this rule from Temp. Treas. Reg. \u00a7 1.469-5T(a)(5)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2022-49 states 'By its terms, the five of ten test applies to an activity that is the same over time.'"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Sources describe regulations allowing comparison of current-year activities with preceding-year activities at Treas. Reg. \u00a7 1.469-5(j)(1)."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2022-49 explicitly states this rule regarding substantial similarity and counting prior years."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Direct quote from Treas. Reg. \u00a7 1.469-5(j)(1) in sources describing material participation for preceding years."
+        }
+      ]
+    },
+    {
+      "id": "G-C16",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer qualifies as a real estate professional under Section 469 if more than one-half of the personal services performed in trades and businesses by the taxpayer during the taxable year are performed in real property trades or businesses in which the taxpayer materially participates",
+        "A taxpayer qualifies as a real estate professional under Section 469 if the taxpayer performs more than 750 hours of services during the taxable year in real property trades or businesses in which the taxpayer materially participates",
+        "If a taxpayer has a full-time job unrelated to real estate, the taxpayer may not meet the requirement that more than one-half of their personal services are performed in real property trades or businesses",
+        "The participation of a taxpayer's spouse may be considered in determining material participation",
+        "Spousal attribution cannot be used to satisfy the 750-hour annual service requirement for real estate professional status",
+        "If a taxpayer cannot show that they spent more time in real estate than in their other work, they do not qualify as a real estate professional"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2022-112 states both requirements: more than one-half personal services in real property trades or businesses in which taxpayer materially participates."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2022-112 cites \u00a7 469(c)(7)(B) requiring more than 750 hours in real property trades or businesses in which taxpayer materially participates."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2022-112 finds full-time job holders cannot meet the one-half requirement; evidence does not support half their time was in real property trades."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2022-112 and 26 U.S.C. \u00a7 469(i)(6)(D) confirm spouse's participation counts in determining taxpayer's active participation."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2022-112 cites Oderio: spousal attribution may not be used to satisfy the 750-hour annual service requirement."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2022-112 conclusion: petitioners with full-time jobs and greater non-real estate work did not qualify as real estate professionals."
+        }
+      ]
+    },
+    {
+      "id": "G-C17",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Owners may not deduct bed-and-breakfast expenses if they also used the B&B personally",
+        "Owners may not deduct expenses for a bed and breakfast if they used the B&B for personal purposes for an indeterminate period",
+        "Owners must substantiate expenses to qualify for deductions related to the operation of a bed and breakfast"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax court held owners cannot deduct B&B expenses when used for personal purposes, citing Section 280A."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Tax court explicitly held owners cannot deduct B&B expenses if used for personal purposes for indeterminate period."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Tax court denied deduction where owners failed to substantiate B&B expenses, per Section 280A requirements."
+        }
+      ]
+    },
+    {
+      "id": "G-C18",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer cannot deduct losses arising from illegal activities, including forfeited funds, due to public policy considerations",
+        "Forfeitures in connection with a criminal conviction are considered penalties",
+        "Allowing a deduction for forfeited funds would frustrate public policy",
+        "The Tax Court has consistently held that deductions for losses related to illegal activities are not allowable under section 165",
+        "A taxpayer is not relieved of the income tax consequences of funds that are criminally forfeited",
+        "Criminally forfeited funds are treated as gross income",
+        "A taxpayer must recognize forfeited funds as gross income to the same extent as if the taxpayer had physically received them"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources establish public policy bars deductions for losses from illegal activities and forfeitures."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state forfeitures in connection with criminal conviction are aspects of punishment/penalties."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources cite Tank Truck Rentals holding that allowing deduction would frustrate public policy by reducing penalty sting."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Multiple cases cited uniformly disallow section 165 deductions for losses related to illegal activities."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2024-16 explicitly states taxpayer not relieved of income tax consequences from criminal forfeiture."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Sources establish criminally forfeited funds treated as constructively received gross income."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2024-16 states forfeited funds recognized as gross income same as physical receipt."
+        }
+      ]
+    },
+    {
+      "id": "G-C19",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The IRS can ignore expenses that section 280E makes nondeductible when evaluating an offer in compromise from a cannabis business",
+        "Section 280E prohibits any deduction or credit for amounts paid or incurred in carrying on a trade or business that consists of trafficking in controlled substances",
+        "Marijuana is a controlled substance illegal under federal law",
+        "Section 280E applies to deductions and credits, not to the computation of reasonable collection potential"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax Court held Commissioner's policy to disregard section 280E nondeductible expenses in OIC calculations is within his authority under 7122(d)."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Section 280E text explicitly states no deduction or credit allowed for trafficking in controlled substances prohibited by federal law."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources confirm marijuana is Schedule I controlled substance illegal under federal law despite state legalization."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Tax Court opinion states section 280E addresses deductions and credits, not reasonable collection potential computation."
+        }
+      ]
+    },
+    {
+      "id": "G-C20",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A penalty approval form that only refers to individual partners does not satisfy the written supervisory approval requirement for penalties against the partnership",
+        "The context of a penalty approval form must clearly indicate that penalties are being asserted against the partnership, not just the individual partners"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2022-52 held that a Civil Penalty Approval Form referring to individual Tungs did not satisfy the written supervisory approval requirement for penalties against Genecure partnership."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2022-52 analyzed form context including headers identifying individuals, Form 1040 reference, and deficiency case designation to conclude the form did not manifest intent to approve penalties against the partnership."
+        }
+      ]
+    },
+    {
+      "id": "G-C21",
+      "refused": false,
+      "faithfulness": 0.0,
+      "claims": [
+        "Vehicles used only to drive passengers for hire are generally subject to the strict substantiation requirements of section 274(d)"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not address vehicles used only to drive passengers for hire or their substantiation status."
+        }
+      ]
+    },
+    {
+      "id": "G-C22",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court has ruled that expenses of bowling activities are deductible only if the taxpayer has a profit motive for those activities",
+        "Section 183(a) provides that if an individual taxpayer is engaged in an activity not engaged in for profit, no deductions are allowable for the expenses of the activity",
+        "Mr. Phillips did not have a profit motive for his bowling activities",
+        "Mr. Phillips had not made a net profit from bowling since 2000",
+        "Mr. Phillips' bowling activities were not engaged in for profit",
+        "Mr. Phillips was not entitled to deduct the expenses claimed on his Schedule C"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax Court stated bowling expenses are deductible only if taxpayer had profit motive for activities."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Section 183(a) is quoted directly in the source material stating this rule."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Tax Court found preponderance of evidence demonstrated Mr. Phillips did not have profit motive."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Sources state annual expenses exceeded gross winnings for each year after 2000."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Tax Court concluded Mr. Phillips did not engage in bowling activities for profit."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Tax Court held Mr. Phillips would not be entitled to any deductions claimed on Schedule C."
+        }
+      ]
+    },
+    {
+      "id": "G-C23",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court may allow a deduction for a converted in-law suite if it is proven to be used exclusively for business",
+        "A spare room must meet the exclusive use requirement to qualify for a home office deduction",
+        "The Tax Court generally prohibits deductions for expenses relating to a dwelling unit used by the taxpayer as a residence",
+        "An exception allows deductions for a portion of a dwelling unit that is exclusively used on a regular basis as the principal place of business for any trade or business of the taxpayer",
+        "Exclusive use is an 'all-or-nothing standard' for home office deductions",
+        "A taxpayer must prove that the space is used exclusively for business purposes to qualify for the home office deduction",
+        "The Tax Court requires taxpayers to demonstrate what portion of the home was used exclusively for business purposes to determine the deductible portion of relevant expenses",
+        "In T.C. Memo. 2013-80, the court found that the taxpayer did not prove a room was used exclusively for business due to insufficient details about the room's use",
+        "In T.C. Memo. 2023-26, the court ruled that the taxpayer failed to provide evidence of exclusive use of multiple rooms for business, leading to disallowance of the deduction"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2013-80 allowed deduction for converted mother-in-law suite based on exclusive use and physical conversion."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Section 280A(c)(1)(A) requires exclusive use on regular basis as principal place of business."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Section 280A(a) states no deduction allowed for dwelling unit used as residence except as provided."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Section 280A(c)(1)(A) provides this exception to the general prohibition on residence-related deductions."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2024-82 cites Hamacher stating exclusive use is an all-or-nothing standard."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Multiple cases require taxpayers prove exclusive use to qualify for home office deduction."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2024-82 states taxpayers must prove exclusive portion or deductible amount cannot be determined."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo. 2013-80 disallowed computer office room deduction due to insufficient proof of exclusive use."
+        },
+        {
+          "index": 8,
+          "supported": true,
+          "why": "T.C. Memo. 2023-26 disallowed deduction where taxpayer failed to provide evidence of exclusive use."
+        }
+      ]
+    },
+    {
+      "id": "G-C24",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer cannot deduct a home office for an activity the court has found is not engaged in for profit",
+        "If an activity is not engaged in for profit, no deduction attributable to such activity shall be allowed under the tax code except as provided in section 183",
+        "Expenses attributable to the use of a home office may be deductible in conducting two or more separate business activities",
+        "If any activity fails to meet the requirements of section 280A(c)(1), none of the activities meets the exclusive use requirement for the home office",
+        "A taxpayer may only deduct expenses allocable to a portion of the home that is exclusively used on a regular basis as the principal place of business for any trade or business of the taxpayer",
+        "If the court has determined that an activity lacks a profit motive, it is not classified as a trade or business",
+        "Home office deductions related to an activity that the court has determined lacks a profit motive would not be allowed"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 183(a) prohibits deductions for activities not engaged in for profit except as provided in section 183. Section 280A(c)(1) requires trade or business status, which requires profit motive."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(a) explicitly states no deduction attributable to activity not engaged in for profit shall be allowed except as provided in section 183."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2023-128 states expenses attributable to home office use may be deductible in conducting two or more separate business activities, citing Hamacher."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2023-128 states if any activity fails section 280A(c)(1) requirements, none of the activities meets the exclusive use requirement."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2023-128 cites section 280A(c)(1)(A) requiring exclusive use as principal place of business for any trade or business."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2023-128 states Ovium activity lacked profit motive and therefore is not a trade or business, citing Commissioner v. Groetzinger."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2023-128 holds home office deductions not allowed where activity lacks profit motive since trade or business requirement cannot be met."
+        }
+      ]
+    },
+    {
+      "id": "G-C25",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court found that service providers at a spa who paid booth rent were classified as independent contractors rather than employees",
+        "The Tax Court concluded that factors indicating the service providers' autonomy predominated over factors indicating control by the spa",
+        "The spa's arrangement of charging booth rent and allowing service providers to set their own hours supported the finding of independent contractor status",
+        "The service providers bore the risk of suffering net losses, which is indicative of independent contractor status"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "The Tax Court held that service providers who paid booth rent were independent contractors rather than employees."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Tax Court explicitly stated: 'factors indicating the service providers' autonomy predominate over factors indicating petitioners' control.'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Tax Court cited booth rent payment and service providers setting their own hours as factors supporting independent contractor status."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Tax Court concluded service providers bore risk of suffering net losses, counting in favor of independent contractor status."
+        }
+      ]
+    },
+    {
+      "id": "G-C26",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The IRS does not include in firm income deposits to client trust accounts because that money generally does not belong to the lawyers until they have earned their fees and paid themselves",
+        "A restriction placed on the use of settlement proceeds after payment does not delay the taxpayer's receipt of income for tax purposes if the payment was made at the taxpayer's direction"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2010-49 explicitly states IRS did not include deposits to client trust accounts in firm income because money generally did not belong to lawyers until earned fees and paid themselves."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2006-239 and 2002-54 state restrictions on settlement proceeds after payment do not delay receipt if payment was made at taxpayer's direction pursuant to settlement agreement."
+        }
+      ]
+    },
+    {
+      "id": "G-X01",
+      "refused": false,
+      "faithfulness": 0.6666666666666666,
+      "claims": [
+        "In tax year 2023, the client cannot deduct any expenses against the $3,000",
+        "A taxpayer generally may not deduct expenses incurred in connection with a hobby or other non-profit activity to offset taxable income from other sources",
+        "Section 183(a) provides that if an activity is not engaged in for profit, no deduction attributable to that activity shall be allowed except as provided in section 183(b)"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources show hobby loss rules under Section 183 may allow some deductions; not all expenses are necessarily barred."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 directly states this rule regarding hobby expenses and non-profit activities."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2009-220 quotes Section 183(a) exactly as stated in the claim."
+        }
+      ]
+    },
+    {
+      "id": "G-X02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Conservation Reserve Program payments received by a taxpayer are includible in self-employment income under IRC section 1401 if the taxpayer is engaged in a trade or business during the years in issue and there is a nexus between the trade or business and the CRP payments received",
+        "CRP payments do not constitute rentals from real estate within the meaning of IRC section 1402(a)(1)",
+        "CRP payments are not excluded from the calculation of net earnings from self-employment",
+        "A taxpayer is considered engaged in a trade or business if they are actively participating in an activity for profit, which includes fulfilling obligations under CRP contracts",
+        "CRP payments are not excluded from self-employment income even if the taxpayer is not actively farming, as long as they are engaged in the trade or business related to the CRP"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax Court held CRP payments includible in self-employment income when taxpayer engaged in trade or business with nexus to CRP payments."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Tax Court held CRP payments do not constitute rentals from real estate under section 1402(a)(1)."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Tax Court held CRP payments not excluded from net earnings from self-employment calculation."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Tax Court found taxpayer engaged in trade or business through active participation in CRP for profit, fulfilling contractual obligations."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Tax Court held CRP payments includible even for non-farmers engaged in trade or business related to CRP participation."
+        }
+      ]
+    },
+    {
+      "id": "G-X03",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "If a taxpayer qualifies as a real estate professional, rental activities are not per se passive activities under section 469(c)(2)",
+        "Real estate professional rental activities are treated as a trade or business subject to the material participation requirements of section 469(c)(1)",
+        "A taxpayer must satisfy the material participation requirement for a rental activity to be nonpassive",
+        "The taxpayer owns six rental houses and is heavily involved in only two of them",
+        "Losses from the four rental houses in which the taxpayer is not heavily involved may be considered passive unless the taxpayer materially participates in those activities",
+        "The taxpayer has not elected to treat all six rental houses as one activity",
+        "Each rental house is treated as a separate activity for determining material participation",
+        "Not all six rental losses are nonpassive"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2010-232 states real estate professional rentals are 'not per se passive activities under section 469(c)(2)'"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2010-232 explicitly states they are 'treated as a trade or business subject to the material participation requirements of section 469(c)(1)'"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2025-128 states taxpayer must satisfy material participation requirement for activity to be nonpassive"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Explicitly stated in the question itself"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Material participation requirement means activities without heavy involvement may be passive if no material participation shown"
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Question states client 'never elected to treat them as one activity'"
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 CFR 1.469-9(e)(1) and example show material participation determined separately per building unless election made"
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "Since taxpayer only heavily involved in two houses and must materially participate in each, four houses likely lack material participation and remain passive"
+        }
+      ]
+    },
+    {
+      "id": "G-X04",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "An S corporation can deduct rent payments made to shareholders if the payments are for legitimate business purposes and are reasonable in amount",
+        "The 14-day rule allows taxpayers to exclude rental income from gross income if the residence is rented for no more than 14 days in a taxable year",
+        "If an S corporation's rent payments are deemed excessive or not substantiated by credible documentation, the deductions may be disallowed",
+        "An S corporation must demonstrate that the rent payments are reasonable and that the meetings actually occurred to support the deductions"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources indicate S corps can deduct rent if legitimate business purpose exists and amounts are reasonable, as shown by allowed deductions in T.C. Memo. 2023-105."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2023-105 states section 280A(g) allows exclusion if residence rented for no more than 14 days in taxable year."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2023-105 disallowed excessive rent deductions where amounts were not substantiated or deemed unreasonable."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2023-105 required S corp to substantiate meetings occurred and establish reasonableness of rent payments."
+        }
+      ]
+    },
+    {
+      "id": "G-X05",
+      "refused": false,
+      "faithfulness": 0.875,
+      "claims": [
+        "The presumption that an activity is engaged in for profit arises if gross income from the activity exceeds deductions for 2 of 5 consecutive taxable years",
+        "The presumption applies to activities consisting in major part of breeding, training, showing, or racing of horses if gross income exceeds deductions for 2 of 7 consecutive taxable years",
+        "The client has only one profitable year in eight years",
+        "The presumption does not apply to the client's horse boarding and breeding operation",
+        "A consistent and concentrated advertising program can indicate a profit motive",
+        "Changes in operating methods to improve profitability can indicate a profit motive",
+        "Having personal motives such as recreational enjoyment may indicate that an activity is not engaged in for profit",
+        "The startup phase of a horse-breeding activity may take 5 to 10 years"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Presumption requires 2 of 5 years for general activities, but horse breeding requires 2 of 7 consecutive years."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.183-1(c)(1) states exactly this for horse breeding activities."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Question states client has run operation for eight years with only one profitable year."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "One profitable year in eight years fails to meet 2 of 7 consecutive years requirement for horse breeding."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2012-17 states consistent advertising indicates businesslike operation and profit motive."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2012-17 states adopting new techniques to improve profitability indicates profit motive."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 CFR 1.183-2(b)(9) and T.C. Memo. 2010-216 state personal motives may indicate activity not engaged in for profit."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo. 2013-54 cites cases stating horse breeding startup phase may be 5 to 10 years."
+        }
+      ]
+    },
+    {
+      "id": "G-X06",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A qualified real estate agent is not treated as an employee for federal tax purposes if certain conditions are met",
+        "A qualified real estate agent must perform services under a written contract stating they will not be treated as an employee",
+        "An officer of a corporation is generally considered an employee for employment tax purposes unless they perform only minor services and do not receive any remuneration",
+        "A real estate agent who does not take a salary and performs all services for the corporation may not be considered an employee if she meets the criteria for a qualified real estate agent",
+        "A corporate officer who does not receive remuneration for their services may not be classified as an employee for employment tax purposes"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 3508(a) states qualified real estate agents shall not be treated as employees if conditions are met."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 3508(b)(1)(C) requires written contract stating individual will not be treated as employee."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 3121(d)(1) makes officers employees; Employment Tax Regs limit this if no services/remuneration."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 3508(a) provides qualified real estate agents not treated as employees if conditions met."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Employment Tax Regs \u00a7 31.3121(d)-1(b) states officers receiving no remuneration not considered employees."
+        }
+      ]
+    },
+    {
+      "id": "G-X07",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Drivers who perform core work and can be let go at any time may be classified as employees",
+        "The common law test for determining independent contractor status considers the degree of control exercised by the employer",
+        "The common law test for determining independent contractor status considers the nature of the relationship between the parties",
+        "If workers perform services that are integral to the employer's business, this supports a finding that they are employees rather than independent contractors",
+        "If a worker does not work regularly but works in the course of the employer's trade or business, this may indicate an employer-employee relationship",
+        "The right to discharge a worker typically indicates an employer-employee relationship",
+        "A worker's right to quit at any time typically indicates an employer-employee relationship",
+        "The Tax Court has ruled that drivers treated as independent contractors but performing core functions of the business and able to be let go at any time were employees for employment tax purposes"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax Court found drivers who performed core work and could be discharged at any time were employees, not independent contractors."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources cite degree of control as a factor in common law employment analysis."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources reference the relationship the parties believed they were creating as a relevant factor in the analysis."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Tax Court stated that integral services support finding workers are employees rather than independent contractors."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Sources state that if workers work in course of employer's trade or business, irregular work does not indicate independent contractor status."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Sources cite that the right to discharge a worker indicates an employer-employee relationship."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Sources state that the worker's right to quit at any time indicates an employer-employee relationship."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "Tax Court Memo 2000-375 held drivers performing core trucking functions and subject to at-will discharge were employees for employment tax purposes."
+        }
+      ]
+    },
+    {
+      "id": "G-X08",
+      "refused": true,
+      "faithfulness": null,
+      "claims": [],
+      "verdicts": []
+    },
+    {
+      "id": "G-X09",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A publicly held corporation cannot deduct applicable employee remuneration exceeding $1,000,000 for any covered employee in a taxable year",
+        "Compensation must be reasonable to be deductible as a business expense under section 162(a)(1)",
+        "Compensation for a majority shareholder-employee is subject to special scrutiny to determine if it is reasonable and not a disguised dividend",
+        "The presumption of reasonableness for compensation can be rebutted if the amount greatly exceeds compensation for similar services in comparable companies",
+        "If compensation is determined to be excessive and not for services rendered, it may be treated as a distribution of profits rather than deductible compensation",
+        "The IRS requires that reasonable compensation is only such amount as would ordinarily be paid for like services by like enterprises under like circumstances"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 162(m)(1) states no deduction allowed for applicable employee remuneration exceeding $1,000,000 for publicly held corporations' covered employees."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2004-207 discusses reasonableness requirement under section 162(a)(1) for compensation to be deductible."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2004-207 states compensation to shareholder-employees deserves special scrutiny and may be disguised dividends."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2004-207 states presumption of reasonableness rebutted by evidence compensation greatly exceeded comparable CEOs' compensation."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2004-207 holds excessive compensation not for services rendered is disguised dividend, not deductible compensation."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo 2004-207 cites regulation 1.162-7(b)(3) defining reasonable compensation as ordinary amount for like services by like enterprises."
+        }
+      ]
+    },
+    {
+      "id": "G-X10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Passive activity losses are suspended until the taxpayer has offsetting income from passive activities",
+        "If leases are treated as separate activities, the income and losses must be treated separately unless an election is made to group them",
+        "The self-rental rule may recharacterize income from a self-rental as nonpassive income",
+        "If the client does not group the activities, the client cannot net the income and losses from the two leases"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(a) states passive activity losses are disallowed until taxpayer has offsetting passive income or disposes of activity."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.469-9(e)(4) example shows separate activities determined separately unless election made to treat as single activity."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "139 T.C. No. 3 discusses self-rental rule recharacterizing rental income as nonpassive income under section 1.469-2(f)(6)."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 469(j)(4) requires allocation of passive losses on pro rata basis; separate activities cannot offset without grouping election."
+        }
+      ]
+    },
+    {
+      "id": "G-X11",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A business can deduct amounts paid for insurance premiums as ordinary and necessary expenses under section 162(a) when paid or incurred in connection with a trade or business",
+        "The deductibility of premiums paid to a captive insurance company may be questioned if the arrangement resembles self-insurance rather than a legitimate insurance transaction",
+        "The IRS and courts require that the captive insurance arrangement achieve risk distribution to be considered valid for tax purposes",
+        "If the captive insurance company is not adequately capitalized, the IRS may disallow the deduction",
+        "If premiums are not reasonable and are not the result of arm's-length transactions, the IRS may disallow the deduction",
+        "In pooling arrangements, the participating captives must demonstrate that they are effectively distributing risk to qualify for the deduction"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Amounts paid for insurance premiums are deductible under section 162(a) as ordinary and necessary expenses when paid or incurred in connection with a trade or business."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources state purported payment to affiliated captive may resemble self-insurance, raising doubts about deductibility."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources state risk distribution is necessary to existence of insurance for federal income tax purposes."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Sources identify adequate capitalization as one of several factors determining whether arrangement constitutes insurance."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Sources list reasonable premiums and arm's-length transactions as factors in determining valid insurance arrangement."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Sources discuss risk distribution requirement for pooling arrangements and note taxpayers' argument that participation in pool achieved risk distribution."
+        }
+      ]
+    },
+    {
+      "id": "G-X12",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Tax Court has jurisdiction to review partnership adjustments under section 6234(a)",
+        "A partnership must file a petition for readjustment within 90 days after the notice of a final partnership adjustment is mailed",
+        "The 90-day filing deadline in section 6234(a) is not jurisdictional",
+        "The Tax Court has held that deadlines for filing a TEFRA petition involve timing issues that have been treated as jurisdictional",
+        "The specific 90-day deadline in section 6234(a) is not considered jurisdictional"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 6234(a) explicitly grants Tax Court jurisdiction to review partnership adjustments."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Section 6234(a) states partnership may file petition 'within 90 days after' final partnership adjustment notice is mailed."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "167 T.C. No. 7 held 'the 90-day filing deadline in I.R.C. \u00a7 6234(a) is not jurisdictional.'"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "167 T.C. No. 11 states Tax Court held TEFRA petition deadlines were jurisdictional, noting timing issues were jurisdictional."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "167 T.C. No. 7 explicitly held the specific 90-day deadline in section 6234(a) is not jurisdictional."
+        }
+      ]
+    },
+    {
+      "id": "G-X13",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer must substantiate travel expenses with adequate records or sufficient evidence corroborating their own statement, including the amount, time and place, business purpose, and business relationship of the recipient",
+        "If records are incomplete or documentary proof is unavailable, a taxpayer may establish the amount of expenditures by approximations based on reliable secondary sources and collateral evidence",
+        "A court may not estimate a deductible expense subject to the strict substantiation requirements in section 274(d) unless the taxpayer presents a sufficient evidentiary basis for the estimate",
+        "The Cohan doctrine allows estimation of expenses not subject to strict substantiation requirements, but the taxpayer must provide some factual basis for the estimate"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 274(d) explicitly requires substantiation by adequate records or sufficient evidence corroborating the taxpayer's statement regarding amount, time, place, business purpose, and business relationship."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.162-17(d)(3) states that when records are incomplete or documentary proof unavailable, amounts may be established by approximations based on reliable secondary sources and collateral evidence."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2026-34 explicitly states that the Cohan doctrine cannot estimate expenses subject to section 274(d) strict substantiation requirements unless the taxpayer presents sufficient evidentiary basis."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2022-83 and 2023-26 confirm that under Cohan, courts require some factual basis for estimation and cannot allow \"unguided largesse.\""
+        }
+      ]
+    },
+    {
+      "id": "G-X14",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Transportation expenses incurred by an employee for commuting between home and the office are nondeductible commuting expenses",
+        "No deduction is allowed for expenses incurred for providing any transportation to an employee in connection with travel between the employee's residence and place of employment"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 463 states transportation between home and first business contact are nondeductible commuting expenses."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 274(l) prohibits deductions for transportation expenses between residence and place of employment."
+        }
+      ]
+    },
+    {
+      "id": "G-X15",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The IRS has the burden to prove the taxpayer was solvent when the debt was cancelled",
+        "The taxpayer generally bears the burden of proving that claimed business expenses were actually incurred and were ordinary and necessary",
+        "When the IRS raises the issue of cancellation of indebtedness income, the IRS bears the burden of proof to show that the taxpayer was solvent at the time of the debt cancellation",
+        "A taxpayer is considered insolvent if the excess of liabilities over the fair market value of assets is positive immediately before the discharge of the debt"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo 2024-79 states IRS bears burden to show taxpayer was solvent when issue not in original NOD."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2024-79 cites \u00a7 162(a) and Rule 142(a) requiring taxpayers to prove business expenses incurred and ordinary and necessary."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2024-79 explicitly states IRS bears burden of proof to show taxpayer was solvent when COD income raised beyond original NOD."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 108(d)(3) defines insolvent as excess of liabilities over fair market value of assets immediately before discharge."
+        }
+      ]
+    },
+    {
+      "id": "G-X16",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A cash-method taxpayer cannot deduct unpaid fees as worthless debts because such debts have not been included in income",
+        "Unpaid fees must have been previously reported in income for the debt to be deductible",
+        "A cash basis taxpayer does not include fees in income before they are actually or constructively received",
+        "A debt arising out of receivables is deemed to be an enforceable obligation only if the income such debt represents has been included in the taxpayer's return of income for the year in which the deduction as a bad debt is claimed"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state cash-method taxpayers cannot deduct unpaid fees as bad debts because fees remain unpaid have not been included in income."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Treasury Regulation \u00a7 1.166-1(e) cited in sources requires unpaid fees to have been previously reported in income to be deductible."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources cite \u00a7\u00a7 451, 461 establishing cash basis taxpayers do not include fees in income before actual or constructive receipt."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Sources directly quote Treasury Regulation \u00a7 1.166-1(c) stating debt is enforceable obligation to extent income was included in prior year return."
+        }
+      ]
+    },
+    {
+      "id": "G-X17",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A taxpayer may challenge the existence or amount of the underlying tax liability at a collection hearing if the taxpayer did not receive any statutory notice of deficiency for such tax liability or did not otherwise have an opportunity to dispute such tax liability",
+        "If a Letter 1153 is not received and not deliberately refused by the taxpayer, it does not constitute an opportunity to dispute the underlying liability",
+        "If the client did not receive the letter proposing the penalty, the client can dispute the penalty itself at a collection hearing"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6330(c)(2)(B) directly states this rule for collection hearings."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2010-140 explicitly holds that a Letter 1153 not received and not deliberately refused does not constitute an opportunity to dispute."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "If client didn't receive Letter 1153, under claims 0 and 1, they can challenge the underlying penalty liability at collection hearing."
+        }
+      ]
+    },
+    {
+      "id": "G-X18",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The client has $60,000 of income",
+        "Gross income includes compensation for services",
+        "Gross income includes sales commissions",
+        "The cancellation of debt does not change the recognition of commission income"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo. 2001-252 holds that petitioner realized $60,500 of commission income, despite $40,500 being credited against rent debt owed."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 61(a) defines gross income broadly and specifically includes compensation for services."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 61(a) and T.C. Memo. 2001-252 confirm sales commissions are included in gross income."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2001-252 recognizes both discharge of indebtedness income and commission income but holds full $60,500 commission is realized as income."
+        }
+      ]
+    },
+    {
+      "id": "G-X19",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The Eleventh Circuit concluded that the IRS satisfies Internal Revenue Code section 6751(b) if a supervisor approves an initial determination of a penalty assessment before the IRS assesses those penalties",
+        "Written supervisory approval for accuracy-related penalties does not need to take any specific form",
+        "Written supervisory approval for accuracy-related penalties must generally be obtained no later than the date the IRS issues the deficiency notice",
+        "Written supervisory approval for accuracy-related penalties must generally be obtained no later than the date the IRS formally communicates to the taxpayer the Examination Division's determination to assert a penalty",
+        "Supervisory approval for accuracy-related penalties is considered timely if it is secured before the penalties are assessed"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Eleventh Circuit in Kroner v. Commissioner stated IRS satisfies section 6751(b) if supervisor approves before assessment."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2023-5 cites Palmolive Bldg. Invs. for proposition that written supervisory approval need not take specific form."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2023-5 states approval must be obtained no later than date IRS issues deficiency notice."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2023-5 states approval must be obtained no later than date IRS formally communicates determination to assert penalty."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Eleventh Circuit in Kroner and multiple tax court memos establish supervisory approval is timely if secured before penalties are assessed."
+        }
+      ]
+    },
+    {
+      "id": "G-X20",
+      "refused": false,
+      "faithfulness": 0.75,
+      "claims": [
+        "A taxpayer may avoid penalties for disallowed deductions if they can demonstrate reasonable reliance on professional advice",
+        "Reliance on advice from a promoter or someone with a conflict of interest is generally considered unreasonable",
+        "A taxpayer must seek independent advice to establish reasonable reliance on professional advice to avoid penalties",
+        "If a taxpayer relied solely on the promoter's advice without seeking independent counsel, this reliance may not be sufficient to avoid penalties"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources discuss reliance on advice but don't state taxpayers can avoid penalties by demonstrating reasonable reliance."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Sources repeatedly state reliance on promoters or those with conflicts of interest is unreasonable for penalty avoidance."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Sources indicate advice must be from competent, independent parties, not promoters or those with conflicts of interest."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Court case shows taxpayer relied only on promoter's advice without independent counsel; court found this insufficient for penalty relief."
+        }
+      ]
+    },
+    {
+      "id": "G-X21",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Shareholders of two related S corporations can receive a distribution of assets from one S corporation and then contribute those assets to another S corporation to increase their basis in the latter",
+        "The transactions must actually occur for the basis increase to be valid",
+        "The fact that two S corporations have a synergistic business relationship and are owned by the same shareholders does not preclude the basis increase, as long as the underlying distributions and contributions actually occurred",
+        "A shareholder's basis in S corporation stock is increased by the shareholder's pro rata share of the corporation's income",
+        "A shareholder's basis in S corporation stock is decreased by distributions not includable in income",
+        "A shareholder's basis in S corporation stock is decreased by losses",
+        "A shareholder's basis in S corporation stock is decreased by deductions"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "T.C. Memo 2012-160 explicitly holds shareholders can distribute assets from one S corp and contribute to another to increase basis."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2012-160 states transactions must actually occur for basis increase to be valid."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2012-160 states synergistic relationship and common ownership do not preclude basis increase if distributions and contributions actually occurred."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 1367(a)(1) increases basis by items of income described in section 1366(a)(1)."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 1367(a)(2)(A) decreases basis by distributions not includible in income under section 1368."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 1367(a)(2)(B) decreases basis by items of loss and deduction described in section 1366(a)(1)."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 1367(a)(2)(B)-(D) decreases basis by losses, deductions, and certain nondeductible noncapital expenses."
+        }
+      ]
+    },
+    {
+      "id": "G-X22",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The taxpayer generally bears the burden of proving that the IRS's determinations in a notice of deficiency are erroneous",
+        "The burden of proof may shift to the IRS if the taxpayer introduces credible evidence and satisfies certain conditions, including cooperating with reasonable requests from the IRS",
+        "One condition for shifting the burden of proof to the IRS is that the taxpayer must have cooperated with reasonable requests by the IRS for witnesses, information, documents, meetings, and interviews",
+        "If the taxpayer ignored the IRS's requests for documents during the audit, the taxpayer likely did not satisfy the cooperation requirement necessary to shift the burden of proof to the IRS",
+        "The burden of proof will not shift to the IRS due to the taxpayer's failure to cooperate"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491 and Tax Court cases state taxpayer bears burden proving deficiency determinations erroneous"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491(a)(1)-(2) explicitly states burden shifts if taxpayer introduces credible evidence and satisfies conditions including cooperation"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 7491(a)(2)(B) requires taxpayer cooperate with reasonable IRS requests for documents, meetings, interviews"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Multiple Tax Court cases hold that ignoring IRS requests violates cooperation requirement, preventing burden shift"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Sources show failure to cooperate is condition for burden shift; non-compliance prevents shift under \u00a7 7491(a)(2)(B)"
+        }
+      ]
+    },
+    {
+      "id": "G-X23",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The client's return showed an understatement of income tax of $12,000",
+        "A substantial understatement exists when the understatement exceeds the greater of 10% of the tax required to be shown on the return or $5,000",
+        "The $12,000 understatement exceeds the threshold for a substantial understatement",
+        "Failure to reconstruct records can lead to a finding of negligence",
+        "Negligence is a basis for the substantial understatement penalty under section 6662",
+        "The substantial understatement penalty applies unless the taxpayer establishes reasonable cause and good faith for the underpayment"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "$92,000 correct tax minus $80,000 reported equals $12,000 understatement."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2013-280 states substantial understatement defined as exceeding greater of 10% of tax required or $5,000."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "$12,000 exceeds both 10% of $92,000 ($9,200) and $5,000 threshold."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2026-65 upheld penalty where taxpayer failed to reconstruct records after flood."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Section 6662 and T.C. Memo. 2013-280 establish negligence as basis for substantial understatement penalty."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2013-280 states penalty doesn't apply if taxpayer establishes reasonable cause and good faith."
+        }
+      ]
+    },
+    {
+      "id": "G-X24",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "If a dwelling unit is rented for 15 days or more during the year, expenses must be divided between rental use and personal use",
+        "The amount of rental expenses that can be deducted is limited to the ratio of days rented at fair rental price to total days the unit is used",
+        "If the taxpayer uses the dwelling unit for personal purposes on any day during the taxable year, deductible rental expenses are limited by the rental use ratio",
+        "Only the rental portion of expenses is deductible when there is personal use of the dwelling unit"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 527 states that if you use a dwelling unit as a home and rent it 15 days or more, you must divide expenses between rental and personal use."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 280A(e)(1) limits deductible rental expenses to the ratio of days rented at fair rental to total days used."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 280A(e)(1) states that when a taxpayer uses a dwelling unit for personal purposes on any day, deductible rental expenses are limited by the rental use ratio."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "IRS Pub 527 and 26 U.S.C. \u00a7 280A(e) both confirm that only the rental portion of expenses is deductible when personal use exists."
+        }
+      ]
+    },
+    {
+      "id": "G-X25",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Section 530 of the Revenue Act of 1978 provides relief from employment taxes for taxpayers who incorrectly treat wage payments to employees as payments to independent contractors if certain requirements are met",
+        "To qualify for section 530 relief, a taxpayer must not have treated the worker as an employee for any period for purposes of federal employment taxes",
+        "To qualify for section 530 relief, a taxpayer must have consistently filed all federal tax returns on a basis consistent with treating the worker as an independent contractor",
+        "To qualify for section 530 relief, a taxpayer must have had a reasonable basis for not treating the worker as an employee",
+        "To qualify for section 530 relief, a taxpayer must not have treated as an employee any individual holding a position substantially similar to that of the worker in question",
+        "A reasonable basis for treating a worker as an independent contractor can include reliance on judicial precedent",
+        "A reasonable basis for treating a worker as an independent contractor can include reliance on published rulings",
+        "A reasonable basis for treating a worker as an independent contractor can include reliance on a longstanding recognized practice of a significant segment of the industry"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources state section 530 affords relief from employment taxes for incorrect classification."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2023-64 lists this as the first requirement for section 530 relief."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2023-64 requires consistent filing on basis consistent with non-employee treatment."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2023-64 lists reasonable basis requirement as third qualification criterion."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2023-64 lists substantive consistency requirement as fourth qualification criterion."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2013-203 lists judicial precedent as safe harbor basis for reasonable reliance."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2013-203 lists published rulings as safe harbor basis for reasonable reliance."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo. 2013-203 lists longstanding industry practice as safe harbor basis for reasonable reliance."
+        }
+      ]
+    },
+    {
+      "id": "G-X26",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Under section 183, if an activity is not engaged in for profit, no deduction attributable to that activity shall be allowed except as provided in section 183",
+        "An activity not engaged in for profit is defined as any activity for which deductions are not allowable under section 162 or section 212",
+        "Deductions that would be allowable without regard to whether the activity is engaged in for profit may be claimed, along with a deduction equal to the amount of deductions that would be allowable if the activity were engaged in for profit, but only to the extent that gross income exceeds the allowable deductions",
+        "A presumption exists that an activity is engaged in for profit if gross income exceeds deductions for 3 out of 5 consecutive taxable years",
+        "A taxpayer must maintain adequate records to substantiate claimed business expenses",
+        "Personal expenses cannot be deducted under the guise of business expenses",
+        "A taxpayer's lack of a business plan and failure to keep formal records raises questions about the profit motive behind writing activities"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(a) states no deduction allowed except as provided in section 183."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(c) defines activity not engaged in for profit as one where deductions are not allowable under section 162 or 212."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(b) permits deductions under specified conditions including gross income limitation."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 183(d) establishes 3-of-5-year presumption for profit motive."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo. 2010-144 denies deductions for inadequate records and lack of substantiation."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "T.C. Memo. 2024-75 states personal expenses may not be deducted as business expenses."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo. 2024-75 notes absence of business plan and formal records indicate questionable profit motive."
+        }
+      ]
+    },
+    {
+      "id": "G-X27",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Income earned by an off-duty police officer for performing security services is subject to self-employment tax if the officer has an independent contractor relationship with the businesses paying for the services",
+        "The determination of whether an off-duty police officer has an employee or independent contractor relationship with the businesses is crucial for self-employment tax applicability"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Tax Court held amounts paid to off-duty police officer for security services as independent contractor were subject to self-employment tax."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Tax Court stated resolution turns on whether officer had employee or independent contractor relationship with third parties."
+        }
+      ]
+    },
+    {
+      "id": "G-X28",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Interest credited to a certificate of deposit is generally taxable income in the year it is credited",
+        "Interest credited to a certificate of deposit is taxable regardless of whether the taxpayer withdraws it",
+        "Interest credited to a certificate of deposit is taxable regardless of whether the taxpayer incurs a penalty for early withdrawal",
+        "Gross income includes all income",
+        "Gross income includes interest income from certificates of deposit",
+        "A potential early withdrawal penalty does not prevent the taxpayer from being in constructive receipt of the interest income credited to the account",
+        "Interest credited to a certificate of deposit remains taxable even if the taxpayer does not withdraw the interest or principal during the taxable year",
+        "Interest credited to a certificate of deposit remains taxable even if it is subject to a penalty for early withdrawal"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.451-2(a) establishes income is constructively received when credited to account and available for withdrawal."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo 2010-190 holds interest taxable in year credited regardless of withdrawal; constructive receipt doctrine applies."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo 2010-190 and regulations confirm early withdrawal penalty alone doesn't prevent constructive receipt of credited interest."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 61(a)(4) is cited in T.C. Memo 2010-190 stating gross income comprises all income including interest."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 61(a)(4) explicitly includes interest income; sources confirm CDs are deposits subject to this rule."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "26 CFR 1.451-2(a) and T.C. Memo 2010-190 confirm early withdrawal penalties alone don't prevent constructive receipt."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "T.C. Memo 2010-190 holds petitioner's interest taxable despite no withdrawal during 2006 taxable year."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "T.C. Memo 2010-190 explicitly holds interest taxable despite early withdrawal penalty potential; penalty doesn't prevent constructive receipt."
+        }
+      ]
+    },
+    {
+      "id": "G-X29",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A client can be relieved of tax liability if she meets all requirements of section 6015(b)",
+        "The client signed joint returns with her husband for a taxable year",
+        "Under section 6015(b), the client must establish that she did not know and had no reason to know of the understatement when she signed the return",
+        "The client had no involvement in her husband's business",
+        "Lack of involvement in her husband's business supports a claim of lack of knowledge regarding disallowed deductions",
+        "Under section 6015(b), it must be determined whether it is inequitable to hold the client liable for the deficiency attributable to the husband's disallowed deductions",
+        "The determination of inequitability requires consideration of all facts and circumstances",
+        "Under section 6015(b), the client must elect the benefits of relief within the prescribed time frame after the Secretary has begun collection activities"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 6015(b)(1) provides relief if all requirements met; case law confirms relief available when all elements satisfied."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Question states client signed joint returns; section 6015(b)(1)(A) requires joint return filed."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Section 6015(b)(1)(C) explicitly requires establishing no knowledge and no reason to know of understatement."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo 2009-201 confirms Ms. Ross had no involvement in husband's ER physician business."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "T.C. Memo 2009-201 and 2007-219 show no involvement in business supports lack of knowledge regarding deductions."
+        },
+        {
+          "index": 5,
+          "supported": true,
+          "why": "Section 6015(b)(1)(D) requires taking into account all facts and circumstances to determine inequitability."
+        },
+        {
+          "index": 6,
+          "supported": true,
+          "why": "Section 6015(b)(1)(D) explicitly requires considering all facts and circumstances for inequitability determination."
+        },
+        {
+          "index": 7,
+          "supported": true,
+          "why": "Section 6015(b)(1)(E) requires election within 2 years after Secretary begins collection activities."
+        }
+      ]
+    },
+    {
+      "id": "G-X30",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "A gross valuation misstatement penalty of 40% applies to the portion of the underpayment attributable to the overvaluation of the conservation easement",
+        "The claimed value exceeds the correct value by more than 200%",
+        "A gross valuation misstatement occurs when the claimed value exceeds the correct value by more than 200%",
+        "The taxpayer cannot demonstrate reasonable cause or good faith as a defense against the gross valuation misstatement penalty"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Sources establish 40% gross valuation misstatement penalty applies to overvalued conservation easement portions."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Multiple sources show claimed values exceeded correct values by over 200% in these cases."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "Source states gross valuation misstatement occurs when claimed value equals or exceeds 200% of correct value."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "Source states reasonable cause defense unavailable for gross valuation misstatements on charitable property."
+        }
+      ]
+    },
+    {
+      "id": "G-I01",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The IRS standard mileage rate for business use of an automobile for 2025 is 70 cents per mile"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 334 (2025) and Pub 463 (2025) both state the 2025 business standard mileage rate is 70 cents per mile."
+        }
+      ]
+    },
+    {
+      "id": "G-I02",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The maximum self-employment income for a taxable year is equal to the contribution and benefit base effective for that calendar year",
+        "The contribution and benefit base is determined under section 230 of the Social Security Act"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.1402(b)-1(b)(1)(i) states maximum self-employment income equals the contribution and benefit base effective for the calendar year."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 CFR 1.1402(b)-1(b)(1)(i) and 26 U.S.C. \u00a7 1402(b) both reference contribution and benefit base as determined under section 230 of the Social Security Act."
+        }
+      ]
+    },
+    {
+      "id": "G-I03",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Qualified property or 50-percent bonus depreciation property is eligible for additional first year depreciation deductions under federal regulations"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 CFR 1.168(k)-1(b)(2) describes qualified property and 50-percent bonus depreciation property that meet requirements for additional first year depreciation deductions."
+        }
+      ]
+    },
+    {
+      "id": "G-I04",
+      "refused": true,
+      "faithfulness": null,
+      "claims": [],
+      "verdicts": []
+    },
+    {
+      "id": "G-I05",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Gross income from rentals of property located outside the United States is treated as income from sources without the United States according to 26 U.S.C. \u00a7 862(a)(4)",
+        "A U.S. citizen earning rental income from a flat in London must report this income as foreign-source income under U.S. tax law"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 862(a)(4) explicitly includes rentals from property located without the United States as income from sources without the United States."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "Since London is outside the United States, rental income from a London flat qualifies as foreign-source income under 26 U.S.C. \u00a7 862(a)(4)."
+        }
+      ]
+    },
+    {
+      "id": "G-I06",
+      "refused": true,
+      "faithfulness": null,
+      "claims": [],
+      "verdicts": []
+    },
+    {
+      "id": "G-I07",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The interest rate for underpayments by individuals is determined under section 6621",
+        "The underpayment rate under section 6621 is the sum of the Federal short-term rate plus 3 percentage points",
+        "The Federal short-term rate is determined for the first month in each calendar quarter"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6654(a)(1) states underpayment rate for individuals is established under section 6621"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6621(a)(2) states underpayment rate is Federal short-term rate plus 3 percentage points"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 6621(b)(1) states Secretary determines Federal short-term rate for first month in each calendar quarter"
+        }
+      ]
+    },
+    {
+      "id": "G-I08",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "The deduction for qualified tips is set to expire after December 31, 2028",
+        "No deduction is allowed under section 224 for any taxable year beginning after December 31, 2028"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 224(h) states deduction terminates for taxable years beginning after December 31, 2028."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 224(h) explicitly states no deduction allowed after December 31, 2028."
+        }
+      ]
+    },
+    {
+      "id": "G-I09",
+      "refused": true,
+      "faithfulness": null,
+      "claims": [],
+      "verdicts": []
+    },
+    {
+      "id": "G-I10",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For taxable years beginning after 2026, the dollar amounts in section 179(b)(1) and (2) are increased by the cost-of-living adjustment determined under section 1(f)(3)"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "26 U.S.C. \u00a7 179(b)(6)(A) states dollar amounts in paragraphs (1) and (2) are increased by cost-of-living adjustment for taxable years beginning after 2025."
+        }
+      ]
+    },
+    {
+      "id": "G-I11",
+      "refused": false,
+      "faithfulness": 0.5,
+      "claims": [
+        "A self-employed individual can deduct home office expenses as ordinary and necessary expenses incurred in carrying on a trade or business",
+        "The deduction for home office expenses must meet the requirements set forth in the Internal Revenue Code regarding trade or business expenses"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": false,
+          "why": "Sources do not mention home office expenses specifically. \u00a7 162(a) permits deductions for ordinary and necessary business expenses generally, but does not expressly address home office deductions."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "\u00a7 162(a) establishes that trade or business expense deductions must be ordinary and necessary, which sets forth the requirements referenced in the claim."
+        }
+      ]
+    },
+    {
+      "id": "G-X31",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "Interest on a construction loan for a rental property must be capitalized under Section 263A(f) when it is paid or incurred during the production period",
+        "The production period begins on the first date that any physical production activity is performed, such as clearing or excavating land",
+        "The production period ends on the date that the property is placed into service and all production activities are completed",
+        "Allocable interest includes interest that is directly attributable to production expenditures for the property",
+        "Interest incurred on a construction loan must be capitalized from the date physical production activities begin until the property is placed into service"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "Section 263A(f) requires capitalization of interest for self-produced real property when paid or incurred during production period"
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "T.C. Memo. 2013-52 states production period begins on first date any physical production activity performed, e.g., clearing or excavating"
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "T.C. Memo. 2013-52 states production period ends when property placed in service and all production activities completed"
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "T.C. Memo. 2013-52 defines allocable interest including interest directly attributable to production expenditures"
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "Claim follows from sources stating production period begins at first physical activity and interest must be capitalized during production period"
+        }
+      ]
+    },
+    {
+      "id": "G-S28",
+      "refused": false,
+      "faithfulness": 1.0,
+      "claims": [
+        "For passenger automobiles placed in service during calendar year 2025, the maximum first-year depreciation deduction is $20,200 if the vehicle qualifies for Code section 168(k) additional first-year depreciation deduction",
+        "For passenger automobiles placed in service during calendar year 2025, the maximum first-year depreciation deduction is $12,200 if the vehicle does not qualify for Code section 168(k) additional first-year depreciation deduction",
+        "To qualify for the 100% additional first-year depreciation deduction, the vehicle must be acquired after January 19, 2025",
+        "To qualify for the 100% additional first-year depreciation deduction, the vehicle must be used more than 50% in qualified business use during the tax year",
+        "A vehicle acquired before January 20, 2025 may qualify for a 40% additional first-year depreciation deduction if it meets certain criteria"
+      ],
+      "verdicts": [
+        {
+          "index": 0,
+          "supported": true,
+          "why": "IRS Pub 463 (2025), p. 1 states first-year limit is $20,200 for automobiles where Code section 168(k) additional first-year depreciation deduction applies."
+        },
+        {
+          "index": 1,
+          "supported": true,
+          "why": "IRS Pub 463 (2025), p. 24 states first-year limit is $12,200 for automobiles where no Code section 168(k) additional first-year depreciation deduction applies."
+        },
+        {
+          "index": 2,
+          "supported": true,
+          "why": "IRS Pub 463 (2025), p. 24 requires car acquired after January 19, 2025 for 100% additional first-year depreciation deduction eligibility."
+        },
+        {
+          "index": 3,
+          "supported": true,
+          "why": "IRS Pub 463 (2025), p. 24 requires car used more than 50% in qualified business use during tax year for 100% deduction eligibility."
+        },
+        {
+          "index": 4,
+          "supported": true,
+          "why": "IRS Pub 463 (2025), p. 24 states car acquired after September 27, 2017 and before January 20, 2025 may qualify for 40% additional first-year depreciation deduction."
+        }
+      ]
+    }
+  ]
+}
