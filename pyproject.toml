@@ -17,13 +17,20 @@ dependencies = [
     "openai>=3.16.2",
     "python-dotenv>=1.2.3",
     "eyecite>=2.7.8",
+    "opentelemetry-sdk>=1.45.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.45.1",
+    "python-multipart>=0.0.33",
+    "pypdfium2>=5.14.0",
 ]
 
 [project.scripts]
 taxcite = "taxcite.cli:main"
 
 [dependency-groups]
-dev = ["pytest"]
+dev = [
+    "playwright>=1.64.1",
+    "pytest",
+]
 spike = [
     "protobuf>=7.36.2",
     "sentencepiece>=0.2.2",

@@ -1,0 +1,119 @@
+{
+ "A": {
+  "question": "My client Maria Lopez works full time and runs a weekend cake business that has lost money every year since 2023. Can she deduct those losses against her wages, and how has the Tax Court treated side businesses like this? Her W-2 and intake memo are uploaded.",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": "2023",
+   "subqueries": [
+    {
+     "kind": "statutory",
+     "query": "activity not engaged in for profit deduction limitation"
+    },
+    {
+     "kind": "case_law",
+     "query": "Tax Court treatment of side businesses with consistent losses"
+    },
+    {
+     "kind": "client_fact",
+     "query": "the client works full time and runs a weekend cake business that has lost money every year since 2023"
+    }
+   ],
+   "fallback": ""
+  },
+  "synthesizing": {
+   "chunks": 8,
+   "documents": 2
+  },
+  "verifying": {
+   "sentences": 6
+  },
+  "answer": {
+   "treatments": {},
+   "text": "Tax year: 2023\n\nShort answer: It depends: Maria Lopez may be limited in deducting her cake business losses against her wages due to the nature of her business and its consistent losses [intake-memo.pdf, p. 1], [IRS Pub 334 (2025), p. 43].\n\nPart 1: activity not engaged in for profit deduction limitation\nMaria Lopez has reported net losses from her home cake business for the years 2023, 2024, and 2025 [intake-memo.pdf, p. 1]. Under IRS rules, a taxpayer can usually deduct business losses from their gross income, but there are limitations if the activity is not engaged in for profit [IRS Pub 334 (2025), p. 43]. Maria Lopez has a separate bank account for her cake business, but she does not have a written business plan and has not changed her pricing or methods after incurring losses [intake-memo.pdf, p. 1].",
+   "citations": [
+    "intake-memo.pdf, p. 1",
+    "IRS Pub 334 (2025), p. 43"
+   ],
+   "derived_citations": [],
+   "unsupported_citations": [],
+   "authorities": {
+    "intake-memo.pdf, p. 1": {
+     "type": "client document",
+     "status": "client",
+     "level": 0,
+     "label": "Client document"
+    },
+    "IRS Pub 334 (2025), p. 43": {
+     "level": 1,
+     "status": "not_binding",
+     "type": "publication",
+     "label": "IRS publication (not binding)"
+    }
+   },
+   "refused": false,
+   "hidden_sentences": 3,
+   "model": "gpt-4o-mini",
+   "cost_usd": 0.010249,
+   "trace_id": "036d8068dd8c268e48cf4e4fff13fc97"
+  }
+ },
+ "B": {
+  "question": "What does Maria Lopez's intake memo say about her cake business losses?",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": null,
+   "subqueries": [
+    {
+     "kind": "unrouted",
+     "query": "What does Maria Lopez's intake memo say about her cake business losses?"
+    }
+   ],
+   "fallback": "no searchable sub-query"
+  },
+  "synthesizing": {
+   "chunks": 8,
+   "documents": 0
+  },
+  "verifying": {
+   "sentences": 4
+  },
+  "answer": {
+   "treatments": {
+    "T.C. Memo. 2021-50": {
+     "status": "none",
+     "by": "",
+     "sources": [
+      "CourtListener"
+     ],
+     "checked_at": "2026-09-26",
+     "stale": true,
+     "note": "No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked."
+    }
+   },
+   "text": "The Tax Court has held that vague and general testimony about business expenses is insufficient to establish a connection between expenditures and the business [T.C. Memo. 2021-50, at *11-12]. Taxpayers must provide adequate records or sufficient evidence to corroborate their claims for business expenses, particularly under section 274(d) [T.C. Memo. 2021-50, at *11-12].",
+   "citations": [
+    "T.C. Memo. 2021-50, at *11-12"
+   ],
+   "derived_citations": [],
+   "unsupported_citations": [],
+   "authorities": {
+    "T.C. Memo. 2021-50, at *11-12": {
+     "level": 2,
+     "status": "memorandum",
+     "type": "opinion",
+     "label": "Tax Court memorandum opinion"
+    }
+   },
+   "refused": false,
+   "hidden_sentences": 2,
+   "model": "gpt-4o-mini",
+   "cost_usd": 0.008732,
+   "trace_id": "d31fe402c0bf6bb811e3af7c15d8d6ea"
+  },
+  "documents_listed": {
+   "documents": []
+  }
+ }
+}

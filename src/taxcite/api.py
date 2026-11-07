@@ -1,21 +1,35 @@
 import asyncio
 import json
 import os
+from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import psycopg
 import redis
-from fastapi import BackgroundTasks, FastAPI, HTTPException, Response
+from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Response, UploadFile
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
 
-from taxcite import jobs, store
+from taxcite import index, jobs, store, tracing
+from taxcite.ingest import client_docs
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://taxcite:taxcite@localhost:5433/taxcite")
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6380/0")
 
-app = FastAPI(title="TaxCite")
+
+@asynccontextmanager
+async def lifespan(app):
+    # G1b: tracing is on when the Langfuse keys are set. At startup, not import: tests build their TestClient
+    # without `with`, so the lifespan never runs and no test sends a span to Langfuse.
+    tracing.setup()
+    yield
+
+
+app = FastAPI(title="TaxCite", lifespan=lifespan)
 
 
 def _check(probe) -> str:
@@ -38,6 +52,17 @@ def health(response: Response) -> dict[str, str]:
     return status
 
 
+def tenant(authorization: str | None = Header(None)) -> str:
+    """Every route but /health belongs to a tenant, resolved from its API key (Phase G)."""
+    scheme, _, key = (authorization or "").partition(" ")
+    if scheme.lower() == "bearer" and key:
+        with store.connect() as conn:
+            if found := store.tenant_for(conn, key.strip()):
+                return found
+    raise HTTPException(status_code=401, detail="missing or unknown API key",
+                        headers={"WWW-Authenticate": "Bearer"})
+
+
 class Query(BaseModel):
     question: str
     k: int = 8
@@ -45,38 +70,50 @@ class Query(BaseModel):
 
 POLL_SECONDS = 0.5   # fallback cadence when Redis is unavailable
 IDLE_TIMEOUT = 0.5   # how long to wait on Redis before re-checking the record
+# Daily quotas, reset at midnight UTC. First guesses (plan G): the global cap keeps a busy day inside the
+# <$50/mo budget at ~$0.0073 an answer with room for retries and eval traffic.
+QUERIES_PER_DAY = 50
+ALL_QUERIES_PER_DAY = 200
+
+
+def _over_quota(conn, who: str) -> None:
+    if jobs.count_today(conn, who) >= QUERIES_PER_DAY or jobs.count_today(conn) >= ALL_QUERIES_PER_DAY:
+        tomorrow = (datetime.now(timezone.utc) + timedelta(days=1)).date()
+        raise HTTPException(status_code=429, detail=f"daily question limit reached; resets {tomorrow} 00:00 UTC")
 
 
 @app.post("/queries", status_code=202)
-def post_query(query: Query, background: BackgroundTasks) -> dict:
+def post_query(query: Query, background: BackgroundTasks, who: str = Depends(tenant)) -> dict:
     """Accept a question and return immediately (ADR-9).
 
     The pipeline runs 20-30s, longer than free-tier proxies keep a connection open,
     so the client gets an id and watches /queries/{id}/events instead.
     """
+    question = client_docs.redact(query.question)  # G0 finding: before the job row, the pipeline and any span
     with store.connect() as conn:
         jobs.create_table(conn)
-        job_id = jobs.create(conn, query.question)
-    background.add_task(_run_job, job_id, query.question, query.k)
+        _over_quota(conn, who)
+        job_id = jobs.create(conn, question, who)
+    background.add_task(_run_job, job_id, question, query.k, who)
     return {"id": job_id, "events": f"/queries/{job_id}/events"}
 
 
-def _run_job(job_id: str, question: str, k: int) -> None:
+def _run_job(job_id: str, question: str, k: int, tenant: str) -> None:
     with store.connect() as conn:
-        jobs.run(conn, job_id, question, k=k)
+        jobs.run(conn, job_id, question, k=k, tenant=tenant)
 
 
 @app.get("/queries/{job_id}")
-def get_query(job_id: str) -> dict:
+def get_query(job_id: str, who: str = Depends(tenant)) -> dict:
     with store.connect() as conn:
-        job = jobs.get(conn, job_id)
+        job = jobs.get(conn, job_id, who)
     if job is None:
         raise HTTPException(status_code=404, detail="no such job")
     return job
 
 
 @app.get("/queries/{job_id}/events")
-def stream_events(job_id: str) -> StreamingResponse:
+def stream_events(job_id: str, who: str = Depends(tenant)) -> StreamingResponse:
     """Server-sent events for one job.
 
     Replays whatever the record already holds, then follows along. Because the record
@@ -85,7 +122,7 @@ def stream_events(job_id: str) -> StreamingResponse:
     hanging.
     """
     with store.connect() as conn:
-        job = jobs.get(conn, job_id)
+        job = jobs.get(conn, job_id, who)
     if job is None:
         raise HTTPException(status_code=404, detail="no such job")
 
@@ -94,7 +131,7 @@ def stream_events(job_id: str) -> StreamingResponse:
         # misses nothing; then follow live events from Redis (ADR-16).
         seen = 0
         with store.connect() as conn:
-            current = jobs.get(conn, job_id)
+            current = jobs.get(conn, job_id, who)
         for event in jobs.replay(current)[seen:]:
             yield event.sse()
         seen = len(current["stages"])
@@ -129,7 +166,7 @@ def stream_events(job_id: str) -> StreamingResponse:
 
                 # Redis was quiet (or absent): the record decides whether we are done.
                 with store.connect() as conn:
-                    current = jobs.get(conn, job_id)
+                    current = jobs.get(conn, job_id, who)
                 for event in jobs.replay(current)[seen:]:
                     yield event.sse()
                 seen = len(current["stages"])
@@ -141,3 +178,47 @@ def stream_events(job_id: str) -> StreamingResponse:
 
     return StreamingResponse(events(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.post("/documents", status_code=201)
+def post_document(file: UploadFile, who: str = Depends(tenant)) -> dict:
+    """Upload one client document (G2). Synchronous: a 50-page text PDF took 16 s, embedding included.
+    ponytail: a long scan through OCR can outlast a free-tier proxy's timeout; run it as a job (ADR-9) if hosting does."""
+    data = file.file.read(client_docs.MAX_BYTES + 1)  # one byte over is enough to refuse it
+    with store.connect() as conn:
+        try:
+            return client_docs.ingest(conn, index.client(), who, file.filename or "document", data)
+        except client_docs.Rejected as e:
+            raise HTTPException(status_code=e.status, detail=str(e))
+
+
+@app.get("/documents")
+def get_documents(who: str = Depends(tenant)) -> dict:
+    with store.connect() as conn:
+        return {"documents": client_docs.documents(conn, who)}
+
+
+@app.delete("/documents/{doc_id}", status_code=204)
+def delete_document(doc_id: str, who: str = Depends(tenant)) -> Response:
+    with store.connect() as conn:
+        if not client_docs.delete(conn, index.client(), who, doc_id):
+            raise HTTPException(status_code=404, detail="no such document")
+    return Response(status_code=204)
+
+
+
+# G5 (ADR-13): the page. It renders every string with textContent; the policy is a second wall behind that, so an
+# injected script tag or inline handler couldn't run, and nothing on the page can reach another host.
+CSP = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; "
+       "object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'")
+
+
+class Page(StaticFiles):
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Content-Security-Policy"] = CSP
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        return response
+
+
+app.mount("/", Page(directory=Path(__file__).parent / "static", html=True), name="page")  # last: API routes match first

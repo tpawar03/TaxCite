@@ -1,0 +1,107 @@
+{
+ "A": {
+  "question": "My client Maria Lopez works full time and runs a weekend cake business that has lost money every year since 2023. Can she deduct those losses against her wages, and how has the Tax Court treated side businesses like this? Her W-2 and intake memo are uploaded.",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": "2023",
+   "fallback": "",
+   "subqueries": [
+    {
+     "kind": "statutory",
+     "query": "activity not engaged in for profit deduction limitation"
+    },
+    {
+     "kind": "case_law",
+     "query": "Tax Court treatment of side businesses with consistent losses and full-time employment"
+    },
+    {
+     "kind": "client_fact",
+     "query": "the client works full time and runs a weekend cake business that has lost money every year since 2023"
+    }
+   ]
+  },
+  "synthesizing": {
+   "chunks": 8,
+   "documents": 2
+  },
+  "verifying": {
+   "sentences": 7
+  },
+  "answer": {
+   "text": "Tax year: 2023\n\nPart 1: activity not engaged in for profit deduction limitation\nMaria Lopez's cake business has reported net losses of $4,100 for 2023 [intake-memo.pdf, p. 1]. Under 26 U.S.C. \u00a7 183(a), if an activity is not engaged in for profit, no deduction attributable to that activity shall be allowed except as provided in that section [26 U.S.C. \u00a7 183(a)-(d)]. The cake business may be considered an activity not engaged in for profit if it does not meet the criteria set forth in 26 U.S.C. \u00a7 183(d) [26 U.S.C. \u00a7 183(a)-(d)]. The presumption of profit motive applies if the gross income from the activity exceeds the deductions for three out of five consecutive years, which does not apply here as the business has incurred losses every year since 2023 [26 U.S.C. \u00a7 183(a)-(d)].\n\nPart 2: Tax Court treatment of side businesses with consistent losses and full-time employment\nIn cases where taxpayers have full-time employment and operate a side business that incurs losses, the burden is on the taxpayer to substantiate the deductions claimed for that business [T.C. Memo. 2025-80, at *7-8].",
+   "model": "gpt-4o-mini",
+   "refused": false,
+   "cost_usd": 0.010571,
+   "trace_id": null,
+   "citations": [
+    "intake-memo.pdf, p. 1",
+    "26 U.S.C. \u00a7 183(a)-(d)",
+    "T.C. Memo. 2025-80, at *7-8"
+   ],
+   "treatments": {
+    "T.C. Memo. 2025-80": {
+     "by": "",
+     "note": "No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked.",
+     "stale": true,
+     "status": "none",
+     "sources": [
+      "CourtListener"
+     ],
+     "checked_at": "2026-09-26"
+    }
+   },
+   "authorities": {
+    "intake-memo.pdf, p. 1": {
+     "type": "client document",
+     "label": "Client document",
+     "level": 0,
+     "status": "client"
+    },
+    "26 U.S.C. \u00a7 183(a)-(d)": {
+     "type": "statute",
+     "label": "Statute",
+     "level": 4,
+     "status": "enacted"
+    },
+    "T.C. Memo. 2025-80, at *7-8": {
+     "type": "opinion",
+     "label": "Tax Court memorandum opinion",
+     "level": 2,
+     "status": "memorandum"
+    }
+   },
+   "hidden_sentences": 2,
+   "derived_citations": [],
+   "unsupported_citations": []
+  }
+ },
+ "B": {
+  "question": "What does Maria Lopez's intake memo say about her cake business losses?",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": null,
+   "fallback": "no searchable sub-query",
+   "subqueries": [
+    {
+     "kind": "unrouted",
+     "query": "What does Maria Lopez's intake memo say about her cake business losses?"
+    }
+   ]
+  },
+  "answer": {
+   "text": "INSUFFICIENT EVIDENCE: no such document is on file.",
+   "model": "gpt-4o-mini",
+   "refused": true,
+   "cost_usd": 0.000171,
+   "trace_id": null,
+   "citations": [],
+   "treatments": {},
+   "authorities": {},
+   "hidden_sentences": 0,
+   "derived_citations": [],
+   "unsupported_citations": []
+  }
+ }
+}

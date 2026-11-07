@@ -21,6 +21,8 @@ from datetime import datetime
 
 import redis
 
+from taxcite import tracing
+
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6380/0")
 CHANNEL = "job:{id}"
 TERMINAL = ("answer", "error")
@@ -37,6 +39,9 @@ SCHEMA = (
     )
     """,
     "CREATE INDEX IF NOT EXISTS jobs_created_idx ON jobs (created_at DESC)",
+    # Phase G: every job belongs to a tenant. Rows from before have none and are visible to no one.
+    "ALTER TABLE jobs ADD COLUMN IF NOT EXISTS tenant uuid",
+    "CREATE INDEX IF NOT EXISTS jobs_tenant_idx ON jobs (tenant, created_at DESC)",
 )
 
 
@@ -60,11 +65,20 @@ def create_table(conn) -> None:
     conn.commit()
 
 
-def create(conn, question: str) -> str:
+def create(conn, question: str, tenant: str) -> str:
     job_id = str(uuid.uuid4())
-    conn.execute("INSERT INTO jobs (id, question, status) VALUES (%s, %s, 'queued')", (job_id, question))
+    conn.execute("INSERT INTO jobs (id, question, status, tenant) VALUES (%s, %s, 'queued', %s)",
+                 (job_id, question, tenant))
     conn.commit()
     return job_id
+
+
+def count_today(conn, tenant: str | None = None) -> int:
+    """Jobs created since midnight UTC: one tenant's, or everyone's (the quotas)."""
+    (n,) = conn.execute(
+        "SELECT count(*) FROM jobs WHERE created_at >= date_trunc('day', now(), 'UTC') "
+        "AND (%(t)s::uuid IS NULL OR tenant = %(t)s::uuid)", {"t": tenant}).fetchone()
+    return n
 
 
 def publish(conn, job_id: str, event: str, data: dict | None = None, rdb: redis.Redis | None = None) -> Event:
@@ -96,25 +110,33 @@ def notify(job_id: str, payload: dict, rdb: redis.Redis | None = None) -> bool:
         return False
 
 
-def get(conn, job_id: str) -> dict | None:
+def get(conn, job_id: str, tenant: str) -> dict | None:
+    """The job, if it exists and is this tenant's. Another tenant's job is None, exactly like a missing one."""
+    try:
+        uuid.UUID(job_id)
+    except ValueError:
+        return None
     row = conn.execute(
-        "SELECT id, question, status, stages, created_at FROM jobs WHERE id = %s", (job_id,)
+        "SELECT id, question, status, stages, created_at FROM jobs WHERE id = %s AND tenant = %s", (job_id, tenant)
     ).fetchone()
     if not row:
         return None
     return {"id": str(row[0]), "question": row[1], "status": row[2], "stages": row[3], "created_at": row[4]}
 
 
-def run(conn, job_id: str, question: str, k: int = 8) -> None:
-    """The pipeline, reporting each stage. Phases C-F add their steps here."""
+@tracing.traced("query")
+def run(conn, job_id: str, question: str, k: int = 8, tenant: str | None = None) -> None:
+    """The pipeline, reporting each stage. Phases C-F add their steps here. One run is one trace (G1b)."""
     from taxcite import decompose as dc
-    from taxcite.generate import OPINION_RE, answer_from_groups, authorities, cited_items, skipped_only
+    from taxcite.generate import (DOCUMENT_ASKED, NO_DOCUMENT, OPINION_RE, answer_from_groups, authorities,
+                                  cited_items, skipped_only)
     from taxcite.ingest.citations import flags
 
     try:
         rdb = client()
     except redis.RedisError:
         rdb = None  # the pipeline continues without live events
+    tracing.annotate({"job.id": job_id, "langfuse.user.id": tenant})
     try:
         publish(conn, job_id, "decomposing", {}, rdb)
         plan = dc.decompose(question)
@@ -126,10 +148,17 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "subqueries": [{"kind": s.kind, "query": s.query} for s in plan.subqueries],
             "fallback": plan.fallback,
         }, rdb)
-        dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE, siblings=dc.SIBLINGS)
-        hits = dc.chunks(plan, k)
-        groups, skipped, verdicts = plan.groups({h.citation for h in hits}), [], []
-        if dc.GATE:  # F2: a part its sources can't answer is never written
+        documents = dc.client_hits(plan, tenant) if tenant else []  # G3
+        # Checkpoint 2: the plan wants only client facts, the question names an upload, and none is on file. The
+        # fallback's public search would answer a question nobody asked (B got substantiation case law).
+        only_documents = (plan.fallback == "no searchable sub-query" and not documents
+                          and bool(DOCUMENT_ASKED.search(question)))
+        hits, groups, skipped, verdicts = [], [], [("The client's uploaded documents", NO_DOCUMENT)], []
+        if not only_documents:
+            dc.retrieve(plan, k=k, editions=dc.EDITIONS, statute=dc.STATUTE, siblings=dc.SIBLINGS, planned=dc.PLANNED)
+            hits = dc.chunks(plan, k)
+            groups, skipped = plan.groups({h.citation for h in hits}), []
+        if dc.GATE and not only_documents:  # F2: a part its sources can't answer is never written
             groups, skipped, verdicts = dc.gate(question, groups, plan.as_of)
             publish(conn, job_id, "checking_sufficiency", {
                 "parts": [{k: v[k] for k in ("part", "sufficient", "missing")} for v in verdicts]}, rdb)
@@ -137,8 +166,9 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
         if not written:
             result = skipped_only(skipped)  # nothing answerable: no synthesis, nothing to verify
         else:
-            publish(conn, job_id, "synthesizing", {"chunks": len(hits)}, rdb)
-            result = answer_from_groups(question, groups, facts=plan.facts, as_of=plan.as_of, skipped=skipped)
+            publish(conn, job_id, "synthesizing", {"chunks": len(hits), "documents": len(documents)}, rdb)
+            result = answer_from_groups(question, groups, facts=plan.facts, as_of=plan.as_of, skipped=skipped,
+                                        documents=documents)
         if dc.VERIFY and written:  # F4: nothing is sent until every sentence is checked (ADR-9: the answer stays buffered)
             from taxcite import verify
             publish(conn, job_id, "verifying", {"sentences": len(cited_items(result.structured["data"]))
@@ -146,6 +176,8 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             result = verify.checked(question, result)
         # Is each cited opinion still good law (C4)? Looked up after synthesis and attached beside the
         # answer, never folded into its text; a failed lookup reads "unknown" and the answer still ships.
+        tracing.annotate({"chunks": len(hits), "hidden_sentences": len(result.hidden), "refused": result.refused,
+                          "langfuse.observation.output": result.text})  # the trace's output in Langfuse
         opinions = list(dict.fromkeys(m.group() for c in result.citations + result.derived_citations
                                       if (m := OPINION_RE.search(c))))
         publish(conn, job_id, "answer", {
@@ -160,9 +192,12 @@ def run(conn, job_id: str, question: str, k: int = 8) -> None:
             "hidden_sentences": len(result.hidden),  # F4: failed verification (or went with a failed part)
             "model": result.model,
             "cost_usd": round(result.cost_usd + plan.cost_usd + sum(v["usd"] for v in verdicts), 6),
+            "trace_id": tracing.trace_id(),  # None when tracing is off
         }, rdb)
     except Exception as e:  # the job record must show what happened, not just stop
-        publish(conn, job_id, "error", {"type": type(e).__name__, "message": str(e)[:300]}, rdb)
+        tracing.annotate({"langfuse.observation.level": "ERROR", "error.type": type(e).__name__})
+        publish(conn, job_id, "error", {"type": type(e).__name__, "message": str(e)[:300],
+                                        "trace_id": tracing.trace_id()}, rdb)
 
 
 def replay(job: dict) -> list[Event]:

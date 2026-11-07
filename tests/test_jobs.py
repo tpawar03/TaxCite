@@ -4,6 +4,10 @@ import json
 
 import pytest
 from fastapi.testclient import TestClient
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import SimpleSpanProcessor, SpanExporter
+from opentelemetry.sdk.trace.export.in_memory_span_exporter import InMemorySpanExporter
 
 from taxcite import api, jobs, store
 from taxcite.generate import Answer
@@ -14,12 +18,20 @@ client = TestClient(api.app)
 STAGES = ["decomposing", "retrieving", "synthesizing", "verifying", "answer"]  # F2's gate is off by default
 
 
+TENANT = {}  # this module's tenant id, for the tests that read the record directly
+
+
 @pytest.fixture(autouse=True)
 def clean():
     with store.connect() as conn:
         jobs.create_table(conn)
         conn.execute("DELETE FROM jobs")
+        conn.execute(store.TENANTS)
+        conn.execute("DELETE FROM tenants WHERE name LIKE 'test-%'")
+        key = store.create_tenant(conn, "test-jobs")
         conn.commit()
+        TENANT["id"] = store.tenant_for(conn, key)
+    client.headers["Authorization"] = f"Bearer {key}"
     yield
 
 
@@ -94,7 +106,7 @@ def test_a_failing_pipeline_is_recorded_not_swallowed(monkeypatch):
     assert events[-1][0] == "error"
     assert events[-1][1]["type"] == "RuntimeError"
     with store.connect() as conn:
-        assert jobs.get(conn, job_id)["status"] == "error"
+        assert jobs.get(conn, job_id, TENANT["id"])["status"] == "error"
 
 
 def test_the_answer_is_one_event_not_a_token_stream(stub_pipeline):
@@ -111,7 +123,7 @@ def test_live_events_arrive_over_redis_while_the_job_runs():
     import time
 
     with store.connect() as conn:
-        job_id = jobs.create(conn, "slow question")
+        job_id = jobs.create(conn, "slow question", TENANT["id"])
 
     def worker():
         time.sleep(0.2)
@@ -193,3 +205,68 @@ def test_a_question_with_nothing_answerable_skips_synthesis_and_verification(mon
     assert [n for n, _ in events] == ["decomposing", "retrieving", "checking_sufficiency", "answer"]
     assert events[2][1]["parts"] == [{"part": "hobby loss deduction limit", "sufficient": False, "missing": "no state law"}]
     assert events[-1][1]["refused"] and "no state law" in events[-1][1]["text"]
+
+
+class BrokenExporter(SpanExporter):
+    def export(self, spans):
+        raise ConnectionError("Langfuse is down")
+
+
+# G1b: spans go to memory here, and every test in this module also runs with an exporter that raises.
+SPANS = InMemorySpanExporter()
+if not isinstance(trace.get_tracer_provider(), TracerProvider):
+    trace.set_tracer_provider(TracerProvider())
+for exporter in (SPANS, BrokenExporter()):
+    trace.get_tracer_provider().add_span_processor(SimpleSpanProcessor(exporter))
+
+
+def test_one_question_is_one_trace_with_a_span_per_step(monkeypatch):
+    """Models and search stubbed at the call, so the traced steps themselves run. The verifier fails, as in F4."""
+    from taxcite import decompose as dc
+    from taxcite import generate, verify
+
+    cite = "IRS Pub 17 (2025), p. 99"
+    monkeypatch.setattr(dc, "call_model", lambda *a, **k: (
+        '{"subqueries": [{"kind": "statutory", "query": "hobby loss"}], "as_of": "2026"}', 1, 1))
+    monkeypatch.setattr(dc, "search", lambda *a, **k: [Hit(citation=cite, heading="h", text="t", score=1.0,
+                                                         section="Pub 17", source="irs_pub")])
+    monkeypatch.setattr(dc, "rerank", lambda q, hits, k, name: hits)
+    monkeypatch.setattr(generate, "call_model", lambda *a, **k: (json.dumps(
+        {"tax_year": None, "not_answerable": [], "sentences": [{"part": 1, "text": "Yes.", "citations": [cite]}]}), 1, 1))
+
+    def boom(*a, **k):
+        raise TimeoutError("verifier timed out")
+    monkeypatch.setattr(verify, "call_model", boom)
+    SPANS.clear()
+    job_id = client.post("/queries", json={"question": "q"}).json()["id"]
+    answer = dict(sse_events(client.get(f"/queries/{job_id}/events").text))["answer"]
+
+    assert answer["refused"]  # the broken exporter cost nothing: the answer arrived
+    spans = {s.name: s for s in SPANS.get_finished_spans()}
+    root = spans["query"]
+    assert root.parent is None and format(root.context.trace_id, "032x") == answer["trace_id"]
+    assert root.attributes["job.id"] == job_id and root.attributes["langfuse.user.id"] == TENANT["id"]
+    for step in ("decompose", "retrieve", "synthesize", "verify"):
+        assert spans[step].parent.span_id == root.context.span_id, step
+    assert spans["verify"].status.status_code == trace.StatusCode.ERROR
+    # every step shows what it was given and what it returned; chunks by citation, never by text
+    assert json.loads(spans["decompose"].attributes["langfuse.observation.input"]) == {"question": "q"}
+    assert "hobby loss" in spans["decompose"].attributes["langfuse.observation.output"]
+    assert cite in spans["synthesize"].attributes["langfuse.observation.input"]
+    assert '"t"' not in spans["synthesize"].attributes["langfuse.observation.input"]
+    assert "Yes." in spans["synthesize"].attributes["langfuse.observation.output"]
+    assert "<Connection>" in spans["query"].attributes["langfuse.observation.input"]
+    assert spans["query"].attributes["langfuse.observation.output"] == answer["text"]
+
+
+def test_a_question_is_redacted_before_the_job_row_and_every_span(stub_pipeline):
+    """§3.4's ordering invariant, G-A06's canary: redaction at POST /queries, before anything stores or traces it."""
+    SPANS.clear()
+    job_id = client.post("/queries", json={"question": "My SSN is 123-45-6789. Can I deduct my van?"}).json()["id"]
+    client.get(f"/queries/{job_id}/events")
+    with store.connect() as conn:
+        job = jobs.get(conn, job_id, TENANT["id"])
+    exported = json.dumps([dict(s.attributes) for s in SPANS.get_finished_spans()])
+    assert job["question"] == "My SSN is [REDACTED SSN]. Can I deduct my van?"
+    assert "[REDACTED SSN]" in exported and "6789" not in exported and "6789" not in json.dumps(job, default=str)
+

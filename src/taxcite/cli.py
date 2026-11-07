@@ -285,6 +285,15 @@ def backfill_authority(args: argparse.Namespace) -> int:
     return 0
 
 
+def create_tenant(args: argparse.Namespace) -> int:
+    """Phase G: a practice and its API key. The key is printed once and stored only as a hash."""
+    with store.connect() as conn:
+        key = store.create_tenant(conn, args.name)
+        conn.commit()
+    print(f"  tenant {args.name!r} created. API key (shown once, not recoverable):\n  {key}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="taxcite")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -324,6 +333,10 @@ def main(argv: list[str] | None = None) -> int:
 
     auth = sub.add_parser("authority", help="backfill authority profiles and source revisions (E2; no re-embedding)")
     auth.set_defaults(func=backfill_authority)
+
+    tenant = sub.add_parser("tenant", help="create a tenant (a practice) and print its API key once")
+    tenant.add_argument("name")
+    tenant.set_defaults(func=create_tenant)
 
     find = sub.add_parser("search", help="search the indexed corpus")
     find.add_argument("query")

@@ -19,6 +19,7 @@ from taxcite.chunk import Chunk, authority, expiry, revision, sunset
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
 COLLECTION = os.environ.get("QDRANT_COLLECTION", "chunks")
+CLIENT_COLLECTION = "client_docs"  # G2: tenants' uploads, never rebuilt from `chunks` or snapshotted (ADR-5)
 DENSE_MODEL = os.environ.get("EMBED_MODEL", "BAAI/bge-base-en-v1.5")  # ADR-18
 SPARSE_MODEL = "Qdrant/bm25"
 DENSE_DIM = 768  # bge-base; bge-small was 384

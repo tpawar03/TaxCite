@@ -25,8 +25,12 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field, replace
 from functools import cache
 
+from qdrant_client import models
+
 from taxcite.generate import MODEL, call_model, cost
+from taxcite.index import CLIENT_COLLECTION, client
 from taxcite.retrieve import RERANK_MODEL, Hit, rerank, search
+from taxcite.tracing import traced
 
 # Which sources each kind of sub-query may search. () means never searched; None means
 # every source, which is Phase A's behaviour and what the fallback falls back to.
@@ -130,6 +134,7 @@ class Decomposition:
     output_tokens: int = 0
     fallback: str = ""  # set when the model's plan was unusable and we searched as Phase A did
     statute_floor: int = 0  # set by retrieve (D3b): slots `chunks` reserves for the statute
+    pinned: list[str] = field(default_factory=list)  # set by retrieve (`planned`): citations `chunks` always keeps
 
     @property
     def searched(self) -> list[SubQuery]:
@@ -181,6 +186,7 @@ def parse(text: str, question: str) -> tuple[list[SubQuery], str | None, str]:
     return subs, as_of, ""
 
 
+@traced("decompose")
 def decompose(question: str, model: str = MODEL) -> Decomposition:
     """One structured-output call (ADR-11). Temperature 0 and a fixed seed, so a re-run
     of the eval measures the change under test and not a different plan."""
@@ -231,6 +237,9 @@ STATUTE = 1
 # F5b (your decision 2026-10-01), a recorded departure from F5b's criteria 1 and 4: dev correct and grounded 27 -> 35, incorrect 18 -> 17, refusals 9 -> 15 (1 cost a correct grounded answer), short answer on 75%.
 # Siblings alone (R1): dev Recall@8 0.610 -> 0.683; answers more honest, not more correct, until re-cite (C3).
 SIBLINGS = 6  # subsections searched inside each of the first SIBLING_SECTIONS sections found
+# Checkpoint 2: one statute hit per statutory sub-query found with the sub-query's own text, kept past the reranker.
+# Recall@10 on cached plans: dev 0.760 -> 0.780 (1 row up, 1 down), golden 0.568 -> 0.603 (6 up, none down).
+PLANNED = 1
 
 # E4, chosen on dev by rules fixed in advance: authority reorders each kind of source's candidates (statute
 # and regulation over publication; reported opinion over memorandum) with a prior of 0.5 per level, and never
@@ -249,9 +258,10 @@ def tax_year(as_of: str | None) -> int | None:
 SIBLING_SECTIONS = 3  # F5b: the first (best-ranked) sections whose subsections are searched
 
 
+@traced("retrieve")
 def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = True,
              rewrite: bool = False, hops: int = 0, editions: tuple[int, int] | None = None,
-             statute: int = 0, union: bool = False, siblings: int = 0) -> Decomposition:
+             statute: int = 0, union: bool = False, siblings: int = 0, planned: int = 0) -> Decomposition:
     """Search once per sub-query, filtered to the sources its kind allows. Fills `hits` in place.
 
     The search text is the **original question**, not the model's rewritten sub-query,
@@ -274,6 +284,11 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
     `siblings` > 0 (F5b) searches again within the Code sections and regulations already found, for that many
     more of their subsections: retrieval often finds the right section's wrong piece (§ 121(a) without the cap
     in (b)(1), § 25D(a)-(c) without the rate in (g)). Pooled; the reranker decides.
+
+    `planned` > 0 (Checkpoint 2) searches the statute with each statutory sub-query's own text and pins its first
+    `planned` hits past the reranker, which scores against the question: "lost money every year … against her
+    wages" ranks § 461(l) first and § 183 out of the top 6, while the planner's "activity not engaged in for
+    profit" finds § 183 first. The question's words still do the rest of retrieval (log #44).
     """
     seen: dict[tuple, list[Hit]] = {}  # two sub-queries of one kind would repeat a search
     year = tax_year(d.as_of) if editions is not None else None
@@ -288,6 +303,10 @@ def retrieve(d: Decomposition, k: int = 8, mode: str = "hybrid", route: bool = T
             extra += search(s.query, k=k, mode=mode, source=key[1], **dated)
         if statute and s.kind == "statutory" and route:
             extra += search(key[0], k=k, mode=mode, source="usc")
+        if planned and s.kind == "statutory" and route:
+            own_text = search(s.query, k=planned, mode=mode, source="usc")
+            d.pinned += [h.citation for h in own_text]
+            extra += own_text
         if extra:
             own = {h.key or h.citation for h in s.hits}
             s.hits = list(s.hits)  # the search result may be shared with another sub-query (`seen`)
@@ -387,11 +406,32 @@ def chunks(d: Decomposition, k: int, rerank_model: str = RERANK_MODEL, floor: in
             chosen.setdefault(h.citation, h)
     for h in [x for x in ranked if slot(x)][:d.statute_floor]:  # D3b's statute slots (E4: or a final regulation)
         chosen.setdefault(h.citation, h)
+    for h in [x for x in ranked if x.citation in d.pinned]:  # `planned`: the sub-query's own statute hits
+        chosen.setdefault(h.citation, h)
     for h in ranked:  # the rest by cross-encoder score
         if len(chosen) >= k:
             break
         chosen.setdefault(h.citation, h)
     return sorted(chosen.values(), key=lambda h: -h.score)[:k]
+
+
+CLIENT_K = 3  # per search; a first guess, like G2's limits
+
+
+@traced("client_documents")
+def client_hits(d: Decomposition, tenant: str, k: int = CLIENT_K) -> list[Hit]:
+    """G3: the asking tenant's own document chunks, searched with each client fact and with the question itself
+    (a plan can have no client fact for "summarize the intake form"). Kept out of `chunks` on purpose: public
+    retrieval, and every number measured on it, are unchanged. A tenant with no documents searches nothing."""
+    qc = client()
+    if not qc.collection_exists(CLIENT_COLLECTION) or not qc.count(CLIENT_COLLECTION, count_filter=models.Filter(
+            must=[models.FieldCondition(key="tenant", match=models.MatchValue(value=tenant))])).count:
+        return []
+    found: dict[str, Hit] = {}
+    for query in [*d.facts, d.question]:
+        for h in search(query, k=k, collection=CLIENT_COLLECTION, tenant=tenant):
+            found.setdefault(h.citation, h)
+    return list(found.values())
 
 
 def merge(subqueries: Sequence[SubQuery], k: int | None) -> list[Hit]:
@@ -476,6 +516,7 @@ def sufficiency(question: str, part: str, hits: list[Hit], as_of: str | None = N
         return {"part": part, "sufficient": True, "missing": "", "supports": [], "usd": 0.0, "error": str(e)[:200]}
 
 
+@traced("sufficiency")
 def gate(question: str, groups: list[tuple[str, list[Hit]]], as_of: str | None = None,
          model: str = MODEL) -> tuple[list[tuple[str, list[Hit]]], list[tuple[str, str]], list[dict]]:
     """(parts to synthesize, (label, missing) for parts skipped, every verdict). A part with no retrieved chunk isn't
@@ -505,7 +546,7 @@ def answer(question: str, k: int = 8, mode: str = "hybrid", model: str = MODEL,
     from taxcite.generate import answer_from_groups, skipped_only
 
     d = retrieve(plan or decompose(question, model=model), k=k, mode=mode, route=route, editions=EDITIONS,
-                 statute=STATUTE, siblings=SIBLINGS)
+                 statute=STATUTE, siblings=SIBLINGS, planned=PLANNED)
     kept = {h.citation for h in chunks(d, k)}
     groups, skipped, verdicts = gate(question, d.groups(kept), d.as_of, model) if GATE else (d.groups(kept), [], [])
     if skipped and not any(hits for _, hits in groups):  # F2: nothing answerable, so nothing is written

@@ -57,6 +57,8 @@ def authority(source: str, citation: str, section: str, partly_expired: bool = F
         kind, status, level = "opinion", "memorandum", 2
     elif source == "irs_pub":
         kind, status, level = "publication", "not_binding", 1
+    elif source == "client":  # G3: the tenant's own upload, never law, whatever its text says
+        kind, status, level = "client document", "client", 0
     else:
         kind, status, level = "unknown", "unknown", 0
     return {"type": kind, "status": status, "level": level}

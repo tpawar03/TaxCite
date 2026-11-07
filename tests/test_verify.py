@@ -121,6 +121,22 @@ def test_a_note_about_a_missing_detail_survives_when_its_part_is_shown(stub):
         "Part 1: federal deduction\nDeductible [26 U.S.C. § 221(a)-(c)]. Not in the sources: the 2026 thresholds"
 
 
+def test_a_part_number_outside_the_labels_is_part_one_not_an_emptied_part(stub):
+    """G6 (G-A01): sentences tagged parts 2 and 3 of a one-part answer render under part 1; hidden, they read as two
+    emptied parts and added "no statement in this part could be verified" twice under an answered part."""
+    _, reply = stub
+    data = {"tax_year": None, "not_answerable": [], "sentences": [
+        {"part": 1, "text": "Deductible.", "citations": [STATUTE.citation]},
+        {"part": 2, "text": "No limit.", "citations": [STATUTE.citation]},
+        {"part": 3, "text": "Also New Jersey.", "citations": [PUB.citation]}]}
+    answer = generate.Answer(text=generate.render(data, ["one"])[0], mode="rag", model="m", retrieved=HITS,
+                             structured={"data": data, "labels": ["one"]})
+    reply[0] = json.dumps({"verdicts": [{"index": 0, "supported": True, "why": "ok"},
+                                        {"index": 1, "supported": False, "why": "no"},
+                                        {"index": 2, "supported": False, "why": "no"}]})
+    assert verify.apply(answer, verify.verify("q", answer)[0]).text == "Deductible [26 U.S.C. § 221(a)-(c)]."
+
+
 def test_checked_fails_closed_and_leaves_refusals_alone(stub, monkeypatch):
     def boom(*a, **k):
         raise TimeoutError("verifier timed out")

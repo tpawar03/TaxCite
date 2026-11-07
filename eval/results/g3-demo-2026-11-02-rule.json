@@ -1,0 +1,189 @@
+{
+ "A": {
+  "question": "My client Maria Lopez works full time and runs a weekend cake business that has lost money every year since 2023. Can she deduct those losses against her wages, and how has the Tax Court treated side businesses like this? Her W-2 and intake memo are uploaded.",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": "2023",
+   "subqueries": [
+    {
+     "kind": "statutory",
+     "query": "activity not engaged in for profit deduction limitation"
+    },
+    {
+     "kind": "case_law",
+     "query": "Tax Court treatment of side businesses with losses and full-time employment"
+    },
+    {
+     "kind": "client_fact",
+     "query": "the client works full time and runs a weekend cake business that has lost money every year since 2023"
+    }
+   ],
+   "fallback": ""
+  },
+  "synthesizing": {
+   "chunks": 8,
+   "documents": 2
+  },
+  "verifying": {
+   "sentences": 8
+  },
+  "answer": {
+   "treatments": {
+    "T.C. Memo. 2025-80": {
+     "status": "none",
+     "by": "",
+     "sources": [
+      "CourtListener"
+     ],
+     "checked_at": "2026-09-26",
+     "stale": true,
+     "note": "No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked."
+    }
+   },
+   "text": "Tax year: 2023\n\nPart 1: activity not engaged in for profit deduction limitation\nMaria Lopez's cake business reported net losses of $4,100 in 2023 [intake-memo.pdf, p. 1]. Maria Lopez's total income from her W-2 job is $48,250, which will be considered against her business losses [w2-2025.pdf, p. 1]. The Tax Court has held that taxpayers must substantiate their business expenses and demonstrate that they are engaged in a trade or business with the intent to make a profit [T.C. Memo. 2025-80, at *12].",
+   "citations": [
+    "intake-memo.pdf, p. 1",
+    "w2-2025.pdf, p. 1",
+    "T.C. Memo. 2025-80, at *12"
+   ],
+   "derived_citations": [],
+   "unsupported_citations": [],
+   "authorities": {
+    "intake-memo.pdf, p. 1": {
+     "type": "client document",
+     "status": "client",
+     "level": 0,
+     "label": "Client document"
+    },
+    "w2-2025.pdf, p. 1": {
+     "type": "client document",
+     "status": "client",
+     "level": 0,
+     "label": "Client document"
+    },
+    "T.C. Memo. 2025-80, at *12": {
+     "level": 2,
+     "status": "memorandum",
+     "type": "opinion",
+     "label": "Tax Court memorandum opinion"
+    }
+   },
+   "refused": false,
+   "hidden_sentences": 5,
+   "model": "gpt-4o-mini",
+   "cost_usd": 0.011567,
+   "trace_id": "12ed90b5329f0c4cf595fe233009aa55"
+  }
+ },
+ "B": {
+  "question": "What does Maria Lopez's intake memo say about her cake business losses?",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": null,
+   "subqueries": [
+    {
+     "kind": "unrouted",
+     "query": "What does Maria Lopez's intake memo say about her cake business losses?"
+    }
+   ],
+   "fallback": "no searchable sub-query"
+  },
+  "synthesizing": {
+   "chunks": 8,
+   "documents": 0
+  },
+  "verifying": {
+   "sentences": 3
+  },
+  "answer": {
+   "treatments": {
+    "T.C. Memo. 2021-88": {
+     "status": "none",
+     "by": "",
+     "sources": [
+      "CourtListener"
+     ],
+     "checked_at": "2026-09-26",
+     "stale": true,
+     "note": "No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked."
+    }
+   },
+   "text": "The Tax Court has previously disallowed deductions for business losses when the taxpayer failed to substantiate the claimed expenses [T.C. Memo. 2021-88, at *79-80].",
+   "citations": [
+    "T.C. Memo. 2021-88, at *79-80"
+   ],
+   "derived_citations": [],
+   "unsupported_citations": [],
+   "authorities": {
+    "T.C. Memo. 2021-88, at *79-80": {
+     "level": 2,
+     "status": "memorandum",
+     "type": "opinion",
+     "label": "Tax Court memorandum opinion"
+    }
+   },
+   "refused": false,
+   "hidden_sentences": 2,
+   "model": "gpt-4o-mini",
+   "cost_usd": 0.007668,
+   "trace_id": "060421bb350a6b1d2fc50c59e4283fe6"
+  }
+ },
+ "B_code_note": {
+  "question": "What does Maria Lopez's intake memo say about her cake business losses?",
+  "decomposing": {},
+  "retrieving": {
+   "k": 8,
+   "as_of": null,
+   "fallback": "no searchable sub-query",
+   "subqueries": [
+    {
+     "kind": "unrouted",
+     "query": "What does Maria Lopez's intake memo say about her cake business losses?"
+    }
+   ]
+  },
+  "synthesizing": {
+   "chunks": 8,
+   "documents": 0
+  },
+  "verifying": {
+   "sentences": 4
+  },
+  "answer": {
+   "text": "Short answer: It depends: Maria Lopez's cake business losses may be deductible if she can substantiate her claimed expenses [T.C. Memo. 2021-50, at *11-12].\n\nPart 1: What does Maria Lopez's intake memo say about her cake business losses?\nThe Tax Court has previously disallowed deductions for business losses when the taxpayer failed to substantiate claimed expenses [T.C. Memo. 2021-50, at *11-12]. Maria Lopez must provide adequate records to substantiate her claimed business expenses to ensure the losses are deductible [T.C. Memo. 2021-50, at *11-12].\n\nPart 2: The client's uploaded documents\nINSUFFICIENT EVIDENCE: no such document is on file.",
+   "model": "gpt-4o-mini",
+   "refused": false,
+   "cost_usd": 0.00943,
+   "trace_id": null,
+   "citations": [
+    "T.C. Memo. 2021-50, at *11-12"
+   ],
+   "treatments": {
+    "T.C. Memo. 2021-50": {
+     "by": "",
+     "note": "No negative treatment found in CourtListener as of 2026-09-26. Pending appeals are not tracked.",
+     "stale": true,
+     "status": "none",
+     "sources": [
+      "CourtListener"
+     ],
+     "checked_at": "2026-09-26"
+    }
+   },
+   "authorities": {
+    "T.C. Memo. 2021-50, at *11-12": {
+     "type": "opinion",
+     "label": "Tax Court memorandum opinion",
+     "level": 2,
+     "status": "memorandum"
+    }
+   },
+   "hidden_sentences": 2,
+   "derived_citations": [],
+   "unsupported_citations": []
+  }
+ }
+}

@@ -363,3 +363,16 @@ def test_the_broken_arm_drops_only_the_grounding_rule_from_the_shipped_prompt(mo
     set_prompt("broken")
     assert g.RAG_SYSTEM == shipped.replace(GROUNDING_RULE, "") and g.RAG_SYSTEM != shipped
     assert g.STRUCTURED and g.RULE_2_STRUCTURED in g.RAG_SYSTEM
+
+
+def test_the_tax_year_line_is_the_questions_year_never_the_models_guess(stub):
+    """G6: with no year in the question gpt-4o-mini wrote "Tax year: 2026" on one row and 2025 on another."""
+    import json as _json
+    stub["reply"] = _json.dumps({"tax_year": "2026", "not_answerable": [], "sentences": [
+        {"part": 1, "text": "Time and effort matter.", "citations": ["26 CFR 1.183-2(b)(3)"]}]})
+    assert generate.answer_from_groups("Is it a hobby?", [("rule", HITS)]).text.startswith("Time and effort")
+    assert generate.answer_from_groups("Was it a hobby in 2023?", [("rule", HITS)], as_of="2023").text.startswith(
+        "Tax year: 2023\n\n")
+    answer = generate.answer_from_groups("2016 vs 2026?", [("rule", HITS)], as_of="2016 and 2026")
+    assert answer.text.startswith("Tax year: 2016 and 2026\n\n") and answer.structured["data"]["tax_year"] == "2016 and 2026"
+
