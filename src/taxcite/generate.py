@@ -511,7 +511,8 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
         return _generate_structured(hits, [label for label, _ in groups], model, prompt,
                                     RAG_SYSTEM + (YEAR_RULE if years else "") + STRUCTURED_RULE
                                     + (CONCLUSION_RULE if CONCLUSION else "") + (DOCUMENT_RULE if documents else "")
-                                    + (ASKED_RULE if asked else ""), skipped)
+                                    + (ASKED_RULE if asked else ""), skipped,
+                                    tax_year=" and ".join(years))
     system = (RAG_SYSTEM + (YEAR_RULE if years else "") + (SECTIONS_RULE if SECTIONS else "")
               + (DOCUMENT_RULE if documents else "") + (ASKED_RULE if asked else ""))
     result = _generate(question, hits, mode="rag", model=model, prompt=prompt, system=system)
@@ -522,15 +523,19 @@ def answer_from_groups(question: str, groups: Sequence[tuple[str, list[Hit]]],
 
 
 def _generate_structured(hits: list[Hit], labels: list[str], model: str, prompt: str, system: str,
-                         skipped: Sequence[tuple[str, str]] = ()) -> Answer:
+                         skipped: Sequence[tuple[str, str]] = (), tax_year: str | None = None) -> Answer:
     """Arm E: the answer as JSON items, rendered to the same cited text every other arm writes, so the API, the CLI
-    and the verifier read it unchanged. An unusable response is a refusal, never raw JSON in front of a user."""
+    and the verifier read it unchanged. An unusable response is a refusal, never raw JSON in front of a user.
+    `tax_year`, when given, replaces the model's: the line shows the year the question names, and none when it names
+    none, never a guess (G6: with no year named, gpt-4o-mini wrote 2026 on one row; a "prior-year" row read 2025)."""
     schema = answer_schema(sorted({h.citation for h in hits}), conclusion=CONCLUSION)
     raw, input_tokens, output_tokens = call_model(system, prompt, model, temperature=0, seed=0, json_schema=schema)
     try:
         data = json.loads(raw)
     except (json.JSONDecodeError, TypeError):
         data = None
+    if isinstance(data, dict) and tax_year is not None:
+        data = {**data, "tax_year": tax_year or None}
     if isinstance(data, dict) and skipped:  # F2: the gate's rejected parts follow the answered ones
         data = {**data, "not_answerable": list(data.get("not_answerable") or [])
                 + [{"part": len(labels) + n, "why": why} for n, (_, why) in enumerate(skipped, 1)]}

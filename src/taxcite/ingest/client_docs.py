@@ -65,6 +65,17 @@ EIN = re.compile(r"(?<!\d)\d{2}[\s-]{1,3}\d{7}(?!\d)")
 SSN_SPACED = re.compile(r"(?<!\d)(?<!\d )\d(?:(?: [-.] | [-.]| )\d){8}(?![ .-]*\d)")
 DIGIT = r"(?:zero|oh|one|two|three|four|five|six|seven|eight|nine)"
 SSN_WORDS = re.compile(rf"\b{DIGIT}(?:[\s,.-]+{DIGIT}){{8}}\b", re.I)
+# Identifiers that aren't nine digits: anything a label calls an ID, a long unbroken (or dashed) digit run, and three
+# foreign shapes (IBAN, UK National Insurance, India PAN). A label needs a value with 5+ digits, so "ID 2025" stays;
+# a bare run needs 11+, so phone numbers and ZIP+4 stay. A shape outside these is left to the prompt.
+LABEL = (r"passport|driver'?s\s+licen[cs]e|licen[cs]e|national\s+(?:ID|identity|insurance)|tax(?:payer)?\s+ID"
+         r"|tax\s+identification|identification|ID|account|acct\.?|routing|IBAN|card|SIN|NINO|Aadhaar|PAN|TIN|ITIN")
+LABELLED = re.compile(rf"\b((?:{LABEL})(?:\s+(?:number|no\.?|num\.?|#))?\s*(?:is|:|#|=)?\s*)"
+                      r"([A-Za-z0-9-]*\d[A-Za-z0-9-]*(?: \d[A-Za-z0-9-]*){0,4})", re.I)
+LONG = re.compile(r"(?<![\w$.,-])\d+(?:-\d+){0,5}(?![\w,-])")
+FOREIGN = re.compile(r"\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]{4}){3,7}(?: ?[A-Z0-9]{1,3})?\b"  # IBAN
+                     r"|\b[A-CEGHJ-PR-TW-Z]{2} ?\d{2} ?\d{2} ?\d{2} ?[A-D]\b"  # UK National Insurance
+                     r"|\b[A-Z]{5}\d{4}[A-Z]\b")  # India PAN
 
 
 class Rejected(ValueError):
@@ -79,7 +90,10 @@ def redact(text: str) -> str:
     """Runs on every upload and every question, before anything is stored, searched, sent or traced (§3.4)."""
     for pattern in (SSN, SSN_SPACED, SSN_WORDS):
         text = pattern.sub("[REDACTED SSN]", text)
-    return EIN.sub("[REDACTED EIN]", text)
+    text = FOREIGN.sub("[REDACTED ID]", EIN.sub("[REDACTED EIN]", text))
+    digits = lambda s: sum(c.isdigit() for c in s)  # noqa: E731
+    text = LABELLED.sub(lambda m: m[1] + "[REDACTED ID]" if digits(m[2]) >= 5 else m[0], text)
+    return LONG.sub(lambda m: "[REDACTED ID]" if digits(m[0]) >= 11 else m[0], text)
 
 
 def create_tables(conn) -> None:

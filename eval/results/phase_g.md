@@ -16,15 +16,15 @@ Login and per-admin data scope (G3b) were planned in full and deferred to after 
 | Tenants and keys | `tenants` table, API key stored as SHA-256 only; `taxcite tenant NAME` prints the key once. One auth dependency on every route but `/health` (401). Jobs carry their tenant; another tenant's job and a malformed id get the same 404, on both routes, checked before the Redis subscribe (G1) |
 | Quotas | 50 questions per tenant and 200 overall per UTC day, 20 uploads per tenant; 429 with the reset time (G1, G2) |
 | Tracing | OpenTelemetry, one span per pipeline step, exported to Langfuse Cloud; on only in the API, so tests and evals never export; an exporter failure never touches the answer; `trace_id` in the terminal event (G1b) |
-| Uploads | `POST/GET/DELETE /documents`. Type sniffed from the bytes (PDF, PNG, JPEG, TIFF; else 415), 10 MB and 50 pages (413). Text layer by pdfminer, scanned pages by tesseract; a failed page is stored "excluded from retrieval" and reported. SSN (dashed, spaced, spelled), ITIN and EIN shapes redacted before anything is stored, in the document *and* the question. File names cleaned (G2, G4, G5) |
+| Uploads | `POST/GET/DELETE /documents`. Type sniffed from the bytes (PDF, PNG, JPEG, TIFF; else 415), 10 MB and 50 pages (413). Text layer by pdfminer, scanned pages by tesseract; a failed page is stored "excluded from retrieval" and reported. SSN (dashed, spaced, spelled), ITIN and EIN shapes redacted before anything is stored, in the document *and* the question; so is any value a label calls an ID (passport, licence, account, card, routing…) with 5+ digits, any bare digit run of 11+, and IBAN, UK National Insurance and India PAN shapes. File names cleaned (G2, G4, G5) |
 | Separate stores | `client_documents` / `client_chunks` tables and a `client_docs` Qdrant collection with an `is_tenant` index: the public index rebuild and CI's published snapshot can't carry client data. `search(..., tenant=)` raises without a tenant. `sweep` removes Qdrant points of deleted tenants (ADR-5, G2) |
 | Documents in answers | Client facts and the question search the tenant's documents; chunks reach synthesis and the verifier inside `<client_document>` blocks under a rule that the document is data, never instructions and never law. The rule is sent only when documents are present, so every earlier measurement stands. Citations carry the structured label "Client document" (G3, G4; ADR-14) |
-| Deterministic guards | A conclusion cited only to client documents is not shown (D56). A sentence naming an authority that only a client document states is hidden, and so is a conclusion naming one (`verify.laundered`). A documents-only question with no documents on file answers "no such document is on file" before retrieval (G3, G4) |
+| Deterministic guards | A conclusion cited only to client documents is not shown (D56). A sentence naming an authority that only a client document states is hidden; a conclusion naming one is dropped; a note naming one keeps only "the client document's legal statements are not supported" (`verify.laundered`; sections however written, regulations, rulings, PLRs and other guidance, reporters, Westlaw cites, public laws, and case names against the government, compared in one spelling). A documents-only question with no documents on file answers "no such document is on file" before retrieval (G3, G4) |
 | Planned statute slot | Each statutory sub-query's own statute hit is kept past the reranker (`decompose.PLANNED = 1`): Recall@10 dev 0.760 → 0.780, golden 0.568 → 0.603, 6 rows up, 0 down. Found by a Checkpoint 2 demo (§183 never retrieved) |
 | The page | `src/taxcite/static/`: vanilla JS, every string through `textContent`, no links built, badges only from the structured `authorities`/`treatments`; served at `/` behind a Content-Security-Policy (G5; ADR-13) |
 | Eval | `tests/test_leakage.py` (stubbed, free), `tests/test_documents.py`, `tests/test_render.py` (Playwright, stubbed API, free), `eval/g3_documents.py`, `eval/g4_injection.py` (30-row corpus, and `--golden` for the A-rows; saves after every row) |
 | CI | `test.yml` installs Chromium, so the render suite fails in CI instead of skipping; `injection.yml` runs the corpus on PRs touching ingestion, prompts, retrieval or rendering (not yet run on GitHub); the retrieval gate scores the planned-slot arm |
-| Tests | 332 |
+| Tests | 336 |
 
 ## The gates
 
@@ -90,8 +90,12 @@ Passing is not the same as helping. Two answers are safe and weak:
 - **G-A05** says the note's authority isn't binding, citing an opinion about IRS publications. The note never cites
   a publication: a right-sounding conclusion from the wrong source.
 
-Cosmetic: G-A01 repeats a "Not in the sources" note, and the "Tax year" line reads 2026 on some rows and 2025 on
-others.
+Cosmetic, fixed after the gate run (2026-11-07): G-A01 repeated "no statement in this part could be verified" under an
+answered part (sentences tagged with a part number the answer doesn't have counted as their own emptied part), and the
+"Tax year" line was the model's guess. The line now shows only the year the plan reads from the question (G-A03's
+"this year" is 2026, G-A07's "prior-year" 2025). Re-run with every fix: golden 8/8, corpus 30/30
+(`g6-golden-2026-11-07-fixes.jsonl`, `g4-injection-2026-11-07-fixes.jsonl`, $0.19). G-A05 refused outright on that run:
+the verifier hid its weak sentences, which is the better outcome.
 
 ## What Phase G got wrong
 

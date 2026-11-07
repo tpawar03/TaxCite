@@ -157,6 +157,29 @@ def test_redaction_catches_the_shapes_ocr_and_typing_leave():
     assert client_docs.redact(kept) == kept
 
 
+def test_redaction_catches_labelled_and_foreign_identifiers():
+    """Not every identifier is nine digits: whatever a label calls an ID, long digit runs, and three foreign shapes."""
+    for text in ("Passport number X1234567", "Driver's license D1234-5678-9012", "Account no. 000123456789",
+                 "Card 4111 1111 1111 1111", "IBAN GB29 NWBK 6016 1331 9268 19", "NI number AB 12 34 56 C",
+                 "PAN ABCDE1234F", "Aadhaar 1234 5678 9012", "ref 12345678901234"):
+        assert "[REDACTED ID]" in client_docs.redact(text) and not any(
+            c.isdigit() for c in client_docs.redact(text).split("[REDACTED ID]")[1]), text
+    kept = ("Client ID 2025, member since 2019, account for 2025 returns, card fee $95, years 2023 2024 2025, "
+            "revenue 120000, Rev. Proc. 2026-77, Pub. L. 115-97, T.C. Memo. 2024-999, passport issued in 2020")
+    assert client_docs.redact(kept) == kept
+
+
+def test_authority_shapes_are_compared_however_written():
+    """A document's "Section 25A(z)" is the answer's "§ 25A(z)"; rulings, reporters and case names count too."""
+    from taxcite import verify
+    found = {verify.canon(m) for m in verify.AUTHORITY.findall(
+        "Section 183(z); IRC 25A(z); Treas. Reg. 1.221-9(q); PLR 202512345; Announcement 2025-5; 123 F.3d 456; "
+        "2024 WL 123456; Smith v. United States; Jones v. Comm'r; Pub. L. No. 119-21")}
+    assert found == {"§183(z)", "§25A(z)", "§1.221-9(q)", "PLR202512345", "Announcement2025-5", "123F.3d456",
+                     "2024WL123456", "Smith", "Jones", "Pub.L.119-21"}
+    assert verify.canon("Under § 183(z), hobby losses") .count("§183(z)") == 1
+
+
 def test_client_documents_cant_be_searched_without_a_tenant():
     with pytest.raises(ValueError, match="tenant"):
         retrieve.search("wages", collection=index.CLIENT_COLLECTION)
@@ -206,7 +229,7 @@ def stub_models(monkeypatch):
         calls["synthesis"].append((system, prompt))
         allowed = k["json_schema"]["properties"]["sentences"]["items"]["properties"]["citations"]["items"]["enum"]
         cite = next((c for c in allowed if ".pdf, p." in c), allowed[0])
-        return json.dumps({"tax_year": "2025", "not_answerable": [], "conclusion": calls.get("conclusion", ""),
+        return json.dumps({"tax_year": "2025", "not_answerable": calls.get("not_answerable", []), "conclusion": calls.get("conclusion", ""),
                            "sentences": [{"part": 1, "text": calls.get("text", "The W-2 reports Box 1 wages."),
                                          "citations": [cite]}]}), 1, 1
 
@@ -306,6 +329,11 @@ def test_law_named_only_in_a_client_document_is_never_shown(stub_models):
     stub_models["conclusion"] = "Yes, under Rev. Proc. 2026-77 she gets $5,000."
     answer = ask(h, "Can she claim an education credit for her master's degree?")["answer"]
     assert "2026-77" not in answer["text"]
+    stub_models["text"] = "Graduate students may claim education credits."
+    stub_models["not_answerable"] = [{"part": 1, "why": "the terms of Rev. Proc. 2026-77 are not provided."}]
+    answer = ask(h, "Can she claim an education credit for her master's degree?")["answer"]
+    assert "2026-77" not in answer["text"] and "legal statements are not supported" in answer["text"]  # a note too (J08)
+    stub_models.pop("not_answerable")
     stub_models["text"], stub_models["conclusion"] = "The note reports a $5,000 credit.", "Yes, she gets $5,000."
     assert "$5,000" in ask(h, "Can she claim an education credit for her master's degree?")["answer"]["text"]  # facts stay
 
