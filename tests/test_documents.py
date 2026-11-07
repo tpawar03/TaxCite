@@ -308,3 +308,14 @@ def test_law_named_only_in_a_client_document_is_never_shown(stub_models):
     assert "2026-77" not in answer["text"]
     stub_models["text"], stub_models["conclusion"] = "The note reports a $5,000 credit.", "Yes, she gets $5,000."
     assert "$5,000" in ask(h, "Can she claim an education credit for her master's degree?")["answer"]["text"]  # facts stay
+
+
+def test_a_file_name_cant_break_synthesis():
+    """G5, found live: a name with a double quote (or a newline) made OpenAI reject the citation enum, so every question
+    the tenant asked failed. Names are cleaned at upload, where they become citations."""
+    who, _ = tenant("A")  # through ingest: browsers and httpx percent-encode quotes in a multipart name, other clients needn't
+    with store.connect() as conn:
+        doc = client_docs.ingest(conn, qc, who, 'memo <img src=x onerror="x()">\n2025.pdf', pdf(W2))
+    hits = retrieve.search("Box 1 wages Okafor Bakery", k=1, collection=index.CLIENT_COLLECTION, tenant=who)
+    assert '"' not in hits[0].citation and "\n" not in hits[0].citation
+    assert hits[0].citation == "memo <img src=x onerror='x()'> 2025.pdf, p. 1" and doc["name"].startswith("memo <img")

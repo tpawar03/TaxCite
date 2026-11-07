@@ -163,7 +163,9 @@ def ingest(conn, qc, tenant: str, name: str, data: bytes) -> dict:
     except Exception as e:  # a damaged or disguised file: the type matched, the contents didn't parse
         raise Rejected(422, f"could not read the {file_kind.upper()} ({type(e).__name__})") from e
 
-    name = redact(name)[:200]  # a file name is user text too
+    # a file name is user text too. It becomes a citation, and OpenAI's strict schema refuses an enum value holding
+    # a double quote or a newline: one such name failed every question its tenant asked (G5, found live)
+    name = re.sub(r"\s+", " ", redact(name)).replace('"', "'").strip()[:200] or "document"
     doc = str(uuid.uuid4())
     size = int(TARGET_TOKENS / 1.3)  # windows are counted in words, as for publications
     failed = [n for n, text in enumerate(texts, 1) if not text.split()]

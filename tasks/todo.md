@@ -2836,6 +2836,8 @@ Qdrant payload gains `owner` and `admin` (both indexed); `tenant` stays. Filteri
 
 **Files:** a static page and its script (new files: you create them); `api.py` (serve it); a Playwright test.
 
+**Status (2026-11-07):** built. Page and script in `src/taxcite/static/`, served at `/` by `api.Page` with a Content-Security-Policy (a second wall: the render tests serve the page without it, so they prove textContent alone holds). `tests/test_render.py`: no script runs (a `window` tripwire), no outbound request or dialog, only allowed elements and no `on*`/`javascript:` attributes, every payload shown verbatim as text, badges equal the structured fields, no HTML-parsing API in the code, the app sends the CSP. 5/5 browser tests pass; all fail with `innerHTML` in `el()`. Playwright is a dev dependency; `test.yml` installs Chromium. Departure: no outbound-request listener beyond the stub (every non-stub route is aborted and recorded). Live check through the real API found a file name with `"` failing every question of its tenant (OpenAI's strict schema refuses a quote or newline in an enum value); upload names are now cleaned (`client_docs.ingest`), with a test. G5 done.
+
 ## G6: Gate run (needs your go, ~$1–2)
 
 1. Leakage harness, stubbed and once live: 0 failures.

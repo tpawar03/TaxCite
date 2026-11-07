@@ -34,6 +34,8 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with: { enable-cache: true }
       - run: uv sync --frozen
+      # G5: the render-path suite drives a real browser; in CI a missing one fails the test instead of skipping it
+      - run: uv run playwright install --with-deps chromium
       # The suite downloads bge-base and the jina cross-encoder on first use; without this the
       # models are refetched on every run.
       - uses: actions/cache@v4

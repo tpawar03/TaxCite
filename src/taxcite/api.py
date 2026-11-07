@@ -3,11 +3,13 @@ import json
 import os
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import psycopg
 import redis
 from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, Response, UploadFile
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
 
@@ -203,3 +205,20 @@ def delete_document(doc_id: str, who: str = Depends(tenant)) -> Response:
             raise HTTPException(status_code=404, detail="no such document")
     return Response(status_code=204)
 
+
+
+# G5 (ADR-13): the page. It renders every string with textContent; the policy is a second wall behind that, so an
+# injected script tag or inline handler couldn't run, and nothing on the page can reach another host.
+CSP = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; "
+       "object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'")
+
+
+class Page(StaticFiles):
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Content-Security-Policy"] = CSP
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        return response
+
+
+app.mount("/", Page(directory=Path(__file__).parent / "static", html=True), name="page")  # last: API routes match first
