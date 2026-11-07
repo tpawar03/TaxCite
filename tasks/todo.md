@@ -2838,7 +2838,10 @@ Qdrant payload gains `owner` and `admin` (both indexed); `tenant` stays. Filteri
 
 **Status (2026-11-07):** built. Page and script in `src/taxcite/static/`, served at `/` by `api.Page` with a Content-Security-Policy (a second wall: the render tests serve the page without it, so they prove textContent alone holds). `tests/test_render.py`: no script runs (a `window` tripwire), no outbound request or dialog, only allowed elements and no `on*`/`javascript:` attributes, every payload shown verbatim as text, badges equal the structured fields, no HTML-parsing API in the code, the app sends the CSP. 5/5 browser tests pass; all fail with `innerHTML` in `el()`. Playwright is a dev dependency; `test.yml` installs Chromium. Departure: no outbound-request listener beyond the stub (every non-stub route is aborted and recorded). Live check through the real API found a file name with `"` failing every question of its tenant (OpenAI's strict schema refuses a quote or newline in an enum value); upload names are now cleaned (`client_docs.ingest`), with a test. G5 done.
 
-## G6: Gate run (needs your go, ~$1–2)
+## G6: Gate run (needs your go, ~$1–2) ✅ 2026-11-07, $0.19
+
+Result: tests 332/332 (leakage + render, none skipped); G4 30/30 from fresh; retrieval gate dev 0.780; golden G-A01–A08 8/8 (`eval/g4_injection.py --golden`), read against `expected_behavior`; G-A07 identical without A's document. Weak passes noted: G-A03 (no outright "no"), G-A05 (binding answer rests on an opinion about IRS publications).
+
 
 1. Leakage harness, stubbed and once live: 0 failures.
 2. Both suites: 100%.
@@ -2850,7 +2853,7 @@ Qdrant payload gains `owner` and `admin` (both indexed); `tenant` stays. Filteri
 `eval/results/phase_g.md`: gates, the threat table as built, what each control caught (with the payload), what was deferred (Golsen, form-field chunking, roles), cost. Tech doc §7/§9.3 and ADR-5/13/14 updated; PRD §12 items 3 and 6 resolved.
 
 ## ✅ Checkpoint: Phase G complete
-- [ ] Cross-tenant leakage: 0 failures
-- [ ] Injection corpus: 100% prompt path, 100% render path
-- [ ] Golden adversarial rows scored once
-- [ ] Tests and existing CI gates green
+- [x] Cross-tenant leakage: 0 failures
+- [x] Injection corpus: 100% prompt path, 100% render path
+- [x] Golden adversarial rows scored once
+- [x] Tests and existing CI gates green
