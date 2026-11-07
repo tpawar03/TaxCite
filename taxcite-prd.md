@@ -245,10 +245,10 @@ All thresholds are first-pass engineering targets, to be recalibrated against re
 
 1. **Embedding model** — not chosen; resolved empirically in Phase A against Recall@10/nDCG@10.
 2. **LLM provider/model tiering** (decomposition, sufficiency gate, synthesis) — proposed but undecided (ADR-11); now constrained by the confirmed <$50/mo ceiling; resolved in Phase A.
-3. **Frontend/rendering framework** — not specified anywhere in the source documentation.
+3. ~~**Frontend/rendering framework**~~ — **resolved (Phase G, 2026-11-07):** one static page in vanilla JS, no framework, every string rendered as text and badges from structured fields only (ADR-13).
 4. **Backup object storage provider** — candidates named (Cloudflare R2, Backblaze B2) but not chosen.
 5. **Alert destination** (Slack/PagerDuty/email) — Slack proposed as default, not confirmed.
-6. **Maximum client-document upload size** — file-type policy is now defined (FR-17), but the specific size limit is not.
+6. ~~**Maximum client-document upload size**~~ — **resolved (Phase G, 2026-11-02):** 10 MB and 50 pages per file, 20 uploads per firm per day (413 / 429 with a clear message); first guesses, revisit with real use.
 7. **Target market scope** — is TaxCite intended solely for Renee's practice, or as a template for a broader small-practice product? Not addressed in source documentation.
 8. **Eval/quality dashboard audience** — Renee, engineering reviewers, or a public portfolio artifact? This affects the dashboard's design and isn't resolved.
 9. **Business-metric instrumentation** — no plan exists for measuring the field-level outcomes in G1 (research time) and G2 (seat displacement); only technical quality metrics are instrumented.

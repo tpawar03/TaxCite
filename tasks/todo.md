@@ -2848,7 +2848,10 @@ Result: tests 332/332 (leakage + render, none skipped); G4 30/30 from fresh; ret
 3. Golden G-A01–A08 once on the shipped pipeline: each row's `expected_behavior`, pass/fail, read by you.
 4. Existing gates unchanged: tests, retrieval gate 0.760; faithfulness only if you re-enable it.
 
-## G7: Phase G exit report
+## G7: Phase G exit report ✅ 2026-11-07
+
+Done: `eval/results/phase_g.md`; tech doc Implementation Status (F and G), §7, §9.3, ADR-5/13/14, frontend row; PRD §12 items 3 and 6 resolved. Roles listed as deferred (G3b).
+
 
 `eval/results/phase_g.md`: gates, the threat table as built, what each control caught (with the payload), what was deferred (Golsen, form-field chunking, roles), cost. Tech doc §7/§9.3 and ADR-5/13/14 updated; PRD §12 items 3 and 6 resolved.
 
