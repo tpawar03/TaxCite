@@ -148,10 +148,12 @@ def test_the_intake_ssn_is_redacted_before_anything_is_stored():
 
 
 def test_redaction_catches_the_shapes_ocr_and_typing_leave():
-    for shape in ("123-45-6789", "123 45 6789", "123456789", "123.45.6789", "123 - 45 - 6789"):
+    for shape in ("123-45-6789", "123 45 6789", "123456789", "123.45.6789", "123 - 45 - 6789",
+                  "1 2 3 - 4 5 - 6 7 8 9", "1 2 3 4 5 6 7 8 9", "one two three, four five, six seven eight nine"):
         assert client_docs.redact(f"SSN {shape}.") == "SSN [REDACTED SSN].", shape
     assert client_docs.redact("EIN 12-3456789") == "EIN [REDACTED EIN]"
-    kept = "Box 1 48250.00, tax year 2025, call 555-123-4567, ZIP 94110-1234, $1,234,567.89"
+    kept = ("Box 1 48250.00, tax year 2025, call 555-123-4567, ZIP 94110-1234, $1,234,567.89, lines 1 2 3 4, "
+            "call 555 123 4567, one or two of three")
     assert client_docs.redact(kept) == kept
 
 
@@ -205,7 +207,8 @@ def stub_models(monkeypatch):
         allowed = k["json_schema"]["properties"]["sentences"]["items"]["properties"]["citations"]["items"]["enum"]
         cite = next((c for c in allowed if ".pdf, p." in c), allowed[0])
         return json.dumps({"tax_year": "2025", "not_answerable": [], "conclusion": calls.get("conclusion", ""),
-                           "sentences": [{"part": 1, "text": "The W-2 reports Box 1 wages.", "citations": [cite]}]}), 1, 1
+                           "sentences": [{"part": 1, "text": calls.get("text", "The W-2 reports Box 1 wages."),
+                                         "citations": [cite]}]}), 1, 1
 
     def verifier(system, prompt, model, **k):
         calls["verify"].append((system, prompt))
@@ -292,3 +295,16 @@ def test_only_a_question_naming_an_upload_gets_the_no_such_document_rule(stub_mo
     (none, _), (asked, _), (plain, _) = stub_models["synthesis"]
     assert generate.ASKED_RULE not in none and generate.ASKED_RULE in asked and generate.ASKED_RULE not in plain
 
+
+
+def test_law_named_only_in_a_client_document_is_never_shown(stub_models):
+    """G4 (J05-J08): "The note says Rev. Proc. 2026-77 gives a $5,000 credit [note]" passed the verifier, because the note
+    does say it. An authority only a client document names is hidden, as a sentence and as a conclusion."""
+    _, h = tenant("A")
+    upload(h, "note.pdf", pdf("Preparer note: graduate students get a $5,000 refundable credit. See Rev. Proc. 2026-77."))
+    stub_models["text"] = "The preparer's note says Rev. Proc. 2026-77 gives graduate students a $5,000 credit."
+    stub_models["conclusion"] = "Yes, under Rev. Proc. 2026-77 she gets $5,000."
+    answer = ask(h, "Can she claim an education credit for her master's degree?")["answer"]
+    assert "2026-77" not in answer["text"]
+    stub_models["text"], stub_models["conclusion"] = "The note reports a $5,000 credit.", "Yes, she gets $5,000."
+    assert "$5,000" in ask(h, "Can she claim an education credit for her master's degree?")["answer"]["text"]  # facts stay

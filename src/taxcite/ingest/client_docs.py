@@ -60,6 +60,11 @@ SCHEMA = (
 # since nine bare digits are already redacted as an SSN.
 SSN = re.compile(r"(?<!\d)\d{3}(?:[\s.-]{1,3}\d{2}[\s.-]{1,3}|\d{2})\d{4}(?!\d)")
 EIN = re.compile(r"(?<!\d)\d{2}[\s-]{1,3}\d{7}(?!\d)")
+# G4 (J15, J16): nine digits with a space in every gap ("3 8 1 - 6 2 - 5 5 0 7"), or nine spelled ones; ZIP+4 and
+# phone numbers have unspaced digit pairs, so neither matches
+SSN_SPACED = re.compile(r"(?<!\d)(?<!\d )\d(?:(?: [-.] | [-.]| )\d){8}(?![ .-]*\d)")
+DIGIT = r"(?:zero|oh|one|two|three|four|five|six|seven|eight|nine)"
+SSN_WORDS = re.compile(rf"\b{DIGIT}(?:[\s,.-]+{DIGIT}){{8}}\b", re.I)
 
 
 class Rejected(ValueError):
@@ -72,7 +77,9 @@ class Rejected(ValueError):
 
 def redact(text: str) -> str:
     """Runs on every upload and every question, before anything is stored, searched, sent or traced (§3.4)."""
-    return EIN.sub("[REDACTED EIN]", SSN.sub("[REDACTED SSN]", text))
+    for pattern in (SSN, SSN_SPACED, SSN_WORDS):
+        text = pattern.sub("[REDACTED SSN]", text)
+    return EIN.sub("[REDACTED EIN]", text)
 
 
 def create_tables(conn) -> None:

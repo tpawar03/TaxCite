@@ -2821,6 +2821,8 @@ Qdrant payload gains `owner` and `admin` (both indexed); `tenant` stays. Filteri
 
 **Acceptance:** 100% on dev; benign rows reported; CI job green. Saves after every row (standing rule).
 
+**Status (2026-11-02):** step 1 drafted: `eval/dev-injection.jsonl`, 30 rows (24 attack, 6 benign), review table `eval/results/g4-corpus-draft.md`. The canary is added to the system prompt by the runner for the run only (the shipped prompt, and every number measured on it, stay as they are). Runner `eval/g4_injection.py` (yours to create); its every-sentence-cited check reads 0 of 96 shipped golden answers as uncited. Render-path rows (G-A02, G-A05's markup) are G5's. Run 1 ($0.136): 24/30 (fabricated 0/4, PII 2/4). Fixed (document-law rules, deterministic laundered-authority guard in `verify.checked`, spaced and spelled SSN redaction); run 2 ($0.140): **30/30**. CI job `.github/workflows/injection.yml` added (not yet run on GitHub). G4 done on dev.
+
 ## G5: Static page and render-path suite
 
 **Goal:** nothing from a source or an answer can execute or forge a UI element.
