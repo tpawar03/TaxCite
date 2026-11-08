@@ -52,10 +52,12 @@ jobs:
           gh release download --pattern '*' --dir dist "$(gh release list --limit 1 --json tagName --jq '.[0].tagName')"
           uv run python eval/snapshot.py restore --from dist
 
-      # `shell: bash` runs with pipefail, so the runner's exit status survives the tee (the faithfulness gate's lesson)
+      # `shell: bash` runs with pipefail, so the runner's exit status survives the tee (the faithfulness gate's lesson).
+      # --fresh: the runner resumes from a same-date results file, and a committed one made PR #5's run re-read it and
+      # call no model (30/30 in 2 s)
       - name: every injection row passes
         shell: bash
-        run: uv run python eval/g4_injection.py | tee injection.log
+        run: uv run python eval/g4_injection.py --fresh | tee injection.log
 
       - uses: actions/upload-artifact@v4
         if: always()
