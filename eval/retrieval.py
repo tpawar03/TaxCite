@@ -17,6 +17,7 @@ lists score exactly as before.
 import argparse
 import json
 import math
+import os
 import time
 from datetime import date
 from pathlib import Path
@@ -25,7 +26,7 @@ from dotenv import load_dotenv
 
 from taxcite import decompose as dc
 from taxcite.generate import OPINION_RE, section_of
-from taxcite.retrieve import RERANK_MODEL, search
+from taxcite.retrieve import RERANK_MODEL, embed, search
 
 MODES = ("sparse", "dense", "hybrid", "hybrid+rerank")
 DEFAULT_MODES = ("sparse", "dense", "hybrid")  # rerank costs a second model load, so it is opt-in
@@ -170,6 +171,7 @@ VARIANTS["route+statute1+prior0.5-scoped+sib6+planned1"] = _SHIPPED | {"authorit
 def score_one(question: dict, mode: str, k: int, reranker: str = RERANK_MODEL,
               variant: str | None = None, cache: dict | None = None,
               cache_path: Path | None = None, plan_set: int = 0) -> dict:
+    embed.cache_clear()  # each timed question pays for its own embed, whichever mode ran it first
     started = time.perf_counter()
     plan = None
     if variant:
@@ -223,6 +225,10 @@ def needs_case_law(question: dict) -> bool:
 
 
 def main() -> int:
+    # A hosted model from the embedding re-benchmark (log #97): EMBED_MODEL=qwen/qwen3-embedding-8b
+    # QDRANT_COLLECTION=bench_qwen3_embedding_8b. Importing embed_bench registers its API with retrieve.
+    if os.environ.get("EMBED_MODEL"):
+        import embed_bench  # noqa: F401
     ap = argparse.ArgumentParser()
     ap.add_argument("--k", type=int, default=10)
     ap.add_argument("--mode", choices=MODES, action="append", help="repeatable; default is all three")

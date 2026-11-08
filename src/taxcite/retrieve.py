@@ -45,7 +45,10 @@ def _models(dense_name: str = DENSE_MODEL):
     return TextEmbedding(dense_name), SparseTextEmbedding(SPARSE_MODEL)
 
 
+@lru_cache(maxsize=256)
 def embed(query: str, dense_name: str = DENSE_MODEL) -> tuple[list[float], models.SparseVector]:
+    """Cached: every search in one pipeline run uses the original question (only the filters differ), so a
+    question was embedded ~5-6 times; with a hosted model that was ~2 s of round trips. Read-only for callers."""
     dense_model, sparse_model = _models(dense_name)
     dense = next(iter(dense_model.query_embed(query))).tolist()
     sparse = next(iter(sparse_model.query_embed(query)))

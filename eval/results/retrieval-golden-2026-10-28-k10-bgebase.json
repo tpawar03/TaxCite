@@ -1,0 +1,4323 @@
+{
+  "k": 10,
+  "modes": [
+    "hybrid",
+    "hybrid+route+statute1+prior0.5-scoped+sib6"
+  ],
+  "rows": [
+    {
+      "id": "G-S01",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 41.080082999542356,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2008-224, at *17-19#body#1"
+    },
+    {
+      "id": "G-S02",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 29.540374875068665,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 587 (2025), p. 5#body#4",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S03",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 24.617791874334216,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 42#body#1"
+    },
+    {
+      "id": "G-S04",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 28.794208075851202,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2022-123, at *8-9#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S05",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 22.952917031943798,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 274(n)(1)#body#1"
+    },
+    {
+      "id": "G-S06",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 24.16800009086728,
+      "first_hit_rank": 6,
+      "top1": "IRS Pub 463 (2025), p. 17#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 6,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S07",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 26.16887493059039,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 47#body#2",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S08",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 21.65683312341571,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 946 (2025), p. 19#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S09",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 30.60375014320016,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 31#body#4",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": true
+    },
+    {
+      "id": "G-S10",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.254417072981596,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2011-69, at *6-7#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S11",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 28.18841696716845,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 527 (2025), p. 21#body#5",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S12",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 25.020083878189325,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.1402(b)-1(c)#body#1"
+    },
+    {
+      "id": "G-S13",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 24.52429197728634,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2022-112, at *8-9#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 3,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S14",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 22.67912495881319,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2023-133, at *46#body#1"
+    },
+    {
+      "id": "G-S15",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 26.418499881401658,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2026-66, at *24-25#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S16",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 24.22616700641811,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2024-3, at *102#body#2",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S17",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 23.42183399014175,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2004-272, at *40-41#body#1"
+    },
+    {
+      "id": "G-S18",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 24.609416956081986,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 19#body#7"
+    },
+    {
+      "id": "G-S19",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3010299956639812,
+      "mrr": 0.1111111111111111,
+      "section_recall": 1.0,
+      "ms": 23.905749898403883,
+      "first_hit_rank": 9,
+      "top1": "IRS Pub 17 (2025), p. 20#body#7",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 9,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S20",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 24.906541919335723,
+      "first_hit_rank": 2,
+      "top1": "26 U.S.C. \u00a7 163(j)(3)#body#1"
+    },
+    {
+      "id": "G-S21",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 24.250916903838515,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 6103(l)(12)#body#1"
+    },
+    {
+      "id": "G-S22",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 23.3816250693053,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6001#body#1"
+    },
+    {
+      "id": "G-S23",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 28.514999896287918,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 47#body#2"
+    },
+    {
+      "id": "G-S24",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.343875030055642,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2025-113, at *5#body#1"
+    },
+    {
+      "id": "G-S25",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 24.774666875600815,
+      "first_hit_rank": 5,
+      "top1": "165 T.C. No. 13, at *9#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 5,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-S26",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.83020818606019,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2021-35, at *17-18#body#1"
+    },
+    {
+      "id": "G-S27",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 25.327584007754922,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 17 (2025), p. 22#body#1"
+    },
+    {
+      "id": "G-C01",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 33.76629110425711,
+      "first_hit_rank": 6,
+      "top1": "T.C. Memo. 2021-115, at *10-11#body#1"
+    },
+    {
+      "id": "G-C02",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.421499835327268,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2012-83, at *10-12#body#1"
+    },
+    {
+      "id": "G-C03",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 45.24137498810887,
+      "first_hit_rank": 1,
+      "top1": "140 T.C. No. 16, at *1-2#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-C04",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 29.568249825388193,
+      "first_hit_rank": 1,
+      "top1": "120 T.C. No. 15, at *1-2#body#1",
+      "auth_kind": "reported_over_memo",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-C05",
+      "style": "keyword",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 25.666374946013093,
+      "first_hit_rank": 1,
+      "top1": "117 T.C. No. 22, at *9-10#body#1"
+    },
+    {
+      "id": "G-C06",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 29.354833997786045,
+      "first_hit_rank": 1,
+      "top1": "119 T.C. No. 5, at *1-2#body#1"
+    },
+    {
+      "id": "G-C07",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 34.478917019441724,
+      "first_hit_rank": 4,
+      "top1": "157 T.C. No. 10, at *15-16#body#1"
+    },
+    {
+      "id": "G-C08",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 29.97912489809096,
+      "first_hit_rank": 1,
+      "top1": "157 T.C. No. 10, at *1-2#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-C09",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 35.5920831207186,
+      "first_hit_rank": null,
+      "top1": "119 T.C. No. 6, at *8-9#body#1"
+    },
+    {
+      "id": "G-C10",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 29.979083221405745,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.469-2(f)(5)#body#4"
+    },
+    {
+      "id": "G-C11",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 28.48274982534349,
+      "first_hit_rank": 1,
+      "top1": "165 T.C. No. 10, at *16-17#body#1"
+    },
+    {
+      "id": "G-C12",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 30.676374910399318,
+      "first_hit_rank": 2,
+      "top1": "167 T.C. No. 11, at *9-10#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 2,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-C13",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 28.276209020987153,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2022-117, at *18#body#1"
+    },
+    {
+      "id": "G-C14",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 31.515832990407944,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2013-215, at *22-23#body#1"
+    },
+    {
+      "id": "G-C15",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 30.148708960041404,
+      "first_hit_rank": 5,
+      "top1": "T.C. Memo. 2022-49, at *15-16#body#1"
+    },
+    {
+      "id": "G-C16",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 29.866457916796207,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2022-112, at *6#body#2"
+    },
+    {
+      "id": "G-C17",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 27.58004213683307,
+      "first_hit_rank": 5,
+      "top1": "125 T.C. No. 13, at *5-6#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 5,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-C18",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 26.865500025451183,
+      "first_hit_rank": 4,
+      "top1": "T.C. Memo. 2024-16, at *5#body#2"
+    },
+    {
+      "id": "G-C19",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.31546487678572877,
+      "mrr": 0.125,
+      "section_recall": 1.0,
+      "ms": 28.78899988718331,
+      "first_hit_rank": 8,
+      "top1": "165 T.C. No. 13, at *8-9#body#1"
+    },
+    {
+      "id": "G-C20",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 27.559000067412853,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2022-52, at *36#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 2,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-C21",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.763833990320563,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2026-69, at *10-11#body#1"
+    },
+    {
+      "id": "G-C22",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 28.673625085502863,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2013-215, at *11-12#body#1"
+    },
+    {
+      "id": "G-C23",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 34.636083990335464,
+      "first_hit_rank": 4,
+      "top1": "T.C. Memo. 2024-82, at *10-11#body#1"
+    },
+    {
+      "id": "G-C24",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 29.258208815008402,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2010-144, at *24-26#body#1"
+    },
+    {
+      "id": "G-C25",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 28.786416864022613,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2010-239, at *1-3#body#1"
+    },
+    {
+      "id": "G-C26",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 33.317417139187455,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2010-49, at *16-17#body#1"
+    },
+    {
+      "id": "G-X01",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 34.96179194189608,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2005-166, at *6-8#body#1"
+    },
+    {
+      "id": "G-X02",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 31.64804191328585,
+      "first_hit_rank": 1,
+      "top1": "140 T.C. No. 16, at *1-2#body#1",
+      "auth_kind": "reviewing_court",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X03",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 36.08808293938637,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2025-128, at *16#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X04",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.3065735963827292,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 35.49366700462997,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2023-105, at *4#body#1"
+    },
+    {
+      "id": "G-X05",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 34.852667013183236,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2012-17, at *16-18#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X06",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.5,
+      "ms": 34.4799580052495,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2003-50, at *3-4#body#1"
+    },
+    {
+      "id": "G-X07",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.5,
+      "section_recall": 0.5,
+      "ms": 38.2429170422256,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2007-66, at *16-17#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X08",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 34.34725012630224,
+      "first_hit_rank": 1,
+      "top1": "136 T.C. No. 6, at *1-2#body#1"
+    },
+    {
+      "id": "G-X09",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.3065735963827292,
+      "mrr": 0.3333333333333333,
+      "section_recall": 0.5,
+      "ms": 35.5682079680264,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2004-207, at *62-63#body#1",
+      "auth_kind": "reviewing_court",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X10",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.5,
+      "section_recall": 0.5,
+      "ms": 36.84824984520674,
+      "first_hit_rank": 2,
+      "top1": "139 T.C. No. 3, at *4-5#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 2,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X11",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.17723928678404774,
+      "mrr": 0.1,
+      "section_recall": 0.5,
+      "ms": 33.90383394435048,
+      "first_hit_rank": 10,
+      "top1": "T.C. Memo. 2025-25, at *31#body#2"
+    },
+    {
+      "id": "G-X12",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5714285040141098,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 29.65466701425612,
+      "first_hit_rank": 2,
+      "top1": "167 T.C. No. 7, at *14-15#body#1"
+    },
+    {
+      "id": "G-X13",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 31.011082930490375,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2026-34, at *7-8#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X14",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 31.06320812366903,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 334 (2025), p. 35#body#2"
+    },
+    {
+      "id": "G-X15",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.20438239758848611,
+      "mrr": 0.14285714285714285,
+      "section_recall": 0.5,
+      "ms": 35.619332920759916,
+      "first_hit_rank": 7,
+      "top1": "T.C. Memo. 2024-79, at *9-10#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X16",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 28.685082914307714,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2026-18, at *28#body#1"
+    },
+    {
+      "id": "G-X17",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 34.68158305622637,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2010-140, at *14-15#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X18",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 35.873291082680225,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2001-252, at *7-9#body#1"
+    },
+    {
+      "id": "G-X19",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 37.13279217481613,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2023-133, at *47-48#body#1"
+    },
+    {
+      "id": "G-X20",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 35.29583313502371,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2012-104, at *56-57#body#1"
+    },
+    {
+      "id": "G-X21",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 33.46683387644589,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2012-160, at *1-2#body#1"
+    },
+    {
+      "id": "G-X22",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 31.389374984428287,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2022-83, at *5#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X23",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.2640681225725909,
+      "mrr": 0.25,
+      "section_recall": 0.5,
+      "ms": 37.61299978941679,
+      "first_hit_rank": 4,
+      "top1": "T.C. Memo. 2013-287, at *18-19#body#1"
+    },
+    {
+      "id": "G-X24",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 27.587625198066235,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 527 (2025), p. 25#body#4"
+    },
+    {
+      "id": "G-X25",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 32.62283303774893,
+      "first_hit_rank": 1,
+      "top1": "121 T.C. No. 6, at *25-26#body#1"
+    },
+    {
+      "id": "G-X26",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.5,
+      "ms": 34.03075016103685,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2024-75, at *3#body#1"
+    },
+    {
+      "id": "G-X27",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.3065735963827292,
+      "mrr": 0.3333333333333333,
+      "section_recall": 0.5,
+      "ms": 30.063166981562972,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2012-343, at *3-4#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X28",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.18457569677956817,
+      "mrr": 0.1111111111111111,
+      "section_recall": 0.5,
+      "ms": 33.13845884986222,
+      "first_hit_rank": 9,
+      "top1": "T.C. Memo. 2010-190, at *5-6#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 9,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X29",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.21840743681816419,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 34.428332932293415,
+      "first_hit_rank": 6,
+      "top1": "T.C. Memo. 2009-201, at *41-42#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 6,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null
+    },
+    {
+      "id": "G-X30",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.3065735963827292,
+      "mrr": 0.3333333333333333,
+      "section_recall": 0.5,
+      "ms": 34.342583967372775,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2026-19, at *29#body#1"
+    },
+    {
+      "id": "G-I11",
+      "style": "nl",
+      "category": "insufficiency",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 30.897374963387847,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2013-125, at *62-63#body#1"
+    },
+    {
+      "id": "G-X31",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.3333333333333333,
+      "ndcg": 0.20210734650054757,
+      "mrr": 0.25,
+      "section_recall": 0.3333333333333333,
+      "ms": 31.204415950924158,
+      "first_hit_rank": 4,
+      "top1": "26 CFR 1.263(a)-3(f)(4)#body#8"
+    },
+    {
+      "id": "G-S28",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 28.929959051311016,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 31#body#1"
+    },
+    {
+      "id": "G-S01",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.2890648263178879,
+      "mrr": 0.1,
+      "section_recall": 1.0,
+      "ms": 185.80175004899502,
+      "first_hit_rank": 10,
+      "top1": "26 CFR 1.183-1(c)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "presumption of profit motive for horse breeding activity based on profit in 2 of 7 years"
+        },
+        {
+          "kind": "case_law",
+          "query": "horse breeding activity profit motive presumption two out of seven years"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018015,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S02",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 1796.7917500063777,
+      "first_hit_rank": 5,
+      "top1": "IRS Pub 587 (2025), p. 5#body#4",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 5,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for home office deduction exclusive use regular use principal place of business"
+        },
+        {
+          "kind": "case_law",
+          "query": "home office deduction exclusive use children homework shared space"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client runs her business from a spare bedroom that children also use for homework"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019140000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S03",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1420.497665880248,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 199A(c)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "home office deduction limitations and treatment of losses"
+        },
+        {
+          "kind": "case_law",
+          "query": "home office deduction creating a loss with minimal business income"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017009999999999996,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S04",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1843.9729581587017,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2024-79, at *27#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for deducting business gifts under Internal Revenue Code"
+        },
+        {
+          "kind": "statutory",
+          "query": "deduction limitations for listed property, including car expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "substantiation requirements for business gifts and listed property expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.000186,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S05",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 805.688583990559,
+      "first_hit_rank": 2,
+      "top1": "26 CFR 1.274-12(c)(2)#body#12",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limitation for business meals food and beverages"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001554,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S06",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1104.0664999745786,
+      "first_hit_rank": 1,
+      "top1": "26 CFR 1.274-3(a)#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limit for business gifts to a single recipient"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015675,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S07",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1463.4743339847773,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2013-71, at *14-16#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of travel expenses for self-employed individuals away from home"
+        },
+        {
+          "kind": "case_law",
+          "query": "temporary vs. indefinite work assignments travel expense deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is self-employed and took an 18-month engagement in another city"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019079999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S08",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1112.4014998786151,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.179-2(d)#body#2",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 179 expensing dollar limitation"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015255,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S09",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1284.006082918495,
+      "first_hit_rank": 2,
+      "top1": "IRS Pub 463 (2025), p. 31#body#4",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 2,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": true,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "accelerated depreciation rules for vehicles with mixed-use business and personal"
+        },
+        {
+          "kind": "case_law",
+          "query": "business use percentage impact on vehicle depreciation methods"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017219999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S10",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 906.9510421250015,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 469(c)(7)#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "real estate professional status requirements for passive activity loss rules"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001581,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S11",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1442.969667026773,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 527 (2025), p. 21#body#5",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "passive activity loss deduction limitations for rental real estate activities"
+        },
+        {
+          "kind": "case_law",
+          "query": "active participation in rental real estate and deducting losses against ordinary income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client actively manages a rental house and has about $120,000 of adjusted gross income"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019425,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S12",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 958.5170829668641,
+      "first_hit_rank": 6,
+      "top1": "26 CFR 1.1402(e)-3A(a)(3)#body#2",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "self-employment tax threshold for net earnings"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has $350 of net earnings from a side business"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017115,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S13",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1113.0278748460114,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6662(d)(1)#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "substantial understatement of income tax threshold for individuals"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015375,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S14",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 778.4243749920279,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6662(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "accuracy-related penalty for underpayment of tax rate"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015480000000000002,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S15",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1244.8499579913914,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2026-66, at *24-25#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "accuracy-related penalty reasonable cause and good faith exception"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer's reasonable cause and good faith defense against accuracy-related penalties"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017279999999999997,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S16",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 1219.6738340426236,
+      "first_hit_rank": 6,
+      "top1": "131 T.C. No. 11, at *5-6#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 6,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof in tax cases under Internal Revenue Code section 7491"
+        },
+        {
+          "kind": "case_law",
+          "query": "shifting burden of proof to IRS in tax disputes"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017415,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S17",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 937.3697908595204,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6501(e)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "six-year assessment period for omission of more than 25 percent of gross income"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001584,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S18",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 1184.9718750454485,
+      "first_hit_rank": 3,
+      "top1": "26 U.S.C. \u00a7 6013(b)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "statute of limitations for assessment of additional tax after filing a tax return"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001584,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S19",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 984.3973328825086,
+      "first_hit_rank": 4,
+      "top1": "26 U.S.C. \u00a7 6511(c)#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 4,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deadline for filing a claim for refund of overpaid taxes under Internal Revenue Code Section 6511"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00016065,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S20",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3562071871080222,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 863.6382499244064,
+      "first_hit_rank": 6,
+      "top1": "26 U.S.C. \u00a7 163(j)(3)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "gross receipts test for small corporations and partnerships under the Internal Revenue Code"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015764999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S21",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 842.2078751027584,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 6103(l)(22)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "definition of employee for FICA tax purposes under the Internal Revenue Code"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015764999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S22",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 425.32562487758696,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6001#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "recordkeeping requirements for taxpayers under Internal Revenue Code"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001539,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S23",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1747.2994590643793,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 274(k)-(l)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "ordinary and necessary expenses for a trade or business"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of personal expenses as business costs"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017055,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S24",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.31546487678572877,
+      "mrr": 0.125,
+      "section_recall": 1.0,
+      "ms": 1134.3315839767456,
+      "first_hit_rank": 8,
+      "top1": "26 U.S.C. \u00a7 67(a)-(b)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "suspension of miscellaneous itemized deductions for taxable years after 2017"
+        }
+      ],
+      "as_of": "2024",
+      "fallback": "",
+      "decompose_cost_usd": 0.00016215,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S25",
+      "style": "keyword",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1253.4961658529937,
+      "first_hit_rank": 2,
+      "top1": "165 T.C. No. 13, at *8-9#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 2,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Internal Revenue Code Section 280E disallowance of deductions for trafficking controlled substances"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer deductions disallowed under Section 280E for businesses trafficking in controlled substances legal under state law"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017864999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S26",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 859.7150419373065,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.1402(a)-15(d)#body#2",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cash method of accounting income recognition timing"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001551,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-S27",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 901.9191251136363,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 6696(a)-(e)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "failure to file penalty for late tax return under Internal Revenue Code section 6651(a)"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00016094999999999998,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-C01",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3333333333333333,
+      "mrr": 0.14285714285714285,
+      "section_recall": 1.0,
+      "ms": 1471.736041130498,
+      "first_hit_rank": 7,
+      "top1": "T.C. Memo. 2021-115, at *8-10#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for hobby expenses under section 183(b)(2) treatment as above-the-line or miscellaneous itemized deduction"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby loss deduction treatment above-the-line miscellaneous itemized deduction"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.000183,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C02",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1355.8287918567657,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2012-83, at *10-12#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "real estate professional status hours requirement including on-call hours"
+        },
+        {
+          "kind": "case_law",
+          "query": "hours spent on call rental properties real estate professional test"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017204999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C03",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 361.78958392702043,
+      "first_hit_rank": 1,
+      "top1": "140 T.C. No. 16, at *1-2#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court decision on Conservation Reserve Program payments self-employment income versus excluded rental income"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00016214999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C04",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1474.2434159852564,
+      "first_hit_rank": 2,
+      "top1": "120 T.C. No. 15, at *13-14#body#1",
+      "auth_kind": "reported_over_memo",
+      "auth_target": 1,
+      "auth_rank": 2,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 530 relief from employment taxes for independent contractors"
+        },
+        {
+          "kind": "case_law",
+          "query": "timeliness of information returns and section 530 relief eligibility"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017385,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C05",
+      "style": "keyword",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 670.3375829383731,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 7481(b)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Tax Court jurisdiction under section 7436 regarding worker classification and additions to tax penalties"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015884999999999999,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-C06",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1448.3557909261435,
+      "first_hit_rank": 1,
+      "top1": "119 T.C. No. 5, at *1-2#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "employee status of shareholders in an S corporation for employment tax purposes"
+        },
+        {
+          "kind": "statutory",
+          "query": "section 530 relief from employment tax liability"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of sole shareholder as employee for employment tax purposes"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018795,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C07",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 1458.3860419224948,
+      "first_hit_rank": 4,
+      "top1": "157 T.C. No. 10, at *15-16#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxable distribution rules for individual retirement accounts"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRA custodian check routed through owner taxable distribution"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017145,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C08",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1508.1126671284437,
+      "first_hit_rank": 1,
+      "top1": "157 T.C. No. 10, at *1-2#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "distribution rules for self-directed individual retirement accounts, including prohibited transactions"
+        },
+        {
+          "kind": "case_law",
+          "query": "self-directed IRA ownership of physical assets distribution determination"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the owner keeps the American Eagle coins at home"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.000186,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C09",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 1290.1510410010815,
+      "first_hit_rank": 5,
+      "top1": "161 T.C. No. 6, at *20-21#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "rollover contribution rules for individual retirement accounts, including cash contributions in lieu of property"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS rulings on cash contributions to an IRA in lieu of partnership interest distribution"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001803,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C10",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1362.6654159743339,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2005-166, at *14-15#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "passive activity loss rules material participation income characterization"
+        },
+        {
+          "kind": "case_law",
+          "query": "lease income characterization passive activity material participation"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001701,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C11",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 368.4447498526424,
+      "first_hit_rank": 1,
+      "top1": "165 T.C. No. 10, at *16-17#body#1",
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "application of the economic substance doctrine relevance determination by courts"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001581,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C12",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1176.3312499970198,
+      "first_hit_rank": 1,
+      "top1": "167 T.C. No. 11, at *2-3#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 6234(a) Tax Court petition filing deadline"
+        },
+        {
+          "kind": "case_law",
+          "query": "equitable tolling application for Tax Court petition filing deadlines"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001737,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C13",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.43067655807339306,
+      "mrr": 0.25,
+      "section_recall": 1.0,
+      "ms": 1618.8386250287294,
+      "first_hit_rank": 4,
+      "top1": "T.C. Memo. 2022-117, at *18-19#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "listed property definition and substantiation requirements for heavy-duty pickup trucks used in farming"
+        },
+        {
+          "kind": "case_law",
+          "query": "substantiate expenses for heavy-duty pickup trucks as listed property in farming context"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017775,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C14",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 1298.1916670687497,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2026-22, at *7#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Cohan rule estimation of business expenses when records are kept but proof of payment is not produced"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court application of the Cohan rule for business expense deductions without proof of payment"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018119999999999999,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C15",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1290.0721249170601,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2022-49, at *15-16#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "material participation tests for passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "material participation in related businesses five of the last ten years"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017235,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C16",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1508.7262091692537,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2022-112, at *6-7#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "requirements for qualifying as a real estate professional under Section 469 of the Internal Revenue Code"
+        },
+        {
+          "kind": "case_law",
+          "query": "real estate professional status time spent in real estate versus other employment"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the taxpayer has a full-time job and cannot show more time in real estate"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019544999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C17",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1497.6527499966323,
+      "first_hit_rank": 1,
+      "top1": "125 T.C. No. 13, at *2-3#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of expenses for property used for both business and personal purposes"
+        },
+        {
+          "kind": "case_law",
+          "query": "allocation of expenses for mixed-use property bed-and-breakfast personal use"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017565,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C18",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 1357.0109580177814,
+      "first_hit_rank": 5,
+      "top1": "T.C. Memo. 2024-16, at *11-12#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of losses from illegal activities forfeited to the government"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer deductions for losses resulting from criminal convictions forfeited funds"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001746,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C19",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.3333333333333333,
+      "mrr": 0.14285714285714285,
+      "section_recall": 1.0,
+      "ms": 1403.6789170932025,
+      "first_hit_rank": 7,
+      "top1": "165 T.C. No. 13, at *9-10#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "Internal Revenue Code section 280E nondeductibility of expenses for businesses trafficking in controlled substances"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS evaluation of offer in compromise cannabis business section 280E expenses"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017939999999999997,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C20",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 1.0,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1418.60833321698,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2022-52, at *39#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "written supervisory approval requirement for penalties against partnerships"
+        },
+        {
+          "kind": "case_law",
+          "query": "sufficiency of penalty approval forms for partnerships individual partners"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001701,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C21",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1121.0358750540763,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.274-5(k)(8)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "strict substantiation requirements for travel expenses under section 274(d)"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015839999999999997,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-C22",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.5,
+      "mrr": 0.3333333333333333,
+      "section_recall": 1.0,
+      "ms": 318.05808399803936,
+      "first_hit_rank": 3,
+      "top1": "T.C. Memo. 2013-215, at *11-12#body#1",
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on deductibility of bowling activity expenses as a business"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015975,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C23",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1607.9704579897225,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2023-26, at *8-9#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "home office deduction requirements exclusive use principal place of business"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on home office deductions for converted spaces and exclusive use claims"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.000177,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C24",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1279.917208943516,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2010-144, at *17-18#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction limitations for home office expenses for activities not engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "court rulings on home office deductions for activities not engaged in for profit"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017684999999999996,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C25",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.6309297535714575,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 350.6328749936074,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2010-239, at *12-14#body#1",
+      "subqueries": [
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on spa workers booth rent independent contractor status"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00015855,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-C26",
+      "style": "nl",
+      "category": "case_law",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1466.4600419346243,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2006-239, at *19#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "constructive receipt doctrine income recognition"
+        },
+        {
+          "kind": "case_law",
+          "query": "timing of income recognition settlement funds held in trust account fee dispute"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017325,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X01",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1273.9692081231624,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.168(k)-2(g)(5)#body#11",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "hobby loss deduction limitation under Internal Revenue Code Section 183"
+        },
+        {
+          "kind": "case_law",
+          "query": "hobby versus business determination factors for profit motive"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has an unprofitable hobby of restoring and selling vintage bikes, earning $3,000 and spending $5,000"
+        }
+      ],
+      "as_of": "2023",
+      "fallback": "",
+      "decompose_cost_usd": 0.00020099999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X02",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1433.4821668453515,
+      "first_hit_rank": 1,
+      "top1": "140 T.C. No. 16, at *1-2#body#1",
+      "auth_kind": "reviewing_court",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "self-employment tax applicability to Conservation Reserve Program payments"
+        },
+        {
+          "kind": "case_law",
+          "query": "Conservation Reserve Program payments self-employment tax Iowa"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client lives in Iowa and does not farm"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001872,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X03",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.19342640361727081,
+      "mrr": 0.125,
+      "section_recall": 0.5,
+      "ms": 1482.4810419231653,
+      "first_hit_rank": 8,
+      "top1": "T.C. Memo. 2010-85, at *6-7#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 8,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "real estate professional status and passive activity loss rules"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of multiple rental properties as separate activities for real estate professionals"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client owns six rental houses and is heavily involved in only two"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.000192,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X04",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.5,
+      "section_recall": 1.0,
+      "ms": 1603.2081658486277,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2023-105, at *4#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of rent paid by an S corporation to shareholders under the 14-day rule"
+        },
+        {
+          "kind": "case_law",
+          "query": "S corporation rent payments to shareholders deductibility under 14-day rule"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients own an S corporation and receive rent for board meetings at their homes"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019875,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X05",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.5,
+      "ms": 1271.201000083238,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2012-17, at *16-18#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "presumption of profit motive for activities engaged in for profit"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court decisions on horse boarding breeding operation profit motive presumption"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has run a horse boarding and breeding operation for eight years with only one profitable year"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001947,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X06",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.20438239758848611,
+      "mrr": 0.14285714285714285,
+      "section_recall": 1.0,
+      "ms": 1334.823332959786,
+      "first_hit_rank": 7,
+      "top1": "26 U.S.C. \u00a7 3508(b)(1)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "definition of employee for employment tax purposes under Internal Revenue Code"
+        },
+        {
+          "kind": "case_law",
+          "query": "corporate officer employment status for tax purposes sole shareholder"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017519999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X07",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1484.590208157897,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2000-375, at *17-18#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "common law test for determining independent contractor status"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court rulings on independent contractor status for drivers treated as contractors"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017729999999999997,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X08",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1139.1653339378536,
+      "first_hit_rank": null,
+      "top1": "26 CFR 1.61-22(d)(2)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of life insurance proceeds received from a nonqualified employee benefit trust"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001605,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-X09",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.20438239758848611,
+      "mrr": 0.14285714285714285,
+      "section_recall": 0.5,
+      "ms": 1160.713957855478,
+      "first_hit_rank": 7,
+      "top1": "T.C. Memo. 2004-207, at *62-63#body#1",
+      "auth_kind": "reviewing_court",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": false,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "reasonable compensation deduction limitation for corporate officers"
+        },
+        {
+          "kind": "case_law",
+          "query": "reasonable compensation for corporate officers factors court rulings"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a majority-owner CEO of the company"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018644999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X10",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1342.0953329186887,
+      "first_hit_rank": 1,
+      "top1": "139 T.C. No. 3, at *1-2#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "passive activity loss rules and grouping of activities"
+        },
+        {
+          "kind": "case_law",
+          "query": "treatment of income and losses from multiple entities in passive activity"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client has one lease making money and another losing money"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001902,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X11",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.19342640361727081,
+      "mrr": 0.125,
+      "section_recall": 0.5,
+      "ms": 1469.194875098765,
+      "first_hit_rank": 8,
+      "top1": "T.C. Memo. 2025-25, at *36-37#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of insurance premiums paid to a captive insurance company"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of premiums in captive insurance arrangements and pooling"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017534999999999995,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X12",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.7977228895450266,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 978.7647500634193,
+      "first_hit_rank": 1,
+      "top1": "26 U.S.C. \u00a7 6234(a)-(c)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "jurisdiction of the Tax Court regarding partnership adjustments and deadlines"
+        },
+        {
+          "kind": "case_law",
+          "query": "Tax Court jurisdiction after late filing of petition following final partnership adjustment"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the partnership filed its Tax Court petition a few days after the 90-day deadline"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019245,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X13",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.5,
+      "ms": 1498.4292918816209,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2012-286, at *29-30#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "substantiation requirements for business travel expenses"
+        },
+        {
+          "kind": "case_law",
+          "query": "court's authority to estimate business expense deductions when receipts are lost"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001725,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X14",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1099.7394588775933,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 170(i)-(l)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "commuting expenses nondeductible for employees"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is an employee who drives from home to his office every day"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001737,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-X15",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1417.6664999686182,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 108(d)(3)#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "cancellation of debt income and insolvency exclusion"
+        },
+        {
+          "kind": "case_law",
+          "query": "burden of proof for insolvency in cancellation of debt income cases"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client claims she was insolvent at the time of debt cancellation"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001923,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X16",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.8772153153380493,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1272.7374581154436,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2026-18, at *28#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for worthless debts under cash method of accounting"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of worthless debts cash method consulting firm"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client operates a cash-method consulting firm and wrote off unpaid client fees as worthless debts"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019004999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X17",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1121.6344588901848,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2010-140, at *14-15#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "trust fund recovery penalty collection due process hearing rights"
+        },
+        {
+          "kind": "case_law",
+          "query": "disputing trust fund recovery penalty at collection hearing"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client claims he never received the letter proposing the penalty"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018825,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X18",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1314.317291835323,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2001-252, at *7-9#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "income recognition for sales commissions and offsets for debts owed"
+        },
+        {
+          "kind": "case_law",
+          "query": "income inclusion when commissions are offset by debts owed"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017355000000000002,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X19",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 1.0,
+      "ndcg": 0.41443699955334395,
+      "mrr": 0.2,
+      "section_recall": 1.0,
+      "ms": 1277.432583970949,
+      "first_hit_rank": 5,
+      "top1": "T.C. Memo. 2026-80, at *8#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "timeliness of supervisor approval for accuracy-related penalties under Internal Revenue Code section 6662"
+        },
+        {
+          "kind": "case_law",
+          "query": "timely approval of penalties conservation easement deduction Eleventh Circuit"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018165,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X20",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.38685280723454163,
+      "mrr": 0.5,
+      "section_recall": 0.5,
+      "ms": 1220.7618749234825,
+      "first_hit_rank": 2,
+      "top1": "T.C. Memo. 2013-203, at *52-53#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "penalties for improper deductions and reliance on professional advice"
+        },
+        {
+          "kind": "case_law",
+          "query": "reliance on tax advisor advice as a defense against penalties for disallowed deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client joined a welfare benefit plan on the promoter's advice and deducted the contributions"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019515,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X21",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1199.6185830794275,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2012-160, at *15-16#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "basis adjustments for S corporation shareholders, including contributions and distributions"
+        },
+        {
+          "kind": "case_law",
+          "query": "S corporation shareholder basis increase through contributions from other S corporations"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the clients own two S corporations, one with losses and one profitable"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001917,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X22",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.18457569677956817,
+      "mrr": 0.1111111111111111,
+      "section_recall": 0.5,
+      "ms": 1090.3335839975625,
+      "first_hit_rank": 9,
+      "top1": "T.C. Memo. 2011-293, at *9-10#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 9,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "burden of proof in tax disputes under Internal Revenue Code section 7491"
+        },
+        {
+          "kind": "case_law",
+          "query": "taxpayer's failure to cooperate with IRS audit burden of proof"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001776,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X23",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.21840743681816419,
+      "mrr": 0.16666666666666666,
+      "section_recall": 0.5,
+      "ms": 1379.7059170901775,
+      "first_hit_rank": 6,
+      "top1": "T.C. Memo. 2013-215, at *31-32#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "substantial understatement penalty under Internal Revenue Code section 6662"
+        },
+        {
+          "kind": "case_law",
+          "query": "reasonable cause exception substantial understatement penalty records destroyed"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017519999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X24",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 1.0,
+      "ms": 1350.6957499776036,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2023-128, at *15#body#2",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deductibility of rental expenses for property used for personal purposes"
+        },
+        {
+          "kind": "case_law",
+          "query": "mixed-use property rental expense deduction limitations"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00017175,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X25",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1378.0655418522656,
+      "first_hit_rank": 1,
+      "top1": "121 T.C. No. 6, at *25-26#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "section 530 relief from employment taxes for misclassification of workers"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS classification of payments as wages versus royalties for owner-employees"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client\u2019s company pays the owner mostly through 'royalty' payments"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019289999999999997,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X26",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.5,
+      "ms": 2338.3570418227464,
+      "first_hit_rank": null,
+      "top1": "T.C. Memo. 2024-75, at *17-18#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "activity not engaged in for profit deduction limitation"
+        },
+        {
+          "kind": "case_law",
+          "query": "deductibility of expenses for writing and research activities with no income"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is a retired teacher reporting losses every year with almost no income"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001902,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X27",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 1.0,
+      "ms": 1517.7470000926405,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2012-343, at *1-3#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 8,
+      "auth_rank": null,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "self-employment tax applicability to income from trade or business activities"
+        },
+        {
+          "kind": "case_law",
+          "query": "off-duty police officer income self-employment tax determination"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is an off-duty police officer paid directly by businesses to provide security"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00019079999999999998,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X28",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1613.114916952327,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2010-190, at *6-8#body#1",
+      "auth_kind": "guard",
+      "auth_target": 1,
+      "auth_rank": 1,
+      "auth_at_target": true,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "taxability of interest income from certificates of deposit"
+        },
+        {
+          "kind": "case_law",
+          "query": "tax treatment of unreported interest income early withdrawal penalty"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001728,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X29",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.21840743681816419,
+      "mrr": 0.16666666666666666,
+      "section_recall": 1.0,
+      "ms": 1366.709749912843,
+      "first_hit_rank": 6,
+      "top1": "T.C. Memo. 2009-201, at *31-33#body#1",
+      "auth_kind": "statute_over_lower",
+      "auth_target": 1,
+      "auth_rank": 6,
+      "auth_at_target": false,
+      "auth_in_pool": true,
+      "auth_keep": null,
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "innocent spouse relief under Internal Revenue Code section 6015"
+        },
+        {
+          "kind": "case_law",
+          "query": "innocent spouse relief requirements joint returns no involvement in business deductions"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client had no involvement in her husband's business"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001905,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-X30",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.5,
+      "ndcg": 0.6131471927654584,
+      "mrr": 1.0,
+      "section_recall": 0.5,
+      "ms": 1200.8155828807503,
+      "first_hit_rank": 1,
+      "top1": "167 T.C. No. 4, at *2-3#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "penalties for overvaluation of charitable contributions, including conservation easements"
+        },
+        {
+          "kind": "case_law",
+          "query": "IRS valuation disputes conservation easement deduction penalties"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001737,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-I11",
+      "style": "nl",
+      "category": "insufficiency",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1119.435208849609,
+      "first_hit_rank": null,
+      "top1": "26 U.S.C. \u00a7 162(l)(4)#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "deduction for home office expenses for self-employed individuals"
+        },
+        {
+          "kind": "statutory",
+          "query": "California home office deduction rules"
+        },
+        {
+          "kind": "client_fact",
+          "query": "the client is self-employed"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.00018059999999999997,
+      "has_case_subquery": false
+    },
+    {
+      "id": "G-X31",
+      "style": "nl",
+      "category": "compound",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.3333333333333333,
+      "ndcg": 0.46927872602275644,
+      "mrr": 1.0,
+      "section_recall": 0.3333333333333333,
+      "ms": 1670.3410840127617,
+      "first_hit_rank": 1,
+      "top1": "T.C. Memo. 2013-52, at *28-30#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "interest capitalization rules for construction loans under Internal Revenue Code Section 263A"
+        },
+        {
+          "kind": "case_law",
+          "query": "date interest begins to capitalize for construction of rental property"
+        }
+      ],
+      "as_of": null,
+      "fallback": "",
+      "decompose_cost_usd": 0.0001761,
+      "has_case_subquery": true
+    },
+    {
+      "id": "G-S28",
+      "style": "nl",
+      "category": "statutory",
+      "mode": "hybrid+route+statute1+prior0.5-scoped+sib6",
+      "plan_set": 0,
+      "chunks": 10,
+      "recall": 0.0,
+      "ndcg": 0.0,
+      "mrr": 0.0,
+      "section_recall": 0.0,
+      "ms": 1497.760915895924,
+      "first_hit_rank": null,
+      "top1": "IRS Pub 463 (2025), p. 31#body#1",
+      "subqueries": [
+        {
+          "kind": "statutory",
+          "query": "maximum first-year depreciation deduction for passenger automobiles placed in service in 2025"
+        },
+        {
+          "kind": "statutory",
+          "query": "bonus depreciation rules for vehicles placed in service in 2025"
+        }
+      ],
+      "as_of": "2025",
+      "fallback": "",
+      "decompose_cost_usd": 0.00017865,
+      "has_case_subquery": false
+    }
+  ],
+  "reranker": "jinaai/jina-reranker-v1-turbo-en",
+  "repeats": 1,
+  "routing": {
+    "hybrid+route+statute1+prior0.5-scoped+sib6": {
+      "rows_needing_case_law": 57,
+      "case_subquery_present": 53,
+      "spurious_case_subquery": 11,
+      "fallbacks": 0,
+      "subqueries_per_question": 2.0348837209302326,
+      "cost_usd": 0.015076949999999999
+    }
+  },
+  "recall_per_plan_set": {
+    "hybrid": [
+      0.4689922480620155
+    ],
+    "hybrid+route+statute1+prior0.5-scoped+sib6": [
+      0.5678294573643411
+    ]
+  },
+  "recall_per_plan_set_by_category": {
+    "hybrid": {
+      "case_law": [
+        0.7692307692307693
+      ],
+      "compound": [
+        0.3655913978494624
+      ],
+      "insufficiency": [
+        0.0
+      ],
+      "statutory": [
+        0.32142857142857145
+      ]
+    },
+    "hybrid+route+statute1+prior0.5-scoped+sib6": {
+      "case_law": [
+        0.7307692307692307
+      ],
+      "compound": [
+        0.41397849462365593
+      ],
+      "insufficiency": [
+        0.0
+      ],
+      "statutory": [
+        0.6071428571428571
+      ]
+    }
+  },
+  "authority": {
+    "hybrid": {
+      "conflict_rows": 24,
+      "guard_rows": 8,
+      "conflict_at_target": [
+        1
+      ],
+      "conflict_in_pool": [
+        5
+      ],
+      "conflict_at_target_of_in_pool": [
+        1
+      ],
+      "guards_kept": [
+        2
+      ],
+      "keep_sources_kept": [
+        1
+      ],
+      "keep_rows": 1,
+      "by_kind": {
+        "reported_over_memo": [
+          1
+        ],
+        "reviewing_court": [
+          0
+        ],
+        "statute_over_lower": [
+          0
+        ]
+      }
+    },
+    "hybrid+route+statute1+prior0.5-scoped+sib6": {
+      "conflict_rows": 24,
+      "guard_rows": 8,
+      "conflict_at_target": [
+        2
+      ],
+      "conflict_in_pool": [
+        23
+      ],
+      "conflict_at_target_of_in_pool": [
+        2
+      ],
+      "guards_kept": [
+        8
+      ],
+      "keep_sources_kept": [
+        1
+      ],
+      "keep_rows": 1,
+      "by_kind": {
+        "reported_over_memo": [
+          0
+        ],
+        "reviewing_court": [
+          0
+        ],
+        "statute_over_lower": [
+          2
+        ]
+      }
+    }
+  },
+  "summary": {
+    "hybrid": {
+      "recall": 0.4689922480620155,
+      "ndcg": 0.331843478413214,
+      "mrr": 0.3365125507567368,
+      "section_recall": 0.5503875968992248,
+      "chunks": 10.0,
+      "p50_ms": 29.866457916796207,
+      "p95_ms": 37.13279217481613
+    },
+    "hybrid+route+statute1+prior0.5-scoped+sib6": {
+      "recall": 0.5678294573643411,
+      "ndcg": 0.40649795574252506,
+      "mrr": 0.413265965300849,
+      "section_recall": 0.7364341085271318,
+      "chunks": 10.0,
+      "p50_ms": 1290.0721249170601,
+      "p95_ms": 1670.3410840127617
+    }
+  }
+}
