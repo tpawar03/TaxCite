@@ -2860,3 +2860,7 @@ Done: `eval/results/phase_g.md`; tech doc Implementation Status (F and G), §7, 
 - [x] Injection corpus: 100% prompt path, 100% render path
 - [x] Golden adversarial rows scored once
 - [x] Tests and existing CI gates green
+
+# Carried into Phase H (not yet planned)
+
+- **Redis: measure, then keep or drop (decided 2026-11-07, Claude's recommendation).** Redis carries only live SSE events; with it off, the events route polls Postgres every 0.5 s and answers are unchanged. With the k6 run and the live page, measure Redis off vs on: delay from a stage's Postgres write to its event reaching the browser (p50/p95), and Postgres load (queries/s, CPU) with a handful of concurrent streams. Pre-registered: drop if p95 extra delay ≤ 1 s and Postgres load stays within the hosting plan's headroom; then remove the service, the client code paths that need it, and the `/health` check, and revise ADR-16/§3.4 (as ADR-23 did for Neo4j). Otherwise keep it and record the numbers. Either way, the §3.4 answer cache stays unbuilt until cost needs it (a Postgres table would do).
